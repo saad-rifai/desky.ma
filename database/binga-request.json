@@ -1,0 +1,15 @@
+{
+    "apiVersion": "1.1",
+    "externalId": "012345678978",
+    "expirationDate": "2021-05-01T10:30:30GMT",
+    "amount": "199",
+    "buyerFirstName": "Saad",
+    "buyerLastName": "Rifai",
+    "buyerEmail": "rifaisaad3@gmail.com",
+    "buyerAddress": "NULL",
+    "buyerPhone": "06671013733",
+    "storeId": "4010",
+    "payUrl": "https://desky.ma/?ref=test",
+    "orderCheckSum": "1774cb608c85148bbcc544235afa14a4"
+
+}
