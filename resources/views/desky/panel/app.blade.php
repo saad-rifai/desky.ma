@@ -159,12 +159,11 @@ $jsondata = json_decode($datajson, true);
                                 </li>
                                 <li>
                                     <a href="{{ URL::asset('/#services') }}" class="uk-button-text"><i class="fas fa-users"></i> &nbsp; العملاء</a>
-                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000"
-                                        class="uk-navbar-dropdown uk-navbar-dropdown-width-1">
-                                        <div class="uk-navbar-dropdown-grid">
+                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                        class="">
 
-                                            <div>
-                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+
+                                                <ul class="uk-nav uk-dropdown-nav">
 
                                                     <li><a href="{{ URL::asset('/service/etude-de-project') }}"><i class="fas fa-list"></i>
                                                             قائمة العملاء</a>
@@ -174,8 +173,7 @@ $jsondata = json_decode($datajson, true);
 
 
                                                 </ul>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </li>
                             </ul>
@@ -291,7 +289,7 @@ $jsondata = json_decode($datajson, true);
 
                     @else
 
-                        <button style="    padding: 0 13px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
+                        <button style="    padding: 10px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-user"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
@@ -309,7 +307,7 @@ $jsondata = json_decode($datajson, true);
                             </ul>
                         </div>
                         <user-notification></user-notification>
-                        <button style="    padding: 0 13px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
+                        <button style="    padding: 10px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-envelope"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">

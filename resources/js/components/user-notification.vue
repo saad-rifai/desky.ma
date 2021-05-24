@@ -2,7 +2,7 @@
   <div>
     <button
       dir="rtl"
-      style="padding: 0 13px;"
+      style="padding: 10px;"
       class="uk-button uk-float-left user-menu-bar"
       type="button"
       @click="bell_open"

@@ -52021,7 +52021,7 @@ var render = function() {
       "button",
       {
         staticClass: "uk-button uk-float-left user-menu-bar",
-        staticStyle: { padding: "0 13px" },
+        staticStyle: { padding: "10px" },
         attrs: { dir: "rtl", type: "button" },
         on: { click: _vm.bell_open }
       },

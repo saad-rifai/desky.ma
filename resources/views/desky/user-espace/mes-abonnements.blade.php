@@ -1,3 +1,4 @@
+
 @extends('desky.panel.app')
 @section('title', 'الاشتراكات والدفع')
 @section('description', 'منصة مقاولة توفر لك العديد من الخدمات لمساعدتك على بدء و تطوير نشاطك التجاري')
@@ -17,7 +18,7 @@
             $jsondatas = json_decode($datajson, true);
         @endphp
 
-        <div class="wd-80 uk-margin-small-top uk-margin-small-bottom">
+        <div class="wd-90 uk-margin-small-top uk-margin-small-bottom">
 
             <div dir="rtl" class="uk-text-center " uk-grid>
 
