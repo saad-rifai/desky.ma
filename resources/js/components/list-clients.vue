@@ -85,15 +85,15 @@
                 <td>{{ val.CID }}</td>
                 <td>{{ val.c_name }}</td>
                 <td>{{ val.c_email }}</td>
-  
+
                 <td>{{ val.created_at }}</td>
 
                 <td>
                   <a href="javascript:void(0)"
-                    ><button @click="showdevis(val.OID)" class="act-btn-radio">
+                    ><button @click="showdevis(val.CID)" class="act-btn-radio">
                       <i class="fas fa-eye"></i></button
                   ></a>
-                  <a href="#modal-delete" uk-toggle @click="removeAct(val.OID)"
+                  <a href="#modal-delete" uk-toggle @click="removeAct(val.CID)"
                     ><button class="act-btn-radio danger">
                       <i class="fas fa-trash-alt"></i></button
                   ></a>

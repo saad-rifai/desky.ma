@@ -156,7 +156,6 @@ input[type="color"]::-webkit-color-swatch {
     padding: 20px;
     font-size: 15px;
     border-radius: 5px;
-    width: 100%;
     direction: rtl;
 }
 .icon-big {
@@ -310,7 +309,6 @@ button.act-btn-radio {
     padding: 20px;
     font-size: 15px;
     border-radius: 5px;
-    width: 100%;
     direction: rtl;
 }
 .fa, .far, .fas {
@@ -360,6 +358,11 @@ input.form-captcha {
 button.uk-button.uk-float-left.user-menu-bar {
     background-color: white;
     color: #383838;
+    height: 55px;
+    overflow: hidden;
+}
+ul.uk-breadcrumb li a {
+    font-size: 75% !important;
 }
 img.icons-radio {
     height: 23px;

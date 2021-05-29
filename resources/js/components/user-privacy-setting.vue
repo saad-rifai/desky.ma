@@ -111,7 +111,7 @@ export default {
           $("#form-loading").css("display", "none");
             UIkit.notification({
             message:
-             error.response.data.error,
+             'حصل خطأ ما يرجى اعادة المحاولة',
             status: "danger",
             pos: "top-center",
             timeout: 5000,

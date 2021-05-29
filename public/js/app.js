@@ -9385,7 +9385,7 @@ var Errors = /*#__PURE__*/function () {
       })["catch"](function (error) {
         $("#form-loading").css("display", "none");
         UIkit.notification({
-          message: error.response.data.error,
+          message: 'حصل خطأ ما يرجى اعادة المحاولة',
           status: "danger",
           pos: "top-center",
           timeout: 5000
@@ -54960,7 +54960,7 @@ var render = function() {
                               staticClass: "act-btn-radio",
                               on: {
                                 click: function($event) {
-                                  return _vm.showdevis(val.OID)
+                                  return _vm.showdevis(val.CID)
                                 }
                               }
                             },
@@ -54974,7 +54974,7 @@ var render = function() {
                             attrs: { href: "#modal-delete", "uk-toggle": "" },
                             on: {
                               click: function($event) {
-                                return _vm.removeAct(val.OID)
+                                return _vm.removeAct(val.CID)
                               }
                             }
                           },

@@ -168,6 +168,7 @@ Route::get('/politique-de-confidentialite', function () {
             return view('desky.panel.devis.c-devis');
         });
         Route::get('devis/{OID}/{UID}', 'DeskyUserDevisController@ShowDevis');
+        Route::get('clients/{CID}/{UID}', 'DeskyUserClientsController@ShowClient');
         Route::get('facture/{OID}/{UID}', 'DeskyUserFactureController@ShowFacture');
         Route::get('devis/{OID}/{UID}/edit', 'DeskyUserDevisController@index');
         Route::get('facture/{OID}/{UID}/edit', 'DeskyUserFactureController@index');
