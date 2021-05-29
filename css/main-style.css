@@ -165,16 +165,16 @@ input[type="color"]::-webkit-color-swatch {
 }
 span.bell-icon i {
     line-height: 1.5;
-    margin: 2px;
+    margin: 3px 10px;
 }
 span.bell-icon {
     color: #585858;
-    font-size: 170%;
+    font-size: 155%;
     text-align: center;
     background-color: #e4e4e4;
     border-radius: 100%;
     width: 40px !important;
-    height: 40px !important;/**/
+    height: 40px !important;
     display: inline-block;
     overflow: hidden !important;
 }
