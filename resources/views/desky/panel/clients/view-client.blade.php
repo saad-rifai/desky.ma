@@ -1,5 +1,5 @@
 @extends('desky.panel.app')
-@section('title', 'عميل رقم' . $infos->CID)
+@section('title', 'عميل رقم ' . $infos->CID)
 @section('content')
     <div class="wd-90 uk-margin ">
         <br>
