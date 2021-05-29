@@ -116,7 +116,7 @@ export default {
     getnotifications: function () {
       let data = new FormData()
       data.append('apikey', this.apikey)
-      axios.post(this.url_api + '/api/notifications', data).then((response) => {
+      axios.post("/api/notifications", data).then((response) => {
         this.notifications = response.data
         if (response.data.highlight > 0) {
           document.title = '(' + response.data.highlight + ') ' + this.title
@@ -127,7 +127,7 @@ export default {
       })
       setInterval(() => {
         axios
-          .post(this.url_api + '/api/notifications', data)
+          .post('/api/notifications', data)
           .then((response) => {
             this.notifications = response.data
             if (response.data.highlight > 0) {
@@ -143,7 +143,7 @@ export default {
     // Notification.requestPermission();
       let data = new FormData()
       data.append('highlight', true)
-      axios.post(this.url_api + '/api/notifications', data).then((response) => {
+      axios.post('/api/notifications', data).then((response) => {
         this.notifications = response.data
                 document.title = this.title;
 
