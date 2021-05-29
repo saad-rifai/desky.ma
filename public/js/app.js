@@ -9204,7 +9204,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       var data = new FormData();
       data.append('apikey', this.apikey);
-      axios.post(this.url_api + '/api/notifications', data).then(function (response) {
+      axios.post("/api/notifications", data).then(function (response) {
         _this.notifications = response.data;
 
         if (response.data.highlight > 0) {
@@ -9216,7 +9216,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
       });
       setInterval(function () {
-        axios.post(_this.url_api + '/api/notifications', data).then(function (response) {
+        axios.post('/api/notifications', data).then(function (response) {
           _this.notifications = response.data;
 
           if (response.data.highlight > 0) {
@@ -9235,7 +9235,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       // Notification.requestPermission();
       var data = new FormData();
       data.append('highlight', true);
-      axios.post(this.url_api + '/api/notifications', data).then(function (response) {
+      axios.post('/api/notifications', data).then(function (response) {
         _this2.notifications = response.data;
         document.title = _this2.title;
       });
@@ -52015,7 +52015,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.CreerDevis }
           },
-          [_vm._v("\n          حفظ\n        ")]
+          [_vm._v("\r\n          حفظ\r\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -52025,7 +52025,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.getout }
           },
-          [_vm._v("\n          الغاء\n        ")]
+          [_vm._v("\r\n          الغاء\r\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -52053,7 +52053,7 @@ var render = function() {
           [
             _c("div", { staticClass: "uk-width-1-1@s" }, [
               _c("label", { attrs: { for: "" } }, [
-                _vm._v("\n              البحث عن عميل موجود\n            ")
+                _vm._v("\r\n              البحث عن عميل موجود\r\n            ")
               ]),
               _vm._v(" "),
               _c(
@@ -52140,9 +52140,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                      " +
+                                    "\r\n                      " +
                                       _vm._s(item.c_name) +
-                                      "\n                      "
+                                      "\r\n                      "
                                   ),
                                   _c("br"),
                                   _vm._v(" "),
@@ -52200,9 +52200,9 @@ var render = function() {
               _vm.errors.errors.c_name
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.c_name[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52243,9 +52243,9 @@ var render = function() {
               _vm.errors.errors.c_phone
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.c_phone[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52287,9 +52287,9 @@ var render = function() {
               _vm.errors.errors.c_email
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.c_email[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52332,9 +52332,9 @@ var render = function() {
               _vm.errors.errors.c_ice
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.c_ice[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52381,9 +52381,9 @@ var render = function() {
                         { key: index, domProps: { value: index } },
                         [
                           _vm._v(
-                            "\n                  " +
+                            "\r\n                  " +
                               _vm._s(item) +
-                              "\n                "
+                              "\r\n                "
                           )
                         ]
                       )
@@ -52396,9 +52396,9 @@ var render = function() {
               _vm.errors.errors.c_type
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.c_type[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52510,7 +52510,7 @@ var render = function() {
                                     _vm._v(
                                       " " +
                                         _vm._s(item.name) +
-                                        "\n\n                    "
+                                        "\r\n\r\n                    "
                                     )
                                   ]
                                 )
@@ -52533,9 +52533,9 @@ var render = function() {
               _vm.errors.errors.country
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.country[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52578,9 +52578,9 @@ var render = function() {
               _vm.errors.errors.c_city
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.c_city[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52623,9 +52623,9 @@ var render = function() {
               _vm.errors.errors.c_adresse
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\n              " +
+                      "\r\n              " +
                         _vm._s(_vm.errors.errors.c_adresse[0]) +
-                        "\n            "
+                        "\r\n            "
                     )
                   ])
                 : _vm._e()
@@ -52654,9 +52654,9 @@ var render = function() {
                 _c("div", { staticClass: "uk-width-1-1" }, [
                   _c("h1", { staticClass: "uk-card-title uk-text-right" }, [
                     _vm._v(
-                      "\n                العنصر " +
+                      "\r\n                العنصر " +
                         _vm._s(index + 1) +
-                        "\n              "
+                        "\r\n              "
                     )
                   ])
                 ]),
@@ -52810,7 +52810,7 @@ var render = function() {
             _c(
               "h2",
               { staticClass: "uk-card-title uk-text-right uk-width-1-1@s" },
-              [_vm._v("\n            الدفع والأداء\n          ")]
+              [_vm._v("\r\n            الدفع والأداء\r\n          ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "uk-width-1-1@s" }, [
@@ -52853,7 +52853,11 @@ var render = function() {
                 _c(
                   "label",
                   { staticClass: "uk-text-right", attrs: { dir: "rtl" } },
-                  [_vm._v("\n              شروط الدفع (اختياري)\n            ")]
+                  [
+                    _vm._v(
+                      "\r\n              شروط الدفع (اختياري)\r\n            "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "uk-margin" }, [
@@ -52942,9 +52946,9 @@ var render = function() {
                 _vm.errors.errors.p_condition
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\n              " +
+                        "\r\n              " +
                           _vm._s(_vm.errors.errors.p_condition[0]) +
-                          "\n            "
+                          "\r\n            "
                       )
                     ])
                   : _vm._e()
@@ -52960,7 +52964,7 @@ var render = function() {
                   { staticClass: "uk-text-right", attrs: { dir: "rtl" } },
                   [
                     _vm._v(
-                      "\n              وسيلة الدفع (اختياري)\n            "
+                      "\r\n              وسيلة الدفع (اختياري)\r\n            "
                     )
                   ]
                 ),
@@ -53005,9 +53009,9 @@ var render = function() {
                           { key: index, domProps: { value: index } },
                           [
                             _vm._v(
-                              "\n                  " +
+                              "\r\n                  " +
                                 _vm._s(item) +
-                                "\n                "
+                                "\r\n                "
                             )
                           ]
                         )
@@ -53020,9 +53024,9 @@ var render = function() {
                 _vm.errors.errors.p_method
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\n              " +
+                        "\r\n              " +
                           _vm._s(_vm.errors.errors.p_method[0]) +
-                          "\n            "
+                          "\r\n            "
                       )
                     ])
                   : _vm._e()
@@ -53071,9 +53075,9 @@ var render = function() {
                 _vm.errors.errors.notes
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\n              " +
+                        "\r\n              " +
                           _vm._s(_vm.errors.errors.notes[0]) +
-                          "\n            "
+                          "\r\n            "
                       )
                     ])
                   : _vm._e()
@@ -53130,9 +53134,9 @@ var render = function() {
                           { key: index, domProps: { value: index } },
                           [
                             _vm._v(
-                              "\n                  " +
+                              "\r\n                  " +
                                 _vm._s(statu) +
-                                "\n                "
+                                "\r\n                "
                             )
                           ]
                         )
@@ -53145,9 +53149,9 @@ var render = function() {
                 _vm.errors.errors.p_method
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\n              " +
+                        "\r\n              " +
                           _vm._s(_vm.errors.errors.p_method[0]) +
-                          "\n            "
+                          "\r\n            "
                       )
                     ])
                   : _vm._e()
@@ -53161,14 +53165,14 @@ var render = function() {
         _c("div", { staticClass: "uk-text-right content-total" }, [
           _c("h3", { staticClass: "text-f-bloder" }, [
             _vm._v(
-              "\n            المجموع:\n            " +
+              "\r\n            المجموع:\r\n            " +
                 _vm._s(
                   this.subtotal.toLocaleString("en-US", {
                     style: "currency",
                     currency: "MAD"
                   })
                 ) +
-                "\n          "
+                "\r\n          "
             )
           ]),
           _vm._v(" "),
@@ -53177,14 +53181,14 @@ var render = function() {
           _vm.remise_c > 0
             ? _c("h3", { staticClass: "text-f-bloder" }, [
                 _vm._v(
-                  "\n            الخصم:\n            " +
+                  "\r\n            الخصم:\r\n            " +
                     _vm._s(
                       this.remise_c.toLocaleString("en-US", {
                         style: "currency",
                         currency: "MAD"
                       })
                     ) +
-                    "\n          "
+                    "\r\n          "
                 )
               ])
             : _vm._e(),
@@ -53193,14 +53197,14 @@ var render = function() {
           _vm._v(" "),
           _c("h3", { staticClass: "text-f-bloder" }, [
             _vm._v(
-              "\n            الضريبة(TVA):\n            " +
+              "\r\n            الضريبة(TVA):\r\n            " +
                 _vm._s(
                   this.tva.toLocaleString("en-US", {
                     style: "currency",
                     currency: "MAD"
                   })
                 ) +
-                "\n          "
+                "\r\n          "
             )
           ]),
           _vm._v(" "),
@@ -53209,14 +53213,14 @@ var render = function() {
           _c("div", { staticClass: "total-border" }, [
             _c("h3", { staticClass: "text-f-bolder-w" }, [
               _vm._v(
-                "\n              المجموع الكلي:\n              " +
+                "\r\n              المجموع الكلي:\r\n              " +
                   _vm._s(
                     this.total.toLocaleString("en-US", {
                       style: "currency",
                       currency: "MAD"
                     })
                   ) +
-                  "\n            "
+                  "\r\n            "
               )
             ])
           ])
@@ -53234,7 +53238,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.CreerDevis }
         },
-        [_vm._v("\n        حفظ\n      ")]
+        [_vm._v("\r\n        حفظ\r\n      ")]
       ),
       _vm._v(" "),
       _c(
@@ -53244,7 +53248,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.getout }
         },
-        [_vm._v("\n        الغاء\n      ")]
+        [_vm._v("\r\n        الغاء\r\n      ")]
       )
     ])
   ])
@@ -53256,7 +53260,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { attrs: { for: "" } }, [
       _c("i", { staticClass: "fas fa-users" }),
-      _vm._v("\n                    قائمة العملاء المسجلين\n                  ")
+      _vm._v(
+        "\r\n                    قائمة العملاء المسجلين\r\n                  "
+      )
     ])
   },
   function() {
@@ -53264,7 +53270,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\n              الاسم الكامل للعميل\n              "),
+      _vm._v("\r\n              الاسم الكامل للعميل\r\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53273,7 +53279,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\n              رقم الهاتف\n              "),
+      _vm._v("\r\n              رقم الهاتف\r\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53282,7 +53288,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\n              البريد الالكتروني\n              "),
+      _vm._v("\r\n              البريد الالكتروني\r\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53291,7 +53297,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\n              نوع العميل\n              "),
+      _vm._v("\r\n              نوع العميل\r\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53301,7 +53307,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { attrs: { for: "" } }, [
       _c("i", { staticClass: "fas fa-globe-africa" }),
-      _vm._v("\n                    قائمة الدول\n                  ")
+      _vm._v("\r\n                    قائمة الدول\r\n                  ")
     ])
   },
   function() {
@@ -53322,7 +53328,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
       _vm._v(
-        "\n                  الخدمة أو المنتج (بالفرنسية)\n                  "
+        "\r\n                  الخدمة أو المنتج (بالفرنسية)\r\n                  "
       ),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
@@ -53332,7 +53338,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\n                  السعر\n                  "),
+      _vm._v("\r\n                  السعر\r\n                  "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53341,7 +53347,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\n                  الكمية\n                  "),
+      _vm._v("\r\n                  الكمية\r\n                  "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
