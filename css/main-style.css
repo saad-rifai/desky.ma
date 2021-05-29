@@ -163,7 +163,20 @@ input[type="color"]::-webkit-color-swatch {
     font-size: 400%;
     color: #f98a13;
 }
-
+span.bell-icon i {
+    line-height: 1.5;
+}
+span.bell-icon {
+    color: #585858;
+    font-size: 170%;
+    text-align: center;
+    background-color: #e4e4e4;
+    border-radius: 100%;
+    width: 40px !important;
+    height: 40px !important;
+    display: inline-block;
+    overflow: hidden !important;
+}
 .btn-border-shadow {
     border: solid 1px white;
     border-radius: 3px;
