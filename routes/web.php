@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Session;
 
 use \Swift_SmtpTransport as SmtpTransport;
 
-Route::get('api/v1/partner/binga/notif', 'PaymentSystemController@binga_notification');
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
 Route::middleware(['auth'])->group(function () {

@@ -12,13 +12,11 @@ use App\desky_db;
 use App\desky_user_clients;
 use App\DeskyUserFacture;
 use Illuminate\Support\Carbon;
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\PaymentSystemController;
 
 class DeskyAlgController extends Controller
 {
-    use HasApiTokens;
 
     public function __construct()
     {
@@ -27,7 +25,7 @@ class DeskyAlgController extends Controller
 
 
     public function UpdateNotes(Request $request){
-        
+
         if(isset($request->token) && $request->token != ""){
             if((isset($request->d) && $request->d != "" && isset($request->oid) && $request->oid != "" && isset($request->notes) && $request->notes != "")){
                 if($request->d == "d" || $request->d == "f"){
@@ -36,7 +34,7 @@ class DeskyAlgController extends Controller
                     $notes= htmlspecialchars($request->notes);
                     if( mb_strlen($notes, 'UTF-8') <= 1500){
 
-                    
+
                     if($d == "d"){
                        $stmt = desky_user_devis::where('email' , Auth::user()->email)->where('OID', $OID)->update(['notes' => $notes]);
                        if($stmt){
@@ -74,7 +72,7 @@ class DeskyAlgController extends Controller
                         }else{
                             return response()->json(['error' => 'حصل خطأ في تحديث الملاحظات fx0054'], 500);
                         }
- 
+
                         return response()->json($stmt);
 
                     }
@@ -123,7 +121,7 @@ class DeskyAlgController extends Controller
         //return response()->json(['error' => 'تم الاتصال ولكن النظام غير جاهز'],402);
     }
     public function deleteDocumment(Request $request){
-        
+
         if(isset($request->token) && $request->token != ""){
             if((isset($request->d) && $request->d != "" && isset($request->oid) && $request->oid != "")){
                 if($request->d == "d" || $request->d == "f"){
@@ -167,7 +165,7 @@ class DeskyAlgController extends Controller
                         }else{
                             return response()->json(['error' => 'حصل خطأ في تحديث البيانات fx0043'], 500);
                         }
- 
+
                         return response()->json($stmt);
 
 
@@ -188,7 +186,7 @@ class DeskyAlgController extends Controller
         }
     }
     public function changeStatus(Request $request){
-        
+
         if(isset($request->token) && $request->token != "" && isset($request->ns)){
             if((isset($request->d) && $request->d != "" && isset($request->oid) && $request->oid != "")){
                 if($request->d == "d" || $request->d == "f"){
@@ -231,7 +229,7 @@ class DeskyAlgController extends Controller
                         }else{
                             return response()->json(['error' => 'حصل خطأ في تحديث البيانات fx0043'], 500);
                         }
- 
+
                         return response()->json($stmt);
                     }
 
@@ -252,7 +250,7 @@ class DeskyAlgController extends Controller
         if(isset($request->_token) && $request->_token != ""){
             if((isset($request->d) && $request->d != "" && isset($request->oid) && $request->oid != "")){
                 if($request->d == "d" || $request->d == "f"){
-                    /* 
+                    /*
                     d = Devis
                     f = Facture
                     */
@@ -260,13 +258,13 @@ class DeskyAlgController extends Controller
                     $OID=$request->oid;
                     if($d == "d"){
                        $stmt = desky_user_devis::where('email' , Auth::user()->email)->where('OID', $OID)->get(['status', 'token_share']);
-                     
+
                        return response()->json($stmt);
 
                     }elseif($d == "f"){
-             
+
                         $stmt = DeskyUserFacture::where('email' , Auth::user()->email)->where('OID', $OID)->get(['status', 'token_share']);
-                     
+
                         return response()->json($stmt);
                     }
 
