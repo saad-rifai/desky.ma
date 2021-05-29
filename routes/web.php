@@ -14,15 +14,16 @@ use Illuminate\Support\Facades\Session;
 
 use \Swift_SmtpTransport as SmtpTransport;
 
+Route::get('api/v1/partner/binga/notif', 'PaymentSystemController@binga_notification');
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
-Route::middleware(['auth'])->group(function () { 
+Route::middleware(['auth'])->group(function () {
     // ListClients
-    Route::post('api/v1/user/ListClients', 'DeskyUserClientsController@ListClients'); 
+    Route::post('api/v1/user/ListClients', 'DeskyUserClientsController@ListClients');
 
-    Route::post('api/v1/user/GetUserPrivacy', 'UserPrivacyController@GetUserPrivacy'); 
-    Route::post('api/v1/user/UpdateUserPrivacy', 'UserPrivacyController@UpdateUserPrivacy'); 
-    Route::get('api/v1/user/CheckSubscriptions', 'PaymentSystemController@CheckSubscriptions'); 
+    Route::post('api/v1/user/GetUserPrivacy', 'UserPrivacyController@GetUserPrivacy');
+    Route::post('api/v1/user/UpdateUserPrivacy', 'UserPrivacyController@UpdateUserPrivacy');
+    Route::get('api/v1/user/CheckSubscriptions', 'PaymentSystemController@CheckSubscriptions');
     Route::get('api/v1/getOfDocument/notes', 'DeskyAlgController@getnotes');
     Route::post('api/v1/UpdateOfDocument/notes', 'DeskyAlgController@UpdateNotes');
     Route::post('api/v1/UpdateOfDocument/status', 'DeskyAlgController@changeStatus');
@@ -226,12 +227,12 @@ Route::get('/politique-de-confidentialite', function () {
 
 Route::any('dev_test', function () {
     $str =
-        'PRE-PAY' .
-        '199' .
-        '4010' .
-        '012345678978' .
-        'rifaisaad3@gmail.com' .
-        '4010653ddd7e9b8cece2779bbed423ce';
+    'PAY' .
+    '200' .
+    '4010' .
+    '230255248710' .
+    'rifaisaad3@gmail.com' .
+    '4010653ddd7e9b8cece2779bbed423ce';
     $hash = md5($str);
     return $hash;
 });

@@ -191,7 +191,62 @@ class PaymentSystemController extends Controller
     {
         //
     }
+    public function binga_notification(Request $request){
+        if(isset($request->code) && is_numeric($request->code) && is_numeric($request->externalId) && isset($request->externalId) && isset($request->expirationDate) && isset($request->amount) && isset($request->buyerEmail) && isset($request->orderCheckSum)){
+          $code = htmlspecialchars($request->code);
+          $transaction_id = htmlspecialchars($request->externalId);
+          $email = htmlspecialchars($request->buyerEmail);
+          $PayInfos = DB::table('payment_systems')
+          ->where('transaction_id', $transaction_id)
+          ->where('code', $code)
+          ->where('buyer_email', $email)
+          ->get();
+          foreach($PayInfos as $PayInfo);
+          if($PayInfos->count() > 0){
 
+
+            $str =
+            'PAY'.
+            $PayInfo->amount.
+            '4010'.
+            $PayInfo->transaction_id.
+            $PayInfo->buyer_email .
+            '4010653ddd7e9b8cece2779bbed423ce';
+            $myhash = md5($str);
+
+            if($request->orderCheckSum == $myhash){
+                $stmt =  DB::table('payment_systems')
+                ->where('transaction_id', $transaction_id)
+                ->where('code', $code)
+                ->where('buyer_email', $email)->update(['status' => 1]);
+                if($stmt){
+                    $date = date("Y-m-dTh:m:ssz");
+                    return response('100;'.$date)->setStatusCode(200);
+                }else{
+                    $date = date("Y-m-dTh:m:ssz");
+                    return response('000;'.$date)->setStatusCode(500);
+                }
+
+            }else{
+                $date = date("Y-m-dTh:m:ssz");
+                return response('000;'.$date)->setStatusCode(500);
+            }
+
+
+
+          }else{
+            $date = date("Y-m-dTh:m:ssz");
+            return response('000;'.$date)->setStatusCode(500);
+          }
+
+
+        }else{
+            $date = date("Y-m-dTh:m:ssz");
+            return response('000;'.$date)->setStatusCode(500);
+
+        }
+
+    }
     /**
      * Display the specified resource.
      *
