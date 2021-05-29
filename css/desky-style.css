@@ -1,0 +1,108 @@
+img.logo-ayol {
+    width: 100%; /* *********** */
+    max-width: 110px;
+    margin: 10px;
+}
+img.icon-services {
+    height: 140px;
+}
+span.ckeck-true i {
+    color: #27ae60;
+}
+span.ckeck-false i {
+    color: #a5b1aa;
+}
+/* *********** */
+.pack-pricing-bd {
+    border-radius: 5px;
+    padding: 0px !important;
+}
+.back-label.label-most {
+    background-color: #f78b03;
+    box-shadow: 0 10px 20px rgb(255 255 255 / 19%), 0 6px 6px rgb(109 109 109 / 23%);
+
+}
+.c-withe {
+    color: white;
+}
+.most-pb-label {
+    color: white;
+    width: 160px;
+    height: 32px;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0px 2px 3px rgb(136 136 136 / 25%);
+    background: #4dbe3b;
+    transform: rotate(
+45deg
+ );
+    position: absolute;
+    padding-top: 7px;
+    margin-top: 23px;
+    margin-right: -42px;
+}
+
+.back-label {
+    width: 100%;
+    height: 50px;
+    padding-top: 15px;
+    background-color: #ff8e0000;
+    border-bottom: solid 2px #f78b03;
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pack-pricing-bd.most-pack {
+    border-color: #27ae60c4;
+}
+.pack-pricing-bd {
+
+    box-shadow: 0 10px 15px -6px rgb(119 119 119 / 40%);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 386px;
+    margin: 10px;
+    height: max-content;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    border: dashed 1px #d4d4d4;
+}
+.large-pack {
+    border-color: #f78b03;
+}
+
+.content-header {
+    text-align: right;
+    direction: rtl;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+input.uk-input.uk-button.uk-button-danger {
+    background-color: #f92222;
+}
+input.uk-input.uk-button.uk-button-primary.uk-margin-top {
+    background-color: #1e87f0;
+}
+.content-total {
+    margin-top: 15%;
+    direction: rtl;
+}
+.total-border {
+    background-color: #27ae60;
+    padding-top: 15px;
+    height: 50px;
+    padding-right: 10px;
+    margin-right: -10px;
+}
+
+
+.total-border h3 {
+    color: white;
+}
+

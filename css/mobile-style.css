@@ -1,0 +1,116 @@
+@media only screen and (max-width: 1200px) {
+    .form-border {
+        max-width: 80%;
+    }
+    .uk-navbar-center {
+        display: none;
+    }
+    .uk-navbar-right {
+        float: right;
+        margin-right: 0px;
+        margin-top: 0px;
+        width: 100%;
+        min-width: max-content;
+    }
+    .toggel-button {
+        display: block !important;
+    }
+    img.logo-ayol {
+        width: 100%;
+        margin: -73px 40% 118px 0px !important;
+        max-width: 80px;
+    }
+    .uk-card.uk-card-default.uk-card-body.job.uk-margin-left {
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-top: 15px;
+        display: block;
+    }
+    .logo {
+        width: 100%;
+        max-width: 120px;
+        margin: 40px 15px;
+    }
+    a.toggele-top {
+        display: flex !important;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .uk-table.min-p td {
+        padding: 16px 1px;
+    }
+    footer ul.uk-list {
+        width: 100%;
+        margin-top: 25px;
+    }
+    img.backimg {
+        position: absolute;
+        opacity: 0.2;
+        height: 100%;
+        max-height: 428px;
+        width: 100%;
+        margin-top: -15px;
+    }
+}
+/**/
+@media only screen and (max-width: 600px) {
+   /* .content-header {
+        margin-bottom: 35%;
+    }*/
+}
+@media only screen and (max-width: 480px) {
+    button.toggel-button{
+        margin-top: 20px !important;
+    }
+    .right-nav{
+
+    margin: 22px 0 0px 2% !important;
+    }
+    .uk-button.uk-float-left.user-menu-bar{
+        padding: 0 3px !important;
+    }
+    .content-header {
+        margin-bottom: 40%;
+    }
+    h1.uk-title.header {
+        font-size: 26px;
+    }
+}
+@media only screen and (max-width: 420px) {
+    img.logo-ayol {
+        width: 100%;
+        margin: -80px 46% 78px -38px !important;
+        max-width: 70px;
+    }
+    .content-header {
+        margin-bottom: 60%;
+    }
+    h1.uk-title.header {
+        font-size: 20px;
+    }
+}
+@media only screen and (max-width: 350px) {
+    img.logo-ayol {
+        width: 100%;
+        margin: -80px 46% 78px -38px !important;
+        max-width: 70px;
+    }
+    .right-nav a .uk-button {
+        margin: 0 0px !important;
+        padding: 0px 20px;
+    }
+    .content-header {
+        margin-bottom: 60%;
+    }
+    h1.uk-title.header {
+        font-size: 20px;
+    }
+}
+@media only screen and (max-width: 330px) {
+
+    .right-nav a.uk-button {
+        display: none !important;
+    }
+
+}
