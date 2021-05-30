@@ -134,7 +134,7 @@
         </h2>
         <hr />
         <div class="uk-overflow-auto">
-          <table class="uk-table uk-table-striped uk-text-right">
+          <table id="tabel-responsive" class="uk-table uk-table-striped uk-text-right">
             <thead>
               <tr>
                 <th>#</th>

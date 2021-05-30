@@ -6021,6 +6021,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
+//
+//
+//
 var Errors = /*#__PURE__*/function () {
   function Errors() {
     _classCallCheck(this, Errors);
@@ -6089,6 +6093,9 @@ var Errors = /*#__PURE__*/function () {
     },
     removeAct: function removeAct(e) {
       this.oidclcicked = e;
+    },
+    exportExcel: function exportExcel() {
+      window.location.href = "/exportClients?from=2020-05-30&to=2020-03-04";
     },
     searchnow: function searchnow() {
       var _this2 = this;
@@ -55298,6 +55305,28 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "uk-position-top-left uk-position-medium",
+              attrs: { href: "javascript:void(0)" }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "act-btn-radio",
+                  on: {
+                    click: function($event) {
+                      return _vm.exportExcel()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-download" })]
+              )
+            ]
+          ),
+          _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
           _c("div", { staticClass: "uk-overflow-auto" }, [
@@ -55817,7 +55846,10 @@ var render = function() {
             _c("div", { staticClass: "uk-overflow-auto" }, [
               _c(
                 "table",
-                { staticClass: "uk-table uk-table-striped uk-text-right" },
+                {
+                  staticClass: "uk-table uk-table-striped uk-text-right",
+                  attrs: { id: "tabel-responsive" }
+                },
                 [
                   _vm._m(4),
                   _vm._v(" "),
@@ -56421,7 +56453,10 @@ var render = function() {
             _c("div", { staticClass: "uk-overflow-auto" }, [
               _c(
                 "table",
-                { staticClass: "uk-table uk-table-striped uk-text-right" },
+                {
+                  staticClass: "uk-table uk-table-striped uk-text-right",
+                  attrs: { id: "tabel-responsive" }
+                },
                 [
                   _vm._m(4),
                   _vm._v(" "),

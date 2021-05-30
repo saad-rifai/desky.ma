@@ -136,6 +136,10 @@
              ({{items}}) قائمة العملاء الصفحة ({{ pagenow }} - {{Math.ceil(pages)}})
 
         </h2>
+        <a class="uk-position-top-left uk-position-medium" href="javascript:void(0)"
+                    ><button @click="exportExcel()" class="act-btn-radio">
+                      <i class="fas fa-download"></i></button
+                  ></a>
         <hr />
         <div class="uk-overflow-auto">
           <table id="tabel-responsive" class="uk-table uk-table-striped uk-text-right">
@@ -258,6 +262,9 @@ export default {
     },
     removeAct: function (e) {
       this.oidclcicked = e;
+    },
+    exportExcel: function(){
+window.location.href="/exportClients?from=2020-05-30&to=2020-03-04";
     },
     searchnow: function () {
       $("#form-loading").css("display", "block");

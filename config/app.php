@@ -140,8 +140,9 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Igoshev\Captcha\Providers\CaptchaServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        Igoshev\Captcha\Providers\CaptchaServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -196,6 +197,8 @@ return [
     */
 
     'aliases' => [
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

@@ -13,13 +13,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use \Swift_SmtpTransport as SmtpTransport;
-Route::get('/500', function(){
-abort('500');
-});
+
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
 Route::middleware(['auth'])->group(function () {
     // ListClients
+    Route::get('/exportClients', 'exportExcle@exportClients');
     Route::post('api/v1/user/ListClients', 'DeskyUserClientsController@ListClients');
 
     Route::post('api/v1/user/GetUserPrivacy', 'UserPrivacyController@GetUserPrivacy');
@@ -228,7 +227,7 @@ Route::get('/politique-de-confidentialite', function () {
 /* SUBDEOMAINS */
 
 Route::any('dev_test', function () {
-    $str =
+   /* $str =
     'PAY' .
     '200' .
     '4010' .
@@ -236,7 +235,8 @@ Route::any('dev_test', function () {
     'rifaisaad3@gmail.com' .
     '4010653ddd7e9b8cece2779bbed423ce';
     $hash = md5($str);
-    return $hash;
+    return $hash;*/
+  //  return var_dump(validateDate('2020-03-12'));
 });
 
 Route::any('verfymail', function () {
