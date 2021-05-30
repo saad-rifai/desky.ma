@@ -194,6 +194,7 @@
                   class="uk-input uk-width-1-1"
                   v-model="countryName"
                   @click="showlistCountries = true"
+                  @input="searchCountry"
                 />
               </div>
               <div v-if="showlistCountries == true" class="data-list">
@@ -785,6 +786,11 @@ export default {
     defocusApp() {
       this.$root.$emit('defocusApp') // emitted event
     },
+        searchCountry: function(){
+              return this.Countries.filter(post => {
+        return post.name.toLowerCase().includes(this.countryName.toLowerCase())
+      })
+    }
   },
   created() {
     this.addInvoice()

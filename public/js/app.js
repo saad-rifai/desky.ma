@@ -4919,6 +4919,13 @@ var Errors = /*#__PURE__*/function () {
     },
     defocusApp: function defocusApp() {
       this.$root.$emit('defocusApp'); // emitted event
+    },
+    searchCountry: function searchCountry() {
+      var _this4 = this;
+
+      return this.Countries.filter(function (post) {
+        return post.name.toLowerCase().includes(_this4.countryName.toLowerCase());
+      });
     }
   },
   created: function created() {
@@ -4926,10 +4933,10 @@ var Errors = /*#__PURE__*/function () {
   },
   computed: {
     filteredList: function filteredList() {
-      var _this4 = this;
+      var _this5 = this;
 
       return this.Countries.filter(function (post) {
-        return post.name.toLowerCase().includes(_this4.countryName.toLowerCase());
+        return post.name.toLowerCase().includes(_this5.countryName.toLowerCase());
       });
     }
   },
@@ -4958,6 +4965,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+//
 //
 //
 //
@@ -5766,6 +5774,13 @@ var Errors = /*#__PURE__*/function () {
     },
     defocusApp: function defocusApp() {
       this.$root.$emit('defocusApp'); // emitted event
+    },
+    searchCountry: function searchCountry() {
+      var _this4 = this;
+
+      return this.Countries.filter(function (post) {
+        return post.name.toLowerCase().includes(_this4.countryName.toLowerCase());
+      });
     }
   },
   created: function created() {
@@ -5773,10 +5788,10 @@ var Errors = /*#__PURE__*/function () {
   },
   computed: {
     filteredList: function filteredList() {
-      var _this4 = this;
+      var _this5 = this;
 
       return this.Countries.filter(function (post) {
-        return post.name.toLowerCase().includes(_this4.countryName.toLowerCase());
+        return post.name.toLowerCase().includes(_this5.countryName.toLowerCase());
       });
     }
   },
@@ -52715,14 +52730,17 @@ var render = function() {
                       staticClass: "uk-input uk-width-1-1",
                       domProps: { value: _vm.countryName },
                       on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.countryName = $event.target.value
+                          },
+                          _vm.searchCountry
+                        ],
                         click: function($event) {
                           _vm.showlistCountries = true
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.countryName = $event.target.value
                         }
                       }
                     })
@@ -54098,12 +54116,15 @@ var render = function() {
                         click: function($event) {
                           _vm.showlistCountries = true
                         },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.countryName = $event.target.value
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.countryName = $event.target.value
+                          },
+                          _vm.searchCountry
+                        ]
                       }
                     })
                   ]),

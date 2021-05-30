@@ -174,7 +174,7 @@
 <div class="uk-inline uk-width-1-1">
 <span v-if="country != ''" class="uk-form-icon uk-form-icon flag-icon"> <img :src="'https://www.countryflags.io/'+country+'/flat/64.png'"></span>
 <span  class="uk-form-icon uk-form-icon-flip " uk-icon="icon:  triangle-down"></span>
-  <input class="uk-input uk-width-1-1" v-model="countryName" @click="showlistCountries = true">
+  <input class="uk-input uk-width-1-1" @input="searchCountry" v-model="countryName" @click="showlistCountries = true">
 </div>
                 <div v-if="showlistCountries == true" class="data-list">
                 <div class="data-list-content">
@@ -755,6 +755,11 @@ this.invid = responseNumber.toString().padStart(8, "0");
     defocusApp() {
       this.$root.$emit('defocusApp') // emitted event
     },
+    searchCountry: function(){
+              return this.Countries.filter(post => {
+        return post.name.toLowerCase().includes(this.countryName.toLowerCase())
+      })
+    }
   },
   created() {
 this.addInvoice();
