@@ -69,10 +69,10 @@
         font-size: 17px;
         width: max-content;
     }
-    table thead{
+     table#tabel-responsive thead{
         display:none;
     }
-    table tbody, table td, table tr {
+    table#tabel-responsive tbody  ,  table#tabel-responsive td,  table#tabel-responsive tr {
         display: block;
         width: 100%;
         border-bottom: solid 1px #f1f1f1;
@@ -80,7 +80,7 @@
     .uk-margin-top.btn-call {
         width: 100%;
     }
-    td .uk-position-center {
+   td .uk-position-center {
         display: contents;
     }
 }

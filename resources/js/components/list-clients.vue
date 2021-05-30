@@ -138,7 +138,7 @@
         </h2>
         <hr />
         <div class="uk-overflow-auto">
-          <table class="uk-table uk-table-striped uk-text-right">
+          <table id="tabel-responsive" class="uk-table uk-table-striped uk-text-right">
             <thead>
               <tr>
                 <th>رقم العميل</th>
@@ -167,14 +167,19 @@
                   ></a>
                 </td>
               </tr>
-            </tbody>
-          </table>
-          <div v-if="pages == 0" class="uk-text-center uk-position-center">
+              <tr>
+                  <td>
+                                <div v-if="pages == 0" class="uk-text-center uk-position-center">
             <p class="nodatamessage">
               <i class="fas fa-info-circle"></i>
               لايوجد بيانات لعرضها
             </p>
           </div>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
         <ul v-if="pages > 1" class="uk-pagination" dir="ltr">
           <li class="uk-margin-auto-right">

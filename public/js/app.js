@@ -6016,6 +6016,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
+//
+//
+//
+//
 var Errors = /*#__PURE__*/function () {
   function Errors() {
     _classCallCheck(this, Errors);
@@ -55298,65 +55303,76 @@ var render = function() {
           _c("div", { staticClass: "uk-overflow-auto" }, [
             _c(
               "table",
-              { staticClass: "uk-table uk-table-striped uk-text-right" },
+              {
+                staticClass: "uk-table uk-table-striped uk-text-right",
+                attrs: { id: "tabel-responsive" }
+              },
               [
                 _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.infos, function(val, index) {
-                    return _c("tr", { key: index }, [
-                      _c("td", [_vm._v(_vm._s(val.CID))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.c_name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.c_email))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.created_at))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("a", { attrs: { href: "javascript:void(0)" } }, [
+                  [
+                    _vm._l(_vm.infos, function(val, index) {
+                      return _c("tr", { key: index }, [
+                        _c("td", [_vm._v(_vm._s(val.CID))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(val.c_name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(val.c_email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(val.created_at))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("a", { attrs: { href: "javascript:void(0)" } }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "act-btn-radio",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showdevis(val.CID)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-eye" })]
+                            )
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "button",
+                            "a",
                             {
-                              staticClass: "act-btn-radio",
+                              attrs: { href: "#modal-delete", "uk-toggle": "" },
                               on: {
                                 click: function($event) {
-                                  return _vm.showdevis(val.CID)
+                                  return _vm.removeAct(val.CID)
                                 }
                               }
                             },
-                            [_c("i", { staticClass: "fas fa-eye" })]
+                            [_vm._m(5, true)]
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#modal-delete", "uk-toggle": "" },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeAct(val.CID)
-                              }
-                            }
-                          },
-                          [_vm._m(5, true)]
-                        )
+                        ])
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [
+                        _vm.pages == 0
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "uk-text-center uk-position-center"
+                              },
+                              [_vm._m(6)]
+                            )
+                          : _vm._e()
                       ])
                     ])
-                  }),
-                  0
+                  ],
+                  2
                 )
               ]
-            ),
-            _vm._v(" "),
-            _vm.pages == 0
-              ? _c(
-                  "div",
-                  { staticClass: "uk-text-center uk-position-center" },
-                  [_vm._m(6)]
-                )
-              : _vm._e()
+            )
           ]),
           _vm._v(" "),
           _vm.pages > 1
