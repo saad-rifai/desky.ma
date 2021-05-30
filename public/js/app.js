@@ -4655,7 +4655,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
-//
 
 
 var Errors = /*#__PURE__*/function () {
@@ -4959,7 +4958,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-//
 //
 //
 //
@@ -52363,14 +52361,11 @@ var render = function() {
                             _vm.q = $event.target.value
                           },
                           function($event) {
-                            return _vm.searchClient("n")
+                            _vm.searchClient("n"), (_vm.CleantsListshow = true)
                           }
                         ],
                         change: function($event) {
-                          return _vm.searchClient("n")
-                        },
-                        focus: function($event) {
-                          _vm.CleantsListshow = true
+                          _vm.searchClient("n"), (_vm.CleantsListshow = true)
                         }
                       }
                     })
@@ -53746,14 +53741,11 @@ var render = function() {
                             _vm.q = $event.target.value
                           },
                           function($event) {
-                            return _vm.searchClient("n")
+                            _vm.searchClient("n"), (_vm.CleantsListshow = true)
                           }
                         ],
                         change: function($event) {
-                          return _vm.searchClient("n")
-                        },
-                        focus: function($event) {
-                          _vm.CleantsListshow = true
+                          _vm.searchClient("n"), (_vm.CleantsListshow = true)
                         }
                       }
                     })

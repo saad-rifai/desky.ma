@@ -40,9 +40,8 @@
                 <input
                   class="uk-input"
                   type="text"
-                  @input="searchClient('n')"
-                  @change="searchClient('n')"
-                  @focus="CleantsListshow = true"
+                  @input="searchClient('n'), CleantsListshow = true"
+                  @change="searchClient('n'), CleantsListshow = true"
                   v-model="q"
                 />
               </div>
