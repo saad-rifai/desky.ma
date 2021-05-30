@@ -4655,6 +4655,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
 
 
 var Errors = /*#__PURE__*/function () {
@@ -52730,17 +52731,15 @@ var render = function() {
                       staticClass: "uk-input uk-width-1-1",
                       domProps: { value: _vm.countryName },
                       on: {
-                        input: [
-                          function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.countryName = $event.target.value
-                          },
-                          _vm.searchCountry
-                        ],
+                        change: _vm.searchCountry,
                         click: function($event) {
                           _vm.showlistCountries = true
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.countryName = $event.target.value
                         }
                       }
                     })
@@ -54116,15 +54115,13 @@ var render = function() {
                         click: function($event) {
                           _vm.showlistCountries = true
                         },
-                        input: [
-                          function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.countryName = $event.target.value
-                          },
-                          _vm.searchCountry
-                        ]
+                        change: _vm.searchCountry,
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.countryName = $event.target.value
+                        }
                       }
                     })
                   ]),

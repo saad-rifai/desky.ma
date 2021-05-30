@@ -194,7 +194,7 @@
                   class="uk-input uk-width-1-1"
                   v-model="countryName"
                   @click="showlistCountries = true"
-                  @input="searchCountry"
+                  @change="searchCountry"
                 />
               </div>
               <div v-if="showlistCountries == true" class="data-list">
