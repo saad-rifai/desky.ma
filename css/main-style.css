@@ -284,6 +284,22 @@ img.logo-pt {
     background-color: #ffe000;
     color: black;
 }
+ul.uk-nav.uk-dropdown-nav {
+    padding-right: 0;
+}
+.mobile-nav-logo img {
+    width: 100%;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.uk-offcanvas-bar.uk-offcanvas-bar-animation.uk-offcanvas-slide {
+    overflow-x: hidden;
+}
+.btn-grids div {
+    margin: 5px;
+}
 p.footer-text-small {
     text-align: center;
     font-size: 13px;
@@ -359,11 +375,12 @@ input.form-captcha {
     width: 143px;
     margin-top: 5px;
 }
-button.uk-button.uk-float-left.user-menu-bar {
-    background-color: white;
+button.user-menu-bar {
+    background-color: inherit;
     color: #383838;
     height: 55px;
     overflow: hidden;
+    border: none;
 }
 ul.uk-breadcrumb li a {
     font-size: 75% !important;
@@ -614,7 +631,7 @@ nav.uk-navbar-container.Blue-brand-ayol.uk-navbar {
     float: left !important;
     direction: ltr;
     width: 100%;
-    margin: 18px 0 0px 6%;
+    margin: 13px 0 0px 2% !important;
     color: #f78b03 !important;
 }
 .h-85{
@@ -703,6 +720,9 @@ button.uk-button.uk-button-text {
     padding: 0 30px;
     font-size: 17px;
     color: white;
+}
+.search-btn-phone{
+    display: none;
 }
 header {
     margin: 0;
@@ -952,6 +972,7 @@ img.left-ayol {
     max-width: 130px;
     padding-bottom: 10px;
 }
+
 pan.msg,
 span.choose {
     color: #555;

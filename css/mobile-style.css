@@ -54,18 +54,38 @@
     }
 }
 /**/
-@media only screen and (max-width: 600px) {
-   /* .content-header {
-        margin-bottom: 35%;
-    }*/
+@media only screen and (max-width: 520px) {
+    .right-search {
+        display: none;
+    }
+    .search-btn-phone{
+        display: block;
+    }
+    button.uk-button {
+        width: 100%;
+    }
+    table thead{
+        display:none;
+    }
+    table tbody, table td, table tr {
+        display: block;
+        width: 100%;
+        border-bottom: solid 1px #f1f1f1;
+    }
+    .uk-margin-top.btn-call {
+        width: 100%;
+    }
+    td .uk-position-center {
+        display: contents;
+    }
 }
 @media only screen and (max-width: 480px) {
+
     button.toggel-button{
         margin-top: 20px !important;
     }
-    .right-nav{
-
-    margin: 22px 0 0px 2% !important;
+    .right-nav {
+        margin: 13px 0 0px 2% !important;
     }
     .uk-button.uk-float-left.user-menu-bar{
         padding: 0 3px !important;
@@ -78,6 +98,10 @@
     }
 }
 @media only screen and (max-width: 420px) {
+
+    ul.uk-breadcrumb li a {
+        font-size: 60% !important;
+    }
     img.logo-ayol {
         width: 100%;
         margin: -80px 46% 78px -38px !important;

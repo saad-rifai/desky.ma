@@ -4655,6 +4655,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
 
 
 var Errors = /*#__PURE__*/function () {
@@ -5470,6 +5471,39 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var Errors = /*#__PURE__*/function () {
@@ -5579,7 +5613,7 @@ var Errors = /*#__PURE__*/function () {
       axios.post('../api/v1/user/desky/facture/maxNumber').then(function (response) {
         if (response.data.length > 0) {
           var responseNumber = parseInt(response.data) + 1;
-          _this.invid = responseNumber.toString().padStart(8, "0");
+          _this.invid = responseNumber.toString().padStart(8, '0');
         } else {
           _this.invid = '00000001';
         }
@@ -5771,6 +5805,74 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6268,6 +6370,88 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var Errors = /*#__PURE__*/function () {
   function Errors() {
     _classCallCheck(this, Errors);
@@ -6293,18 +6477,18 @@ var Errors = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["uid", "token_share"],
+  props: ['uid', 'token_share'],
   data: function data() {
     return {
       errors: new Errors(),
       infos: [],
-      s_oid: "",
-      s_name: "",
-      s_email: "",
-      pages: "",
-      items: "",
+      s_oid: '',
+      s_name: '',
+      s_email: '',
+      pages: '',
+      items: '',
       pagenow: 1,
-      oidclcicked: ""
+      oidclcicked: ''
     };
   },
   methods: {
@@ -6312,24 +6496,24 @@ var Errors = /*#__PURE__*/function () {
       var _this = this;
 
       var data = new FormData();
-      data.append("ref", window.location.href);
-      data.append("token", $("meta[name=csrf-token]").attr("content"));
-      data.append("oid", e);
-      data.append("d", "d");
-      axios.post("../api/v1/deleteDocumment", data).then(function (response) {
+      data.append('ref', window.location.href);
+      data.append('token', $('meta[name=csrf-token]').attr('content'));
+      data.append('oid', e);
+      data.append('d', 'd');
+      axios.post('../api/v1/deleteDocumment', data).then(function (response) {
         UIkit.notification({
-          message: "تم حذف عرض الاسعار : " + e + "",
-          status: "success",
-          pos: "top-center",
+          message: 'تم حذف عرض الاسعار : ' + e + '',
+          status: 'success',
+          pos: 'top-center',
           timeout: 5000
         });
 
         _this.searchnow();
       })["catch"](function (error) {
         UIkit.notification({
-          message: "حصل خطأ ما يرجى اعادة المحاولة لاحقاََ رقم الخطأ fx0029",
-          status: "danger",
-          pos: "top-center",
+          message: 'حصل خطأ ما يرجى اعادة المحاولة لاحقاََ رقم الخطأ fx0029',
+          status: 'danger',
+          pos: 'top-center',
           timeout: 5000
         });
       });
@@ -6340,130 +6524,130 @@ var Errors = /*#__PURE__*/function () {
     searchnow: function searchnow() {
       var _this2 = this;
 
-      $("#form-loading").css("display", "block");
+      $('#form-loading').css('display', 'block');
       var config = {
-        apikey: "35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H"
+        apikey: '35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H'
       }; ///////////////
 
       var data = new FormData();
-      data.append("s_oid", this.s_oid);
-      data.append("s_name", this.s_name);
-      data.append("s_email", this.s_email);
-      data.append("page", 0);
-      data.append("search", true);
-      axios.post("../../api/list-devis", data, config).then(function (response) {
+      data.append('s_oid', this.s_oid);
+      data.append('s_name', this.s_name);
+      data.append('s_email', this.s_email);
+      data.append('page', 0);
+      data.append('search', true);
+      axios.post('../../api/list-devis', data, config).then(function (response) {
         _this2.infos = response.data[0].data;
         _this2.pages = response.data.count / 10;
         _this2.items = response.data.count;
         _this2.pagenow = response.data.pagenow;
-        $("#form-loading").css("display", "none");
+        $('#form-loading').css('display', 'none');
       })["catch"](function (error) {
         _this2.errors.record(error.response.data);
 
         _this2.notificationchek();
 
-        $("#form-loading").css("display", "none");
+        $('#form-loading').css('display', 'none');
       });
     },
     showdevis: function showdevis(oid) {
-      window.location.href = "" + oid + "/" + this.uid;
+      window.location.href = '' + oid + '/' + this.uid;
     },
     previouspage: function previouspage(page) {
       var _this3 = this;
 
-      $("#form-loading").css("display", "block");
+      $('#form-loading').css('display', 'block');
 
       if (page > 1) {
         var pagenow = page - 1;
         var data = new FormData();
-        data.append("s_oid", "" + this.s_oid + "");
-        data.append("s_name", "" + this.s_name + "");
-        data.append("s_email", "" + this.s_email + "");
-        data.append("page", "" + pagenow + "");
-        data.append("search", "" + true + "");
+        data.append('s_oid', '' + this.s_oid + '');
+        data.append('s_name', '' + this.s_name + '');
+        data.append('s_email', '' + this.s_email + '');
+        data.append('page', '' + pagenow + '');
+        data.append('search', '' + true + '');
         var config = {
-          apikey: "35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H"
+          apikey: '35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H'
         };
-        axios.post("../../api/list-devis", data, config).then(function (response) {
+        axios.post('../../api/list-devis', data, config).then(function (response) {
           _this3.infos = response.data[0].data;
           _this3.pages = response.data.count / 10;
           _this3.items = response.data.count;
           _this3.pagenow = response.data.pagenow;
-          $("#form-loading").css("display", "none");
+          $('#form-loading').css('display', 'none');
         })["catch"](function (error) {
           _this3.errors.record(error.response.data);
 
           _this3.notificationchek();
 
-          $("#form-loading").css("display", "none");
+          $('#form-loading').css('display', 'none');
         });
       } else {
-        $("#form-loading").css("display", "none");
+        $('#form-loading').css('display', 'none');
       }
     },
     nextpage: function nextpage(page) {
       var _this4 = this;
 
-      $("#form-loading").css("display", "block");
+      $('#form-loading').css('display', 'block');
 
       if (page < this.pages) {
         var config = {
           headers: {
-            apikey: "35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H"
+            apikey: '35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H'
           }
         };
         var pagenow = page + 1;
         var data = new FormData();
-        data.append("s_oid", this.s_oid);
-        data.append("s_name", this.s_name);
-        data.append("s_email", this.s_email);
-        data.append("page", pagenow);
-        data.append("search", true);
-        axios.post("../../api/list-devis", data, config).then(function (response) {
+        data.append('s_oid', this.s_oid);
+        data.append('s_name', this.s_name);
+        data.append('s_email', this.s_email);
+        data.append('page', pagenow);
+        data.append('search', true);
+        axios.post('../../api/list-devis', data, config).then(function (response) {
           _this4.infos = response.data[0].data;
           _this4.pages = response.data.count / 10;
           _this4.items = response.data.count;
           _this4.pagenow = response.data.pagenow;
-          $("#form-loading").css("display", "none");
+          $('#form-loading').css('display', 'none');
         })["catch"](function (error) {
           _this4.errors.record(error.response.data);
 
           _this4.notificationchek();
 
-          $("#form-loading").css("display", "none");
+          $('#form-loading').css('display', 'none');
         });
       } else {
-        $("#form-loading").css("display", "none");
+        $('#form-loading').css('display', 'none');
       }
     },
     notificationchek: function notificationchek() {
       UIkit.notification({
-        message: "حصل خطأ ما يرجى اعادة تحميل الصفحة",
-        status: "danger"
+        message: 'حصل خطأ ما يرجى اعادة تحميل الصفحة',
+        status: 'danger'
       });
     }
   },
   mounted: function mounted() {
     var _this5 = this;
 
-    $("#form-loading").css("display", "block"); ///////////////
+    $('#form-loading').css('display', 'block'); ///////////////
 
     var config = {
-      apikey: "35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H"
+      apikey: '35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H'
     };
-    axios.post("../../api/list-devis?apikey").then(function (response) {
+    axios.post('../../api/list-devis?apikey').then(function (response) {
       _this5.infos = response.data[0].data;
       _this5.pages = response.data.count / 10;
       _this5.items = response.data.count;
       _this5.pagenow = response.data.pagenow;
-      $("#form-loading").css("display", "none");
+      $('#form-loading').css('display', 'none');
     })["catch"](function (error) {
       _this5.errors.record(error.response.data);
 
       _this5.notificationchek(); //location.reload()
 
 
-      $("#form-loading").css("display", "none");
+      $('#form-loading').css('display', 'none');
     });
   }
 });
@@ -6485,6 +6669,74 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9025,7 +9277,6 @@ var Errors = /*#__PURE__*/function () {
       city: this.user.city,
       country: this.user.country,
       apiKey: "fgfg160151f2g2fdgfgfdg",
-      url_api: "http://" + window.location.hostname,
       response: ""
     };
   },
@@ -9042,7 +9293,7 @@ var Errors = /*#__PURE__*/function () {
       data.append("phonenumb", this.phonenumb);
       data.append("city", this.city);
       data.append("country", this.country);
-      axios.post(this.url_api + "/api/user/update", data).then(function (response) {
+      axios.post("/api/user/update", data).then(function (response) {
         $("#form-loading").css("display", "none");
         UIkit.notification({
           message: "تم حفظ البيانات",
@@ -49918,7 +50169,11 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "uk-text-right uk-flex", attrs: { hi: "", dir: "rtl" } },
+      {
+        staticClass:
+          "uk-flex uk-flex-wrap uk-flex-wrap-around btn-grids uk-padding-small",
+        attrs: { dir: "rtl" }
+      },
       [
         _c("div", [
           _vm._m(2),
@@ -49967,7 +50222,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "uk-margin-right" }, [
+        _c("div", {}, [
           _c(
             "button",
             {
@@ -50022,7 +50277,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "uk-margin-right" }, [
+        _c("div", {}, [
           _c(
             "button",
             {
@@ -51707,7 +51962,11 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "uk-text-right uk-flex", attrs: { hi: "", dir: "rtl" } },
+      {
+        staticClass:
+          "uk-flex uk-flex-wrap uk-flex-wrap-around btn-grids uk-padding-small",
+        attrs: { dir: "rtl" }
+      },
       [
         _c("div", [
           _vm._m(2),
@@ -51756,7 +52015,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "uk-margin-right" }, [
+        _c("div", [
           _c(
             "button",
             {
@@ -51811,7 +52070,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "uk-margin-right" }, [
+        _c("div", [
           _c(
             "button",
             {
@@ -52015,7 +52274,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.CreerDevis }
           },
-          [_vm._v("\r\n          حفظ\r\n        ")]
+          [_vm._v("\n          حفظ\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -52025,7 +52284,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.getout }
           },
-          [_vm._v("\r\n          الغاء\r\n        ")]
+          [_vm._v("\n          الغاء\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -52053,7 +52312,7 @@ var render = function() {
           [
             _c("div", { staticClass: "uk-width-1-1@s" }, [
               _c("label", { attrs: { for: "" } }, [
-                _vm._v("\r\n              البحث عن عميل موجود\r\n            ")
+                _vm._v("\n              البحث عن عميل موجود\n            ")
               ]),
               _vm._v(" "),
               _c(
@@ -52107,6 +52366,9 @@ var render = function() {
                             return _vm.searchClient("n")
                           }
                         ],
+                        change: function($event) {
+                          return _vm.searchClient("n")
+                        },
                         focus: function($event) {
                           _vm.CleantsListshow = true
                         }
@@ -52140,9 +52402,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n                      " +
+                                    "\n                      " +
                                       _vm._s(item.c_name) +
-                                      "\r\n                      "
+                                      "\n                      "
                                   ),
                                   _c("br"),
                                   _vm._v(" "),
@@ -52200,9 +52462,9 @@ var render = function() {
               _vm.errors.errors.c_name
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.c_name[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52243,9 +52505,9 @@ var render = function() {
               _vm.errors.errors.c_phone
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.c_phone[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52287,9 +52549,9 @@ var render = function() {
               _vm.errors.errors.c_email
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.c_email[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52332,9 +52594,9 @@ var render = function() {
               _vm.errors.errors.c_ice
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.c_ice[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52381,9 +52643,9 @@ var render = function() {
                         { key: index, domProps: { value: index } },
                         [
                           _vm._v(
-                            "\r\n                  " +
+                            "\n                  " +
                               _vm._s(item) +
-                              "\r\n                "
+                              "\n                "
                           )
                         ]
                       )
@@ -52396,9 +52658,9 @@ var render = function() {
               _vm.errors.errors.c_type
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.c_type[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52510,7 +52772,7 @@ var render = function() {
                                     _vm._v(
                                       " " +
                                         _vm._s(item.name) +
-                                        "\r\n\r\n                    "
+                                        "\n\n                    "
                                     )
                                   ]
                                 )
@@ -52533,9 +52795,9 @@ var render = function() {
               _vm.errors.errors.country
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.country[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52578,9 +52840,9 @@ var render = function() {
               _vm.errors.errors.c_city
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.c_city[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52623,9 +52885,9 @@ var render = function() {
               _vm.errors.errors.c_adresse
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n              " +
                         _vm._s(_vm.errors.errors.c_adresse[0]) +
-                        "\r\n            "
+                        "\n            "
                     )
                   ])
                 : _vm._e()
@@ -52654,9 +52916,9 @@ var render = function() {
                 _c("div", { staticClass: "uk-width-1-1" }, [
                   _c("h1", { staticClass: "uk-card-title uk-text-right" }, [
                     _vm._v(
-                      "\r\n                العنصر " +
+                      "\n                العنصر " +
                         _vm._s(index + 1) +
-                        "\r\n              "
+                        "\n              "
                     )
                   ])
                 ]),
@@ -52810,7 +53072,7 @@ var render = function() {
             _c(
               "h2",
               { staticClass: "uk-card-title uk-text-right uk-width-1-1@s" },
-              [_vm._v("\r\n            الدفع والأداء\r\n          ")]
+              [_vm._v("\n            الدفع والأداء\n          ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "uk-width-1-1@s" }, [
@@ -52853,11 +53115,7 @@ var render = function() {
                 _c(
                   "label",
                   { staticClass: "uk-text-right", attrs: { dir: "rtl" } },
-                  [
-                    _vm._v(
-                      "\r\n              شروط الدفع (اختياري)\r\n            "
-                    )
-                  ]
+                  [_vm._v("\n              شروط الدفع (اختياري)\n            ")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "uk-margin" }, [
@@ -52946,9 +53204,9 @@ var render = function() {
                 _vm.errors.errors.p_condition
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n              " +
                           _vm._s(_vm.errors.errors.p_condition[0]) +
-                          "\r\n            "
+                          "\n            "
                       )
                     ])
                   : _vm._e()
@@ -52964,7 +53222,7 @@ var render = function() {
                   { staticClass: "uk-text-right", attrs: { dir: "rtl" } },
                   [
                     _vm._v(
-                      "\r\n              وسيلة الدفع (اختياري)\r\n            "
+                      "\n              وسيلة الدفع (اختياري)\n            "
                     )
                   ]
                 ),
@@ -53009,9 +53267,9 @@ var render = function() {
                           { key: index, domProps: { value: index } },
                           [
                             _vm._v(
-                              "\r\n                  " +
+                              "\n                  " +
                                 _vm._s(item) +
-                                "\r\n                "
+                                "\n                "
                             )
                           ]
                         )
@@ -53024,9 +53282,9 @@ var render = function() {
                 _vm.errors.errors.p_method
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n              " +
                           _vm._s(_vm.errors.errors.p_method[0]) +
-                          "\r\n            "
+                          "\n            "
                       )
                     ])
                   : _vm._e()
@@ -53075,9 +53333,9 @@ var render = function() {
                 _vm.errors.errors.notes
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n              " +
                           _vm._s(_vm.errors.errors.notes[0]) +
-                          "\r\n            "
+                          "\n            "
                       )
                     ])
                   : _vm._e()
@@ -53134,9 +53392,9 @@ var render = function() {
                           { key: index, domProps: { value: index } },
                           [
                             _vm._v(
-                              "\r\n                  " +
+                              "\n                  " +
                                 _vm._s(statu) +
-                                "\r\n                "
+                                "\n                "
                             )
                           ]
                         )
@@ -53149,9 +53407,9 @@ var render = function() {
                 _vm.errors.errors.p_method
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n              " +
                           _vm._s(_vm.errors.errors.p_method[0]) +
-                          "\r\n            "
+                          "\n            "
                       )
                     ])
                   : _vm._e()
@@ -53165,14 +53423,14 @@ var render = function() {
         _c("div", { staticClass: "uk-text-right content-total" }, [
           _c("h3", { staticClass: "text-f-bloder" }, [
             _vm._v(
-              "\r\n            المجموع:\r\n            " +
+              "\n            المجموع:\n            " +
                 _vm._s(
                   this.subtotal.toLocaleString("en-US", {
                     style: "currency",
                     currency: "MAD"
                   })
                 ) +
-                "\r\n          "
+                "\n          "
             )
           ]),
           _vm._v(" "),
@@ -53181,14 +53439,14 @@ var render = function() {
           _vm.remise_c > 0
             ? _c("h3", { staticClass: "text-f-bloder" }, [
                 _vm._v(
-                  "\r\n            الخصم:\r\n            " +
+                  "\n            الخصم:\n            " +
                     _vm._s(
                       this.remise_c.toLocaleString("en-US", {
                         style: "currency",
                         currency: "MAD"
                       })
                     ) +
-                    "\r\n          "
+                    "\n          "
                 )
               ])
             : _vm._e(),
@@ -53197,14 +53455,14 @@ var render = function() {
           _vm._v(" "),
           _c("h3", { staticClass: "text-f-bloder" }, [
             _vm._v(
-              "\r\n            الضريبة(TVA):\r\n            " +
+              "\n            الضريبة(TVA):\n            " +
                 _vm._s(
                   this.tva.toLocaleString("en-US", {
                     style: "currency",
                     currency: "MAD"
                   })
                 ) +
-                "\r\n          "
+                "\n          "
             )
           ]),
           _vm._v(" "),
@@ -53213,14 +53471,14 @@ var render = function() {
           _c("div", { staticClass: "total-border" }, [
             _c("h3", { staticClass: "text-f-bolder-w" }, [
               _vm._v(
-                "\r\n              المجموع الكلي:\r\n              " +
+                "\n              المجموع الكلي:\n              " +
                   _vm._s(
                     this.total.toLocaleString("en-US", {
                       style: "currency",
                       currency: "MAD"
                     })
                   ) +
-                  "\r\n            "
+                  "\n            "
               )
             ])
           ])
@@ -53238,7 +53496,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.CreerDevis }
         },
-        [_vm._v("\r\n        حفظ\r\n      ")]
+        [_vm._v("\n        حفظ\n      ")]
       ),
       _vm._v(" "),
       _c(
@@ -53248,7 +53506,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.getout }
         },
-        [_vm._v("\r\n        الغاء\r\n      ")]
+        [_vm._v("\n        الغاء\n      ")]
       )
     ])
   ])
@@ -53260,9 +53518,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { attrs: { for: "" } }, [
       _c("i", { staticClass: "fas fa-users" }),
-      _vm._v(
-        "\r\n                    قائمة العملاء المسجلين\r\n                  "
-      )
+      _vm._v("\n                    قائمة العملاء المسجلين\n                  ")
     ])
   },
   function() {
@@ -53270,7 +53526,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              الاسم الكامل للعميل\r\n              "),
+      _vm._v("\n              الاسم الكامل للعميل\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53279,7 +53535,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              رقم الهاتف\r\n              "),
+      _vm._v("\n              رقم الهاتف\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53288,7 +53544,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              البريد الالكتروني\r\n              "),
+      _vm._v("\n              البريد الالكتروني\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53297,7 +53553,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              نوع العميل\r\n              "),
+      _vm._v("\n              نوع العميل\n              "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53307,7 +53563,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { attrs: { for: "" } }, [
       _c("i", { staticClass: "fas fa-globe-africa" }),
-      _vm._v("\r\n                    قائمة الدول\r\n                  ")
+      _vm._v("\n                    قائمة الدول\n                  ")
     ])
   },
   function() {
@@ -53328,7 +53584,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
       _vm._v(
-        "\r\n                  الخدمة أو المنتج (بالفرنسية)\r\n                  "
+        "\n                  الخدمة أو المنتج (بالفرنسية)\n                  "
       ),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
@@ -53338,7 +53594,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n                  السعر\r\n                  "),
+      _vm._v("\n                  السعر\n                  "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53347,7 +53603,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n                  الكمية\r\n                  "),
+      _vm._v("\n                  الكمية\n                  "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -53401,7 +53657,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.CreerFacture }
           },
-          [_vm._v("\r\n          حفظ\r\n        ")]
+          [_vm._v("\n        حفظ\n      ")]
         ),
         _vm._v(" "),
         _c(
@@ -53411,7 +53667,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.getout }
           },
-          [_vm._v("\r\n          الغاء\r\n        ")]
+          [_vm._v("\n        الغاء\n      ")]
         )
       ]),
       _vm._v(" "),
@@ -53439,7 +53695,7 @@ var render = function() {
           [
             _c("div", { staticClass: "uk-width-1-1@s" }, [
               _c("label", { attrs: { for: "" } }, [
-                _vm._v("\r\n              البحث عن عميل موجود\r\n            ")
+                _vm._v("\n            البحث عن عميل موجود\n          ")
               ]),
               _vm._v(" "),
               _c(
@@ -53493,6 +53749,9 @@ var render = function() {
                             return _vm.searchClient("n")
                           }
                         ],
+                        change: function($event) {
+                          return _vm.searchClient("n")
+                        },
                         focus: function($event) {
                           _vm.CleantsListshow = true
                         }
@@ -53526,9 +53785,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n                      " +
+                                    "\n                    " +
                                       _vm._s(item.c_name) +
-                                      "\r\n                      "
+                                      "\n                    "
                                   ),
                                   _c("br"),
                                   _vm._v(" "),
@@ -53586,9 +53845,9 @@ var render = function() {
               _vm.errors.errors.c_name
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.c_name[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -53629,9 +53888,9 @@ var render = function() {
               _vm.errors.errors.c_phone
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.c_phone[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -53673,9 +53932,9 @@ var render = function() {
               _vm.errors.errors.c_email
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.c_email[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -53718,9 +53977,9 @@ var render = function() {
               _vm.errors.errors.c_ice
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.c_ice[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -53767,9 +54026,9 @@ var render = function() {
                         { key: index, domProps: { value: index } },
                         [
                           _vm._v(
-                            "\r\n                  " +
+                            "\n                " +
                               _vm._s(item) +
-                              "\r\n                "
+                              "\n              "
                           )
                         ]
                       )
@@ -53782,9 +54041,9 @@ var render = function() {
               _vm.errors.errors.c_type
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.c_type[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -53828,7 +54087,7 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _c("span", {
-                      staticClass: "uk-form-icon uk-form-icon-flip ",
+                      staticClass: "uk-form-icon uk-form-icon-flip",
                       attrs: { "uk-icon": "icon:  triangle-down" }
                     }),
                     _vm._v(" "),
@@ -53894,9 +54153,9 @@ var render = function() {
                                       })
                                     ]),
                                     _vm._v(
-                                      " " +
+                                      "\n                    " +
                                         _vm._s(item.name) +
-                                        "\r\n\r\n                    "
+                                        "\n                  "
                                     )
                                   ]
                                 )
@@ -53919,9 +54178,9 @@ var render = function() {
               _vm.errors.errors.country
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.country[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -53964,9 +54223,9 @@ var render = function() {
               _vm.errors.errors.c_city
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.c_city[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -54009,9 +54268,9 @@ var render = function() {
               _vm.errors.errors.c_adresse
                 ? _c("div", { staticClass: "uk-text-danger" }, [
                     _vm._v(
-                      "\r\n              " +
+                      "\n            " +
                         _vm._s(_vm.errors.errors.c_adresse[0]) +
-                        "\r\n            "
+                        "\n          "
                     )
                   ])
                 : _vm._e()
@@ -54040,9 +54299,9 @@ var render = function() {
                 _c("div", { staticClass: "uk-width-1-1" }, [
                   _c("h1", { staticClass: "uk-card-title uk-text-right" }, [
                     _vm._v(
-                      "\r\n                العنصر " +
+                      "\n              العنصر " +
                         _vm._s(index + 1) +
-                        "\r\n              "
+                        "\n            "
                     )
                   ])
                 ]),
@@ -54196,7 +54455,7 @@ var render = function() {
             _c(
               "h2",
               { staticClass: "uk-card-title uk-text-right uk-width-1-1@s" },
-              [_vm._v("\r\n            الدفع والأداء\r\n          ")]
+              [_vm._v("\n          الدفع والأداء\n        ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "uk-width-1-1@s" }, [
@@ -54239,11 +54498,7 @@ var render = function() {
                 _c(
                   "label",
                   { staticClass: "uk-text-right", attrs: { dir: "rtl" } },
-                  [
-                    _vm._v(
-                      "\r\n              شروط الدفع (اختياري)\r\n            "
-                    )
-                  ]
+                  [_vm._v("\n            شروط الدفع (اختياري)\n          ")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "uk-margin" }, [
@@ -54332,9 +54587,9 @@ var render = function() {
                 _vm.errors.errors.p_condition
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n            " +
                           _vm._s(_vm.errors.errors.p_condition[0]) +
-                          "\r\n            "
+                          "\n          "
                       )
                     ])
                   : _vm._e()
@@ -54348,11 +54603,7 @@ var render = function() {
                 _c(
                   "label",
                   { staticClass: "uk-text-right", attrs: { dir: "rtl" } },
-                  [
-                    _vm._v(
-                      "\r\n              وسيلة الدفع (اختياري)\r\n            "
-                    )
-                  ]
+                  [_vm._v("\n            وسيلة الدفع (اختياري)\n          ")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "uk-margin" }, [
@@ -54395,9 +54646,9 @@ var render = function() {
                           { key: index, domProps: { value: index } },
                           [
                             _vm._v(
-                              "\r\n                  " +
+                              "\n                " +
                                 _vm._s(item) +
-                                "\r\n                "
+                                "\n              "
                             )
                           ]
                         )
@@ -54410,9 +54661,9 @@ var render = function() {
                 _vm.errors.errors.p_method
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n            " +
                           _vm._s(_vm.errors.errors.p_method[0]) +
-                          "\r\n            "
+                          "\n          "
                       )
                     ])
                   : _vm._e()
@@ -54461,9 +54712,9 @@ var render = function() {
                 _vm.errors.errors.notes
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n            " +
                           _vm._s(_vm.errors.errors.notes[0]) +
-                          "\r\n            "
+                          "\n          "
                       )
                     ])
                   : _vm._e()
@@ -54520,9 +54771,9 @@ var render = function() {
                           { key: index, domProps: { value: index } },
                           [
                             _vm._v(
-                              "\r\n                  " +
+                              "\n                " +
                                 _vm._s(statu) +
-                                "\r\n                "
+                                "\n              "
                             )
                           ]
                         )
@@ -54535,9 +54786,9 @@ var render = function() {
                 _vm.errors.errors.p_method
                   ? _c("div", { staticClass: "uk-text-danger" }, [
                       _vm._v(
-                        "\r\n              " +
+                        "\n            " +
                           _vm._s(_vm.errors.errors.p_method[0]) +
-                          "\r\n            "
+                          "\n          "
                       )
                     ])
                   : _vm._e()
@@ -54551,14 +54802,14 @@ var render = function() {
         _c("div", { staticClass: "uk-text-right content-total" }, [
           _c("h3", { staticClass: "text-f-bloder" }, [
             _vm._v(
-              "\r\n            المجموع:\r\n            " +
+              "\n          المجموع:\n          " +
                 _vm._s(
                   this.subtotal.toLocaleString("en-US", {
                     style: "currency",
                     currency: "MAD"
                   })
                 ) +
-                "\r\n          "
+                "\n        "
             )
           ]),
           _vm._v(" "),
@@ -54567,14 +54818,14 @@ var render = function() {
           _vm.remise_c > 0
             ? _c("h3", { staticClass: "text-f-bloder" }, [
                 _vm._v(
-                  "\r\n            الخصم:\r\n            " +
+                  "\n          الخصم:\n          " +
                     _vm._s(
                       this.remise_c.toLocaleString("en-US", {
                         style: "currency",
                         currency: "MAD"
                       })
                     ) +
-                    "\r\n          "
+                    "\n        "
                 )
               ])
             : _vm._e(),
@@ -54583,14 +54834,14 @@ var render = function() {
           _vm._v(" "),
           _c("h3", { staticClass: "text-f-bloder" }, [
             _vm._v(
-              "\r\n            الضريبة(TVA):\r\n            " +
+              "\n          الضريبة(TVA):\n          " +
                 _vm._s(
                   this.tva.toLocaleString("en-US", {
                     style: "currency",
                     currency: "MAD"
                   })
                 ) +
-                "\r\n          "
+                "\n        "
             )
           ]),
           _vm._v(" "),
@@ -54599,14 +54850,14 @@ var render = function() {
           _c("div", { staticClass: "total-border" }, [
             _c("h3", { staticClass: "text-f-bolder-w" }, [
               _vm._v(
-                "\r\n              المجموع الكلي:\r\n              " +
+                "\n            المجموع الكلي:\n            " +
                   _vm._s(
                     this.total.toLocaleString("en-US", {
                       style: "currency",
                       currency: "MAD"
                     })
                   ) +
-                  "\r\n            "
+                  "\n          "
               )
             ])
           ])
@@ -54624,7 +54875,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.CreerFacture }
         },
-        [_vm._v("\r\n        حفظ\r\n      ")]
+        [_vm._v("\n      حفظ\n    ")]
       ),
       _vm._v(" "),
       _c(
@@ -54634,7 +54885,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.getout }
         },
-        [_vm._v("\r\n        الغاء\r\n      ")]
+        [_vm._v("\n      الغاء\n    ")]
       )
     ])
   ])
@@ -54646,9 +54897,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { attrs: { for: "" } }, [
       _c("i", { staticClass: "fas fa-users" }),
-      _vm._v(
-        "\r\n                    قائمة العملاء المسجلين\r\n                  "
-      )
+      _vm._v("\n                  قائمة العملاء المسجلين\n                ")
     ])
   },
   function() {
@@ -54656,7 +54905,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              الاسم الكامل للعميل\r\n              "),
+      _vm._v("\n            الاسم الكامل للعميل\n            "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -54665,7 +54914,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              رقم الهاتف\r\n              "),
+      _vm._v("\n            رقم الهاتف\n            "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -54674,7 +54923,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              البريد الالكتروني\r\n              "),
+      _vm._v("\n            البريد الالكتروني\n            "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -54683,7 +54932,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n              نوع العميل\r\n              "),
+      _vm._v("\n            نوع العميل\n            "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -54693,7 +54942,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { attrs: { for: "" } }, [
       _c("i", { staticClass: "fas fa-globe-africa" }),
-      _vm._v("\r\n                    قائمة الدول\r\n                  ")
+      _vm._v("\n                  قائمة الدول\n                ")
     ])
   },
   function() {
@@ -54714,7 +54963,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
       _vm._v(
-        "\r\n                  الخدمة أو المنتج (بالفرنسية)\r\n                  "
+        "\n                الخدمة أو المنتج (بالفرنسية)\n                "
       ),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
@@ -54724,7 +54973,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n                  السعر\r\n                  "),
+      _vm._v("\n                السعر\n                "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -54733,7 +54982,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("\r\n                  الكمية\r\n                  "),
+      _vm._v("\n                الكمية\n                "),
       _c("span", { staticClass: "red" }, [_vm._v("*")])
     ])
   },
@@ -54800,7 +55049,7 @@ var render = function() {
                 staticClass: "uk-button uk-button-default uk-modal-close",
                 attrs: { type: "button" }
               },
-              [_vm._v("\n          الغاء\n        ")]
+              [_vm._v("\n            الغاء\n          ")]
             ),
             _vm._v(" "),
             _c(
@@ -54814,16 +55063,18 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("\n          حذف\n        ")]
+              [_vm._v("\n            حذف\n          ")]
             )
           ])
         ]
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "uk-grid-large", attrs: { "uk-grid": "" } }, [
-      _c("div", { staticClass: "uk-margin-left uk-width-1-4@m" }, [
-        _c("div", { staticClass: "uk-card uk-card-default uk-card-body" }, [
+    _c("div", { attrs: { id: "modal-search", "uk-modal": "" } }, [
+      _c(
+        "div",
+        { staticClass: "uk-modal-dialog uk-modal-body", attrs: { dir: "rtl" } },
+        [
           _vm._m(0),
           _vm._v(" "),
           _c("hr"),
@@ -54909,8 +55160,109 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("br")
-        ])
+          _c("br"),
+          _vm._v(" "),
+          _vm._m(1)
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _c("div", { staticClass: "uk-grid-small", attrs: { "uk-grid": "" } }, [
+      _c("div", { staticClass: "uk-margin-left uk-width-1-4@m" }, [
+        _c(
+          "div",
+          { staticClass: "uk-card uk-card-default uk-card-body right-search" },
+          [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "uk-margin" }, [
+              _c("label", [_vm._v("رقم العميل")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.s_oid,
+                    expression: "s_oid"
+                  }
+                ],
+                staticClass: "uk-input",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.s_oid },
+                on: {
+                  change: _vm.searchnow,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.s_oid = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "uk-margin" }, [
+              _c("label", [_vm._v("اسم العميل")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.s_name,
+                    expression: "s_name"
+                  }
+                ],
+                staticClass: "uk-input",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.s_name },
+                on: {
+                  change: _vm.searchnow,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.s_name = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "uk-margin" }, [
+              _c("label", [_vm._v("البريد الالكتروني")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.s_email,
+                    expression: "s_email"
+                  }
+                ],
+                staticClass: "uk-input",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.s_email },
+                on: {
+                  change: _vm.searchnow,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.s_email = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("br")
+          ]
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -54921,13 +55273,13 @@ var render = function() {
         [
           _c("h2", { staticClass: "uk-card-title" }, [
             _vm._v(
-              "\n        قائمة العملاء (" +
+              "\n             (" +
                 _vm._s(_vm.items) +
-                ") - الصفحة (" +
+                ") قائمة العملاء الصفحة (" +
                 _vm._s(_vm.pagenow) +
-                "-\n        " +
+                " - " +
                 _vm._s(Math.ceil(_vm.pages)) +
-                ")\n      "
+                ")\n\n        "
             )
           ]),
           _vm._v(" "),
@@ -54938,7 +55290,7 @@ var render = function() {
               "table",
               { staticClass: "uk-table uk-table-striped uk-text-right" },
               [
-                _vm._m(1),
+                _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -54978,7 +55330,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._m(2, true)]
+                          [_vm._m(5, true)]
                         )
                       ])
                     ])
@@ -54992,7 +55344,7 @@ var render = function() {
               ? _c(
                   "div",
                   { staticClass: "uk-text-center uk-position-center" },
-                  [_vm._m(3)]
+                  [_vm._m(6)]
                 )
               : _vm._e()
           ]),
@@ -55018,7 +55370,7 @@ var render = function() {
                               staticClass: "uk-margin-small-left",
                               attrs: { "uk-pagination-previous": "" }
                             }),
-                            _vm._v("\n            التالي\n          ")
+                            _vm._v("\n              التالي\n            ")
                           ]
                         )
                       : _vm._e()
@@ -55036,7 +55388,7 @@ var render = function() {
                             }
                           },
                           [
-                            _vm._v("\n            السابق\n            "),
+                            _vm._v("\n              السابق\n              "),
                             _c("span", {
                               staticClass: "uk-margin-small-left",
                               attrs: { "uk-pagination-next": "" }
@@ -55060,7 +55412,56 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "uk-card-title uk-text-right" }, [
       _c("span", { attrs: { "uk-icon": "search" } }),
-      _vm._v("\n          البحث\n        ")
+      _vm._v("\n            البحث\n          ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "uk-text-right", attrs: { dir: "rtl" } }, [
+      _c(
+        "button",
+        {
+          staticClass: "uk-button uk-button-primary uk-modal-close",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n            بحث\n          ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "uk-button uk-button-default uk-modal-close",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n            الغاء\n          ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "uk-button uk-button-default uk-margin search-btn-phone",
+        attrs: { "uk-toggle": "target: #modal-search", dir: "rtl" }
+      },
+      [
+        _c("span", { attrs: { "uk-icon": "icon:search" } }),
+        _vm._v("\n      البحث\n    ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "uk-card-title uk-text-right" }, [
+      _c("span", { attrs: { "uk-icon": "search" } }),
+      _vm._v("\n            البحث\n          ")
     ])
   },
   function() {
@@ -55095,7 +55496,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "nodatamessage" }, [
       _c("i", { staticClass: "fas fa-info-circle" }),
-      _vm._v("\n            لايوجد بيانات لعرضها\n          ")
+      _vm._v("\n              لايوجد بيانات لعرضها\n            ")
     ])
   }
 ]
@@ -55145,7 +55546,7 @@ var render = function() {
                 staticClass: "uk-button uk-button-default uk-modal-close",
                 attrs: { type: "button" }
               },
-              [_vm._v("\n          الغاء\n        ")]
+              [_vm._v("\n           الغاء\n         ")]
             ),
             _vm._v(" "),
             _c(
@@ -55159,16 +55560,18 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("\n          حذف\n        ")]
+              [_vm._v("\n           حذف\n         ")]
             )
           ])
         ]
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "uk-grid-large", attrs: { "uk-grid": "" } }, [
-      _c("div", { staticClass: "uk-margin-left uk-width-1-4@m" }, [
-        _c("div", { staticClass: "uk-card uk-card-default uk-card-body" }, [
+    _c("div", { attrs: { id: "modal-search", "uk-modal": "" } }, [
+      _c(
+        "div",
+        { staticClass: "uk-modal-dialog uk-modal-body", attrs: { dir: "rtl" } },
+        [
           _vm._m(0),
           _vm._v(" "),
           _c("hr"),
@@ -55254,210 +55657,354 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("br")
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "uk-width-expand@m uk-card uk-card-default uk-card-body"
-        },
-        [
-          _c("h2", { staticClass: "uk-card-title" }, [
-            _vm._v(
-              "\n        قائمة عروض الأسعار (" +
-                _vm._s(_vm.items) +
-                ") - الصفحة (" +
-                _vm._s(_vm.pagenow) +
-                "-\n        " +
-                _vm._s(Math.ceil(_vm.pages)) +
-                ")\n      "
-            )
-          ]),
+          _c("br"),
           _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "uk-overflow-auto" }, [
-            _c(
-              "table",
-              { staticClass: "uk-table uk-table-striped uk-text-right" },
-              [
-                _vm._m(1),
+          _vm._m(1)
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "uk-grid uk-grid-small", attrs: { "uk-grid": "" } },
+      [
+        _c("div", { staticClass: "uk-margin-left uk-width-1-4@m" }, [
+          _c(
+            "div",
+            {
+              staticClass: "uk-card uk-card-default uk-card-body right-search"
+            },
+            [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "uk-margin" }, [
+                _c("label", [_vm._v("رقم عرض الأسعار")]),
                 _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.infos, function(val, index) {
-                    return _c("tr", { key: index }, [
-                      _c("td", [_vm._v(_vm._s(val.OID))]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.s_oid,
+                      expression: "s_oid"
+                    }
+                  ],
+                  staticClass: "uk-input",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.s_oid },
+                  on: {
+                    change: _vm.searchnow,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.s_oid = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "uk-margin" }, [
+                _c("label", [_vm._v("اسم العميل")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.s_name,
+                      expression: "s_name"
+                    }
+                  ],
+                  staticClass: "uk-input",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.s_name },
+                  on: {
+                    change: _vm.searchnow,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.s_name = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "uk-margin" }, [
+                _c("label", [_vm._v("البريد الالكتروني")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.s_email,
+                      expression: "s_email"
+                    }
+                  ],
+                  staticClass: "uk-input",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.s_email },
+                  on: {
+                    change: _vm.searchnow,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.s_email = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("br")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "uk-width-expand@m uk-card uk-card-default uk-card-body"
+          },
+          [
+            _c("h2", { staticClass: "uk-card-title" }, [
+              _vm._v(
+                "\n(" +
+                  _vm._s(_vm.items) +
+                  ") عروض الأسعار  الصفحة (" +
+                  _vm._s(_vm.pagenow) +
+                  " - " +
+                  _vm._s(Math.ceil(_vm.pages)) +
+                  ")\n       "
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "uk-overflow-auto" }, [
+              _c(
+                "table",
+                { staticClass: "uk-table uk-table-striped uk-text-right" },
+                [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    [
+                      _vm._l(_vm.infos, function(val, index) {
+                        return _c("tr", { key: index }, [
+                          _c("td", [_vm._v(_vm._s(val.OID))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(val.c_name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(val.c_email))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            val.status == 0
+                              ? _c("span", { staticClass: "uk-label" }, [
+                                  _vm._v("جديد")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 1
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-warning" },
+                                  [
+                                    _vm._v(
+                                      "\n                   في انتضار التسليم\n                 "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 2
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-info" },
+                                  [
+                                    _vm._v(
+                                      "\n                   تم التسليم\n                 "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 3
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-warning" },
+                                  [
+                                    _vm._v(
+                                      "\n                   في انتضار الدفع\n                 "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 4
+                              ? _c("span", { staticClass: "uk-label" }, [
+                                  _vm._v("تم الدفع")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 5
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-success" },
+                                  [
+                                    _vm._v(
+                                      "\n                   مكتمل\n                 "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 6
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-info" },
+                                  [
+                                    _vm._v(
+                                      "\n                   بدون رد\n                 "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 7
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-danger" },
+                                  [
+                                    _vm._v(
+                                      "\n                   ملغي\n                 "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(val.created_at))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("a", { attrs: { href: "javascript:void(0)" } }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "act-btn-radio",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showdevis(val.OID)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-eye" })]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "#modal-delete",
+                                  "uk-toggle": ""
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.removeAct(val.OID)
+                                  }
+                                }
+                              },
+                              [_vm._m(5, true)]
+                            )
+                          ])
+                        ])
+                      }),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.c_name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.c_email))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        val.status == 0
-                          ? _c("span", { staticClass: "uk-label" }, [
-                              _vm._v("جديد")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 1
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-warning" },
-                              [_vm._v("في انتضار التسليم")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 2
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-info" },
-                              [_vm._v("تم التسليم")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 3
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-warning" },
-                              [_vm._v("في انتضار الدفع")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 4
-                          ? _c("span", { staticClass: "uk-label" }, [
-                              _vm._v(" تم الدفع")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 5
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-success" },
-                              [_vm._v("مكتمل")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 6
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-info" },
-                              [_vm._v("بدون رد")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 7
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-danger" },
-                              [_vm._v("ملغي\n                ")]
-                            )
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.created_at))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("a", { attrs: { href: "javascript:void(0)" } }, [
-                          _c(
-                            "button",
+                      _c("tr", [
+                        _c("td", [
+                          _vm.pages == 0
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "uk-text-center uk-position-center"
+                                },
+                                [_vm._m(6)]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ],
+                    2
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.pages > 1
+              ? _c(
+                  "ul",
+                  { staticClass: "uk-pagination", attrs: { dir: "ltr" } },
+                  [
+                    _c("li", { staticClass: "uk-margin-auto-right" }, [
+                      _vm.pagenow < _vm.pages
+                        ? _c(
+                            "a",
                             {
-                              staticClass: "act-btn-radio",
                               on: {
                                 click: function($event) {
-                                  return _vm.showdevis(val.OID)
+                                  return _vm.nextpage(_vm.pagenow)
                                 }
                               }
                             },
-                            [_c("i", { staticClass: "fas fa-eye" })]
+                            [
+                              _c("span", {
+                                staticClass: "uk-margin-small-left",
+                                attrs: { "uk-pagination-previous": "" }
+                              }),
+                              _vm._v("\n             التالي\n           ")
+                            ]
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#modal-delete", "uk-toggle": "" },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeAct(val.OID)
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm.pagenow > _vm.pages
+                        ? _c(
+                            "a",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.previouspage(_vm.pagenow)
+                                }
                               }
-                            }
-                          },
-                          [_vm._m(2, true)]
-                        )
-                      ])
+                            },
+                            [
+                              _vm._v("\n             السابق\n             "),
+                              _c("span", {
+                                staticClass: "uk-margin-small-left",
+                                attrs: { "uk-pagination-next": "" }
+                              })
+                            ]
+                          )
+                        : _vm._e()
                     ])
-                  }),
-                  0
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm.pages == 0
-              ? _c(
-                  "div",
-                  { staticClass: "uk-text-center uk-position-center" },
-                  [_vm._m(3)]
+                  ]
                 )
               : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.pages > 1
-            ? _c(
-                "ul",
-                { staticClass: "uk-pagination", attrs: { dir: "ltr" } },
-                [
-                  _c("li", { staticClass: "uk-margin-auto-right" }, [
-                    _vm.pagenow < _vm.pages
-                      ? _c(
-                          "a",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.nextpage(_vm.pagenow)
-                              }
-                            }
-                          },
-                          [
-                            _c("span", {
-                              staticClass: "uk-margin-small-left",
-                              attrs: { "uk-pagination-previous": "" }
-                            }),
-                            _vm._v("\n            التالي\n          ")
-                          ]
-                        )
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _vm.pagenow > _vm.pages
-                      ? _c(
-                          "a",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.previouspage(_vm.pagenow)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v("\n            السابق\n            "),
-                            _c("span", {
-                              staticClass: "uk-margin-small-left",
-                              attrs: { "uk-pagination-next": "" }
-                            })
-                          ]
-                        )
-                      : _vm._e()
-                  ])
-                ]
-              )
-            : _vm._e()
-        ]
-      )
-    ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -55467,7 +56014,56 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "uk-card-title uk-text-right" }, [
       _c("span", { attrs: { "uk-icon": "search" } }),
-      _vm._v("\n          البحث\n        ")
+      _vm._v("\n         البحث\n       ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "uk-text-right", attrs: { dir: "rtl" } }, [
+      _c(
+        "button",
+        {
+          staticClass: "uk-button uk-button-primary uk-modal-close",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n           بحث\n         ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "uk-button uk-button-default uk-modal-close",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n           الغاء\n         ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "uk-button uk-button-default uk-margin search-btn-phone",
+        attrs: { "uk-toggle": "target: #modal-search", dir: "rtl" }
+      },
+      [
+        _c("span", { attrs: { "uk-icon": "icon:search" } }),
+        _vm._v("\n     البحث\n   ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "uk-card-title uk-text-right" }, [
+      _c("span", { attrs: { "uk-icon": "search" } }),
+      _vm._v("\n           البحث\n         ")
     ])
   },
   function() {
@@ -55504,7 +56100,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "nodatamessage" }, [
       _c("i", { staticClass: "fas fa-info-circle" }),
-      _vm._v("\n            لايوجد بيانات لعرضها\n          ")
+      _vm._v("\n                     لايوجد بيانات لعرضها\n                   ")
     ])
   }
 ]
@@ -55575,9 +56171,11 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "uk-grid-large", attrs: { "uk-grid": "" } }, [
-      _c("div", { staticClass: "uk-margin-left uk-width-1-4@m" }, [
-        _c("div", { staticClass: "uk-card uk-card-default uk-card-body" }, [
+    _c("div", { attrs: { id: "modal-search", "uk-modal": "" } }, [
+      _c(
+        "div",
+        { staticClass: "uk-modal-dialog uk-modal-body", attrs: { dir: "rtl" } },
+        [
           _vm._m(0),
           _vm._v(" "),
           _c("hr"),
@@ -55663,213 +56261,379 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("br")
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "uk-width-expand@m uk-card uk-card-default uk-card-body"
-        },
-        [
-          _c("h2", { staticClass: "uk-card-title" }, [
-            _vm._v(
-              "\n        قائمة الفواتير (" +
-                _vm._s(_vm.items) +
-                ") - الصفحة (" +
-                _vm._s(_vm.pagenow) +
-                "-\n        " +
-                _vm._s(Math.ceil(_vm.pages)) +
-                ")\n      "
-            )
-          ]),
+          _c("br"),
           _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "uk-overflow-auto" }, [
-            _c(
-              "table",
-              { staticClass: "uk-table uk-table-striped uk-text-right" },
-              [
-                _vm._m(1),
+          _vm._m(1)
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "uk-grid-small uk-grid", attrs: { "uk-grid": "" } },
+      [
+        _c("div", { staticClass: "uk-margin-left uk-width-1-4@m" }, [
+          _c(
+            "div",
+            {
+              staticClass: "uk-card uk-card-default uk-card-body right-search"
+            },
+            [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "uk-margin" }, [
+                _c("label", [_vm._v("رقم الفاتورة")]),
                 _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.infos, function(val, index) {
-                    return _c("tr", { key: index }, [
-                      _c("td", [_vm._v(_vm._s(val.OID))]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.s_oid,
+                      expression: "s_oid"
+                    }
+                  ],
+                  staticClass: "uk-input",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.s_oid },
+                  on: {
+                    change: _vm.searchnow,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.s_oid = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "uk-margin" }, [
+                _c("label", [_vm._v("اسم العميل")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.s_name,
+                      expression: "s_name"
+                    }
+                  ],
+                  staticClass: "uk-input",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.s_name },
+                  on: {
+                    change: _vm.searchnow,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.s_name = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "uk-margin" }, [
+                _c("label", [_vm._v("البريد الالكتروني")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.s_email,
+                      expression: "s_email"
+                    }
+                  ],
+                  staticClass: "uk-input",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.s_email },
+                  on: {
+                    change: _vm.searchnow,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.s_email = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("br")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "uk-width-expand@m uk-card uk-card-default uk-card-body"
+          },
+          [
+            _c("h2", { staticClass: "uk-card-title" }, [
+              _vm._v(
+                "\n           (" +
+                  _vm._s(_vm.items) +
+                  ")فاتورة الصفحة (" +
+                  _vm._s(_vm.pagenow) +
+                  " - " +
+                  _vm._s(Math.ceil(_vm.pages)) +
+                  ")\n\n      "
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "uk-overflow-auto" }, [
+              _c(
+                "table",
+                { staticClass: "uk-table uk-table-striped uk-text-right" },
+                [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    [
+                      _vm._l(_vm.infos, function(val, index) {
+                        return _c("tr", { key: index }, [
+                          _c("td", [_vm._v(_vm._s(val.OID))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(val.c_name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(val.c_email))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            val.status == 0
+                              ? _c("span", { staticClass: "uk-label" }, [
+                                  _vm._v("جديد")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 1
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-warning" },
+                                  [_vm._v("في انتضار التسليم")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 2
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-info" },
+                                  [_vm._v("تم التسليم")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 3
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-warning" },
+                                  [_vm._v("في انتضار الدفع")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 4
+                              ? _c("span", { staticClass: "uk-label" }, [
+                                  _vm._v(" تم الدفع")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 5
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-success" },
+                                  [_vm._v("مكتمل")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 6
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-info" },
+                                  [_vm._v("بدون رد")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            val.status == 7
+                              ? _c(
+                                  "span",
+                                  { staticClass: "uk-label uk-label-danger" },
+                                  [_vm._v("ملغي\n                ")]
+                                )
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(val.created_at))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("a", { attrs: { href: "javascript:void(0)" } }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "act-btn-radio",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showdevis(val.OID)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-eye" })]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "#modal-delete",
+                                  "uk-toggle": ""
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.removeAct(val.OID)
+                                  }
+                                }
+                              },
+                              [_vm._m(5, true)]
+                            )
+                          ])
+                        ])
+                      }),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.c_name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.c_email))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        val.status == 0
-                          ? _c("span", { staticClass: "uk-label" }, [
-                              _vm._v("جديد")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 1
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-warning" },
-                              [_vm._v("في انتضار التسليم")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 2
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-info" },
-                              [_vm._v("تم التسليم")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 3
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-warning" },
-                              [_vm._v("في انتضار الدفع")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 4
-                          ? _c("span", { staticClass: "uk-label" }, [
-                              _vm._v(" تم الدفع")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 5
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-success" },
-                              [_vm._v("مكتمل")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 6
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-info" },
-                              [_vm._v("بدون رد")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        val.status == 7
-                          ? _c(
-                              "span",
-                              { staticClass: "uk-label uk-label-danger" },
-                              [_vm._v("ملغي\n                ")]
-                            )
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(val.created_at))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("a", { attrs: { href: "javascript:void(0)" } }, [
-                          _c(
-                            "button",
+                      _c("tr", [
+                        _c("td", [
+                          _vm.pages == 0
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "uk-text-center uk-position-center"
+                                },
+                                [_vm._m(6)]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ],
+                    2
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.pages > 1
+              ? _c(
+                  "ul",
+                  { staticClass: "uk-pagination", attrs: { dir: "ltr" } },
+                  [
+                    _c("li", { staticClass: "uk-margin-auto-right" }, [
+                      _vm.pagenow < _vm.pages
+                        ? _c(
+                            "a",
                             {
-                              staticClass: "act-btn-radio",
                               on: {
                                 click: function($event) {
-                                  return _vm.showdevis(val.OID)
+                                  return _vm.nextpage(_vm.pagenow)
                                 }
                               }
                             },
-                            [_c("i", { staticClass: "fas fa-eye" })]
+                            [
+                              _c("span", {
+                                staticClass: "uk-margin-small-left",
+                                attrs: { "uk-pagination-previous": "" }
+                              }),
+                              _vm._v("\n            التالي\n          ")
+                            ]
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#modal-delete", "uk-toggle": "" },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeAct(val.OID)
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm.pagenow > _vm.pages
+                        ? _c(
+                            "a",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.previouspage(_vm.pagenow)
+                                }
                               }
-                            }
-                          },
-                          [_vm._m(2, true)]
-                        )
-                      ])
+                            },
+                            [
+                              _vm._v("\n            السابق\n            "),
+                              _c("span", {
+                                staticClass: "uk-margin-small-left",
+                                attrs: { "uk-pagination-next": "" }
+                              })
+                            ]
+                          )
+                        : _vm._e()
                     ])
-                  }),
-                  0
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm.pages == 0
-              ? _c(
-                  "div",
-                  { staticClass: "uk-text-center uk-position-center" },
-                  [_vm._m(3)]
+                  ]
                 )
               : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.pages > 1
-            ? _c(
-                "ul",
-                { staticClass: "uk-pagination", attrs: { dir: "ltr" } },
-                [
-                  _c("li", { staticClass: "uk-margin-auto-right" }, [
-                    _vm.pagenow < _vm.pages
-                      ? _c(
-                          "a",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.nextpage(_vm.pagenow)
-                              }
-                            }
-                          },
-                          [
-                            _c("span", {
-                              staticClass: "uk-margin-small-left",
-                              attrs: { "uk-pagination-previous": "" }
-                            }),
-                            _vm._v("\n            التالي\n          ")
-                          ]
-                        )
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _vm.pagenow > _vm.pages
-                      ? _c(
-                          "a",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.previouspage(_vm.pagenow)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v("\n            السابق\n            "),
-                            _c("span", {
-                              staticClass: "uk-margin-small-left",
-                              attrs: { "uk-pagination-next": "" }
-                            })
-                          ]
-                        )
-                      : _vm._e()
-                  ])
-                ]
-              )
-            : _vm._e()
-        ]
-      )
-    ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "uk-card-title uk-text-right" }, [
+      _c("span", { attrs: { "uk-icon": "search" } }),
+      _vm._v("\n          البحث\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "uk-text-right", attrs: { dir: "rtl" } }, [
+      _c(
+        "button",
+        {
+          staticClass: "uk-button uk-button-primary  uk-modal-close",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n          بحث\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "uk-button   uk-button-default uk-modal-close",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n          الغاء\n        ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "uk-button uk-button-default uk-margin search-btn-phone",
+        attrs: { "uk-toggle": "target: #modal-search", dir: "rtl" }
+      },
+      [_c("span", { attrs: { "uk-icon": "icon:search" } }), _vm._v(" البحث")]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -59725,7 +60489,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "uk-button uk-float-left user-menu-bar",
+        staticClass: " uk-float-left user-menu-bar",
         staticStyle: { padding: "10px" },
         attrs: { dir: "rtl", type: "button" },
         on: { click: _vm.bell_open }

@@ -1,12 +1,13 @@
 <template>
-<div>
-<div id="loading" class="form-loading"></div>
+  <div>
+    <div id="loading" class="form-loading"></div>
     <div class="uk-card uk-card-default uk-card-body">
       <div class="uk-text-right" dir="rtl">
         <button
           @click="CreerFacture"
           type="button"
-          class="uk-button uk-button-primary btn-call uk-margin-top">
+          class="uk-button uk-button-primary btn-call uk-margin-top"
+        >
           حفظ
         </button>
 
@@ -30,17 +31,22 @@
             <label for="">
               البحث عن عميل موجود
             </label>
-            <div class="uk-form-controls"  v-clickoutside="hide">
+            <div class="uk-form-controls" v-clickoutside="hide">
               <div class="uk-inline uk-width-1-1">
                 <span
                   class="uk-form-icon uk-form-icon-flip"
                   uk-icon="icon: search"
                 ></span>
-                <span class="uk-form-icon uk-form-icon" uk-spinner="ratio: 0.5" v-if="datalistloading == true"></span>
+                <span
+                  class="uk-form-icon uk-form-icon"
+                  uk-spinner="ratio: 0.5"
+                  v-if="datalistloading == true"
+                ></span>
                 <input
                   class="uk-input"
                   type="text"
                   @input="searchClient('n')"
+                  @change="searchClient('n')"
                   @focus="CleantsListshow = true"
                   v-model="q"
                 />
@@ -67,7 +73,6 @@
                       <br />
                       <small>{{ item.c_email }} - {{ item.c_phone }}</small>
                     </li>
-
                   </ul>
                 </div>
               </div>
@@ -152,7 +157,7 @@
               نوع العميل
               <span class="red">*</span>
             </label>
-            <div class="uk-form-controls" >
+            <div class="uk-form-controls">
               <select v-model="c_type" class="uk-select">
                 <option value=""></option>
                 <option
@@ -169,14 +174,30 @@
             </div>
           </div>
           <div class="uk-width-1-2@s">
-            <label for="" >الدولة (اختياري)</label>
+            <label for="">الدولة (اختياري)</label>
             <div class="uk-form-controls" v-clickoutside="hideCountriesList">
-<div class="uk-inline uk-width-1-1">
-<span v-if="country != ''" class="uk-form-icon uk-form-icon flag-icon"> <img :src="'https://www.countryflags.io/'+country+'/flat/64.png'"></span>
-<span  class="uk-form-icon uk-form-icon-flip " uk-icon="icon:  triangle-down"></span>
-  <input class="uk-input uk-width-1-1" v-model="countryName" @click="showlistCountries = true">
-</div>
-                <div v-if="showlistCountries == true" class="data-list">
+              <div class="uk-inline uk-width-1-1">
+                <span
+                  v-if="country != ''"
+                  class="uk-form-icon uk-form-icon flag-icon"
+                >
+                  <img
+                    :src="
+                      'https://www.countryflags.io/' + country + '/flat/64.png'
+                    "
+                  />
+                </span>
+                <span
+                  class="uk-form-icon uk-form-icon-flip"
+                  uk-icon="icon:  triangle-down"
+                ></span>
+                <input
+                  class="uk-input uk-width-1-1"
+                  v-model="countryName"
+                  @click="showlistCountries = true"
+                />
+              </div>
+              <div v-if="showlistCountries == true" class="data-list">
                 <div class="data-list-content">
                   <h4 for="">
                     <i class="fas fa-globe-africa"></i>
@@ -185,16 +206,28 @@
 
                   <ul class="uk-list uk-list-collapse uk-list-striped">
                     <li
-                     v-for="(item, index) in filteredList"
-                  :key="index"
-
-                      @click="country = item.code; countryName = item.name; showlistCountries = false"
+                      v-for="(item, index) in filteredList"
+                      :key="index"
+                      @click="
+                        country = item.code
+                        countryName = item.name
+                        showlistCountries = false
+                      "
                     >
-                  <span class="flag-icon"><img :src="'https://www.countryflags.io/'+item.code+'/flat/64.png'"></span> {{ item.name }}
-
+                      <span class="flag-icon">
+                        <img
+                          :src="
+                            'https://www.countryflags.io/' +
+                            item.code +
+                            '/flat/64.png'
+                          "
+                        />
+                      </span>
+                      {{ item.name }}
                     </li>
-                    <li v-if="filteredList.length <= 0 " class="uk-text-center"> <small>لايوجد اي بيانات</small> </li>
-
+                    <li v-if="filteredList.length <= 0" class="uk-text-center">
+                      <small>لايوجد اي بيانات</small>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -527,11 +560,11 @@ class Errors {
   }
 }
 export default {
-  props:['uid'],
+  props: ['uid'],
   data() {
     return {
-        showlistCountries: false,
-    datalistloading: false,
+      showlistCountries: false,
+      datalistloading: false,
       q: '',
       FactureStatus: json.facture_status,
       p_methodsJson: json.p_method,
@@ -564,22 +597,21 @@ export default {
       remise_c: 0,
       cleantslist: [],
       CleantsListshow: false,
-      countryName: ''
+      countryName: '',
     }
   },
   methods: {
     hide: function () {
       this.CleantsListshow = false
-
     },
-    hideCountriesList: function(){
-        this.showlistCountries = false
-        this.countryName = '';
+    hideCountriesList: function () {
+      this.showlistCountries = false
+      this.countryName = ''
 
-        for(var i=0; this.Countries.length > i; i++){
-          if(this.Countries[i].code == this.country){
-              this.countryName = this.Countries[i].name;
-          }
+      for (var i = 0; this.Countries.length > i; i++) {
+        if (this.Countries[i].code == this.country) {
+          this.countryName = this.Countries[i].name
+        }
       }
     },
     getout: function () {
@@ -600,23 +632,24 @@ export default {
       this.loadpoints()
     },
     addInvoice: function () {
-
-      axios.post('../api/v1/user/desky/facture/maxNumber').then((response) => {
-          if(response.data.length > 0){
-var responseNumber = parseInt(response.data)+1;
-this.invid = responseNumber.toString().padStart(8, "0");
-          }else{
+      axios
+        .post('../api/v1/user/desky/facture/maxNumber')
+        .then((response) => {
+          if (response.data.length > 0) {
+            var responseNumber = parseInt(response.data) + 1
+            this.invid = responseNumber.toString().padStart(8, '0')
+          } else {
             this.invid = '00000001'
           }
-
-
-      }).catch((error) => {
-                  UIkit.notification({
-          message: "حصل خطأ أثناء محاولة تكوين رقم للفاتورة <span uk-icon='icon: warning'></span>",
-          status: 'danger',
-        });
-  this.addInvoice();
-      });
+        })
+        .catch((error) => {
+          UIkit.notification({
+            message:
+              "حصل خطأ أثناء محاولة تكوين رقم للفاتورة <span uk-icon='icon: warning'></span>",
+            status: 'danger',
+          })
+          this.addInvoice()
+        })
     },
     addFind: function () {
       if (this.devis.length == 6) {
@@ -652,7 +685,9 @@ this.invid = responseNumber.toString().padStart(8, "0");
         .then((response) => {
           this.planinfos = response.data
           if (response.status == 220) {
-            window.location.replace('../../facture/' + this.invid+'/'+this.uid)
+            window.location.replace(
+              '../../facture/' + this.invid + '/' + this.uid,
+            )
           }
           $('#form-loading').css('display', 'none')
         })
@@ -660,13 +695,13 @@ this.invid = responseNumber.toString().padStart(8, "0");
           this.errors.record(error.response.data)
           this.notificationchek()
           $('#form-loading').css('display', 'none')
-        }).finally(() => {
-    $('#form-loading').css('display', 'none')
-
+        })
+        .finally(() => {
+          $('#form-loading').css('display', 'none')
         })
     },
     searchClient: function (e) {
-   this.datalistloading = true;
+      this.datalistloading = true
       // N == le nom du client
       let data = new FormData()
       data.append('method', 'n')
@@ -674,15 +709,11 @@ this.invid = responseNumber.toString().padStart(8, "0");
       axios
         .post('../api/v1/user/desky/clients/getSearch', data)
         .then((response) => {
-
           this.cleantslist = response.data
-          this.datalistloading = false;
-
+          this.datalistloading = false
         })
         .catch((error) => {
-
-         this.datalistloading = false;
-
+          this.datalistloading = false
         })
     },
     changedata: function () {
@@ -722,26 +753,26 @@ this.invid = responseNumber.toString().padStart(8, "0");
       this.c_name = this.cleantslist[u].c_name
       this.c_email = this.cleantslist[u].c_email
       this.c_phone = this.cleantslist[u].c_phone
-      if(this.cleantslist[u].c_ice != null){
-      this.c_ice = this.cleantslist[u].c_ice
-      }if(this.cleantslist[u].country != null){
-      this.country = this.cleantslist[u].country
-
-      }if(this.cleantslist[u].adresse != null){
-      this.adresse = this.cleantslist[u].adresse
-
-      }if(this.cleantslist[u].city != null){
-      this.city = this.cleantslist[u].city
-
+      if (this.cleantslist[u].c_ice != null) {
+        this.c_ice = this.cleantslist[u].c_ice
+      }
+      if (this.cleantslist[u].country != null) {
+        this.country = this.cleantslist[u].country
+      }
+      if (this.cleantslist[u].adresse != null) {
+        this.adresse = this.cleantslist[u].adresse
+      }
+      if (this.cleantslist[u].city != null) {
+        this.city = this.cleantslist[u].city
       }
 
       this.c_type = this.cleantslist[u].c_type
       this.q = this.cleantslist[u].c_name
-      this.countryName = '';
-      for(var i=0; this.Countries.length > i; i++){
-          if(this.Countries[i].code == this.cleantslist[u].country){
-              this.countryName = this.Countries[i].name;
-          }
+      this.countryName = ''
+      for (var i = 0; this.Countries.length > i; i++) {
+        if (this.Countries[i].code == this.cleantslist[u].country) {
+          this.countryName = this.Countries[i].name
+        }
       }
       this.hide()
     },
@@ -757,19 +788,17 @@ this.invid = responseNumber.toString().padStart(8, "0");
     },
   },
   created() {
-this.addInvoice();
+    this.addInvoice()
   },
-computed:{
-
+  computed: {
     filteredList() {
-      return this.Countries.filter(post => {
+      return this.Countries.filter((post) => {
         return post.name.toLowerCase().includes(this.countryName.toLowerCase())
       })
-    }
-},
+    },
+  },
   mounted() {
     //this.loadpoints();
-
 
     $('#form-loading').css('display', 'none')
   },

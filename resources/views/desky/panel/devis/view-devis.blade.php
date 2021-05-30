@@ -98,7 +98,7 @@
                                         } else {
                                             echo 'غير محدد';
                                         }
-                                        
+
                                     @endphp
 
                                     <span style="opacity: 0"><i class="fas fa-edit"></i></span>
@@ -123,7 +123,7 @@
                                             }
                                         }
                                         echo $country;
-                                        
+
                                     @endphp
 
                                     <span style="opacity: 0"><i class="fas fa-edit"></i></span>
@@ -179,7 +179,7 @@
                     @foreach ($items as $item)
 
                         <div class="item-border" id="fileds ">
-                            <div class="form-formulaire uk-text-center" dir="rtl" uk-grid>
+                            <div class="form-formulaire uk-text-right " dir="rtl" >
                                 <div class="uk-width-1-1">
 
                                     <h1 class="uk-card-title uk-text-right uk-margin-right">
@@ -187,28 +187,29 @@
                                     </h1>
 
                                 </div>
-                                <div class="uk-width-1-3@s">
+                                <div class="uk-padding uk-flex" style="width: 100%">
+                                <div class="uk-margin-small-left  uk-width-1-3@s">
                                     <div class="uk-form-controls">
-                                        <label class="uk-text-muted" for="">الخدمة أو المنتج </label>
+                                        <label class="uk-text-muted" for=""> العنصر  </label>
                                         <br>
                                         <span class="uk-text-emphasis">{{ $item->article }}</span>
                                     </div>
                                 </div>
-                                <div class="uk-width-1-3@s">
+                                <div class="uk-margin-small-left uk-width-1-3@s">
                                     <div class="uk-form-controls">
                                         <label class="uk-text-muted" for="">السعر</label>
                                         <br>
                                         <span class="uk-text-emphasis">{{ $item->price }}</span>
                                     </div>
                                 </div>
-                                <div class="uk-width-1-3@s">
+                                <div class="uk-margin-small-left uk-width-1-3@s">
                                     <div class="uk-form-controls">
                                         <label class="uk-text-muted" for="">الكمية</label>
                                         <br>
                                         <span class="uk-text-emphasis">{{ $item->quantity }}</span>
                                     </div>
                                 </div>
-
+                                </div>
 
                                 <div class="uk-width-1-1@s">
                                     <hr />
@@ -218,10 +219,10 @@
                     @endforeach
 
                     @php
-                        
+
                         $data = file_get_contents('database/data.json');
                         $json = json_decode($data, true);
-                        
+
                     @endphp
                     <div class="uk-margin uk-grid-small" uk-grid>
                         <h2 class="uk-card-title uk-text-right uk-width-1-1@s">
@@ -237,7 +238,7 @@
                                 } else {
                                     echo 'غير محدد';
                                 }
-                                
+
                             @endphp
                                 <span style="opacity: 0"><i class="fas fa-edit"></i></span>
 
@@ -252,7 +253,7 @@
                                 } else {
                                     echo 'غير محدد';
                                 }
-                                
+
                             @endphp
                                 <span style="opacity: 0"><i class="fas fa-edit"></i></span>
                             </span>

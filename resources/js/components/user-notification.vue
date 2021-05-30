@@ -3,7 +3,7 @@
     <button
       dir="rtl"
       style="padding: 10px;"
-      class="uk-button uk-float-left user-menu-bar"
+      class=" uk-float-left user-menu-bar"
       type="button"
       @click="bell_open"
     >

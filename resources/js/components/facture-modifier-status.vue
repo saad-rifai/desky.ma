@@ -22,14 +22,14 @@
         </p>
       </div>
     </div>
-    
+
     <div id="modal-share" uk-modal>
       <div dir="rtl" class="uk-modal-dialog uk-modal-body">
         <h3 class="uk-modal-title">مشاركة عرض الأسعار #{{ oid }}</h3>
         <hr>
         <div v-if="privacy.length > 0 &&  privacy[0].public_facture == 0" class="uk-alert-primary" uk-alert>
           <p >
- 
+
             انت لم تفعل خيار مشاركة الفواتير لن يتمكن أحد من غيرك مشاهدة الفواتير الخاصة بك من خلال الرابط المباشر
             <br />
             <br />
@@ -66,7 +66,7 @@
 
           <button
             class="uk-button uk-button-primary uk-modal-close"
-         
+
             type="button"
           >
             اغلق
@@ -74,7 +74,7 @@
         </p>
       </div>
     </div>
-    <div hi class="uk-text-right uk-flex" dir="rtl">
+    <div class="uk-flex uk-flex-wrap uk-flex-wrap-around btn-grids uk-padding-small" dir="rtl">
       <div>
         <button class="uk-dropdown-menu-orange" type="button" dir="rtl">
           اجرائات <span uk-icon="icon: triangle-down"></span>
@@ -102,7 +102,7 @@
           </ul>
         </div>
       </div>
-      <div class="uk-margin-right">
+      <div>
         <button
           v-bind:class="{
             'uk-dropdown-menu-primary': infos.status == 0,
@@ -131,7 +131,7 @@
           </ul>
         </div>
       </div>
-      <div class="uk-margin-right">
+      <div>
         <button
           class="uk-button btn-share"
           uk-toggle="target: #modal-share" @click="check_privacy"

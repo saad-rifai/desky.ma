@@ -21,9 +21,77 @@
         </p>
       </div>
     </div>
-    <div class="uk-grid-large" uk-grid>
+<!-- modal search mobile -->
+
+    <div id="modal-search" uk-modal>
+      <div dir="rtl" class="uk-modal-dialog uk-modal-body">
+                    <h4 class="uk-card-title uk-text-right">
+            <span uk-icon="search"></span>
+            البحث
+          </h4>
+          <hr />
+          <div class="uk-margin">
+            <label>رقم العميل</label>
+            <input
+              class="uk-input"
+              v-model="s_oid"
+              type="text"
+              @change="searchnow"
+              placeholder=""
+            />
+          </div>
+          <div class="uk-margin">
+            <label>اسم العميل</label>
+            <input
+              class="uk-input"
+              v-model="s_name"
+              type="text"
+              @change="searchnow"
+              placeholder=""
+            />
+          </div>
+          <div class="uk-margin">
+            <label>البريد الالكتروني</label>
+            <input
+              class="uk-input"
+              v-model="s_email"
+              type="text"
+              @change="searchnow"
+              placeholder=""
+            />
+          </div>
+
+          <br />
+        <p class="uk-text-right" dir="rtl">
+          <button
+            class="uk-button uk-button-primary uk-modal-close"
+            type="button"
+          >
+            بحث
+          </button>
+
+          <button
+            class="uk-button uk-button-default uk-modal-close"
+            type="button"
+          >
+            الغاء
+          </button>
+        </p>
+      </div>
+    </div>
+
+    <button
+      class="uk-button uk-button-default uk-margin search-btn-phone"
+      uk-toggle="target: #modal-search"
+      dir="rtl"
+    >
+      <span uk-icon="icon:search"></span>
+      البحث
+    </button>
+
+    <div class="uk-grid-small" uk-grid>
       <div class="uk-margin-left uk-width-1-4@m">
-        <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-card uk-card-default uk-card-body right-search">
           <h4 class="uk-card-title uk-text-right">
             <span uk-icon="search"></span>
             البحث
@@ -65,8 +133,8 @@
       </div>
       <div class="uk-width-expand@m uk-card uk-card-default uk-card-body">
         <h2 class="uk-card-title">
-          قائمة العملاء ({{ items }}) - الصفحة ({{ pagenow }}-
-          {{ Math.ceil(pages) }})
+             ({{items}}) قائمة العملاء الصفحة ({{ pagenow }} - {{Math.ceil(pages)}})
+
         </h2>
         <hr />
         <div class="uk-overflow-auto">

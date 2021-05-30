@@ -108,19 +108,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC8QSMPXQG"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-ZC8QSMPXQG');
-
-    </script>
 </head>
 @php
 $datajson = file_get_contents('database/data.json');
@@ -210,8 +198,7 @@ $jsondata = json_decode($datajson, true);
                         <div>
                             <h4></h4>
                             <ul class="uk-list uk-list-large">
-                                <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>اعداد
-                                        عن الخدمة</a>
+                                <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>gust</a>
                                 </li>
                                 <li><a href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>طلب
                                         المميزات</a></li>

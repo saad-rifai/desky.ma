@@ -89,7 +89,6 @@ export default {
       city: this.user.city,
       country: this.user.country,
       apiKey: "fgfg160151f2g2fdgfgfdg",
-      url_api: "http://" + window.location.hostname,
       response: ""
     };
   },
@@ -106,7 +105,7 @@ export default {
             data.append("country", this.country);
 
 
-        axios.post(this.url_api + "/api/user/update", data).then((response) => {
+        axios.post("/api/user/update", data).then((response) => {
            $("#form-loading").css("display", "none");
           UIkit.notification({
             message: "تم حفظ البيانات",
@@ -114,7 +113,7 @@ export default {
             pos: "top-center",
             timeout: 5000,
           });
-            
+
       }).catch((error) => {
                   $("#form-loading").css("display", "none");
 

@@ -159,7 +159,7 @@ $jsondata = json_decode($datajson, true);
                                             class="fas fa-tachometer-alt"></i> &nbsp; لوحة التحكم</a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::asset('/#services') }}" class="uk-button-text"><i
+                                    <a href="{{ URL::asset('/clients/list') }}" class="uk-button-text"><i
                                             class="fas fa-users"></i> &nbsp; العملاء</a>
                                     <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
                                         class="">
@@ -167,7 +167,7 @@ $jsondata = json_decode($datajson, true);
 
                                         <ul class="uk-nav uk-dropdown-nav">
 
-                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><i
+                                            <li><a href="{{ URL::asset('/clients/list') }}"><i
                                                         class="fas fa-list"></i>
                                                     قائمة العملاء</a>
                                             </li>
@@ -259,7 +259,7 @@ $jsondata = json_decode($datajson, true);
 
                             </ul>
 
-               
+
                             </ul>
                         </div>
                     </div>
@@ -274,7 +274,7 @@ $jsondata = json_decode($datajson, true);
 
                     @else
 
-                        <button style="    padding: 10px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
+                        <button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-user"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
@@ -292,7 +292,7 @@ $jsondata = json_decode($datajson, true);
                             </ul>
                         </div>
                         <user-notification></user-notification>
-                        <button style="    padding: 10px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
+                        <button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-envelope"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
@@ -323,24 +323,128 @@ $jsondata = json_decode($datajson, true);
                     <br>
                     <div class="uk-child-width-expand@s" uk-grid dir="rtl">
                         <div>
+                            <div class="mobile-nav-logo">
+                                <img src="{{asset('image/desky-white-logo.png')}}" alt="desky.ma - white logo">
+                            </div>
+                            <hr class="uk-divider-icon">
+
                             <h4></h4>
                             <ul class="uk-list uk-list-large">
-                                <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>اعداد
-                                        عن الخدمة</a>
+                                <li> <a href="{{ URL::asset('/u') }}" class="uk-link"><i
+                                    class="fas fa-tachometer-alt"></i> &nbsp; لوحة التحكم</a>
                                 </li>
-                                <li><a href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>طلب
-                                        المميزات</a></li>
-                                <li><a href="{{ URL::asset('/service/consultation') }}"><span></span>
-                                        لماذا نحن</a></li>
-
-                                <li><a
-                                        href="{{ URL::asset('/service/conception-de-sites-web-et-dapplications-mobiles') }}"><span></span>تطوير
-                                        الاسعار</a>
-                                </li>
-                                <li><a href="{{ URL::asset('/service/e-marketing') }}"><span></span>تواصل معنا</a>
-                                </li>
+                                <li>
+                                    <a href="{{ URL::asset('/#services') }}" ><i
+                                            class="fas fa-users"></i> &nbsp; العملاء</a>
+                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                        class="">
 
 
+                                        <ul class="uk-nav uk-dropdown-nav">
+
+                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><i
+                                                        class="fas fa-list"></i>
+                                                    قائمة العملاء</a>
+                                            </li>
+                                            <li><a
+                                                    href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><i
+                                                        class="fas fa-plus"></i>
+                                                    انشاء عميل</a></li>
+
+
+                                        </ul>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::asset('/devis/list') }}" > <i
+                                            class="fas fa-file-invoice-dollar"></i> &nbsp; عروض الاسعار</a>
+                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                        class="">
+
+
+                                        <ul class="uk-nav uk-dropdown-nav">
+
+                                            <li><a href="{{ URL::asset('/creer/devis') }}"><i
+                                                        class="fas fa-plus"></i>
+                                                    انشاء عرض اسعار</a>
+                                            </li>
+                                            <li dir="rtl"><a href="{{ URL::asset('/devis/list') }}"><i
+                                                        class="fas fa-list"></i>
+                                                    قائمة عروض الاسعار</a></li>
+
+
+
+                                        </ul>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::asset('/facture/list') }}" > <i
+                                            class="fas fa-file-invoice"></i> &nbsp; الفواتير</a>
+                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                        class="">
+
+
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li><a href="{{ URL::asset('/creer/facture') }}"><i
+                                                        class="fas fa-plus"></i>
+                                                    انشاء فاتورة</a>
+                                            </li>
+                                            <li dir="rtl"><a href="{{ URL::asset('/facture/list') }}"><i
+                                                        class="fas fa-list"></i>
+                                                    قائمة الفواتير</a></li>
+
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::asset('/facture/list') }}" ><i class="far fa-chart-bar"></i> &nbsp; التحليلات والأدوات</a>
+                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                        class="">
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
+                                                التقارير</a>
+                                        </li>
+                                        <li dir="rtl"><a
+                                                href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
+                                                المحاسبة</a></li>
+
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::asset('/facture/list') }}" ><i
+                                        class="fas fa-cog"></i> &nbsp; الاعدادات</a>
+                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                        class="">
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
+                                                معلومات الحساب</a>
+                                        </li>
+                                        <li dir="rtl"><a
+                                                href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
+                                                الفواتير</a></li>
+
+                                        </ul>
+                                    </div>
+                                </li>
+                                <br>
+                                <hr class="uk-divider-icon">
+
+                                <div id="copyright">
+                                    <div class="container" style="width: auto !important;">
+                                        <!-- Copyright Text Start -->
+                                        <small dir="rtl">
+
+                                            Desky.ma منتج تابع لشركة NERYOU جميع الحقوق محفوظة © {{ now()->year }}
+                                            <br>
+
+                                            <small>v {{ env('APP_VERSION') }} ({{ env('APP_RELEASE_YEAR') }}) @if (env('APP_BETA') == true) BETA @endif</small>
+                                        </small>
+
+                                    </div>
+                                </div>
                             </ul>
 
                         </div>
@@ -362,7 +466,7 @@ $jsondata = json_decode($datajson, true);
                     </div>
                 @endif
                 @php
-                    
+
                     $c_products = DB::table('subscriptions')
                         ->where('email', Auth::user()->email)
                         ->get();
