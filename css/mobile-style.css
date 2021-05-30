@@ -64,6 +64,11 @@
     button.uk-button {
         width: 100%;
     }
+    button.uk-button.uk-button-primary.btn-radio {
+        border-radius: 35px;
+        font-size: 17px;
+        width: max-content;
+    }
     table thead{
         display:none;
     }
@@ -85,7 +90,12 @@
         margin-top: 20px !important;
     }
     .right-nav {
-        margin: 13px 0 0px 2% !important;
+        margin: 20px -5px 0px 2% !important;
+        display: flex;
+    }
+    button.user-menu-bar {
+
+        margin-top: -10px;
     }
     .uk-button.uk-float-left.user-menu-bar{
         padding: 0 3px !important;
