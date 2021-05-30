@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use \Swift_SmtpTransport as SmtpTransport;
-
+Route::get('/500', function(){
+abort('500');
+});
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
 Route::middleware(['auth'])->group(function () {

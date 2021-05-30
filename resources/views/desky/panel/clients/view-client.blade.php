@@ -8,7 +8,6 @@
                 <span class="uk-text-muted" dir="ltr">
                     اخر تحديث: {{ $infos->updated_at }}
                 </span>
-
             </div>
             <div class="uk-text-right">
                 <ul class="uk-breadcrumb " dir="rtl">
