@@ -48,11 +48,14 @@ Vue.directive('clickoutside', {
       event.stopPropagation()
     },
   })
-Vue.component("facture-modifier-status", require("./components/facture-modifier-status.vue").default); 
-Vue.component("form-facture", require("./components/form-facture.vue").default); 
-Vue.component("list-clients", require("./components/list-clients.vue").default); 
-Vue.component("list-facture", require("./components/list-facture.vue").default); 
-Vue.component("facture-notes", require("./components/facture-notes.vue").default); 
+
+Vue.component("clients-notes", require("./components/clients-notes.vue").default);
+
+Vue.component("facture-modifier-status", require("./components/facture-modifier-status.vue").default);
+Vue.component("form-facture", require("./components/form-facture.vue").default);
+Vue.component("list-clients", require("./components/list-clients.vue").default);
+Vue.component("list-facture", require("./components/list-facture.vue").default);
+Vue.component("facture-notes", require("./components/facture-notes.vue").default);
 Vue.component("user-privacy-setting", require("./components/user-privacy-setting.vue").default);
 
 ///////////////////////////////////////

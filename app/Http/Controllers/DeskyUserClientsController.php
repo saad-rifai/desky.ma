@@ -79,4 +79,44 @@ class DeskyUserClientsController extends Controller
             abort(404);
         }
     }
+    public function GetNotes(Request $request){
+    if(isset($request->CID) && $request->CID != "" && is_numeric($request->CID)){
+        $stmt = desky_user_clients::where('from', Auth::user()->email)->where("CID", $request->CID)->get(['notes']);
+        return response()->json($stmt, 200);
+    }else{
+        return response()->json(['error', 'هناك خطأ في طلبك'], 400);
+    }
+    }
+    public function UpdateNotes(Request $request){
+
+        if(isset($request->token) && $request->token != ""){
+            if(isset($request->CID) && $request->CID != "" && isset($request->notes) && $request->notes != ""){
+                    $CID=$request->CID;
+                    $notes= htmlspecialchars($request->notes);
+                    if( mb_strlen($notes, 'UTF-8') <= 1500){
+
+                       $stmt = desky_user_clients::where('from' , Auth::user()->email)->where('CID', $CID)->update(['notes' => $notes]);
+                       if($stmt){
+                        return response()->json(['success' => 'تم تحديث الملاحظات'], 200);
+
+                       }else{
+                           return response()->json(['error' => 'حصل خطأ في تحديث الملاحظات fx0054'], 500);
+                       }
+
+                       return response()->json($stmt);
+
+                }else{
+                    return response()->json(['error' => 'الملاحظات أطول من اللازم الحد الأقصى المسموح به 1500 حرف'], 402);
+
+                }
+
+            }else{
+                return response()->json(['error' => 'forbidden'], 403);
+
+            }
+
+        }else{
+            return response()->json(['error' => 'forbidden '], 403);
+        }
+    }
 }

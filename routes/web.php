@@ -2,25 +2,20 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\CaptchaServiceController;
-use App\Http\Controllers\NotificationPushController;
-use App\Http\Middleware\ApiAuth;
-use League\Flysystem\Config;
 use App\Mail\verfymail_desky;
-use GuzzleHttp\Middleware;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use \Swift_SmtpTransport as SmtpTransport;
 
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
 Route::middleware(['auth'])->group(function () {
-    // ListClients
+
     Route::get('/exportClients', 'exportExcle@exportClients');
     Route::post('api/v1/user/ListClients', 'DeskyUserClientsController@ListClients');
 
+    Route::post('/api/v1/getClientsNotes', 'DeskyUserClientsController@GetNotes');
+    Route::post('/api/v1/UpdateClientsNotes', 'DeskyUserClientsController@UpdateNotes');
     Route::post('api/v1/user/GetUserPrivacy', 'UserPrivacyController@GetUserPrivacy');
     Route::post('api/v1/user/UpdateUserPrivacy', 'UserPrivacyController@UpdateUserPrivacy');
     Route::get('api/v1/user/CheckSubscriptions', 'PaymentSystemController@CheckSubscriptions');

@@ -162,7 +162,7 @@
                         الملاحضات
                     </h1>
                     <hr>
-                    <!--clients-notes :cid="'{{$infos->CID}}'"></clients-notes-->
+                    <clients-notes :cid="'{{$infos->CID}}'"></clients-notes>
 
                 </div>
             </div>
