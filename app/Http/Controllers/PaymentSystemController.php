@@ -170,8 +170,8 @@ function generate_string($input, $strength = 16) {
 
 
 
-        $externalId = generate_string($permitted_chars,20);
-        $OID = generate_string($permitted_chars,20);
+        $externalId = generate_string($permitted_chars,13);
+        $OID = generate_string($permitted_chars,13);
         $str = "PRE-PAY"."$amount"."4010".$externalId."$email"."4010653ddd7e9b8cece2779bbed423ce";
         $orderCheckSum = md5($str);
         $client = new Client([
