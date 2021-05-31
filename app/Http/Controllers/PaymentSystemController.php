@@ -203,11 +203,11 @@ class PaymentSystemController extends Controller
           ->get();
           foreach($PayInfos as $PayInfo);
           if($PayInfos->count() > 0){
-
+              $amount =  $PayInfo->amount.'.00';
 
             $str =
             'PAY'.
-            $PayInfo->amount.
+            $amount.
             '4010'.
             $PayInfo->transaction_id.
             $PayInfo->buyer_email .
