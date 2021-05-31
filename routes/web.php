@@ -224,9 +224,9 @@ Route::get('/politique-de-confidentialite', function () {
 Route::any('dev_test', function () {
    $str =
     'PAY' .
-    '200.00' .
+    '400.00' .
     '4010' .
-    '673973737936743' .
+    '1856177829701' .
     'rifaisaad3@gmail.com' .
     '4010653ddd7e9b8cece2779bbed423ce';
     $hash = md5($str);
