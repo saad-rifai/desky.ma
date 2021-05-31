@@ -148,13 +148,26 @@ class PaymentSystemController extends Controller
     {
         //
     }
-    public function bingapay(){
+    public function bingapay(Request $request){
+        $email=$request->email;
+        $fname=$request->fname;
+        $lname=$request->lname;
+        $phone=$request->phone;
+        $amount=$request->amount;
         $externalId = rand(111111111111111,999999999999999);
-        $str = "PRE-PAY"."199"."4010".$externalId."rifaisaad3@gmail.com"."4010653ddd7e9b8cece2779bbed423ce";
+        $OID = rand(111111111111111,999999999999999);
+        $str = "PRE-PAY"."$amount"."4010".$externalId."$email"."4010653ddd7e9b8cece2779bbed423ce";
         $orderCheckSum = md5($str);
         $client = new Client([
             'base_uri' => 'http://preprod.binga.ma'
         ]);
+        $d = Carbon::parse(date("Y-m-d"));
+        $adddays = $d->addDays(15);
+        $date = date("Y-m-d", strtotime($adddays));
+
+        $exdate=$date."T".date("H:i:s").'GMT';
+       // $date = Carbon::parse();
+        //$exdate = $date->addDays(15);
 
         $response = $client->request('POST',
             '/bingaApi/api/orders/json/pay',
@@ -164,22 +177,56 @@ class PaymentSystemController extends Controller
                 'form_params' => [
                     'apiVersion' => '1.1',
                     'externalId' => $externalId,
-                    'expirationDate' => '2021-05-01T10:30:30GMT',
-                    'amount' => '199',
+                    'expirationDate' => "$exdate",
+                    'amount' => "$amount",
                     'storeId' => '4010',
-                    'payUrl' => 'https://desky.ma/?ref=test',
-                    'buyerFirstName' => 'Saad',
-                    'buyerLastName' => 'Rifai   ',
-                    'buyerEmail' => 'rifaisaad3@gmail.com',
+                    'payUrl' => 'https://s.moqawala.ma/api/v1/partner/binga/notif',
+                    'buyerFirstName' => "$$fname",
+                    'buyerLastName' => "$lname",
+                    'buyerEmail' => "$email",
                     'buyerAddress' => 'NULL',
-                    'buyerPhone' => '06671013733',
+                    'buyerPhone' => "$phone",
                     'orderCheckSum' => $orderCheckSum
                 ]
 
             ]
         );
 
-    return $response;
+    $res = $response->getBody();
+    $someArray = json_decode($res, true);
+    $status  = $someArray['result'];
+    if($status == "success"){
+        $orderdata = $someArray['orders']['order'];
+        $r_amount = $orderdata['amount'];
+        $r_externalId = $orderdata['externalId'];
+        $r_code = $orderdata['code'];
+        $r_email = $orderdata['buyerEmail'];
+        $c_status =  $orderdata['status'];
+        $c_totalAmount =  $orderdata['totalAmount'];
+        $stmt = PaymentSystem::create([
+            'OID' => $OID,
+            'buyer_email' => $email,
+            'transaction_id' => $externalId,
+            'amount' => $c_totalAmount,
+            'status' => 0,
+            'object' => '4',
+            'code' => $r_code,
+            'id_addr' => $request->ip(),
+            'method' => '1'
+        ]);
+        if($stmt){
+            return response("La demande numéro ".$r_code." a été créée. Vous pouvez vous rendre dans l'une des agences Wafacach pour payer en espèces Montant total:".$c_totalAmount, 200);
+        }else{
+            return response("Votre demande n'a pas pu être créée", 500);
+        }
+        //return response(['Amount' => $r_amount, 'r_externalId' => $r_externalId, 'r_code' => $r_code, 'r_email' => $r_email, 'c_status' => $c_status, 'c_totalAmount'=> $c_totalAmount]);
+    }else{
+
+        return $response->getBody().'<br> '.$exdate;
+    }
+
+
+
     }
     /**
      * Store a newly created resource in storage.

@@ -16,13 +16,14 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "google/recaptcha": "1.2",
-        "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
+        "guzzlehttp/guzzle": "^7.3",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.5",
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^3.2",
-        "swiftmailer/swiftmailer": "6.0"
+        "swiftmailer/swiftmailer": "6.0",
+        "symfony/psr-http-message-bridge": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

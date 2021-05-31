@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
         'api/update/desky/user',
         'DeskyAlgController@update_user_infos'
     );
-    Route::post('api/bingapay', 'PaymentSystemController@bingapay');
+    Route::get('api/bingapay', 'PaymentSystemController@bingapay');
     Route::any('verfymail/{UID}/{token}', 'verfymailController@verfylink');
     Route::any(
         'api/v1/user/desky/clients/getSearch',

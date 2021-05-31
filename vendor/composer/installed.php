@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4c7c98c01d3587d8c4e9d4f18bae4d0b7b63f2e7',
+    'reference' => '0fb61b92c443e7150b74b0f60721f42fee81bef5',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -503,7 +503,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4c7c98c01d3587d8c4e9d4f18bae4d0b7b63f2e7',
+      'reference' => '0fb61b92c443e7150b74b0f60721f42fee81bef5',
     ),
     'laravel/tinker' => 
     array (
@@ -1323,6 +1323,15 @@
       array (
       ),
       'reference' => '98cb8eeb72e55d4196dd1e36f1f16e7b3a9a088e',
+    ),
+    'symfony/psr-http-message-bridge' => 
+    array (
+      'pretty_version' => 'v2.1.0',
+      'version' => '2.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '81db2d4ae86e9f0049828d9343a72b9523884e5d',
     ),
     'symfony/routing' => 
     array (
