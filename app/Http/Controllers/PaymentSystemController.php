@@ -154,17 +154,24 @@ class PaymentSystemController extends Controller
         $lname=$request->lname;
         $phone=$request->phone;
         $amount=$request->amount;
-        function intCodeRandom($length = 8)
-        {
-          $intMin = (10 ** $length) / 10; // 100...
-          $intMax = (10 ** $length) - 1;  // 999...
 
-          $codeRandom = mt_rand($intMin, $intMax);
+        $permitted_chars = '0123456789';
 
-          return $codeRandom;
-        }
-        $externalId = intCodeRandom(15);
-        $OID = intCodeRandom(15);
+function generate_string($input, $strength = 16) {
+    $input_length = strlen($input);
+    $random_string = '';
+    for($i = 0; $i < $strength; $i++) {
+        $random_character = $input[mt_rand(0, $input_length - 1)];
+        $random_string .= $random_character;
+    }
+
+    return $random_string;
+}
+
+
+
+        $externalId = generate_string($permitted_chars,20);
+        $OID = generate_string($permitted_chars,20);
         $str = "PRE-PAY"."$amount"."4010".$externalId."$email"."4010653ddd7e9b8cece2779bbed423ce";
         $orderCheckSum = md5($str);
         $client = new Client([
