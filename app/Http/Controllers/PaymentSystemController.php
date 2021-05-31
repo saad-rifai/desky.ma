@@ -220,28 +220,28 @@ class PaymentSystemController extends Controller
                 ->where('code', $code)
                 ->where('buyer_email', $email)->update(['status' => 1]);
                 if($stmt){
-                    $date = date("Y-m-dTh:m:ssz");
+                    $date = date("Y-m-d\TH:i:s");
                     return response('100;'.$date)->setStatusCode(200);
                 }else{
-                    $date = date("Y-m-dTh:m:ssz");
+                    $date = date("Y-m-d\TH:i:s");
                     return response('000;'.$date)->setStatusCode(500);
                 }
 
             }else{
-                $date = date("Y-m-dTh:m:ssz");
+                $date = date("Y-m-d\TH:i:s");
                 return response('000;'.$date)->setStatusCode(500);
             }
 
 
 
           }else{
-            $date = date("Y-m-dTh:m:ssz");
+            $date = date("Y-m-d\TH:i:s");
             return response('000;'.$date)->setStatusCode(500);
           }
 
 
         }else{
-            $date = date("Y-m-dTh:m:ssz");
+            $date = date("Y-m-d\TH:i:s");
             return response('000;'.$date)->setStatusCode(500);
 
         }

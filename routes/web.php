@@ -222,15 +222,16 @@ Route::get('/politique-de-confidentialite', function () {
 /* SUBDEOMAINS */
 
 Route::any('dev_test', function () {
-   /* $str =
+   $str =
     'PAY' .
-    '200' .
+    '200.00' .
     '4010' .
-    '230255248710' .
+    '673973737936743' .
     'rifaisaad3@gmail.com' .
     '4010653ddd7e9b8cece2779bbed423ce';
     $hash = md5($str);
-    return $hash;*/
+    return $hash;
+    //return date("Y-m-d\TH:i:s");
   //  return var_dump(validateDate('2020-03-12'));
 });
 
