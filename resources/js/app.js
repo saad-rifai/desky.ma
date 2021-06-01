@@ -48,9 +48,13 @@ Vue.directive('clickoutside', {
       event.stopPropagation()
     },
   })
+
+Vue.component("panel-statistics", require("./components/panel-statistics.vue").default);
+Vue.component("feedback", require("./components/feedback.vue").default);
 Vue.component("clients-action", require("./components/clients-action.vue").default);
 Vue.component("clients-notes", require("./components/clients-notes.vue").default);
-
+Vue.component("creer-client", require("./components/creer-client.vue").default);
+Vue.component("edit-clients", require("./components/edit-clients.vue").default);
 Vue.component("facture-modifier-status", require("./components/facture-modifier-status.vue").default);
 Vue.component("form-facture", require("./components/form-facture.vue").default);
 Vue.component("list-clients", require("./components/list-clients.vue").default);

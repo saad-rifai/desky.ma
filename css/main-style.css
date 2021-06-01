@@ -605,10 +605,59 @@ button.uk-dropdown-menu-orange {
     cursor: pointer;
     background: transparent linear-gradient(#f9aa1b,#f85206) 0 0 no-repeat padding-box!important;
 }
-ul.uk-breadcrumb {
-    margin: 0 5px;
-}
+.user-image-box {
 
+    width: 65px;
+    height: 65px;
+    background-color: #f95e0b;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    border-radius: 100%;
+}
+.feedback-border:hover {
+    right: 0;
+}
+.feedback-border {
+    transition: 0.4s;
+    right: -150px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 100000;
+    background-color: #ffaa3e;
+    color: white;
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    bottom: 50%;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+}
+.feed-back-text {
+    margin-top: 15px;
+}
+.feedback-icon {
+    background-color: #f78b03;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.symbole-image {
+    padding: 10px 0;
+}
+ul.uk-breadcrumb {
+    margin: 15px 5px;
+}
+p.nodatamessage {
+    margin: 10px;
+}
+.uk-navbar-right {
+    height: 70px;
+    overflow: hidden !important;
+}
+.uk-table td {
+    position: relative;
+}
 .material-icons {
     vertical-align: middle;
 }

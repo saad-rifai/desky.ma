@@ -145,7 +145,7 @@ $jsondata = json_decode($datajson, true);
 
 <br>
 <br>
-<img src="{{asset('image/logo-desky.png')}}" height="30px" class="logo-pt" alt="Desky.ma - Moqawala.ma - Register">
+<img src="{{asset('image/logo-beta.png')}}" height="30px" class="logo-pt" alt="Desky.ma - Moqawala.ma - Register">
 <div id="app">
         @yield('content')
 

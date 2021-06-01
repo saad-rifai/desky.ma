@@ -21,6 +21,10 @@
             "fr": "Annulé"
         }
     },
+    "methods_de_paymetnts":{
+        "0": "Manuellement",
+        "1": "binga"
+    },
     "properties":{
         "GC": "Gestion des clients",
         "SY": "Statistiques annuelles",

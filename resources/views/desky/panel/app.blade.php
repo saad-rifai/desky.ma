@@ -140,6 +140,8 @@ $jsondata = json_decode($datajson, true);
 <body id="body">
     <div id="app">
         <div>
+            <feedback></feedback>
+
             <div class="h-85"></div>
             <!-- Header Of Website -->
             <nav class="uk-navbar-container Blue-brand-ayol " id="navbar-desky" dir="rtl" uk-navbar>
@@ -151,7 +153,7 @@ $jsondata = json_decode($datajson, true);
                                 uk-icon="icon: menu; ratio: 2"></span></button>
 
                         <div class="logo"><a href="{{ URL::asset('') }}"><img class="logo-ayol" title="Logo - Desky"
-                                    src="{{ URL::asset('image/logo-desky.png') }}"></a></div>
+                                    src="{{ URL::asset('image/logo-beta.png') }}"></a></div>
                         <div class="uk-navbar-center">
 
                             <ul class="uk-navbar-nav">

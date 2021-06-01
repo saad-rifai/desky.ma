@@ -131,7 +131,7 @@ $jsondata = json_decode($datajson, true);
                         <button style="display: none" uk-toggle="target: #offcanvas-slide" type="button"
                             class="toggel-button"><span uk-icon="icon: menu; ratio: 2"></span></button>
                         <div class="logo"><a href="{{ URL::asset('') }}"><img class="logo-ayol" title="Logo - Desky"
-                                    src="{{ URL::asset('image/logo-desky.png') }}"></a></div>
+                                    src="{{ URL::asset('image/logo-beta.png') }}"></a></div>
                         <div class="uk-navbar-center">
 
                             <ul class="uk-navbar-nav">

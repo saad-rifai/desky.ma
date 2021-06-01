@@ -1,26 +1,6 @@
 <template>
   <div>
-    <div id="modal-delete" uk-modal>
-      <div dir="rtl" class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">حذف عرض الاسعار #{{ oidclcicked }}</h2>
-        <p>هل أنت متأكد بأنك تود حذف عرض الاسعار رقم #{{ oidclcicked }} ؟</p>
-        <p class="uk-text-right" dir="ltr">
-          <button
-            class="uk-button uk-button-default uk-modal-close"
-            type="button"
-          >
-            الغاء
-          </button>
-          <button
-            class="uk-button uk-button-danger uk-modal-close"
-            @click="deleteDocumment(oidclcicked)"
-            type="button"
-          >
-            حذف
-          </button>
-        </p>
-      </div>
-    </div>
+
 <!-- modal search mobile -->
 
     <div id="modal-search" uk-modal>
@@ -145,6 +125,7 @@
           <table id="tabel-responsive" class="uk-table uk-table-striped uk-text-right">
             <thead>
               <tr>
+                  <th></th>
                 <th>رقم العميل</th>
                 <th>الاسم</th>
                 <th>البريد الالكتروني</th>
@@ -154,6 +135,7 @@
             </thead>
             <tbody>
               <tr v-for="(val, index) in infos" :key="index">
+                  <td> <div class="user-image-box"><div class="symbole-image">{{val.c_name.charAt(0).toUpperCase()}}</div></div></td>
                 <td>{{ val.CID }}</td>
                 <td>{{ val.c_name }}</td>
                 <td>{{ val.c_email }}</td>
@@ -165,15 +147,12 @@
                     ><button @click="showdevis(val.CID)" class="act-btn-radio">
                       <i class="fas fa-eye"></i></button
                   ></a>
-                  <a href="#modal-delete" uk-toggle @click="removeAct(val.CID)"
-                    ><button class="act-btn-radio danger">
-                      <i class="fas fa-trash-alt"></i></button
-                  ></a>
+
                 </td>
               </tr>
-              <tr>
-                  <td>
-                                <div v-if="pages == 0" class="uk-text-center uk-position-center">
+              <tr v-if="pages == 0">
+                  <td colspan="5">
+                                <div  class="uk-text-center uk-position-center">
             <p class="nodatamessage">
               <i class="fas fa-info-circle"></i>
               لايوجد بيانات لعرضها
@@ -234,32 +213,7 @@ export default {
     };
   },
   methods: {
-    deleteDocumment: function (e) {
-      let data = new FormData();
-      data.append("ref", window.location.href);
-      data.append("token", $("meta[name=csrf-token]").attr("content"));
-      data.append("oid", e);
-      data.append("d", "d");
-      axios
-        .post("../api/v1/deleteDocumment", data)
-        .then((response) => {
-          UIkit.notification({
-            message: "تم حذف عرض الاسعار : " + e + "",
-            status: "success",
-            pos: "top-center",
-            timeout: 5000,
-          });
-          this.searchnow();
-        })
-        .catch((error) => {
-          UIkit.notification({
-            message: "حصل خطأ ما يرجى اعادة المحاولة لاحقاََ رقم الخطأ fx0029",
-            status: "danger",
-            pos: "top-center",
-            timeout: 5000,
-          });
-        });
-    },
+
     removeAct: function (e) {
       this.oidclcicked = e;
     },

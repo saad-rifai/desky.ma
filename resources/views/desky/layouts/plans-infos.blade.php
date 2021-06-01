@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
     @foreach($infos as $info)
 
- 
+
 
         @php
   $orgdate =  Carbon::parse($info->created_at);
@@ -52,7 +52,7 @@ if($points != "unlimited"){
         @if($exdate > $timenow)
            <div>
         <div class="uk-card uk-card-default uk-card-body uk-text-right uk-flex">
-            <span class="uk-label  @php 
+            <span class="uk-label  @php
             if($info->status == 1){ echo 'uk-label-success';  }elseif ($info->status == 0) {
                echo 'uk-label-warning';
             }elseif ($info->status == 2) {
@@ -64,7 +64,7 @@ if($points != "unlimited"){
             } @endphp  uk-position-top-left uk-position-small">{{$jsondatas['payments_status'][$info->status]['ar']}}</span>
 
             <div class="icon-big uk-margin-left"><i class="fas fa-box"></i></div>
-            
+
             <div><h1 class="uk-card-title">الباقة الابتدائية</h1>
                 <p dir="rtl">@if($points == "unlimited") غير محدود @else {{$points}} @endif دوفي / عرض أسعار <br>({{$time_payments}}/{{$price}}Dhs)</p>
                @if ($info->status == 1)
@@ -93,9 +93,9 @@ if($points != "unlimited"){
             </h1>
      <p>
          @if($info->type == "m")
-          تم استهلاك {{$consumption}} نقاط من {{$points}} نقطة 
+          تم استهلاك {{$consumption}} نقاط من {{$points}} نقطة
           @else
-              استهلاكك غير محدود 
+              استهلاكك غير محدود
           @endif
         </p>
             <p> الرصيد المتبقي @php if(is_numeric($consumption)){echo ($points-$consumption); }else{ echo 'غير محدود'; } @endphp</p>
@@ -106,7 +106,7 @@ if($points != "unlimited"){
     </div>
 @endif
     @endforeach
-    @if(count($infos) < 1)
+    @if(count($infos) < 1 || $exdate < $timenow)
     <div class="uk-card uk-card-default uk-card-body uk-text-right uk-flex " style="    position: relative !important;
     height: 250px;">
         <div class="uk-text-center uk-position-center">

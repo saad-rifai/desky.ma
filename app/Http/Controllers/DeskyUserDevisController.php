@@ -24,7 +24,7 @@ class DeskyUserDevisController extends Controller
                 ->where('desky_user_devis.email', Auth::user()->email)
                 ->get();
             });
-            
+
             if($DevisInfos->count() > 0){
                 if(isset($request->datajson)){
                     return response()->json($DevisInfos, 200);
@@ -41,7 +41,7 @@ class DeskyUserDevisController extends Controller
     public function update(Request $request){
         $data = file_get_contents('database/data.json');
         $json = json_decode($data, true);
-        
+
         $this->validate($request, [
             'p_method' => 'nullable|regex:/[0-9]/',
             'p_condition' => 'nullable|regex:/[0-9]/',
@@ -148,9 +148,9 @@ class DeskyUserDevisController extends Controller
                     return view("desky.panel.devis.view-devis", ['infos' => $DevisInfo, 'db_desky' => $db_desky]);
                 } else {
                    abort(404);
-                
+
                 }
-                
+
             } else {
                 abort(404);
             }
@@ -183,7 +183,10 @@ class DeskyUserDevisController extends Controller
             'required' => 'هذا الحقل مطلوب *',
             'regex' => 'يرجى التحقق من المدخلات *',
             'max' => 'يرجى التحقق من المدخلات *',
-            'min' => 'يرجى التحقق من المدخلات *'
+            'min' => 'يرجى التحقق من المدخلات *',
+            'email' => 'يرجى ادخال بريد الكتروني صالح *',
+            'notes.max' => 'الحد الأقصى للملاحظات 700 حرف *'
+
 
         ]);
         if(!isset($json['type_clients'][$request->c_type])){
@@ -325,7 +328,7 @@ class DeskyUserDevisController extends Controller
                             'country' => $request->c_country,
                             'city' => $request->c_city,
                             'adresse' => $request->c_adresse,
-    
+
                             ]);
                             $go = 1;
                             if($go == 1){
@@ -372,8 +375,8 @@ class DeskyUserDevisController extends Controller
                             ]);
                             if($stmt){
                                 foreach($countclients as $countclient);
-                           
-                                
+
+
                                 $stmt = desky_user_devis::create([
                                     'OID' => $request->OID,
                                     'email' => Auth::user()->email,

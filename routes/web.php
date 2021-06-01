@@ -11,6 +11,9 @@ Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('api/v1/user/statistiques/general/{json}/{year}','DeskyAlgController@UserStatistiquesGeneral');
+    Route::post('api/v1/user/desky/edit/Clients','DeskyUserClientsController@EditClients');
+    Route::post('api/v1/user/desky/creer/Clients','DeskyUserClientsController@CreerClients');
     Route::get('/exportClients', 'exportExcle@exportClients');
     Route::post('api/v1/user/ListClients', 'DeskyUserClientsController@ListClients');
     Route::post('api/v1/user/deleteClients', 'DeskyUserClientsController@deleteClients');
@@ -54,6 +57,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post(
         'api/v1/user/desky/devis/maxNumber',
         'DeskyUserDevisController@GetLastDevisNumber'
+    );
+    Route::post(
+        'api/v1/user/desky/clients/maxNumber',
+        'DeskyUserClientsController@GetLastCIDNumber'
     );
     Route::post(
         'api/v1/user/desky/facture/maxNumber',
@@ -133,6 +140,9 @@ Route::get('/politique-de-confidentialite', function () {
 
     /* Auth Routes */
     Route::middleware(['auth'])->group(function () {
+        Route::get('/creer/client', function(){
+            return view('desky.panel.clients.c-client');
+        });
         Route::get('/creer/facture', function(){
             return view('desky.panel.facture.c-facture');
         });
@@ -149,7 +159,7 @@ Route::get('/politique-de-confidentialite', function () {
             return view('desky.panel.devis.list-devis');
         });
         Route::get('/clients/list', function () {
-            return view('desky.panel.list-clients');
+            return view('desky.panel.clients.list-clients');
         });
         Route::get('/facture/list', function () {
             return view('desky.panel.facture.list-facture');
@@ -169,6 +179,13 @@ Route::get('/politique-de-confidentialite', function () {
         Route::get('facture/{OID}/{UID}', 'DeskyUserFactureController@ShowFacture');
         Route::get('devis/{OID}/{UID}/edit', 'DeskyUserDevisController@index');
         Route::get('facture/{OID}/{UID}/edit', 'DeskyUserFactureController@index');
+
+        Route::get('clients/{CID}/{UID}/edit', function($CID, $UID){
+            return view('desky.panel.clients.edit-clients', ['CID' => $CID, 'UID' => $UID]);
+        });
+
+        Route::post('clients/{CID}/{UID}/edit/{datajson}', 'DeskyUserClientsController@ShowClient');
+
         Route::post('devis/update', 'DeskyUserDevisController@update');
         Route::post('facture/update', 'DeskyUserFactureController@update');
         Route::post('devis/{OID}/{UID}/{datajson}', 'DeskyUserDevisController@index');
