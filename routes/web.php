@@ -13,6 +13,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/exportClients', 'exportExcle@exportClients');
     Route::post('api/v1/user/ListClients', 'DeskyUserClientsController@ListClients');
+    Route::post('api/v1/user/deleteClients', 'DeskyUserClientsController@deleteClients');
 
     Route::post('/api/v1/getClientsNotes', 'DeskyUserClientsController@GetNotes');
     Route::post('/api/v1/UpdateClientsNotes', 'DeskyUserClientsController@UpdateNotes');
@@ -226,7 +227,7 @@ Route::any('dev_test', function () {
     'PAY' .
     '400.00' .
     '4010' .
-    '1856177829701' .
+    '8957780501535' .
     'rifaisaad3@gmail.com' .
     '4010653ddd7e9b8cece2779bbed423ce';
     $hash = md5($str);

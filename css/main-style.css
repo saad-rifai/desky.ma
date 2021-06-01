@@ -598,14 +598,16 @@ button.uk-button.uk-button-primary {
 }
 button.uk-dropdown-menu-orange {
     border: solid 0px;
-    padding: 8px 30px;
+    padding: 8px 15px;
     font-size: 16px;
     border-radius: 5px;
     color: white;
     cursor: pointer;
     background: transparent linear-gradient(#f9aa1b,#f85206) 0 0 no-repeat padding-box!important;
 }
-
+ul.uk-breadcrumb {
+    margin: 0 5px;
+}
 
 .material-icons {
     vertical-align: middle;
@@ -646,7 +648,7 @@ button.uk-button.btn-share {
     border: solid 1px #f78b03;
 }
 button.uk-dropdown-menu-pending {
-    padding: 8px 30px;
+    padding: 8px 15px;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
@@ -659,7 +661,7 @@ button.act-btn-radio.danger {
     border: solid 1px #fa5661;
 }
 button.uk-dropdown-menu-white {
-    padding: 8px 30px;
+    padding: 8px 15px;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
@@ -668,7 +670,7 @@ button.uk-dropdown-menu-white {
     border: solid 1px #f78b03;
 }
 button.uk-dropdown-menu-primary {
-    padding: 8px 30px;
+    padding: 8px 15px;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;

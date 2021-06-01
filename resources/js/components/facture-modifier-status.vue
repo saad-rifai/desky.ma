@@ -77,7 +77,7 @@
     <div class="uk-flex uk-flex-wrap uk-flex-wrap-around btn-grids uk-padding-small" dir="rtl">
       <div>
         <button class="uk-dropdown-menu-orange" type="button" dir="rtl">
-          اجرائات <span uk-icon="icon: triangle-down"></span>
+           <span uk-icon="icon: more-vertical"></span>
         </button>
         <div uk-dropdown="mode: click; pos: bottom-right">
           <ul class="uk-nav uk-dropdown-nav">

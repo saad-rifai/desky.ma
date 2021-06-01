@@ -48,7 +48,7 @@ Vue.directive('clickoutside', {
       event.stopPropagation()
     },
   })
-
+Vue.component("clients-action", require("./components/clients-action.vue").default);
 Vue.component("clients-notes", require("./components/clients-notes.vue").default);
 
 Vue.component("facture-modifier-status", require("./components/facture-modifier-status.vue").default);

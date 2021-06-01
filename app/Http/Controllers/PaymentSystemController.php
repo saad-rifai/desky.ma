@@ -172,10 +172,10 @@ function generate_string($input, $strength = 16) {
 
         $externalId = generate_string($permitted_chars,13);
         $OID = generate_string($permitted_chars,13);
-        $str = "PRE-PAY"."$amount"."4010".$externalId."$email"."4010653ddd7e9b8cece2779bbed423ce";
+        $str = "PRE-PAY"."$amount"."401090".$externalId."$email"."21af6d8381101b46e1010cc1f11901ed14cae0b9";
         $orderCheckSum = md5($str);
         $client = new Client([
-            'base_uri' => 'http://preprod.binga.ma'
+            'base_uri' => 'https://api.binga.ma'
         ]);
         $d = Carbon::parse(date("Y-m-d"));
         $adddays = $d->addDays(15);
@@ -186,16 +186,16 @@ function generate_string($input, $strength = 16) {
         //$exdate = $date->addDays(15);
 
         $response = $client->request('POST',
-            '/bingaApi/api/orders/json/pay',
+            '/bingaApi/api/orders/pay',
             [
-                'auth' => ['Binga.ma', 'Binga'],
+                'auth' => ['moqawala.ma', 'M0Q@wala@0621'],
                 'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
                 'form_params' => [
                     'apiVersion' => '1.1',
                     'externalId' => $externalId,
                     'expirationDate' => "$exdate",
                     'amount' => "$amount",
-                    'storeId' => '4010',
+                    'storeId' => '401090',
                     'payUrl' => 'https://s.moqawala.ma/api/v1/partner/binga/notif',
                     'buyerFirstName' => "$$fname",
                     'buyerLastName' => "$lname",
@@ -271,10 +271,10 @@ function generate_string($input, $strength = 16) {
             $str =
             'PAY'.
             $amount.
-            '4010'.
+            '401090'.
             $PayInfo->transaction_id.
             $PayInfo->buyer_email .
-            '4010653ddd7e9b8cece2779bbed423ce';
+            '21af6d8381101b46e1010cc1f11901ed14cae0b9';
             $myhash = md5($str);
 
             if($request->orderCheckSum == $myhash){

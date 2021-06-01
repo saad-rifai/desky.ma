@@ -25,8 +25,7 @@
             <div id="loading" class="form-loading"></div>
 
             <div class="uk-card uk-card-default uk-card-body">
-                <!--clients-tools :cid="'{{ $infos->CID }}'" :uid="'{{Auth::user()->id}}'"></clients-tools-->
-
+                <clients-action :cid="'{{ $infos->CID }}'" :uid="'{{Auth::user()->id}}'"></clients-action>
                 <br />
 
 
