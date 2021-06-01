@@ -186,7 +186,7 @@ function generate_string($input, $strength = 16) {
         //$exdate = $date->addDays(15);
 
         $response = $client->request('POST',
-            '/bingaApi/api/orders/pay',
+            '/bingaApi/api/orders/json/pay',
             [
                 'auth' => ['moqawala.ma', 'M0Q@wala@0621'],
                 'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
@@ -197,7 +197,7 @@ function generate_string($input, $strength = 16) {
                     'amount' => "$amount",
                     'storeId' => '401090',
                     'payUrl' => 'https://s.moqawala.ma/api/v1/partner/binga/notif',
-                    'buyerFirstName' => "$fname",
+                    'buyerFirstName' => "$$fname",
                     'buyerLastName' => "$lname",
                     'buyerEmail' => "$email",
                     'buyerAddress' => 'NULL',
@@ -210,7 +210,7 @@ function generate_string($input, $strength = 16) {
 
     $res = $response->getBody();
     $someArray = json_decode($res, true);
-    /*$status  = $someArray['result'];
+    $status  = $someArray['result'];
     if($status == "success"){
         $orderdata = $someArray['orders']['order'];
         $r_amount = $orderdata['amount'];
@@ -240,8 +240,7 @@ function generate_string($input, $strength = 16) {
 
         return $response->getBody().'<br> '.$exdate;
     }
-*/
-print_r($someArray);
+
 
 
     }
