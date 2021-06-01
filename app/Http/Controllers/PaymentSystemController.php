@@ -210,7 +210,7 @@ function generate_string($input, $strength = 16) {
 
     $res = $response->getBody();
     $someArray = json_decode($res, true);
-    $status  = $someArray['result'];
+    /*$status  = $someArray['result'];
     if($status == "success"){
         $orderdata = $someArray['orders']['order'];
         $r_amount = $orderdata['amount'];
@@ -240,7 +240,8 @@ function generate_string($input, $strength = 16) {
 
         return $response->getBody().'<br> '.$exdate;
     }
-
+*/
+print_r($someArray);
 
 
     }
