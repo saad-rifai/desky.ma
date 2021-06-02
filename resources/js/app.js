@@ -49,7 +49,8 @@ Vue.directive('clickoutside', {
     },
   })
 
-Vue.component("panel-statistics", require("./components/panel-statistics.vue").default);
+Vue.component("cas-de-facturation-pie", require("./components/statistics/cas-de-facturation-pie.vue").default);
+Vue.component("panel-statistics", require("./components/statistics/panel-statistics.vue").default);
 Vue.component("feedback", require("./components/feedback.vue").default);
 Vue.component("clients-action", require("./components/clients-action.vue").default);
 Vue.component("clients-notes", require("./components/clients-notes.vue").default);
@@ -91,7 +92,7 @@ Vue.component(
 );
 Vue.component(
     "year-line-chart-desky",
-    require("./components/year-line-chart-desky.vue").default
+    require("./components/statistics/year-line-chart-desky.vue").default
 );
 Vue.component(
     "notification-badge",

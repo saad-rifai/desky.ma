@@ -609,7 +609,7 @@ button.uk-dropdown-menu-orange {
 
     width: 65px;
     height: 65px;
-    background-color: #f95e0b;
+    background-color: #f78b03;
     text-align: center;
     color: white;
     font-size: 30px;
@@ -634,6 +634,10 @@ button.uk-dropdown-menu-orange {
 }
 .feed-back-text {
     margin-top: 15px;
+}
+.div-load {
+    display: none;
+    color: #f78b03;
 }
 .feedback-icon {
     background-color: #f78b03;

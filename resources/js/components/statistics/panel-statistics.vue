@@ -116,9 +116,10 @@ export default {
           $('#form-loading').css('display', 'none')
         })
         .catch((error) => {
-          console.log(error)
-          //this.getinfos();
-          $('#form-loading').css('display', 'bnonelock')
+          $('#form-loading').css('display', 'none')
+
+          // console.log(error)
+          this.getinfos()
         })
     },
   },

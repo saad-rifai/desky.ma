@@ -11,7 +11,9 @@ Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('api/v1/user/statistiques/general/{json}/{year}','DeskyAlgController@UserStatistiquesGeneral');
+    Route::get('api/v1/user/statistiques/general/{json}/{year}','UserStatiquesController@UserStatistiquesGeneral');
+    Route::post('api/v1/user/statistiques/ventes/{json}/{year}','UserStatiquesController@UserStatistiquesVentesAnnuel');
+    Route::post('api/v1/user/statistiques/CasDeFacturation/{json}/{year}','UserStatiquesController@CasDeFacturation');
     Route::post('api/v1/user/desky/edit/Clients','DeskyUserClientsController@EditClients');
     Route::post('api/v1/user/desky/creer/Clients','DeskyUserClientsController@CreerClients');
     Route::get('/exportClients', 'exportExcle@exportClients');
