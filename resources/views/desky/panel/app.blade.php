@@ -152,7 +152,7 @@ $jsondata = json_decode($datajson, true);
                         <button uk-toggle="target: #offcanvas-slide" type="button" class="toggel-button"><span
                                 uk-icon="icon: menu; ratio: 2"></span></button>
 
-                        <div class="logo"><a href="{{ URL::asset('') }}"><img class="logo-ayol" title="Logo - Desky"
+                        <div class="logo"><a href="{{ URL::asset('/u') }}"><img class="logo-ayol" title="Logo - Desky"
                                     src="{{ URL::asset('image/logo-beta.png') }}"></a></div>
                         <div class="uk-navbar-center">
 
@@ -174,7 +174,7 @@ $jsondata = json_decode($datajson, true);
                                                     قائمة العملاء</a>
                                             </li>
                                             <li><a
-                                                    href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><i
+                                                    href="{{ URL::asset('/creer/client') }}"><i
                                                         class="fas fa-plus"></i>
                                                     انشاء عميل</a></li>
 
@@ -336,7 +336,7 @@ $jsondata = json_decode($datajson, true);
                                     class="fas fa-tachometer-alt"></i> &nbsp; لوحة التحكم</a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::asset('/#services') }}" ><i
+                                    <a href="{{ URL::asset('/clients/list') }}" ><i
                                             class="fas fa-users"></i> &nbsp; العملاء</a>
                                     <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
                                         class="">
@@ -344,12 +344,12 @@ $jsondata = json_decode($datajson, true);
 
                                         <ul class="uk-nav uk-dropdown-nav">
 
-                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><i
+                                            <li><a href="{{ URL::asset('/clients/list') }}"><i
                                                         class="fas fa-list"></i>
                                                     قائمة العملاء</a>
                                             </li>
                                             <li><a
-                                                    href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><i
+                                                    href="{{ URL::asset('/creer/client') }}"><i
                                                         class="fas fa-plus"></i>
                                                     انشاء عميل</a></li>
 

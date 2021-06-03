@@ -54,75 +54,7 @@
                     <div class="uk-position-top-left uk-overlay "><a href="#"><small>مشاهدة المزيد   </small></a></div>
 
                     <hr>
-                    <table dir="rtl" class="uk-table uk-table-divider uk-text-right">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>اسم العميل</th>
-                                <th>تاريخ الاضافة</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><div class="user-image-box"><div class="symbole-image">S</div></div></td>
-
-                                <td>Saad Rifai</td>
-                                <td>2021-05-26 </td>
-                                <td> <button  class="act-btn-radio">
-                                    <i class="fas fa-eye"></i>
-                                  </button> </td>
-                            </tr>
-                            <tr>
-                                <td><div class="user-image-box"><div class="symbole-image">S</div></div></td>
-
-                                <td>Adil Miftah</td>
-                                <td>2021-05-20</td>
-                                <td> <button  class="act-btn-radio">
-                                    <i class="fas fa-eye"></i>
-                                  </button> </td>
-                            </tr>
-                            <tr>
-                                <td><div class="user-image-box"><div class="symbole-image">S</div></div></td>
-
-                                <td>Zineb kadi</td>
-                                <td>2021-05-19</td>
-                                <td> <button  class="act-btn-radio">
-                                    <i class="fas fa-eye"></i>
-                                  </button> </td>
-                            </tr>
-                            <tr>
-                                <td><div class="user-image-box"><div class="symbole-image">S</div></div></td>
-
-                                <td>Yassin baladi</td>
-                                <td>2021-05-18</td>
-                                <td> <button  class="act-btn-radio">
-                                    <i class="fas fa-eye"></i>
-                                  </button> </td>
-                            </tr>
-                            <tr>
-                                <td><div class="user-image-box"><div class="symbole-image">S</div></div></td>
-
-                                <td>Hoda yazid</td>
-                                <td>2021-05-18</td>
-                                <td> <button  class="act-btn-radio">
-                                    <i class="fas fa-eye"></i>
-                                  </button> </td>
-                            </tr>
-                            <tr>
-                                <td><div class="user-image-box"><div class="symbole-image">S</div></div></td>
-
-                                <td>sihame yasiri</td>
-                                <td>2021-05-18</td>
-                                <td> <button  class="act-btn-radio">
-                                    <i class="fas fa-eye"></i>
-                                  </button> </td>
-
-                            </tr>
-
-
-                        </tbody>
-                    </table>
+                    <last-clients :limit="5" :uid='"{{Auth::user()->id}}"'></last-clients>
 
 
 
@@ -137,7 +69,7 @@
                     <table dir="rtl" class="uk-table uk-table-divider uk-text-right">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>العميل</th>
                                 <th>عنوان الرسالة</th>
                                 <th></th>
                             </tr>

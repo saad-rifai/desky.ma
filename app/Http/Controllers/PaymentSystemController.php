@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 use App\Subscriptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use App\MyCart;
 class PaymentSystemController extends Controller
 {
     /**
@@ -88,28 +88,20 @@ class PaymentSystemController extends Controller
      }
     public function index(Request $request)
     {
-        $transaction_id = $request->id;
-        $OID = $request->OID;
-        $PayInfos = DB::table('payment_systems')
-        ->where('transaction_id', $transaction_id )
-        ->where('OID', '#'.$OID)
-        ->get();
+        if(isset($request->id) && isset($request->OID) && is_numeric($request->OID) && is_numeric($request->id)){
+            $stmt = MyCart::where('UID', Auth::user()->id)->where('email', Auth::user()->email)->where('OID', $request->OID)->where('status', 0)->get(['OID']);
+           foreach($stmt as $oid);
+            if(count($stmt) > 0){
+                $loid = json_encode($oid, true);
+               $data = json_decode($loid, true);
 
-        $countPayInfo = $PayInfos->count();
-        if($countPayInfo > 0){
-            foreach($PayInfos as $PayInfo);
-            $amount = $PayInfo->amount;
-            $SID = $PayInfo->object;
-            $nameservices = DB::table('services')
-            ->where('SID', $SID )
-            ->get();
-            foreach($nameservices as $nameservice);
-            $nameservice = $nameservice->name;
-            return view('payments', ['amount' => $amount, 'nameservice' => $nameservice]);
+                return view('payments', ['oid' => $data['OID']]);
 
+            }else{
+                abort(404);
+            }
         }else{
-            abort(404, 'Page not found');
-
+            abort(404);
         }
     }
     public function api(Request $request)

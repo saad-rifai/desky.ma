@@ -234,6 +234,8 @@ $test = '454564df';
 ?>
 <head>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>DESKY - DEVIS N° {{ $OID }}</title>
@@ -344,7 +346,7 @@ $test = '454564df';
                         </h1>
                         <br>
                         <h1 class="head-text" style="font-weight: 400;"> {{ $c_phone }}</h1>
-                  
+
                     </div>
                 </th>
             </tr>

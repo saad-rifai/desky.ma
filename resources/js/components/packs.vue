@@ -131,7 +131,7 @@
                   <td class="uk-text-center">
                       <hr class="uk-divider-icon">
 
-                    <a href="#form-demande-branding">
+                    <a href="javascript:void(0)" @click="AddToCart(index)">
                       <button
                         type="button"
                         class="uk-button uk-button-primary btn-call"
@@ -155,11 +155,14 @@ import json from '../../../database/data.json'
 export default {
   data() {
     return {
-      packInfos: json.packs,
+      packInfos: json._2147845.packs,
       PackageDuration: 'm',
     }
   },
   methods: {
+      AddToCart: function(e){
+          window.location.href='/api/v1/user/AddToCart/2147845/'+e+'/'+$("meta[name=csrf-token]").attr("content")+'/'+this.PackageDuration
+      },
     PayTimeChange: function (e) {
       if (e == 'm') {
           this.PackageDuration = 'm';

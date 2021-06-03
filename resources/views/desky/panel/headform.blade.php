@@ -3,35 +3,11 @@
 
 <head>
 
-    <!-- Facebook Pixel Code -->
-    <script>
-        ! function(f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function() {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '742002670009558');
-        fbq('track', 'PageView');
-
-    </script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=742002670009558&ev=PageView&noscript=1" /></noscript>
-            <noscript>
-                <meta http-equiv="refresh" content="0;url=noscript.html">
-              </noscript>
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=noscript.html">
+    </noscript>
     <!-- End Facebook Pixel Code -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,18 +87,7 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC8QSMPXQG"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-ZC8QSMPXQG');
-
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
 </head>
 @php
@@ -143,16 +108,17 @@ $jsondata = json_decode($datajson, true);
 
 
 
-<br>
-<br>
-<img src="{{asset('image/logo-beta.png')}}" height="30px" class="logo-pt" alt="Desky.ma - Moqawala.ma - Register">
-<div id="app">
+    <br>
+    <br>
+    <img src="{{ asset('image/logo-beta.png') }}" height="30px" class="logo-pt"
+        alt="Desky.ma - Moqawala.ma - Register">
+    <div id="app">
         @yield('content')
 
-</div>
-<p dir="rtl" class="footer-text-small">                        Desky.ma منتج تابع لشركة NERYOU S.A.R.L جميع الحقوق محفوظة © {{ now()->year }}
-</p>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    </div>
+    <p dir="rtl" class="footer-text-small"> Desky.ma منتج تابع لشركة NERYOU S.A.R.L جميع الحقوق محفوظة ©
+        {{ now()->year }}
+    </p>
 
     <script src="{{ URL::asset('uikit/dist/js/uikit-icons.min.js') }}"></script>
 

@@ -150,32 +150,36 @@ $jsondata = json_decode($datajson, true);
                 </div>
                 <div class="right-nav">
                     @guest
-                        <a href="{{ 'http://account.'.env("APP_URL").'/register' }}?ref={{ url()->current() }}"><button
+                        <a href="{{ URL::asset('register') }}?ref={{ url()->current() }}"><button
                                 class="uk-button uk-button-primary btn-radio">سجل الأن</button></a>
-                        <a href="{{ 'http://account.'.env("APP_URL").'/login' }}?ref={{ url()->current() }}" class="uk-button">الدخول</a>
+                        <a href="{{ URL::asset('login') }}?ref={{ url()->current() }}" class="uk-button">الدخول</a>
+
                     @else
-                        <button style="    padding: 0 13px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
+
+                        <button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-user"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
-                                <li><a href="{{ asset('u/account?ref=nav_bar') }}"><span uk-icon="user"></span> حسابي </a>
+                                <li><a href="{{ asset('u/account') }}"><span uk-icon="user"></span> حسابي </a></li>
+                                <li><a href="{{ asset('u/services') }}"><span uk-icon="list"></span> خدماتي</a></li>
+                                <li><a href="{{ asset('u/products') }}"><span uk-icon="grid"></span> منتجاتي</a></li>
+                                <li><a href="{{ asset('u/history') }}"><span uk-icon="history"></span> سجل المدفوعات</a>
                                 </li>
-                                <li><a href="{{ asset('u?ref=nav_bar') }}"><span uk-icon="home"></span> لوحة التحكم</a>
-                                </li>
-                                <li><a href="{{ asset('u/setting') }}"><span uk-icon="cog"></span> الاعدادت</a></li>
-                                <li><a class="dropdown-item" href="#"
+                                <li><a href="{{ asset('u/setting') }}"><span uk-icon="cog"></span> الاعدادات </a></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                         document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                              document.getElementById('logout-form').submit();">
                                         <span uk-icon="sign-out"></span> {{ __('تسجيل الخروج') }}
                                     </a></li>
                             </ul>
                         </div>
                         <user-notification></user-notification>
-                        <button style="    padding: 0 13px;" dir="rtl" class="uk-button  uk-float-left  user-menu-bar"
+                        <button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-envelope"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
-                                <li><a href="{{ asset('u/account?ref=nav_bar') }}"><span uk-icon="user"></span> حسابي </a>
+                                <li><a href="{{ asset('u/account?ref=nav_bar') }}"><span uk-icon="user"></span> حسابي
+                                    </a>
                                 </li>
                                 <li><a href="{{ asset('u?ref=nav_bar') }}"><span uk-icon="home"></span> لوحة التحكم</a>
                                 </li>
@@ -186,7 +190,10 @@ $jsondata = json_decode($datajson, true);
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+
                     @endguest
+
+
                 </div>
             </nav>
             <!-- Mobile Nav -->
@@ -261,8 +268,10 @@ $jsondata = json_decode($datajson, true);
                     <li>
                         <img class="logo-pay-footer" src="{{ URL::asset('image/icon/logo-wafacash.jpg') }}"
                             alt="wafacach - desky.ma">
-                        <img class="logo-pay-footer" src="{{ URL::asset('image/icon/method-de-payment.png') }}"
+                        <img class="logo-pay-footer" src="{{ URL::asset('image/icon/visa-mastercard.png') }}"
                             alt="visa master card - desky.ma">
+                            <img class="logo-pay-footer" src="{{ URL::asset('image/icon/cmi-logo.png') }}"
+                            alt="CMI - desky.ma">
                     </li>
 
                     <h4><span uk-icon="icon: chevron-left"></span> تابعنا على</h4>

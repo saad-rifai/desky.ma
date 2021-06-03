@@ -6,30 +6,94 @@ use App\Mail\verfymail_desky;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
+    //AddToCart
+    Route::get(
+        'api/v1/user/AddToCart/{p_id}/{pk_id}/{token}/{type}',
+        'MyCartController@AddToCart'
+    );
+    //generateOrderID
+Route::get('api/v1/generateOrderID', 'DeskyAlgController@generateOrderID');
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('api/v1/user/statistiques/general/{json}/{year}','UserStatiquesController@UserStatistiquesGeneral');
-    Route::post('api/v1/user/statistiques/ventes/{json}/{year}','UserStatiquesController@UserStatistiquesVentesAnnuel');
-    Route::post('api/v1/user/statistiques/CasDeFacturation/{json}/{year}','UserStatiquesController@CasDeFacturation');
-    Route::post('api/v1/user/desky/edit/Clients','DeskyUserClientsController@EditClients');
-    Route::post('api/v1/user/desky/creer/Clients','DeskyUserClientsController@CreerClients');
+    //LastClientsList
+    Route::post(
+        'api/v1/user/getCartInfos/{OID}',
+        'MyCartController@getCartInfos'
+    );
+    //updateCart
+    Route::post(
+        'api/v1/user/updateCart',
+        'MyCartController@updateCart'
+    );
+    Route::post(
+        'api/v1/user/LastClientsList',
+        'DeskyUserClientsController@LastClientsList'
+    );
+    Route::get(
+        'api/v1/user/statistiques/general/{json}/{year}',
+        'UserStatiquesController@UserStatistiquesGeneral'
+    );
+    Route::post(
+        'api/v1/user/statistiques/ventes/{json}/{year}',
+        'UserStatiquesController@UserStatistiquesVentesAnnuel'
+    );
+    Route::post(
+        'api/v1/user/statistiques/CasDeFacturation/{json}/{year}',
+        'UserStatiquesController@CasDeFacturation'
+    );
+    Route::post(
+        'api/v1/user/desky/edit/Clients',
+        'DeskyUserClientsController@EditClients'
+    );
+    Route::post(
+        'api/v1/user/desky/creer/Clients',
+        'DeskyUserClientsController@CreerClients'
+    );
     Route::get('/exportClients', 'exportExcle@exportClients');
-    Route::post('api/v1/user/ListClients', 'DeskyUserClientsController@ListClients');
-    Route::post('api/v1/user/deleteClients', 'DeskyUserClientsController@deleteClients');
+    Route::post(
+        'api/v1/user/ListClients',
+        'DeskyUserClientsController@ListClients'
+    );
+    Route::post(
+        'api/v1/user/deleteClients',
+        'DeskyUserClientsController@deleteClients'
+    );
 
-    Route::post('/api/v1/getClientsNotes', 'DeskyUserClientsController@GetNotes');
-    Route::post('/api/v1/UpdateClientsNotes', 'DeskyUserClientsController@UpdateNotes');
-    Route::post('api/v1/user/GetUserPrivacy', 'UserPrivacyController@GetUserPrivacy');
-    Route::post('api/v1/user/UpdateUserPrivacy', 'UserPrivacyController@UpdateUserPrivacy');
-    Route::get('api/v1/user/CheckSubscriptions', 'PaymentSystemController@CheckSubscriptions');
+    Route::post(
+        '/api/v1/getClientsNotes',
+        'DeskyUserClientsController@GetNotes'
+    );
+    Route::post(
+        '/api/v1/UpdateClientsNotes',
+        'DeskyUserClientsController@UpdateNotes'
+    );
+    Route::post(
+        'api/v1/user/GetUserPrivacy',
+        'UserPrivacyController@GetUserPrivacy'
+    );
+    Route::post(
+        'api/v1/user/UpdateUserPrivacy',
+        'UserPrivacyController@UpdateUserPrivacy'
+    );
+    Route::get(
+        'api/v1/user/CheckSubscriptions',
+        'PaymentSystemController@CheckSubscriptions'
+    );
     Route::get('api/v1/getOfDocument/notes', 'DeskyAlgController@getnotes');
-    Route::post('api/v1/UpdateOfDocument/notes', 'DeskyAlgController@UpdateNotes');
-    Route::post('api/v1/UpdateOfDocument/status', 'DeskyAlgController@changeStatus');
+    Route::post(
+        'api/v1/UpdateOfDocument/notes',
+        'DeskyAlgController@UpdateNotes'
+    );
+    Route::post(
+        'api/v1/UpdateOfDocument/status',
+        'DeskyAlgController@changeStatus'
+    );
     Route::post('api/v1/deleteDocumment', 'DeskyAlgController@deleteDocumment');
-    Route::post('api/v1/getOfDocument/status', 'DeskyAlgController@StatusOfDocument');
+    Route::post(
+        'api/v1/getOfDocument/status',
+        'DeskyAlgController@StatusOfDocument'
+    );
     Route::get('/download/{filename}', 'filesController@download');
     Route::post('api/notifications', 'NotificationPushController@apishow');
     Route::post(
@@ -111,7 +175,7 @@ Route::get('setcookie', function () {
     if (isset($_GET['ref']) && $_GET['ref'] != '') {
         return redirect($_GET['ref']);
     } else {
-        return redirect('u/account');
+        return redirect('u?Dashboard.do&ref=start_session');
     }
 })->middleware('guest');
 /* start Session */
@@ -132,20 +196,26 @@ Route::get('/vftoken', function () {
 /* Verfy Email Route */
 
 Route::group(['domain' => env('APP_URL')], function () {
+    /* Any Route */
+    Route::get('/politique-de-confidentialite', function () {
+        return view('desky.pages.privacy');
+    });
+    Route::get('/tarifs', function () {
+        return view('desky/tarif');
+    });
 
-/* Any Route */
-Route::get('/politique-de-confidentialite', function () {
-    return view('desky.pages.privacy');
-
-});
-/* Any Route */
+    Route::get('/ae-network', function () {
+        return view('desky/ae-network');
+    });
+    /* Any Route */
 
     /* Auth Routes */
     Route::middleware(['auth'])->group(function () {
-        Route::get('/creer/client', function(){
+
+        Route::get('/creer/client', function () {
             return view('desky.panel.clients.c-client');
         });
-        Route::get('/creer/facture', function(){
+        Route::get('/creer/facture', function () {
             return view('desky.panel.facture.c-facture');
         });
 
@@ -167,31 +237,58 @@ Route::get('/politique-de-confidentialite', function () {
             return view('desky.panel.facture.list-facture');
         });
         Route::post('api/list-devis', 'DeskyUserDevisController@ListDevis');
-        Route::post('api/list-facture', 'DeskyUserFactureController@ListFacture');
+        Route::post(
+            'api/list-facture',
+            'DeskyUserFactureController@ListFacture'
+        );
 
         Route::post('api/creer_devis', 'DeskyUserDevisController@CreateDevis');
-        Route::post('api/creer_facture', 'DeskyUserFactureController@CreateFacture');
+        Route::post(
+            'api/creer_facture',
+            'DeskyUserFactureController@CreateFacture'
+        );
         Route::get('print/devis/{OID}/{UID}', 'pdfGeneretor@devis');
         Route::get('print/facture/{OID}/{UID}', 'pdfGeneretor@facture');
         Route::get('/creer/devis', function () {
             return view('desky.panel.devis.c-devis');
         });
         Route::get('devis/{OID}/{UID}', 'DeskyUserDevisController@ShowDevis');
-        Route::get('clients/{CID}/{UID}', 'DeskyUserClientsController@ShowClient');
-        Route::get('facture/{OID}/{UID}', 'DeskyUserFactureController@ShowFacture');
+        Route::get(
+            'clients/{CID}/{UID}',
+            'DeskyUserClientsController@ShowClient'
+        );
+        Route::get(
+            'facture/{OID}/{UID}',
+            'DeskyUserFactureController@ShowFacture'
+        );
         Route::get('devis/{OID}/{UID}/edit', 'DeskyUserDevisController@index');
-        Route::get('facture/{OID}/{UID}/edit', 'DeskyUserFactureController@index');
+        Route::get(
+            'facture/{OID}/{UID}/edit',
+            'DeskyUserFactureController@index'
+        );
 
-        Route::get('clients/{CID}/{UID}/edit', function($CID, $UID){
-            return view('desky.panel.clients.edit-clients', ['CID' => $CID, 'UID' => $UID]);
+        Route::get('clients/{CID}/{UID}/edit', function ($CID, $UID) {
+            return view('desky.panel.clients.edit-clients', [
+                'CID' => $CID,
+                'UID' => $UID,
+            ]);
         });
 
-        Route::post('clients/{CID}/{UID}/edit/{datajson}', 'DeskyUserClientsController@ShowClient');
+        Route::post(
+            'clients/{CID}/{UID}/edit/{datajson}',
+            'DeskyUserClientsController@ShowClient'
+        );
 
         Route::post('devis/update', 'DeskyUserDevisController@update');
         Route::post('facture/update', 'DeskyUserFactureController@update');
-        Route::post('devis/{OID}/{UID}/{datajson}', 'DeskyUserDevisController@index');
-        Route::post('facture/{OID}/{UID}/{datajson}', 'DeskyUserFactureController@index');
+        Route::post(
+            'devis/{OID}/{UID}/{datajson}',
+            'DeskyUserDevisController@index'
+        );
+        Route::post(
+            'facture/{OID}/{UID}/{datajson}',
+            'DeskyUserFactureController@index'
+        );
 
         Route::get('/devis/sample', function () {
             return view('desky/models/sample');
@@ -217,24 +314,18 @@ Route::get('/politique-de-confidentialite', function () {
 
     /* Guest Routes */
     Route::middleware(['guest'])->group(function () {
+        Route::get('/', function () {
+            return view('desky.index');
+        });
         Route::get('/login', function () {
             return redirect('http://account.' . env('APP_URL'));
         });
 
         Route::get('/register', function () {
-            return redirect('http://account.' . env('APP_URL'));
-        });
-        Route::get('/', function () {
-            return view('desky/index');
-        })->name('homepage');
-
-        Route::get('/tarifs', function () {
-            return view('desky/tarif');
+            return redirect('http://account.' . env('APP_URL').'/register');
         });
 
-        Route::get('/ae-network', function () {
-            return view('desky/ae-network');
-        });
+
     });
     /* Guest Routes  */
 });
@@ -242,17 +333,20 @@ Route::get('/politique-de-confidentialite', function () {
 /* SUBDEOMAINS */
 
 Route::any('dev_test', function () {
-   $str =
-    'PAY' .
-    '400.00' .
-    '4010' .
-    '8957780501535' .
-    'rifaisaad3@gmail.com' .
-    '4010653ddd7e9b8cece2779bbed423ce';
+    $str =
+        'PAY' .
+        '400.00' .
+        '4010' .
+        '8957780501535' .
+        'rifaisaad3@gmail.com' .
+        '4010653ddd7e9b8cece2779bbed423ce';
     $hash = md5($str);
-    return $hash;
+    //return $hash;
+    $str = date('ymdh').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 9);
+
+ echo $str;
     //return date("Y-m-d\TH:i:s");
-  //  return var_dump(validateDate('2020-03-12'));
+    //  return var_dump(validateDate('2020-03-12'));
 });
 
 Route::any('verfymail', function () {
@@ -291,8 +385,6 @@ Route::get('/reload-captcha', [
     CaptchaServiceController::class,
     'reloadCaptcha',
 ]);
-
-
 
 /* */
 Route::post('/contact/store', 'ContactController@store');

@@ -1,6 +1,6 @@
 @extends('desky.layouts.app')
 
-@section('title', 'من أجل ادارة نشاطك من أي مكان وفي أي وقت')
+@section('title', 'الباقات والأسعار')
 @section('description',' أول مكتب خاص بالمقاول الذاتي على الانترنت لادارة نشاطك التجاري باحترافية من أي مكان وفي أي وقت.',)
 @section('ogimage', asset('image/service/2.jpg'))
 @section('content')
@@ -24,7 +24,7 @@
 @include('desky.layouts.packs')
 </div>
 <div id="reviews" class="wd-90 uk-text-center uk-margin">
-    <h1 class="uk-card-title">أراء عملائنا</h1>
+    <h1 class="uk-card-title">تعليقات</h1>
     <br>
     <div class="uk-slider-container-offset" uk-slider>
 
@@ -33,67 +33,39 @@
             <ul class="uk-slider-items uk-child-width-1-3@s uk-grid">
                 <li>
                     <div class="chiffre-border">
-                        <h4 class="info-comment"> BEN HAKOU SALR AU</h4>
+                        <div class="uk-comment-avatar" style="background-image: url('image/users/173560799_947125385828314_3570436792996144561_n.jpg')">
+                        </div>
+                        <h4 class="info-comment"> Saad Rifai
+                            <br>
+                            <small dir="rtl">منهدس برمجيات, NerYou LLC</small>
+
+                        </h4>
                         <div class="starts-icons"><span class="material-icons">star</span><span
                                 class="material-icons">star</span><span class="material-icons">star</span><span
                                 class="material-icons">star</span><span class="material-icons">star</span></div>
 
                         <p class="comment-custmer" dir="rtl">
-                            شكرا على الاحترافية في العمل
+                            على الرغم من أني كنت مساهم في تطوير المنصة أصبحت لا أستطيع الاستغناء عن المنصة في اعداد الفواتير وعروض الأسعار وتحليل التقارير.
                         </p>
                     </div>
                 </li>
                 <li>
                     <div class="chiffre-border">
-                        <h4 class="info-comment"> Pain O'choix</h4>
+                        <div class="uk-comment-avatar" style="background-image: url('image/users/121278590_3664561140255144_7541311586304254054_n.jpg')"></div>
+                        <h4 class="info-comment"> Adil Miftah
+                            <br>
+                            <small  dir="rtl">المدير التنفيذي, NerYou LLC</small>
+                        </h4>
                         <div class="starts-icons"><span class="material-icons">star</span><span
                                 class="material-icons">star</span><span class="material-icons">star</span><span
                                 class="material-icons">star</span><span class="material-icons">star</span></div>
 
-                        <p class="comment-custmer" dir="rtl"> بفضل الله ثم انتم لليوم غانبدا مشروعي </p>
+                        <p class="comment-custmer" dir="rtl"> لقد عملنا على تطوير حل لادارة نشاط المقاول الذاتي بطريقة مبسطة وعملية وقوية وأمنة وبعد عمل طويل قد تم اطلاق منصة desky.ma التي جمعت كل مايحتاج المقاول الذاتي لادارة وتطوير نشاطه التجاري</p>
                     </div>
                 </li>
 
-                <li>
-                    <div class="chiffre-border">
-                        <h4 class="info-comment">Jahhar car </h4>
-                        <div class="starts-icons"><span class="material-icons">star</span><span
-                                class="material-icons">star</span><span class="material-icons">star</span><span
-                                class="material-icons">star</span><span class="material-icons">star</span></div>
 
-                        <p class="comment-custmer" dir="rtl">
-                            فريق احترافي شكرا لانكم ساندتوني باش نلقا تمويل نديماري بيه مشروعي
-                        </p>
-                    </div>
-                </li>
-                </li>
-                <li>
-                    <div class="chiffre-border">
-                        <h4 class="info-comment">Promande car </h4>
-                        <div class="starts-icons"><span class="material-icons">star</span><span
-                                class="material-icons">star</span><span class="material-icons">star</span><span
-                                class="material-icons">star</span><span class="material-icons">star</span></div>
 
-                        <p class="comment-custmer" dir="rtl">
-
-                            انا كنقلب من شحال هتدي لي غادي يرافقني باش نلقا تمويل و نخلي مشروعي في الانترنت شكرا لكم
-                        </p>
-                    </div>
-                </li>
-                </li>
-                <li>
-                    <div class="chiffre-border">
-                        <h4 class="info-comment">Red Rdk trans </h4>
-                        <div class="starts-icons"><span class="material-icons">star</span><span
-                                class="material-icons">star</span><span class="material-icons">star</span><span
-                                class="material-icons">star</span><span class="material-icons">star</span></div>
-
-                        <p class="comment-custmer" dir="rtl">
-                            اول مرة جيت للمغرب نبدا شركة ديالي للنقل تلاقيت مع فريق احترافي بعقلية عصرية شكرا على
-                            المجهودات ديالكم
-                        </p>
-                    </div>
-                </li>
             </ul>
 
             <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous

@@ -52,13 +52,14 @@ Vue.directive('clickoutside', {
 Vue.component("cas-de-facturation-pie", require("./components/statistics/cas-de-facturation-pie.vue").default);
 Vue.component("panel-statistics", require("./components/statistics/panel-statistics.vue").default);
 Vue.component("feedback", require("./components/feedback.vue").default);
-Vue.component("clients-action", require("./components/clients-action.vue").default);
-Vue.component("clients-notes", require("./components/clients-notes.vue").default);
-Vue.component("creer-client", require("./components/creer-client.vue").default);
-Vue.component("edit-clients", require("./components/edit-clients.vue").default);
+Vue.component("clients-action", require("./components/userClients/clients-action.vue").default);
+Vue.component("last-clients", require("./components/userClients/lastClients.vue").default);
+Vue.component("clients-notes", require("./components/userClients/clients-notes.vue").default);
+Vue.component("creer-client", require("./components/userClients/creer-client.vue").default);
+Vue.component("edit-clients", require("./components/userClients/edit-clients.vue").default);
 Vue.component("facture-modifier-status", require("./components/facture-modifier-status.vue").default);
 Vue.component("form-facture", require("./components/form-facture.vue").default);
-Vue.component("list-clients", require("./components/list-clients.vue").default);
+Vue.component("list-clients", require("./components/userClients/list-clients.vue").default);
 Vue.component("list-facture", require("./components/list-facture.vue").default);
 Vue.component("facture-notes", require("./components/facture-notes.vue").default);
 Vue.component("user-privacy-setting", require("./components/user-privacy-setting.vue").default);
@@ -155,7 +156,9 @@ const app = new Vue({
         infos: [],
         coupon_cost: "",
         totalprice: "",
-        apikey:"35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H"
+        apikey:"35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H",
+        pay_type: "",
+        total_cart: 0
     },
 
 });

@@ -384,10 +384,11 @@ CaptchaCallback: function(){
               timeout: 5000,
             });
             grecaptcha.reset();
+             this.CaptchaCallback();
           })
           .finally(() => {
             grecaptcha.reset();
-
+             this.CaptchaCallback();
             $("#form-loading").css("display", "none");
           });
       } else {

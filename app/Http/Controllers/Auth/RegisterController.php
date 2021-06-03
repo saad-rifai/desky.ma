@@ -17,6 +17,9 @@ use App\Mail\verfymail_desky;
 use Illuminate\Support\Facades\Session;
 use \Swift_SmtpTransport;
 use Swift_Mailer;
+
+use App\UserPrivacy;
+
 class RegisterController extends Controller
 {
     /*
@@ -200,7 +203,14 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
             'typeaccount' => $request->typeaccount,
         ]);
-        if ($stmt) {
+        $privacy = UserPrivacy::create([
+            'email' => $request->email,
+            'public_account' => 1,
+            'public_devis' => 0,
+            'public_facture' => 0,
+            'token_share' => null
+            ]);
+        if ($stmt && $privacy) {
             function generateRandomString($length)
             {
                 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

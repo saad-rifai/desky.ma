@@ -1,27 +1,33 @@
-@extends('layouts.layout')
-@section('title', 'رفيق مقاولتك')
+@extends('desky.panel.headform')
+@section('title', 'الدفع والأداء')
 @section('description', 'منصة مقاولة توفر لك العديد من الخدمات لمساعدتك على بدء و تطوير نشاطك التجاري')
-@section('ogimage', asset('image/moqawala.ma.jpg'))
-<script src="https://secure-global.paytabs.com/payment/js/paylib.js"></script>
 
 @section('content')
+<br>
+<br>
     <div>
         @php
             $datajson = file_get_contents('database/data.json');
             $jsondatas = json_decode($datajson, true);
         @endphp
         <div class="wd-80 uk-margin-small-top uk-margin-small-bottom">
-            <style>
-            </style>
+
             <div class="uk-text-center " uk-grid>
 
                 <div class="uk-width-1-3@m">
                     <div class="uk-card uk-card-default uk-card-body" uk-sticky="bottom: true">
-                        <h4 class="uk-card-title uk-text-right"><span uk-icon="cart"></span>
-                            مشترياتي</h4>
-                        <hr>
-                        <cart></cart>
-           
+                        <h4 class="uk-card-title uk-text-right">
+                            معلومات
+                        </h4>
+                        <hr class="uk-divider-icon">
+                        <div id="cartLoad_" class="cartLoad_">
+                            <div class=" uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle div-load">
+                            <span uk-spinner="ratio: 1.5"></span>
+
+                            </div>
+                            </div>
+                        <cart :oid="'{{$oid}}'"></cart>
+
                         <br>
 
                     </div>
@@ -73,8 +79,9 @@
                             </div>
 
                             <h4 class="uk-card-title uk-text-right"> الدفع و الأداء</h4>
-                            <hr>
-                            <payment-methods></payment-methods>
+                            <hr class="uk-divider-icon">
+
+                            <payment-methods ref='componentOne' :oid="'{{$oid}}'"></payment-methods>
 
                         </div>
 
@@ -83,4 +90,6 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
 @endsection

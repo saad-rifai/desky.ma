@@ -1,13 +1,7 @@
 <template>
   <div style="position: relative;" >
-    <div
-      id="chartLoad"
-      class="uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle div-load"
-    >
-      <div class="div-load-content">
-        <div uk-spinner="ratio: 1.5"></div>
-      </div>
-    </div>
+        <div id="chartLoad" class=" uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle div-load"><span uk-spinner="ratio: 1.5"></span></div>
+
     <canvas id="myChart" width="400" height="175"></canvas>
   </div>
 </template>
@@ -21,7 +15,7 @@ export default {
   },
   methods: {
     getdata: function () {
-      $('#chartLoad').css('display', 'block')
+      $('#chartLoad').css('display', 'flex')
       axios
         .post('/api/v1/user/statistiques/ventes/json/' + this.year)
         .then((response) => {
