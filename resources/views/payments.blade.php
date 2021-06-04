@@ -5,6 +5,14 @@
 @section('content')
 <br>
 <br>
+<div id="payment-loading" class="form-loading">
+    <span class="uk-position-center">
+        <span  uk-spinner="ratio: 3"></span>
+        <p class="" dir="rtl"> جاري معالجة طلبك...</p>
+    </span>
+
+
+</div>
     <div>
         @php
             $datajson = file_get_contents('database/data.json');

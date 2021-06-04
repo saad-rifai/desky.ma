@@ -670,4 +670,10 @@ class pdfGeneretor extends Controller
          }
       }
    }
+   public function invoice(){
+    header('Content-type: text/html; charset=UTF-8') ;//chrome
+
+    return PDF::loadView('desky/models/recu-print', array('enable_remote' => true))->setPaper('A4', 'portrait')->stream('invoice.pdf');
+
+   }
 }

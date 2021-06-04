@@ -6,12 +6,20 @@ use App\Mail\verfymail_desky;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+// print invoice
+Route::get('print/invoice', 'pdfGeneretor@invoice');
+
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
     //AddToCart
     Route::get(
         'api/v1/user/AddToCart/{p_id}/{pk_id}/{token}/{type}',
         'MyCartController@AddToCart'
+    );
+    //PaymentProcessing
+    Route::post(
+        'api/v1/user/PaymentProcessing',
+        'PaymentSystemController@PaymentProcessing'
     );
     //generateOrderID
 Route::get('api/v1/generateOrderID', 'DeskyAlgController@generateOrderID');
@@ -211,7 +219,9 @@ Route::group(['domain' => env('APP_URL')], function () {
 
     /* Auth Routes */
     Route::middleware(['auth'])->group(function () {
-
+        Route::get('/recu/{OID}', function () {
+            return view('desky.invoice');
+        });
         Route::get('/creer/client', function () {
             return view('desky.panel.clients.c-client');
         });

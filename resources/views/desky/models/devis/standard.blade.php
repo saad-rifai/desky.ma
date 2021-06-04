@@ -60,7 +60,7 @@
     }
 
     .border-orange {
-        background-color: {{$brandcolor }};
+        background-color: {{ $brandcolor }};
         text-align: right;
         color: white;
         height: 10px !important;
@@ -71,7 +71,7 @@
 
     .og-text {
         /*position: absolute;*/
-        color: {{$brandcolor }};
+        color: {{ $brandcolor }};
         background-color: white;
         margin-right: 15%;
         font-size: 60px;
@@ -114,7 +114,7 @@
     }
 
     .icon-text {
-        background-color: {{$brandcolor }};
+        background-color: {{ $brandcolor }};
         width: 15px;
         height: 15px;
         padding: 8px;
@@ -147,7 +147,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
         text-align: left;
-        background-color: {{$brandcolor }};
+        background-color: {{ $brandcolor }};
         color: white;
     }
 
@@ -160,7 +160,7 @@
 
     .total-border {
         width: 100%;
-        background-color: {{$brandcolor }};
+        background-color: {{ $brandcolor }};
         color: white;
         margin-right: 2px;
         padding-left: 40px;
@@ -181,19 +181,32 @@
         margin-top: 30px;
         margin-bottom: -40px;
     }
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0px;
+        right: 0px;
+        height: 50px;
+
+        /** Extra personal styles **/
+        text-align: center;
+        line-height: 35px;
+    }
 
     .border-info {
         width: 100%;
         height: 15px;
         overflow: visible;
-        background-color: {{$brandcolor }};
+        background-color: {{ $brandcolor }};
         margin: 0;
-        margin-top: 2px;
+
+        top: -50%;
+        position: absolute;
         padding: 0;
     }
 
     .border-info span {
-        color: {{$brandcolor }};
+        color: {{ $brandcolor }};
         width: 100%;
         max-width: 150px;
         background-color: white;
@@ -203,28 +216,16 @@
         line-height: 0.8;
     }
 
-    footer {
-        position: fixed;
-        bottom: -60px;
-        left: 0px;
-        right: 0px;
-        height: 50px;
 
-        /** Extra personal styles **/
-        background-color: #03a9f4;
-        color: white;
-        text-align: center;
-        line-height: 35px;
+
+
+
+    .logo-pdf {
+        max-width: 180px;
+        max-height: 150px;
+        display: block;
     }
-.footer{
-    position: fixed;
-    bottom: 9%;
-}
-.logo-pdf{
-    max-width: 180px;
-    max-height: 150px;
-    display: block;
-}
+
 </style>
 <?php
 //$url = asset('image')
@@ -232,36 +233,39 @@ $phonepng = file_get_contents('image/icon/phone.png');
 $phonepng64 = base64_encode($phonepng);
 $test = '454564df';
 ?>
+<!DOCTYPE html>
+
+<html>
+
 <head>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>DESKY - DEVIS N° {{ $OID }}</title>
 </head>
-<footer>
-    Copyright &copy; <?php echo date("Y");?>
-</footer>
-<div style="width: 100%;">
+<body>
+<header>
     <div class="wd-90 margin-top">
 
         <table style="width:100%; height: 100px; padding: 0; margin: 0;" dir="ltr" align="left">
             <tr>
                 <th style="">
                     <div>
-                       @if($logo != "" && $logo != null)
-                       <img src="http://{{ env('APP_URL') }}/{{ $logo }}" class="logo-pdf">
+                        @if ($logo != '' && $logo != null)
+                            <img src="http://{{ env('APP_URL') }}/{{ $logo }}" class="logo-pdf">
 
-                       @else
-                        <h1 class="logo-text"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}</h1>
-                        <p class="logo-slogon"> {{ $slogon }} </p>
-                       @endif
+                        @else
+                            <h1 class="logo-text"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}</h1>
+                            <p class="logo-slogon"> {{ $slogon }} </p>
+                        @endif
 
                     </div>
                 </th>
                 <th style="text-align: right;">
                     <div class="content-right-td">
                         <h1 class="head-text"> Date de la Creation</h1>
-                        <p class="slogon-text" style="font-weight: 300;"> {{ date("d/m/Y", strtotime($created_at)) }} </p>
+                        <p class="slogon-text" style="font-weight: 300;"> {{ date('d/m/Y', strtotime($created_at)) }}
+                        </p>
                     </div>
                 </th>
             </tr>
@@ -283,18 +287,21 @@ $test = '454564df';
             </td>
         </tr>
     </table>
-    <div class="wd-90">
 
-        <!-- Infos Devis Section -->
-        <table style="width:100%; height: 100px; padding: 0; margin: 0;" dir="ltr" align="left">
-            <tr>
+</header>
+<main>
+<div class="wd-90">
 
-                <th style="text-align: left;">
-                    <div class="">
-                        <h1 class="head-text" style="font-weight: 400; font-size: 18px;"> Contactez-nous
-                        </h1>
-                        <br>
-                        @if($telephone != "" && $telephone != null)
+    <!-- Infos Devis Section -->
+    <table style="width:100%; height: 100px; padding: 0; margin: 0;" dir="ltr" align="left">
+        <tr>
+
+            <th style="text-align: left;">
+                <div class="">
+                    <h1 class="head-text" style="font-weight: 400; font-size: 18px;"> Contactez-nous
+                    </h1>
+                    <br>
+                    @if ($telephone != '' && $telephone != null)
                         <div class="head-text" style="font-weight: 400; width: 100%;">
                             <div class="icon-text" style="float: left;">
                                 <img src='http://{{ env('APP_URL') }}/image/icon/phone.png'>
@@ -302,190 +309,155 @@ $test = '454564df';
                             <div style="font-size: 14px;font-weight: 400;">{{ $telephone }} </div>
                         </div>
                         <br>
-                        @endif
-                        <div class="head-text" style="font-weight: 400;">
-                            <div class="icon-text" style="float: left">
-                                <img src='http://{{ env('APP_URL') }}/image/icon/email.png'>
-                            </div>
-                            <div style="font-size: 14px;font-weight: 400;">{{ $b_email }}</div>
+                    @endif
+                    <div class="head-text" style="font-weight: 400;">
+                        <div class="icon-text" style="float: left">
+                            <img src='http://{{ env('APP_URL') }}/image/icon/email.png'>
                         </div>
-                        <br>
-                        @if($siteweb != "")
+                        <div style="font-size: 14px;font-weight: 400;">{{ $b_email }}</div>
+                    </div>
+                    <br>
+                    @if ($siteweb != '')
                         <div class="head-text" style="font-weight: 400;">
                             <div class="icon-text" style="float: left">
                                 <img src='http://{{ env('APP_URL') }}/image/icon/global.png'>
                             </div>
                             <div style="font-size: 14px;font-weight: 400;">{{ $siteweb }}</div>
                         </div>
-                        @endif
-                    </div>
-                </th>
-                <th style="text-align: left; margin-left: 20px;">
-                    <div class=" margin-left">
-                        <h1 class="head-text" style="font-weight: 600; font-size: 20px;"> N° {{ $OID }}
-                        </h1>
-                        <br>
+                    @endif
+                </div>
+            </th>
+            <th style="text-align: left; margin-left: 20px;">
+                <div class=" margin-left">
+                    <h1 class="head-text" style="font-weight: 600; font-size: 20px;"> N° {{ $OID }}
+                    </h1>
+                    <br>
 
-                        <h1 class="head-text" style="font-weight: 400; font-size: 18px;"> Client
-                        </h1>
-                        <br>
-                        <h1 class="head-text" style="font-weight: 400;"> Numéro de client: {{ $CID }}
-                        </h1>
-                        <br>
-                        <h1 class="head-text" style="font-weight: 400;"> {{ $c_name }}
-                        </h1>
-                        <br>
-                        <h1 class="head-text" style="font-weight: 400;"> {{ $c_email }}
-                        </h1>
-                        <br>
-                        <h1 class="head-text" style="font-weight: 400;"> {{ $c_phone }}</h1>
-                    </div>
-                </th>
-            </tr>
-        </table>
-        <br>
-        <br>
+                    <h1 class="head-text" style="font-weight: 400; font-size: 18px;"> Client
+                    </h1>
+                    <br>
+                    <h1 class="head-text" style="font-weight: 400;"> Numéro de client: {{ $CID }}
+                    </h1>
+                    <br>
+                    <h1 class="head-text" style="font-weight: 400;"> {{ $c_name }}
+                    </h1>
+                    <br>
+                    <h1 class="head-text" style="font-weight: 400;"> {{ $c_email }}
+                    </h1>
+                    <br>
+                    <h1 class="head-text" style="font-weight: 400;"> {{ $c_phone }}</h1>
+                </div>
+            </th>
+        </tr>
+    </table>
+    <br>
+    <br>
 
-        <!-- devis detils section -->
+    <!-- devis detils section -->
 
-        <table
-            style="width:100%; min-height: 1000px; padding: 0; margin: 0;border-bottom: solid 1px #e7e7e7;    border-left: solid 1px #e7e7e7;    border-right: solid 1px #e7e7e7;"
-            class="devis-table" dir="ltr">
+    <table
+        style="width:100%; min-height: 1000px; padding: 0; margin: 0;border-bottom: solid 1px #e7e7e7;    border-left: solid 1px #e7e7e7;    border-right: solid 1px #e7e7e7;"
+        class="devis-table" dir="ltr">
+        <tr>
+            <th style="text-align: center">N°</th>
+            <th>Désignation</th>
+            <th style="text-align: center">Prix</th>
+            <th style="text-align: center">Quantité</th>
+            <th style="text-align: center">Total</th>
+        </tr>
+        @php $i=1 @endphp
+        @foreach ($items as $item)
             <tr>
-                <th style="text-align: center">N°</th>
-                <th>Désignation</th>
-                <th style="text-align: center">Prix</th>
-                <th style="text-align: center">Quantité</th>
-                <th style="text-align: center">Total</th>
+                <td style="text-align: center">{{ $i++ }}</td>
+
+                <td>{{ $item->article }}</td>
+                <td style="text-align: center">{{ number_format($item->price, 2, '.', ',') }} MAD</td>
+                <td style="text-align: center">{{ $item->quantity }}</td>
+                <td style="text-align: center">{{ number_format($item->price * $item->quantity, 2, '.', ',') }}</td>
             </tr>
-@php $i=1 @endphp
-@foreach($items as $item)
-                <tr>
-                    <td style="text-align: center">{{ $i++ }}</td>
+        @endforeach
+    </table>
+    <br>
+    <br>
+    <!-- Section information generale -->
+    <table style="width:100%; height: 100px; padding: 0; margin: 0;" dir="ltr" align="left">
+        <tr>
+            <th style="text-align: left;">
+                <div class=" ">
 
-                    <td>{{ $item->article }}</td>
-                    <td style="text-align: center">{{  number_format($item->price, 2, '.', ',') }} MAD</td>
-                    <td style="text-align: center">{{ $item->quantity }}</td>
-                    <td style="text-align: center">{{ number_format(($item->price*$item->quantity), 2, '.', ',') }}</td>
-                </tr>
-@endforeach
-        </table>
-        <br>
-        <br>
-        <!-- Section information generale -->
-        <table style="width:100%; height: 100px; padding: 0; margin: 0;" dir="ltr" align="left">
-            <tr>
-                <th style="text-align: left;">
-                    <div class=" ">
+                    <br>
 
+                    <h1 class="head-text" style="font-weight: 400; font-size: 18px;"> Informations de paiement
+                    </h1>
+                    <br>
+                    <br>
+                    <h1 class="head-text" style="font-weight: 400;"> Le nom du compte bancaire :
+                        {{ $compte_bank_username }}
+
+                    </h1>
+                    <br>
+                    <h1 class="head-text" style="font-weight: 400;"> N° Compte : {{ $compte_bank_rib }}
+
+                    </h1>
+                    <br>
+                    <h1 class="head-text" style="font-weight: 400;"> Nom de Banque : {{ $compte_bank_name }}
+                    </h1>
+
+                </div>
+            </th>
+            <th style="text-align: left; margin-left: 20px;">
+                <div class=" margin-left">
+                    <h1 class="head-text sb-total" style="font-weight: 400; font-size: 18px;"> Total: <span
+                            class="px-stl"> {{ number_format($subtotal, 2, '.', ',') }} MAD</span>
+                    </h1>
+                    @if ($remise > 0)
                         <br>
-
-                        <h1 class="head-text" style="font-weight: 400; font-size: 18px;"> Informations de paiement
+                        <h1 class="head-text sb-total "
+                            style="text-align: left; font-weight: 400; font-size: 18px; margin-right: -10px; color: #27ae60">
+                            Remise: <span class="px-stl"> -{{ number_format($remise, 2, '.', ',') }} MAD</span>
                         </h1>
-                        <br>
-                        <br>
-                        <h1 class="head-text" style="font-weight: 400;"> Le nom du compte bancaire : {{ $compte_bank_username }}
 
-                        </h1>
                         <br>
-                        <h1 class="head-text" style="font-weight: 400;"> N° Compte : {{ $compte_bank_rib }}
-
+                    @endif
+                    <br>
+                    <h1 class="head-text sb-total" style="font-weight: 400; font-size: 18px; margin-right: -10px">
+                        TVA ({{ $tva_percentage }}%): <span class="px-stl">
+                            {{ number_format($tva, 2, '.', ',') }} MAD</span>
+                    </h1>
+                    <br>
+                    <div class="total-border">
+                        <h1 class="" style="font-weight: 600; font-size: 23px; line-height: 1;"> Total Final: <span
+                                class="">&nbsp; &nbsp; {{ number_format($TotalFinal, 2, '.', ',') }} MAD</span>
                         </h1>
-                        <br>
-                        <h1 class="head-text" style="font-weight: 400;"> Nom de Banque : {{ $compte_bank_name}}
-                        </h1>
-
                     </div>
-                </th>
-                <th style="text-align: left; margin-left: 20px;">
-                    <div class=" margin-left">
-                        <h1 class="head-text sb-total" style="font-weight: 400; font-size: 18px;"> Total: <span
-                                class="px-stl"> {{  number_format($subtotal, 2, '.', ',') }} MAD</span>
-                        </h1>
-                       @if($remise > 0)
-                        <br>
-                        <h1 class="head-text sb-total " style="text-align: left; font-weight: 400; font-size: 18px; margin-right: -10px; color: #27ae60">
-                            Remise: <span class="px-stl">  -{{  number_format($remise, 2, '.', ',') }} MAD</span>
-                        </h1>
-
-                        <br>
-                        @endif
-                        <br>
-                        <h1 class="head-text sb-total" style="font-weight: 400; font-size: 18px; margin-right: -10px">
-                            TVA ({{ $tva_percentage }}%): <span class="px-stl">  {{  number_format($tva, 2, '.', ',') }} MAD</span>
-                        </h1>
-                        <br>
-                        <div class="total-border">
-                            <h1 class="" style="font-weight: 600; font-size: 23px; line-height: 1;"> Total Final: <span
-                                    class="">&nbsp; &nbsp;  {{  number_format($TotalFinal, 2, '.', ',') }} MAD</span>
-                            </h1>
-                        </div>
-                    </div>
-                </th>
-            </tr>
-        </table>
-    </div>
-
-
-@if ($remarque != "")
-<div class="remarqe">
-    <div class="remarqe-text"><span class="" style="font-size: 13px"> {{ $remarque }}
+                </div>
+            </th>
+        </tr>
+    </table>
 </div>
+
+
+@if ($remarque != '')
+    <div class="remarqe">
+        <div class="remarqe-text"><span class="" style="font-size: 13px"> {{ $remarque }}
+        </div>
 @endif
 
-    <br>
-    <!-- Footer-->
+<br>
+</main>
+<!-- Footer-->
+<footer>
     <div class="footer">
         <div class="border-info"><span style="font-size: 13px"> PLUS D'INFORMATION</span></div>
-        <br>
-        <table style="margin-left: auto !important;
-        margin-right: auto !important; " dir="ltr" align="center">
-            <tr>
-                <th style="text-align: center;">
 
+        <small style="font-size: 13px;color: #555;line-height: 1;">ICE: {{ $ice }} - IF: {{ $if }}
+            - TP: {{ $tp }}
+            <br>
+            Adresse: Mandar Jamile, Avenue Allal Al Fassi, Rue 50 B, N° 1, 2eme Etage, N° 03 - 90070
+        </small>
 
-                    <h1 class="head-text" style="font-weight: 400; font-size: 13px; line-height: 1; color:black">
-                        ICE: {{ $ice }}
-                    </h1>
-
-                </th>
-                <th style="text-align: center;">
-
-
-                    <h1 class="head-text" style="font-weight: 400; font-size: 13px; line-height: 1; color:black">
-                        IF: {{ $if }}
-                    </h1>
-
-                </th>
-                <th style="text-align: center;">
-
-
-                    <h1 class="head-text" style="font-weight: 400; font-size: 13px; line-height: 1; color:black">
-                        TP: {{ $tp}}
-                    </h1>
-
-
-                </th>
-                <th style="text-align: center;">
-
-
-                    <h1 class="head-text" style="font-weight: 400; font-size: 13px; line-height: 1; color:black">
-                       Tel: {{ $telephone }}
-                    </h1>
-
-
-                </th>
-                <th style="text-align: center;">
-
-
-                    <h1 class="head-text" style="font-weight: 400; font-size: 13px; line-height: 1; color:black">
-                       Email: {{ $b_email }}
-                    </h1>
-
-
-                </th>
-            </tr>
-        </table>
     </div>
-    </div>
-    <br>
+</footer>
+</body>
+
+</html>

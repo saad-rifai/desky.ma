@@ -23,7 +23,7 @@
           <input
             class="uk-radio"
             type="radio"
-            value="method1"
+            value="1"
             v-model="method"
             name="radio2"
             @change="methodChange()"
@@ -38,7 +38,7 @@
           </small>
         </label>
 
-        <div v-if="method == 'method1'">
+        <div v-if="method == '1'">
           <br />
           <hr />
 
@@ -51,7 +51,7 @@
           <input
             class="uk-radio"
             id="bank_radio"
-            value="method2"
+            value="2"
             v-model="method"
             type="radio"
             name="radio2"
@@ -66,7 +66,7 @@
           </small>
         </label>
 
-        <div v-if="method == 'method2'">
+        <div v-if="method == '2'">
           <br />
           <hr />
 
@@ -209,12 +209,13 @@ export default {
   methods: {
     methodChange: function () {
       this.numberload = true
-      if (this.method == 'method1') {
+      if (this.method == '1') {
         this.service_cost = (this.amount * 3.5) / 100 + this.service_cost
+        this.service_cost = this.service_cost + (this.service_cost*20/100)
         this.total = this.amount + this.service_cost
         this.numberload = false
         $('#btn-submit').removeAttr('disabled')
-      } else if (this.method == 'method2') {
+      } else if (this.method == '2') {
         this.service_cost = 0
         this.total = this.amount
         this.numberload = false
@@ -266,7 +267,23 @@ export default {
     },
 
     paynow: function () {
-      alert('BINGA.MA')
+   $('#payment-loading').css('display', 'block')
+        $('#btn-submit').attr('disabled', 'disabled')
+
+      let data = new FormData();
+      data.append('m' , this.method);
+      data.append('OID', this.oid)
+      data.append('token', $('meta[name=csrf-token]').attr('content'))
+      axios.post('/api/v1/user/PaymentProcessing', data).then((response) => {
+          window.location.replace('/recu/'+this.oid);
+
+
+      }).catch((error) => {
+          UIkit.notification({
+        message:'حصل خطأ ما يرجى اعادة المحاولة اذا استمر المشكل معك يرجى التواصل معنا عبر support@desky.ma',
+        status: "danger",
+      });
+      })
     },
   },
   created() {

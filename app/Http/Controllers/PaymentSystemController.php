@@ -10,6 +10,9 @@ use App\Subscriptions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\MyCart;
+use App\Http\Controllers\AlgNoAuthController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\NotificationPushController;
 class PaymentSystemController extends Controller
 {
     /**
@@ -17,90 +20,106 @@ class PaymentSystemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function CheckSubscriptions(){
-         $user_email = Auth::user()->email;
-         $packs =  DB::table('subscriptions')
-         ->join('payment_systems', 'payment_systems.OID', '=', 'subscriptions.OID')
-         ->select('subscriptions.*', 'payment_systems.status','payment_systems.code')
-         ->where('email', Auth::user()->email)
-         ->where('payment_systems.buyer_email', Auth::user()->email)
-         ->get();
-         $points = 0;
-         $unlimited = NULL;
-         foreach($packs as $pack){
-             if($pack->status == 1){
-             if($pack->pack_id == 1){
-                 if($pack->type == "m"){
-                    $olddate = Carbon::parse($pack->created_at);
-                    $exdate = $olddate->addDays(31);
-                    $timenow = date("Y-m-d H:i:s");
-                    if ($timenow < $exdate) {
-                        $points = ($points + $pack->point);
+    public function CheckSubscriptions()
+    {
+        $user_email = Auth::user()->email;
+        $packs = DB::table('subscriptions')
+            ->join(
+                'payment_systems',
+                'payment_systems.OID',
+                '=',
+                'subscriptions.OID'
+            )
+            ->select(
+                'subscriptions.*',
+                'payment_systems.status',
+                'payment_systems.code'
+            )
+            ->where('email', Auth::user()->email)
+            ->where('payment_systems.buyer_email', Auth::user()->email)
+            ->get();
+        $points = 0;
+        $unlimited = null;
+        foreach ($packs as $pack) {
+            if ($pack->status == 1) {
+                if ($pack->pack_id == 1) {
+                    if ($pack->type == 'm') {
+                        $olddate = Carbon::parse($pack->created_at);
+                        $exdate = $olddate->addDays(31);
+                        $timenow = date('Y-m-d H:i:s');
+                        if ($timenow < $exdate) {
+                            $points = $points + $pack->point;
+                        }
+                    } elseif ($pack->type == 'y') {
+                        $olddate = Carbon::parse($pack->created_at);
+                        $exdate = $olddate->addDays(366);
+                        $timenow = date('Y-m-d H:i:s');
+                        if ($timenow < $exdate) {
+                            $points = $points + $pack->point;
+                        }
                     }
-                 }elseif($pack->type == "y"){
-                    $olddate = Carbon::parse($pack->created_at);
-                    $exdate = $olddate->addDays(366);
-                    $timenow = date("Y-m-d H:i:s");
-                    if ($timenow < $exdate) {
-                        $points = ($points + $pack->point);
+                } elseif ($pack->pack_id == 2) {
+                    if ($pack->type == 'm') {
+                        $olddate = Carbon::parse($pack->created_at);
+                        $exdate = $olddate->addDays(31);
+                        $timenow = date('Y-m-d H:i:s');
+                        if ($timenow < $exdate) {
+                            $points = $points + $pack->point;
+                        }
+                    } elseif ($pack->type == 'y') {
+                        $olddate = Carbon::parse($pack->created_at);
+                        $exdate = $olddate->addDays(366);
+                        $timenow = date('Y-m-d H:i:s');
+                        if ($timenow < $exdate) {
+                            $points = $points + $pack->point;
+                        }
                     }
-                 }
-             }elseif($pack->pack_id == 2){
-                if($pack->type == "m"){
-                   $olddate = Carbon::parse($pack->created_at);
-                   $exdate = $olddate->addDays(31);
-                   $timenow = date("Y-m-d H:i:s");
-                   if ($timenow < $exdate) {
-                       $points = ($points + $pack->point);
-                   }
-                }elseif($pack->type == "y"){
-                   $olddate = Carbon::parse($pack->created_at);
-                   $exdate = $olddate->addDays(366);
-                   $timenow = date("Y-m-d H:i:s");
-                   if ($timenow < $exdate) {
-                       $points = ($points + $pack->point);
-                   }
-                }
-            }elseif($pack->pack_id == 3){
-                if($pack->type == "m"){
-                   $olddate = Carbon::parse($pack->created_at);
-                   $exdate = $olddate->addDays(31);
-                   $timenow = date("Y-m-d H:i:s");
-                   if ($timenow < $exdate) {
-                       $points = ($points + $pack->point);
-                       $unlimited = true;
-
-                   }
-                }elseif($pack->type == "y"){
-                   $olddate = Carbon::parse($pack->created_at);
-                   $exdate = $olddate->addDays(366);
-                   $timenow = date("Y-m-d H:i:s");
-                   if ($timenow < $exdate) {
-                       $points = ($points + $pack->point);
-                       $unlimited = true;
-
-                   }
+                } elseif ($pack->pack_id == 3) {
+                    if ($pack->type == 'm') {
+                        $olddate = Carbon::parse($pack->created_at);
+                        $exdate = $olddate->addDays(31);
+                        $timenow = date('Y-m-d H:i:s');
+                        if ($timenow < $exdate) {
+                            $points = $points + $pack->point;
+                            $unlimited = true;
+                        }
+                    } elseif ($pack->type == 'y') {
+                        $olddate = Carbon::parse($pack->created_at);
+                        $exdate = $olddate->addDays(366);
+                        $timenow = date('Y-m-d H:i:s');
+                        if ($timenow < $exdate) {
+                            $points = $points + $pack->point;
+                            $unlimited = true;
+                        }
+                    }
                 }
             }
         }
-         }
-         return array('points' => $points, 'unlimited' => $unlimited);
-     }
+        return ['points' => $points, 'unlimited' => $unlimited];
+    }
     public function index(Request $request)
     {
-        if(isset($request->id) && isset($request->OID) && is_numeric($request->OID) && is_numeric($request->id)){
-            $stmt = MyCart::where('UID', Auth::user()->id)->where('email', Auth::user()->email)->where('OID', $request->OID)->where('status', 0)->get(['OID']);
-           foreach($stmt as $oid);
-            if(count($stmt) > 0){
+        if (
+            isset($request->id) &&
+            isset($request->OID) &&
+            is_numeric($request->OID) &&
+            is_numeric($request->id)
+        ) {
+            $stmt = MyCart::where('UID', Auth::user()->id)
+                ->where('email', Auth::user()->email)
+                ->where('OID', $request->OID)
+                ->where('status', 0)
+                ->get(['OID']);
+            foreach ($stmt as $oid);
+            if (count($stmt) > 0) {
                 $loid = json_encode($oid, true);
-               $data = json_decode($loid, true);
+                $data = json_decode($loid, true);
 
                 return view('payments', ['oid' => $data['OID']]);
-
-            }else{
+            } else {
                 abort(404);
             }
-        }else{
+        } else {
             abort(404);
         }
     }
@@ -109,26 +128,24 @@ class PaymentSystemController extends Controller
         $transaction_id = $request->id;
         $OID = $request->OID;
         $PayInfos = DB::table('payment_systems')
-        ->where('transaction_id', $transaction_id )
-        ->where('OID', '#'.$OID)
-        ->get();
+            ->where('transaction_id', $transaction_id)
+            ->where('OID', '#' . $OID)
+            ->get();
 
         $countPayInfo = $PayInfos->count();
-        if($countPayInfo > 0){
-            foreach($PayInfos as $PayInfo);
+        if ($countPayInfo > 0) {
+            foreach ($PayInfos as $PayInfo);
             $amount = $PayInfo->amount;
             $SID = $PayInfo->object;
             $nameservices = DB::table('services')
-            ->where('SID', $SID )
-            ->get();
-            foreach($nameservices as $nameservice);
+                ->where('SID', $SID)
+                ->get();
+            foreach ($nameservices as $nameservice);
             $nameservice = $nameservice->name;
-            $infosall = array($PayInfo, $nameservice);
+            $infosall = [$PayInfo, $nameservice];
             return response()->json($infosall);
-
-        }else{
+        } else {
             abort(404, 'Page not found');
-
         }
     }
     /**
@@ -140,101 +157,109 @@ class PaymentSystemController extends Controller
     {
         //
     }
-    public function bingapay(Request $request){
-        $email=$request->email;
-        $fname=$request->fname;
-        $lname=$request->lname;
-        $phone=$request->phone;
-        $amount=$request->amount;
-
-        $permitted_chars = '0123456789';
-
-function generate_string($input, $strength = 16) {
-    $input_length = strlen($input);
-    $random_string = '';
-    for($i = 0; $i < $strength; $i++) {
-        $random_character = $input[mt_rand(0, $input_length - 1)];
-        $random_string .= $random_character;
-    }
-
-    return $random_string;
-}
+    public function bingapay($email,$fname,$lname,$phone,$amount,$PID,$pack_id,$points,$type,$OID)
+    {
 
 
 
-        $externalId = generate_string($permitted_chars,13);
-        $OID = generate_string($permitted_chars,13);
-        $str = "PRE-PAY"."$amount"."401090".$externalId."$email"."21af6d8381101b46e1010cc1f11901ed14cae0b9";
+
+        $NotificationPushController = new NotificationPushController;
+
+        $externalId = $OID;
+
+        $str =
+            'PRE-PAY' .
+            "$amount" .
+            '4010' .
+            $externalId .
+            "$email" .
+            '4010653ddd7e9b8cece2779bbed423ce';
         $orderCheckSum = md5($str);
         $client = new Client([
-            'base_uri' => 'https://api.binga.ma'
+            'base_uri' => env('BINGA_TEST_API'),
         ]);
-        $d = Carbon::parse(date("Y-m-d"));
+        $d = Carbon::parse(date('Y-m-d'));
         $adddays = $d->addDays(15);
-        $date = date("Y-m-d", strtotime($adddays));
+        $date = date('Y-m-d', strtotime($adddays));
 
-        $exdate=$date."T".date("H:i:s").'GMT';
-       // $date = Carbon::parse();
+        $exdate = $date . 'T' . date('H:i:s') . 'GMT';
+        // $date = Carbon::parse();
         //$exdate = $date->addDays(15);
 
-        $response = $client->request('POST',
-            '/bingaApi/api/orders/json/pay',
-            [
-                'auth' => ['moqawala.ma', 'M0Q@wala@0621'],
-                'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
-                'form_params' => [
-                    'apiVersion' => '1.1',
-                    'externalId' => $externalId,
-                    'expirationDate' => "$exdate",
-                    'amount' => "$amount",
-                    'storeId' => '401090',
-                    'payUrl' => 'https://s.moqawala.ma/api/v1/partner/binga/notif',
-                    'buyerFirstName' => "$$fname",
-                    'buyerLastName' => "$lname",
-                    'buyerEmail' => "$email",
-                    'buyerAddress' => 'NULL',
-                    'buyerPhone' => "$phone",
-                    'orderCheckSum' => $orderCheckSum
-                ]
-
-            ]
-        );
-
-    $res = $response->getBody();
-    $someArray = json_decode($res, true);
-    $status  = $someArray['result'];
-    if($status == "success"){
-        $orderdata = $someArray['orders']['order'];
-        $r_amount = $orderdata['amount'];
-        $r_externalId = $orderdata['externalId'];
-        $r_code = $orderdata['code'];
-        $r_email = $orderdata['buyerEmail'];
-        $c_status =  $orderdata['status'];
-        $c_totalAmount =  $orderdata['totalAmount'];
-        $stmt = PaymentSystem::create([
-            'OID' => $OID,
-            'buyer_email' => $email,
-            'transaction_id' => $externalId,
-            'amount' => $amount,
-            'status' => 0,
-            'object' => '4',
-            'code' => $r_code,
-            'id_addr' => $request->ip(),
-            'method' => '1'
+        $response = $client->request('POST', '/bingaApi/api/orders/json/pay', [
+            'auth' => ['binga.ma', 'binga'],
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => [
+                'apiVersion' => '1.1',
+                'externalId' => $externalId,
+                'expirationDate' => "$exdate",
+                'amount' => "$amount",
+                'storeId' => '4010',
+                'payUrl' => 'https://s.moqawala.ma/api/v1/partner/binga/notif',
+                'buyerFirstName' => "$fname",
+                'buyerLastName' => "$lname",
+                'buyerEmail' => "$email",
+                'buyerAddress' => 'NULL',
+                'buyerPhone' => "$phone",
+                'orderCheckSum' => $orderCheckSum,
+            ],
         ]);
-        if($stmt){
-            return response("La demande numéro ".$r_code." a été créée. Vous pouvez vous rendre dans l'une des agences Wafacach pour payer en espèces Montant total:".$c_totalAmount, 200);
-        }else{
-            return response("Votre demande n'a pas pu être créée", 500);
+
+        $res = $response->getBody();
+        $someArray = json_decode($res, true);
+        $status = $someArray['result'];
+        if ($status == 'success') {
+            $orderdata = $someArray['orders']['order'];
+            $r_amount = $orderdata['amount'];
+            $r_externalId = $orderdata['externalId'];
+            $r_code = $orderdata['code'];
+            $r_email = $orderdata['buyerEmail'];
+            $c_status = $orderdata['status'];
+            $c_totalAmount = $orderdata['totalAmount'];
+            $c_frais = (intval($orderdata['totalAmount']) - intval($amount));
+            $stmt = PaymentSystem::create([
+                'OID' => $OID,
+                'buyer_email' => $email,
+                'transaction_id' => $externalId,
+                'amount' => $amount,
+                'frais' => $c_frais,
+                'status' => 0,
+                'object' => '4',
+                'code' => $r_code,
+                'id_addr' => request()->ip(),
+                'method' => '1',
+            ]);
+            if ($stmt) {
+                $subs = Subscriptions::create([
+                    'OID' => $OID,
+                    'email' => $email,
+                    'pr_name' => 'Desky',
+                    'PID' => $PID,
+                    'auto_pay' => 0,
+                    'pack_id' => $pack_id,
+                    'point' => $points,
+                    'start_at' => NULL,
+                    'type' => $type
+                    ]);
+                    if ($subs) {
+                        $subject = 'طلب رقم #'.$OID;
+                        $message = 'تم انشاء طلبك رقم #'.$OID.' يجب أن تتوجه الى أقرب وكالة وفاكاش من أجل أداء تكلفة الطلب قبل '.$exdate.' رمز الأداء (يجب أن تزود موظف وفاكاش بهذا الرقم): '.$r_code;
+                        $link = '/recu/'.$OID;
+                        $NotificationPushController->SendPush($email, 'payments@desky.ma', '0', $subject,$message,$link);
+                        return response(['sucess' => 'succes subs'], 200);
+                    } else {
+                        return response(['error' => 'error subs ' ], 400);
+                    }
+            } else {
+                return response(['error' => 'error fx0035 ' ], 400);
+            }
+
+            //return response(['Amount' => $r_amount, 'r_externalId' => $r_externalId, 'r_code' => $r_code, 'r_email' => $r_email, 'c_status' => $c_status, 'c_totalAmount'=> $c_totalAmount]);
+        } else {
+            return response()->json(['error' => 'BINGA::ERROR'], 400);
         }
-        //return response(['Amount' => $r_amount, 'r_externalId' => $r_externalId, 'r_code' => $r_code, 'r_email' => $r_email, 'c_status' => $c_status, 'c_totalAmount'=> $c_totalAmount]);
-    }else{
-
-        return $response->getBody().'<br> '.$exdate;
-    }
-
-
-
     }
     /**
      * Store a newly created resource in storage.
@@ -246,104 +271,133 @@ function generate_string($input, $strength = 16) {
     {
         //
     }
-    public function binga_notification(Request $request){
-        if(isset($request->code) && is_numeric($request->code) && is_numeric($request->externalId) && isset($request->externalId) && isset($request->expirationDate) && isset($request->amount) && isset($request->buyerEmail) && isset($request->orderCheckSum)){
-          $code = htmlspecialchars($request->code);
-          $transaction_id = htmlspecialchars($request->externalId);
-          $email = htmlspecialchars($request->buyerEmail);
-          $PayInfos = DB::table('payment_systems')
-          ->where('transaction_id', $transaction_id)
-          ->where('code', $code)
-          ->where('buyer_email', $email)
-          ->get();
-          foreach($PayInfos as $PayInfo);
-          if($PayInfos->count() > 0){
-              $amount =  $PayInfo->amount.'.00';
-
-            $str =
-            'PAY'.
-            $amount.
-            '401090'.
-            $PayInfo->transaction_id.
-            $PayInfo->buyer_email .
-            '21af6d8381101b46e1010cc1f11901ed14cae0b9';
-            $myhash = md5($str);
-
-            if($request->orderCheckSum == $myhash){
-                $stmt =  DB::table('payment_systems')
+    public function binga_notification(Request $request)
+    {
+        if (
+            isset($request->code) &&
+            is_numeric($request->code) &&
+            is_numeric($request->externalId) &&
+            isset($request->externalId) &&
+            isset($request->expirationDate) &&
+            isset($request->amount) &&
+            isset($request->buyerEmail) &&
+            isset($request->orderCheckSum)
+        ) {
+            $code = htmlspecialchars($request->code);
+            $transaction_id = htmlspecialchars($request->externalId);
+            $email = htmlspecialchars($request->buyerEmail);
+            $PayInfos = DB::table('payment_systems')
                 ->where('transaction_id', $transaction_id)
                 ->where('code', $code)
-                ->where('buyer_email', $email)->update(['status' => 1]);
-                if($stmt){
-                    $date = date("Y-m-d\TH:i:s");
-                    return response('100;'.$date)->setStatusCode(200);
+                ->where('buyer_email', $email)
+                ->get();
+            foreach ($PayInfos as $PayInfo);
+            if ($PayInfos->count() > 0) {
+                $amount = $PayInfo->amount . '.00';
+
+                $str =
+                    'PAY' .
+                    $amount .
+                    '401090' .
+                    $PayInfo->transaction_id .
+                    $PayInfo->buyer_email .
+                    '21af6d8381101b46e1010cc1f11901ed14cae0b9';
+                $myhash = md5($str);
+
+                if ($request->orderCheckSum == $myhash) {
+                    $stmt = DB::table('payment_systems')
+                        ->where('transaction_id', $transaction_id)
+                        ->where('code', $code)
+                        ->where('buyer_email', $email)
+                        ->update(['status' => 1]);
+                    if ($stmt) {
+                        $date = date('Y-m-d\TH:i:s');
+                        return response('100;' . $date)->setStatusCode(200);
+                    } else {
+                        $date = date('Y-m-d\TH:i:s');
+                        return response('000;' . $date)->setStatusCode(500);
+                    }
+                } else {
+                    $date = date('Y-m-d\TH:i:s');
+                    return response('000;' . $date)->setStatusCode(500);
+                }
+            } else {
+                $date = date('Y-m-d\TH:i:s');
+                return response('000;' . $date)->setStatusCode(500);
+            }
+        } else {
+            $date = date('Y-m-d\TH:i:s');
+            return response('000;' . $date)->setStatusCode(500);
+        }
+    }
+    public function PaymentProcessing(Request $request){
+        if(isset($request->token) && isset($request->OID) && isset($request->m) && is_numeric($request->OID) && $request->OID != "" && $request->m != "" && is_numeric($request->m) && $request->m > 0){
+            $csrf_toekn = Session::token();
+
+            if($request->token == $csrf_toekn){
+                $data = file_get_contents('database/data.json');
+                $json = json_decode($data, true);
+                if(isset($json['methods_de_paymetnts'][$request->m])){
+                    $datas = MyCart::all()->where('email', Auth::user()->email)->where('UID', Auth::user()->id)->where('OID', $request->OID);
+                    if($datas->count() > 0){
+                        $checkPaymetsTabel = PaymentSystem::where('buyer_email', Auth::user()->email)->where('OID', $request->OID)->get(['OID']);
+                        if(count($checkPaymetsTabel) > 0){
+                            return response()->json(['success' => 'طلبك تم انشائه بالفعل'], 200);
+
+                        }else{
+                            if($request->m == "1"){
+                                foreach($datas as $data);
+                                if(isset($json['_'.$data->P_ID]['packs'][$data->PK_ID]) ){
+                                    $PID = $data->P_ID;
+                                    $pack_id = $data->PK_ID;
+                                    $type = $data->type;
+                                    $OID = $request->OID;
+                                    if($data->type == "m"){
+                                     $amount =   $json['_'.$data->P_ID]['packs'][$data->PK_ID]['price'];
+                                     $points =  $json['_'.$data->P_ID]['packs'][$data->PK_ID]['points'];
+                                     $bingaPay = $this->bingapay(Auth::user()->email, Auth::user()->fname, Auth::user()->lname, Auth::user()->phonenumb, $amount,$PID,$pack_id,$points,$type,$OID);
+                                    }elseif($data->type == "y"){
+                                        $points =  (intval($json['_'.$data->P_ID]['packs'][$data->PK_ID]['points']) * 12);
+
+                                      $amount =  $json['_'.$data->P_ID]['packs'][$data->PK_ID]['price_year'];
+                                      $bingaPay = $this->bingapay(Auth::user()->email, Auth::user()->fname, Auth::user()->lname, Auth::user()->phonenumb, $amount,$PID,$pack_id,$points,$type,$OID);
+
+                                    }else{
+                                        return response()->json(['error' => 'تعذر انشاء الطلب fx00457']);
+                                    }
+
+                                    if(isset($bingaPay) && $bingaPay){
+                                   return response()->json(['success' => 'تم انشاء الطلب بنجاح'], 200);
+                                   }else{
+                                        return response()->json(['error' => 'فشل انشاء الطلب fx00332']);
+                                    }
+                                }else{
+                                    return response()->json(['error' => 'فشل انشاء الطلب fx00336']);
+
+                                }
+
+                            }elseif($request->m == "2"){
+                                return response()->json(['CFG']);
+                            }
+                        }
+                       // return response()->json(['success' => 'Votre demande a été créée'], 200);
+                    }else{
+                        return response()->json(['error' => 'فشل انشاء طلبك يرجى اعادة المحاولة'], 400);
+
+                    }
                 }else{
-                    $date = date("Y-m-d\TH:i:s");
-                    return response('000;'.$date)->setStatusCode(500);
+                    return response()->json(['error' => 'طريقة الدفع غير مدعومة !'], 400);
+
                 }
 
             }else{
-                $date = date("Y-m-d\TH:i:s");
-                return response('000;'.$date)->setStatusCode(500);
+                return response()->json(['error' => 'لم يتم الترخيص لهذا الطلب Token'], 401);
+
             }
-
-
-
-          }else{
-            $date = date("Y-m-d\TH:i:s");
-            return response('000;'.$date)->setStatusCode(500);
-          }
-
-
         }else{
-            $date = date("Y-m-d\TH:i:s");
-            return response('000;'.$date)->setStatusCode(500);
-
+          return response()->json(['error' => 'طلب خاطئ'], 400);
         }
-
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\PaymentSystem  $paymentSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PaymentSystem $paymentSystem)
-    {
-        //
+        /*if(isset($request->OID))*/
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PaymentSystem  $paymentSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PaymentSystem $paymentSystem)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PaymentSystem  $paymentSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PaymentSystem $paymentSystem)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\PaymentSystem  $paymentSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PaymentSystem $paymentSystem)
-    {
-        //
-    }
 }

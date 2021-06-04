@@ -24,8 +24,8 @@ $jsondatas = json_decode($datajson, true);
 $timenow = date("Y-m-d");
 if($info->type == "m"){
     $time_payments = 'شهر';
-    $points = $jsondatas['packs'][$pack_id]['points'];
-    $price = $jsondatas['packs'][$pack_id]['price'];
+    $points = $jsondatas['_2147845']['packs'][$pack_id]['points'];
+    $price = $jsondatas['_2147845']['packs'][$pack_id]['price'];
     $olddate = Carbon::parse($info->created_at);
      $exdate = $olddate->addDays(31);
      $exdate = date("Y-m-d", strtotime($exdate));
@@ -33,9 +33,9 @@ if($info->type == "m"){
 
 }elseif ($info->type == "y") {
     $time_payments = 'سنة';
-    $points = $jsondatas['packs'][$pack_id]['points'];
+    $points = $jsondatas['_2147845']['packs'][$pack_id]['points'];
     $points = intval($points)*12;
-    $price = $jsondatas['packs'][$pack_id]['price_year'];
+    $price = $jsondatas['_2147845']['packs'][$pack_id]['price_year'];
     $olddate = Carbon::parse($info->created_at);
      $exdate = $olddate->addDays(366);
      $exdate = date("Y-m-d", strtotime($exdate));

@@ -23,7 +23,8 @@
     },
     "methods_de_paymetnts":{
         "0": "Manuellement",
-        "1": "binga"
+        "1": "binga",
+        "2": "transfert bancaire"
     },
     "properties":{
         "GC": "Gestion des clients",
