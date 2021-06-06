@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Cookie;
 
 class Authenticate extends Middleware
 {
@@ -15,7 +16,10 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return 'login';
+            $url = str_replace('/','-', $_SERVER['REQUEST_URI']);
+           $str = '79354128'.'ref'.$url.'15'.'login';
+           $Token = md5($str);
+            return 'http://account.'.env('APP_URL').'/setusercookie/'.$Token.'/79354128/ref/'.$url.'/15/login';
         }
     }
 }

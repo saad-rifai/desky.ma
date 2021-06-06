@@ -42,8 +42,15 @@ class MyCartController extends Controller
 
                 ]);
                 if($stmt){
-                    Cookie::queue('cart_id', $cookie_id, '720');
-                    return redirect('http://account.' . env('APP_URL').'/register?CallCookie&t='.$request->token.'&oid='.$OID.'&s='.$cookie_id);
+                 //   Cookie::queue('cart_id', $cookie_id, '720');
+                 //$redirect = '/pay/'.Auth::user()->id.'/'.$OID;
+
+
+                //    $url = str_replace('/','-', $OID);
+                    $str = '79354128'.'cart_id'.$OID.'15'.'register';
+                    $Token = md5($str);
+                     return redirect('http://account.'.env('APP_URL').'/setusercookie/'.$Token.'/79354128/cart_id/'.$OID.'/15/register');
+                  //  return redirect('http://account.' . env('APP_URL').'/register?CallCookie&t='.$request->token.'&oid='.$OID.'&s='.$cookie_id);
 
                 }else{
                     return abort(500);

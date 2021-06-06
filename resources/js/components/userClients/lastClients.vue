@@ -26,7 +26,14 @@
             </button>
           </td>
         </tr>
-
+        <tr v-if="infos.length < 1">
+            <td colspan="4">
+                    <p class="nodatamessage uk-text-center">
+                      <i class="fas fa-info-circle"></i>
+                      لايوجد بيانات لعرضها
+                    </p>
+            </td>
+        </tr>
       </tbody>
     </table>
   </div>

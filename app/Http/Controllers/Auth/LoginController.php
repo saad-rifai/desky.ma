@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\MyCart;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Cookie;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Cookie;
 class LoginController extends Controller
 {
     /*
@@ -71,11 +72,37 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $status = Auth::user()->status;
             if($status == "0"){
-                if($request->ref){
-                    return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'&ref='.$request->ref);
+                $cart_id = Cookie::get('cart_id');
+                if($cart_id != ""){
+                    $OID = Cookie::get('cart_id');
+                    $check = MyCart::where('OID', $OID)->where('status', 0)->get(['OID']);
+                    if(count($check) > 0){
+                        $stmt = MyCart::where('OID', $OID)->where('status', 0)->update([
+                            'UID' => Auth::user()->id,
+                            'email' => Auth::user()->email
+                        ]);
+                        if($stmt){
+                            Cookie::queue(
+                                Cookie::forget('cart_id')
+                            );
+                            return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'&ref=/pay/'.Auth::user()->id.'/'.$OID);
+                        }else{
+                            return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'');
+
+                        }
+                    }else{
+                        return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'');
+
+                    }
                 }else{
-                   return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'');
+                    if(Cookie::get('ref')){
+                        $ref = str_replace('-','/',Cookie::get('ref'));
+                        return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'&ref='.$ref);
+                    }else{
+                       return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'');
+                    }
                 }
+
 
         }else{
             $token = $request->_token;

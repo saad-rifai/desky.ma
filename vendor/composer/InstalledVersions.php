@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '0fb61b92c443e7150b74b0f60721f42fee81bef5',
+    'reference' => '61cefe1a9b064c8e3ccae288ca6feb9e29765f35',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -97,6 +97,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'e438e9c37ce7a6ce2c74422decc4e386e4a60e5e',
+    ),
+    'composer/ca-bundle' => 
+    array (
+      'pretty_version' => '1.2.9',
+      'version' => '1.2.9.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '78a0e288fdcebf92aa2318a8d3656168da6ac1a5',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -246,6 +255,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'a8ccedc7ca95189ead0e407c43b530dc17791d6a',
+    ),
+    'geoip2/geoip2' => 
+    array (
+      'pretty_version' => 'v2.11.0',
+      'version' => '2.11.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd01be5894a5c1a3381c58c9b1795cd07f96c30f7',
     ),
     'google/recaptcha' => 
     array (
@@ -527,7 +545,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '0fb61b92c443e7150b74b0f60721f42fee81bef5',
+      'reference' => '61cefe1a9b064c8e3ccae288ca6feb9e29765f35',
     ),
     'laravel/tinker' => 
     array (
@@ -618,6 +636,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '6d51ee9e94cff14412783785e79a4e7ef97b9d62',
+    ),
+    'maxmind-db/reader' => 
+    array (
+      'pretty_version' => 'v1.10.1',
+      'version' => '1.10.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '569bd44d97d30a4ec12c7793a33004a76d4caf18',
+    ),
+    'maxmind/web-service-common' => 
+    array (
+      'pretty_version' => 'v0.8.1',
+      'version' => '0.8.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '32f274051c543fc865e5a84d3a2c703913641ea8',
     ),
     'mews/captcha' => 
     array (
@@ -1142,6 +1178,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
+    ),
+    'stevebauman/location' => 
+    array (
+      'pretty_version' => 'v6.1.0',
+      'version' => '6.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7f5085f23612aec628507c83c0913cc1d5ba8bdb',
     ),
     'swiftmailer/swiftmailer' => 
     array (

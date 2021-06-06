@@ -95,7 +95,7 @@ if($points != "unlimited"){
          @if($info->type == "m")
           تم استهلاك {{$consumption}} نقاط من {{$points}} نقطة
           @else
-              استهلاكك غير محدود
+          تم استهلاك {{$consumption}} نقاط من {{$points}} نقطة
           @endif
         </p>
             <p> الرصيد المتبقي @php if(is_numeric($consumption)){echo ($points-$consumption); }else{ echo 'غير محدود'; } @endphp</p>

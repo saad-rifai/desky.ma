@@ -197,7 +197,7 @@
                 </td>
               </tr>
               <tr>
-                <td>
+                <td colspan="6">
                   <div
                     v-if="pages == 0"
                     class="uk-text-center uk-position-center"

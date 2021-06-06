@@ -6,9 +6,9 @@
 <br>
 <br>
 <div id="payment-loading" class="form-loading">
-    <span class="uk-position-center">
-        <span  uk-spinner="ratio: 3"></span>
-        <p class="" dir="rtl"> جاري معالجة طلبك...</p>
+    <span class="uk-position-center uk-text-center">
+        <span class="uk-text-center"  uk-spinner="ratio: 3"></span>
+        <p class="uk-text-center" dir="rtl"> جاري معالجة طلبك...</p>
     </span>
 
 

@@ -11,7 +11,7 @@ class NotificationPushController extends Controller
         /*
          Status Notifications
          0 = Notification Not read with Sound !
-         1 = Notification Not read without Sound ! 
+         1 = Notification Not read without Sound !
          2 = Notification already read
          */
         if(isset($to) && isset($from) && isset($status) && isset($subject) && isset($message) && is_numeric($status) && $message != "" && isset($link)){
@@ -24,7 +24,7 @@ class NotificationPushController extends Controller
             'status' => $status,
             'subject' => $subject,
             'message' => $message,
-            'link' => $link, 
+            'link' => $link,
             'created_at' => $date
             ]);
             if($stmt){
@@ -39,31 +39,35 @@ class NotificationPushController extends Controller
     }
     public function apishow(Request $request){
         if($request->highlight && $request->highlight == true){
-            $editdata = [
-                'status' => 2,
-            ];
 
-            DB::table('notification_pushes')
-                ->where("to", Auth::user()->email)
-                ->where("status", 0)
-                ->orWhere("status", 1)
-                ->update($editdata);
                 $notifications = DB::table('notification_pushes')->where("to", Auth::user()->email)->orderBy('created_at', 'desc')->limit('15')->get();
-                $highlight = DB::table('notification_pushes')->where("to", Auth::user()->email)->where("status" , 0)->get()->count();
-                return response()->json([$notifications, "highlight" => $highlight], 200);
-        }else{
-            $notifications = DB::table('notification_pushes')->where("to", Auth::user()->email)->orderBy('created_at', 'desc')->limit('15')->get();
-            $highlight = DB::table('notification_pushes')->where("to", Auth::user()->email)->where("status" , 1)->orWhere("status", 0)->get()->count();
-            $soundPush = DB::table('notification_pushes')->where("to", Auth::user()->email)->where("status" , 0)->get()->count();
-            $editdata = [
-                'status' => 1,
-            ];
+                $highlight = count(DB::table('notification_pushes')->where("to", Auth::user()->email)->where("status" , 0)->orWhere('status', 1)->get());
+                $soundPush = count(DB::table('notification_pushes')->where("to", Auth::user()->email)->where("status" , 0)->get());
+                $editdata = [
+                    'status' => 2,
+                ];
 
-            DB::table('notification_pushes')
-                ->where("to", Auth::user()->email)
-                ->where("status", 0)
-                ->update($editdata);
-            return response()->json([$notifications, "highlight" => $highlight, "soundPush"=> $soundPush], 200);
+                DB::table('notification_pushes')
+                    ->where("to", Auth::user()->email)
+                    ->where("status", 0)
+                    ->orWhere("status", 1)
+                    ->update($editdata);
+                return response()->json([$notifications, "highlight" => $highlight, "soundPush"=> $soundPush], 200);
+            }else{
+
+                    $notifications = DB::table('notification_pushes')->where("to", Auth::user()->email)->orderBy('created_at', 'desc')->limit('15')->get();
+                    $highlight = count(DB::table('notification_pushes')->where("to", Auth::user()->email)->where("status" , 0)->orWhere('status', 1)->get());
+                    $soundPush = count(DB::table('notification_pushes')->where("to", Auth::user()->email)->where("status" , 0)->get());
+                    $editdata = [
+                        'status' => 1,
+                    ];
+
+                    DB::table('notification_pushes')
+                        ->where("to", Auth::user()->email)
+                        ->where("status", 0)
+                        ->orWhere("status", 1)
+                        ->update($editdata);
+                    return response()->json([$notifications, "highlight" => $highlight, "soundPush"=> $soundPush], 200);
         }
 
 

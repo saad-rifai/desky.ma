@@ -13,8 +13,9 @@
       </span>
     </button>
     <div uk-dropdown="mode: click" class="scroll" style="max-height: 470px; overflow-y: auto;">
-      <div v-if="notifications[0] && notifications[0].length > 0">
+      <div class="bell-childs" v-if="notifications[0] && notifications[0].length > 0">
         <div v-for="(val, index) in notifications[0]" :key="index">
+            <a :href="val.link" class="uk-text">
           <div class="bell-not-content ">
             <div class="bell-head uk-inline uk-flex">
               <div class="content-text-bell">
@@ -32,6 +33,7 @@
               </p>
             </div>
           </div>
+            </a>
           <hr />
         </div>
       </div>

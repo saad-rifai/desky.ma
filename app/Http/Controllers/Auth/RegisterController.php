@@ -17,7 +17,7 @@ use App\Mail\verfymail_desky;
 use Illuminate\Support\Facades\Session;
 use \Swift_SmtpTransport;
 use Swift_Mailer;
-
+use App\MyCart;
 use App\UserPrivacy;
 
 class RegisterController extends Controller
@@ -185,11 +185,11 @@ class RegisterController extends Controller
         } else {
             $status = "0";
         }
-        $ref_alg = $request->ref_alg;
+        $ref_alg = Cookie::get('ref');
         //Create a response instance
         if (isset($ref_alg)) {
-            Cookie::queue('ref_alg', $ref_alg, '5');
-            Cookie::queue('ipaddr', $clientIP, '5');
+          //  Cookie::queue('ref_alg', $ref_alg, '5');
+//Cookie::queue('ipaddr', $clientIP, '5');
         }
         $stmt = User::create([
             'fname' => $request->fname,
@@ -242,9 +242,9 @@ class RegisterController extends Controller
                     // Setup your gmail mailer
                     $backup = Mail::getSwiftMailer();
 
-                    $transport = new Swift_SmtpTransport('desky.ma', 587, 'tls');
-                    $transport->setUsername('support@desky.ma');
-                    $transport->setPassword('uGrtY8jl2jKc');
+                    $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
+                    $transport->setUsername('noreply@desky.ma');
+                    $transport->setPassword('Yg(H2)&48k!?');
                     $gmail = new Swift_Mailer($transport);
 
 
@@ -261,7 +261,7 @@ class RegisterController extends Controller
                     } catch (\Exception $e) {
                         return 'Error - ' . $e;
                     }
-                    if(Cookie::has("register_more")){
+                  /*  if(Cookie::has("register_more")){
                         $register_more = Cookie::get("register_more");
                        // return redirect($register_more.'?ref=registerform&from=controller&u='.Auth::user()->id.'&packs=true');
                        return response()->json(['token' => Session::getId(), 'ref' => $register_more], 200);
@@ -276,6 +276,38 @@ class RegisterController extends Controller
 
                           //  return redirect('/u?uid=' . Auth::user()->id . '&ref=registerform');
 
+                        }
+                    }*/
+
+                    $cart_id = Cookie::get('cart_id');
+                    if($cart_id != ""){
+                        $OID = Cookie::get('cart_id');
+                        $check = MyCart::where('OID', $OID)->where('status', 0)->get(['OID']);
+                        if(count($check) > 0){
+                            $stmt = MyCart::where('OID', $OID)->where('status', 0)->update([
+                                'UID' => Auth::user()->id,
+                                'email' => Auth::user()->email
+                            ]);
+                            if($stmt){
+                                Cookie::queue(
+                                    Cookie::forget('cart_id')
+                                );
+                                return response()->json(['token' => Session::getId(), 'ref' => '/pay/'.Auth::user()->id.'/'.$OID], 200);
+
+                            }else{
+                                return response()->json(['token' => Session::getId(), 'ref' => "u"], 200);
+
+                            }
+                        }else{
+                            return response()->json(['token' => Session::getId(), 'ref' => "u"], 200);
+
+                        }
+                    }else{
+                        if(Cookie::get('ref')){
+                            $ref = str_replace('-','/',Cookie::get('ref'));
+                            return response()->json(['token' => Session::getId(), 'ref' => $ref], 200);
+                        }else{
+                            return response()->json(['token' => Session::getId(), 'ref' => "u"], 200);
                         }
                     }
 

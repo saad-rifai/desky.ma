@@ -661,7 +661,7 @@ this.invid = responseNumber.toString().padStart(8, "0");
           this.errors.record(error.response.data)
           this.notificationchek()
           $('#form-loading').css('display', 'none')
-        }).finaly(() => {
+        }).finally(() => {
     $('#form-loading').css('display', 'none')
 
         })

@@ -33,7 +33,7 @@ class verfymail_desky extends Mailable
      */
     public function build()
     {
-        return $this->subject("تفعيل البريد الالكتروني -  Desky.ma")->from('support@desky.ma', 'desky.ma')->markdown('emails.desky.verfymail')->with('content',$this->content);
+        return $this->subject("تفعيل البريد الالكتروني -  Desky.ma")->from('noreply@desky.ma', 'desky.ma')->markdown('emails.desky.verfymail')->with('content',$this->content);
 
     }
 }

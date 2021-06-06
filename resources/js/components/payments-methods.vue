@@ -2,8 +2,8 @@
   <div>
     <div class="uk-margin">
         <label for="">الباقة:</label>
-      <select @change="CartUpdate" class="uk-select" v-model="pack_id">
-          <option v-for="(item, index) in packs" :key="index" :value="index">{{item.name}}</option>
+      <select dir="rtl" @change="CartUpdate" class="uk-select" v-model="pack_id">
+          <option v-for="(item, index) in packs" :key="index" :value="index"> {{item.name}} ({{item.points}} عرض اسعار / فاتورة)</option>
       </select>
     </div>
         <div class="uk-margin">
@@ -12,6 +12,9 @@
           <option value="m">اشتراك شهري</option>
           <option value="y">اشتراك سنوي</option>
       </select>
+    </div>
+    <div>
+        <label for=""></label>
     </div>
     <h4 class="uk-card-title uk-text-right">الدفع و الأداء</h4>
     <hr class="uk-divider-icon" />
@@ -84,10 +87,7 @@
               })
             }}
           </div>
-          <div uk-alert>
-            يجب ارسال المبلغ المطلوب الى الحساب وارسال وصل الأداء الى البريد
-            الالكتروني التالي: support@moqawala.ma من أجل معالجة طلبكم
-          </div>
+
         </div>
       </div>
     </div>

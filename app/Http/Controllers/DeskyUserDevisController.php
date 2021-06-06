@@ -337,6 +337,7 @@ class DeskyUserDevisController extends Controller
                                 $stmt = desky_user_devis::create([
                                     'OID' => $request->OID,
                                     'email' => Auth::user()->email,
+                                    'UID' => Auth::user()->id,
                                     'CID' => $countclient->CID,
                                     'items' => $request->items,
                                     'remise' => $request->remise,
@@ -364,6 +365,8 @@ class DeskyUserDevisController extends Controller
                         $stmt = desky_user_clients::create([
                             'CID' => $CID,
                             'from' => Auth::user()->email,
+                            'UID' => Auth::user()->id,
+
                             'c_email' => $request->c_email,
                             'c_name' => $request->c_name,
                             'c_phone' => $request->c_phone,
@@ -380,6 +383,7 @@ class DeskyUserDevisController extends Controller
                                 $stmt = desky_user_devis::create([
                                     'OID' => $request->OID,
                                     'email' => Auth::user()->email,
+                                    'UID' => Auth::user()->id,
                                     'CID' => $CID,
                                     'items' => $request->items,
                                     'remise' => $request->remise,

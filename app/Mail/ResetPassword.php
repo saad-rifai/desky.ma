@@ -28,6 +28,6 @@ class ResetPassword extends Mailable
      */
     public function build()
     {
-        return $this->subject("اعادة تعيين كلمة السر - منصة مقاولة")->markdown('emails.Reset_Password')->with('content',$this->content);
+        return $this->subject("اعادة تعيين كلمة السر - Desky.ma ")->markdown('emails.desky.Reset_Password')->with('content',$this->content);
     }
 }

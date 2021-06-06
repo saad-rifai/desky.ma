@@ -1,5 +1,5 @@
 @guest
-    
+
 @extends('layouts.layout')
 @section('title', 'تسجيل الدخول')
 @section('description', 'منصة مقاولة توفر لك العديد من الخدمات لمساعدتك على بدء و تطوير نشاطك التجاري')
@@ -7,6 +7,7 @@
 @section('content')
 <div  class="form-border wd-80 uk-margin-top uk-margin-bottom uk-card-default uk-padding">
     <h2 class="uk-card-title uk-text-right">تسجيل الدخول</h2>
+
     <form dir="rtl" class="uk-grid-small " action="{{ route('login') }}" method="post" uk-grid>
         @if (isset($_GET['ref']))
         <input type="hidden" name="ref" value="{{ $_GET['ref'] ?? '' }}">
@@ -64,10 +65,10 @@
 </div>
 @endsection
 
-    
+
 @else
-    
+
 @php
-  return redirect()->intended('/');  
+  return redirect()->intended('/');
 @endphp
 @endguest

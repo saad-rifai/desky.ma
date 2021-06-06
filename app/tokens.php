@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class tokens extends Model
 {
-    protected $fillable = ['token', 'UID'];
+    protected $fillable = ['token', 'UID' , 'email'];
 }

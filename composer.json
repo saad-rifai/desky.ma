@@ -22,6 +22,7 @@
         "laravel/ui": "^2.5",
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^3.2",
+        "stevebauman/location": "^6.1",
         "swiftmailer/swiftmailer": "6.0",
         "symfony/psr-http-message-bridge": "^2.1"
     },

@@ -8,6 +8,6 @@ class PaymentSystem extends Model
 {
     protected $fillable = [
 
-        'OID', 'buyer_email', 'transaction_id', 'status', 'amount', 'object', 'id_addr', 'code', 'method', 'frais'
+        'OID', 'buyer_email', 'transaction_id', 'status', 'amount', 'object', 'id_addr', 'code', 'method', 'frais', 'exDate', 'recuFile'
      ];
 }

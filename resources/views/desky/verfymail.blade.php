@@ -16,7 +16,7 @@
 @if ($succes == false)
 <div class="icon_statu"><img src="{{ URL::asset('image/icon/error.png') }}" alt=""></div>
 <h1 class="uk-card-title " dir="rtl">لقد فشل تأكيد بريدك الالكتروني يرجى اعادة المحاولة لاحقاََ</h1>
-<a href="{{ route('homepage') }}"><button class="uk-button uk-button-primary">الرئيسة</button></a>
+<a href="{{'http://'.env('APP_URL').'?Home.do&ref=email_verfy&t='}}"><button class="uk-button uk-button-primary">الرئيسة</button></a>
 
 
 @else
@@ -24,7 +24,7 @@
 @endif
 <div class="icon_statu"><img src="{{ URL::asset('image/icon/success.png') }}" alt=""></div>
 <h1 class="uk-card-title " dir="rtl">تم تأكيد بريدك الالكتروني بنجاح !</h1>
-<a href="{{ route('homepage') }}"><button class="uk-button uk-button-primary">الرئيسة</button></a>
+<a href="{{'http://'.env('APP_URL').'?Home.do&ref=email_verfy&t='}}"><button class="uk-button uk-button-primary">الرئيسة</button></a>
 </div>
 
 

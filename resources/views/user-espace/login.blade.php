@@ -7,7 +7,9 @@
 @section('ogimage', asset('image/moqawala.ma.jpg'))
 @section('content')
 <div  class="form-border wd-80 uk-margin-top uk-margin-bottom uk-card-default uk-padding">
-    <h2 class="uk-card-title uk-text-right">تسجيل الدخول</h2>
+    <h2 class="uk-card-title uk-text-right">تسجيل الدخول </h2>
+    <hr class="uk-divider-icon">
+
     <form dir="rtl" class="uk-grid-small " action="{{ asset("/auth/login")}}" method="post" uk-grid>
         <input type="hidden" name="ref" value="{{ $_GET['ref'] ?? '' }}">
 
@@ -21,9 +23,15 @@
         <p>{!! \Session::get('error') !!}</p>
     </div>
 @endif
+@if (\Session::has('password_update'))
 
+    <div class="uk-alert-success" uk-alert>
+        <p>{!! \Session::get('password_update') !!}</p>
+    </div>
+@endif
 </div>
         <div class="uk-width-1-1@s">
+
             <label class="uk-form-label" for="">البريد الالكتروني </label>
             <div class="uk-form-controls">
             <input class="uk-input @error('email') uk-form-danger @enderror" type="text" name="email"  required placeholder="أدخل البريد الالكتروني الخاص بك">

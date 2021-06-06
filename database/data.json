@@ -1,4 +1,12 @@
 {
+    "NERYOU":{
+        "BANK_NAME": "CFG BANK",
+        "BANK_ACCOUNT": "NERYOU SARL",
+        "RIB": "050 640 009 01075325 720 01 78",
+        "SWIFTCODE": "CAFGMAMC",
+        "DEVIS": "MAD"
+    },
+
     "payments_status":{
         "0": {
             "ar": "في انتظار الدفع",
@@ -19,6 +27,10 @@
         "4":{
             "ar": "ملغي",
             "fr": "Annulé"
+        },
+        "5":{
+            "ar": "قيد المراجعة",
+            "fr": "en cours d'examen"
         }
     },
     "methods_de_paymetnts":{
@@ -1343,7 +1355,7 @@
             "time_payments": "شهر"
         },
         "2": {
-            "name": "الباقة الذهبية",
+            "name": "الباقة المتوسطة",
             "price": 199,
             "price_year": 1499,
             "save": 50,

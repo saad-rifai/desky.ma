@@ -375,12 +375,26 @@ input.form-captcha {
     width: 143px;
     margin-top: 5px;
 }
+.Expiry-date-badge {
+    width: 200px;
+    background-color: #fa5661;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    transform: rotate(
+318deg
+);
+    z-index: 1;
+    left: -85px;
+}
 button.user-menu-bar {
     background-color: inherit;
     color: #383838;
     height: 55px;
     overflow: hidden;
     border: none;
+    cursor: pointer;
 }
 ul.uk-breadcrumb li a {
     font-size: 75% !important;
@@ -607,8 +621,8 @@ button.uk-dropdown-menu-orange {
 }
 .user-image-box {
     position: relative;
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
     background-color: #f78b03;
     text-align: center;
     color: white;
@@ -873,6 +887,24 @@ table.uk-table.cart-info.cart-table-moqawala.uk-text-right.min-p tbody tr td {
 .uk-alert {
     z-index: 100;
 }
+.bell-childs a {
+    color: #212121 !important;
+}
+.bell-childs div:last-child > hr {
+    display: none;
+}
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+  }
+  .videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 .brand-logo-hidden {
     background-image: url('/image/partners/NERYOU-LOGO.png');
     width: 100%;
@@ -880,7 +912,7 @@ table.uk-table.cart-info.cart-table-moqawala.uk-text-right.min-p tbody tr td {
     position: absolute;
     filter: grayscale(100%);
     opacity: 0.03;
-    z-index: 1;
+    z-index: 0;
     top: 10%;
 }
 

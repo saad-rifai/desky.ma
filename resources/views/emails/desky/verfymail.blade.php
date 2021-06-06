@@ -22,7 +22,7 @@
         background-color: #efefef;
     text-align: center;
     padding: 50px 0px;">
-        <img class="logo-message-9" style="width: 100%; max-width: 220px;" src="https://desky.ma/logo-desky.png?ref=sendmail&palat=desky"
+        <img class="logo-message-9" style="width: 100%; max-width: 220px;" src="https://desky.ma/logo%20web%20png.png"
             alt="Desky.ma">
         <div class="body_mesaage" style="    text-align: right;
             text-align: right;
@@ -46,7 +46,7 @@
                     مرحبا {{ Auth::user()->fname }} !
                 </span>
                 <br>
-          
+
                 شكراََ لك للانظمام لنا رجاءا قم بتأكيد بريدك الالكتروني من خلال الضغط على الزر أسفله.
             </p>
             <a href="{{ asset('verfymail/'.Auth::user()->id.'/'.$content["token"].'') }}" target="_blank" style="   padding: 10px 25px;
@@ -55,7 +55,7 @@
             border: solid 1px #fffbf8;
             border-radius: 3px;
             font-size: 15px;
-            font-weight: 500; 
+            font-weight: 500;
 cursor: pointer;
 text-decoration: none;
 ">تفعيل الحساب</a>

@@ -278,6 +278,7 @@ $jsondata = json_decode($datajson, true);
 
                         <button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-user"></i></span> </button>
+
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
                                 <li><a href="{{ asset('u/account') }}"><span uk-icon="user"></span> حسابي </a></li>

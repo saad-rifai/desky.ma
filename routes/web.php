@@ -5,23 +5,59 @@ use App\Http\Controllers\CaptchaServiceController;
 use App\Mail\verfymail_desky;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Mail\NewOrder;
+use Illuminate\Support\Facades\Cookie;
+//ResetPassword
+
+Route::post('ResetPassword/{sendMail}', ('Auth\ResetPasswordController@ResetPassword'));
+
+//ResetPass
+Route::get('ResetPassword/{ResetPass}/{token}', ('Auth\ResetPasswordController@ResetPassword'));
+//NewPass
+Route::post('ResetPassword/{NewPass}/new/{token}', ('Auth\ResetPasswordController@ResetPassword'));
 
 // print invoice
 Route::get('print/invoice', 'pdfGeneretor@invoice');
 
+Route::group(
+    ['domain' => 'account.' . env('APP_URL')], function () {
+        Route::get('/u/account', function(){
+           return redirect()->to('http://'.env('APP_URL').'/u/account?AccountRef&Home.do');
+        });
+    });
+Route::group(
+    ['domain' => 'account.' . env('APP_URL'), 'middleware' => 'guest'],
+    function () {
+// Set Cookie In Account.domain.ma
+Route::get('/setusercookie/{token}/{random}/{name}/{content}/{time}/{redirect}', function($token,$random,$name,$content,$time,$redirect){
+    if(isset($token)){
+       $str = $random.$name.$content.$time.$redirect;
+       $checkToken = md5($str);
+       if($checkToken == $token){
+     Cookie::queue($name, $content, $time);
+    return redirect()->to($redirect);
+
+       }else{
+           abort(400);
+       }
+    }else{
+        abort(404);
+    }
+});
+    });
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
-    //AddToCart
-    Route::get(
-        'api/v1/user/AddToCart/{p_id}/{pk_id}/{token}/{type}',
-        'MyCartController@AddToCart'
-    );
-    //PaymentProcessing
-    Route::post(
-        'api/v1/user/PaymentProcessing',
-        'PaymentSystemController@PaymentProcessing'
-    );
-    //generateOrderID
+//AddToCart
+Route::get(
+    'api/v1/user/AddToCart/{p_id}/{pk_id}/{token}/{type}',
+    'MyCartController@AddToCart'
+);
+//PaymentProcessing
+Route::post(
+    'api/v1/user/PaymentProcessing',
+    'PaymentSystemController@PaymentProcessing'
+);
+//generateOrderID
 Route::get('api/v1/generateOrderID', 'DeskyAlgController@generateOrderID');
 Route::middleware(['auth'])->group(function () {
     //LastClientsList
@@ -30,9 +66,11 @@ Route::middleware(['auth'])->group(function () {
         'MyCartController@getCartInfos'
     );
     //updateCart
+    Route::post('api/v1/user/updateCart', 'MyCartController@updateCart');
+    //UploadRecu
     Route::post(
-        'api/v1/user/updateCart',
-        'MyCartController@updateCart'
+        'api/v1/payment/UploadRecu',
+        'PaymentSystemController@UploadRecu'
     );
     Route::post(
         'api/v1/user/LastClientsList',
@@ -169,7 +207,7 @@ Route::group(
             }
         });
         Route::get('reset_password', function () {
-            return view('user-espace/reset_password');
+            return view('user-espace.reset_password');
         });
     }
 );
@@ -219,9 +257,7 @@ Route::group(['domain' => env('APP_URL')], function () {
 
     /* Auth Routes */
     Route::middleware(['auth'])->group(function () {
-        Route::get('/recu/{OID}', function () {
-            return view('desky.invoice');
-        });
+        Route::get('/recu/{OID}', 'PaymentSystemController@RecuShow');
         Route::get('/creer/client', function () {
             return view('desky.panel.clients.c-client');
         });
@@ -332,10 +368,8 @@ Route::group(['domain' => env('APP_URL')], function () {
         });
 
         Route::get('/register', function () {
-            return redirect('http://account.' . env('APP_URL').'/register');
+            return redirect('http://account.' . env('APP_URL') . '/register');
         });
-
-
     });
     /* Guest Routes  */
 });
@@ -343,20 +377,23 @@ Route::group(['domain' => env('APP_URL')], function () {
 /* SUBDEOMAINS */
 
 Route::any('dev_test', function () {
-    $str =
+    /* $str =
         'PAY' .
         '400.00' .
         '4010' .
         '8957780501535' .
         'rifaisaad3@gmail.com' .
         '4010653ddd7e9b8cece2779bbed423ce';
-    $hash = md5($str);
-    //return $hash;
-    $str = date('ymdh').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 9);
+*/
+$str = '2357854'.'ref'.'dev_test'.'60'.'login';
+   //$hash = md5($str);
+ //return $hash;
+    //    $str = date('ymdh').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 9);
 
- echo $str;
-    //return date("Y-m-d\TH:i:s");
-    //  return var_dump(validateDate('2020-03-12'));
+    $ip = request()->ip();
+    $ipdata = \Location::get($ip);
+    print_r($ipdata);
+
 });
 
 Route::any('verfymail', function () {
