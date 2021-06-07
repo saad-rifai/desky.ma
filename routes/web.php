@@ -80,6 +80,10 @@ Route::middleware(['auth'])->group(function () {
         'api/v1/user/statistiques/general/{json}/{year}',
         'UserStatiquesController@UserStatistiquesGeneral'
     );
+    Route::get(
+        'api/v1/user/statistiques/general/{json}/{year}/line',
+        'UserStatiquesController@UserStatistiquesGeneralLine'
+    );
     Route::post(
         'api/v1/user/statistiques/ventes/{json}/{year}',
         'UserStatiquesController@UserStatistiquesVentesAnnuel'
@@ -259,7 +263,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::middleware(['auth'])->group(function () {
         //statistique
         Route::get('/statistique/annee', function () {
-            return view('desky.user-espace.statistique-de-annee');
+            return view('desky.panel.statistics.statistique-de-annee');
         });
         Route::get('/recu/{OID}', 'PaymentSystemController@RecuShow');
         Route::get('/creer/client', function () {
@@ -381,15 +385,16 @@ Route::group(['domain' => env('APP_URL')], function () {
 /* SUBDEOMAINS */
 
 Route::any('dev_test', function () {
-    /* $str =
+    $str =
         'PAY' .
-        '400.00' .
-        '4010' .
-        '8957780501535' .
+        '10.00' .
+        '401090' .
+        '21060701985554100' .
         'rifaisaad3@gmail.com' .
-        '4010653ddd7e9b8cece2779bbed423ce';
-*/
-$str = '2357854'.'ref'.'dev_test'.'60'.'login';
+        '21af6d8381101b46e1010cc1f11901ed14cae0b9';
+return md5($str);
+
+//$str = '2357854'.'ref'.'dev_test'.'60'.'login';
    //$hash = md5($str);
  //return $hash;
     //    $str = date('ymdh').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 9);
@@ -397,7 +402,7 @@ $str = '2357854'.'ref'.'dev_test'.'60'.'login';
     /*$ip = request()->ip();
     $ipdata = \Location::get($ip);
     print_r($ipdata);*/
-    return PDF::loadView('desky.models.reports.sales', array('enable_remote' => true))->setPaper('A4', 'portrait')->stream('DEVIS-.pdf');
+   // return PDF::loadView('desky.models.reports.sales', array('enable_remote' => true))->setPaper('A4', 'portrait')->stream('DEVIS-.pdf');
 
   //  return view('desky.models.reports.sales');
 

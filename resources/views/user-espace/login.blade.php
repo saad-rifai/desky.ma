@@ -57,7 +57,7 @@
         <div class="uk-width-1-1">
 
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label><input class="uk-checkbox" type="checkbox"> تذكرني</label>
+                <label><input class="uk-checkbox" name="remember" id="remember" type="checkbox"> تذكرني</label>
             </div>
         </div>
         <div class="uk-width-1-1@s">

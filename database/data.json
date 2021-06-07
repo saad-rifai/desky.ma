@@ -1337,7 +1337,7 @@
     "packs": {
         "1": {
             "name": "الباقة الابتدائية",
-            "price": 99,
+            "price": 10,
             "price_year": 899,
             "most": false,
             "save": 50,

@@ -69,7 +69,7 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $status = Auth::user()->status;
             if($status == "0"){
                 $cart_id = Cookie::get('cart_id');

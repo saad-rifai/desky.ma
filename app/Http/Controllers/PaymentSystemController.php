@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewOrder;
 use Swift_SmtpTransport;
 use Swift_Mailer;
+use App\Mail\SuccessPayments;
 class PaymentSystemController extends Controller
 {
-
     public function CheckSubscriptions()
     {
         $user_email = Auth::user()->email;
@@ -168,13 +168,13 @@ class PaymentSystemController extends Controller
         $str =
             'PRE-PAY' .
             "$amount" .
-            '4010' .
+            '401090' .
             $externalId .
             "$email" .
-            '4010653ddd7e9b8cece2779bbed423ce';
+            '21af6d8381101b46e1010cc1f11901ed14cae0b9';
         $orderCheckSum = md5($str);
         $client = new Client([
-            'base_uri' => env('BINGA_TEST_API'),
+            'base_uri' => env('BINGA_PD_API'),
         ]);
         $d = Carbon::parse(date('Y-m-d'));
         $adddays = $d->addDays(15);
@@ -184,8 +184,8 @@ class PaymentSystemController extends Controller
         // $date = Carbon::parse();
         //$exdate = $date->addDays(15);
 
-        $response = $client->request('POST', '/bingaApi/api/orders/json/pay', [
-            'auth' => ['binga.ma', 'binga'],
+        $response = $client->request('POST', env('BINGA_CREATE_COMMANDE_API'), [
+            'auth' => ['moqawala.ma', 'M0Q@wala@0621'],
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
@@ -194,7 +194,7 @@ class PaymentSystemController extends Controller
                 'externalId' => $externalId,
                 'expirationDate' => "$exdate",
                 'amount' => "$amount",
-                'storeId' => '4010',
+                'storeId' => '401090',
                 'payUrl' => 'https://s.moqawala.ma/api/v1/partner/binga/notif',
                 'buyerFirstName' => "$fname",
                 'buyerLastName' => "$lname",
@@ -217,7 +217,10 @@ class PaymentSystemController extends Controller
             $c_status = $orderdata['status'];
             $c_totalAmount = $orderdata['totalAmount'];
             $c_frais = intval($orderdata['totalAmount']) - intval($amount);
-            $r_expirationDate = date("Y-m-d H:i:s" ,strtotime($orderdata['expirationDate']));
+            $r_expirationDate = date(
+                'Y-m-d H:i:s',
+                strtotime($orderdata['expirationDate'])
+            );
             $stmt = PaymentSystem::create([
                 'OID' => $OID,
                 'buyer_email' => $email,
@@ -229,7 +232,7 @@ class PaymentSystemController extends Controller
                 'code' => $r_code,
                 'id_addr' => request()->ip(),
                 'method' => '1',
-                'exDate' => $r_expirationDate
+                'exDate' => $r_expirationDate,
             ]);
             if ($stmt) {
                 $subs = Subscriptions::create([
@@ -297,7 +300,7 @@ class PaymentSystemController extends Controller
                 ->get();
             foreach ($PayInfos as $PayInfo);
             if ($PayInfos->count() > 0) {
-                $amount = $PayInfo->amount . '.00';
+                $amount = $PayInfo->amount;
 
                 $str =
                     'PAY' .
@@ -314,9 +317,59 @@ class PaymentSystemController extends Controller
                         ->where('code', $code)
                         ->where('buyer_email', $email)
                         ->update(['status' => 1]);
+
                     if ($stmt) {
                         $date = date('Y-m-d\TH:i:s');
                         return response('100;' . $date)->setStatusCode(200);
+
+                        //Send Notification
+                      /*  $NotificationPushController = new NotificationPushController();
+                        $subject = '! تم تفعيل باقتك';
+                        $message =
+                            'مرحبا نعلمك بأنه قد تلقينا دفعتك وقد تم تفعيل باقتك, طلب رقم ' .
+                            $transaction_id .
+                            '';
+                        $link = '/recu/' . $transaction_id;
+                        $NotificationPushController->SendPush(
+                            $email,
+                            'sales@desky.ma',
+                            '0',
+                            $subject,
+                            $message,
+                            $link
+                        );
+
+                        //SendMail
+
+                        // Do
+                        $backup = Mail::getSwiftMailer();
+
+                        $transport = new Swift_SmtpTransport(
+                            'desky.ma',
+                            465,
+                            'ssl'
+                        );
+                        $transport->setUsername('info@desky.ma');
+                        $transport->setPassword('C^CjgA9(XVbC');
+                        $gmail = new Swift_Mailer($transport);
+
+                        // Set the mailer as gmail
+                        Mail::setSwiftMailer($gmail);
+
+                        // Set the mailer as gmail
+                        Mail::setSwiftMailer($gmail);
+                        $valueArray = [
+                            'OID' => "$transaction_id",
+                            'amount' => "$amount",
+                        ];
+
+                        try {
+                            Mail::to($email)->send(
+                                new SuccessPayments($valueArray)
+                            );
+                            //return 'Mail send successfully';
+                        } catch (\Exception $e) {
+                        }*/
                     } else {
                         $date = date('Y-m-d\TH:i:s');
                         return response('000;' . $date)->setStatusCode(500);
@@ -371,7 +424,13 @@ class PaymentSystemController extends Controller
                         } else {
                             if ($request->m == '1') {
                                 foreach ($datas as $data);
-                                if (isset($json['_' . $data->P_ID]['packs'][$data->PK_ID])) {
+                                if (
+                                    isset(
+                                        $json['_' . $data->P_ID]['packs'][
+                                            $data->PK_ID
+                                        ]
+                                    )
+                                ) {
                                     $PID = $data->P_ID;
                                     $pack_id = $data->PK_ID;
                                     $type = $data->type;
@@ -448,14 +507,14 @@ class PaymentSystemController extends Controller
                                     ]);
                                 }
                             } elseif ($request->m == '2') {
-
-
-
-
-
-
                                 foreach ($datas as $data);
-                                if (isset($json['_' . $data->P_ID]['packs'][$data->PK_ID])) {
+                                if (
+                                    isset(
+                                        $json['_' . $data->P_ID]['packs'][
+                                            $data->PK_ID
+                                        ]
+                                    )
+                                ) {
                                     $PID = $data->P_ID;
                                     $pack_id = $data->PK_ID;
                                     $type = $data->type;
@@ -472,22 +531,25 @@ class PaymentSystemController extends Controller
 
                                         $d = Carbon::parse(date('Y-m-d h:i:s'));
                                         $adddays = $d->addDays(15);
-                                        $exDate = date('Y-m-d h:i:s', strtotime($adddays));
+                                        $exDate = date(
+                                            'Y-m-d h:i:s',
+                                            strtotime($adddays)
+                                        );
                                         $stmt = PaymentSystem::create([
                                             'OID' => $OID,
                                             'transaction_id' => $OID,
-                                            'buyer_email' => Auth::user()->email,
+                                            'buyer_email' => Auth::user()
+                                                ->email,
                                             'amount' => $amount,
                                             'frais' => 0,
                                             'status' => 0,
                                             'object' => 4,
-                                            'code' => NULL,
+                                            'code' => null,
                                             'id_addr' => request()->ip(),
                                             'method' => '2',
-                                            'exDate' =>$exDate
-
+                                            'exDate' => $exDate,
                                         ]);
-                                        if($stmt){
+                                        if ($stmt) {
                                             $subs = Subscriptions::create([
                                                 'OID' => $OID,
                                                 'email' => Auth::user()->email,
@@ -499,8 +561,7 @@ class PaymentSystemController extends Controller
                                                 'start_at' => null,
                                                 'type' => $type,
                                             ]);
-
-                                        }else{
+                                        } else {
                                             return response()->json([
                                                 'error' =>
                                                     'تعذر انشاء الطلب fx00490',
@@ -518,41 +579,44 @@ class PaymentSystemController extends Controller
                                             $json['_' . $data->P_ID]['packs'][
                                                 $data->PK_ID
                                             ]['price_year'];
-                                            $d = Carbon::parse(date('Y-m-d h:i:s'));
-                                            $adddays = $d->addDays(15);
-                                            $exDate = date('Y-m-d h:i:s', strtotime($adddays));
-                                            $stmt = PaymentSystem::create([
+                                        $d = Carbon::parse(date('Y-m-d h:i:s'));
+                                        $adddays = $d->addDays(15);
+                                        $exDate = date(
+                                            'Y-m-d h:i:s',
+                                            strtotime($adddays)
+                                        );
+                                        $stmt = PaymentSystem::create([
+                                            'OID' => $OID,
+                                            'transaction_id' => $OID,
+                                            'buyer_email' => Auth::user()
+                                                ->email,
+                                            'amount' => $amount,
+                                            'frais' => 0,
+                                            'status' => 0,
+                                            'object' => 4,
+                                            'code' => null,
+                                            'id_addr' => request()->ip(),
+                                            'method' => '2',
+                                            'exDate' => $exDate,
+                                        ]);
+                                        if ($stmt) {
+                                            $subs = Subscriptions::create([
                                                 'OID' => $OID,
-                                                'transaction_id' => $OID,
-                                                'buyer_email' => Auth::user()->email,
-                                                'amount' => $amount,
-                                                'frais' => 0,
-                                                'status' => 0,
-                                                'object' => 4,
-                                                'code' => NULL,
-                                                'id_addr' => request()->ip(),
-                                                'method' => '2',
-                                                'exDate' =>$exDate
-
+                                                'email' => Auth::user()->email,
+                                                'pr_name' => 'Desky',
+                                                'PID' => $PID,
+                                                'auto_pay' => 0,
+                                                'pack_id' => $pack_id,
+                                                'point' => $points,
+                                                'start_at' => null,
+                                                'type' => $type,
                                             ]);
-                                            if($stmt){
-                                                $subs = Subscriptions::create([
-                                                    'OID' => $OID,
-                                                    'email' => Auth::user()->email,
-                                                    'pr_name' => 'Desky',
-                                                    'PID' => $PID,
-                                                    'auto_pay' => 0,
-                                                    'pack_id' => $pack_id,
-                                                    'point' => $points,
-                                                    'start_at' => null,
-                                                    'type' => $type,
-                                                ]);
-                                            }else{
-                                                return response()->json([
-                                                    'error' =>
-                                                        'تعذر انشاء الطلب fx00490',
-                                                ]);
-                                            }
+                                        } else {
+                                            return response()->json([
+                                                'error' =>
+                                                    'تعذر انشاء الطلب fx00490',
+                                            ]);
+                                        }
                                     } else {
                                         return response()->json([
                                             'error' =>
@@ -580,8 +644,14 @@ class PaymentSystemController extends Controller
                                         // Do
                                         $backup = Mail::getSwiftMailer();
 
-                                        $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
-                                        $transport->setUsername('info@desky.ma');
+                                        $transport = new Swift_SmtpTransport(
+                                            'desky.ma',
+                                            465,
+                                            'ssl'
+                                        );
+                                        $transport->setUsername(
+                                            'info@desky.ma'
+                                        );
                                         $transport->setPassword('C^CjgA9(XVbC');
                                         $gmail = new Swift_Mailer($transport);
 
@@ -594,16 +664,17 @@ class PaymentSystemController extends Controller
                                             'OID' => "$OID",
                                             'method' => '2',
                                             'amount' => "$amount",
-                                            'frais' => "0.00",
+                                            'frais' => '0.00',
                                             'total' => "$amount",
-                                            'exDate' => "$exDate"
+                                            'exDate' => "$exDate",
                                         ];
 
                                         try {
-                                            Mail::to(Auth::user()->email)->send(new NewOrder($valueArray));
+                                            Mail::to(Auth::user()->email)->send(
+                                                new NewOrder($valueArray)
+                                            );
                                             //return 'Mail send successfully';
-                                        }catch (\Exception $e) {
-
+                                        } catch (\Exception $e) {
                                         }
 
                                         return response()->json(
@@ -623,12 +694,7 @@ class PaymentSystemController extends Controller
                                     return response()->json([
                                         'error' => 'فشل انشاء الطلب fx00336',
                                     ]);
-
-
-                                    }
-
-
-
+                                }
                             }
                         }
                         // return response()->json(['success' => 'Votre demande a été créée'], 200);
@@ -655,84 +721,131 @@ class PaymentSystemController extends Controller
         }
         /*if(isset($request->OID))*/
     }
-    public function RecuShow(Request $request){
-        if(isset($request->OID) && is_numeric($request->OID)){
+    public function RecuShow(Request $request)
+    {
+        if (isset($request->OID) && is_numeric($request->OID)) {
             $email = Auth::user()->email;
             $infos = DB::table('subscriptions')
-            ->join(
-                'payment_systems',
-                'payment_systems.OID',
-                '=',
-                'subscriptions.OID'
-            )
-            ->select(
-                'subscriptions.PID',
-                'subscriptions.pack_id',
-                'subscriptions.email',
-                'subscriptions.type',
-                'payment_systems.*'
-            )
-            ->where('subscriptions.email', Auth::user()->email)
-            ->where('payment_systems.buyer_email', Auth::user()->email)
-            ->where('payment_systems.OID', $request->OID)
-            ->get();
+                ->join(
+                    'payment_systems',
+                    'payment_systems.OID',
+                    '=',
+                    'subscriptions.OID'
+                )
+                ->select(
+                    'subscriptions.PID',
+                    'subscriptions.pack_id',
+                    'subscriptions.email',
+                    'subscriptions.type',
+                    'payment_systems.*'
+                )
+                ->where('subscriptions.email', Auth::user()->email)
+                ->where('payment_systems.buyer_email', Auth::user()->email)
+                ->where('payment_systems.OID', $request->OID)
+                ->get();
 
-            if(count($infos) > 0){
-                foreach($infos as $info);
-            if($info->method == "1"){
-                return view('desky.invoice', ['OID' => $request->OID, 'CODE' => $info->code, 'method' => '1', 'PID' => $info->PID, 'pack_id' => $info->pack_id, 'type' => $info->type, 'amount' => $info->amount, 'frais' => $info->frais, 'status' => $info->status, 'exDate' => $info->exDate ]);
-
-            }elseif($info->method == "2"){
-                return view('desky.invoice', ['OID' => $request->OID, 'transaction_id' => $info->transaction_id, 'method' => '2', 'PID' => $info->PID, 'pack_id' => $info->pack_id, 'type' => $info->type, 'amount' => $info->amount, 'frais' => $info->frais, 'status' => $info->status, 'exDate' => $info->exDate ]);
-
-            }else{
-                abort(500);
-            }
-            }else{
+            if (count($infos) > 0) {
+                foreach ($infos as $info);
+                if ($info->method == '1') {
+                    return view('desky.invoice', [
+                        'OID' => $request->OID,
+                        'CODE' => $info->code,
+                        'method' => '1',
+                        'PID' => $info->PID,
+                        'pack_id' => $info->pack_id,
+                        'type' => $info->type,
+                        'amount' => $info->amount,
+                        'frais' => $info->frais,
+                        'status' => $info->status,
+                        'exDate' => $info->exDate,
+                    ]);
+                } elseif ($info->method == '2') {
+                    return view('desky.invoice', [
+                        'OID' => $request->OID,
+                        'transaction_id' => $info->transaction_id,
+                        'method' => '2',
+                        'PID' => $info->PID,
+                        'pack_id' => $info->pack_id,
+                        'type' => $info->type,
+                        'amount' => $info->amount,
+                        'frais' => $info->frais,
+                        'status' => $info->status,
+                        'exDate' => $info->exDate,
+                    ]);
+                } else {
+                    abort(500);
+                }
+            } else {
                 abort(404);
             }
-        }else{
+        } else {
             abort(404);
         }
     }
-    public function UploadRecu(Request $request){
-        if(isset($request->token) && $request->token == Session::token() && isset($request->recuFile) && isset($request->OID) && is_numeric($request->OID)){
-            $this->validate($request, [
-                'recuFile' => 'required|mimes:png,jpg,jpeg,pdf|max:1000'
-            ], $message = ['required' => 'يرجى رفع وصل الأداء *', 'mimes' => 'هذا الملف غير مدعوم يسمح فقط ب (jpg,png,jpeg,pdf)', 'max' => 'هذا الملف أكبر من المسموح به الحد الأقصى 1M']);
+    public function UploadRecu(Request $request)
+    {
+        if (
+            isset($request->token) &&
+            $request->token == Session::token() &&
+            isset($request->recuFile) &&
+            isset($request->OID) &&
+            is_numeric($request->OID)
+        ) {
+            $this->validate(
+                $request,
+                [
+                    'recuFile' => 'required|mimes:png,jpg,jpeg,pdf|max:1000',
+                ],
+                $message = [
+                    'required' => 'يرجى رفع وصل الأداء *',
+                    'mimes' =>
+                        'هذا الملف غير مدعوم يسمح فقط ب (jpg,png,jpeg,pdf)',
+                    'max' => 'هذا الملف أكبر من المسموح به الحد الأقصى 1M',
+                ]
+            );
 
             // Check Order
-            $Check = PaymentSystem::where('OID', $request->OID)->where('buyer_email', Auth::user()->email)->where('status', 0)->where('method', 2)->get(['OID']);
-            if(count($Check) > 0){
-
-            }else{
-                return response()->json(['error'=>'طلب خاطئ'], 400);
-
-            }
-            $rand = rand(1111,9999);
-            $ext = $request->recuFile->getClientOriginalExtension();
-            $file_name = $request->OID.'_'.$rand.'_'.date("m-d_H_i_s").'.'.$ext;
-            $destinationPath_i = 'storage/desky/recu/' . date("Y");
-            $FullPathFile = $destinationPath_i.'/'.$file_name;
-            $upload = $request->recuFile->move($destinationPath_i, $file_name);
-            if($upload){
-                $stmt = PaymentSystem::where('OID', $request->OID)
+            $Check = PaymentSystem::where('OID', $request->OID)
                 ->where('buyer_email', Auth::user()->email)
                 ->where('status', 0)
                 ->where('method', 2)
-                ->update(['recuFile' => $FullPathFile, 'status' => 5]);
-                if($stmt){
-                    return response()->json(['success'=>'تم تلقي طلبك'], 200);
-                }else{
-                    return response()->json(['error'=>'فشل تحميل الملف *'], 500);
-
-                }
-            }else{
-                return response()->json(['error'=>'فشل تحميل الملف *'], 500);
-
+                ->get(['OID']);
+            if (count($Check) > 0) {
+            } else {
+                return response()->json(['error' => 'طلب خاطئ'], 400);
             }
-        }else{
-            return response()->json(['error'=>'طلب خاطئ'], 400);
+            $rand = rand(1111, 9999);
+            $ext = $request->recuFile->getClientOriginalExtension();
+            $file_name =
+                $request->OID .
+                '_' .
+                $rand .
+                '_' .
+                date('m-d_H_i_s') .
+                '.' .
+                $ext;
+            $destinationPath_i = 'storage/desky/recu/' . date('Y');
+            $FullPathFile = $destinationPath_i . '/' . $file_name;
+            $upload = $request->recuFile->move($destinationPath_i, $file_name);
+            if ($upload) {
+                $stmt = PaymentSystem::where('OID', $request->OID)
+                    ->where('buyer_email', Auth::user()->email)
+                    ->where('status', 0)
+                    ->where('method', 2)
+                    ->update(['recuFile' => $FullPathFile, 'status' => 5]);
+                if ($stmt) {
+                    return response()->json(['success' => 'تم تلقي طلبك'], 200);
+                } else {
+                    return response()->json(
+                        ['error' => 'فشل تحميل الملف *'],
+                        500
+                    );
+                }
+            } else {
+                return response()->json(['error' => 'فشل تحميل الملف *'], 500);
+            }
+        } else {
+            return response()->json(['error' => 'طلب خاطئ'], 400);
         }
     }
 }

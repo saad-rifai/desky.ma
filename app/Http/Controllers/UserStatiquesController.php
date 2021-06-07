@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\DeskyUserFacture;
+use PHPUnit\Framework\Constraint\Count;
+
 class UserStatiquesController extends Controller
 {
     public function UserStatistiquesGeneral(Request $request)
@@ -30,20 +32,33 @@ class UserStatiquesController extends Controller
             ->where('email', Auth::user()->email)
             ->orderby('created_at', 'desc')
             ->get();
+
         $userdbs = desky_db::where('email', Auth::user()->email)->get(['tva']);
         foreach ($userdbs as $tva);
         $tva = intval($tva->tva);
         $price_m = 0;
         $price_y = 0;
         $price_u = 0;
+        $price_ny = 0;
         $TotalUnpaidThisMonth = 0;
         $TotalThisMonth = 0;
         $TotalThisYear = 0;
+        $NumberOfSales=0;
+        $Clients = DB::table('desky_user_clients')
+            ->select(['CID'])
+            ->whereYear('created_at', 'LIKE', '%' . $year . '%')
+            // ->whereMonth('created_at', 'LIKE', '%'.$month.'%')
+            ->where('from', Auth::user()->email)
+            ->orderby('created_at', 'desc')
+            ->get();
+         $TotalClientsThisYear= Count($Clients);
+
         foreach ($datas as $data) {
             $date_m = date('m', strtotime($data->created_at));
             $date_y = date('y', strtotime($data->created_at));
             if ($date_y == date('y')) {
                 if ($data->status == 4 || $data->status == 5) {
+                    $NumberOfSales++;
                     // Get Sales Of This Year
                     $items = json_decode($data->items);
                     $remise = intval($data->remise);
@@ -56,7 +71,19 @@ class UserStatiquesController extends Controller
                     }
                     $price_y = $price_y - $remise;
                 }
+                // Get Facture Need Pay This Year
+                if ($date_y == date('y') && $data->status == 3) {
+                    $items = json_decode($data->items);
+                    $remise_ny = intval($data->remise);
 
+                    $n_items = count($items);
+                    for ($i = 0; $n_items > $i; $i++) {
+                        $price_ny += intval(
+                            $items[$i]->price * $items[$i]->quantity
+                        );
+                    }
+                    $price_ny = $price_ny - $remise_ny;
+                }
                 // Get Facture Need Pay This Month
                 if ($date_m == date('m') && $data->status == 3) {
                     $items = json_decode($data->items);
@@ -98,15 +125,81 @@ class UserStatiquesController extends Controller
 
         $tva_cost_u = ($price_u * $tva) / 100;
         $TotalUnpaidThisMonth = $price_u + $tva_cost_u;
+
+        // Factures Need Pay This Year
+
+        $tva_cost_ny = ($price_ny * $tva) / 100;
+        $TotalUnpaidThisMonth = $price_ny + $tva_cost_ny;
         return response()->json(
             [
                 'TotalThisMonth' => $TotalThisMonth,
                 'TotalThisYear' => $TotalThisYear,
                 'TotalUnpaidThisMonth' => $TotalUnpaidThisMonth,
+                'TotalSales' => $NumberOfSales,
+                'TotalUnpaidThisYear' => $TotalUnpaidThisMonth,
+                'TotalClientsThisYear' => $TotalClientsThisYear
             ],
             200
         );
         //return response()->json([$data]);
+    }
+    public function UserStatistiquesGeneralLine(Request $request)
+    {
+        if (isset($request->year) && is_numeric($request->year)) {
+            if (isset($request->json)) {
+                $year = $request->year;
+
+                $datas = DB::table('desky_user_factures')
+                    ->select(['status', 'items', 'remise', 'created_at'])
+                    ->whereYear('created_at', 'LIKE', '%' . $year . '%')
+                    // ->whereMonth('created_at', 'LIKE', '%'.$month.'%')
+                    ->where('email', Auth::user()->email)
+                    ->orderby('created_at', 'desc')
+                    ->get();
+                // Months Viriables
+                for ($i = 1; $i <= 12; $i++) {
+                    $m[$i] = 0;
+                    $NumberOfSales[$i] =0;
+                }
+                $userdbs = desky_db::where('email', Auth::user()->email)->get([
+                    'tva',
+                ]);
+                foreach ($userdbs as $tva);
+                $tva = intval($tva->tva);
+                $price_m = 0;
+
+                foreach ($datas as $data) {
+                    $date_m = date('m', strtotime($data->created_at));
+                    for ($x = 1; $x <= 12; $x++) {
+                        if (
+                            ($date_m == "$x" && $data->status == 4) ||
+                            ($data->status == 5 && $date_m == "$x")
+                        ) {
+                            $NumberOfSales[$x]+1;
+                            $items = json_decode($data->items);
+                            $remise = intval($data->remise);
+
+                            $n_items = count($items);
+                            for ($i = 0; $n_items > $i; $i++) {
+                                $price_m += intval(
+                                    $items[$i]->price * $items[$i]->quantity
+                                );
+                            }
+                            $price_m = $price_m - $remise;
+                            $tva_cost = ($price_m * $tva) / 100;
+
+                            $m[$x] += $price_m + $tva_cost;
+                        }
+                    }
+                }
+                $data = [$NumberOfSales, $m];
+                return response()->json($data, 200);
+            } else {
+                // Do somthing
+            }
+        } else {
+            // Do somthing
+        }
     }
     public function UserStatistiquesVentesAnnuel(Request $request)
     {

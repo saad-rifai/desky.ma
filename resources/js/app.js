@@ -48,9 +48,12 @@ Vue.directive('clickoutside', {
       event.stopPropagation()
     },
   })
-
-  Vue.component("sendrecu", require("./components/payments/SendRecu.vue").default);
-  Vue.component("cas-de-facturation-pie", require("./components/statistics/cas-de-facturation-pie.vue").default);
+//infos-anne
+//generale-line-charts
+Vue.component("sendrecu", require("./components/payments/SendRecu.vue").default);
+Vue.component("cas-de-facturation-pie", require("./components/statistics/cas-de-facturation-pie.vue").default);
+Vue.component("generale-line-charts", require("./components/statistics/generale-line-charts.vue").default);
+Vue.component("infos-anne", require("./components/statistics/infos-anne.vue").default);
 Vue.component("panel-statistics", require("./components/statistics/panel-statistics.vue").default);
 Vue.component("feedback", require("./components/feedback.vue").default);
 Vue.component("clients-action", require("./components/userClients/clients-action.vue").default);

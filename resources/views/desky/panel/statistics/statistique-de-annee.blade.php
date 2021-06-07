@@ -47,14 +47,14 @@
                                 <button class="uk-button uk-button-primary">تحميل التقرير السنوي</button>
                             </div>
                         </div>
-                    
+
                         <hr>
-               
+
                         <br>
-                        <panel-statistics :year='"{{ date('Y') }}"'></panel-statistics>
+                        <infos-anne :year='"{{ date('Y') }}"'></infos-anne>
                         <br>
 
-                        <year-line-chart-desky :year='"{{ date('Y') }}"'></year-line-chart-desky>
+                        <generale-line-charts :year='"{{ date('Y') }}"'></generale-line-charts>
                         <br>
                         <br>
                         <div uk-grid>
