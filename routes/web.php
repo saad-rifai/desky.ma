@@ -257,6 +257,10 @@ Route::group(['domain' => env('APP_URL')], function () {
 
     /* Auth Routes */
     Route::middleware(['auth'])->group(function () {
+        //statistique
+        Route::get('/statistique/annee', function () {
+            return view('desky.user-espace.statistique-de-annee');
+        });
         Route::get('/recu/{OID}', 'PaymentSystemController@RecuShow');
         Route::get('/creer/client', function () {
             return view('desky.panel.clients.c-client');
@@ -390,9 +394,12 @@ $str = '2357854'.'ref'.'dev_test'.'60'.'login';
  //return $hash;
     //    $str = date('ymdh').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 9);
 
-    $ip = request()->ip();
+    /*$ip = request()->ip();
     $ipdata = \Location::get($ip);
-    print_r($ipdata);
+    print_r($ipdata);*/
+    return PDF::loadView('desky.models.reports.sales', array('enable_remote' => true))->setPaper('A4', 'portrait')->stream('DEVIS-.pdf');
+
+  //  return view('desky.models.reports.sales');
 
 });
 

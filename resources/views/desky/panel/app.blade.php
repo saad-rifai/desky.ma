@@ -231,30 +231,23 @@ $jsondata = json_decode($datajson, true);
                                         class="">
                                         <ul class="uk-nav uk-dropdown-nav">
                                             <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
-                                                التقارير</a>
+                                                 الاحصائيات و التقارير الربع سنوية</a>
                                         </li>
                                         <li dir="rtl"><a
-                                                href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
-                                                المحاسبة</a></li>
+                                                href="{{ URL::asset('/statistique/annee') }}"><span></span>
+                                                الاحصائيات التقارير السنوية </a></li>
+                                                <li dir="rtl"><a
+                                                    href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
+                                                    المحاسبة والضرائب </a></li>
+    
+    
 
                                         </ul>
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::asset('/facture/list') }}" class="uk-button-text"><i
-                                        class="fas fa-cog"></i> &nbsp; الاعدادات</a>
-                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
-                                        class="">
-                                        <ul class="uk-nav uk-dropdown-nav">
-                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
-                                                معلومات الحساب</a>
-                                        </li>
-                                        <li dir="rtl"><a
-                                                href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
-                                                الفواتير</a></li>
-
-                                        </ul>
-                                    </div>
+                                    <a href="{{ URL::asset('/ae-network') }}" class="uk-button-text"><i class="fas fa-globe"></i> &nbsp; شبكة المقاول</a>
+                            
                                 </li>
                             </ul>
 
@@ -402,13 +395,16 @@ $jsondata = json_decode($datajson, true);
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::asset('/facture/list') }}" ><i class="far fa-chart-bar"></i> &nbsp; التحليلات والأدوات</a>
+                                    <a href="" ><i class="far fa-chart-bar"></i> &nbsp; التحليلات والأدوات</a>
                                     <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
                                         class="">
                                         <ul class="uk-nav uk-dropdown-nav">
-                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
-                                                التقارير</a>
+                                            <li><a href="{{ URL::asset('/statistique/anne') }}"><span></span>
+                                                الاحصائيات والتقارير السنوية</a>
                                         </li>
+                                        <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
+                                            الاحصائيات والتقارير الربع سنوية</a>
+                                    </li>
                                         <li dir="rtl"><a
                                                 href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
                                                 المحاسبة</a></li>
@@ -417,20 +413,9 @@ $jsondata = json_decode($datajson, true);
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::asset('/facture/list') }}" ><i
-                                        class="fas fa-cog"></i> &nbsp; الاعدادات</a>
-                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
-                                        class="">
-                                        <ul class="uk-nav uk-dropdown-nav">
-                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
-                                                معلومات الحساب</a>
-                                        </li>
-                                        <li dir="rtl"><a
-                                                href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
-                                                الفواتير</a></li>
-
-                                        </ul>
-                                    </div>
+                                    <a href="{{ URL::asset('/ae-network') }}" ><i
+                                        class="fas fa-cog"></i> &nbsp; شبكة المقاول</a>
+                     
                                 </li>
                                 <br>
                                 <hr class="uk-divider-icon">
