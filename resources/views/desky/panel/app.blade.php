@@ -108,9 +108,8 @@
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
     </script>
     <!-- Font Awesome Pro CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC8QSMPXQG"></script>
     <script>
@@ -137,6 +136,20 @@ $jsondata = json_decode($datajson, true);
 
 </div>
 
+<div id="neddpay-full" class="uk-modal-full  uk-height-viewport" uk-modal>
+    <div class="uk-modal-dialog" dir="rtl">
+        <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle"  uk-height-viewport uk-grid>
+            <div dir="rtl" class="uk-padding-large uk-text-right">
+                <h1>تحتاج الى الاشتراك بباقة لتتمكن من استعمال المنصة.</h1>
+                <p>ندعوك الى اختيار الباقة التي تناسبة من اجل ادارة نشاطك التجاري باحترافية وبساطة</p>
+            <a href="/tarifs">
+            <button class="uk-button uk-button-primary">مشاهدة الباقات</button>
+            </a>
+            </div>
+
+        </div>
+    </div>
+</div>
 <body id="body">
     <div id="app">
         <div>
@@ -230,25 +243,25 @@ $jsondata = json_decode($datajson, true);
                                     <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
                                         class="">
                                         <ul class="uk-nav uk-dropdown-nav">
-                                            <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
-                                                 الاحصائيات و التقارير الربع سنوية</a>
+                                            <li><a href="{{ URL::asset('/statistique/mois') }}"><span></span>
+                                                 الاحصائيات و التقارير الشهرية</a>
                                         </li>
                                         <li dir="rtl"><a
                                                 href="{{ URL::asset('/statistique/annee') }}"><span></span>
                                                 الاحصائيات التقارير السنوية </a></li>
                                                 <li dir="rtl"><a
-                                                    href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
+                                                    href="{{ URL::asset('/statistique/impot') }}"><span></span>
                                                     المحاسبة والضرائب </a></li>
-    
-    
+
+
 
                                         </ul>
                                     </div>
                                 </li>
-                                <li>
+                                <!--li>
                                     <a href="{{ URL::asset('/ae-network') }}" class="uk-button-text"><i class="fas fa-globe"></i> &nbsp; شبكة المقاول</a>
-                            
-                                </li>
+
+                                </li-->
                             </ul>
 
 
@@ -275,11 +288,8 @@ $jsondata = json_decode($datajson, true);
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
                                 <li><a href="{{ asset('u/account') }}"><span uk-icon="user"></span> حسابي </a></li>
-                                <li><a href="{{ asset('u/services') }}"><span uk-icon="list"></span> خدماتي</a></li>
-                                <li><a href="{{ asset('u/products') }}"><span uk-icon="grid"></span> منتجاتي</a></li>
-                                <li><a href="{{ asset('u/history') }}"><span uk-icon="history"></span> سجل المدفوعات</a>
+                                <li><a href="{{ asset('u/payments/history') }}"><span uk-icon="history"></span> سجل المدفوعات</a>
                                 </li>
-                                <li><a href="{{ asset('u/setting') }}"><span uk-icon="cog"></span> الاعدادات </a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">
@@ -288,7 +298,7 @@ $jsondata = json_decode($datajson, true);
                             </ul>
                         </div>
                         <user-notification></user-notification>
-                        <button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
+                        <!--button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-envelope"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
@@ -300,7 +310,7 @@ $jsondata = json_decode($datajson, true);
                                 <li><a href="{{ asset('u/setting') }}"><span uk-icon="cog"></span> الاعدادت</a></li>
 
                             </ul>
-                        </div>
+                        </div-->
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
@@ -326,97 +336,97 @@ $jsondata = json_decode($datajson, true);
 
                             <h4></h4>
                             <ul class="uk-list uk-list-large">
-                                <li> <a href="{{ URL::asset('/u') }}" class="uk-link"><i
+
+
+                                <li> <a href="{{ URL::asset('/u') }}" class="uk-button-text"><i
                                     class="fas fa-tachometer-alt"></i> &nbsp; لوحة التحكم</a>
-                                </li>
-                                <li>
-                                    <a href="{{ URL::asset('/clients/list') }}" ><i
-                                            class="fas fa-users"></i> &nbsp; العملاء</a>
-                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
-                                        class="">
+                        </li>
+                        <li>
+                            <a href="{{ URL::asset('/clients/list') }}" class="uk-button-text"><i
+                                    class="fas fa-users"></i> &nbsp; العملاء</a>
+                            <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                class="">
 
 
-                                        <ul class="uk-nav uk-dropdown-nav">
+                                <ul class="uk-nav uk-dropdown-nav">
 
-                                            <li><a href="{{ URL::asset('/clients/list') }}"><i
-                                                        class="fas fa-list"></i>
-                                                    قائمة العملاء</a>
-                                            </li>
-                                            <li><a
-                                                    href="{{ URL::asset('/creer/client') }}"><i
-                                                        class="fas fa-plus"></i>
-                                                    انشاء عميل</a></li>
-
-
-                                        </ul>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="{{ URL::asset('/devis/list') }}" > <i
-                                            class="fas fa-file-invoice-dollar"></i> &nbsp; عروض الاسعار</a>
-                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
-                                        class="">
-
-
-                                        <ul class="uk-nav uk-dropdown-nav">
-
-                                            <li><a href="{{ URL::asset('/creer/devis') }}"><i
-                                                        class="fas fa-plus"></i>
-                                                    انشاء عرض اسعار</a>
-                                            </li>
-                                            <li dir="rtl"><a href="{{ URL::asset('/devis/list') }}"><i
-                                                        class="fas fa-list"></i>
-                                                    قائمة عروض الاسعار</a></li>
-
-
-
-                                        </ul>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="{{ URL::asset('/facture/list') }}" > <i
-                                            class="fas fa-file-invoice"></i> &nbsp; الفواتير</a>
-                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
-                                        class="">
-
-
-                                        <ul class="uk-nav uk-dropdown-nav">
-                                            <li><a href="{{ URL::asset('/creer/facture') }}"><i
-                                                        class="fas fa-plus"></i>
-                                                    انشاء فاتورة</a>
-                                            </li>
-                                            <li dir="rtl"><a href="{{ URL::asset('/facture/list') }}"><i
-                                                        class="fas fa-list"></i>
-                                                    قائمة الفواتير</a></li>
-
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="" ><i class="far fa-chart-bar"></i> &nbsp; التحليلات والأدوات</a>
-                                    <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
-                                        class="">
-                                        <ul class="uk-nav uk-dropdown-nav">
-                                            <li><a href="{{ URL::asset('/statistique/anne') }}"><span></span>
-                                                الاحصائيات والتقارير السنوية</a>
-                                        </li>
-                                        <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>
-                                            الاحصائيات والتقارير الربع سنوية</a>
+                                    <li><a href="{{ URL::asset('/clients/list') }}"><i
+                                                class="fas fa-list"></i>
+                                            قائمة العملاء</a>
                                     </li>
-                                        <li dir="rtl"><a
-                                                href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>
-                                                المحاسبة</a></li>
+                                    <li><a
+                                            href="{{ URL::asset('/creer/client') }}"><i
+                                                class="fas fa-plus"></i>
+                                            انشاء عميل</a></li>
 
-                                        </ul>
-                                    </div>
+
+                                </ul>
+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{{ URL::asset('/devis/list') }}" class="uk-button-text"> <i
+                                    class="fas fa-file-invoice-dollar"></i> &nbsp; عروض الاسعار</a>
+                            <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                class="">
+
+
+                                <ul class="uk-nav uk-dropdown-nav">
+
+                                    <li><a href="{{ URL::asset('/creer/devis') }}"><i
+                                                class="fas fa-plus"></i>
+                                            انشاء عرض اسعار</a>
+                                    </li>
+                                    <li dir="rtl"><a href="{{ URL::asset('/devis/list') }}"><i
+                                                class="fas fa-list"></i>
+                                            قائمة عروض الاسعار</a></li>
+
+
+
+                                </ul>
+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{{ URL::asset('/facture/list') }}" class="uk-button-text"> <i
+                                    class="fas fa-file-invoice"></i> &nbsp; الفواتير</a>
+                            <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                class="">
+
+
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li><a href="{{ URL::asset('/creer/facture') }}"><i
+                                                class="fas fa-plus"></i>
+                                            انشاء فاتورة</a>
+                                    </li>
+                                    <li dir="rtl"><a href="{{ URL::asset('/facture/list') }}"><i
+                                                class="fas fa-list"></i>
+                                            قائمة الفواتير</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{{ URL::asset('/facture/list') }}" class="uk-button-text"><i class="far fa-chart-bar"></i> &nbsp; التحليلات والأدوات</a>
+                            <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000; pos: bottom-right"
+                                class="">
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li><a href="{{ URL::asset('/statistique/mois') }}"><span></span>
+                                         الاحصائيات و التقارير الشهرية</a>
                                 </li>
-                                <li>
-                                    <a href="{{ URL::asset('/ae-network') }}" ><i
-                                        class="fas fa-cog"></i> &nbsp; شبكة المقاول</a>
-                     
-                                </li>
+                                <li dir="rtl"><a
+                                        href="{{ URL::asset('/statistique/annee') }}"><span></span>
+                                        الاحصائيات التقارير السنوية </a></li>
+                                        <li dir="rtl"><a
+                                            href="{{ URL::asset('/statistique/impot') }}"><span></span>
+                                            المحاسبة والضرائب </a></li>
+
+
+
+                                </ul>
+                            </div>
+                        </li>
+
                                 <br>
                                 <hr class="uk-divider-icon">
 

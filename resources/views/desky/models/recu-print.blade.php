@@ -84,50 +84,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
 
 </head>
-
+@php
+$datajson = file_get_contents('database/data.json');
+$jsondata = json_decode($datajson, true);
+//payments_status
+$status = $data->status;
+@endphp
 <body>
     <header class="uk-text-center">
         <span class="logo uk-text-center">
             <img src="{{ asset('image/logo-desky.png') }}" alt="">
         </span>
-        <span class="uk-text-muted uk-position-top-right date-print">2020-06-17 07:32</span>
+
+        <span class="uk-text-muted uk-position-top-right date-print">{{$data->created_at}} </span>
     </header>
     <main>
         <div>
-
             <div class="wd-80 uk-margin-small-top uk-margin-small-bottom" style="position: relative">
 
 
                 <div class="uk-card-default uk-padding uk-text-right">
                     <div class="recu-header" style="position: relative">
 
-                        <span class="uk-label uk-label-warning">En attente de paiement</span>
+                        <span class="uk-padding-small uk-label
+                    @php if ($status == 0) {
+                            echo 'uk-label-warning';
+                        } elseif ($status == 1) {
+                            echo 'uk-label-success';
+                        } elseif ($status == 2) {
+                            echo 'uk-label-pending';
+                        } elseif ($status == 3) {
+                            echo 'uk-label-warning';
+                        } elseif ($status == 4) {
+                            echo 'uk-label-danger';
+                        } elseif ($status == 5) {
+                            echo 'uk-label-pending';
+                    }
+                    @endphp ">{{ $jsondata['payments_status'][$status]['fr'] }}</span>
                     </div>
                     <hr>
 
                     <div class="recu-body">
-                        <h1 class="uk-card-title uk-text-left code-pay-border" dir="ltr"> #398583012352</h1>
+                        <h1 class="uk-card-title uk-text-left code-pay-border" dir="ltr"> #{{ $data->OID }}</h1>
 
                         <table class="uk-table uk-table-small uk-text-left" dir="ltr">
                             <thead>
                                 <tr>
                                     <td><span class="uk-text-emphasis uk-text-bold">Demande:</span></td>
-                                    <td><span class="uk-text-light uk-text-emphasis">Abonnement d'un mois au forfait or
-                                            pour Desky.ma</span></td>
+                                    <td><span class="uk-text-light uk-text-emphasis">Abonnement d'un @if ($data->type == 'm') Mois @else Une annee @endif à
+                                        {{ $jsondata['_2147845']['packs'][$data->pack_id]['namefr'] }} pour la plateforme Desky.ma </span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="uk-text-emphasis uk-text-bold">Mode de paiement:</span></td>
+                                    @if($data->method == 1)
                                     <td><span class="uk-text-light uk-text-emphasis">Paiement en espèces via l'agence
                                             Wafacash (Binga)</span></td>
+                                    @endif
+                                    @if($data->method == 2)
+                                    <td><span class="uk-text-light uk-text-emphasis">Paiement par virement bancaire</span></td>
+                                    @endif
                                 </tr>
+                                @if(isset($data->code) && $data->code != null)
                                 <tr>
                                     <td><span class="uk-text-emphasis uk-text-bold">Code de paiement (Binga):</span>
                                     </td>
-                                    <td><span class="uk-text-light uk-text-bold">398583012352</span></td>
+                                    <td><span class="uk-text-light uk-text-bold">{{ $data->code }}</span></td>
                                 </tr>
+                                @endif
                                 <tr>
                                     <td><span class="uk-text-emphasis uk-text-bold">Numéro de commande:</span></td>
-                                    <td><span class="uk-text-light uk-text-emphasis">379413546789114</span></td>
+                                    <td><span class="uk-text-light uk-text-emphasis">{{ $data->OID }}</span></td>
                                 </tr>
 
                                 <tr>
@@ -135,7 +161,7 @@
                                     <td class="labelcart">
 
                                         <span>
-                                            99.00 MAD
+                                            {{ number_format($data->amount , 2) }} MAD
                                         </span>
                                     </td>
                                 </tr>
@@ -146,7 +172,7 @@
                                     </td>
                                     <td class="labelcart">
                                         <span>
-                                            4.15 MAD
+                                            {{ number_format($data->frais , 2) }} MAD
                                         </span>
                                     </td>
                                 </tr>
@@ -158,7 +184,7 @@
                                     <td class="">
                                         <h4 class="labelcart_green">
                                             <span>
-                                                103.15 MAD
+                                                {{ number_format((intval($data->frais) + intval($data->amount)) , 2) }} MAD
                                             </span>
 
                                             <br />
@@ -172,12 +198,14 @@
                                 </tr>
                             </thead>
                         </table>
+                        @if($data->method == 1 && $data->status == 0)
+
                         <div class="uk-alert-primary uk-text-left uk-padding-small" dir="ltr" uk-alert>
                             <p><span uk-icon="icon:  chevron-double-left"></span>Vous devez vous rendre à l'agence
-                                Wafacash la plus proche avec le numéro de paiement : 398583012352 et régler le montant
+                                Wafacash la plus proche avec le numéro de paiement : {{$data->code}} et régler le montant
                                 dû afin d'activer votre forfait <br>
 
-                                <span uk-icon="icon:  chevron-double-left"></span>Délai de paiement : 17/06/2021
+                                <span uk-icon="icon:  chevron-double-left"></span>Délai de paiement : {{$data->exDate}}
                                 <br>
 
                                 <span uk-icon="icon:  chevron-double-left"></span> Une fois que vous avez payé via
@@ -186,6 +214,32 @@
                             </p>
                         </div>
 
+                        @endif
+                        @if($data->method == 2 && $data->status == 0)
+
+                        <div class="uk-alert-primary uk-text-left uk-padding-small" dir="ltr" uk-alert>
+                            <p><span uk-icon="icon:  chevron-double-left"></span>Le coût de   {{ number_format((intval($data->frais) + intval($data->amount)) , 2) }} MAD de la commande doit être transféré sur le compte suivant
+                                <br>
+                                la Banque: {{ $jsondata['NERYOU']['BANK_NAME'] }}
+                                <br>
+                                nom du compte: {{ $jsondata['NERYOU']['BANK_ACCOUNT'] }}
+                                <br>
+                                Numéro de compte: <span dir="ltr"> {{ $jsondata['NERYOU']['RIB'] }}</span>
+                                <br>
+                                <span dir="rtl"> swiftcode: {{ $jsondata['NERYOU']['SWIFTCODE'] }}</span>
+
+                                <br>
+                                @if ($data->exDate != null)
+                                <span uk-icon="icon:  chevron-double-left"></span>Délai de paiement : {{$data->exDate}}
+                                <br>
+
+                                @endif
+
+                                <span uk-icon="icon:  chevron-double-left"></span> Une fois le montant viré, le reçu de paiement doit être envoyé via le site desky.ma
+                                Votre demande sera traitée dans un délai maximum de 48h, hors jours fériés
+                            </p>
+                        </div>
+                        @endif
                     </div>
 
 
@@ -193,8 +247,7 @@
 
             </div>
         </div>
-        <br>
-        <br>
+
         <span class="brand-logo-hidden">
         </span>
     </main>

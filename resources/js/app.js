@@ -50,10 +50,23 @@ Vue.directive('clickoutside', {
   })
 //infos-anne
 //generale-line-charts
+//LastFiveYearsChiffreDaffire
+//dowload-annual-report.vue
+//download-TurnoverLast5years
+
+//list-recu
+Vue.component("list-recu", require("./components/payments/list-recu.vue").default);
 Vue.component("sendrecu", require("./components/payments/SendRecu.vue").default);
+Vue.component("download-annual-report", require("./components/statistics/download-annual-report.vue").default);
+Vue.component("download-turnover-last5years", require("./components/statistics/download-TurnoverLast5years.vue").default);
+//infos-mois
+Vue.component("infos-mois", require("./components/statistics/infos-mois.vue").default);
+//impot-infos
+Vue.component("impot-infos", require("./components/statistics/impot-infos.vue").default);
 Vue.component("cas-de-facturation-pie", require("./components/statistics/cas-de-facturation-pie.vue").default);
 Vue.component("generale-line-charts", require("./components/statistics/generale-line-charts.vue").default);
 Vue.component("infos-anne", require("./components/statistics/infos-anne.vue").default);
+Vue.component("turnover-last5years", require("./components/statistics/TurnoverLast5years.vue").default);
 Vue.component("panel-statistics", require("./components/statistics/panel-statistics.vue").default);
 Vue.component("feedback", require("./components/feedback.vue").default);
 Vue.component("clients-action", require("./components/userClients/clients-action.vue").default);

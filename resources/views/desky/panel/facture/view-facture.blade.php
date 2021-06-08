@@ -168,13 +168,15 @@
                         $countItems = count($items);
                         $subtotal = 0;
                         $article_p = 0;
+                        $remise = intval($infos->remise);
                         $tva = $db_desky->tva;
                         for ($i = 0; $i < $countItems; $i++) {
                             $article_p = $items[$i]->price * $items[$i]->quantity;
                             $subtotal = $subtotal + $article_p;
+
                         }
-                        $tva_cost = ($subtotal * $tva) / 100;
-                        $TotalFinal = $subtotal - $tva_cost;
+                        $tva_cost = (($subtotal - $remise) * $tva) / 100;
+                        $TotalFinal = ($subtotal - $remise) + $tva_cost;
                     @endphp
                     @foreach ($items as $item)
 
@@ -273,7 +275,13 @@
                             </h3>
                             <hr />
                             <h3 class="text-f-bloder" dir="rtl">
-                                الضريبة(TVA): MAD {{ number_format($tva, 2, '.', ',') }}
+                                الخصم: {{ number_format($remise, 2, '.', ',') }}
+
+                            </h3>
+                            <hr />
+
+                            <h3 class="text-f-bloder" dir="rtl">
+                                الضريبة(TVA): MAD {{ number_format($tva_cost, 2, '.', ',') }}
 
                             </h3>
                             <hr />

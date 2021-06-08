@@ -621,8 +621,8 @@ button.uk-dropdown-menu-orange {
 }
 .user-image-box {
     position: relative;
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     background-color: #f78b03;
     text-align: center;
     color: white;
@@ -880,12 +880,22 @@ table.uk-table.cart-info.cart-table-moqawala.uk-text-right.min-p tbody tr td {
     background-color: #ea2f353b;
     z-index: 1;
 }
+.disabled-feature {
+    cursor: not-allowed;
+}
 .icon_statu img {
     width: 100%;
     max-width: 140px;
 }
 .uk-alert {
     z-index: 100;
+}
+.uk-position-cover{
+    z-index: 2;
+}
+.fad {
+    font-family: 'Font Awesome 5 pro' !important;
+    font-style: normal;
 }
 .bell-childs a {
     color: #212121 !important;

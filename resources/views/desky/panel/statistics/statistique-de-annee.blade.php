@@ -25,7 +25,7 @@
                 <div class="uk-width-1-4@m">
                     <div class="uk-card uk-card-default uk-card-body" uk-sticky="bottom: true">
                         <h4 class="uk-card-title uk-text-right">
-                            مرحبا Saad Rifai !</h4>
+                            مركز الاحصائيات والتحليلات </h4>
                         <hr>
 
                         @include('desky.layouts.right-bar-statistique')
@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="uk-text-left uk-width-1-2@s">
-                                <button class="uk-button uk-button-primary">تحميل التقرير السنوي</button>
+                                <download-annual-report></download-annual-report>
                             </div>
                         </div>
 
@@ -64,48 +64,13 @@
                             </div>
 
                             <div class="uk-text-left uk-width-1-2@s">
-                                <button class="uk-button uk-button-primary">تحميل تقرير أخر 5 سنوات</button>
+                               <download-turnover-last5years></download-turnover-last5years>
                             </div>
                         </div>
 
                         <hr>
 
-                        <table class="uk-table uk-table-striped">
-                            <thead>
-                                <tr>
-                                    <th>السنة</th>
-                                    <th>عدد المبيعات</th>
-                                    <th>رقم الأعمال</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2016</td>
-                                    <td>124</td>
-                                    <td>250,247.00 MAD</td>
-                                </tr>
-                                <tr>
-                                    <td>2017</td>
-                                    <td>214</td>
-                                    <td>268,841.00 MAD</td>
-                                </tr>
-                                <tr>
-                                    <td>2018</td>
-                                    <td>256</td>
-                                    <td>298,893.00 MAD</td>
-                                </tr>
-                                <tr>
-                                    <td>2019</td>
-                                    <td>321</td>
-                                    <td>302,201.00 MAD</td>
-                                </tr>
-                                <tr>
-                                    <td>2020</td>
-                                    <td>390</td>
-                                    <td>305,052.00 MAD</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <turnover-last5years></turnover-last5years>
                     </div>
                 </div>
             </div>

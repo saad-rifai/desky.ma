@@ -391,16 +391,16 @@ class DeskyAlgController extends Controller
         );
         $sector = $request->sector;
 
-        if ($sector > 0 && $sector < 5) {
-            if($sector == 1){
+        if ($sector >= 0 && $sector < 4) {
+            if($sector == 0){
                 $tva = 0.5;
-            }elseif($sector == 2){
+            }elseif($sector == 1){
                 $tva = 1;
 
-            }elseif($sector == 3){
+            }elseif($sector == 2){
                 $tva = 0.5;
 
-            }elseif($sector == 4){
+            }elseif($sector == 3){
                 $tva = 0.5;
 
             }
@@ -567,16 +567,16 @@ class DeskyAlgController extends Controller
 
         $sector = $request->sector;
 
-        if ($sector > 0 && $sector < 5) {
-            if($sector == 1){
+        if ($sector >= 0 && $sector < 4) {
+            if($sector == 0){
                 $tva = 0.5;
-            }elseif($sector == 2){
+            }elseif($sector == 1){
                 $tva = 1;
 
-            }elseif($sector == 3){
+            }elseif($sector == 2){
                 $tva = 0.5;
 
-            }elseif($sector == 4){
+            }elseif($sector == 3){
                 $tva = 0.5;
 
             }

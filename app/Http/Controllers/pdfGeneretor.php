@@ -670,10 +670,34 @@ class pdfGeneretor extends Controller
          }
       }
    }
-   public function invoice(){
-    header('Content-type: text/html; charset=UTF-8') ;//chrome
+   public function invoice(Request $request){
+       if(isset($request->OID) && is_numeric($request->OID)){
+        $packs = DB::table('subscriptions')
+        ->join(
+            'payment_systems',
+            'payment_systems.OID',
+            '=',
+            'subscriptions.OID'
+        )
+        ->select(
+            'subscriptions.pack_id',
+            'subscriptions.type',
+            'payment_systems.*'
+        )
+        ->where('payment_systems.buyer_email', Auth::user()->email)
+        ->where('payment_systems.OID', $request->OID)
+        ->get();
+        if(count($packs) > 0){
+            foreach($packs as $pack)
+            return PDF::loadView('desky/models/recu-print', ['data' => $pack])->setPaper('A4', 'portrait')->download('recu-'.$request->OID.'.pdf');
 
-    return PDF::loadView('desky/models/recu-print', array('enable_remote' => true))->setPaper('A4', 'portrait')->stream('invoice.pdf');
+        }else{
+            return response(['Not Found'] , 404);
+        }
+       }else{
+           return response(['Bad Request'], 404);
+       }
+
 
    }
 }

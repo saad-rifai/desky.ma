@@ -96,7 +96,7 @@ class LoginController extends Controller
                     }
                 }else{
                     if(Cookie::get('ref')){
-                        $ref = str_replace('-','/',Cookie::get('ref'));
+                        $ref = base64_decode(Cookie::get('ref'));
                         return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'&ref='.$ref);
                     }else{
                        return redirect('http://'.env('APP_URL').'/setcookie?s_token='.Session::getId().'');

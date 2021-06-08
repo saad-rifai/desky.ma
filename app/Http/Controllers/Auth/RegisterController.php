@@ -304,7 +304,7 @@ class RegisterController extends Controller
                         }
                     }else{
                         if(Cookie::get('ref')){
-                            $ref = str_replace('-','/',Cookie::get('ref'));
+                            $ref = base64_decode(Cookie::get('ref'));
                             return response()->json(['token' => Session::getId(), 'ref' => $ref], 200);
                         }else{
                             return response()->json(['token' => Session::getId(), 'ref' => "u"], 200);

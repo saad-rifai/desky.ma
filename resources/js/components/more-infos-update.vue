@@ -197,13 +197,13 @@
               name="AeActivite[855097][secteur]"
             >
               <option value="">- - - - - - - - - - - - - - -</option>
-              <option value="1">الصناعة</option>
+              <option value="0">الصناعة</option>
               <!-- 0.5% -->
-              <option value="2">الخدمات</option>
+              <option value="1">الخدمات</option>
               <!-- 1% -->
-              <option value="3">التجارة</option>
+              <option value="2">التجارة</option>
               <!-- 0.5% -->
-              <option value="4">الصناعة التقليدية</option>
+              <option value="3">الصناعة التقليدية</option>
               <!-- 0.5% -->
             </select>
           </div>
@@ -248,7 +248,7 @@
               v-model="u_tp"
             />
           </div>
-          <div class="uk-text-danger" v-if="errors.errors.u_if">
+          <div class="uk-text-danger" v-if="errors.errors.u_tp">
             {{ errors.get("u_tp") }}
           </div>
         </div>

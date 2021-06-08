@@ -105,9 +105,8 @@
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
     </script>
     <!-- Font Awesome Pro CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+
 
 </head>
 @php
@@ -139,11 +138,11 @@ $jsondata = json_decode($datajson, true);
                                 </li>
                                 <li><a href="{{ URL::asset('/#whyus') }}" class="uk-button-text">المميزات</a></li>
                                 <li><a href="{{ URL::asset('/#videos') }}" class="uk-button-text">لماذا نحن</a></li>
-                                <li><a href="{{ URL::asset('/#q&a') }}" class="uk-button-text"> الأسعار</a></li>
-                                <li><a href="{{ URL::asset('/#q&a') }}" class="uk-button-text"> شبكة المقاولين
+                                <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> الأسعار</a></li>
+                                <!--li><a href="{{ URL::asset('/#q&a') }}" class="uk-button-text"> شبكة المقاولين
                                         الذاتيين</a></li>
-                                <li><a class="uk-button-text" href="{{ URL::asset('/contactus') }}">تواصل معنا</a>
-                                </li>
+                                <li--><!--a class="uk-button-text" href="{{ URL::asset('/contactus') }}">تواصل معنا</a>
+                                </li-->
                             </ul>
                         </div>
                     </div>
@@ -161,11 +160,8 @@ $jsondata = json_decode($datajson, true);
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
                                 <li><a href="{{ asset('u/account') }}"><span uk-icon="user"></span> حسابي </a></li>
-                                <li><a href="{{ asset('u/services') }}"><span uk-icon="list"></span> خدماتي</a></li>
-                                <li><a href="{{ asset('u/products') }}"><span uk-icon="grid"></span> منتجاتي</a></li>
-                                <li><a href="{{ asset('u/history') }}"><span uk-icon="history"></span> سجل المدفوعات</a>
+                                <li><a href="{{ asset('u/payments/history') }}"><span uk-icon="history"></span> سجل المدفوعات</a>
                                 </li>
-                                <li><a href="{{ asset('u/setting') }}"><span uk-icon="cog"></span> الاعدادات </a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">
@@ -174,7 +170,7 @@ $jsondata = json_decode($datajson, true);
                             </ul>
                         </div>
                         <user-notification></user-notification>
-                        <button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
+                        <!--button style="    padding: 10px;" dir="rtl" class="  uk-float-left  user-menu-bar"
                             type="button"> <span class="bell-icon"><i class="fas fa-envelope"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
@@ -189,7 +185,7 @@ $jsondata = json_decode($datajson, true);
                         </div>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
-                        </form>
+                        </form-->
 
                     @endguest
 
@@ -205,19 +201,11 @@ $jsondata = json_decode($datajson, true);
                         <div>
                             <h4></h4>
                             <ul class="uk-list uk-list-large">
-                                <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span></span>gust</a>
+                                <li><a href="{{ URL::asset('/#aboutus') }}" class="uk-button-text">عن الخدمة </a>
                                 </li>
-                                <li><a href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span></span>طلب
-                                        المميزات</a></li>
-                                <li><a href="{{ URL::asset('/service/consultation') }}"><span></span>
-                                        لماذا نحن</a></li>
-
-                                <li><a
-                                        href="{{ URL::asset('/service/conception-de-sites-web-et-dapplications-mobiles') }}"><span></span>تطوير
-                                        الاسعار</a>
-                                </li>
-                                <li><a href="{{ URL::asset('/service/e-marketing') }}"><span></span>تواصل معنا</a>
-                                </li>
+                                <li><a href="{{ URL::asset('/#whyus') }}" class="uk-button-text">المميزات</a></li>
+                                <li><a href="{{ URL::asset('/#videos') }}" class="uk-button-text">لماذا نحن</a></li>
+                                <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> الأسعار</a></li>
                             </ul>
                         </div>
                     </div>

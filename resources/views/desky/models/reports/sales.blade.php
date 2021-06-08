@@ -65,8 +65,9 @@
         background-color: #f58915;
         color: white !important;
     }
-    table.orange-head thead tr td {
+    table.orange-head thead tr th {
         color: white !important;
+        font-size: 12px !important;
     }
     table.orange-head tbody tr td {
        font-size: 14px;
@@ -83,7 +84,7 @@
 
                 <img width="80" src="{{ asset('image/logo-desky.png') }}" alt="">
             </span>
-            <span class="uk-text-emphasis uk-text-small uk-position-top-right date-print">Date de création: 2020-06-17 07:32</span>
+            <span class="uk-text-emphasis uk-text-small uk-position-top-right date-print">Date de création: {{ date("Y-m-d H:i:s") }}</span>
 
         </div>
            <div class="border-color " style="width: 100%;     background-color: #f58915c9; height: 25px" ></div>
@@ -92,7 +93,7 @@
     <main>
         <div class="head uk-text-center">
             <h4 style="margin: 0" class="uk-heading-line uk-text-center">
-                 Rapport de chiffre d'affaires annuel (2021)
+                 Rapport de chiffre d'affaires annuel ({{$data['year']}})
             </h4>
             <small style="margin: 0">Ce rapport a été préparé par la plateforme de gestion d'entreprise desky.ma</small>
         </div>
@@ -107,28 +108,24 @@
 
                     <tbody class="uk-text-emphasis">
                         <tr>
-                            <td>Nom: Saad Rifai (auto-entrepreneur)</td>
+                            <td>Nom: {{Auth::user()->fname}} {{Auth::user()->lname}} (auto-entrepreneur)</td>
                             <td>Tel: 0665033460</td>
                         </tr>
                         <tr>
-                         <td>Activité: Conception et développement de sites Web</td>
-                         <td>Email: s.rifai@moqawala.ma</td>
+                            <td>Secteur: {{$data['sector']}}</td>
+
+                         <td>Email: {{$data['b_email']}}</td>
                         </tr>
                         <tr>
-                            <td>Secteur: services</td>
-                            <td>Adresse: technopark Tanger B°457 </td>
+                            <td>Adresse: - {{Auth::user()->country}}  {{Auth::user()->city}} </td>
+                            <td>ICE: {{$data['ice']}}</td>
 
                            </tr>
                         <tr>
-                            <td>IF: 2354789</td>
+                            <td>IF: {{$data['if']}}</td>
+                            <td>TP: {{$data['tp']}}</td>
+                        </tr>
 
-                        </tr>
-                        <tr>
-                         <td>TP: 4152369</td>
-                        </tr>
-                        <tr>
-                         <td>ICE: 021654879213654</td>
-                        </tr>
 
 
                     </tbody>
@@ -142,97 +139,95 @@
              <hr>
              <span class="brand-logo-hidden">
             </span>
+            <div class="uk-text-left">
+                <small for="">Tous les montants sont en dirhams marocains (MAD)</small>
+
+            </div>
+
              <table class="uk-table orange-head  uk-table-striped uk-table-small uk-text-left uk-table-divider">
                 <thead>
                     <tr>
-                        <th>le Mois</th>
+                        <th>Mois</th>
+                        @if($data['customize']['unpaidFacture'] == true)
                         <th>Factures dues</th>
-                        <th>les ventes</th>
-                        <th>chiffre d'affaires</th>
+                        @endif
+
+                        @if($data['customize']['ventes'] == true)
+                        <th>ventes</th>
+                        @endif
+
+                        <th>C.D (TTC)</th>
+
+                        @if($data['customize']['revenu'] == true)
+                        <th>bénéfice (HT)</th>
+                        @endif
+
+                        @if($data['customize']['tva'] == true)
+                        <th>TVA ({{$data['tva']}}%)</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
+                         @php
+                  $datajson = file_get_contents('database/data.json');
+                    $jsondata = json_decode($datajson, true);
+                            $i = 1;
+                            @endphp
+                 @foreach ($data[1] as $ChiffreDaffire)
+                 @php
+                     $tva =  (intval($ChiffreDaffire) * intval($data['tva'])) /100;
+                 @endphp
                     <tr>
-                        <td>Janvier</td>
-                        <td>6,457.00 MAD</td>
-                        <td>23</td>
-                        <td>20,024.40 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>février</td>
-                        <td>5,344.00 MAD</td>
-                        <td>34</td>
-                        <td>30,002.87 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>Mars</td>
-                        <td>7,934.00 MAD</td>
-                        <td>21</td>
-                        <td>22,321.87 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>avril</td>
-                        <td>3,448.89 MAD</td>
-                        <td>34</td>
-                        <td>29,854.87 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>Mai</td>
-                        <td>11,701.00 MAD</td>
-                        <td>24</td>
-                        <td>25,985.87 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>juin</td>
-                        <td>8,487.00 MAD</td>
-                        <td>39</td>
-                        <td>33,456.87 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>juillet</td>
-                        <td>9,470.00 MAD</td>
-                        <td>38</td>
-                        <td>32,498.87 MAD</td>
-                    </tr>
+                        <td>{{$jsondata['months'][$i]['namefr']}}</td>
 
-                    <tr>
-                        <td>août</td>
-                        <td>2,935.00 MAD</td>
-                        <td>41</td>
-                        <td>35,014.00 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>septembre</td>
-                        <td>1,457.00 MAD</td>
-                        <td>45</td>
-                        <td>48,436.98 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>octobre</td>
-                        <td>9,147.00 MAD</td>
-                        <td>45</td>
-                        <td>51,541.98 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>nov</td>
-                        <td>7,934.00 MAD</td>
-                        <td>47</td>
-                        <td>49,498.87 MAD</td>
-                    </tr>
-                    <tr>
-                        <td>déc</td>
-                        <td>4,347.00 MAD</td>
-                        <td>49</td>
-                        <td>48,088.87 MAD</td>
-                    </tr>
+                        @if($data['customize']['unpaidFacture'] == true)
+                        <td>{{number_format($data[2][$i], 2)}}</td>
+                        @endif
 
+                        @if($data['customize']['ventes'] == true)
+                        <td>{{$data[0][$i]}}</td>
+                        @endif
+                        <td>{{ number_format($ChiffreDaffire, 2)}}</td>
+
+                        @if($data['customize']['revenu'] == true)
+                        <td>{{ number_format(intval($ChiffreDaffire - $tva), 2) }}</td>
+                        @endif
+
+                        @if($data['customize']['tva'] == true)
+                        <td>{{ number_format(intval($tva), 2) }}</td>
+                        @endif
+
+                    </tr>
+                    @php
+                        $i++;
+                    @endphp
+      @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
                         <td>Total</td>
-                        <td>78,661.89 MAD</td>
-                        <td>440</td>
-                        <td>444,726.32 MAD</td>
+
+                        @if($data['customize']['unpaidFacture'] == true)
+                        <td>{{ number_format(array_sum($data[2]))}}</td>
+                        @endif
+
+                        @if($data['customize']['ventes'] == true)
+                        <td>{{ array_sum($data[0])}}</td>
+                        @endif
+
+                        <td>{{ number_format(array_sum($data[1]), 2 )}}</td>
+
+                        @if($data['customize']['revenu'] == true)
+                        @php
+                            $totalTva = (intval(array_sum($data[1])) * intval($data['tva']) / 100);
+                            $TotalRevunu = intval(array_sum($data[1])) - $totalTva;
+                        @endphp
+                        <td>{{ number_format($TotalRevunu , 2)}}</td>
+                        @endif
+
+                        @if($data['customize']['tva'] == true)
+                        <td> {{number_format($totalTva, 2)}} </td>
+                        @endif
                     </tr>
                 </tfoot>
             </table>

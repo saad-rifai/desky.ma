@@ -6,7 +6,7 @@
     <div class="wd-90 uk-margin">
 
         <div class="uk-text-right uk-margin-top">
-            <a href="#form-demande-branding"><button type="button"
+            <a href="{{ asset('creer/facture') }}"><button type="button"
                     class="uk-button uk-button-primary uk-margin-top btn-call">انشاء فاتورة
                     <span uk-icon="plus"></span> </button></a>
             <a href="{{ asset('creer/devis') }}"><button type="button"
@@ -23,7 +23,7 @@
             <div class="uk-width-1-3@s">
                 <div class="uk-card uk-card-default uk-card-body">
                     <h4 class="uk-card-title uk-text-right">احصائيات الشهر</h4>
-                    <div class="uk-position-top-left uk-overlay "><a href="#"><small>مشاهدة المزيد   </small></a></div>
+                    <div class="uk-position-top-left uk-overlay "><a href="/statistique/mois"><small>مشاهدة المزيد   </small></a></div>
 
                     <hr>
                     <cas-de-facturation-pie :year='"{{ date('Y') }}"'></cas-de-facturation-pie>
@@ -37,7 +37,7 @@
 
                     <h4 class="uk-card-title uk-text-right">
                         احصائيات هذه السنة</h4>
-                        <div class="uk-position-top-left uk-overlay "><a href="#"><small>مشاهدة المزيد   </small></a></div>
+                        <div class="uk-position-top-left uk-overlay "><a href="/statistique/annee"><small>مشاهدة المزيد   </small></a></div>
 
                     <hr>
                     <year-line-chart-desky :year='"{{ date('Y') }}"'></year-line-chart-desky>
@@ -51,7 +51,7 @@
             <div class="uk-width-expand@s">
                 <div class="uk-card uk-card-default uk-card-body">
                     <h4 class="uk-card-title uk-text-right">أحدث العملاء</h4>
-                    <div class="uk-position-top-left uk-overlay "><a href="#"><small>مشاهدة المزيد   </small></a></div>
+                    <div class="uk-position-top-left uk-overlay "><a href="/clients/list"><small>مشاهدة المزيد   </small></a></div>
 
                     <hr>
                     <last-clients :limit="5" :uid='"{{Auth::user()->id}}"'></last-clients>

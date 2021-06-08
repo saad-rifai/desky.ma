@@ -199,7 +199,7 @@
               v-model="u_tp"
             />
           </div>
-          <div class="uk-text-danger" v-if="errors.errors.u_if">
+          <div class="uk-text-danger" v-if="errors.errors.u_tp">
             {{ errors.get('u_tp') }}
           </div>
         </div>

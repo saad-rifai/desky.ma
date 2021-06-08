@@ -210,9 +210,14 @@ export default {
     methodChange: function () {
       this.numberload = true
       if (this.method == '1') {
-        this.service_cost = (this.amount * 3.5) / 100 + this.service_cost
-        this.service_cost = this.service_cost + (this.service_cost*20/100)
-        this.total = this.amount + this.service_cost
+     //   this.service_cost = (this.amount * 3.5) / 100 + this.service_cost
+     //   this.service_cost = this.service_cost + (this.service_cost*20/100)
+     //   this.total = this.amount + this.service_cost
+     var DroitDeTimbre = (this.amount * 0.25) / 100;
+     var BingaFrais =  (this.amount * 3.5) / 100;
+     var Tva = ((DroitDeTimbre + BingaFrais) * 20)/100;
+     this.service_cost = (DroitDeTimbre + BingaFrais +Tva);
+     this.total = (this.amount + this.service_cost);
         this.numberload = false
         $('#btn-submit').removeAttr('disabled')
       } else if (this.method == '2') {
@@ -254,6 +259,8 @@ export default {
           this.total = this.amount + this.service_cost
           this.pack_id = response.data.pack_id;
           this.type = response.data.type;
+                      this.methodChange();
+
           this.numberload = false
           if(this.method != false){
          $('#btn-submit').removeAttr('disabled')

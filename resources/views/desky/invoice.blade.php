@@ -204,9 +204,9 @@
                     @endif
                     @endif
                     <p class="uk-text-center" uk-margin dir="rtl">
-                        <button class="uk-button uk-button-primary">طباعة الفاتورة</button>
+                        <a target="_blank" href="/print/recu/{{ $OID }}"><button class="uk-button uk-button-primary">طباعة الفاتورة</button></a>
 
-                        <button class="uk-button uk-button-default">حسابي</button>
+                        <a href="/u"> <button class="uk-button uk-button-default">حسابي</button></a>
                     </p>
                 </div>
 

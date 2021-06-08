@@ -3,6 +3,11 @@
         <div id="pieload" class=" uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle div-load"><span uk-spinner="ratio: 1.5"></span></div>
 
     <canvas id="cas-de-facturation-pie" width="400" height="185"></canvas>
+    <div v-if="max <  1" class="uk-text-center uk-margin uk-position-center">
+        <p>
+            لايوجد بيانات
+        </p>
+    </div>
   </div>
 </template>
 <script>
@@ -11,6 +16,7 @@ export default {
   data() {
     return {
       data: [],
+      max: 0,
     }
   },
   methods: {
@@ -20,6 +26,7 @@ export default {
         .post('/api/v1/user/statistiques/CasDeFacturation/json/' + this.year)
         .then((response) => {
           this.data = response.data
+          this.max =  Math.max.apply(Math, this.data)
           this.draw()
           $('#pieload').css('display', 'none')
         })

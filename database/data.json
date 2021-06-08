@@ -1,4 +1,43 @@
 {
+    "months":{
+        "1":{
+            "namefr": "janv"
+
+        },
+        "2":{
+            "namefr": "févr"
+        },
+        "3":{
+            "namefr": "mars"
+        },
+        "4":{
+            "namefr": "avr"
+        },
+        "5":{
+            "namefr": "mai"
+        },
+        "6":{
+            "namefr": "juin"
+        },
+        "7":{
+            "namefr": "juil"
+        },
+        "8":{
+            "namefr": "août"
+        },
+        "9":{
+            "namefr": "sept"
+        },
+        "10":{
+            "namefr": "oct"
+        },
+        "11":{
+            "namefr": "nov"
+        },
+        "12":{
+            "namefr": "déc"
+        }
+    },
     "NERYOU":{
         "BANK_NAME": "CFG BANK",
         "BANK_ACCOUNT": "NERYOU SARL",
@@ -40,15 +79,19 @@
     },
     "properties":{
         "GC": "Gestion des clients",
-        "SY": "Statistiques annuelles",
+        "SA": "Statistiques annuelles",
         "SM": "Statistiques mensuelles",
         "SW": "Statistiques de workflow",
+        "SAP": "Statistiques annuelles personnalisées",
+        "CDD5DA": "Chiffre d'affaires des 5 dernières années",
         "CT": "Calculateur de taxes",
         "RA": "Réseau d'auto-entrepreneurs",
         "SC": "Service clientèle",
         "FP": "Formulaires de facture et devis personnalisés",
         "CP": "Conseils professionnels",
-        "MDF": "Modification des devis et factures"
+        "MDF": "Modification des devis et factures",
+        "GS": "generale statistiques",
+        "IFT": "Informations fiscales trimestrielles"
 
     },
     "countries": [
@@ -1337,7 +1380,8 @@
     "packs": {
         "1": {
             "name": "الباقة الابتدائية",
-            "price": 10,
+            "namefr": "Forfait élémentaire",
+            "price": 99,
             "price_year": 899,
             "most": false,
             "save": 50,
@@ -1352,10 +1396,12 @@
                 "7": "الوصل 7/24"
             },
             "points": 60,
-            "time_payments": "شهر"
+            "time_payments": "شهر",
+            "properties": ["GS"]
         },
         "2": {
             "name": "الباقة المتوسطة",
+            "namefr": "Forfait moyen",
             "price": 199,
             "price_year": 1499,
             "save": 50,
@@ -1377,11 +1423,13 @@
                 "12": "شبكة المقاول الذاتي"
             },
             "points": 400,
-            "time_payments": "شهر"
+            "time_payments": "شهر",
+            "properties": ["SA","GS", "IFT"]
 
         },
         "3": {
-            "name": "الباقة VIP",
+            "name": "الباقة الاحترافية",
+            "namefr": "Forfait Professionnel",
             "price": 299,
             "price_year": 2499,
             "save": 50,
@@ -1405,7 +1453,8 @@
                 "14": "استشارة مع مختص"
             },
             "points": "unlimited",
-            "time_payments": "شهر"
+            "time_payments": "شهر",
+            "properties": ["GS","SAP", "SA", "CDD5DA", "IFT"]
 
 
         }
@@ -1457,9 +1506,14 @@
     "sector": {
         "0": "صناعة",
         "1": "خدمات",
-        "2": "صناعة",
-        "3": "تجارة",
-        "4": "الفنون والحرف اليدوية"
+        "2": "تجارة",
+        "3": "الفنون والحرف اليدوية"
+    },
+    "sector_fr": {
+        "0": "Fabrication",
+        "1": "Services",
+        "2": "Commerce",
+        "3": "l'artisanat"
     },
     "webinfo": {
         "rib": "230028858770621101390003 CIH BANK"

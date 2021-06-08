@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Mail\NewOrder;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
 //ResetPassword
 
 Route::post('ResetPassword/{sendMail}', ('Auth\ResetPasswordController@ResetPassword'));
@@ -17,25 +19,19 @@ Route::get('ResetPassword/{ResetPass}/{token}', ('Auth\ResetPasswordController@R
 Route::post('ResetPassword/{NewPass}/new/{token}', ('Auth\ResetPasswordController@ResetPassword'));
 
 // print invoice
-Route::get('print/invoice', 'pdfGeneretor@invoice');
+Route::get('print/recu/{OID}', 'pdfGeneretor@invoice');
 
 Route::group(
     ['domain' => 'account.' . env('APP_URL')], function () {
-        Route::get('/u/account', function(){
-           return redirect()->to('http://'.env('APP_URL').'/u/account?AccountRef&Home.do');
-        });
-    });
-Route::group(
-    ['domain' => 'account.' . env('APP_URL'), 'middleware' => 'guest'],
-    function () {
-// Set Cookie In Account.domain.ma
+        // Set Cookie In Account.domain.ma
 Route::get('/setusercookie/{token}/{random}/{name}/{content}/{time}/{redirect}', function($token,$random,$name,$content,$time,$redirect){
     if(isset($token)){
        $str = $random.$name.$content.$time.$redirect;
        $checkToken = md5($str);
        if($checkToken == $token){
      Cookie::queue($name, $content, $time);
-    return redirect()->to($redirect);
+   //  $url = urldecode($redirect);
+     return redirect()->to($redirect);
 
        }else{
            abort(400);
@@ -44,6 +40,14 @@ Route::get('/setusercookie/{token}/{random}/{name}/{content}/{time}/{redirect}',
         abort(404);
     }
 });
+        Route::get('/u/account', function(){
+           return redirect()->to('http://'.env('APP_URL').'/u/account?AccountRef&Home.do');
+        });
+    });
+Route::group(
+    ['domain' => 'account.' . env('APP_URL'), 'middleware' => 'guest'],
+    function () {
+
     });
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
@@ -60,6 +64,12 @@ Route::post(
 //generateOrderID
 Route::get('api/v1/generateOrderID', 'DeskyAlgController@generateOrderID');
 Route::middleware(['auth'])->group(function () {
+///api/v1/Statistiques/TurnoverLast5years
+Route::post('api/v1/Statistiques/TurnoverLast5years/json/{json}', 'UserStatiquesController@TurnoverLast5years');
+Route::post('api/v1/Statistiques/TurnoverLast5years/print/{print}', 'UserStatiquesController@TurnoverLast5years');
+//api/v1/user/statistiques/impot/json/
+Route::post('api/v1/user/statistiques/impot/{json}/{year}', 'UserStatiquesController@InmpotInfos');
+
     //LastClientsList
     Route::post(
         'api/v1/user/getCartInfos/{OID}',
@@ -80,8 +90,16 @@ Route::middleware(['auth'])->group(function () {
         'api/v1/user/statistiques/general/{json}/{year}',
         'UserStatiquesController@UserStatistiquesGeneral'
     );
-    Route::get(
-        'api/v1/user/statistiques/general/{json}/{year}/line',
+    Route::post(
+        'api/v1/user/statistiques/general/{json}/{year}/{SA}',
+        'UserStatiquesController@UserStatistiquesGeneral'
+    );
+    Route::post(
+        'api/v1/user/statistiques/general/{json}/line/{year}',
+        'UserStatiquesController@UserStatistiquesGeneralLine'
+    );
+    Route::post(
+        'api/v1/user/statistiques/{print}/{year}',
         'UserStatiquesController@UserStatistiquesGeneralLine'
     );
     Route::post(
@@ -265,6 +283,14 @@ Route::group(['domain' => env('APP_URL')], function () {
         Route::get('/statistique/annee', function () {
             return view('desky.panel.statistics.statistique-de-annee');
         });
+        //statistique-de-mois.blade
+        Route::get('/statistique/mois', function () {
+            return view('desky.panel.statistics.statistique-de-mois');
+        });
+        //tax-quarterly.blade.php
+        Route::get('/statistique/impot', function () {
+            return view('desky.panel.statistics.tax-quarterly');
+        });
         Route::get('/recu/{OID}', 'PaymentSystemController@RecuShow');
         Route::get('/creer/client', function () {
             return view('desky.panel.clients.c-client');
@@ -280,6 +306,9 @@ Route::group(['domain' => env('APP_URL')], function () {
         Route::get('/u/settings', function () {
             return view('desky/user-espace/user-settings');
         });
+        Route::get('/u/payments/history', function () {
+            return view('desky/user-espace/payments-history');
+        });
 
         Route::get('/devis/list', function () {
             return view('desky.panel.devis.list-devis');
@@ -291,10 +320,8 @@ Route::group(['domain' => env('APP_URL')], function () {
             return view('desky.panel.facture.list-facture');
         });
         Route::post('api/list-devis', 'DeskyUserDevisController@ListDevis');
-        Route::post(
-            'api/list-facture',
-            'DeskyUserFactureController@ListFacture'
-        );
+        Route::post('api/list-facture', 'DeskyUserFactureController@ListFacture');
+        Route::post('api/list-recu', 'PaymentSystemController@ListRecu');
 
         Route::post('api/creer_devis', 'DeskyUserDevisController@CreateDevis');
         Route::post(
@@ -384,28 +411,8 @@ Route::group(['domain' => env('APP_URL')], function () {
 
 /* SUBDEOMAINS */
 
-Route::any('dev_test', function () {
-    $str =
-        'PAY' .
-        '10.00' .
-        '401090' .
-        '21060701985554100' .
-        'rifaisaad3@gmail.com' .
-        '21af6d8381101b46e1010cc1f11901ed14cae0b9';
-return md5($str);
-
-//$str = '2357854'.'ref'.'dev_test'.'60'.'login';
-   //$hash = md5($str);
- //return $hash;
-    //    $str = date('ymdh').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 9);
-
-    /*$ip = request()->ip();
-    $ipdata = \Location::get($ip);
-    print_r($ipdata);*/
-   // return PDF::loadView('desky.models.reports.sales', array('enable_remote' => true))->setPaper('A4', 'portrait')->stream('DEVIS-.pdf');
-
-  //  return view('desky.models.reports.sales');
-
+Route::any('dev_test', function(){
+    return view('desky.models.recu-print');
 });
 
 Route::any('verfymail', function () {

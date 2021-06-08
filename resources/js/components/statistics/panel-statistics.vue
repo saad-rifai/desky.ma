@@ -116,10 +116,19 @@ export default {
           $('#form-loading').css('display', 'none')
         })
         .catch((error) => {
+            if(error.response.status == 402){
           $('#form-loading').css('display', 'none')
 
+         UIkit.modal("#neddpay-full").show();
+
+
+            }else{
+          $('#form-loading').css('display', 'none')
+this.getinfos()
+            }
+
           // console.log(error)
-          this.getinfos()
+          //this.getinfos()
         })
     },
   },

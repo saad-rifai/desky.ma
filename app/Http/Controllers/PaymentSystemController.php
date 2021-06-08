@@ -18,6 +18,7 @@ use App\Mail\NewOrder;
 use Swift_SmtpTransport;
 use Swift_Mailer;
 use App\Mail\SuccessPayments;
+use Illuminate\Support\Facades\Log;
 class PaymentSystemController extends Controller
 {
     public function CheckSubscriptions()
@@ -40,62 +41,81 @@ class PaymentSystemController extends Controller
             ->get();
         $points = 0;
         $unlimited = null;
+        $BigPack = null;
         foreach ($packs as $pack) {
             if ($pack->status == 1) {
                 if ($pack->pack_id == 1) {
                     if ($pack->type == 'm') {
-                        $olddate = Carbon::parse($pack->created_at);
+                        $olddate = Carbon::parse($pack->start_at);
                         $exdate = $olddate->addDays(31);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
                             $points = $points + $pack->point;
+                            if($BigPack < $pack->pack_id){
+                                $BigPack = $pack->pack_id;
+                            }
                         }
                     } elseif ($pack->type == 'y') {
-                        $olddate = Carbon::parse($pack->created_at);
+                        $olddate = Carbon::parse($pack->start_at);
                         $exdate = $olddate->addDays(366);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
                             $points = $points + $pack->point;
+                            if($BigPack < $pack->pack_id){
+                                $BigPack = $pack->pack_id;
+                            }
                         }
                     }
                 } elseif ($pack->pack_id == 2) {
                     if ($pack->type == 'm') {
-                        $olddate = Carbon::parse($pack->created_at);
+                        $olddate = Carbon::parse($pack->start_at);
                         $exdate = $olddate->addDays(31);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
                             $points = $points + $pack->point;
+                            if($BigPack < $pack->pack_id){
+                                $BigPack = $pack->pack_id;
+                            }
                         }
                     } elseif ($pack->type == 'y') {
-                        $olddate = Carbon::parse($pack->created_at);
+                        $olddate = Carbon::parse($pack->start_at);
                         $exdate = $olddate->addDays(366);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
                             $points = $points + $pack->point;
+                            if($BigPack < $pack->pack_id){
+                                $BigPack = $pack->pack_id;
+                            }
                         }
                     }
                 } elseif ($pack->pack_id == 3) {
                     if ($pack->type == 'm') {
-                        $olddate = Carbon::parse($pack->created_at);
+                        $olddate = Carbon::parse($pack->start_at);
                         $exdate = $olddate->addDays(31);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
                             $points = $points + $pack->point;
+                            if($BigPack < $pack->pack_id){
+                                $BigPack = $pack->pack_id;
+                            }
                             $unlimited = true;
                         }
                     } elseif ($pack->type == 'y') {
-                        $olddate = Carbon::parse($pack->created_at);
+                        $olddate = Carbon::parse($pack->start_at);
                         $exdate = $olddate->addDays(366);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
                             $points = $points + $pack->point;
+                            if($BigPack < $pack->pack_id){
+                                $BigPack = $pack->pack_id;
+                            }
                             $unlimited = true;
                         }
                     }
                 }
             }
         }
-        return ['points' => $points, 'unlimited' => $unlimited];
+        return ['points' => $points, 'unlimited' => $unlimited, 'BigPack' => $BigPack];
     }
     public function index(Request $request)
     {
@@ -216,7 +236,12 @@ class PaymentSystemController extends Controller
             $r_email = $orderdata['buyerEmail'];
             $c_status = $orderdata['status'];
             $c_totalAmount = $orderdata['totalAmount'];
-            $c_frais = intval($orderdata['totalAmount']) - intval($amount);
+
+            $DroitDeTimbre = (intval($amount) * env('DroitDeTimbre')) / 100;
+            $BingaFrais =  (intval($amount) * env('BingaFrais')) / 100;
+            $Tva = (($BingaFrais + $DroitDeTimbre) * 20)/100;
+            $c_frais = ($DroitDeTimbre + $BingaFrais + $Tva);
+
             $r_expirationDate = date(
                 'Y-m-d H:i:s',
                 strtotime($orderdata['expirationDate'])
@@ -293,6 +318,12 @@ class PaymentSystemController extends Controller
             $code = htmlspecialchars($request->code);
             $transaction_id = htmlspecialchars($request->externalId);
             $email = htmlspecialchars($request->buyerEmail);
+            $dateNow = date("Y-m-d H:i:s");
+            $SubsStmt = Subscriptions::where('email', $email)->where('OID' , $transaction_id)->update(['start_at' => $dateNow]);
+            if($SubsStmt){
+
+
+
             $PayInfos = DB::table('payment_systems')
                 ->where('transaction_id', $transaction_id)
                 ->where('code', $code)
@@ -319,11 +350,22 @@ class PaymentSystemController extends Controller
                         ->update(['status' => 1]);
 
                     if ($stmt) {
-                        $date = date('Y-m-d\TH:i:s');
-                        return response('100;' . $date)->setStatusCode(200);
+                        ignore_user_abort(true);
 
+                        ob_start();
+                        $date = date('Y-m-d\TH:i:s');
+                        echo '100;'.$date;
+                        $serverProtocole = filter_input(INPUT_SERVER, 'SERVER_PROTOCOL', FILTER_SANITIZE_STRING);
+                        header($serverProtocole.' 200 OK');
+                        header('Content-Encoding: none');
+                        header('Content-Length: '.ob_get_length());
+                        header('Connection: close');
+
+                        ob_end_flush();
+                        ob_flush();
+                        flush();
                         //Send Notification
-                      /*  $NotificationPushController = new NotificationPushController();
+                        $NotificationPushController = new NotificationPushController();
                         $subject = '! تم تفعيل باقتك';
                         $message =
                             'مرحبا نعلمك بأنه قد تلقينا دفعتك وقد تم تفعيل باقتك, طلب رقم ' .
@@ -369,21 +411,36 @@ class PaymentSystemController extends Controller
                             );
                             //return 'Mail send successfully';
                         } catch (\Exception $e) {
-                        }*/
+                        }
                     } else {
                         $date = date('Y-m-d\TH:i:s');
+                        Log::error(['error' => 'Payment Update Failed', 'ip' => request()->ip(), 'email' => $email, 'order' => $transaction_id]);
+
                         return response('000;' . $date)->setStatusCode(500);
                     }
                 } else {
                     $date = date('Y-m-d\TH:i:s');
+                    Log::error(['error' => 'orderCheckSum Failed', 'ip' => request()->ip(), 'email' => $email, 'order' => $transaction_id]);
+
                     return response('000;' . $date)->setStatusCode(500);
                 }
             } else {
                 $date = date('Y-m-d\TH:i:s');
+                Log::error(['error' => 'Failed to find In Payments System', 'ip' => request()->ip(), 'email' => $email, 'order' => $transaction_id]);
+
                 return response('000;' . $date)->setStatusCode(500);
             }
+        }else{
+            $date = date('Y-m-d\TH:i:s');
+            Log::error(['error' => 'Failed to find subscription', 'ip' => request()->ip(), 'email' => $email, 'order' => $transaction_id]);
+
+            return response('000;' . $date)->setStatusCode(500);
+
+        }
         } else {
             $date = date('Y-m-d\TH:i:s');
+            Log::error(['error' => 'Bad Request', 'ip' => request()->ip(), 'email' => Null, 'order' => Null]);
+
             return response('000;' . $date)->setStatusCode(500);
         }
     }
@@ -488,6 +545,7 @@ class PaymentSystemController extends Controller
                                     }
 
                                     if (isset($bingaPay) && $bingaPay) {
+                                        $CartClear = MyCart::where('email',Auth::user()->email)->where('OID', $OID)->delete();
                                         return response()->json(
                                             [
                                                 'success' =>
@@ -495,6 +553,7 @@ class PaymentSystemController extends Controller
                                             ],
                                             200
                                         );
+
                                     } else {
                                         return response()->json([
                                             'error' =>
@@ -676,6 +735,7 @@ class PaymentSystemController extends Controller
                                             //return 'Mail send successfully';
                                         } catch (\Exception $e) {
                                         }
+                                        $CartClear = MyCart::where('email',Auth::user()->email)->where('OID', $OID)->delete();
 
                                         return response()->json(
                                             [
@@ -847,5 +907,49 @@ class PaymentSystemController extends Controller
         } else {
             return response()->json(['error' => 'طلب خاطئ'], 400);
         }
+    }
+    public function ListRecu(Request $request){
+        if (isset($request->search) && $request->search == true) {
+            $term = $request->s_oid;
+            $filterData = DB::table('payment_systems')
+            ->where('payment_systems.buyer_email', Auth::user()->email)
+
+            ->join('subscriptions', 'payment_systems.OID', '=', 'subscriptions.OID')
+            ->select('subscriptions.*','payment_systems.*')
+            ->where('payment_systems.OID', 'LIKE', '%' . $request->OID . '%')
+            ->orderBy('payment_systems.created_at', 'DESC')
+            ->paginate(10);
+            $infos = DB::table('payment_systems')
+            ->where('payment_systems.buyer_email', Auth::user()->email)
+
+            ->join('subscriptions', 'payment_systems.OID', '=', 'subscriptions.OID')
+            ->select('subscriptions.*','payment_systems.*')
+            ->where('payment_systems.OID', 'LIKE', '%' . $request->OID . '%')
+             ->get();
+            $count = $infos->count();
+            if (isset($request->page) && $request->page != "") {
+                $pagenow = intval($request->page);
+            } else {
+                $pagenow = 1;
+            }
+            return  response()->json([ $filterData, 'count' => $count, 'pagenow' => $pagenow], 200);
+        } else {
+            $stmt = DB::table('payment_systems')
+            ->where('payment_systems.buyer_email', Auth::user()->email)
+
+            ->join('subscriptions', 'payment_systems.OID', '=', 'subscriptions.OID')
+            ->select('subscriptions.*','payment_systems.*')
+            ->orderBy('payment_systems.created_at', 'DESC')
+            ->paginate(10);
+          //  ;
+            $count = PaymentSystem::all()->where('buyer_email', Auth::user()->email)->count();
+            if (isset($request->page) && $request->page != "") {
+                $pagenow = intval($request->page);
+            } else {
+                $pagenow = 1;
+            }
+            return  response()->json([$stmt, 'count' => $count, 'pagenow' => $pagenow], 200);
+        }
+
     }
 }
