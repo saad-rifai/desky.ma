@@ -6,9 +6,7 @@
 <style>.l2 a {
     color: #f98a13 !important;
 }
-#form-loading{
-    display: block;
-}
+
 </style>
 
 @section('content')
