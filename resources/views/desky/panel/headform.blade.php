@@ -1,95 +1,63 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ar">
 
-<head>
+    <head>
+        <link rel="icon" href="{{ asset('image/desky/favicon.jpg') }}" type="image/jpg" sizes="17x17">
+        <!-- Facebook Pixel Code -->
 
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=742002670009558&ev=PageView&noscript=1" /></noscript>
-    <noscript>
-        <meta http-equiv="refresh" content="0;url=noscript.html">
-    </noscript>
-    <!-- End Facebook Pixel Code -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('description')">
-    <meta name="keywords" content="Business plan,
-    دراسة الجدوى ,
-   برنامج انطلاقة ,
-   الدعم الملكي ,
-   برنامج تمويل مقاولة ,
-    Etude de marche ,
-   Etude de faisabilite,
-     تمويل بنكي ,
-   تمويل بدون فائدة ,
-    انشاء مواقع انترنت ,
-   التسويق ,
-   براندينغ ,
-   مقاول ذاتي ,
-   مشروع ناجح,
-   بطاقة مقاول ذاتي,
-   Creation d entreprise au maroc,
-   نشاء شركة بالمغرب,
-   شركة بالمغرب,
-   التسويق  والبراندينغ,
-   Autoentrepreuneur facture,
-   Autoentrepreuneur devis,
-   Moqawala,
-   Moqawala.ma,
-   AyolSoft,
-   Creation siteweb,
-   مقاولة,
-   منصة مقاولة,
-   تصميم موقع الكتروني,
-   البيع عبر الانترنت,
-   محاكي قرض انطلاقة,
-   قرض انطلاقة,
-   الاستشارة في برنامج انطلاقة,
-   موقع مقاولة,
-   منصة moqawala
-   ">
-    <meta name="author" content="Saad Rifai">
-    <!-- SEO -->
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="{{ URL::current() }}">
-    <meta name="twitter:title" content="Moqawala - @yield('title')">
-    <meta name="twitter:description" content="@yield('description')">
-    <!-- Twitter Summary card images must be at least 120x120px -->
-    <meta name="twitter:image" content="@yield('ogimage')">
-
-    <!-- Open Graph data -->
-    <meta property="og:title" content="Moqawala - @yield('title')" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ URL::asset('') }}" />
-    <meta property="og:image" content="@yield('ogimage')" />
-    <meta property="og:description" content="@yield('description')" />
-    <meta property="og:site_name" content="Moqawala.ma" />
+        <noscript>
+            <meta http-equiv="refresh" content="0;url=noscript.html">
+        </noscript>
 
 
-    <title>Desky - @yield('title')</title>
-    <link href="{{ URL::asset('uikit/dist/css/uikit-rtl.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/main-style.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/desky-style.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/mobile-style.css') }}" rel="stylesheet">
-    <script src="{{ URL::asset('uikit/dist/js/uikit.min.js') }}"></script>
-    <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href='https://fonts.googleapis.com/css?family=Tajawal' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
-    <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
-    </script>
-    <!-- Font Awesome Pro CSS -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+        <!-- End Facebook Pixel Code -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
-</head>
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description"
+            content="تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك .">
+        <meta name="keywords"
+            content="desky.ma, منصة ديسكي, منصة desky, فاتورة المقاول الذاتي, دوفي المقاول الذاتي, نظام ادارة المقاول الذاتي, منصة ادارة فواتير المقاول الداتي, دوفي المقاول الذاتي, المقاول الذاتي بالمغرب, facture, devis, Autoentrepreneur devis, Autoentrepreneur facture, Auto Entrepreneur, اتحاد المقاوليين الذاتيين بالمغرب, المقاول الذاتي بالمغرب, نظام المقاول الذاتي,E-commerce Autoentrepreneur, Management, عمل المقاول الذاتي, بطاقة المقاول الذاتي, المقاول الذاتي مشروع ناجح, نجاح مقاول ذاتي, قصة نجاح مقاول ذاتي">
+        <meta name="author" content="Saad Rifai">
+        <!-- SEO -->
+        <!-- Twitter Card data -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="{{ URL::current() }}">
+        <meta name="twitter:title" content="desky - @yield('title')">
+        <meta name="twitter:description"
+            content="تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك .">
+        <!-- Twitter Summary card images must be at least 120x120px -->
+        <meta name="twitter:image" content="/image/desky/brand-cover.jpg">
+        <!-- Open Graph data -->
+        <meta property="og:title" content="desky - @yield('title')" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ URL::asset('') }}" />
+        <meta property="og:image" content="/image/desky/brand-cover.jpg" />
+        <meta property="og:description"
+            content="تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك ." />
+        <meta property="og:site_name" content="desky.ma" />
+        <title>Desky - @yield('title')</title>
+        <link href="{{ URL::asset('uikit/dist/css/uikit-rtl.min.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('css/main-style.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('css/desky-style.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('css/mobile-style.css') }}" rel="stylesheet">
+        <script src="{{ URL::asset('uikit/dist/js/uikit.min.js') }}"></script>
+        <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href='https://fonts.googleapis.com/css?family=Tajawal' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+        <script src="{{ asset('public/js/app.js') }}" defer></script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
+        </script>
+        <!-- Font Awesome Pro CSS -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css"
+            integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
 @php
 $datajson = file_get_contents('database/data.json');
 $jsondata = json_decode($datajson, true);

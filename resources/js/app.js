@@ -53,8 +53,9 @@ Vue.directive('clickoutside', {
 //LastFiveYearsChiffreDaffire
 //dowload-annual-report.vue
 //download-TurnoverLast5years
-
+//contact-form
 //list-recu
+Vue.component("contact-form", require("./components/public/contact-form.vue").default);
 Vue.component("list-recu", require("./components/payments/list-recu.vue").default);
 Vue.component("sendrecu", require("./components/payments/SendRecu.vue").default);
 Vue.component("download-annual-report", require("./components/statistics/download-annual-report.vue").default);

@@ -87,11 +87,11 @@
                 ><span uk-icon="icon:  file-pdf"></span> تصدير ملف PDF</a
               >
             </li>
-            <li class="uk-active">
+            <!--li class="uk-active">
               <a href="#"
                 ><span uk-icon="icon: link"></span> تحويل الى فاتورة
               </a>
-            </li>
+            </li-->
             <li class="uk-active">
               <a :href="'/devis/'+oid+'/'+uid+'/edit'"><span uk-icon="icon: file-edit"></span> تعديل</a>
             </li>
@@ -160,7 +160,7 @@ export default {
   },
   methods: {
     whatsapp_share: function(){
-            window.open('https://api.whatsapp.com/send?text' +this.share_link);
+            window.open('https://api.whatsapp.com/send?text=' +this.share_link);
 
     },
     check_privacy: function(){

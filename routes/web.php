@@ -10,45 +10,77 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
 //ResetPassword
+Route::get('sitemap.xml', 'AlgNoAuthController@sitemap');
 Route::any('verfymail/{UID}/{token}', 'verfymailController@verfylink');
-Route::post('ResetPassword/{sendMail}', ('Auth\ResetPasswordController@ResetPassword'));
+Route::post(
+    'ResetPassword/{sendMail}',
+    'Auth\ResetPasswordController@ResetPassword'
+);
 
+//SendMessage
+Route::post('api/v1/SendMessage', 'ContantUsController@SendMessage');
 //ResetPass
-Route::get('ResetPassword/{ResetPass}/{token}', ('Auth\ResetPasswordController@ResetPassword'));
+Route::get(
+    'ResetPassword/{ResetPass}/{token}',
+    'Auth\ResetPasswordController@ResetPassword'
+);
 //NewPass
-Route::post('ResetPassword/{NewPass}/new/{token}', ('Auth\ResetPasswordController@ResetPassword'));
+Route::post(
+    'ResetPassword/{NewPass}/new/{token}',
+    'Auth\ResetPasswordController@ResetPassword'
+);
 
 // print invoice
 Route::get('print/recu/{OID}', 'pdfGeneretor@invoice');
 
-Route::group(
-    ['domain' => 'account.' . env('APP_URL')], function () {
-        // Set Cookie In Account.domain.ma
-Route::get('/setusercookie/{token}/{random}/{name}/{content}/{time}/{redirect}', function($token,$random,$name,$content,$time,$redirect){
-    if(isset($token)){
-       $str = $random.$name.$content.$time.$redirect;
-       $checkToken = md5($str);
-       if($checkToken == $token){
-     Cookie::queue($name, $content, $time);
-   //  $url = urldecode($redirect);
-     return redirect()->to($redirect);
+Route::group(['domain' => 'account.' . env('APP_URL')], function () {
+    Route::get('register', function () {
+        if (Auth::check()) {
+            Auth::logout();
+            return view('user-espace/register');
 
-       }else{
-           abort(400);
-       }
-    }else{
-        abort(404);
-    }
-});
-        Route::get('/u/account', function(){
-           return redirect()->to('http://'.env('APP_URL').'/u/account?AccountRef&Home.do');
-        });
+        } else {
+            return view('user-espace/register');
+        }
     });
+    Route::get('login', function () {
+        if (Auth::check()) {
+           Auth::logout();
+           return view('user-espace/login');
+
+        } else {
+            return view('user-espace/login');
+        }
+    });
+    // Set Cookie In Account.domain.ma
+    Route::get(
+        '/setusercookie/{token}/{random}/{name}/{content}/{time}/{redirect}',
+        function ($token, $random, $name, $content, $time, $redirect) {
+            if (isset($token)) {
+                $str = $random . $name . $content . $time . $redirect;
+                $checkToken = md5($str);
+                if ($checkToken == $token) {
+                    Cookie::queue($name, $content, $time);
+                    //  $url = urldecode($redirect);
+                    return redirect()->to($redirect);
+                } else {
+                    abort(400);
+                }
+            } else {
+                abort(404);
+            }
+        }
+    );
+    Route::get('/u/account', function () {
+        return redirect()->to(
+            'http://' . env('APP_URL') . '/u/account?AccountRef&Home.do'
+        );
+    });
+});
 Route::group(
     ['domain' => 'account.' . env('APP_URL'), 'middleware' => 'guest'],
-    function () {
-
-    });
+    function () {}
+);
 Route::get('print/devis/{OID}/{UID}/{token_share}', 'pdfGeneretor@devis');
 Route::get('print/facture/{OID}/{UID}/{token_share}', 'pdfGeneretor@facture');
 //AddToCart
@@ -64,15 +96,34 @@ Route::post(
 //generateOrderID
 Route::get('api/v1/generateOrderID', 'DeskyAlgController@generateOrderID');
 Route::middleware(['auth'])->group(function () {
-///api/v1/Statistiques/TurnoverLast5years
-Route::post('api/v1/Statistiques/TurnoverLast5years/json/{json}', 'UserStatiquesController@TurnoverLast5years');
-Route::post('api/v1/Statistiques/TurnoverLast5years/print/{print}', 'UserStatiquesController@TurnoverLast5years');
-//api/v1/user/statistiques/impot/json/
-Route::post('api/v1/user/statistiques/impot/{json}/{year}', 'UserStatiquesController@InmpotInfos');
 
-//getUserTvaPercentage
+    //CheckFeedBack
 
-Route::get('api/v1/getUserTvaPercentage', 'DeskyAlgController@getUserTvaPercentage');
+    Route::post("api/v1/CheckFeedBack", "UserFeedbackController@CheckFeedBack");
+    //SendFeedBack
+    Route::post("api/v1/SendFeedBack", "UserFeedbackController@SendFeedBack");
+
+    ///api/v1/Statistiques/TurnoverLast5years
+    Route::post(
+        'api/v1/Statistiques/TurnoverLast5years/json/{json}',
+        'UserStatiquesController@TurnoverLast5years'
+    );
+    Route::post(
+        'api/v1/Statistiques/TurnoverLast5years/print/{print}',
+        'UserStatiquesController@TurnoverLast5years'
+    );
+    //api/v1/user/statistiques/impot/json/
+    Route::post(
+        'api/v1/user/statistiques/impot/{json}/{year}',
+        'UserStatiquesController@InmpotInfos'
+    );
+
+    //getUserTvaPercentage
+
+    Route::get(
+        'api/v1/getUserTvaPercentage',
+        'DeskyAlgController@getUserTvaPercentage'
+    );
     //LastClientsList
     Route::post(
         'api/v1/user/getCartInfos/{OID}',
@@ -213,24 +264,12 @@ Route::group(
         Route::post('/auth/register', 'Auth\RegisterController@create');
         Route::post('/auth/login', 'Auth\LoginController@login');
 
-        Route::get('login', function () {
-            if (Auth::check()) {
-                return redirect('/');
-            } else {
-                return view('user-espace/login');
-            }
-        });
+
         Route::get('/', function () {
             return redirect('login');
         });
 
-        Route::get('register', function () {
-            if (Auth::check()) {
-                return redirect('/');
-            } else {
-                return view('user-espace/register');
-            }
-        });
+
         Route::get('reset_password', function () {
             return view('user-espace.reset_password');
         });
@@ -271,6 +310,9 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/politique-de-confidentialite', function () {
         return view('desky.pages.privacy');
     });
+    Route::get('/À-propos-du-service', function () {
+        return view('desky.pages.about-service');
+    });
     Route::get('/tarifs', function () {
         return view('desky/tarif');
     });
@@ -284,13 +326,17 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/Contactez-nous', function () {
         return view('desky.pages.Contactez-nous');
     });
-  /*  Route::get('/ae-network', function () {
+    /*  Route::get('/ae-network', function () {
         return view('desky/ae-network');
     });*/
     /* Any Route */
 
     /* Auth Routes */
     Route::middleware(['auth'])->group(function () {
+        Route::get('register/pack', function(){
+            return view('desky.user-espace.register-pack');
+        });
+        Route::any('/pay/{id}/{OID}', 'PaymentSystemController@index');
         //statistique
         Route::get('/statistique/annee', function () {
             return view('desky.panel.statistics.statistique-de-annee');
@@ -332,7 +378,10 @@ Route::group(['domain' => env('APP_URL')], function () {
             return view('desky.panel.facture.list-facture');
         });
         Route::post('api/list-devis', 'DeskyUserDevisController@ListDevis');
-        Route::post('api/list-facture', 'DeskyUserFactureController@ListFacture');
+        Route::post(
+            'api/list-facture',
+            'DeskyUserFactureController@ListFacture'
+        );
         Route::post('api/list-recu', 'PaymentSystemController@ListRecu');
 
         Route::post('api/creer_devis', 'DeskyUserDevisController@CreateDevis');
@@ -423,7 +472,7 @@ Route::group(['domain' => env('APP_URL')], function () {
 
 /* SUBDEOMAINS */
 
-Route::any('dev_test', function(){
+Route::any('dev_test', function () {
     return view('desky.models.recu-print');
 });
 
@@ -446,7 +495,7 @@ Route::any('verfymail', function () {
 Route::post('/pay/{id}/{OID}/api', 'PaymentSystemController@api');
 Route::any('/coupons/api/checker', 'CouponsController@checker');
 
-Route::any('/pay/{id}/{OID}', 'PaymentSystemController@index');
+
 Route::get('/successmessage', function () {
     return view('successmessage');
 });

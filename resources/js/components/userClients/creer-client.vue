@@ -41,6 +41,7 @@
                 value=""
                 required
               />
+              <small>الاسم بالأحرف الفرنسية</small>
             </div>
             <div class="uk-text-danger" v-if="errors.errors.c_name">
               {{ errors.errors.c_name[0] }}
@@ -332,7 +333,13 @@ this.invid = responseNumber.toString().padStart(8, "0");
         })
         .catch((error) => {
           this.errors.record(error.response.data)
-          if (error.response.status == 500) {
+          if(error.response.status == 422){
+              UIkit.notification({
+          message: "يرجى التحقق من المخلات *",
+          status: 'danger',
+        })
+          }
+          else{
                   UIkit.notification({
           message: error.response.data.message,
           status: 'danger',

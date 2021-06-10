@@ -159,7 +159,7 @@ export default {
   },
   methods: {
     whatsapp_share: function(){
-            window.open('https://api.whatsapp.com/send?text' +this.share_link);
+            window.open('https://api.whatsapp.com/send?text=' +this.share_link);
 
     },
     check_privacy: function(){

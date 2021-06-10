@@ -41,7 +41,7 @@
             </div>
         </div>
     </header>
-    <div class="wd-80 uk-margin uk-margin-bottom" id="aboutus" uk-scrollspy="cls:uk-animation-fade; repeat: true">
+    <div class="wd-80 uk-margin uk-margin-bottom" id="aboutservice" uk-scrollspy="cls:uk-animation-fade; repeat: true">
         <article class="uk-article" align="center">
 
             <h1 style="font-size: 25px" class="uk-article-title">عن الخدمة</h1>
@@ -179,7 +179,7 @@
     <br>
     <br>
 
-    <div id="facture" class="wd-90 uk-margin-top ">
+    <div id="a-propos-de-nous" class="wd-90 uk-margin-top ">
 
         <div uk-scrollspy="cls: uk-animation-slide-right; target: .uk-card-body; delay: 300; repeat: true"
             class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>

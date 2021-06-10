@@ -1,9 +1,6 @@
 @extends('desky.layouts.app')
 @section('title', 'سياسة الاستخدام')
-@section('description',
-    ' أول مكتب خاص بالمقاول الذاتي على الانترنت لادارة نشاطك التجاري باحترافية من أي مكان وفي أي
-    وقت.',)
-@section('ogimage', asset('image/service/2.jpg'))
+
 @section('content')
 <div class="form-border wd-80 uk-margin-top uk-margin-bottom uk-card-default uk-padding">
     <p style="text-align: right;" dir="rtl"><strong>1&nbsp;</strong><strong>&ndash; </strong><strong>مقدمة</strong></p>

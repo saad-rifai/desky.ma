@@ -245,7 +245,13 @@ export default {
             timeout: 5000,
           });
         }).catch((error) => {
-            console.log(error);
+                      UIkit.notification({
+            message: "فشل تحديث السلة يرجى اعادة المحاولة",
+            status: "danger",
+            pos: "top-center",
+            timeout: 5000,
+          });
+            //console.log(error);
         });
 
 

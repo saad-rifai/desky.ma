@@ -1,32 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ar">
 <head>
     <link rel="icon" href="{{ asset('image/desky/favicon.jpg') }}" type="image/jpg" sizes="17x17">
     <!-- Facebook Pixel Code -->
-    <script>
-        ! function(f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function() {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '742002670009558');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=742002670009558&ev=PageView&noscript=1" /></noscript>
+
             <noscript>
                 <meta http-equiv="refresh" content="0;url=noscript.html">
               </noscript>
@@ -39,58 +16,24 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('description')">
-    <meta name="keywords" content="Business plan,
-    دراسة الجدوى ,
-   برنامج انطلاقة ,
-   الدعم الملكي ,
-   برنامج تمويل مقاولة ,
-    Etude de marche ,
-   Etude de faisabilite,
-     تمويل بنكي ,
-   تمويل بدون فائدة ,
-    انشاء مواقع انترنت ,
-   التسويق ,
-   براندينغ ,
-   مقاول ذاتي ,
-   مشروع ناجح,
-   بطاقة مقاول ذاتي,
-   Creation d entreprise au maroc,
-   نشاء شركة بالمغرب,
-   شركة بالمغرب,
-   التسويق  والبراندينغ,
-   Autoentrepreuneur facture,
-   Autoentrepreuneur devis,
-   Moqawala,
-   Moqawala.ma,
-   AyolSoft,
-   Creation siteweb,
-   مقاولة,
-   منصة مقاولة,
-   تصميم موقع الكتروني,
-   البيع عبر الانترنت,
-   محاكي قرض انطلاقة,
-   قرض انطلاقة,
-   الاستشارة في برنامج انطلاقة,
-   موقع مقاولة,
-   منصة moqawala
-   ">
+    <meta name="description" content="تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك .">
+    <meta name="keywords" content="desky.ma, منصة ديسكي, منصة desky, فاتورة المقاول الذاتي, دوفي المقاول الذاتي, نظام ادارة المقاول الذاتي, منصة ادارة فواتير المقاول الداتي, دوفي المقاول الذاتي, المقاول الذاتي بالمغرب, facture, devis, Autoentrepreneur devis, Autoentrepreneur facture, Auto Entrepreneur, اتحاد المقاوليين الذاتيين بالمغرب, المقاول الذاتي بالمغرب, نظام المقاول الذاتي,E-commerce Autoentrepreneur, Management, عمل المقاول الذاتي, بطاقة المقاول الذاتي, المقاول الذاتي مشروع ناجح, نجاح مقاول ذاتي, قصة نجاح مقاول ذاتي">
     <meta name="author" content="Saad Rifai">
     <!-- SEO -->
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="{{ URL::current() }}">
-    <meta name="twitter:title" content="Moqawala - @yield('title')">
-    <meta name="twitter:description" content="@yield('description')">
+    <meta name="twitter:title" content="desky - @yield('title')">
+    <meta name="twitter:description" content="تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك .">
     <!-- Twitter Summary card images must be at least 120x120px -->
-    <meta name="twitter:image" content="@yield('ogimage')">
+    <meta name="twitter:image" content="/image/desky/brand-cover.jpg">
     <!-- Open Graph data -->
-    <meta property="og:title" content="Moqawala - @yield('title')" />
+    <meta property="og:title" content="desky - @yield('title')" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ URL::asset('') }}" />
-    <meta property="og:image" content="@yield('ogimage')" />
-    <meta property="og:description" content="@yield('description')" />
-    <meta property="og:site_name" content="Moqawala.ma" />
+    <meta property="og:image" content="/image/desky/brand-cover.jpg" />
+    <meta property="og:description" content="تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك ." />
+    <meta property="og:site_name" content="desky.ma" />
     <title>Desky - @yield('title')</title>
     <link href="{{ URL::asset('uikit/dist/css/uikit-rtl.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/main-style.css') }}" rel="stylesheet">
@@ -106,7 +49,7 @@
     </script>
     <!-- Font Awesome Pro CSS -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 @php
@@ -134,12 +77,19 @@ $jsondata = json_decode($datajson, true);
                         <div class="uk-navbar-center">
 
                             <ul class="uk-navbar-nav">
-                                <li><a href="{{ URL::asset('/#aboutus') }}" class="uk-button-text">عن الخدمة </a>
-                                </li>
-                                <li><a href="{{ URL::asset('/#whyus') }}" class="uk-button-text">المميزات</a></li>
-                                <li><a href="{{ URL::asset('/q&a') }}" class="uk-button-text">الاسئلة الشائعة</a></li>
-                                <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> الأسعار</a></li>
-                                <li><a href="{{ URL::asset('/a-propos-de-nous') }}" class="uk-button-text"> من نحن</a></li>
+                                @if(Route::getCurrentRoute()->uri() == '/')
+                                <li><a href="{{ URL::asset('/#aboutservice') }}" class="uk-button-text">عن الخدمة </a>     </li>
+                                <li><a href="{{ URL::asset('/#q&a') }}" class="uk-button-text">الاسئلة الشائعة</a></li>
+                                <li><a href="{{ URL::asset('/#tarifs') }}" class="uk-button-text"> الأسعار</a></li>
+                                <li><a href="{{ URL::asset('/#a-propos-de-nous') }}" class="uk-button-text"> من نحن</a></li>
+                                @else
+                                    <li><a href="{{ URL::asset('/À-propos-du-service') }}" class="uk-button-text">عن الخدمة </a>     </li>
+                                    <li><a href="{{ URL::asset('/q&a') }}" class="uk-button-text">الاسئلة الشائعة</a></li>
+                                    <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> الأسعار</a></li>
+                                    <li><a href="{{ URL::asset('/a-propos-de-nous') }}" class="uk-button-text"> من نحن</a></li>
+                                @endif
+
+
                                 <li><a href="{{ URL::asset('/Contactez-nous') }}" class="uk-button-text"> تواصل معنا</a></li>
                                 <!--li><a href="{{ URL::asset('/#q&a') }}" class="uk-button-text"> شبكة المقاولين
                                         الذاتيين</a></li>
@@ -201,14 +151,41 @@ $jsondata = json_decode($datajson, true);
                     <br>
                     <div class="uk-child-width-expand@s" uk-grid dir="rtl">
                         <div>
+                            <div class="mobile-nav-logo">
+                                <img src="{{asset('image/desky-white-logo.png')}}" alt="desky.ma - white logo">
+                            </div>
+                            <hr class="uk-divider-icon">
                             <h4></h4>
                             <ul class="uk-list uk-list-large">
-                                <li><a href="{{ URL::asset('/#aboutus') }}" class="uk-button-text">عن الخدمة </a>
-                                </li>
-                                <li><a href="{{ URL::asset('/#whyus') }}" class="uk-button-text">المميزات</a></li>
-                                <li><a href="{{ URL::asset('/#videos') }}" class="uk-button-text">لماذا نحن</a></li>
-                                <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> الأسعار</a></li>
+                                @if(Route::getCurrentRoute()->uri() == '/')
+                                <li><a href="{{ URL::asset('/#aboutservice') }}" class="uk-button-text">عن الخدمة </a>     </li>
+                                <li><a href="{{ URL::asset('/#q&a') }}" class="uk-button-text">الاسئلة الشائعة</a></li>
+                                <li><a href="{{ URL::asset('/#tarifs') }}" class="uk-button-text"> الأسعار</a></li>
+                                <li><a href="{{ URL::asset('/#a-propos-de-nous') }}" class="uk-button-text"> من نحن</a></li>
+                                @else
+                                    <li><a href="{{ URL::asset('/À-propos-du-service') }}" class="uk-button-text">عن الخدمة </a>     </li>
+                                    <li><a href="{{ URL::asset('/q&a') }}" class="uk-button-text">الاسئلة الشائعة</a></li>
+                                    <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> الأسعار</a></li>
+                                    <li><a href="{{ URL::asset('/a-propos-de-nous') }}" class="uk-button-text"> من نحن</a></li>
+                                @endif
+                                <li><a href="{{ URL::asset('/Contactez-nous') }}" class="uk-button-text"> تواصل معنا</a></li>
+
                             </ul>
+                            <hr class="uk-divider-icon">
+
+                            <div id="copyright">
+                                <div class="container" style="width: auto !important;">
+                                    <!-- Copyright Text Start -->
+                                    <small dir="rtl">
+
+                                        Desky.ma منتج تابع لشركة NERYOU جميع الحقوق محفوظة © {{ now()->year }}
+                                        <br>
+
+                                        <small>v {{ env('APP_VERSION') }} ({{ env('APP_RELEASE_YEAR') }}) @if (env('APP_BETA') == true) BETA @endif</small>
+                                    </small>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -224,20 +201,16 @@ $jsondata = json_decode($datajson, true);
 
                 <ul class="uk-list">
                     <h4><span uk-icon="icon: chevron-left"></span> منصة Desky </h4>
-                    <li><a href="{{ URL::asset('/contactus') }}"><span uk-icon="icon: link"></span> عن الخدمة </a>
-                    </li>
-                    <li><a href="{{ URL::asset('/contactus') }}"><span uk-icon="icon: link"></span> الأسعار</a></li>
-                    <li><a href="{{ URL::asset('/contactus') }}"><span uk-icon="icon: link"></span> شبكة المقاولين
-                            الذاتيين بالمغرب</a></li>
-                    <li><a href="{{ URL::asset('/contactus') }}"><span uk-icon="icon: link"></span> تواصل معنا</a>
-                    </li>
-                    <li><a href="{{ URL::asset('/contactus') }}"><span uk-icon="icon: link"></span> شروط
-                            الاستخدام</a></li>
-                    <li><a href="{{ URL::asset('/contactus') }}"> <span uk-icon="icon: link"></span> بيان
+                    <li><a href="{{ URL::asset('/À-propos-du-service') }}" class="uk-button-text"> <span uk-icon="icon: link"></span> عن الخدمة </a>     </li>
+                    <li><a href="{{ URL::asset('/q&a') }}" class="uk-button-text"> <span uk-icon="icon: link"></span> الاسئلة الشائعة</a></li>
+                    <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> <span uk-icon="icon: link"></span> الأسعار</a></li>
+                    <li><a href="{{ URL::asset('/a-propos-de-nous') }}" class="uk-button-text"> <span uk-icon="icon: link"></span> من نحن</a></li>
+
+                    <li><a href="{{ URL::asset('/politique-de-confidentialite') }}"> <span uk-icon="icon: link"></span> بيان
                             الخصوصية</a></li>
                     <li>
                         <h4>عن منصة Desky.ma </h4>
-                        <p class="des-footer" style="color:white">
+                        <p class="des-footer" style="color:#4e4e4e">
                             تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك .
 
                         </p>
@@ -247,20 +220,19 @@ $jsondata = json_decode($datajson, true);
                 <div class="uk-width-1-2@s">
                 <ul class="uk-list uk-width-1-1">
                     <h4><span uk-icon="icon: chevron-left"></span> روابط مفيدة</h4>
-                    <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span uk-icon="icon: link"></span>
-                            مكتبة المعرفة</a>
-                    </li>
-                    <li><a href="{{ URL::asset('/service/je-veux-devenir-auto-entrepreneur') }}"><span
+
+                    <li><a href="{{ URL::asset('/Contactez-nous') }}"><span
                                 uk-icon="icon: link"></span>
                             تواصل معنا</a></li>
-                    <li><a href="{{ URL::asset('/service/consultation') }}"><span uk-icon="icon: link"></span>
-                            المدونة</a></li>
+
 
                     <h4><span uk-icon="icon: chevron-left"></span> طرق الدفع</h4>
 
                     <li>
                         <img class="logo-pay-footer" src="{{ URL::asset('image/icon/logo-wafacash.jpg') }}"
                             alt="wafacach - desky.ma">
+                            <img class="logo-pay-footer" src="{{ URL::asset('image/partners/cfg-logo.svg') }}"
+                            alt="CFG BANK - desky.ma">
                         <!--img class="logo-pay-footer" src="{{ URL::asset('image/icon/visa-mastercard.png') }}"
                             alt="visa master card - desky.ma">
                             <img class="logo-pay-footer" src="{{ URL::asset('image/icon/cmi-logo.png') }}"
@@ -284,21 +256,20 @@ $jsondata = json_decode($datajson, true);
                 </ul>
                 </div>
             </div>
-            <hr style="border-top: 0.5px solid #d97900; ">
+            <hr style="border-top: 0.5px solid #d8d8d8 ">
             <div id="copyright">
                 <div class="container" style="width: auto !important;">
                     <!-- Copyright Text Start -->
-                    <p style="color: white" dir="rtl">
+                    <p style="color: #3a3a3a" dir="rtl">
 
                         Desky.ma منتج تابع لشركة NERYOU S.A.R.L جميع الحقوق محفوظة © {{ now()->year }}
 
                     </p>
                     <!-- Copyright Text End -->
-                    <p style="color: white">
+                    <p style="color: 3a3a3a">
 
-                        @php
+                        <small>v {{ env('APP_VERSION') }} ({{ env('APP_RELEASE_YEAR') }}) @if (env('APP_BETA') == true) BETA @endif</small>
 
-                        @endphp
                     </p>
                 </div>
             </div>

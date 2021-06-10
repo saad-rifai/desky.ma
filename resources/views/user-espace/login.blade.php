@@ -3,8 +3,6 @@
 @extends('desky.panel.headform')
 
 @section('title', 'تسجيل الدخول')
-@section('description', 'منصة مقاولة توفر لك العديد من الخدمات لمساعدتك على بدء و تطوير نشاطك التجاري')
-@section('ogimage', asset('image/moqawala.ma.jpg'))
 @section('content')
 <div  class="form-border wd-80 uk-margin-top uk-margin-bottom uk-card-default uk-padding">
     <h2 class="uk-card-title uk-text-right">تسجيل الدخول </h2>

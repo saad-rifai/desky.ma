@@ -1147,19 +1147,71 @@ button.btn-small-act.green {
 }
 footer {
     width: 100%;
-    background-color: #f78b03;
+    background-color: #fbfbfb;
     padding-top: 55px;
     padding-bottom: 50px;
 }
 footer h4 {
-    color: #fff;
+    color: #f78b03;
+}
+.uk-offcanvas-bar a:hover {
+    transition: ease 0.4s !important;
+    color: #3a3a3a !important;
+}
+.rate {
+    height: 46px;
+    padding: 0 10px;
+    position: absolute;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:left;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
 }
 footer a {
     font-size: 18px;
-    color: #fff;
+    color: #505050;
     text-decoration: none;
 }
-
+.uk-icon-button {
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    border-radius: 500px;
+    background: #f78b03;
+    color: #fff;
+    vertical-align: middle;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: .1s ease-in-out;
+    transition-property: color,background-color;
+}
 img.left-ayol {
     float: left;
     width: 100%;

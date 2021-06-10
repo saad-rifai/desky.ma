@@ -275,15 +275,11 @@ class RegisterController extends Controller
 
                         }
                     } else {
-                        if (Cookie::get('ref')) {
-                            $ref = base64_decode(Cookie::get('ref'));
-                            echo json_encode(array('token' => Session::getId(), 'ref' => $ref, 'status' => 'ok')) ;
 
-                        } else {
-                            echo json_encode(array('token' => Session::getId(), 'ref' => 'u', 'status' => 'ok')) ;
+                            echo json_encode(array('token' => Session::getId(), 'ref' => 'register/tarifs', 'status' => 'ok')) ;
 
                            // return response()->json([],200);
-                        }
+
                     }
                     $serverProtocole = filter_input(
                         INPUT_SERVER,
