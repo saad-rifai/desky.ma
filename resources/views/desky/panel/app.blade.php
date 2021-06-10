@@ -417,7 +417,7 @@ $jsondata = json_decode($datajson, true);
                 @endphp
                 @if ($c_products < 1)
                     <div class="alert-f-w warning">
-                        <p dir="rtl"><span uk-icon="icon: warning"></span> لقد نفد رصيدك يرجى <a href="#">تجديد اشتراكك</a>
+                        <p dir="rtl"><span uk-icon="icon: warning"></span> لقد نفد رصيدك يرجى <a href="/register/pack">تجديد اشتراكك</a>
                         </p>
                     </div>
                 @endif
