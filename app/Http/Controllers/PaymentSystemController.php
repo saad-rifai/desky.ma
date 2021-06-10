@@ -215,7 +215,7 @@ class PaymentSystemController extends Controller
                 'expirationDate' => "$exdate",
                 'amount' => "$amount",
                 'storeId' => '401090',
-                'payUrl' => 'https://s.moqawala.ma/api/v1/partner/binga/notif',
+                'payUrl' => 'https://desky.ma/api/v1/partner/binga/notif',
                 'buyerFirstName' => "$fname",
                 'buyerLastName' => "$lname",
                 'buyerEmail' => "$email",

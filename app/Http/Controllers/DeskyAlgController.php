@@ -454,8 +454,8 @@ class DeskyAlgController extends Controller
                         'tva' => $tva,
                         'slogon' => $request->slogan,
                         'description' => $request->description,
-                        'model_devis' => $request->model_devis,
-                        'model_facture' => $request->model_facute
+                        'model_devis' => 0,
+                        'model_facture' => 0
 
 
                     ]);
@@ -485,8 +485,8 @@ class DeskyAlgController extends Controller
                     'tva' => $tva,
                     'slogon' => $request->slogan,
                     'description' => $request->description,
-                    'model_devis' => $request->model_devis,
-                    'model_facture' => $request->model_facute
+                    'model_devis' => 0,
+                    'model_facture' => 0
 
 
                 ]);
