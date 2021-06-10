@@ -10,6 +10,7 @@ use App\Subscriptions;
 use Illuminate\Support\Facades\Auth;
 use App\desky_user_clients;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Carbon;
 
 class DeskyUserFactureController extends Controller
 {
@@ -25,7 +26,7 @@ class DeskyUserFactureController extends Controller
                 ->where('desky_user_factures.email', Auth::user()->email)
                 ->get();
             });
-            
+
             if($DevisInfos->count() > 0){
                 if(isset($request->datajson)){
                     return response()->json($DevisInfos, 200);
@@ -50,7 +51,7 @@ class DeskyUserFactureController extends Controller
         $json = json_decode($data, true);
 
         $this->validate($request, [
-            'c_name' => 'required|min:5|max:20|regex:/^[\p{L} ]+$/u',
+            'c_name' => 'required|min:5|max:20|regex:/^[\w\d\s ]*$/',
             'c_email' => 'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:80',
             'c_phone' => 'required|regex:/[0-9]{9}/',
             'c_ice' => 'nullable|min:15|max:17|regex:/[0-9]/',
@@ -67,8 +68,10 @@ class DeskyUserFactureController extends Controller
         ], $message = [
             'required' => 'هذا الحقل مطلوب *',
             'regex' => 'يرجى التحقق من المدخلات *',
-            'max' => 'يرجى التحقق من المدخلات *',
-            'min' => 'يرجى التحقق من المدخلات *'
+            'max' => 'المدخلات أطول من اللازم *',
+            'min' => 'المدخلات أقصر من اللازم *',
+            'email' => 'يرجى ادخال بريد الكتروني صالح *',
+            'notes.max' => 'الحد الأقصى للملاحظات 700 حرف *'
 
         ]);
         if(!isset($json['type_clients'][$request->c_type])){
@@ -141,14 +144,30 @@ class DeskyUserFactureController extends Controller
                $token_share = substr(str_shuffle($permitted_chars), 0, 24);
 
                 $email = Auth::user()->email;
-                $products = Subscriptions::all()->where('email', $email);
+                $products = DB::table('subscriptions')
+                ->join(
+                    'payment_systems',
+                    'payment_systems.OID',
+                    '=',
+                    'subscriptions.OID'
+                )
+                ->select(
+                    'subscriptions.*',
+                    'payment_systems.status',
+                    'payment_systems.code'
+                )
+                ->where('email', Auth::user()->email)
+                ->where('payment_systems.buyer_email', Auth::user()->email)
+                ->where('payment_systems.status', 1)
+                ->get();
                 $stop_minus = false;
 
+
                 foreach ($products as $product) {
-                    if ($product->pack_id == 1) {
+                    if ($product->pack_id == 1 && $product->type == "m") {
                         if ($product->point > 0) {
-                            $olddate = $product->created_at;
-                            $exdate = $olddate->addDays(31);
+                            $olddate = $product->start_at;
+                            $exdate = Carbon::parse($olddate)->addDays(31);
                             $timenow = date("Y-m-d H:i:s");
                             if ($timenow < $exdate) {
                                 if ($stop_minus == false) {
@@ -162,11 +181,28 @@ class DeskyUserFactureController extends Controller
                                 }
                             }
                         }
-                    } elseif ($product->pack_id == 2) {
+                    }elseif ($product->pack_id == 1 && $product->type == "y") {
+                        if ($product->point > 0) {
+                            $olddate = $product->start_at;
+                            $exdate = Carbon::parse($olddate)->addDays(366);
+                            $timenow = date("Y-m-d H:i:s");
+                            if ($timenow < $exdate) {
+                                if ($stop_minus == false) {
+                                    $points = $product->point;
+                                    $editdata = array(
+                                        'point' => ($points - 1)
+
+                                    );
+                                    DB::table('subscriptions')->where('id', $product->id)->update($editdata);
+                                    $stop_minus = true;
+                                }
+                            }
+                        }
+                    } elseif ($product->pack_id == 2 && $product->type == "m") {
                         if ($product->point > 0) {
 
-                            $olddate = $product->created_at;
-                            $exdate = $olddate->addDays(121);
+                            $olddate = $product->start_at;
+                            $exdate = Carbon::parse($olddate)->addDays(31);
                             $timenow = date("Y-m-d H:i:s");
                             if ($stop_minus == false) {
                                 $points = $product->point;
@@ -178,9 +214,32 @@ class DeskyUserFactureController extends Controller
                                 $stop_minus = true;
                             }
                         }
-                    } elseif ($product->pack_id == 3) {
-                        $olddate = $product->created_at;
-                        $exdate = $olddate->addDays(365);
+                    }elseif ($product->pack_id == 2 && $product->type == "y") {
+                        if ($product->point > 0) {
+
+                            $olddate = $product->start_at;
+                            $exdate = Carbon::parse($olddate)->addDays(366);
+                            $timenow = date("Y-m-d H:i:s");
+                            if ($stop_minus == false) {
+                                $points = $product->point;
+                                $editdata = array(
+                                    'point' => ($points - 1)
+
+                                );
+                                DB::table('subscriptions')->where('id', $product->id)->update($editdata);
+                                $stop_minus = true;
+                            }
+                        }
+                    } elseif ($product->pack_id == 3 && $product->type == "m") {
+                        $olddate = $product->start_at;
+                        $exdate = Carbon::parse($olddate)->addDays(31);
+                        $timenow = date("Y-m-d H:i:s");
+                        if ($timenow < $exdate) {
+                            $unlimited = true;
+                        }
+                    }elseif ($product->pack_id == 3 && $product->type == "y") {
+                        $olddate = $product->start_at;
+                        $exdate = Carbon::parse($olddate)->addDays(366);
                         $timenow = date("Y-m-d H:i:s");
                         if ($timenow < $exdate) {
                             $unlimited = true;
@@ -210,7 +269,7 @@ class DeskyUserFactureController extends Controller
                             'country' => $request->c_country,
                             'city' => $request->c_city,
                             'adresse' => $request->c_adresse,
-    
+
                             ]);
                             $go = 1;
                             if($go == 1){
@@ -256,8 +315,8 @@ class DeskyUserFactureController extends Controller
                             ]);
                             if($stmt){
                                 foreach($countclients as $countclient);
-                           
-                                
+
+
                                 $stmt = DeskyUserFacture::create([
                                     'OID' => $request->OID,
                                     'email' => Auth::user()->email,
@@ -311,9 +370,9 @@ class DeskyUserFactureController extends Controller
                     return view("desky.panel.facture.view-facture", ['infos' => $FactureInfo, 'db_desky' => $db_desky]);
                 } else {
                    abort(404);
-                
+
                 }
-                
+
             } else {
                 abort(404);
             }
@@ -329,6 +388,7 @@ class DeskyUserFactureController extends Controller
                 $filterData = DB::table('desky_user_factures')
                 ->join('desky_user_clients', 'desky_user_factures.CID', '=', 'desky_user_clients.CID')
                 ->select('desky_user_factures.*', 'desky_user_clients.c_name', 'desky_user_clients.c_email', 'desky_user_clients.c_phone')
+                ->where("email", Auth::user()->email)
                 ->where('desky_user_clients.c_name', 'LIKE', '%' . $request->s_name . '%')
                 ->where('desky_user_clients.c_email', 'LIKE', '%' . $request->s_email . '%')
                 ->where('desky_user_factures.OID', 'LIKE', '%' . $request->s_oid . '%')
@@ -357,7 +417,13 @@ class DeskyUserFactureController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->paginate(10);
               //  ;
-                $count = DeskyUserFacture::all()->where('email', Auth::user()->email)->count();
+                $count = DB::table('desky_user_factures')
+                ->join('desky_user_clients', 'desky_user_factures.CID', '=', 'desky_user_clients.CID')
+                ->select('desky_user_factures.*', 'desky_user_clients.c_name', 'desky_user_clients.c_email', 'desky_user_clients.c_phone')
+                    ->where("email", Auth::user()->email)
+                    ->where('OID', 'LIKE', '%' . $request->s_oid . '%')
+                    ->where('desky_user_clients.c_name', 'LIKE', '%' . $request->s_name . '%')
+                    ->where('desky_user_clients.c_email', 'LIKE', '%' . $request->s_email . '%')->count();
                 if (isset($request->page) && $request->page != "") {
                     $pagenow = intval($request->page);
                 } else {
@@ -372,7 +438,7 @@ class DeskyUserFactureController extends Controller
     public function update(Request $request){
         $data = file_get_contents('database/data.json');
         $json = json_decode($data, true);
-        
+
         $this->validate($request, [
             'p_method' => 'nullable|regex:/[0-9]/',
             'p_condition' => 'nullable|regex:/[0-9]/',

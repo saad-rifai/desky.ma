@@ -183,9 +183,9 @@
                   ></a>
                 </td>
               </tr>
-              <tr>
+              <tr  v-if="pages == 0" >
                   <td colspan="6">
-                                            <div v-if="pages == 0" class="uk-text-center uk-position-center">
+                                            <div class="uk-text-center uk-position-center">
             <p class="nodatamessage">
               <i class="fas fa-info-circle"></i>
               لايوجد بيانات لعرضها
@@ -322,7 +322,7 @@ export default {
         const config = { apikey: "35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H" };
 
         axios
-          .post("../../api/list-facture", data, config)
+          .post("/api/list-facture", data, config)
           .then((response) => {
             this.infos = response.data[0].data;
             this.pages = response.data.count / 10;

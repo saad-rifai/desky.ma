@@ -26,7 +26,7 @@ export default {
     getdata: function () {
       $('#chartGenelareLoad').css('display', 'flex')
       axios
-        .post('/api/v1/user/statistiques/general/json/line/' + this.year)
+        .post('/api/v1/user/statistiques/line/json/' + this.year)
         .then((response) => {
             this.NotAllowdFunction = false;
           this.data = response.data

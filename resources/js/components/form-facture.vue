@@ -500,7 +500,7 @@
 
           <hr v-if="remise_c > 0" />
           <h3 class="text-f-bloder">
-            الضريبة(TVA):
+            الضريبة(TVA {{prtva}}%):
             {{
               this.tva.toLocaleString('en-US', {
                 style: 'currency',
@@ -615,12 +615,17 @@ export default {
       }
     },
     getout: function () {
-      window.location.replace('../../devis/list?ref=cancel_btn&method=js')
+      window.location.replace('/devis/list?ref=cancel_btn&method=js')
     },
     notificationchek: function () {
       if (this.errors.errors.items) {
         UIkit.notification({
           message: this.errors.errors.items[0],
+          status: 'danger',
+        })
+      }else{
+           UIkit.notification({
+          message: "يرجى التحقق من المدخلات *",
           status: 'danger',
         })
       }
@@ -633,7 +638,7 @@ export default {
     },
     addInvoice: function () {
       axios
-        .post('../api/v1/user/desky/facture/maxNumber')
+        .post('/api/v1/user/desky/facture/maxNumber')
         .then((response) => {
           if (response.data.length > 0) {
             var responseNumber = parseInt(response.data) + 1
@@ -681,12 +686,12 @@ export default {
       data.append('c_city', this.city)
       data.append('c_adresse', this.adresse)
       axios
-        .post('../api/creer_facture', data)
+        .post('/api/creer_facture', data)
         .then((response) => {
           this.planinfos = response.data
           if (response.status == 220) {
             window.location.replace(
-              '../../facture/' + this.invid + '/' + this.uid,
+              '/facture/' + this.invid + '/' + this.uid,
             )
           }
           $('#form-loading').css('display', 'none')
@@ -707,7 +712,7 @@ export default {
       data.append('method', 'n')
       data.append('q', this.q)
       axios
-        .post('../api/v1/user/desky/clients/getSearch', data)
+        .post('/api/v1/user/desky/clients/getSearch', data)
         .then((response) => {
           this.cleantslist = response.data
           this.datalistloading = false
@@ -745,8 +750,8 @@ export default {
         }
       }
 
-      this.tva = (this.subtotal - this.remise * this.prtva) / 100
-      this.total = this.subtotal - this.remise + this.tva
+      this.tva = (this.subtotal - parseFloat(this.remise)) * this.prtva / 100
+      this.total = this.subtotal - parseFloat(this.remise) + this.tva
       this.remise_c = parseInt(this.remise)
     },
     selectCleants: function (u) {
@@ -790,9 +795,18 @@ export default {
               return this.Countries.filter(post => {
         return post.name.toLowerCase().includes(this.countryName.toLowerCase())
       })
+    },
+        GetTvaPercentage: function(){
+    axios.get('/api/v1/getUserTvaPercentage').then((response) => {
+        this.prtva = response.data.tva;
+    }).catch((error) => {
+        //window.location.replace();
+        console.log(error);
+    });
     }
   },
   created() {
+     this.GetTvaPercentage();
     this.addInvoice()
   },
   computed: {

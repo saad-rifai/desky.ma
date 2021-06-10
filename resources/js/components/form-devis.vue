@@ -87,6 +87,7 @@
                 value=""
                 required
               />
+              <small>الاسم بالأحرف الفرنسية</small>
             </div>
             <div class="uk-text-danger" v-if="errors.errors.c_name">
               {{ errors.errors.c_name[0] }}
@@ -468,7 +469,7 @@
 
           <hr v-if="remise_c > 0" />
           <h3 class="text-f-bloder">
-            الضريبة(TVA):
+            الضريبة(TVA {{prtva}}%):
             {{
               this.tva.toLocaleString('en-US', {
                 style: 'currency',
@@ -553,7 +554,7 @@ export default {
       subtotal: 0,
       total: 0,
       tva: 0,
-      prtva: 1,
+      prtva: 0.5,
       avprice: '',
       invid: '',
       country: '',
@@ -592,6 +593,11 @@ export default {
           message: this.errors.errors.items[0],
           status: 'danger',
         })
+      }else{
+           UIkit.notification({
+          message: "يرجى التحقق من المدخلات *",
+          status: 'danger',
+        })
       }
     },
     CreerDevis: function () {
@@ -602,7 +608,8 @@ export default {
     },
     addInvoice: function () {
 
-      axios.post('../api/v1/user/desky/devis/maxNumber').then((response) => {
+      axios.post('/api/v1/user/desky/devis/maxNumber').then((response) => {
+
           if(response.data.length > 0){
 var responseNumber = parseInt(response.data)+1;
 this.invid = responseNumber.toString().padStart(8, "0");
@@ -649,21 +656,19 @@ this.invid = responseNumber.toString().padStart(8, "0");
       data.append('c_city', this.city)
       data.append('c_adresse', this.adresse)
       axios
-        .post('../api/creer_devis', data)
+        .post('/api/creer_devis', data)
         .then((response) => {
           this.planinfos = response.data
           if (response.status == 220) {
-            window.location.replace('../../devis/' + this.invid+'/'+this.uid)
+            window.location.replace('/devis/' + this.invid+'/'+this.uid)
           }
           $('#form-loading').css('display', 'none')
         })
         .catch((error) => {
+      $('#form-loading').css('display', 'none')
+
           this.errors.record(error.response.data)
           this.notificationchek()
-          $('#form-loading').css('display', 'none')
-        }).finally(() => {
-    $('#form-loading').css('display', 'none')
-
         })
     },
     searchClient: function (e) {
@@ -673,7 +678,7 @@ this.invid = responseNumber.toString().padStart(8, "0");
       data.append('method', 'n')
       data.append('q', this.q)
       axios
-        .post('../api/v1/user/desky/clients/getSearch', data)
+        .post('/api/v1/user/desky/clients/getSearch', data)
         .then((response) => {
 
           this.cleantslist = response.data
@@ -715,8 +720,8 @@ this.invid = responseNumber.toString().padStart(8, "0");
         }
       }
 
-      this.tva = (this.subtotal - this.remise * this.prtva) / 100
-      this.total = this.subtotal - this.remise + this.tva
+      this.tva = (this.subtotal - parseFloat(this.remise)) * this.prtva / 100
+      this.total = this.subtotal - parseFloat(this.remise) + this.tva
       this.remise_c = parseInt(this.remise)
     },
     selectCleants: function (u) {
@@ -760,10 +765,22 @@ this.invid = responseNumber.toString().padStart(8, "0");
               return this.Countries.filter(post => {
         return post.name.toLowerCase().includes(this.countryName.toLowerCase())
       })
+    },
+    GetTvaPercentage: function(){
+    axios.get('/api/v1/getUserTvaPercentage').then((response) => {
+        this.prtva = response.data.tva;
+    }).catch((error) => {
+        //window.location.replace();
+        console.log(error);
+    });
     }
   },
   created() {
-this.addInvoice();
+            this.GetTvaPercentage();
+
+      this.addInvoice();
+
+
   },
 computed:{
 
@@ -773,6 +790,7 @@ computed:{
       })
     }
 },
+
   mounted() {
     //this.loadpoints();
 

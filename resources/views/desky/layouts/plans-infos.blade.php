@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 
         @php
-  $orgdate =  Carbon::parse($info->created_at);
+  $orgdate =  Carbon::parse($info->start_at);
   $pack_id = $info->pack_id;
   $newDate = date("Y-m-d", strtotime($orgdate));
   $datajson = file_get_contents('database/data.json');
@@ -26,7 +26,8 @@ if($info->type == "m"){
     $time_payments = 'شهر';
     $points = $jsondatas['_2147845']['packs'][$pack_id]['points'];
     $price = $jsondatas['_2147845']['packs'][$pack_id]['price'];
-    $olddate = Carbon::parse($info->created_at);
+    $pack_name =  $jsondatas['_2147845']['packs'][$pack_id]['name'];
+    $olddate = Carbon::parse($info->start_at);
      $exdate = $olddate->addDays(31);
      $exdate = date("Y-m-d", strtotime($exdate));
 
@@ -36,7 +37,9 @@ if($info->type == "m"){
     $points = $jsondatas['_2147845']['packs'][$pack_id]['points'];
     $points = intval($points)*12;
     $price = $jsondatas['_2147845']['packs'][$pack_id]['price_year'];
-    $olddate = Carbon::parse($info->created_at);
+    $pack_name =  $jsondatas['_2147845']['packs'][$pack_id]['name'];
+
+    $olddate = Carbon::parse($info->start_at);
      $exdate = $olddate->addDays(366);
      $exdate = date("Y-m-d", strtotime($exdate));
 }
@@ -65,7 +68,7 @@ if($points != "unlimited"){
 
             <div class="icon-big uk-margin-left"><i class="fas fa-box"></i></div>
 
-            <div><h1 class="uk-card-title">الباقة الابتدائية</h1>
+            <div><h1 class="uk-card-title">{{$pack_name}}</h1>
                 <p dir="rtl">@if($points == "unlimited") غير محدود @else {{$points}} @endif دوفي / عرض أسعار <br>({{$time_payments}}/{{$price}}Dhs)</p>
                @if ($info->status == 1)
                <p>
@@ -75,9 +78,9 @@ if($points != "unlimited"){
                 <span uk-icon="icon:clock; ratio:0.7"></span>  تاريخ الانتهاء: {{$exdate}}
             </p>
                @endif
+
 @if ($info->status == 0)
-<a href="#" class="uk-link-heading"> <span uk-icon="icon:info"></span> معلومات الاداء</a> &nbsp;
-<a href="#" class="uk-link-heading"> <span uk-icon="icon:upload"></span> رفع وصل الأداء</a>
+<a href="/recu/{{$info->OID}}" class="uk-link-heading"> <span uk-icon="icon:upload"></span> رفع وصل الأداء</a>
 
 @endif
             </div>
@@ -112,7 +115,7 @@ if($points != "unlimited"){
         <div class="uk-text-center uk-position-center">
 
             <p>اكتشف العروض والباقات</p>
-            <button class="uk-button uk-button-primary btn-call">الاشتراك بباقة</button>
+           <a href="/tarifs"> <button class="uk-button uk-button-primary btn-call">الاشتراك بباقة</button></a>
 
         </div>
 

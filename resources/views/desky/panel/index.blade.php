@@ -60,7 +60,7 @@
 
                 </div>
             </div>
-            <div class="uk-width-1-3@s">
+            <!--div class="uk-width-1-3@s">
                 <div class="uk-card uk-card-default uk-card-body">
                     <h4 class="uk-card-title uk-text-right">أحدث الرسائل</h4>
                     <div class="uk-position-top-left uk-overlay "><a href="#"><small>مشاهدة المزيد   </small></a></div>
@@ -131,7 +131,7 @@
 
 
                 </div>
-            </div>
+            </div-->
         </div>
     </div>
 <div>

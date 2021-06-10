@@ -53,9 +53,10 @@
                             اضافة باقة </h4>
                         <hr>
                         <div dir="rtl" class="uk-grid-small uk-text-center">
+                            <a href="/tarifs">
                             <button class="uk-button uk-button-primary btn-call"><i class="fas fa-box"></i> مشاهدة الباقات
                             </button>
-
+                            </a>
                         </div>
                     </div>
                 </div>

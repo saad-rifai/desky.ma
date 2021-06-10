@@ -10,7 +10,7 @@
       <input type="hidden" name="_token" :value="csrf" />
 
       <!--input type="hidden" name="ref_alg" value="{{ $_GET['ref'] ?? '' }}" /-->
-      <div class="uk-width-1-1@s">
+      <!--div class="uk-width-1-1@s">
         <label for="">
           نوع الحساب
           <span class="red">*</span>
@@ -41,7 +41,7 @@
         <div class="uk-text-danger" v-if="errors.errors.typeaccount">
           {{ errors.get("typeaccount") }}
         </div>
-      </div>
+      </div-->
 
       <div class="uk-width-1-2@s">
         <label for="">
@@ -127,7 +127,7 @@
         </div>
       </div>
 
-      <div class="uk-width-1-2@s">
+      <!--div class="uk-width-1-2@s">
         <label for="">الشركة (اختياري)</label>
 
         <div class="uk-form-controls">
@@ -143,7 +143,7 @@
         <div class="uk-text-danger" v-if="errors.errors.company">
           {{ errors.get("company") }}
         </div>
-      </div>
+      </div-->
       <div class="uk-width-1-2@s">
         <label for="">
           الدولة
@@ -194,7 +194,7 @@
           {{ errors.get("city") }}
         </div>
       </div>
-      <div class="uk-width-1-1@s">
+      <div class="uk-width-1-2@s">
         <label for="">
           كلمة المرور
           <span class="red">*</span>
@@ -289,7 +289,7 @@ export default {
       lname: "",
       email: "",
       phonenumb: "",
-      company: "",
+    //company: "",
       country: "",
       city: "",
       password: "",
@@ -347,16 +347,16 @@ CaptchaCallback: function(){
         data.append("lname", this.lname);
         data.append("email", this.email);
         data.append("phonenumb", this.phonenumb);
-        data.append("company", this.company);
+      //  data.append("company", this.company);
         data.append("country", this.country);
         data.append("city", this.city);
         data.append("password", this.password);
-        data.append("typeaccount", this.typeaccountid);
+      // data.append("typeaccount", this.typeaccountid);
         data.append("_token", this.csrf);
         data.append("recaptcha_token", this.recaptcha_response);
 
         axios
-          .post("../auth/register", data)
+          .post("/auth/register", data)
           .then((response) => {
             $("#form-loading").css("display", "none");
             UIkit.notification({
@@ -386,11 +386,6 @@ CaptchaCallback: function(){
             grecaptcha.reset();
              this.CaptchaCallback();
           })
-          .finally(() => {
-            grecaptcha.reset();
-             this.CaptchaCallback();
-            $("#form-loading").css("display", "none");
-          });
       } else {
         UIkit.notification({
           message:

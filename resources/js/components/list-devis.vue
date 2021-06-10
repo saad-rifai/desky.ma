@@ -196,10 +196,10 @@
                   </a>
                 </td>
               </tr>
-              <tr>
-                <td colspan="6">
+              <tr v-if="pages == 0">
+                <td  colspan="6">
                   <div
-                    v-if="pages == 0"
+
                     class="uk-text-center uk-position-center"
                   >
                     <p class="nodatamessage">
@@ -212,7 +212,7 @@
             </tbody>
           </table>
         </div>
-        <ul v-if="pages > 1" class="uk-pagination" dir="ltr">
+        <ul v-if="pages > 1"  class="uk-pagination" dir="ltr">
           <li class="uk-margin-auto-right">
             <a v-if="pagenow < pages" @click="nextpage(pagenow)">
               <span class="uk-margin-small-left" uk-pagination-previous></span>
@@ -221,7 +221,7 @@
           </li>
 
           <li>
-            <a v-if="pagenow > pages" @click="previouspage(pagenow)">
+            <a v-if="pagenow > 1" @click="previouspage(pagenow)">
               السابق
               <span class="uk-margin-small-left" uk-pagination-next></span>
             </a>
@@ -303,7 +303,7 @@ export default {
       data.append('page', 0)
       data.append('search', true)
       axios
-        .post('../../api/list-devis', data, config)
+        .post('/api/list-devis', data, config)
         .then((response) => {
           this.infos = response.data[0].data
           this.pages = response.data.count / 10
@@ -336,7 +336,7 @@ export default {
         const config = { apikey: '35O3VOQQJCE947HA55EGCD07VFT32XCPDPMZET5H' }
 
         axios
-          .post('../../api/list-devis', data, config)
+          .post('/api/list-devis', data, config)
           .then((response) => {
             this.infos = response.data[0].data
             this.pages = response.data.count / 10

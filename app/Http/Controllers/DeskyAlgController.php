@@ -24,7 +24,16 @@ class DeskyAlgController extends Controller
     {
         $this->middleware('auth');
     }
+    public function getUserTvaPercentage(){
+        $datas = desky_db::where('email', Auth::user()->email)->get(['tva']);
+        if(count($datas) > 0){
+            foreach($datas as $data);
+            return response()->json(['tva'=> floatval($data->tva)], 200);
+        }else{
+            return response()->json(['tva' => 0], 202);
+        }
 
+    }
 
     public function UpdateNotes(Request $request){
 
@@ -445,8 +454,8 @@ class DeskyAlgController extends Controller
                         'tva' => $tva,
                         'slogon' => $request->slogan,
                         'description' => $request->description,
-                        'model_devis' => 0,
-                        'model_facture' => 0
+                        'model_devis' => $request->model_devis,
+                        'model_facture' => $request->model_facute
 
 
                     ]);
@@ -476,8 +485,8 @@ class DeskyAlgController extends Controller
                     'tva' => $tva,
                     'slogon' => $request->slogan,
                     'description' => $request->description,
-                    'model_devis' => 0,
-                    'model_facture' => 0
+                    'model_devis' => $request->model_devis,
+                    'model_facture' => $request->model_facute
 
 
                 ]);
@@ -625,7 +634,8 @@ class DeskyAlgController extends Controller
                         'tva' => $tva,
                         'slogon' => $request->slogan,
                         'description' => $request->description,
-                        'model_devis' => $request->model_devis
+                        'model_devis' => $request->model_devis,
+                        'model_facture' => $request->model_facute
 
                     ]);
                     if ($stmt) {
@@ -642,6 +652,38 @@ class DeskyAlgController extends Controller
                     }
                 } else {
                     return response()->json(['error' => ['logo' => ['قد فشل تحميل الملف يرجى اعادة تحميل الصفحة اذا استمر معك المشكل يرجى التواصل معنا']]], 418);
+                }
+            }elseif(isset($request->removeLogo) && $request->removeLogo == true) {
+                $stmt = desky_db::where("email", Auth::user()->email)->update([
+                    'email' => Auth::user()->email,
+                    'b_email' => $request->b_email,
+                    'b_phone' => $request->b_phone,
+                    'compte_bank_username' => $request->bank_account_name,
+                    'compte_bank_name' => $request->bank_name,
+                    'compte_bank_rib' => $request->bank_rib,
+                    'brandcolor' => $request->brand_color,
+                    'ice' => $request->ice,
+                    'sector' => $request->sector,
+                    'siteweb' => $request->siteweb,
+                    'if' => $request->u_if,
+                    'tp' => $request->u_tp,
+                    'cni' => $request->cni,
+                    'tva' => $tva,
+                    'slogon' => $request->slogan,
+                    'description' => $request->description,
+                    'model_devis' => $request->model_devis,
+                    'model_facture' => $request->model_facute,
+                    'logo' => null
+
+
+                ]);
+                if ($stmt) {
+                    $clearCache = Cache::forget('user_desky_infos_'.Auth::user()->id);
+
+                        return response()->json(['success' =>  ['قد تحديث البيانات بنجاح !']], 201);
+
+                } else {
+                    return response()->json(['errors' => ['form' => ['قد فشل حفظ المعطيات يرجى اعادة المحاولة لاحقاَ اذا استمر معك المشكل يرجى التواصل معنا']]], 422);
                 }
             } else {
                 $stmt = desky_db::where("email", Auth::user()->email)->update([
@@ -660,19 +702,16 @@ class DeskyAlgController extends Controller
                     'cni' => $request->cni,
                     'tva' => $tva,
                     'slogon' => $request->slogan,
-                    'description' => $request->description,
-                    'model_devis' => $request->model_devis
+                    'model_devis' => $request->model_devis,
+                    'model_facture' => $request->model_facute
 
 
                 ]);
                 if ($stmt) {
                     $clearCache = Cache::forget('user_desky_infos_'.Auth::user()->id);
-                    if($clearCache){
-                        return response()->json(['success' =>  ['قد تحديث البيانات بنجاح !']], 201);
-                    }else{
-                        return response()->json(['error' => ['قد حصل خطأ أثناء محاولة تحديث البيانات رقم الخطأ fx00738']], 418);
 
-                    }
+                        return response()->json(['success' =>  ['قد تحديث البيانات بنجاح !']], 201);
+
                 } else {
                     return response()->json(['errors' => ['form' => ['قد فشل حفظ المعطيات يرجى اعادة المحاولة لاحقاَ اذا استمر معك المشكل يرجى التواصل معنا']]], 422);
                 }

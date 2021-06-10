@@ -12,6 +12,8 @@ use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\PaymentSystemController;
 use PDF;
+use Ramsey\Uuid\Type\Decimal;
+
 class UserStatiquesController extends Controller
 {
     public function UserStatistiquesGeneral(Request $request)
@@ -56,7 +58,7 @@ class UserStatiquesController extends Controller
                     'tva',
                 ]);
                 foreach ($userdbs as $tva);
-                $tva = intval($tva->tva);
+                $tva = floatval($tva->tva);
                 $price_m = 0;
                 $price_y = 0;
                 $price_u = 0;
@@ -212,7 +214,7 @@ class UserStatiquesController extends Controller
                             Auth::user()->email
                         )->get(['tva']);
                         foreach ($userdbs as $tva);
-                        $tva = intval($tva->tva);
+                        $tva = floatval($tva->tva);
 
                         foreach ($datas as $data) {
                             $date_m = date('m', strtotime($data->created_at));
@@ -332,7 +334,7 @@ class UserStatiquesController extends Controller
                                     ]);
 
                                     foreach ($userdbs as $userdb);
-                                    $tva = intval($userdb->tva);
+                                    $tva = floatval($userdb->tva);
 
                                     $b_email = $userdb->b_email;
                                     $b_phone = $userdb->b_phone;
@@ -539,7 +541,7 @@ class UserStatiquesController extends Controller
                                     ]);
 
                                     foreach ($userdbs as $userdb);
-                                    $tva = intval($userdb->tva);
+                                    $tva = floatval($userdb->tva);
 
                                     $b_email = $userdb->b_email;
                                     $b_phone = $userdb->b_phone;
@@ -717,7 +719,7 @@ class UserStatiquesController extends Controller
                     'tva',
                 ]);
                 foreach ($userdbs as $tva);
-                $tva = intval($tva->tva);
+                $tva = floatval($tva->tva);
 
                 foreach ($datas as $data) {
                     $date_m = date('m', strtotime($data->created_at));
@@ -817,7 +819,7 @@ class UserStatiquesController extends Controller
                     'tva',
                 ]);
                 foreach ($userdbs as $tva);
-                $tva = intval($tva->tva);
+                $tva = floatval($tva->tva);
 
                 for ($y = $oldDate; $y <= $dateNow; $y++) {
                     $datas = DB::table('desky_user_factures')
@@ -961,7 +963,8 @@ class UserStatiquesController extends Controller
                     'tva',
                 ]);
                 foreach ($userdbs as $tva);
-                $tva = intval($tva->tva);
+                $tva = floatval($tva->tva);
+
 
                 $datas = DB::table('desky_user_factures')
                     ->select(['status', 'items', 'remise', 'created_at'])

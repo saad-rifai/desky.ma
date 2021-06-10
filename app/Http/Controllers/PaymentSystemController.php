@@ -473,7 +473,14 @@ class PaymentSystemController extends Controller
                         )
                             ->where('OID', $request->OID)
                             ->get(['OID']);
-                        if (count($checkPaymetsTabel) > 0) {
+
+                            $checkSubscTable = Subscriptions::where(
+                                'email',
+                                Auth::user()->email
+                            )
+                                ->where('OID', $request->OID)
+                                ->get(['OID']);
+                        if (count($checkPaymetsTabel) > 0 && count($checkSubscTable) > 0) {
                             return response()->json(
                                 ['success' => 'طلبك تم انشائه بالفعل'],
                                 200
@@ -583,10 +590,13 @@ class PaymentSystemController extends Controller
                                             $json['_' . $data->P_ID]['packs'][
                                                 $data->PK_ID
                                             ]['price'];
-                                        $points =
-                                            $json['_' . $data->P_ID]['packs'][
-                                                $data->PK_ID
-                                            ]['points'];
+
+                                                $points =
+                                                $json['_' . $data->P_ID]['packs'][
+                                                    $data->PK_ID
+                                                ]['points'];
+
+
 
                                         $d = Carbon::parse(date('Y-m-d h:i:s'));
                                         $adddays = $d->addDays(15);

@@ -33,26 +33,21 @@
                 <td>{{ packs[val.pack_id]['name'] }}</td>
                 <td>{{ val.amount }}</td>
                 <td>
-                  <span v-if="val.status == 0" class="uk-label">جديد</span>
-                  <span v-if="val.status == 1" class="uk-label uk-label-warning"
-                    >في انتضار التسليم</span
+                  <span v-if="val.status == 0" class="uk-label uk-label-warning">في انتظار الدفع</span>
+                  <span v-if="val.status == 1" class="uk-label uk-label-success"
+                    >مفعلة</span
                   >
-                  <span v-if="val.status == 2" class="uk-label uk-label-info"
-                    >تم التسليم</span
+                  <span v-if="val.status == 2" class="uk-label uk-label-pending"
+                    >معلق</span
                   >
                   <span v-if="val.status == 3" class="uk-label uk-label-warning"
-                    >في انتضار الدفع</span
+                    >معاملة مشكوك فيها</span
                   >
-                  <span v-if="val.status == 4" class="uk-label"> تم الدفع</span>
-                  <span v-if="val.status == 5" class="uk-label uk-label-success"
-                    >مكتمل</span
+                  <span v-if="val.status == 4" class="uk-label uk-label-danger"> ملغي</span>
+                  <span v-if="val.status == 5" class="uk-label uk-label-pending"
+                    >قيد المراجعة</span
                   >
-                  <span v-if="val.status == 6" class="uk-label uk-label-info"
-                    >بدون رد</span
-                  >
-                  <span v-if="val.status == 7" class="uk-label uk-label-danger"
-                    >ملغي
-                  </span>
+
                 </td>
                 <td>{{ val.created_at }}</td>
 

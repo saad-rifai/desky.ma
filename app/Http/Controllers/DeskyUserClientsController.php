@@ -213,7 +213,7 @@ class DeskyUserClientsController extends Controller
         $this->validate(
             $request,
             [
-                'c_name' => 'required|min:5|max:20|regex:/^[\p{L} ]+$/u',
+                'c_name' => 'required|min:5|max:20|regex:/^[\w\d\s ]*$/',
                 'c_email' =>
                     'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:80',
                 'c_phone' => 'required|regex:/[0-9]{9}/',
@@ -229,8 +229,8 @@ class DeskyUserClientsController extends Controller
             $message = [
                 'required' => 'هذا الحقل مطلوب *',
                 'regex' => 'يرجى التحقق من المدخلات *',
-                'max' => 'يرجى التحقق من المدخلات *',
-                'min' => 'يرجى التحقق من المدخلات *',
+                'max' => 'المدخلات أطول من اللازم *',
+                'min' => 'المدخلات أقصر من اللازم *',
                 'email' => 'يرجى ادخال بريد الكتروني صالح *',
                 'notes.max' => 'الحد الأقصى للملاحظات 700 حرف *',
             ]

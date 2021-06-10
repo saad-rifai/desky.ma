@@ -269,7 +269,10 @@ export default {
           //document.getElementsByClassName('cartLoad_').style.display = "none";
         })
         .catch((error) => {
-          this.loadinfos()
+                   UIkit.notification({
+        message:'حصل خطأ ما يرجى اعادة المحاولة اذا استمر المشكل معك يرجى التواصل معنا عبر support@desky.ma',
+        status: "danger",
+      });
         })
     },
 
@@ -286,8 +289,11 @@ export default {
 
 
       }).catch((error) => {
+             $('#payment-loading').css('display', 'none')
+        $('#btn-submit').removeAttr('disabled')
+
           UIkit.notification({
-        message:'حصل خطأ ما يرجى اعادة المحاولة اذا استمر المشكل معك يرجى التواصل معنا عبر support@desky.ma',
+        message:error.response.data,
         status: "danger",
       });
       })

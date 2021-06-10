@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
 //ResetPassword
-
+Route::any('verfymail/{UID}/{token}', 'verfymailController@verfylink');
 Route::post('ResetPassword/{sendMail}', ('Auth\ResetPasswordController@ResetPassword'));
 
 //ResetPass
@@ -70,6 +70,9 @@ Route::post('api/v1/Statistiques/TurnoverLast5years/print/{print}', 'UserStatiqu
 //api/v1/user/statistiques/impot/json/
 Route::post('api/v1/user/statistiques/impot/{json}/{year}', 'UserStatiquesController@InmpotInfos');
 
+//getUserTvaPercentage
+
+Route::get('api/v1/getUserTvaPercentage', 'DeskyAlgController@getUserTvaPercentage');
     //LastClientsList
     Route::post(
         'api/v1/user/getCartInfos/{OID}',
@@ -95,7 +98,7 @@ Route::post('api/v1/user/statistiques/impot/{json}/{year}', 'UserStatiquesContro
         'UserStatiquesController@UserStatistiquesGeneral'
     );
     Route::post(
-        'api/v1/user/statistiques/general/{json}/line/{year}',
+        'api/v1/user/statistiques/line/{json}/{year}',
         'UserStatiquesController@UserStatistiquesGeneralLine'
     );
     Route::post(
@@ -183,7 +186,7 @@ Route::post('api/v1/user/statistiques/impot/{json}/{year}', 'UserStatiquesContro
         'DeskyAlgController@update_user_infos'
     );
     Route::get('api/bingapay', 'PaymentSystemController@bingapay');
-    Route::any('verfymail/{UID}/{token}', 'verfymailController@verfylink');
+
     Route::any(
         'api/v1/user/desky/clients/getSearch',
         'DeskyAlgController@UserDeskyCleantsSearchGet'
@@ -271,10 +274,19 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/tarifs', function () {
         return view('desky/tarif');
     });
-
-    Route::get('/ae-network', function () {
-        return view('desky/ae-network');
+    Route::get('/q&a', function () {
+        return view('desky.pages.q&a');
     });
+    //a-propos-de-nous
+    Route::get('/a-propos-de-nous', function () {
+        return view('desky.pages.a-propos-de-nous');
+    });
+    Route::get('/Contactez-nous', function () {
+        return view('desky.pages.Contactez-nous');
+    });
+  /*  Route::get('/ae-network', function () {
+        return view('desky/ae-network');
+    });*/
     /* Any Route */
 
     /* Auth Routes */

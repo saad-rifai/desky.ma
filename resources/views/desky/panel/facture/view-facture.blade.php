@@ -168,7 +168,7 @@
                         $countItems = count($items);
                         $subtotal = 0;
                         $article_p = 0;
-                        $remise = intval($infos->remise);
+                        $remise = floatval($infos->remise);
                         $tva = $db_desky->tva;
                         for ($i = 0; $i < $countItems; $i++) {
                             $article_p = $items[$i]->price * $items[$i]->quantity;

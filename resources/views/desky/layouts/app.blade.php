@@ -137,8 +137,10 @@ $jsondata = json_decode($datajson, true);
                                 <li><a href="{{ URL::asset('/#aboutus') }}" class="uk-button-text">عن الخدمة </a>
                                 </li>
                                 <li><a href="{{ URL::asset('/#whyus') }}" class="uk-button-text">المميزات</a></li>
-                                <li><a href="{{ URL::asset('/#videos') }}" class="uk-button-text">لماذا نحن</a></li>
+                                <li><a href="{{ URL::asset('/q&a') }}" class="uk-button-text">الاسئلة الشائعة</a></li>
                                 <li><a href="{{ URL::asset('/tarifs') }}" class="uk-button-text"> الأسعار</a></li>
+                                <li><a href="{{ URL::asset('/a-propos-de-nous') }}" class="uk-button-text"> من نحن</a></li>
+                                <li><a href="{{ URL::asset('/Contactez-nous') }}" class="uk-button-text"> تواصل معنا</a></li>
                                 <!--li><a href="{{ URL::asset('/#q&a') }}" class="uk-button-text"> شبكة المقاولين
                                         الذاتيين</a></li>
                                 <li--><!--a class="uk-button-text" href="{{ URL::asset('/contactus') }}">تواصل معنا</a>
@@ -217,7 +219,9 @@ $jsondata = json_decode($datajson, true);
     </div>
     <footer dir="rtl">
         <div class="wd-80">
-            <div uk-grid>
+            <div class="uk-grid-large" uk-grid>
+                <div class="uk-width-1-2@s">
+
                 <ul class="uk-list">
                     <h4><span uk-icon="icon: chevron-left"></span> منصة Desky </h4>
                     <li><a href="{{ URL::asset('/contactus') }}"><span uk-icon="icon: link"></span> عن الخدمة </a>
@@ -234,13 +238,14 @@ $jsondata = json_decode($datajson, true);
                     <li>
                         <h4>عن منصة Desky.ma </h4>
                         <p class="des-footer" style="color:white">
-                            Desky توفر لك عدة مزايا منها ادارة نشاطك التجاري كمقاول ذاتي وانشاء الفواتير وعروض الأسعار
-                            (الدوفي) بشكل احترافي يمكنك من التعامل مع الشركات والمقاولات والدخول الى الصفقات العمومية,
-                            بخلاصة منصة Desky ترافقك لانشاء نظام احترافي للعمل لرفع رقم المعاملات الخاص بك
+                            تقدم لك منصة desky.ma نظام احترافي لادارة نشاط المقاول الذاتي يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك .
+
                         </p>
                     </li>
                 </ul>
-                <ul class="uk-list">
+                </div>
+                <div class="uk-width-1-2@s">
+                <ul class="uk-list uk-width-1-1">
                     <h4><span uk-icon="icon: chevron-left"></span> روابط مفيدة</h4>
                     <li><a href="{{ URL::asset('/service/etude-de-project') }}"><span uk-icon="icon: link"></span>
                             مكتبة المعرفة</a>
@@ -256,10 +261,10 @@ $jsondata = json_decode($datajson, true);
                     <li>
                         <img class="logo-pay-footer" src="{{ URL::asset('image/icon/logo-wafacash.jpg') }}"
                             alt="wafacach - desky.ma">
-                        <img class="logo-pay-footer" src="{{ URL::asset('image/icon/visa-mastercard.png') }}"
+                        <!--img class="logo-pay-footer" src="{{ URL::asset('image/icon/visa-mastercard.png') }}"
                             alt="visa master card - desky.ma">
                             <img class="logo-pay-footer" src="{{ URL::asset('image/icon/cmi-logo.png') }}"
-                            alt="CMI - desky.ma">
+                            alt="CMI - desky.ma"-->
                     </li>
 
                     <h4><span uk-icon="icon: chevron-left"></span> تابعنا على</h4>
@@ -277,8 +282,7 @@ $jsondata = json_decode($datajson, true);
                         </div>
                     </li>
                 </ul>
-                <ul class="uk-list">
-                </ul>
+                </div>
             </div>
             <hr style="border-top: 0.5px solid #d97900; ">
             <div id="copyright">

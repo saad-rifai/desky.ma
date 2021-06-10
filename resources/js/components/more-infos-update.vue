@@ -78,7 +78,7 @@
             <a class="uk-alert-close" uk-close></a>
             <p id="filename_logo"></p>
           </div>
-          <div v-if="logourl != '' && logourl != 'null'"
+          <div v-if="logourl != '' && logourl != null"
             style="display: block"
             class="border-show-image"
             id="preview-border"
@@ -95,6 +95,7 @@
               id="preview-image"
               class="logo-image uk-position-center"
             />
+            <div @click="removeLogo" class="delete-border-btn"> <span>حذف</span> </div>
           </div>
           <div class="uk-text-danger" v-if="errors.errors.logo">
             {{ errors.get("logo") }}
@@ -108,8 +109,26 @@
             <div class="uk-grid-small " uk-grid>
               <div v-for="(item, index) in devis_models" :key="index" class="uk-width-1-2@s">
                 <div class="model-view" @click="modelcheck(index)">
-                  <img :src="'../image/models/devis/'+item.preview_image" :alt="item.name+' - Desky.ma - '+item.date" />
+                  <img :src="'/image/models/devis/'+item.preview_image" :alt="item.name+' - Desky.ma - '+item.date" />
                   <div :id="index" class="title-model-view uk-position-bottom" v-bind:class="{'selected' : index == userinfos.model_devis}">
+                    {{item.name}}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <hr>
+        </div>
+                <div class="uk-width-1-1@s ">
+          <label for="">قالب الفواتير</label>
+          <div class="uk-margin">
+            <div class="uk-grid-small " uk-grid>
+              <div v-for="(item, index) in factures_models" :key="index" class="uk-width-1-2@s">
+                <div class="model-view" @click="modelfactureCheck(index)">
+                  <img :src="'/image/models/factures/'+item.preview_image" :alt="item.name+' - Desky.ma - '+item.date" />
+                  <div :id="'f'+index" class="title-model-view uk-position-bottom" v-bind:class="{'selected' : index == userinfos.model_facture}">
                     {{item.name}}
                   </div>
                 </div>
@@ -478,6 +497,7 @@ export default {
     return {
       errors: new Errors(),
       devis_models: json.devis_template,
+      factures_models: json.facture_template,
       logofile: "",
       logourl: "",
       slogan: "",
@@ -498,12 +518,18 @@ export default {
       userinfos: [],
       modelsCount: 2,
       modelDevis: 0,
-      modelfacture: 0
+      modelfacture: 0,
+      removeLogoFile: false
     };
   },
   methods: {
     count_description: function () {
       this.description_count = this.description.length;
+    },
+    removeLogo: function(){
+        this.logofile = "";
+        this.logourl = "";
+        this.removeLogo = true;
     },
     uplogo: function (e) {
       $("#form-loading").css("display", "block");
@@ -568,6 +594,18 @@ export default {
           $("#form-loading").css("display", "none");
         });
     },
+    modelfactureCheck: function(e){
+        var c = this.modelfacture;
+        $("#f"+e).addClass("selected");
+        this.modelfacture = e;
+        for(var i=0; c >= i; i++){
+            if(i != e){
+        $("#f"+i).removeClass("selected");
+
+            }
+
+        }
+    },
     modelcheck: function(e){
         var c = this.modelDevis;
         $("#"+e).addClass("selected");
@@ -582,9 +620,14 @@ export default {
 
     },
     submitform: function () {
+
       $("#form-loading").css("display", "block");
 
       let data = new FormData();
+      if(this.logofile == "" && this.removeLogo == true){
+         data.append("removeLogo", true);
+
+      }
 
       data.append("logo", this.logofile);
       data.append("slogan", this.slogan);
