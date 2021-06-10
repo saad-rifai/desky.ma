@@ -333,6 +333,7 @@ Route::group(['domain' => env('APP_URL')], function () {
 
     /* Auth Routes */
     Route::middleware(['auth'])->group(function () {
+
         Route::get('register/pack', function(){
             return view('desky.user-espace.register-pack');
         });

@@ -276,7 +276,7 @@ class RegisterController extends Controller
                         }
                     } else {
 
-                            echo json_encode(array('token' => Session::getId(), 'ref' => 'register/tarifs', 'status' => 'ok')) ;
+                            echo json_encode(array('token' => Session::getId(), 'ref' => 'register/pack', 'status' => 'ok')) ;
 
                            // return response()->json([],200);
 
