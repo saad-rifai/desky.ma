@@ -45,10 +45,10 @@
 
                         @include('desky.layouts.plans-infos')
                         <hr>
-                        <h4 class="uk-card-title uk-text-right">
+                        <!--h4 class="uk-card-title uk-text-right">
                             معلومات الدفع</h4>
-                        <hr>
-                        <credit-card-settings></credit-card-settings>
+                        <hr-->
+                        <!--credit-card-settings></credit-card-settings-->
                         <h4 class="uk-card-title uk-text-right">
                             اضافة باقة </h4>
                         <hr>
