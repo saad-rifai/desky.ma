@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
 //ResetPassword
-Route::get('sitemap.xml', 'AlgNoAuthController@sitemap');
+//Route::get('sitemap.xml', 'AlgNoAuthController@sitemap');
 Route::any('verfymail/{UID}/{token}', 'verfymailController@verfylink');
 Route::post(
     'ResetPassword/{sendMail}',
