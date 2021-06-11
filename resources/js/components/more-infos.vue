@@ -101,9 +101,9 @@
             {{ errors.get('logo') }}
           </div>
         </div>
-        <div class="uk-width-1-1@s">
+        <div class="uk-width-1-2@s">
           <label for="">
-            الشعار النصي (slogan)
+           المهنة (اختياري)
             <span class="red">*</span>
           </label>
           <div class="uk-form-controls">
@@ -111,20 +111,18 @@
               class="uk-input"
               type="text"
               name="fname"
-              placeholder="مثال: Full Stack developper"
+              placeholder="مثال: artisan traditionnel, Concepteur de site Web"
               value=""
-              list="slogan"
               v-model="slogan"
               v-bind:class="{ 'uk-form-danger': errors.errors.slogan }"
             />
+            <small>بالأحرف الفرنسية</small>
           </div>
-          <datalist id="slogan">
-            <option value="full stack developer"></option>
-            <option value="web designer"></option>
-          </datalist>
+
           <div class="uk-text-danger" v-if="errors.errors.slogan">
-            {{ errors.get('slogan') }}
+            {{ errors.get("slogan") }}
           </div>
+
         </div>
 
         <div class="uk-width-1-1@s">
@@ -320,7 +318,7 @@
               name="company"
               value=""
               v-model="bank_name"
-              placeholder="مثال: CFG BANK"
+              placeholder="مثال: CIH BANK"
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.bank_name">
@@ -340,7 +338,7 @@
               name="company"
               value=""
               v-model="bank_account_name"
-              placeholder="مثال: mohammed nasiri"
+              placeholder="مثال: Saad Rifai"
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.bank_account_name">
@@ -368,31 +366,38 @@
             {{ errors.get('bank_rib') }}
           </div>
         </div>
+                <div class="uk-width-1-2@s">
+          <label for="">
+           العنوان (اختياري)
+          </label>
+
+          <div class="uk-form-controls">
+            <input
+              class="uk-input"
+              type="text"
+              name="company"
+              value=""
+              v-model="adresse"
+              placeholder="Mandar Jamile B50 Etage N°4 - tanger 90000 "
+            />
+            <small>بالأحرف الفرنسية</small>
+          </div>
+          <div class="uk-text-danger" v-if="errors.errors.adresse">
+            {{ errors.get("adresse") }}
+          </div>
+        </div>
         <div class="uk-width-1-1@s">
-          <label>صف نفسك</label>
+          <label>صف نفسك (اختياري)</label>
           <div class="uk-margin">
             <textarea
               class="uk-textarea"
-              v-bind:class="{
-                'uk-form-danger':
-                  description_count > 500 || errors.errors.description,
-              }"
+
               rows="5"
               placeholder=""
-              @input="count_description"
               v-model="description"
             ></textarea>
             <div class="uk-text-danger" v-if="errors.errors.description">
               {{ errors.get('description') }}
-            </div>
-            <div
-              class="uk-text-left"
-              v-bind:class="{
-                'uk-form-danger':
-                  description_count > 500 || description_count < 20,
-              }"
-            >
-              <small>{{ description_count }}-500</small>
             </div>
           </div>
         </div>
@@ -452,6 +457,8 @@ export default {
       recaptcha_response: '',
       description: '',
       description_count: 0,
+            adresse:"",
+
     }
   },
   methods: {
@@ -500,10 +507,15 @@ export default {
       data.append('cni', this.cni)
       data.append('recaptcha_token', this.recaptcha_response)
       data.append('description', this.description)
+          data.append("adresse", this.adresse);
+
       const config = { headers: { 'Content-Type': 'multipart/form-data' } }
       axios
         .post('../api/creer/desky/user', data, config)
         .then((response) => {
+                        if(this.errors.errors){
+                this.errors.errors = "";
+            }
           $('#form-loading').css('display', 'none')
           UIkit.notification({
             message: 'تم حفظ البيانات',

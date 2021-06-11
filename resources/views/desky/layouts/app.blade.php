@@ -60,6 +60,32 @@
   gtag('config', 'G-S1XT2DT4WF');
 </script>
 </head>
+<!-- Messenger Plug-in Discussion Code -->
+<div id="fb-root"></div>
+
+<!-- Your Plug-in Discussion code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
+
+<script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "107158034873357");
+  chatbox.setAttribute("attribution", "biz_inbox");
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v11.0'
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/ar_AR/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 @php
 $datajson = file_get_contents('database/data.json');
 $jsondata = json_decode($datajson, true);
@@ -119,9 +145,12 @@ $jsondata = json_decode($datajson, true);
                             type="button"> <span class="bell-icon"><i class="fas fa-user"></i></span> </button>
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
-                                <li><a href="{{ asset('u/account') }}"><span uk-icon="user"></span> حسابي </a></li>
-                                <li><a href="{{ asset('u/payments/history') }}"><span uk-icon="history"></span> سجل المدفوعات</a>
-                                </li>
+                                <li class="l1"><a href="{{asset('u/account')}}"><span uk-icon="user"></span> حسابي </a></li>
+                                <li class="l2"><a href="{{asset('u/abonnement')}}"><span uk-icon="credit-card"></span>  الاشتراكات والدفع</a></li>
+                                <li class="l3"><a href="{{asset('u/settings')}}"><span uk-icon="file-edit"></span> اعدادات الحساب </a></li>
+                                <li class="l4"><a href="{{asset('desk/settings')}}"><span uk-icon="settings"></span> اعدادات المكتب</a></li>
+                                <li class="l5"><a href="{{asset('u/privacy')}}"><span uk-icon="lock"></span> اعدادات الخصوصية</a></li>
+                                <li class="l6"><a href="/u/payments/history"><span uk-icon="history"></span> سجل المدفوعات</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">

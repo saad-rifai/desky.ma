@@ -3,7 +3,7 @@
     <div id="modal-delete" uk-modal>
       <div dir="rtl" class="uk-modal-dialog uk-modal-body">
         <h3 class="uk-modal-title">حذف عرض الاسعار #{{ oid }}</h3>
-        <hr>
+        <hr />
         <p>هل أنت متأكد بأنك تود حذف عرض الاسعار رقم #{{ oid }} ؟</p>
         <p class="uk-text-right" dir="ltr">
           <button
@@ -26,23 +26,44 @@
     <div id="modal-share" uk-modal>
       <div dir="rtl" class="uk-modal-dialog uk-modal-body">
         <h3 class="uk-modal-title">مشاركة عرض الأسعار #{{ oid }}</h3>
-        <hr>
-        <div v-if="privacy.length > 0 &&  privacy[0].public_devis == 0" class="uk-alert-primary" uk-alert>
-          <p >
-
+        <hr />
+        <div
+          v-if="privacy.length > 0 && privacy[0].public_devis == 0"
+          class="uk-alert-primary"
+          uk-alert
+        >
+          <p>
             انت لم تفعل خيار مشاركة عروض الأسعار لن يتمكن أحد من غيرك مشاهدة عرض
             الاسعار الخاص بك من خلال الرابط المباشر
             <br />
             <br />
             ماذا أفعل ؟ يمكنك من خلال حسابي/
-            <a href="#" class="uk-link">اعدادات الخصوصية</a> تفعيل خاصية مشاركة
-            عرض الأسعار عبر رابط مباشر
+            <a href="#" class="uk-link">اعدادات الخصوصية</a>
+            تفعيل خاصية مشاركة عرض الأسعار عبر رابط مباشر
           </p>
         </div>
-        <div class="uk-margin" v-if="privacy.length > 0 &&  privacy[0].public_devis == 1">
-          <a href="javascript:void(0)" @click="whatsapp_share" class="uk-icon-button uk-margin-small-right"><i class="fab fa-whatsapp"></i></a>
-          <a :href="'mailto:?subject=عرض أسعار رقم #'+ oid +'&amp;body=مرحبا! هذا الرابط لمعاينة عرض الأسعار الخاص بك <br>' + share_link"  class="uk-icon-button uk-margin-small-right"><i class="fab fa-facebook"></i></a>
-
+        <div
+          class="uk-margin"
+          v-if="privacy.length > 0 && privacy[0].public_devis == 1"
+        >
+          <a
+            href="javascript:void(0)"
+            @click="whatsapp_share"
+            class="uk-icon-button uk-margin-small-right"
+          >
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a
+            :href="
+              'mailto:?subject=عرض أسعار رقم #' +
+              oid +
+              '&amp;body=مرحبا! هذا الرابط لمعاينة عرض الأسعار الخاص بك <br>' +
+              share_link
+            "
+            class="uk-icon-button uk-margin-small-right"
+          >
+            <i class="fab fa-facebook"></i>
+          </a>
         </div>
         <label for="">رابط المشاركة:</label>
         <div class="uk-inline uk-width-1-1">
@@ -64,10 +85,8 @@
           />
         </div>
         <p class="uk-text-right" dir="ltr">
-
           <button
             class="uk-button uk-button-primary uk-modal-close"
-
             type="button"
           >
             اغلق
@@ -75,17 +94,26 @@
         </p>
       </div>
     </div>
-    <div class="uk-flex uk-flex-wrap uk-flex-wrap-around btn-grids uk-padding-small"  dir="rtl">
+    <div
+      class="uk-flex uk-flex-wrap uk-flex-wrap-around btn-grids uk-padding-small min-btn"
+      dir="rtl"
+    >
       <div>
+        <a target="_blank" :href="'../../print/devis/' + oid + '/' + uid">
+          <button class="uk-dropdown-menu-orange" type="button" dir="rtl">
+            <i class="far fa-file-pdf"></i>
+          </button>
+        </a>
         <button class="uk-dropdown-menu-orange" type="button" dir="rtl">
-           <span uk-icon="icon: more-vertical"></span>
+            <i class="fas fa-ellipsis-v"></i>
         </button>
         <div uk-dropdown="mode: click; pos: bottom-right">
           <ul class="uk-nav uk-dropdown-nav">
             <li class="uk-active">
-              <a target="_blank" :href="'../../print/devis/'+oid+'/'+uid"
-                ><span uk-icon="icon:  file-pdf"></span> تصدير ملف PDF</a
-              >
+              <a target="_blank" :href="'../../print/devis/' + oid + '/' + uid">
+                <span uk-icon="icon:  file-pdf"></span>
+                تصدير ملف PDF
+              </a>
             </li>
             <!--li class="uk-active">
               <a href="#"
@@ -93,12 +121,16 @@
               </a>
             </li-->
             <li class="uk-active">
-              <a :href="'/devis/'+oid+'/'+uid+'/edit'"><span uk-icon="icon: file-edit"></span> تعديل</a>
+              <a :href="'/devis/' + oid + '/' + uid + '/edit'">
+                <span uk-icon="icon: file-edit"></span>
+                تعديل
+              </a>
             </li>
             <li class="uk-active">
-              <a href="#modal-delete" uk-toggle
-                ><span uk-icon="icon: trash"></span> حذف</a
-              >
+              <a href="#modal-delete" uk-toggle>
+                <span uk-icon="icon: trash"></span>
+                حذف
+              </a>
             </li>
           </ul>
         </div>
@@ -117,7 +149,8 @@
           type="button"
           dir="rtl"
         >
-          {{ status[infos.status] }} <span uk-icon="icon: triangle-down"></span>
+          {{ status[infos.status] }}
+          <span uk-icon="icon: triangle-down"></span>
         </button>
         <div uk-dropdown="mode: click; pos: bottom-right">
           <ul class="uk-nav uk-dropdown-nav">
@@ -127,7 +160,10 @@
               @click="changeStatus(index)"
               class="uk-active"
             >
-              <a href="javascript:void(0)"><span></span> {{ item }}</a>
+              <a href="javascript:void(0)">
+                <span></span>
+                {{ item }}
+              </a>
             </li>
           </ul>
         </div>
@@ -135,7 +171,8 @@
       <div class="">
         <button
           class="uk-button btn-share"
-          uk-toggle="target: #modal-share" @click="check_privacy"
+          uk-toggle="target: #modal-share"
+          @click="check_privacy"
           type="button"
           dir="rtl"
         >
@@ -146,124 +183,126 @@
   </div>
 </template>
 <script>
-import json from "../../../database/data.json";
+import json from '../../../database/data.json'
 
 export default {
-  props: ["oid", "resp", "uid"],
+  props: ['oid', 'resp', 'uid'],
   data() {
     return {
       share_link: '',
       status: json.devis_status,
-      infos: "",
-      privacy: []
-    };
+      infos: '',
+      privacy: [],
+    }
   },
   methods: {
-    whatsapp_share: function(){
-            window.open('https://api.whatsapp.com/send?text=' +this.share_link);
-
+    whatsapp_share: function () {
+      window.open('https://api.whatsapp.com/send?text=' + this.share_link)
     },
-    check_privacy: function(){
-//api/v1/user/GetUserPrivacy
-    $('#form-loading').css('display', 'block')
-    axios.post('/api/v1/user/GetUserPrivacy').then((response) => {
-      this.privacy = [response.data];
+    check_privacy: function () {
+      //api/v1/user/GetUserPrivacy
+      $('#form-loading').css('display', 'block')
+      axios
+        .post('/api/v1/user/GetUserPrivacy')
+        .then((response) => {
+          this.privacy = [response.data]
 
-      $('#form-loading').css('display', 'none')
-
-    }).catch((error) => {
-   this.check_privacy();
-      $('#form-loading').css('display', 'none')
-
-    });
-
+          $('#form-loading').css('display', 'none')
+        })
+        .catch((error) => {
+          this.check_privacy()
+          $('#form-loading').css('display', 'none')
+        })
     },
     CopyLink: function (e) {
-      let CodeToCopy = document.querySelector("#share_lnk");
-      $("#share_lnk").removeAttr("disabled");
+      let CodeToCopy = document.querySelector('#share_lnk')
+      $('#share_lnk').removeAttr('disabled')
 
-      CodeToCopy.select();
-      document.execCommand("copy");
+      CodeToCopy.select()
+      document.execCommand('copy')
       UIkit.notification({
-        message: "تم نسخ رابط المشاركة",
-        status: "success",
-        pos: "top-center",
+        message: 'تم نسخ رابط المشاركة',
+        status: 'success',
+        pos: 'top-center',
         timeout: 5000,
-      });
-      $("#share_lnk").attr("disabled", "disabled");
+      })
+      $('#share_lnk').attr('disabled', 'disabled')
     },
     deleteDocumment: function (e) {
-      let data = new FormData();
-      data.append("ref", window.location.href);
-      data.append("token", $("meta[name=csrf-token]").attr("content"));
-      data.append("oid", this.oid);
-      data.append("d", "d");
+      let data = new FormData()
+      data.append('ref', window.location.href)
+      data.append('token', $('meta[name=csrf-token]').attr('content'))
+      data.append('oid', this.oid)
+      data.append('d', 'd')
       axios
-        .post("/api/v1/deleteDocumment", data)
+        .post('/api/v1/deleteDocumment', data)
         .then((response) => {
           UIkit.notification({
-            message: "تم حذف عرض الاسعار : " + this.oid + "",
-            status: "success",
-            pos: "top-center",
+            message: 'تم حذف عرض الاسعار : ' + this.oid + '',
+            status: 'success',
+            pos: 'top-center',
             timeout: 5000,
-          });
-         window.location.replace('/devis/list');
+          })
+          window.location.replace('/devis/list')
         })
         .catch((error) => {
           UIkit.notification({
-            message: "حصل خطأ ما يرجى اعادة المحاولة لاحقاََ رقم الخطأ fx0029",
-            status: "danger",
-            pos: "top-center",
+            message: 'حصل خطأ ما يرجى اعادة المحاولة لاحقاََ رقم الخطأ fx0029',
+            status: 'danger',
+            pos: 'top-center',
             timeout: 5000,
-          });
-        });
+          })
+        })
     },
     changeStatus: function (e) {
-      let data = new FormData();
-      data.append("ref", window.location.href);
-      data.append("token", $("meta[name=csrf-token]").attr("content"));
-      data.append("oid", this.oid);
-      data.append("d", "d");
-      data.append("ns", e);
+      let data = new FormData()
+      data.append('ref', window.location.href)
+      data.append('token', $('meta[name=csrf-token]').attr('content'))
+      data.append('oid', this.oid)
+      data.append('d', 'd')
+      data.append('ns', e)
       axios
-        .post("/api/v1/UpdateOfDocument/status", data)
+        .post('/api/v1/UpdateOfDocument/status', data)
         .then((response) => {
-          this.infos.status = e;
+          this.infos.status = e
           UIkit.notification({
-            message: "تم تحديث الحالة",
-            status: "success",
-            pos: "top-center",
+            message: 'تم تحديث الحالة',
+            status: 'success',
+            pos: 'top-center',
             timeout: 5000,
-          });
+          })
         })
         .catch((error) => {
           UIkit.notification({
             message: error.data.error,
-            status: "danger",
-            pos: "top-center",
+            status: 'danger',
+            pos: 'top-center',
             timeout: 5000,
-          });
-        });
+          })
+        })
     },
     getuserstatus: function () {
-      let data = new FormData();
-      data.append("ref", window.location.href);
-      data.append("_token", $("meta[name=csrf-token]").attr("content"));
-      data.append("oid", this.oid);
-      data.append("d", "d");
+      let data = new FormData()
+      data.append('ref', window.location.href)
+      data.append('_token', $('meta[name=csrf-token]').attr('content'))
+      data.append('oid', this.oid)
+      data.append('d', 'd')
       axios
-        .post("/api/v1/getOfDocument/status", data)
+        .post('/api/v1/getOfDocument/status', data)
         .then((response) => {
-          this.infos = response.data[0];
-          this.share_link = window.location.href.replace('devis', 'print/devis')+"/"+this.infos.token_share;
+          this.infos = response.data[0]
+          this.share_link =
+            window.location.href.replace('devis', 'print/devis') +
+            '/' +
+            this.infos.token_share
         })
         .catch((error) => {
-         this.getuserstatus();
-        });
+          this.getuserstatus()
+        })
     },
   },
   created() {
-    this.getuserstatus();
+    this.getuserstatus()
   },
-};
+}
 </script>

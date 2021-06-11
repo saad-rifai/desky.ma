@@ -45,6 +45,7 @@
     <link href="{{ URL::asset('css/desky-style.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/mobile-style.css') }}" rel="stylesheet">
     <script src="{{ URL::asset('uikit/dist/js/uikit.min.js') }}"></script>
+
     <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href='https://fonts.googleapis.com/css?family=Tajawal' rel='stylesheet'>
@@ -229,10 +230,12 @@ $jsondata = json_decode($datajson, true);
 
                         <div uk-dropdown="boundary: .boundary">
                             <ul dir="rtl" class="uk-nav uk-dropdown-nav uk-text-right">
-                                <li><a href="{{ asset('u/account') }}"><span uk-icon="user"></span> حسابي </a></li>
-                                <li><a href="{{ asset('u/payments/history') }}"><span uk-icon="history"></span> سجل
-                                        المدفوعات</a>
-                                </li>
+                                <li class="l1"><a href="{{asset('u/account')}}"><span uk-icon="user"></span> حسابي </a></li>
+                                <li class="l2"><a href="{{asset('u/abonnement')}}"><span uk-icon="credit-card"></span>  الاشتراكات والدفع</a></li>
+                                <li class="l3"><a href="{{asset('u/settings')}}"><span uk-icon="file-edit"></span> اعدادات الحساب </a></li>
+                                <li class="l4"><a href="{{asset('desk/settings')}}"><span uk-icon="settings"></span> اعدادات المكتب</a></li>
+                                <li class="l5"><a href="{{asset('u/privacy')}}"><span uk-icon="lock"></span> اعدادات الخصوصية</a></li>
+                                <li class="l6"><a href="/u/payments/history"><span uk-icon="history"></span> سجل المدفوعات</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                                                                                                                                                                                                                                                                                                   document.getElementById('logout-form').submit();">

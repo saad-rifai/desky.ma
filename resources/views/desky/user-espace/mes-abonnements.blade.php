@@ -1,8 +1,6 @@
 
 @extends('desky.panel.app')
 @section('title', 'الاشتراكات والدفع')
-@section('description', 'منصة مقاولة توفر لك العديد من الخدمات لمساعدتك على بدء و تطوير نشاطك التجاري')
-@section('ogimage', asset('image/moqawala.ma.jpg'))
 <style>.l2 a {
     color: #f98a13 !important;
 }

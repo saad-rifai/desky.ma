@@ -70,7 +70,7 @@
             </div>
           </div>
           <div
-            style="display: none"
+            style="display: none;"
             class="uk-alert-primary"
             id="border_file"
             uk-alert
@@ -78,16 +78,16 @@
             <a class="uk-alert-close" uk-close></a>
             <p id="filename_logo"></p>
           </div>
-          <div v-if="logourl != '' && logourl != null"
-            style="display: block"
+          <div
+            v-if="logourl != '' && logourl != null"
+            style="display: block;"
             class="border-show-image"
             id="preview-border"
           >
             <div class="border-preview">
               <span class="">
-                  <i class="fa fa-eye"></i>
+                <i class="fa fa-eye"></i>
                 المعاينة
-
               </span>
             </div>
             <img
@@ -95,53 +95,75 @@
               id="preview-image"
               class="logo-image uk-position-center"
             />
-            <div @click="removeLogo" class="delete-border-btn"> <span>حذف</span> </div>
+            <div @click="removeLogo" class="delete-border-btn">
+              <span>حذف</span>
+            </div>
           </div>
           <div class="uk-text-danger" v-if="errors.errors.logo">
-            {{ errors.get("logo") }}
+            {{ errors.get('logo') }}
           </div>
-          <hr>
+          <hr />
         </div>
-        <div class="uk-width-1-1@s ">
+        <div class="uk-width-1-1@s">
           <label for="">قالب عروض الأسعار (devis)</label>
 
           <div class="uk-margin">
-            <div class="uk-grid-small " uk-grid>
-              <div v-for="(item, index) in devis_models" :key="index" class="uk-width-1-2@s">
+            <div class="uk-grid-small" uk-grid>
+              <div
+                v-for="(item, index) in devis_models"
+                :key="index"
+                class="uk-width-1-2@s"
+              >
                 <div class="model-view" @click="modelcheck(index)">
-                  <img :src="'/image/models/devis/'+item.preview_image" :alt="item.name+' - Desky.ma - '+item.date" />
-                  <div :id="index" class="title-model-view uk-position-bottom" v-bind:class="{'selected' : index == userinfos.model_devis}">
-                    {{item.name}}
+                  <img
+                    :src="'/image/models/devis/' + item.preview_image"
+                    :alt="item.name + ' - Desky.ma - ' + item.date"
+                  />
+                  <div
+                    :id="index"
+                    class="title-model-view uk-position-bottom"
+                    v-bind:class="{ selected: index == userinfos.model_devis }"
+                  >
+                    {{ item.name }}
                   </div>
                 </div>
               </div>
-
             </div>
-
           </div>
-          <hr>
+          <hr />
         </div>
-                <div class="uk-width-1-1@s ">
+        <div class="uk-width-1-1@s">
           <label for="">قالب الفواتير</label>
           <div class="uk-margin">
-            <div class="uk-grid-small " uk-grid>
-              <div v-for="(item, index) in factures_models" :key="index" class="uk-width-1-2@s">
+            <div class="uk-grid-small" uk-grid>
+              <div
+                v-for="(item, index) in factures_models"
+                :key="index"
+                class="uk-width-1-2@s"
+              >
                 <div class="model-view" @click="modelfactureCheck(index)">
-                  <img :src="'/image/models/factures/'+item.preview_image" :alt="item.name+' - Desky.ma - '+item.date" />
-                  <div :id="'f'+index" class="title-model-view uk-position-bottom" v-bind:class="{'selected' : index == userinfos.model_facture}">
-                    {{item.name}}
+                  <img
+                    :src="'/image/models/factures/' + item.preview_image"
+                    :alt="item.name + ' - Desky.ma - ' + item.date"
+                  />
+                  <div
+                    :id="'f' + index"
+                    class="title-model-view uk-position-bottom"
+                    v-bind:class="{
+                      selected: index == userinfos.model_facture,
+                    }"
+                  >
+                    {{ item.name }}
                   </div>
                 </div>
               </div>
-
             </div>
-
           </div>
-          <hr>
+          <hr />
         </div>
         <div class="uk-width-1-2@s">
           <label for="">
-            الشعار النصي (slogan)
+            المهنة (اختياري)
             <span class="red">*</span>
           </label>
           <div class="uk-form-controls">
@@ -149,21 +171,17 @@
               class="uk-input"
               type="text"
               name="fname"
-              placeholder="مثال: Full Stack developper"
+              placeholder="مثال: artisan traditionnel, Concepteur de site Web"
               value=""
-              list="slogan"
               v-model="slogan"
               v-bind:class="{ 'uk-form-danger': errors.errors.slogan }"
             />
+            <small>بالأحرف الفرنسية</small>
           </div>
-          <datalist id="slogan">
-            <option value="full stack developer"></option>
-            <option value="web designer"></option>
-          </datalist>
+
           <div class="uk-text-danger" v-if="errors.errors.slogan">
-            {{ errors.get("slogan") }}
+            {{ errors.get('slogan') }}
           </div>
-          <hr>
         </div>
         <div class="uk-width-1-4@s">
           <label for="">
@@ -174,16 +192,16 @@
             <label for="">
               اختيار لون:
               <input
-              class="uk-input color-input"
-              lang="ar"
-              type="color"
-              name="fname"
-              placeholder="مثال: Full Stack developper"
-              value="#f78b03"
-              v-model="brandcolor"
-              required
-            /></label>
-
+                class="uk-input color-input"
+                lang="ar"
+                type="color"
+                name="fname"
+                placeholder="مثال: Full Stack developper"
+                value="#f78b03"
+                v-model="brandcolor"
+                required
+              />
+            </label>
           </div>
           <datalist id="brandcolor">
             <option value="#f78b03"></option>
@@ -192,7 +210,7 @@
             <option value="#ff5722"></option>
           </datalist>
           <div class="uk-text-danger" v-if="errors.errors.brandcolor">
-            {{ errors.get("brandcolor") }}
+            {{ errors.get('brandcolor') }}
           </div>
         </div>
         <div class="uk-width-1-1@s">
@@ -227,7 +245,7 @@
             </select>
           </div>
           <div class="uk-text-danger" v-if="errors.errors.sector">
-            {{ errors.get("sector") }}
+            {{ errors.get('sector') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -244,10 +262,18 @@
               v-model="u_if"
               placeholder=""
               value=""
+              disabled
             />
+            <small>
+              لايمكنك تغيير هذه المعلومات
+              <span
+                uk-icon="icon: info; ratio:0.7"
+                uk-tooltip="title: تمنع سياستنا تغيير المعلومات المهنية في حال كانت المعلومات خاطئة يجرى التواصل معنا عبر support@desky.ma"
+              ></span>
+            </small>
           </div>
           <div class="uk-text-danger" v-if="errors.errors.u_if">
-            {{ errors.get("u_if") }}
+            {{ errors.get('u_if') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -265,10 +291,19 @@
               placeholder=""
               value=""
               v-model="u_tp"
+              disabled
             />
           </div>
+          <small>
+            لايمكنك تغيير هذه المعلومات
+            <span
+              uk-icon="icon: info; ratio:0.7"
+              uk-tooltip="title: تمنع سياستنا تغيير المعلومات المهنية في حال كانت المعلومات خاطئة يجرى التواصل معنا عبر support@desky.ma"
+            ></span>
+          </small>
+
           <div class="uk-text-danger" v-if="errors.errors.u_tp">
-            {{ errors.get("u_tp") }}
+            {{ errors.get('u_tp') }}
           </div>
         </div>
 
@@ -287,10 +322,18 @@
               value=""
               v-model="ice"
               placeholder=""
+              disabled
             />
+            <small>
+              لايمكنك تغيير هذه المعلومات
+              <span
+                uk-icon="icon: info; ratio:0.7"
+                uk-tooltip="title: تمنع سياستنا تغيير المعلومات المهنية في حال كانت المعلومات خاطئة يجرى التواصل معنا عبر support@desky.ma"
+              ></span>
+            </small>
           </div>
           <div class="uk-text-danger" v-if="errors.errors.ice">
-            {{ errors.get("ice") }}
+            {{ errors.get('ice') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -310,7 +353,7 @@
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.b_email">
-            {{ errors.get("b_email") }}
+            {{ errors.get('b_email') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -329,7 +372,7 @@
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.b_phone">
-            {{ errors.get("b_phone") }}
+            {{ errors.get('b_phone') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -346,10 +389,18 @@
               value=""
               v-model="cni"
               placeholder="KB00000"
+              disabled
             />
+            <small>
+              لايمكنك تغيير هذه المعلومات
+              <span
+                uk-icon="icon: info; ratio:0.7"
+                uk-tooltip="title: تمنع سياستنا تغيير المعلومات المهنية في حال كانت المعلومات خاطئة يجرى التواصل معنا عبر support@desky.ma"
+              ></span>
+            </small>
           </div>
           <div class="uk-text-danger" v-if="errors.errors.cni">
-            {{ errors.get("cni") }}
+            {{ errors.get('cni') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -366,7 +417,7 @@
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.siteweb">
-            {{ errors.get("siteweb") }}
+            {{ errors.get('siteweb') }}
           </div>
         </div>
         <div class="uk-width-1-1@s">
@@ -392,7 +443,7 @@
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.bank_name">
-            {{ errors.get("bank_name") }}
+            {{ errors.get('bank_name') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -412,7 +463,7 @@
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.bank_account_name">
-            {{ errors.get("bank_account_name") }}
+            {{ errors.get('bank_account_name') }}
           </div>
         </div>
         <div class="uk-width-1-2@s">
@@ -433,34 +484,40 @@
             />
           </div>
           <div class="uk-text-danger" v-if="errors.errors.bank_rib">
-            {{ errors.get("bank_rib") }}
+            {{ errors.get('bank_rib') }}
+          </div>
+        </div>
+        <div class="uk-width-1-2@s">
+          <label for="">
+            العنوان (اختياري)
+          </label>
+
+          <div class="uk-form-controls">
+            <input
+              class="uk-input"
+              type="text"
+              name="company"
+              value=""
+              v-model="adresse"
+              placeholder="Mandar Jamile B50 Etage N°4 - tanger 90000 "
+            />
+            <small>بالأحرف الفرنسية</small>
+          </div>
+          <div class="uk-text-danger" v-if="errors.errors.adresse">
+            {{ errors.get('adresse') }}
           </div>
         </div>
         <div class="uk-width-1-1@s">
-          <label>صف نفسك</label>
+          <label>صف نفسك (اختياري)</label>
           <div class="uk-margin">
             <textarea
               class="uk-textarea"
-              v-bind:class="{
-                'uk-form-danger':
-                  description_count > 500 || errors.errors.description,
-              }"
               rows="5"
               placeholder=""
-              @input="count_description"
               v-model="description"
             ></textarea>
             <div class="uk-text-danger" v-if="errors.errors.description">
-              {{ errors.get("description") }}
-            </div>
-            <div
-              class="uk-text-left"
-              v-bind:class="{
-                'uk-form-danger':
-                  description_count > 500 || description_count < 10,
-              }"
-            >
-              <small>{{ description_count }}-500</small>
+              {{ errors.get('description') }}
             </div>
           </div>
         </div>
@@ -474,217 +531,226 @@
 </template>
 
 <script>
-import json from "../../../database/data.json";
+import json from '../../../database/data.json'
 
-var n = 0;
+var n = 0
 class Errors {
   constructor() {
-    this.errors = {};
+    this.errors = {}
   }
   get(filed) {
     if (this.errors[filed]) {
-      return this.errors[filed][0];
+      return this.errors[filed][0]
     }
   }
   record(errors) {
-    this.errors = errors.errors;
+    this.errors = errors.errors
   }
 }
 
 export default {
-  props: ["user"],
+  props: ['user'],
   data() {
     return {
       errors: new Errors(),
       devis_models: json.devis_template,
       factures_models: json.facture_template,
-      logofile: "",
-      logourl: "",
-      slogan: "",
-      brandcolor: "#f78b03",
-      sector: "",
-      u_if: "",
-      u_tp: "",
-      ice: "",
+      logofile: '',
+      logourl: '',
+      slogan: '',
+      brandcolor: '#f78b03',
+      sector: '',
+      u_if: '',
+      u_tp: '',
+      ice: '',
+      adresse: '',
       b_email: this.user.email,
       b_phone: this.user.phonenumb,
-      siteweb: "",
-      bank_name: "",
-      bank_account_name: "",
-      bank_rib: "",
-      cni: "",
-      description: "",
+      siteweb: '',
+      bank_name: '',
+      bank_account_name: '',
+      bank_rib: '',
+      cni: '',
+      description: '',
       description_count: 0,
       userinfos: [],
       modelsCount: 2,
       modelDevis: 0,
       modelfacture: 0,
-      removeLogoFile: false
-    };
+      removeLogoFile: false,
+    }
   },
   methods: {
     count_description: function () {
-      this.description_count = this.description.length;
+      this.description_count = this.description.length
     },
-    removeLogo: function(){
-        this.logofile = "";
-        this.logourl = "";
-        this.removeLogo = true;
+    removeLogo: function () {
+      this.logofile = ''
+      this.logourl = ''
+      this.removeLogo = true
     },
     uplogo: function (e) {
-      $("#form-loading").css("display", "block");
+      $('#form-loading').css('display', 'block')
       if (e.target.files && e.target.files[0]) {
-        var reader = new FileReader();
+        var reader = new FileReader()
 
         reader.onload = function (e) {
-          $("#preview-image").attr("src", e.target.result);
-        };
+          $('#preview-image').attr('src', e.target.result)
+        }
 
-        reader.readAsDataURL(e.target.files[0]);
-        $("#preview-border").css("display", "block");
-      }else{
-                $("#form-loading").css("display", "none");
-
+        reader.readAsDataURL(e.target.files[0])
+        $('#preview-border').css('display', 'block')
+      } else {
+        $('#form-loading').css('display', 'none')
       }
-      let file = e.target.files[0];
-      this.logofile = file;
-      var geekss = e.target.files[0].name;
-      $("#border_file").css("display", "block");
-      $("#filename_logo").text(" تم تحديد " + geekss);
-      $("#form-loading").css("display", "none");
+      let file = e.target.files[0]
+      this.logofile = file
+      var geekss = e.target.files[0].name
+      $('#border_file').css('display', 'block')
+      $('#filename_logo').text(' تم تحديد ' + geekss)
+      $('#form-loading').css('display', 'none')
     },
     getuserdata: function () {
-        $("#form-loading").css("display", "block");
+      $('#form-loading').css('display', 'block')
       axios
-        .post("../api/get/desky/user")
+        .post('../api/get/desky/user')
         .then((response) => {
-          this.userinfos = response.data;
-          this.cni = this.userinfos.cni;
-          this.logourl = this.userinfos.logo;
-          this.bank_account_name = this.userinfos.compte_bank_username;
-          this.bank_name = this.userinfos.compte_bank_name;
-          this.bank_rib = this.userinfos.compte_bank_rib;
-          this.brandcolor = this.userinfos.brandcolor;
-          this.description = this.userinfos.description;
-          this.ice = this.userinfos.ice;
-          this.u_if = this.userinfos.if;
-          this.u_tp = this.userinfos.tp;
-          this.slogan = this.userinfos.slogon;
-          this.sector = this.userinfos.sector;
-          this.modelDevis = this.userinfos.model_devis;
-          if (this.userinfos.siteweb == null) {
-            this.siteweb = "";
+          this.userinfos = response.data
+          this.cni = this.userinfos.cni
+          this.logourl = this.userinfos.logo
+          this.bank_account_name = this.userinfos.compte_bank_username
+          this.bank_name = this.userinfos.compte_bank_name
+          this.bank_rib = this.userinfos.compte_bank_rib
+          this.brandcolor = this.userinfos.brandcolor
+          this.ice = this.userinfos.ice
+          this.u_if = this.userinfos.if
+          this.u_tp = this.userinfos.tp
+          //this.slogan = this.userinfos.slogon;
+          this.sector = this.userinfos.sector
+          this.modelDevis = this.userinfos.model_devis
+          // Slogan
+          if (this.userinfos.slogon == null) {
+            this.slogan = ''
           } else {
-            this.siteweb = this.userinfos.siteweb;
+            this.slogan = this.userinfos.slogon
           }
-          $("#form-loading").css("display", "none");
+
+          if (this.userinfos.description == null) {
+            this.description = ''
+          } else {
+            this.description = this.userinfos.description
+          }
+          if (this.userinfos.adresse == null) {
+            this.adresse = ''
+          } else {
+            this.adresse = this.userinfos.adresse
+          }
+          if (this.userinfos.siteweb == null) {
+            this.siteweb = ''
+          } else {
+            this.siteweb = this.userinfos.siteweb
+          }
+          $('#form-loading').css('display', 'none')
         })
         .catch((error) => {
-          $("#form-loading").css("display", "none");
+          $('#form-loading').css('display', 'none')
           UIkit.notification({
-            message:
-              "تعذر جلب البيانات <span uk-icon='icon: warning'></span>",
-            status: "danger",
-            pos: "top-center",
+            message: "تعذر جلب البيانات <span uk-icon='icon: warning'></span>",
+            status: 'danger',
+            pos: 'top-center',
             timeout: 5000,
-          });
-          window.location.reload();
+          })
+          window.location.reload()
         })
         .finally(() => {
-          $("#form-loading").css("display", "none");
-        });
+          $('#form-loading').css('display', 'none')
+        })
     },
-    modelfactureCheck: function(e){
-        var c = this.modelfacture;
-        $("#f"+e).addClass("selected");
-        this.modelfacture = e;
-        for(var i=0; c >= i; i++){
-            if(i != e){
-        $("#f"+i).removeClass("selected");
-
-            }
-
+    modelfactureCheck: function (e) {
+      var c = this.modelfacture
+      $('#f' + e).addClass('selected')
+      this.modelfacture = e
+      for (var i = 0; c >= i; i++) {
+        if (i != e) {
+          $('#f' + i).removeClass('selected')
         }
+      }
     },
-    modelcheck: function(e){
-        var c = this.modelDevis;
-        $("#"+e).addClass("selected");
-        this.modelDevis = e;
-        for(var i=0; c >= i; i++){
-            if(i != e){
-        $("#"+i).removeClass("selected");
-
-            }
-
+    modelcheck: function (e) {
+      var c = this.modelDevis
+      $('#' + e).addClass('selected')
+      this.modelDevis = e
+      for (var i = 0; c >= i; i++) {
+        if (i != e) {
+          $('#' + i).removeClass('selected')
         }
-
+      }
     },
     submitform: function () {
+      $('#form-loading').css('display', 'block')
 
-      $("#form-loading").css("display", "block");
-
-      let data = new FormData();
-      if(this.logofile == "" && this.removeLogo == true){
-         data.append("removeLogo", true);
-
+      let data = new FormData()
+      if (this.logofile == '' && this.removeLogo == true) {
+        data.append('removeLogo', true)
       }
 
-      data.append("logo", this.logofile);
-      data.append("slogan", this.slogan);
-      data.append("brand_color", this.brandcolor);
-      data.append("sector", this.sector);
-      data.append("u_if", this.u_if);
-      data.append("u_tp", this.u_tp);
-      data.append("ice", this.ice);
-      data.append("b_email", this.b_email);
-      data.append("b_phone", this.b_phone);
-      data.append("siteweb", this.siteweb);
-      data.append("bank_name", this.bank_name);
-      data.append("bank_account_name", this.bank_account_name);
-      data.append("bank_rib", this.bank_rib);
-      data.append("cni", this.cni);
-      data.append("description", this.description);
-      data.append("model_devis", this.modelDevis);
-      data.append("model_facute", this.modelfacture);
+      data.append('logo', this.logofile)
+      data.append('slogan', this.slogan)
+      data.append('brand_color', this.brandcolor)
+      data.append('sector', this.sector)
+      data.append('u_if', this.userinfos.if)
+      data.append('u_tp', this.userinfos.tp)
+      data.append('ice', this.userinfos.ice)
+      data.append('b_email', this.b_email)
+      data.append('b_phone', this.b_phone)
+      data.append('siteweb', this.siteweb)
+      data.append('bank_name', this.bank_name)
+      data.append('bank_account_name', this.bank_account_name)
+      data.append('bank_rib', this.bank_rib)
+      data.append('cni', this.userinfos.cni)
+      data.append('description', this.description)
+      data.append('model_devis', this.modelDevis)
+      data.append('model_facute', this.modelfacture)
+      data.append('adresse', this.adresse)
       let config = {
-        headers: { "Content-Type": "multipart/form-data" }
-
-        };
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }
       axios
-        .post("../api/update/desky/user", data, config)
+        .post('../api/update/desky/user', data, config)
         .then((response) => {
-          $("#form-loading").css("display", "none");
+          if (this.errors.errors) {
+            this.errors.errors = ''
+          }
+          $('#form-loading').css('display', 'none')
           UIkit.notification({
-            message: "تم حفظ البيانات",
-            status: "success",
-            pos: "top-center",
+            message: 'تم حفظ البيانات',
+            status: 'success',
+            pos: 'top-center',
             timeout: 5000,
-          });
+          })
         })
         .catch((error) => {
-          this.errors.record(error.response.data);
-          $("#form-loading").css("display", "none");
+          this.errors.record(error.response.data)
+          $('#form-loading').css('display', 'none')
           UIkit.notification({
             message:
               "يرجى التحقق من المدخلات <span uk-icon='icon: warning'></span>",
-            status: "danger",
-            pos: "top-center",
+            status: 'danger',
+            pos: 'top-center',
             timeout: 5000,
-          });
+          })
         })
         .finally(() => {
-          $("#form-loading").css("display", "none");
-        });
+          $('#form-loading').css('display', 'none')
+        })
     },
     logoupload: function () {
       // this.logo_url = $("#logo_change").val().replace(/.*(\/|\\)/, '');
     },
   },
-  created(){
-this.getuserdata();
+  created() {
+    this.getuserdata()
   },
-  mounted() {
-
-  },
-};
+  mounted() {},
+}
 </script>

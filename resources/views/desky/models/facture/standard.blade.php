@@ -262,8 +262,8 @@ $test = '454564df';
                             <img src="http://{{ env('APP_URL') }}/{{ $logo }}" class="logo-pdf">
 
                         @else
-                            <h1 class="logo-text"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}</h1>
-                            <p class="logo-slogon"> {{ $slogon }} </p>
+                        <h1 class="logo-text"> {{ ucwords(Auth::user()->fname) }} {{ ucwords(Auth::user()->lname) }}</h1>
+                        <p class="logo-slogon"> {{ $slogon }} </p>
                         @endif
 
                     </div>
@@ -466,8 +466,11 @@ $test = '454564df';
         <div class="border-info"><span style="font-size: 13px"> PLUS D'INFORMATION</span></div>
 
         <small style="font-size: 13px;color: #555;line-height: 1;">ICE: {{ $ice }} - IF: {{$if}} - TP: {{ $tp }}
+           @if ($adresse != '')
             <br>
-        Adresse: Mandar Jamile, Avenue Allal Al Fassi, Rue 50 B, N° 1, 2eme Etage, N° 03 - 90070
+        Adresse: {{$adresse}}
+        @endif
+
         </small>
 
     </div>

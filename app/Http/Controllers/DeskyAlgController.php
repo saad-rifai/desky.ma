@@ -313,16 +313,14 @@ class DeskyAlgController extends Controller
         $infos = desky_db::all()->where("email", Auth::user()->email);
         $count = $infos->count();
         if ($count > 0) {
-            $products = Subscriptions::all()->where("email", Auth::user()->email);
-            $points = 0;
+          //  $products = Subscriptions::all()->where("email", Auth::user()->email);
+          //  $points = 0;
             $currentMonth = date("m");
-            $devis = DB::table('desky_user_devis')->where("email", Auth::user()->email)->whereMonth('created_at', Carbon::now()->month);
-            $n_devis_t_m = $devis->count();
-            $product = null;
-            foreach($products as $product){
-                $points += $product->point;
-            }
-            return view("desky.panel.index", ["points" => $points, "pr_infos" => $product, "n_devis_t_m" => $n_devis_t_m]);
+           // $devis = DB::table('desky_user_devis')->where("email", Auth::user()->email)->whereMonth('created_at', Carbon::now()->month);
+            //$n_devis_t_m = $devis->count();
+//$product = null;
+
+            return view("desky.panel.index");
         } else {
             return view("desky/panel/register-infos");
         }
@@ -345,9 +343,11 @@ class DeskyAlgController extends Controller
                 'u_if' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'u_tp' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'cni' => 'required|min:4|max:8|regex:/^[\w\d\s0-9]*$/',
-                'slogan' => 'required|min:8|max:35|regex:/^[\w\d\s.,-]*$/',
-                'description' => 'required|min:20|max:500',
-                'recaptcha_token' => 'required|recaptcha'
+                'slogan' => 'nullable|min:8|max:35|regex:/^[\w\d\s.,-]*$/',
+                'description' => 'nullable|min:20|max:500',
+                'recaptcha_token' => 'required|recaptcha',
+                'adresse' => 'nullable|min:5|max:45|regex:/^[\w\d\s ,°]*$/'
+
             ],
             $message = [
                 'recaptcha_token.required' => 'يرجى التحقق من الكابشا *',
@@ -388,9 +388,9 @@ class DeskyAlgController extends Controller
                 'cni.max' => 'رقم بطاقة الهوية أطول من اللازم *',
                 'cni.min' => 'رقم بطاقة الهوية أقصر من اللازم *',
                 /* CNI */
-                'slogan.regex' => 'يرجى التحقق من المدخلات يجب ان يكون الشعار بالغة الفرسية (مثال: Graphic Designer) *',
-                'slogan.max' => 'الشعار أطول من اللازم *',
-                'slogan.min' => 'الشعار أقصر من اللازم *',
+                'slogan.regex' => 'يرجى التحقق من المدخلات يجب ان يكون اسم المهنة باللغة الفرسية (مثال: Graphic Designer) *',
+                'slogan.max' => 'اسم المهنة أطول من اللازم *',
+                'slogan.min' => 'اسم المهنة أقصر من اللازم *',
                 /* description */
                 'description.max' => 'الوصف أطول من اللازم *',
                 'description.min' => 'الوصف أقصر من اللازم *',
@@ -426,7 +426,7 @@ class DeskyAlgController extends Controller
             }
             if ($request->logo) {
                 /** ID IMAGE UPLOAD */
-                $destinationPath_i = 'image/desky/users/' . date("Y") . '/logos';
+                $destinationPath_i = 'storage/desky/users/logo' . date('Y');
                 $file = $request->logo;
                 // GET THE FILE EXTENSION
                 $extension_i = $file->getClientOriginalExtension();
@@ -455,7 +455,9 @@ class DeskyAlgController extends Controller
                         'slogon' => $request->slogan,
                         'description' => $request->description,
                         'model_devis' => 0,
-                        'model_facture' => 0
+                        'model_facture' => 0,
+                        'adresse' => $request->adresse
+
 
 
                     ]);
@@ -486,7 +488,9 @@ class DeskyAlgController extends Controller
                     'slogon' => $request->slogan,
                     'description' => $request->description,
                     'model_devis' => 0,
-                    'model_facture' => 0
+                    'model_facture' => 0,
+                    'adresse' => $request->adresse
+
 
 
                 ]);
@@ -520,8 +524,9 @@ class DeskyAlgController extends Controller
                 'u_if' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'u_tp' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'cni' => 'required|min:4|max:8|regex:/^[\w\d\s0-9]*$/',
-                'slogan' => 'required|min:8|max:35|regex:/^[\w\d\s.,-]*$/',
-                'description' => 'required|min:15|max:500',
+                'slogan' => 'nullable|min:8|max:35|regex:/^[\w\d\s.,-]*$/',
+                'description' => 'nullable|min:15|max:500',
+                'adresse' => 'nullable|min:5|max:45|regex:/^[\w\d\s ,°]*$/'
             ],
             $message = [
                 'recaptcha_token.required' => 'يرجى التحقق من الكابشا *',
@@ -568,6 +573,10 @@ class DeskyAlgController extends Controller
                 /* description */
                 'description.max' => 'الوصف أطول من اللازم *',
                 'description.min' => 'الوصف أقصر من اللازم *',
+                /* Adresse */
+                'adresse.min' => 'العنوان أقصر من اللازم *',
+                'adresse.max' => 'العنوان أطول من اللازم *',
+                'adresse.regex' => 'يرجى التحقق من المدخلات مسموح فقط بالأحرف الفرسية *',
 
 
             ]
@@ -606,7 +615,7 @@ class DeskyAlgController extends Controller
             }
             if ($request->logo && $request->logo != '' && $request->logo != null) {
                 /** ID IMAGE UPLOAD */
-                $destinationPath_i = 'image/desky/users/' . date("Y") . '/logos';
+                $destinationPath_i = 'storage/desky/users/logo' . date('Y');
                 $file = $request->logo;
                 // GET THE FILE EXTENSION
                 $extension_i = $file->getClientOriginalExtension();
@@ -635,7 +644,8 @@ class DeskyAlgController extends Controller
                         'slogon' => $request->slogan,
                         'description' => $request->description,
                         'model_devis' => $request->model_devis,
-                        'model_facture' => $request->model_facute
+                        'model_facture' => $request->model_facute,
+                        'adresse' => $request->adresse
 
                     ]);
                     if ($stmt) {
@@ -673,6 +683,7 @@ class DeskyAlgController extends Controller
                     'description' => $request->description,
                     'model_devis' => $request->model_devis,
                     'model_facture' => $request->model_facute,
+                    'adresse' => $request->adresse,
                     'logo' => null
 
 
@@ -703,7 +714,9 @@ class DeskyAlgController extends Controller
                     'tva' => $tva,
                     'slogon' => $request->slogan,
                     'model_devis' => $request->model_devis,
-                    'model_facture' => $request->model_facute
+                    'model_facture' => $request->model_facute,
+                    'adresse' => $request->adresse,
+
 
 
                 ]);

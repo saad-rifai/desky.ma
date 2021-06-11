@@ -646,6 +646,8 @@ export default {
           } else {
             this.invid = '00000001'
           }
+                  this.devis.push({ article: '', price: 0, quantity: 1 })
+
         })
         .catch((error) => {
           UIkit.notification({

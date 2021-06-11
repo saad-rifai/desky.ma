@@ -102,7 +102,9 @@ class pdfGeneretor extends Controller
                      'TotalFinal' => $TotalFinal,
                      'brandcolor' => $db_desky->brandcolor,
                      'CID' => $c_info->CID,
-                     'remise' => $remise
+                     'remise' => $remise,
+                     'adresse' => $db_desky->adresse
+
 
                   ];
                   return PDF::loadView('desky/models/devis/' . $model_devis_infos['url'], array('enable_remote' => true), $data)->setPaper('A4', 'portrait')->stream('DEVIS-' . $OID . '.pdf');
@@ -206,7 +208,9 @@ class pdfGeneretor extends Controller
                            'TotalFinal' => $TotalFinal,
                            'brandcolor' => $db_desky->brandcolor,
                            'CID' => $c_info->CID,
-                           'remise' => $remise
+                           'remise' => $remise,
+                           'adresse' => $db_desky->adresse
+
 
                         ];
                         return PDF::loadView('desky/models/devis/' . $model_devis_infos['url'], array('enable_remote' => true), $data)->setPaper('A4', 'portrait')->stream('DEVIS-' . $OID . '.pdf');
@@ -319,7 +323,9 @@ class pdfGeneretor extends Controller
                            'TotalFinal' => $TotalFinal,
                            'brandcolor' => $db_desky->brandcolor,
                            'CID' => $c_info->CID,
-                           'remise' => $remise
+                           'remise' => $remise,
+                           'adresse' => $db_desky->adresse
+
 
                         ];
                         return PDF::loadView('desky/models/devis/' . $model_devis_infos['url'], array('enable_remote' => true), $data)->setPaper('A4', 'portrait')->stream('DEVIS-' . $OID . '.pdf');
@@ -429,7 +435,8 @@ class pdfGeneretor extends Controller
                      'TotalFinal' => $TotalFinal,
                      'brandcolor' => $db_desky->brandcolor,
                      'CID' => $c_info->CID,
-                     'remise' => $remise
+                     'remise' => $remise,
+                     'adresse' => $db_desky->adresse
 
                   ];
                   return PDF::loadView('desky/models/facture/' . $model_facture_infos['url'], array('enable_remote' => true), $data)->setPaper('A4', 'portrait')->stream('FACTURE-' . $OID . '.pdf');
@@ -533,7 +540,9 @@ class pdfGeneretor extends Controller
                            'TotalFinal' => $TotalFinal,
                            'brandcolor' => $db_desky->brandcolor,
                            'CID' => $c_info->CID,
-                           'remise' => $remise
+                           'remise' => $remise,
+                           'adresse' => $db_desky->adresse
+
 
                         ];
                         return PDF::loadView('desky/models/facture/' . $model_facture_infos['url'], array('enable_remote' => true), $data)->setPaper('A4', 'portrait')->stream('FACTURE-' . $OID . '.pdf');
@@ -646,7 +655,9 @@ class pdfGeneretor extends Controller
                            'TotalFinal' => $TotalFinal,
                            'brandcolor' => $db_desky->brandcolor,
                            'CID' => $c_info->CID,
-                           'remise' => $remise
+                           'remise' => $remise,
+                           'adresse' => $db_desky->adresse
+
 
                         ];
                         return PDF::loadView('desky/models/facture/' . $model_facture_infos['url'], array('enable_remote' => true), $data)->setPaper('A4', 'portrait')->stream('FACTURE-' . $OID . '.pdf');

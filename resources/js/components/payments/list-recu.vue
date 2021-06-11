@@ -35,7 +35,7 @@
                 <td>
                   <span v-if="val.status == 0" class="uk-label uk-label-warning">في انتظار الدفع</span>
                   <span v-if="val.status == 1" class="uk-label uk-label-success"
-                    >مفعلة</span
+                    >تم الدفع</span
                   >
                   <span v-if="val.status == 2" class="uk-label uk-label-pending"
                     >معلق</span

@@ -55,6 +55,9 @@
 }
 /**/
 @media only screen and (max-width: 520px) {
+    .min-btn button {
+        font-size: 14px !important;
+    }
     .right-search {
         display: none;
     }
@@ -85,6 +88,10 @@
     }
 }
 @media only screen and (max-width: 480px) {
+    .min-btn button {
+        font-size: 11px !important;
+        height: 35px;
+    }
     .swetch-btn .uk-button {
         border: none !important;
         box-shadow: none;

@@ -94,7 +94,7 @@ class PaymentSystemController extends Controller
                         $exdate = $olddate->addDays(31);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
-                            $points = $points + $pack->point;
+                            $points = $points + 0;
                             if($BigPack < $pack->pack_id){
                                 $BigPack = $pack->pack_id;
                             }
@@ -105,7 +105,7 @@ class PaymentSystemController extends Controller
                         $exdate = $olddate->addDays(366);
                         $timenow = date('Y-m-d H:i:s');
                         if ($timenow < $exdate) {
-                            $points = $points + $pack->point;
+                            $points = $points + 0;
                             if($BigPack < $pack->pack_id){
                                 $BigPack = $pack->pack_id;
                             }
@@ -942,7 +942,9 @@ class PaymentSystemController extends Controller
             } else {
                 $pagenow = 1;
             }
-            return  response()->json([ $filterData, 'count' => $count, 'pagenow' => $pagenow], 200);
+            $dtnow = date("Y-m-d H:i:s");
+
+            return  response()->json([ $filterData, 'count' => $count, 'pagenow' => $pagenow, 'dateNow' => $dtnow], 200);
         } else {
             $stmt = DB::table('payment_systems')
             ->where('payment_systems.buyer_email', Auth::user()->email)
@@ -958,7 +960,8 @@ class PaymentSystemController extends Controller
             } else {
                 $pagenow = 1;
             }
-            return  response()->json([$stmt, 'count' => $count, 'pagenow' => $pagenow], 200);
+            $dtnow = date("Y-m-d H:i:s");
+            return  response()->json([$stmt, 'count' => $count, 'pagenow' => $pagenow, 'dateNow' => $dtnow], 200);
         }
 
     }
