@@ -426,7 +426,7 @@ class DeskyAlgController extends Controller
             }
             if ($request->logo) {
                 /** ID IMAGE UPLOAD */
-                $destinationPath_i = 'storage/desky/users/logo' . date('Y');
+                $destinationPath_i = 'storage/desky/users/logos/' . date('Y');
                 $file = $request->logo;
                 // GET THE FILE EXTENSION
                 $extension_i = $file->getClientOriginalExtension();
@@ -615,7 +615,7 @@ class DeskyAlgController extends Controller
             }
             if ($request->logo && $request->logo != '' && $request->logo != null) {
                 /** ID IMAGE UPLOAD */
-                $destinationPath_i = 'storage/desky/users/logo' . date('Y');
+                $destinationPath_i = 'storage/desky/users/logos/' . date('Y');
                 $file = $request->logo;
                 // GET THE FILE EXTENSION
                 $extension_i = $file->getClientOriginalExtension();
