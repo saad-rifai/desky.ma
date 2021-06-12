@@ -303,6 +303,7 @@ class DeskyUserFactureController extends Controller
                         $CID = rand(111111111, 999999999);
                         $stmt = desky_user_clients::create([
                             'CID' => $CID,
+                            'UID' => Auth::user()->id,
                             'from' => Auth::user()->email,
                             'c_email' => $request->c_email,
                             'c_name' => $request->c_name,
