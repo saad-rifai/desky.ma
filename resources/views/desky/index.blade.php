@@ -3,7 +3,6 @@
 @section('description',
     ' أول مكتب خاص بالمقاول الذاتي على الانترنت لادارة نشاطك التجاري باحترافية من أي مكان وفي أي
     وقت.',)
-@section('ogimage', asset('image/service/2.jpg'))
 @section('content')
 @section('back-color', 'background-color-orange')
     @php

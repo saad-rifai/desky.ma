@@ -104,7 +104,6 @@
         <div class="uk-width-1-2@s">
           <label for="">
            المهنة (اختياري)
-            <span class="red">*</span>
           </label>
           <div class="uk-form-controls">
             <input

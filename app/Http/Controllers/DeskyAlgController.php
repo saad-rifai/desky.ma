@@ -343,7 +343,7 @@ class DeskyAlgController extends Controller
                 'u_if' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'u_tp' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'cni' => 'required|min:4|max:8|regex:/^[\w\d\s0-9]*$/',
-                'slogan' => 'nullable|min:8|max:35|regex:/^[\w\d\s.,-]*$/',
+                'slogan' => 'nullable|min:8|max:35|regex:/^[\w\d\s.,-é]*$/',
                 'description' => 'nullable|min:20|max:500',
                 'recaptcha_token' => 'required|recaptcha',
                 'adresse' => 'nullable|min:5|max:45|regex:/^[\w\d\s ,°]*$/'
@@ -524,7 +524,7 @@ class DeskyAlgController extends Controller
                 'u_if' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'u_tp' => 'required|min:6|max:11|regex:/^[0-9]+$/',
                 'cni' => 'required|min:4|max:8|regex:/^[\w\d\s0-9]*$/',
-                'slogan' => 'nullable|min:8|max:35|regex:/^[\w\d\s.,-]*$/',
+                'slogan' => 'nullable|min:8|max:35|regex:/^[\w\d\s.,-é]*$/',
                 'description' => 'nullable|min:15|max:500',
                 'adresse' => 'nullable|min:5|max:45|regex:/^[\w\d\s ,°]*$/'
             ],

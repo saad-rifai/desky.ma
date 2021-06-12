@@ -235,6 +235,8 @@
 //$url = asset('image')
 $phonepng = file_get_contents('image/icon/phone.png');
 $phonepng64 = base64_encode($phonepng);
+$datajson = file_get_contents('database/data.json');
+$jsondata = json_decode($datajson, true);
 $test = '454564df';
 ?>
 <!DOCTYPE html>
@@ -332,12 +334,12 @@ $test = '454564df';
                             </div>
                         @endif
                         <br>
-                        <h1 class="head-text" style="font-weight: 400;">statut: <span class="status">en attente de
-                                paiement</span></h1>
+                        <h1 class="head-text" style="font-weight: 400;">statut: <span class="status">{{$jsondata['facture_status_fr'][$status]}}</span></h1>
                         <br>
+                        @if(isset($p_methid) && $p_method != "" && $p_method != null)
                         <h1 class="head-text" style="font-weight: 400;">méthode de paiement: <span
-                                class="status">Cash</span></h1>
-
+                                class="status">{{$jsondata['p_method_fr'][$status]}}</span></h1>
+                                @endif
                     </div>
                 </th>
                 <th style="text-align: left; margin-left: 20px;">
