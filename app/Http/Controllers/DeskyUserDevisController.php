@@ -167,7 +167,7 @@ class DeskyUserDevisController extends Controller
 
         $this->validate($request, [
             'c_name' => 'required|min:5|max:20|regex:/^[\w\d\s ]*$/',
-            'c_email' => 'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:80',
+            'c_email' => 'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:220',
             'c_phone' => 'required|regex:/[0-9]{9}/',
             'c_ice' => 'nullable|min:15|max:17|regex:/[0-9]/',
             'c_type' => 'required|regex:/[0-9]/',
@@ -179,7 +179,7 @@ class DeskyUserDevisController extends Controller
             'notes' => 'nullable|max:700',
             'c_country' => 'nullable|max:6',
             'c_city' => 'nullable|min:4|max:25|regex:/^[\p{L} ]+$/u',
-            'c_adresse' => 'nullable|min:7|max:25|regex:/^[\p{L}° ,0-9]+$/u'
+            'c_adresse' => 'nullable|min:7|max:40|regex:/^[\p{L}° ,0-9]+$/u'
         ], $message = [
             'required' => 'هذا الحقل مطلوب *',
             'regex' => 'يرجى التحقق من المدخلات *',
@@ -243,7 +243,7 @@ class DeskyUserDevisController extends Controller
                     return response()->json(['errors' => ['items' => ['يرجى التحقق من اسماء العناصر']]], 422);
                 } elseif ($article < 3 && $article > 25) {
                     return response()->json(['errors' => ['items' => ['يجب ان يتكون اسم العنصر من 3 أحرف على الأقل و 25 حرف كحد  أقصى ']]], 422);
-                } elseif (!preg_match('/^[a-zàâçéèêëîïôûùüÿñæœ A-Z 0-9 ,. ]*$/', $itm->article)) {
+                } elseif (!preg_match("/^[a-zA-ZÀÂÉÊÈËÌÏÎÔÙÛÇÆŒàâéêèëìïîôùûçæœ0-9 '-]{3,100}$/", $itm->article)) {
                     return response()->json(['errors' => ['items' => ['يرجى ادخال اسماء العناصر بالحروف اللاتينية']]], 422);
                 } elseif (!is_numeric($itm->price)) {
                     return response()->json(['errors' => ['items' => ['يجب أن يكون السعر عبارة عن رقم']]], 422);
