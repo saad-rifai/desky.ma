@@ -4,92 +4,159 @@
     ' أول مكتب خاص بالمقاول الذاتي على الانترنت لادارة نشاطك التجاري باحترافية من أي مكان وفي أي
     وقت.',)
 @section('content')
-@section('back-color', 'background-color-orange')
     @php
     @endphp
     <header>
-        <div class="uk-child-width-1-1@s uk-light" uk-grid>
-            <div>
-                <div class="uk-background-cover uk-height-large uk-panel uk-flex uk-flex-center uk-flex-middle"
-                    style="    background-image: linear-gradient(rgba(250, 184, 66, 0.75), rgba(250, 128, 71, 0.74)), url('../image/header.jpg')">
-                    <div class="uk-text-center uk-width-1-1" dir="rtl" uk-grid>
-                        <div class="uk-width-1-2@s">
-                            <div class="" ><img src="{{ asset('image/desky/landing-page/1.png') }}" width="1050"
-                                    alt="dashboard - desky.ma" >
-                                </div>
+        <div class="
+                    header-content">
+            <div class="header-grid uk-grid uk-child-width-1-2@s" uk-grid>
+                <div>
+                    <div class="text-section">
+                        <h1>شبكة المقاولين الذاتيين المحترفين بالمغرب</h1>
+                        <p>أول مكتب خاص بالمقاول الذاتي على الانترنت لادارة نشاطك التجاري باحترافية من أي مكان وفي أي وقت,
+                            ببساطة لم تعهدها من قبل.
+                        </p>
+                        <div class="call-to-act-btn">
+                            <button class="uk-button uk-button-primary trail-button">جرب مجانا</button>
+                            <button class="uk-button  uk-button-default ">الاسعار</button>
                         </div>
-                        <div class="uk-width-1-2@m">
-                            <div class="content-header uk-text-right uk-margin ">
-                                <h1 class="uk-title header uk-margin-large-top ">نظام ادارة نشاط المقاول الذاتي</h1>
-                                <h4 class="uk-margin-small-top uk-margin-medium-bottom">أول مكتب خاص بالمقاول الذاتي على الانترنت لادارة نشاطك التجاري
-                                    باحترافية من أي مكان وفي أي وقت, ببساطة لم تعهدها من قبل.</h4>
-                                </p>
-                                <a href="/register"> <button type="button"
-                                        class="uk-button uk-button-default btn-call">سجل الأن
-                                    </button></a>
-                                    <a href="#tarifs" uk-scroll> <button type="button"
-                                        class="uk-button uk-button-text">الباقات والأسعار
-                                    </button></a>
-
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
+                <div>
+                    <div class="video-section">
+                        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+                            <div class="wistia_responsive_wrapper"
+                                style="height:100%;left:0;position:absolute;top:0;width:100%;"><iframe
+                                    src="https://fast.wistia.net/embed/iframe/n1ik6rxzxh?videoFoam=true"
+                                    title=" [Example Video] Wistia Video Essentials" allow="autoplay; fullscreen"
+                                    allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed"
+                                    name="wistia_embed" allowfullscreen msallowfullscreen width="100%"
+                                    height="100%"></iframe></div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
+        </div>
     </header>
-    <div class="wd-80 uk-margin uk-margin-bottom" id="aboutservice" uk-scrollspy="cls:uk-animation-fade; repeat: true">
+
+    <!--div class="text-desky-ad-primary"> <p>تخفيض 50% على جميع الباقات</p> </div-->
+    <div class="wd-80 uk-margin uk-margin-bottom uk-margin-large-top" id="aboutservice"
+        uk-scrollspy="cls:uk-animation-fade; repeat: true">
         <article class="uk-article" align="center">
 
-            <h1 style="font-size: 25px" class="uk-article-title">عن الخدمة</h1>
-            <p style="width: 100%; max-width: 650px; margin-left: auto; margin-right: auto;" dir="rtl"> تقدم لك <strong>منصة desky.ma</strong>  <strong>نظام احترافي لادارة نشاط المقاول الذاتي </strong> يمكن من خلاله ادارة كافة جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب الخاصة بك .</p>
-            </article>
+            <h1 class="uk-article-title" dir="rtl">ما هي منصة Desky ؟</h1>
+            <p style="width: 100%; max-width: 650px; margin-left: auto; margin-right: auto;" dir="rtl"> تقدم لك <strong>منصة
+                    desky.ma</strong> <strong>نظام احترافي لادارة نشاط المقاول الذاتي </strong> يمكن من خلاله ادارة كافة
+                جوانب عملك تمكنك المنصة من انشاء وادارة الفواتير وعروض أسعار (devis) احترافية ببساطة وسهولة بهويتك البصرية
+                كما تمكنك المنصة من ادارة وتسيير عملائك وانجاز تقارير وتحليلات شهرية وسنوية وتمكنك من حساب وتوقع الضرائب
+                الخاصة بك .</p>
+        </article>
+
+
+    </div>
+    <div class="wd-80 uk-margin uk-margin-bottom uk-margin-large-top" uk-scrollspy="cls:uk-animation-fade; repeat: true">
+        <div align="center">
+
+            <h1 class="uk-article-title" dir="rtl">أكبر شبكة للمقاولين الذاتيين بالمغرب</h1>
+
+            <div class="users-avatars">
+                <div class="users-avatars-content uk-flex uk-flex-center">
+                    <div class="user-avatar"><img src="image/users/1.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/2.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/3.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/4.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/unnamed.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/f212571c02b2944ec623228d0ef60abd.png" alt="user avatar">
+                    </div>
+                    <span class="plus-users-avatars">+99</span>
+                </div>
+            </div>
+        </div>
 
 
     </div>
     <br><br>
-    <div class="wd-80 uk-margin uk-text-center ">
-        <h1 class="uk-card-title uk-text-center">مالذي تقدمه المنصة</h1>
-        <br>
-        <br>
-        <div class="uk-grid-column-small uk-grid-row-large uk-child-width-1-3@s uk-text-center  uk-flex-center" uk-grid>
-            <div>
-                <h3 class="uk-card-title c-org">نظام ادارة الفواتير وعروض الأسعار</h3>
+    <div class="wd-80 uk-margin uk-text-center " style="position: relative">
+        <div class="white-border-canva"></div>
+        <div class="index-100">
+            <h1 class="uk-card-title uk-text-center" dir="rtl">مالذي تقدمه منصة desky ؟</h1>
+            <br>
+            <br>
+            <div class="uk-grid-column-small uk-grid-row-large uk-child-width-1-3@s uk-text-center  uk-flex-center" uk-grid>
+                <div>
 
-                <div class="uk-card uk-card-body"><img
-                        src="{{ URL::asset('image/icon/undraw_Documents_re_isxv.svg') }}"
-                        alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services"></div>
-                <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام متكامل لادارة الفواتير وعروض الأسعار الخاصة بك وتمكنك من انشاء نماذج فواتير وعروض أسعار احترافية بهويتك البصرية </p>
-            </div>
-            <div>
-                <h3 class="uk-card-title c-org">
-                     نظام ادارة العملاء
+                    <div class="uk-card uk-card-body"><img class="lazy"
+                            src="{{ URL::asset('image/icon/tabler-icon-box.png') }}"
+                            alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services">
+                        <h3 class="uk-card-title ">نظام ادارة الفواتير وعروض الأسعار</h3>
 
-                    </h3>
+                        <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام متكامل لادارة الفواتير وعروض الأسعار الخاصة بك
+                            وتمكنك
+                            من انشاء نماذج فواتير وعروض أسعار احترافية بهويتك البصرية </p>
+                    </div>
+                </div>
+                <div>
 
-                <div class="uk-card uk-card-body"><img src="{{ URL::asset('image/icon/undraw_Friends_online_re_r7pq.svg') }}"
-                        alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services"></div>
-                <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام احترافي لادارة عملائك وحفظ المعلومات الخاصة بهم في أمان تام من أجل تجنب ضياعها
-                .</p>
+                    <div class="uk-card uk-card-body"><img
+                            src="{{ URL::asset('image/icon/tabler-icon-device-analytics.png') }}"
+                            alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services">
+                        <h3 class="uk-card-title ">نظام ادارة الفواتير وعروض الأسعار</h3>
 
-            </div>
-            <div>
-                <h3 class="uk-card-title c-org">التقارير والاحصائيات
+                        <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام متكامل لادارة الفواتير وعروض الأسعار الخاصة بك
+                            وتمكنك
+                            من انشاء نماذج فواتير وعروض أسعار احترافية بهويتك البصرية </p>
+                    </div>
+                </div>
+                <div>
 
-                </h3>
+                    <div class="uk-card uk-card-body"><img
+                            src="{{ URL::asset('image/icon/tabler-icon-file-invoice.png') }}"
+                            alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services">
+                        <h3 class="uk-card-title ">نظام ادارة الفواتير وعروض الأسعار</h3>
 
-                <div class="uk-card uk-card-body"><img src="{{ URL::asset('image/icon/undraw_growth_chart_r99m.svg') }}"
-                        alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services"></div>
-                <p dir="rtl">تمكنك منصة <strong>desky</strong> من انجاز تقارير واحصائيات سنوية وشهرية وربع سنوية مفصلة تساعدك على تحليل نشاطك التجاري وتطويره وقياس نسبة النمو والمقارنة مع المنافسين.</p>
-            </div>
-            <div>
-                <h3 class="uk-card-title c-org">المحاسبة والضرائب </h3>
+                        <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام متكامل لادارة الفواتير وعروض الأسعار الخاصة بك
+                            وتمكنك
+                            من انشاء نماذج فواتير وعروض أسعار احترافية بهويتك البصرية </p>
+                    </div>
+                </div>
+                <div>
 
-                <div class="uk-card uk-card-body"><img src="{{ URL::asset('image/icon/undraw_discount_d4bd.svg') }}"
-                        alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services"></div>
-                <p dir="rtl">تقدم لك منصة <strong>desky.ma</strong> نظام يساعدك على توقع وحساب الضرائب المستحقة بدقة وبساطة بدون اي مجهود يتم حساب كافة الضرائب تلقائياََ بنائا على الاعدادات المسبقة.</p>
+                    <div class="uk-card uk-card-body"><img
+                            src="{{ URL::asset('image/icon/tabler-icon-receipt-tax.png') }}"
+                            alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services">
+                        <h3 class="uk-card-title">نظام ادارة الفواتير وعروض الأسعار</h3>
+
+                        <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام متكامل لادارة الفواتير وعروض الأسعار الخاصة بك
+                            وتمكنك
+                            من انشاء نماذج فواتير وعروض أسعار احترافية بهويتك البصرية </p>
+                    </div>
+                </div>
+                <div>
+
+                    <div class="uk-card uk-card-body"><img src="{{ URL::asset('image/icon/tabler-icon-social.png') }}"
+                            alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services">
+                        <h3 class="uk-card-title">نظام ادارة الفواتير وعروض الأسعار</h3>
+
+                        <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام متكامل لادارة الفواتير وعروض الأسعار الخاصة بك
+                            وتمكنك
+                            من انشاء نماذج فواتير وعروض أسعار احترافية بهويتك البصرية </p>
+                    </div>
+                </div>
+                <div>
+
+                    <div class="uk-card uk-card-body"><img src="{{ URL::asset('image/icon/tabler-icon-users.png') }}"
+                            alt="desky نظام الفوترة للمقاول الذاتي بالمغرب" class="icon-services">
+                        <h3 class="uk-card-title ">نظام ادارة الفواتير وعروض الأسعار</h3>
+
+                        <p dir="rtl">تقدم لك منصة <strong>desky</strong> نظام متكامل لادارة الفواتير وعروض الأسعار الخاصة بك
+                            وتمكنك
+                            من انشاء نماذج فواتير وعروض أسعار احترافية بهويتك البصرية </p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -98,24 +165,26 @@
     <br>
     <div id="facture" class="wd-90 uk-margin-top ">
 
-        <div uk-scrollspy="cls: uk-animation-slide-right; target: .uk-card-body; delay: 300; repeat: true"
-            class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+        <div class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin"
+            uk-scrollspy="cls:uk-animation-fade; repeat: true" uk-grid>
 
 
-            <div uk-scrollspy="cls: uk-animation-slide-top; delay: 300; repeat: true"
-                class="uk-inline uk-card-media-right  ">
+            <div class="uk-inline uk-card-media-right  ">
 
-                <img height="300px" src="{{ URL::asset('image/desky/landing-page/devis-factures-steps.png') }}" alt="Desky من نحن">
+                <img class="lazy" height="300px" data-src="{{ URL::asset('image/icon/Connected-cuate.svg') }}"
+                    alt="شبكة المقاولين الذاتيين">
 
             </div>
             <div class="align-flex">
                 <div class="uk-card-body uk-text-right " dir="rtl">
-                    <h3 class="uk-card-title">أنشئ فواتيرك وعروض الاسعار الخاصة بك بخطوات بسيطة</h3>
-                    <p>تمكنك منصة ديسكي من انشاء فواتيرك وعروض الأسعار الخاصة بك (Devis) احترافية بهويتك البصرية ببساطة وسهولة لم تعهدها من قبل.</p>
+                    <h3 class="uk-card-title">دع العملاء المحتملين يتواصلون معك
+                        من خلال أكبر شبكة للمقاولين الذاتيين</h3>
+                    <p>تمكنك منصة ديسكي من انشاء فواتيرك وعروض الأسعار الخاصة بك (Devis) احترافية بهويتك البصرية ببساطة
+                        وسهولة لم تعهدها من قبل.</p>
                     <a href='/register' target="_blank" uk-toggle> <button type="button"
-                            class="uk-button uk-button-primary btn-call">
+                            class="uk-button uk-button-primary ">
                             سجل الأن</button></a>
-                            <a href="#tarifs" uk-scroll><button class="uk-button uk-button-text">الباقات والأسعار</button> </a>
+                    <a href="#tarifs" uk-scroll><button class="uk-button  uk-button-default ">الاسعار</button> </a>
                 </div>
             </div>
         </div>
@@ -124,48 +193,97 @@
     <br>
     <div id="facture" class="wd-90 uk-margin-top ">
 
-        <div uk-scrollspy="cls: uk-animation-slide-right; target: .uk-card-body; delay: 300; repeat: true"
-            class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+        <div class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin"
+            uk-scrollspy="cls:uk-animation-fade; repeat: true" uk-grid>
 
             <div class="align-flex">
                 <div class="uk-card-body uk-text-right " dir="rtl">
-                    <h3 class="uk-card-title">الاحصائيات والتقارير</h3>
-                    <p>تمكنك منصة desky.ma من انجاز تقارير واحصائيات سنوية وشهرية وربع سنوية من أجل مراقبة وتحليل نمو نشاطك التجاري.</p>                    <a href='/register' target="_blank" uk-toggle> <button type="button"
-                            class="uk-button uk-button-primary btn-call">
+                    <h3 class="uk-card-title">عشرات الصفقات في انتظارك
+                        كل يوم</h3>
+                    <p>تمكنك منصة desky.ma من انجاز تقارير واحصائيات سنوية وشهرية وربع سنوية من أجل مراقبة وتحليل نمو نشاطك
+                        التجاري.</p>
+                    <a href='/register' target="_blank" uk-toggle> <button type="button"
+                            class="uk-button uk-button-primary ">
                             سجل الأن</button></a>
-                            <a href="#tarifs" uk-scroll><button class="uk-button uk-button-text">الباقات والأسعار</button> </a>
+                    <a href="#tarifs" uk-scroll><button class="uk-button  uk-button-default ">الاسعار</button> </a>
                 </div>
             </div>
-            <div uk-scrollspy="cls: uk-animation-slide-top; delay: 300; repeat: true"
-            class="uk-inline uk-card-media-right  ">
+            <div class="uk-inline uk-card-media-right  ">
 
-            <img height="300px" src="{{ URL::asset('image/desky/landing-page/report-steps.png') }}" alt="Desky من نحن">
+                <img height="300px" src="{{ URL::asset('image/icon/Live collaboration-rafiki.svg') }}"
+                    alt="الصفقات - desky">
 
-        </div>
+            </div>
         </div>
     </div>
     <br>
     <br>
     <div id="facture" class="wd-90 uk-margin-top ">
 
-        <div uk-scrollspy="cls: uk-animation-slide-right; target: .uk-card-body; delay: 300; repeat: true"
+        <div uk-scrollspy="cls:uk-animation-fade; repeat: true"
             class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-            <div uk-scrollspy="cls: uk-animation-slide-top; delay: 300; repeat: true"
-                class="uk-inline uk-card-media-right  ">
+            <div class="uk-inline uk-card-media-right  ">
 
-                <img height="300px" src="{{ URL::asset('image/desky/landing-page/impot.png') }}" alt="Desky من نحن">
+                <img height="300px" src="{{ URL::asset('image/icon/Printing invoices-bro.svg') }}"
+                    alt="نظام فوترة - desky">
 
             </div>
             <div class="align-flex">
                 <div class="uk-card-body uk-text-right " dir="rtl">
-                    <h3 class="uk-card-title">حساب وتوقع الضرائب</h3>
-                    <p>تقدم لك منصة desky.ma نظام لحساب وتوقع الضرائب الخاصة بك  لتجنب المفاجئات </p>                     <a href='/register' target="_blank" uk-toggle> <button type="button"
-                            class="uk-button uk-button-primary btn-call">
+                    <h3 class="uk-card-title">أنشئ فواتيرك وعروض الاسعار
+                        الخاصة بك بخطوات بسيطة</h3>
+                    <p>تمكنك منصة ديسكي من انشاء فواتيرك وعروض الأسعار الخاصة بك (Devis) احترافية بهويتك البصرية ببساطة
+                        وسهولة لم تعهدها من قبل. </p>
+                    <a href='/register' target="_blank" uk-toggle> <button type="button"
+                            class="uk-button uk-button-primary ">
                             سجل الأن</button></a>
-                            <a href="#tarifs" uk-scroll><button class="uk-button uk-button-text">الباقات والأسعار</button> </a>
+                    <a href="#tarifs" uk-scroll><button class="uk-button  uk-button-default ">الاسعار</button> </a>
                 </div>
             </div>
 
+        </div>
+    </div>
+    <br>
+    <br>
+    <div id="facture" class="wd-90 uk-margin-top ">
+
+        <div class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin"
+            uk-scrollspy="cls:uk-animation-fade; repeat: true" uk-grid>
+
+            <div class="align-flex">
+                <div class="uk-card-body uk-text-right " dir="rtl">
+                    <h3 class="uk-card-title">نظام متكامل لإدارة نشاطك
+                        وزيادة انتاجيتك
+                    </h3>
+                    <p>تمكنك منصة desky.ma من انجاز تقارير واحصائيات سنوية وشهرية وربع سنوية من أجل مراقبة وتحليل نمو نشاطك
+                        التجاري.</p>
+                    <a href='/register' target="_blank" uk-toggle> <button type="button"
+                            class="uk-button uk-button-primary ">
+                            سجل الأن</button></a>
+                    <a href="#tarifs" uk-scroll><button class="uk-button  uk-button-default ">الاسعار</button> </a>
+                </div>
+            </div>
+            <div class="uk-inline uk-card-media-right  ">
+
+                <img height="300px" src="{{ URL::asset('image/icon/Dashboard-pana.svg') }}"
+                    alt="نظام ادارة نشاط المقاول الذاتي - desky">
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="wd-80 uk-margin uk-margin-bottom uk-margin-large-top" uk-scrollspy="cls:uk-animation-fade; repeat: true">
+        <div align="center">
+
+            <h1 class="uk-article-title" dir="rtl">اربط المنصة مع تطبيقاتك المفضلة</h1>
+            <div  class="brands">
+                <img class="brand-logo" src="image/partners/gmail.png" title="Gmail">
+                <img class="brand-logo" src="image/partners/google-contact.png" title="google-contact">
+                <img class="brand-logo" src="image/partners/google-drive.png" title="google-drive">
+                <img class="brand-logo" src="image/partners/infobip.png" title="infobip">
+                <img class="brand-logo" src="image/partners/mailchimp.png" title="mailchimp">
+            </div>
         </div>
     </div>
     <br>
@@ -178,45 +296,49 @@
     <br>
     <br>
 
-    <div id="a-propos-de-nous" class="wd-90 uk-margin-top ">
+    <div id="comments" class="wd-90 uk-margin-top uk-text-center" style="position: relative">
+        <div class="white-border-canva"></div>
+        <h1 class="uk-card-title">أراء عملائنا
+        </h1>
+        @include('desky.layouts.reviews')
+<br>
+<h1 class="uk-card-title">شركائنا
+</h1>
+<div  class="brands" style="position: relative">
+    <img class="brand-logo" src="image/partners/MCISE-white-title.png" title="Gmail">
+    <img class="brand-logo" src="image/partners/infobip-2.png" title="infobip">
+    <img class="brand-logo" src="image/partners/logo-startup-maroc.png" title="mailchimp">
+</div>
+    </div>
+    <br>
+    <br>
 
-        <div uk-scrollspy="cls: uk-animation-slide-right; target: .uk-card-body; delay: 300; repeat: true"
-            class="uk-card  uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-            <div uk-scrollspy="cls: uk-animation-slide-top; delay: 300; repeat: true"
-                class="uk-inline uk-card-media-right  uk-cover-container" >
-                <canvas height="500px"></canvas>
+    <div class="wd-80 uk-margin uk-margin-bottom uk-margin-large-top" uk-scrollspy="cls:uk-animation-fade; repeat: true">
+        <div align="center">
 
-                <img height="300px" src="{{ URL::asset('image/service/3182762.jpg') }}" alt="Desky من نحن" uk-cover>
+            <h1 class="uk-article-title" dir="rtl">ماذا تنتظر ؟ انظم الى أكبر شبكة مقاوليين ذاتيين بالمغرب</h1>
 
-            </div>
-            <div class="align-flex">
-                <div class="uk-card-body uk-text-right " dir="rtl">
-                    <h3 class="uk-card-title">من نحن ؟</h3>
-                    <p>منصة desky.ma تابعة لشركة NerYou LLC التي تهتم بتطوير ورقمنة السوق المغربية من خلال ابتكار وتطوير حلول عملية وطرحها في السوق, تأسست شركة NerYou LLC سنة 2021 بمدينة طنجة شمال المغرب لتنطلق في رحلتها ومهمتها التي اسست من أجلها وهي تطوير ورقمنة السوق المغربية. </p>                     <a href='/register' target="_blank" uk-toggle> <button type="button"
-                            class="uk-button uk-button-primary btn-call">
-                            سجل الأن</button></a>
-                            <a href="#tarifs" uk-scroll><button class="uk-button uk-button-text">الباقات والأسعار</button> </a>
+            <div class="users-avatars">
+                <div class="users-avatars-content uk-flex uk-flex-center">
+                    <div class="user-avatar"><img src="image/users/1.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/2.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/3.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/4.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/unnamed.jpg" alt="user avatar"></div>
+                    <div class="user-avatar"><img src="image/users/f212571c02b2944ec623228d0ef60abd.png" alt="user avatar">
+                    </div>
+                    <span class="plus-users-avatars">+99</span>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary uk-button-small uk-width-1-5@s">جرب مجانا</button>
                 </div>
             </div>
-
         </div>
-    </div>
-    <br>
-    <br>
 
 
-    <div id="partners" class="wd-80 uk-text-center uk-margin">
-        <h1 class="uk-card-title">
-            شركائنا
-        </h1>
-        <div uk-scrollspy="cls: uk-animation-fade; target: .brand-logo; delay: 500; repeat: true" class="brands">
-            <img class="brand-logo" src="image/partners/binga-logo.png" title="BINGA.MA">
-            <img class="brand-logo" src="image/partners/moqawala.ma.png" title="MOQAWALA.MA">
-            <img class="brand-logo" src="image/partners/logo_wafa.png" title="WAFACACH.MA">
-        </div>
     </div>
+
     <br>
     <br>
-    @include('desky.layouts.q-a')
 
 @endsection

@@ -23,7 +23,7 @@
                 </div>
             </div>
     </header>
-    <div class="wd-80" dir="rtl" uk-grid>
+    <div class="wd-90 uk-margin-top" dir="rtl" uk-grid>
         <div class="uk-width-1-4@m">
             <div class="uk-card uk-card-default uk-card-body">
                 <h4 class="uk-card-title uk-text-right"><span uk-icon="search"></span>
@@ -90,15 +90,17 @@
             <article class="uk-comment">
                 <div class="uk-comment-header">
                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                        <div class="uk-width-auto">
-                            <img class="uk-comment-avatar" src="{{ asset('image/users/f212571c02b2944ec623228d0ef60abd.png') }}" width="80" height="80" alt="">
+                        <div class="uk-width-auto" style="position: relative">
+                            <img class="uk-comment-avatar" src="{{ asset('image/icon/user.png') }}" width="50" height="50" alt="">
+
                         </div>
-                        <div class="uk-width-expand">
-                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Hiba ghmarti</a></h4>
+                        <div class="uk-width-expand " style="position: relative;">
+                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Hiba ghmarti  <span class="verified-badge " uk-tooltip="title: تم التحقق من هذا الحساب; pos: left" title="تم التحقق"><i class="fas fa-badge-check"></i></span></a></h4>
                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                <li><a href="#">التصميم الجرافيكي</a></li>
-                                <li><a href="#">طنجة, المغرب</a></li>
+                                <li><a href="#"><i class="fa fa-fw fa-briefcase"></i> التصميم الجرافيكي </a></li>
+                                <li><a href="#"><i class="fas fa-map-marker-alt"></i> طنجة, المغرب</a></li>
                             </ul>
+                        <button class="uk-button uk-button-primary uk-position-top-left"><i class="fas fa-envelope"></i> التواصل</button>
                         </div>
                     </div>
                 </div>

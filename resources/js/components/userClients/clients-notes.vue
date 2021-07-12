@@ -2,9 +2,9 @@
   <div uk-grid dir="rtl">
 
     <div dir="rtl" class="uk-width-1-2@s uk-text-right">
-      <label for="">الملاحظات</label>
-      <div class="uk-margin">
+      <div class="uk-margin uk-form-controls">
       <textarea  v-bind:class="{'uk-form-danger': total > max}" v-model="notes" @input="CountNotes"  class="uk-textarea uk-text-right"  rows="5"></textarea>
+  <span class="label-input">الملاحظات</span>
       <small v-bind:class="{'uk-text-danger': total > max}">{{max}}-{{total}}</small>
 
       </div>

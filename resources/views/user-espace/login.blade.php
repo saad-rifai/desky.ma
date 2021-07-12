@@ -28,11 +28,25 @@
     </div>
 @endif
 </div>
+<div class="uk-width-1-2@s">
+    <button class="uk-button google-btn uk-width-1-1"><i class="fab fa-google"></i> باستخدام جوجل </button>
+</div>
+<div class="uk-width-1-2@s">
+    <button class="uk-button facebook-btn uk-width-1-1"><i class="fab fa-facebook-f"></i> باستخدام فيسبوك </button>
+
+</div>
+<div  class="uk-width-1-1@s">
+  <br>
+
+
+</div>
         <div class="uk-width-1-1@s">
 
-            <label class="uk-form-label" for="">البريد الالكتروني </label>
-            <div class="uk-form-controls">
-            <input class="uk-input @error('email') uk-form-danger @enderror" type="text" name="email"  required placeholder="أدخل البريد الالكتروني الخاص بك">
+            <label class="uk-form-label" for=""> </label>
+            <div class="uk-form-controls desky-input">
+            <input  class="uk-input @error('email') uk-form-danger @enderror" type="text" name="email"  required >
+            <span class="label-input">البريد الالكتروني</span>
+
             </div>
         </div>
         @error("email")
@@ -41,9 +55,11 @@
         </span>
         @enderror
         <div class="uk-width-1-1@s">
-            <label for="">كلمة السر </label>
             <div class="uk-form-controls">
-            <input class="uk-input" type="password" name="password" placeholder="أدخل كلمة السر الخاصة بك" required>
+
+            <input class="uk-input" type="password" name="password" required>
+            <span class="label-input">كلمة السر</span>
+
             <a href="reset_password" class="uk-link-text"> اعادة تعيين كلمة السر</a>
             </div>
         </div>

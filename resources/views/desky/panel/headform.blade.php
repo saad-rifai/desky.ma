@@ -62,8 +62,9 @@ src="https://www.facebook.com/tr?id=162243945814000&ev=PageView&noscript=1"
         <link href="{{ URL::asset('css/mobile-style.css') }}" rel="stylesheet">
         <script src="{{ URL::asset('uikit/dist/js/uikit.min.js') }}"></script>
         <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href='https://fonts.googleapis.com/css?family=Tajawal' rel='stylesheet'>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
         <script src="{{ asset('public/js/app.js') }}" defer></script>
         <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>

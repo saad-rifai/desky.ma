@@ -42,12 +42,39 @@
           {{ errors.get("typeaccount") }}
         </div>
       </div-->
-
+ <div class="uk-width-1-1">
+     <br>
+ </div>
       <div class="uk-width-1-2@s">
-        <label for="">
-          الاسم الأول
-          <span class="red">*</span>
-        </label>
+
+
+    <button class="uk-button google-btn uk-width-1-1"><i class="fab fa-google"></i> باستخدام جوجل </button>
+</div>
+<div class="uk-width-1-2@s">
+    <button class="uk-button facebook-btn uk-width-1-1"><i class="fab fa-facebook-f"></i> باستخدام فيسبوك </button>
+
+</div>
+<div  class="uk-width-1-1@s">
+    <br>
+
+  <hr class="uk-divider-icon" style="    background-image: url(/image/icon/aw.png);">
+
+
+</div>
+<div class="uk-width-1-1@s">
+    <div class="upload-user-image-form uk-text-center">
+         <label for=""> الصورة الشخصية (اختياري)</label>
+        <div class="preview-image uk-text-center"  uk-tooltip="تحميل الصورة الشخصية" style="position:relative">
+
+            <span class="upload-icon uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle" uk-icon="icon:camera" >
+
+            </span>
+            <img src="/image/icon/user.png" alt="user image">
+        </div>
+    </div>
+</div>
+      <div class="uk-width-1-2@s">
+
         <div class="uk-form-controls">
           <input
             class="uk-input"
@@ -58,17 +85,16 @@
             v-bind:class="{ 'uk-form-danger': errors.errors.fname }"
             required
           />
+                    <span  class="label-input" v-bind:class="{ 'uk-text-danger': errors.errors.fname }">
+         الاسم الأول
+          <span class="red">*</span>
+           </span>
         </div>
         <div class="uk-text-danger" v-if="errors.errors.fname">
           {{ errors.get("fname") }}
         </div>
       </div>
       <div class="uk-width-1-2@s">
-        <label for="">
-          الاسم الأخير
-          <span class="red">*</span>
-        </label>
-
         <div class="uk-form-controls">
           <input
             class="uk-input"
@@ -79,16 +105,17 @@
             required
             v-bind:class="{ 'uk-form-danger': errors.errors.lname }"
           />
+          <span  class="label-input" v-bind:class="{ 'uk-text-danger': errors.errors.lname }">
+          الاسم الأخير
+          <span class="red">*</span>
+           </span>
         </div>
         <div class="uk-text-danger" v-if="errors.errors.lname">
           {{ errors.get("lname") }}
         </div>
       </div>
       <div class="uk-width-1-1@s">
-        <label for="">
-          البريد الالكتروني
-          <span class="red">*</span>
-        </label>
+
         <div class="uk-form-controls">
           <input
             class="uk-input"
@@ -100,55 +127,19 @@
             required
             v-bind:class="{ 'uk-form-danger': errors.errors.email }"
           />
+        <span  class="label-input" v-bind:class="{ 'uk-text-danger': errors.errors.email }">
+          البريد الالكتروني
+          <span class="red">*</span>
+           </span>
         </div>
         <div class="uk-text-danger" v-if="errors.errors.email">
           {{ errors.get("email") }}
         </div>
       </div>
+
+
       <div class="uk-width-1-2@s">
-        <label for="">
-          رقم الهاتف
-          <span class="red">*</span>
-        </label>
 
-        <div class="uk-form-controls">
-          <input
-            class="uk-input"
-            v-model="phonenumb"
-            type="text"
-            placeholder=""
-            value=""
-            required
-            v-bind:class="{ 'uk-form-danger': errors.errors.phonenumb }"
-          />
-        </div>
-        <div class="uk-text-danger" v-if="errors.errors.phonenumb">
-          {{ errors.get("phonenumb") }}
-        </div>
-      </div>
-
-      <!--div class="uk-width-1-2@s">
-        <label for="">الشركة (اختياري)</label>
-
-        <div class="uk-form-controls">
-          <input
-            class="uk-input"
-            type="text"
-            v-model="company"
-            value=""
-            placeholder=""
-            v-bind:class="{ 'uk-form-danger': errors.errors.company }"
-          />
-        </div>
-        <div class="uk-text-danger" v-if="errors.errors.company">
-          {{ errors.get("company") }}
-        </div>
-      </div-->
-      <div class="uk-width-1-2@s">
-        <label for="">
-          الدولة
-          <span class="red">*</span>
-        </label>
         <div class="uk-form-controls">
           <select
             v-model="country"
@@ -157,7 +148,7 @@
             required
             v-bind:class="{ 'uk-form-danger': errors.errors.country }"
           >
-            <option value="">-- اختيار --</option>
+            <option value=""></option>
             <optgroup for="" label="المغرب">
               <option value="MA"><strong>المغرب</strong></option>
             </optgroup>
@@ -169,16 +160,46 @@
               {{ countrie.name }}
             </option>
           </select>
+            <span  class="label-input" v-bind:class="{ 'uk-text-danger': errors.errors.country }">
+         الدولة
+          <span class="red">*</span>
+        </span>
         </div>
         <div class="uk-text-danger" v-if="errors.errors.country">
           {{ errors.get("country") }}
         </div>
       </div>
-      <div class="uk-width-1-2@s">
-        <label for="">
-          المدينة
+            <div class="uk-width-1-2@s">
+
+
+        <div class="uk-form-controls">
+          <input
+            class="uk-input input-phone"
+            v-model="phonenumb"
+            type="text"
+            placeholder=""
+            name="onlynumbers"
+            @click="numberZeroSet"
+            pattern="[0-9]+"
+            maxlength="10"
+            dir="ltr"
+            align="left"
+            required
+            v-bind:class="{ 'uk-form-danger': errors.errors.phonenumb }"
+          />
+          <span class="countrycode"><img src="/image/icon/flags/MA.png" class="flag-icon-small" alt="morrocan flag"> +212</span>
+                  <span  class="label-input" v-bind:class="{ 'uk-text-danger': errors.errors.phonenumb }">
+          رقم الهاتف
           <span class="red">*</span>
-        </label>
+        </span>
+        </div>
+        <div class="uk-text-danger" v-if="errors.errors.phonenumb">
+          {{ errors.get("phonenumb") }}
+        </div>
+      </div>
+
+      <div class="uk-width-1-2@s">
+
         <div class="uk-form-controls">
           <input
             class="uk-input"
@@ -189,19 +210,21 @@
             required
             v-bind:class="{ 'uk-form-danger': errors.errors.city }"
           />
+           <span  class="label-input" v-bind:class="{ 'uk-text-danger': errors.errors.city }">
+          المدينة
+          <span class="red">*</span>
+           </span>
         </div>
         <div class="uk-text-danger" v-if="errors.errors.city">
           {{ errors.get("city") }}
         </div>
       </div>
       <div class="uk-width-1-2@s">
-        <label for="">
-          كلمة المرور
-          <span class="red">*</span>
-        </label>
-        <br />
+
+
 
         <div class="uk-inline uk-width-1-1">
+            <div class="uk-form-controls">
           <a
             id="ShowPass"
             @click="showpass"
@@ -221,6 +244,11 @@
 
             v-bind:class="{ 'uk-form-danger': errors.errors.password }"
           />
+                     <span  class="label-input" v-bind:class="{ 'uk-text-danger': errors.errors.password }">
+          كلمة المرور
+          <span class="red">*</span>
+           </span>
+        </div>
         </div>
 
         <br />
@@ -263,7 +291,13 @@
   </div>
 </template>
 <script>
+
 import json from "../../../database/data.json";
+$(function(){
+  $("input[name='onlynumbers']").on('input', function (e) {
+    $(this).val($(this).val().replace(/[^0-9]/g, ''));
+  });
+});
 class Errors {
   constructor() {
     this.errors = {};
@@ -306,6 +340,7 @@ CaptchaCallback: function(){
 })
 
     },
+
     showpass: function () {
       if ("password" == $("#pass").attr("type")) {
         $("#pass").prop("type", "text");
@@ -332,6 +367,11 @@ CaptchaCallback: function(){
         $("#typeaccount1").attr("checked", false);
         $("#typeaccount2").attr("checked", true);
       }
+    },
+        numberZeroSet: function(){
+        if(this.phonenumb == ""){
+            this.phonenumb = "06";
+        }
     },
     submitform: function () {
       if (this.terms == true) {

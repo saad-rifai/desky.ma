@@ -1,33 +1,34 @@
 <template>
   <div>
     <div class="uk-text-center" style="" dir="rtl">
-
       <br />
       <br />
       <div class="uk-text-center">
-        <div>
-          <div class="swetch-btn uk-margin-bottom" >
-            <button
+        <div style="position:relative">
+          <div class="swetch-btn uk-margin-bottom">
+            <span
               @click="PayTimeChange('m')"
               v-bind:class="{
-                'uk-button-default': PackageDuration == 'y',
-                'uk-button-primary': PackageDuration == 'm',
+                'unselected-opt': PackageDuration == 'y',
+                'selected-opt': PackageDuration == 'm',
               }"
               class="uk-button btn-border-shadow"
             >
-              شهرياََ
-            </button>
-            <button
+              الدفع شهرياََ
+            </span>
+            <span
               @click="PayTimeChange('y')"
               type="button"
               v-bind:class="{
-                'uk-button-default': PackageDuration == 'm',
-                'uk-button-primary': PackageDuration == 'y',
+                'unselected-opt': PackageDuration == 'm',
+                'selected-opt': PackageDuration == 'y',
               }"
-              class="uk-button btn-border-shadow"
+              class="uk-button btn-border-shadow of-span"
             >
-              سنوياََ
-            </button>
+              الدفع سنوياََ
+
+
+            </span>
           </div>
         </div>
       </div>
@@ -40,14 +41,20 @@
           :key="index"
           class="uk-text-center"
         >
-          <div v-bind:class="{'most-pack': item.most == true, 'large-pack': item.large == true}" class="pack-pricing-bd">
+          <div
+            v-bind:class="{
+              'most-pack': item.most == true,
+              'large-pack': item.large == true,
+            }"
+            class="pack-pricing-bd"
+          >
             <div v-if="item.most == true" class="most-pb-label">
               الأكثر شيوعاََ
             </div>
             <div class="back-label">
               <h3 class="uk-card-title">{{ item.name }}</h3>
             </div>
-            <table class="uk-table  uk-text-center">
+            <table class="uk-table uk-text-center">
               <tbody>
                 <tr>
                   <td v-if="PackageDuration == 'm'" class="uk-text-center">
@@ -75,8 +82,7 @@
                       </span>
                     </h2>
                     <h3 class="save-text">تخفيض %{{ item.save }}</h3>
-                    <hr class="uk-divider-icon">
-
+                    <hr class="uk-divider-icon" />
                   </td>
                   <td v-if="PackageDuration == 'y'" class="uk-text-center">
                     <h2 class="price-pack" dir="ltr">
@@ -108,19 +114,18 @@
                       <small dir="rtl">
                         انت توفر مبلغ
                         {{
-                          (
-                            item.price * 12 -
-                            item.price_year
-                          ).toLocaleString('en-US', {
-                            style: 'decimal',
-                            maximumFractionDigits: 2,
-                          })+' Dhs'
+                          (item.price * 12 - item.price_year).toLocaleString(
+                            'en-US',
+                            {
+                              style: 'decimal',
+                              maximumFractionDigits: 2,
+                            },
+                          ) + ' Dhs'
                         }}
                         باشتراكك في الباقة السنوية
                       </small>
                     </h3>
-                    <hr class="uk-divider-icon">
-
+                    <hr class="uk-divider-icon" />
                   </td>
                 </tr>
                 <tr v-for="(info, index) in item.content" :key="index">
@@ -129,7 +134,7 @@
 
                 <tr>
                   <td class="uk-text-center">
-                      <hr class="uk-divider-icon">
+                    <hr class="uk-divider-icon" />
 
                     <a href="javascript:void(0)" @click="AddToCart(index)">
                       <button
@@ -160,14 +165,20 @@ export default {
     }
   },
   methods: {
-      AddToCart: function(e){
-          window.location.href='/api/v1/user/AddToCart/2147845/'+e+'/'+$("meta[name=csrf-token]").attr("content")+'/'+this.PackageDuration
-      },
+    AddToCart: function (e) {
+      window.location.href =
+        '/api/v1/user/AddToCart/2147845/' +
+        e +
+        '/' +
+        $('meta[name=csrf-token]').attr('content') +
+        '/' +
+        this.PackageDuration
+    },
     PayTimeChange: function (e) {
       if (e == 'm') {
-          this.PackageDuration = 'm';
-      }else{
-          this.PackageDuration ='y';
+        this.PackageDuration = 'm'
+      } else {
+        this.PackageDuration = 'y'
       }
     },
   },

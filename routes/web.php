@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
 //ResetPassword
 //Route::get('sitemap.xml', 'AlgNoAuthController@sitemap');
+Route::get("login_event", function(){
+    return view('test');
+});
 Route::any('verfymail/{UID}/{token}', 'verfymailController@verfylink');
 Route::post(
     'ResetPassword/{sendMail}',
@@ -32,7 +35,12 @@ Route::post(
 
 // print invoice
 Route::get('print/recu/{OID}', 'pdfGeneretor@invoice');
-
+Route::get('uikits/buttons', function () {
+    return view('uikits.buttons');
+});
+Route::get('uikits/navbar', function () {
+    return view('uikits.navbar');
+});
 Route::group(['domain' => 'account.' . env('APP_URL')], function () {
     Route::get('register', function () {
         if (Auth::check()) {
@@ -326,9 +334,9 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/Contactez-nous', function () {
         return view('desky.pages.Contactez-nous');
     });
-    /*  Route::get('/ae-network', function () {
+     Route::get('/ae-network', function () {
         return view('desky/ae-network');
-    });*/
+    });
     /* Any Route */
 
     /* Auth Routes */
