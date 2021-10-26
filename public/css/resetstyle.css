@@ -1,0 +1,312 @@
+
+* {
+    font-family: "Noto Kufi Arabic", sans-serif;
+    transition: ease 0.4s;
+}
+body {
+    background-color: #f6f6f6 !important;
+}
+button.btn.btn-primary {
+    background-color: #f96a0c;
+    border: solid 1px #f96a0c;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 17px;
+}
+button.btn {
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 17px;
+}
+.accordion-button::after {
+    margin-left: 0 !important;
+}
+.accordion-item {
+    background-color: #fff0 !important;
+    border: none !important;
+    border-bottom: solid 1px #d7d7d7 !important;
+}
+.accordion-button:not(.collapsed) {
+    color: #202020 !important;
+    background-color: #ffffff00 !important;
+    box-shadow: none !important;
+}
+a {
+    text-decoration: none !important;
+    color: #f96a0c !important;
+}
+.accordion-button {
+    background-color: #ffffff00 !important;
+    border: none !important;
+}
+.accordion-button:focus {
+    border-color: #86b7fe00 !important;
+    box-shadow: none !important;
+}
+button.btn.btn-outline-primary {
+    background-color: #ffffff;
+    border: solid 1px #f96a0c;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 17px;
+    color: #f96a0c;
+}
+.btn-act-section button {
+    margin-right: 10px !important;
+}
+.btn-check:focus + .btn-outline-primary,
+.btn-outline-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgb(249 106 12 / 46%) !important;
+}
+
+.btn-check:focus + .btn-primary,
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgb(249 106 12 / 46%) !important;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(68 68 68) !important;
+    font-weight: 400 !important;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #f96a0c !important;
+}
+.form-control {
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+textarea {
+    font-size: 14px !important;
+    line-height: 2 !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border: solid 1px #ced4da !important;
+    padding: 11px 15px !important;
+    height: auto !important;
+}
+.select2-container--default[dir="rtl"]
+    .select2-selection--single
+    .select2-selection__arrow {
+    left: 10px !important;
+    right: auto !important;
+    top: 25% !important;
+}
+span.select2-selection.select2-selection--multiple {
+    font-size: 14px !important;
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    border: solid 1px #bfbfbf !important;
+}
+a.nav-link:hover {
+    color: #f96a0c !important;
+}
+a.nav-link {
+    color: #737373 !important;
+}
+a.nav-link.active {
+    color: #f96a0c !important;
+    font-weight: 500;
+}
+.page-text h1 {
+    font-size: 20px;
+    color: #363636;
+}
+.select2-results__option--selectable {
+    padding: 10px 15px !important;
+    font-size: 14px !important;
+}
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
+    background-color: #f96a0c !important;
+    border: 1px solid #f96a0c !important;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 0;
+    padding-left: 20px;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+    color: white !important;
+}
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice__remove {
+    background-color: transparent;
+    border: none !important;
+    border-right: none !important;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    color: #fff !important;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+li.select2-results__option.select2-results__message {
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+}
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice__remove:hover,
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice__remove:focus {
+    background-color: inherit !important;
+}
+textarea.select2-search__field {
+    font-family: "Noto Kufi Arabic" !important;
+}
+.select2-container--default .select2-results__option--selected {
+    background-color: #f96a0c59 !important;
+}
+
+.select2-container--default
+    .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #f96a0c !important;
+    color: white !important;
+}
+.select2-dropdown {
+    background-color: white;
+    border: 1px solid #bdbdbd !important;
+    border-radius: 3px !important;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1051;
+    box-shadow: rgb(98 98 98 / 19%) -1px 4px 2.6px;
+}
+.form-select {
+    font-size: 14px !important;
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+.input-select{
+    font-size: 14px !important;
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    width: 100% !important;
+}
+.vuesax-app-is-ltr .vs-select--icon {
+    left: 5px !important;
+}
+.vuesax-app-is-ltr .vs-select--item {
+    direction: rtl !important;
+    text-align: right !important;
+}
+button.vs-select--item.activex {
+    background-color: #f96a0c40 !important;
+    color: #f96a0c !important;
+}
+span.icon-input-btn {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    transform: translate(0%, 50%);
+    cursor: pointer;
+}
+label.form-label {
+    color: #525252;
+    font-size: 14px;
+}
+
+.form-select:focus {
+    outline: 0;
+    box-shadow: none !important;
+}
+.page-load .bar {
+    background: #f96a0c;
+}
+.form-control:focus {
+    outline: 0;
+/*    box-shadow: none !important;*/
+}
+.vuesax-app-is-ltr .vs-select--icon {
+    right: inherit !important;
+}
+.vuesax-app-is-ltr .vs-select--input {
+    padding-right: 20px !important;
+}
+.vs-tooltip {
+    text-align: right !important;
+    direction: rtl !important;
+}
+.strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.strike > span {
+    position: relative;
+    display: inline-block;
+}
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #dc3545 !important;
+    color: #dc3545 !important;
+}
+.con-text-noti * {
+    text-align: right !important;
+    direction: rtl !important;
+}
+
+
+.strike > span:before,
+.strike > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: #e5e5e5;
+}
+
+.strike > span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.strike > span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+.modal-header {
+
+    margin-right: 25px;
+    margin-left: 25px;
+}
+.vs-select-group h4 {
+    font-size: 15px;
+    text-align: right;
+    direction: rtl;
+}
+@media (max-width: 992px) {
+    .navbar-collapse {
+        width: 100%;
+        background-color: #ffffff;
+        position: absolute;
+        top: 80px;
+        padding: 15px;
+        margin: 0;
+        left: 0;
+        border: solid 1px #f1f1f1;
+        z-index: 1000;
+    }
+}
