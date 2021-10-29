@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'Account_number', 'OAuth_ID', 'frist_name', 'last_name', 'phone_number', 'email', 'country', 'city', 'gender', 'type', 'avatar', 'description', 'sector', 'status', 'IP_Address', 'MAC_Address', 'remember_token', 'source', 'password' ];
+        'Account_number', 'username', 'OAuth_ID', 'frist_name', 'last_name', 'phone_number', 'email', 'country', 'city', 'gender', 'type', 'avatar', 'description', 'sector', 'status', 'IP_Address', 'MAC_Address', 'remember_token', 'source', 'password', 'verifiy_token', 'verified_account' ];
     
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','verifiy_token'
     ];
 
     /**

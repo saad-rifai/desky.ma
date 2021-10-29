@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPassword;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use \Swift_SmtpTransport;
 use Swift_Mailer;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -63,6 +65,67 @@ class ResetPasswordController extends Controller
         }*/
 
     }
+    public function UpdatePassword(Request $request){
+        $this->validate($request,[
+            'password' => 'required|string|min:8|max:25|confirmed',
+            'g_recaptcha_response' => 'required|captcha',
+
+        ], $message = [
+            'required' => 'هذا الحقل مطلوب *',
+            'g_recaptcha_response.required' => 'يرجى التحقق من الكابشا *',
+            'g_recaptcha_response.captcha' => 'يرجى التحقق من الكابشا *',
+
+            'password.min' => ' يجب أن تتكون كلمة السر من 8 أحرف على الأقل *',
+            'password.max' => ' كلمة السر أطول من اللازم *',
+            'password.required' => ' هذا الحقل مطلوب *',
+            'password.confirmed' => ' كلمة السر غير متطابقة *',
+        ]);
+        if(isset($request->hashToken)){
+            $stmts = DB::table('password_resets')->where("token", "$request->hashToken")->where('created_at', '>', Carbon::parse('-2 hours'))->get();
+            if($stmts->count() > 0){
+                foreach($stmts as $stmt);
+                $decrypt= Crypt::decryptString($request->hashToken);
+                $TokenData = explode("*{@}*",$decrypt);
+                $email = $TokenData[0];
+                $hashPassword = Hash::make($request->password);
+                $UpdateUserInfos = User::where('email', "$email")->update(['password' => "$hashPassword", 'email_verified_at' => date("Y-m-d H:i:s")]);
+                if($UpdateUserInfos){
+                    $deletToken = DB::table('password_resets')->where("token", $request->hashToken)->delete();
+                    return response()->json(['Password Updated Succesfully !'], 200);
+
+                }else{
+                    return response()->json(['Password Not Updated Succesfully System Error f0x50074245 !'], 500);
+
+                }
+            }else{
+                return response()->json(['Not Found Token '], 400);
+
+            }
+        }else{
+            return response()->json(['hashToken Filed ! '], 400);
+        }
+    }
+    public function VerifyToken(Request $request){
+        $hashToken = $request->hashToken;
+
+        $stmts = DB::table('password_resets')->where("token", "$hashToken")->where('created_at', '>', Carbon::parse('-2 hours'))->get();
+        if($stmts->count() > 0){
+            $decrypt= Crypt::decryptString($hashToken);
+            $TokenData = explode("*{@}*",$decrypt);
+            $email = $TokenData[0];
+            foreach($stmts as $stmt);
+
+
+            $userInfos = User::where('email', "$email")->get(["avatar", "frist_name", "last_name", "username"]);
+            foreach($userInfos as $userInfo);
+            $fullname = $userInfo->frist_name.' '.$userInfo->last_name;
+         return view("auth.passwords.confirm")->with(['ValideToken'=> true, 'fullname'=> "$fullname", 'avatar' => "$userInfo->avatar", "username"=>"$userInfo->username", "HashToken" => "$hashToken"]);
+
+        }else{
+            return view("auth.passwords.confirm")->with(['ValideToken'=> false]);
+        }
+
+    }
     public function ResetPassword(Request $request){
         $this->validate(
             $request,
@@ -96,7 +159,7 @@ class ResetPasswordController extends Controller
 
         }else{
            $token =  bin2hex(random_bytes(20));
-           $textToken = $email."@".$token;
+           $textToken = $email."*{@}*".$token;
            $hashToken = Crypt::encryptString($textToken);
            $stmt = DB::table('password_resets')->insert(['email' => "$email", 'token' => "$hashToken", "created_at" => Carbon::now()]);
            if($stmt){
@@ -136,7 +199,7 @@ class ResetPasswordController extends Controller
 
 
         }else{
-            return response()->json(['errors' => ['username' => [0 => 'البريد الالكتروني أو اسم المستخدم غير متطابق']]], 401);
+            return response()->json(['errors' => ['username' => [0 => 'البريد الالكتروني أو اسم المستخدم غير موجود']]], 401);
 
         }
       

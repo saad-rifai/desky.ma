@@ -63,7 +63,7 @@ class LoginController extends Controller
             return response()->json(['Login Success !'], 200);
 
         }else{
-            return response()->json(['البريد الالكتروني أو كلمة السر التي أدخلت غير متطابقة'], 401);
+            return response()->json(['errors' => ['email' => [0 => 'البريد الالكتروني أو كلمة السر التي أدخلت غير متطابقة']]], 422);
 
         }
      }

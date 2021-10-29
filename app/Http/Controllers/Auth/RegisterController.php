@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VerifiyEmail;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -11,6 +12,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Mail;
+use \Swift_SmtpTransport;
+use Swift_Mailer;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -65,14 +70,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-  /*  protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }*/
+
+
 
 
 
@@ -150,6 +149,7 @@ class RegisterController extends Controller
         }
         if($resultcheck == true){
             $AccountNumber = random_int(100000, 9999999999);
+            $verifiy_token = Str::random(25);
            $stmt = User::create([
                'frist_name' => $request->User__fname,
                'last_name' => $request->User__lname,
@@ -168,7 +168,9 @@ class RegisterController extends Controller
                'password' => Hash::make($request->User__password),
                'MAC_Address' => exec('getmac'),
                'IP_Address' => $request->ip(),
-               'Account_number' => $AccountNumber
+               'Account_number' => $AccountNumber,
+               'verifiy_token' => $verifiy_token,
+               'username' => $request->User__lname.'_'.$AccountNumber
 
            ]);
            if($stmt){
@@ -187,8 +189,36 @@ class RegisterController extends Controller
                 'status' => 0,
                 'Account_number' => $AccountNumber,
                 'password' => $request->User__password,
+                'username' => $request->User__lname.'-'.$AccountNumber
+
 
                 ])) {
+                                      // Setup your gmail mailer
+                  $backup = Mail::getSwiftMailer();
+
+                  $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
+                  $transport->setUsername('noreply@desky.ma');
+                  $transport->setPassword('Yg(H2)&48k!?');
+                  $gmail = new Swift_Mailer($transport);
+
+
+                  // Set the mailer as gmail
+                  Mail::setSwiftMailer($gmail);
+                  $valueArray2 = [
+                      'token' => $verifiy_token,
+                      'fullname' => $request->User__fname.' '.$request->User__lname,
+                      'AccountNumber' => $AccountNumber
+
+                  ];
+
+                  try {
+                      Mail::to($request->User__email)->send(new VerifiyEmail($valueArray2));
+                  } catch (\Exception $e) {
+                      //return 'Error - ' . $e;
+                   //   return response()->json(['Mail Filed !'], 500);
+
+                  }
+
 
                     return response()->json(['AccountCreated'], 200);
 

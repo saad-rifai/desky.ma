@@ -128,7 +128,9 @@
             </div>
             </div>
           <div class="col mt-2">
-                <h1 class="user-name">Saad Rifai <span data-bs-toggle="tooltip" data-bs-placement="top" title="حساب مقاول ذاتي موثق"   class="verified-icon verified-lv-1"  dir="rtl"></span></h1>
+                <h1 class="user-name">Saad Rifai
+                     <span data-bs-toggle="tooltip" data-bs-placement="top" title="حساب مقاول ذاتي موثق"   class="verified-icon verified-lv-1"  dir="rtl"></span>
+                    </h1>
                 <br>
                 <div class="row" style="    margin-top: -30px;">
 

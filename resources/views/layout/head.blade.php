@@ -8,6 +8,8 @@
     <meta name="description" content="Free Web tutorials">
     <meta name="author" content="Saad Rifai">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" href="{{ asset('css/resetstyle.css') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -26,7 +28,7 @@
     <!-- Fonts -->
 
 
-
+<link rel="shortcut icon" href="{{asset('img/icons/favicon-32x32.png')}}" type="image/x-icon">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
@@ -47,7 +49,9 @@
     <link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.5.3/dist/css/splide-extension-video.min.css">
-</head>
+        <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
+
+    </head>
 
 <body>
 

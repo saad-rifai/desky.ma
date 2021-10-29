@@ -36,6 +36,8 @@ class CreateUsersTable extends Migration
             $table->string('MAC_Address', 35)->nullable();	
             $table->string('OAuth_ID', 100)->nullable();	
             $table->timestamp('email_verified_at')->nullable();
+            $table->string("verifiy_token", 35)->nullable();
+            $table->integer("verified_account", 11)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -229,9 +229,13 @@
             v-model="terms"
             id="terms"
           />
-          <label class="form-check-label" for="terms">
+          <label class="form-check-label terms-text" for="terms">
             لقد قرأت <a href="#">شروط الاستخدام</a> و
             <a href="#">سياسة الخصوصية</a> وأوافق عليها
+            <br>
+            عند الإشارة إلى حماية البيانات الشخصية. وفقا للقانون 09-08، لديك الحق في الوصول، والتصحيح والمعارضة على معالجة بياناتك الشخصية.
+
+
           </label>
           <br />
           <div
@@ -343,7 +347,7 @@ export default {
             fixed: true,
             icon: "check",
           });
-          window.location.reload();
+        window.location.reload();
           this.HideLoadingInDiv();
         })
         .catch((error) => {

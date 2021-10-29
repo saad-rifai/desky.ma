@@ -12,6 +12,8 @@ import Vuesax from 'vuesax'
 import 'material-icons/iconfont/material-icons.css';
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
+import 'vue-advanced-cropper/dist/style.css';
+
 Vue.use(Vuesax, {})
 /**
 /**
@@ -26,9 +28,12 @@ Vue.use(Vuesax, {})
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 Vue.component('register-form', require('./components/auth/register-form.vue').default);
 Vue.component('reset-form', require('./components/auth/reset-form.vue').default);
+Vue.component('update-password', require('./components/auth/update-password.vue').default);
 Vue.component('login-form', require('./components/auth/login-form.vue').default);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('account-settings', require('./components/user/account-settings.vue').default);
+Vue.component('public-profile-edit', require('./components/user/public-profile-edit.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

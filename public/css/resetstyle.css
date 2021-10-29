@@ -108,6 +108,29 @@ a.nav-link.active {
     color: #f96a0c !important;
     font-weight: 500;
 }
+.list-group-item.active {
+    color: #fff !important;
+    background-color: #f96a0c !important;
+    border-color: #f96a0c !important;
+}
+.list-group-item {
+
+    color: #212529 !important;
+
+}
+.list-group-item {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+}
+.mr-auto {
+    margin-right: auto !important;
+}
+.tooltip-inner {
+    font-size: 12.5px !important;
+}
+.ml-auto {
+    margin-left: auto !important;
+}
 .page-text h1 {
     font-size: 20px;
     color: #363636;

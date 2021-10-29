@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>رسالة اعادة تعيين كلمة السر - Desky.ma</title>
+    <title>رسالة تفعيل الحساب - desky.ma</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
         rel="stylesheet">
@@ -42,19 +42,17 @@
                 <span class="bold-text" style="
                     font-weight: 600;
                 ">
-                    مرحبا !
+                    مرحبا {{$content['fullname']}} !
                 </span>
                 <br>
                 <br>
 
-                لقد طلبت إستعادة كلمة المرور الخاصة بك في desky.
-                <br>
-                <br>
-                إذا كنت ترغب بتغيير كلمة المرور الخاصة بك يرجى الضغط على الزر التالي:
+                نحن سعداء بانضمامك وبقي خطوة واحدة فقط لتفعيل حسابك. يرجى الضغط على الزر التالي لتفعيل حسابك لتتمكن بعدها من تسجيل الدخول اليه:
+        
                 <br>
                 <br>
             </p>
-            <a href="{{ asset('ResetPassword/reset/' . $content['token'] . '') }}" target="_blank" style="
+            <a href="{{ asset('account/verifiyEmail/'.$content['AccountNumber'].'/' . $content['token'] . '') }}" target="_blank" style="
     padding: 10px 25px;
     background-color: #F9600A;
     color: white;
@@ -63,7 +61,7 @@
     border-radius: 30px;
     font-weight: 500;
     text-decoration: none;
-">اعادة تعيين كلمة المرور</a>
+">تفعيل</a>
 
             <br>
             <br>
@@ -71,7 +69,8 @@
 text-align: right !important;
 direction: rtl !important;
 ">
-                إن لم تكن تتوقع وصول هذه الرسالة وتظن أنها وصلتك بالخطأ يمكنك تجاهلها.
+وصلتك هذه الرسالة لأنك سجّلت في desky. إن لم تنشئ حسابًا أو تظن أن هذه الرسالة وصلتك بالخطأ بإمكانك تجاهلها.
+
                 <br>
                 <br><br>
 
@@ -87,10 +86,8 @@ direction: rtl !important;
             <p style="    font-size: 12px;
             direction: rtl;
             text-align: center;
-        ">تم ارسال هذه الرسالة لك لأنك طلبت اعادة تعيين كلمة المرور اذا لم تكن أنت يرجى تجاهل هذه الرسالة <br>
-                اذا لم يشتغل معك الزر يرجى الظغط على <a
-                    href="{{ asset('reset_password/reset/' . $content['token'] . '') }}">الرابط التالي</a>
-            </p>
+        ">
+        www.desky.ma
         </footer>
     </div>
 </body>

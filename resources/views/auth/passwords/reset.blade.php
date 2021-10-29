@@ -15,6 +15,7 @@
     <!-- Styles -->
 
     <!-- Fonts -->
+    <link rel="shortcut icon" href="{{asset('img/icons/favicon-32x32.png')}}" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +32,7 @@
     <title>Desky - اعادة تعيين كلمة المرور</title>
     <!-- Font-awsome -->
 
+    <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"
         integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg=="
