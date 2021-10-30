@@ -63,7 +63,24 @@
     
                         </div>
                         <div class="tab-pane fade" id="ae_account" role="tabpanel" aria-labelledby="list-messages-list">.3..</div>
-                        <div class="tab-pane fade" id="documentation_center" role="tabpanel" aria-labelledby="list-settings-list">..4.</div>
+                        <div class="tab-pane fade" id="documentation_center" role="tabpanel" aria-labelledby="list-settings-list">
+                            <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px">  مركز التوثيق</h1>
+                            @if (auth::user()->verified_account == 1 || auth::user()->verified_account == 2)
+
+                            <div class="row row-cols-1 mx-auto text-center mt-3 mb-3">
+                                <div class="col w-100"><div class="icon-large-top">
+                                <img src="{{asset('img/icons/man-ceck.png')}}" alt="">    
+                                </div></div>
+                                <div class="col w-100 mt-3">
+                                    <p class="text-icon">تم توثيق الهوية بنجاح، شكرا لك</p>
+                                </div>
+                            </div>
+                            
+                            @else
+                                <request-verification :userinfos="{{Auth::user()}}"></request-verification>
+                            @endif
+
+                        </div>
                       </div>
                     </div>
                 </div>

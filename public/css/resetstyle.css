@@ -122,6 +122,9 @@ a.nav-link.active {
     padding-top: 14px !important;
     padding-bottom: 14px !important;
 }
+.form-select.is-invalid, .was-validated .form-select:invalid {
+    border-color: #dc3545 !important;
+}
 .mr-auto {
     margin-right: auto !important;
 }

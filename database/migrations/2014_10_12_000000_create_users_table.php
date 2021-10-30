@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->integer("sector")->nullable();
             $table->string("activity", 20)->nullable();
             $table->string("source", 20)->nullable();
+            $table->date("date_of_birth")->nullable();
             $table->string("password", 200);
             $table->integer("status");
             $table->string('Account_number', 10)->unique();

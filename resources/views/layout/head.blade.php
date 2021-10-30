@@ -28,19 +28,14 @@
     <!-- Fonts -->
 
 
-<link rel="shortcut icon" href="{{asset('img/icons/favicon-32x32.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/icons/favicon-32x32.png') }}" type="image/x-icon">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
-
-
     <title>Desky - @yield('title')</title>
     <!-- Font Awesome Pro CSS -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js"
         integrity="sha512-1Al+dnfE+1gI7IBmpUZ8XnZ3l3Nv6cyA+XgdtlaptVNxJcWWRzHxOPzT+2pbp52qtXa2jkwk0MWYSmxslMsHCQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -49,15 +44,13 @@
     <link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.5.3/dist/css/splide-extension-video.min.css">
-        <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
-
-    </head>
-
+    <script>
+        window.Laravel = {
+            csrfToken: '{{ csrf_token() }}'
+        }
+    </script>
+</head>
 <body>
-
-
-
-
     <!-- Nav Bar  -->
     <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar">
         <div class="container-fluid container">
@@ -82,8 +75,6 @@
 
                 </ul>
                 @guest
-
-
                     <div class="btn-act-section" dir="rtl">
 
                         <div class="non-auth">
@@ -97,8 +88,8 @@
                     </div>
                 @endguest
             </div>
-            <div class="btn-act-section" style="    margin-right: auto;
-                padding-left: 15px;" dir="rtl">
+            <div class="" style="    margin-right: auto;
+                padding-left: 5px;" dir="rtl">
                 @auth
 
                     <div class="auth-user">
@@ -209,14 +200,17 @@
                             <div class="col-auto pm-0">
                                 <div class="dropdown">
                                     <div class="user-info-box-article-avatar " data-toggle="dropdown" aria-expanded="false">
-                                        <img src="{{ asset(request()->Avatar) }}" id="menu_user" alt="{{Auth::user()->frist_name .' '. Auth::user()->last_name}} - avatar">
+                                        <img src="{{ asset(request()->Avatar) }}" id="menu_user"
+                                            alt="{{ Auth::user()->frist_name . ' ' . Auth::user()->last_name }} - avatar">
 
                                     </div>
-                                    <ul class="dropdown-menu" aria-labelledby="menu_user" style="left: 0;top: 60px;">
-                                        <li><a class="dropdown-item" href="#">لوحة التحكم</a></li>
-                                        <li><a class="dropdown-item" href="#">حسابي</a></li>
-                                        <li><a class="dropdown-item" href="#">اعدادات</a></li>
-                                        <li><a class="dropdown-item" href="{{route('logout')}}">تسجيل الخروج</a></li>
+                                    <ul class="dropdown-menu shadow-sm" aria-labelledby="menu_user" style="left: 0;top: 60px;">
+                                        <li><a class="dropdown-item item-w-icn" href="{{asset('/')}}"><span class="bg-icn"><i class="fas fa-tachometer-alt"></i></span> لوحة التحكم</a></li>
+                                        <li><a class="dropdown-item item-w-icn" href="{{asset('@'.auth::user()->username)}}"><span class="bg-icn"><i class="fas fa-at"></i></span> حسابي</a></li>
+                                        <li><a class="dropdown-item item-w-icn" href="{{asset('account/settings')}}"><span class="bg-icn"><i class="fas fa-cog"></i></span> اعدادات</a></li>
+                                        <li><a class="dropdown-item item-w-icn" href="{{route('logout')}}"><span class="bg-icn"><i class="fas fa-sign-out-alt"></i></span> تسجيل الخروج</a></li>
+                                        
+                                        
                                     </ul>
                                 </div>
                             </div>

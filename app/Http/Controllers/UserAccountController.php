@@ -90,10 +90,11 @@ class UserAccountController extends Controller
                 'User__phone' => 'required|regex:/[0-9]{9}/|unique:users,phone_number,' . auth::user()->id . '|max:10',
                 'User__cities' => 'required|max:5|regex:/^[\p{L} 0-9]+$/u',
                 'User__gender' => 'required|integer|max:2|min:1',
+                'User__date_of_birth' => 'date|nullable',
             ],
             $message = [
                 'required' => 'هذا الحقل مطلوب *',
-
+                'date' => 'يرجى ادخال تاريخ ازدياد صالح *',
                 'User__fname.min' => ' يرجى ادخال اسم صالح *',
                 'User__fname.regex' => ' يرجى ادخال اسم صالح *',
                 'User__fname.max' => 'الاسم أطول من اللازم *',
@@ -122,6 +123,7 @@ class UserAccountController extends Controller
             'phone_number' => "$request->User__phone",
             'city' => "$request->User__cities",
             'gender' => "$request->User__gender",
+            'date_of_birth' => $request->User__date_of_birth,
             'verified_account' => null
         ]);
         if ($stmt) {

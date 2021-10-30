@@ -34,6 +34,7 @@ Vue.component('login-form', require('./components/auth/login-form.vue').default)
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('account-settings', require('./components/user/account-settings.vue').default);
 Vue.component('public-profile-edit', require('./components/user/public-profile-edit.vue').default);
+Vue.component('request-verification', require('./components/user/request-verification.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

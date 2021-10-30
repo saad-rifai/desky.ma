@@ -176,6 +176,18 @@
             </div>
           </div>
         </div>
+                <div class="col-sm">
+          <div class="mb-3">
+            <label class="form-label">تاريخ الازدياد</label>
+            <input type="date" class="form-control" 
+            v-bind:class="{ 'is-invalid': errors.errors.User__date_of_birth }"
+            v-model="User__date_of_birth">
+
+            <div class="invalid-feedback" v-if="errors.errors.User__date_of_birth">
+              {{ errors.errors.User__date_of_birth[0] }}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="mb-3 mt-3">
@@ -264,6 +276,7 @@ export default {
       User__phone: this.userinfos.phone_number,
       User__cities: this.userinfos.city,
       User__gender: this.userinfos.gender,
+      User__date_of_birth: this.userinfos.date_of_birth,
       User_avatar: "/" + this.userinfos.avatar,
       Uploaded_avatar: "",
       apiresponse: "",
@@ -285,11 +298,7 @@ export default {
           position: "top-right",
           icon: "error",
         });
-      } else if (
-        !file ||
-        (file.type != "image/jpg" &&
-          file.type != "image/jpeg" &&
-          file.type != "image/png")
+      } else if (!file || (file.type != "image/jpg" && file.type != "image/jpeg" && file.type != "image/png")
       ) {
         e.preventDefault();
         this.$vs.notify({
@@ -377,6 +386,9 @@ export default {
       data.append("User__phone", this.User__phone);
       data.append("User__cities", this.User__cities);
       data.append("User__gender", this.User__gender);
+ 
+      data.append("User__date_of_birth", this.User__date_of_birth);
+ 
       axios
         .post("/ajax/user/update/account", data)
         .then((response) => {
