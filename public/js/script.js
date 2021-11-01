@@ -114,7 +114,7 @@ $("#upload-files-form").click(function() {
 });
 
 
-$('#upload-files-form').on('dragover', function(e) {
+/*$('#upload-files-form').on('dragover', function(e) {
   $("#"+form_file).prop("files", e.originalEvent.dataTransfer.files);
 });
 
@@ -123,20 +123,14 @@ $('#upload-files-form').on('drop', function(e) {
 
   $("#"+form_file).prop("files", e.originalEvent.dataTransfer.files);
 
-});
+});*/
 
 
 $("#"+form_file).on('change', function () {
   const typesselect = document.querySelector('#upload-files-form');
   var fileExtension = typesselect.dataset.types;
   var filesCount = $("#"+form_file)[0].files.length;
-  if(filesCount > 5){
-    $("#form_upload_error").text("  عدد الملفات أكثر من المسموح به الحد الأقصى 5 ملفات");
-    $("#form_upload_error").removeAttr('hidden');
-  }else{
-    $("#form_upload_error").attr('hidden', true);
 
-  }
 });
 
 }

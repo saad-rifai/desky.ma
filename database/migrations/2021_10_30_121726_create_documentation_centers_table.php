@@ -20,7 +20,7 @@ class CreateDocumentationCentersTable extends Migration
             $table->string("document_id", 10);
             $table->date("expiration_date");
             $table->integer('status');
-            $table->mediumText("files");
+            $table->json("files");
             $table->string("message", 250)->nullable();
             $table->timestamps();
         });

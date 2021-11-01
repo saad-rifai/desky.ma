@@ -65,6 +65,12 @@
                         <div class="tab-pane fade" id="ae_account" role="tabpanel" aria-labelledby="list-messages-list">.3..</div>
                         <div class="tab-pane fade" id="documentation_center" role="tabpanel" aria-labelledby="list-settings-list">
                             <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px">  مركز التوثيق</h1>
+                            @if (request()->request_verification == null || request()->request_verification == 3 || request()->request_verification == 2)
+                            @if (request()->request_verification == 3)
+                            <div class="alert alert-warning mt-3" role="alert">
+                                {{request()->request_verification_error}}
+                            </div>
+                            @endif
                             @if (auth::user()->verified_account == 1 || auth::user()->verified_account == 2)
 
                             <div class="row row-cols-1 mx-auto text-center mt-3 mb-3">
@@ -78,6 +84,31 @@
                             
                             @else
                                 <request-verification :userinfos="{{Auth::user()}}"></request-verification>
+                            @endif    
+
+                            @else
+                            @if (request()->request_verification == 1)
+                            <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
+                                <div class="col w-100"><div class="icon-large-top">
+                                <img style="max-width: 100px" src="{{asset('img/icons/pending.png')}}" alt="">    
+                                </div></div>
+                                <div class="col w-100 mt-3">
+                                    <p class="text-icon">طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من مراجعة طلبك</p>
+                                </div>
+                            </div>
+                            @else
+                            <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
+                                <div class="col w-100"><div class="icon-large-top">
+                                <img src="{{asset('img/icons/forbidden.png')}}" alt="">    
+                                </div></div>
+                                <div class="col w-100 mt-3">
+                                    <p class="text-icon">تم حظرك نهائيا من ارسال طلب توثيق الحساب</p>
+                                </div>
+                            </div>
+                            
+                         
+
+                            @endif
                             @endif
 
                         </div>

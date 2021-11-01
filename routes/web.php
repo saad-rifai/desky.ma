@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
 
     Route::get('/account/settings', function () {
         return view('user.settings');
-    });
+    })->middleware("request_verification");
 
 
     Route::get('/new/order', function () {
@@ -89,9 +89,7 @@ Route::group(['middleware' => 'avatar'], function () {
     });
     
     
-    Route::get('/@{UN}', function () {
-        return view('user-public-profile');
-    });
+    Route::get('/@{username}', 'WebController@publicProfile');
 });
 
 

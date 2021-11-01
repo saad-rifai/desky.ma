@@ -1,7 +1,23 @@
 <template>
   <div>
-    <form class="mt-3" @submit.prevent>
-      <div id="loadform"></div>
+    <div
+      v-if="success == true"
+      class="row row-cols-1 mx-auto text-center mt-5 mb-3"
+    >
+      <div class="col w-100">
+        <div class="icon-large-top">
+          <img style="max-width: 100px" src="/img/icons/pending.png" alt="" />
+        </div>
+      </div>
+      <div class="col w-100 mt-3">
+        <p class="text-icon">
+          طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من مراجعة طلبك
+        </p>
+      </div>
+    </div>
+
+    <form v-else class="mt-3" @submit.prevent>
+      <div id="loadform_3"></div>
 
       <div class="mb-3">
         <label for="username" class="form-label">نوع وثيقة التعريف</label>
@@ -20,6 +36,19 @@
         </select>
         <div class="invalid-feedback" v-if="errors.errors.document_type">
           {{ errors.errors.document_type[0] }}
+        </div>
+      </div>
+      <div class="mb-3" v-if="file_type_name != '' && file_type_name != null">
+        <label class="form-label">تاريخ انتهاء الصلاحية</label>
+        <input
+          type="date"
+          class="form-control"
+          v-bind:class="{ 'is-invalid': errors.errors.expiration_date }"
+          v-model="expiration_date"
+        />
+
+        <div class="invalid-feedback" v-if="errors.errors.expiration_date">
+          {{ errors.errors.expiration_date[0] }}
         </div>
       </div>
       <div class="mb-3" v-if="file_type_name != '' && file_type_name != null">
@@ -43,7 +72,15 @@
           class="mb-3"
           v-bind:hidden="file_type_name == '' || file_type_name == null"
         >
-          <label for="time" class="form-label"> ملفات توضيحية</label>
+          <label for="time" class="form-label">  تحميل الوثائق <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="يجب أن تقوم بتحميل صورة واضحة للوثيقة التي اخترت أن تقوم بتوثيق حسابك بواسطتها (في حال اخترت بطاقة الهوية أو بطاقة الاقامة بجب تقديم صورة من الخلف وصورة من الوراء)"></i></label>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            v-if="errors.errors.document_file"
+          >
+            {{ errors.errors.document_file[0] }}
+          </div>
+
           <div
             class="alert alert-danger"
             id="form_upload_error"
@@ -55,6 +92,7 @@
             class="upload-files-form"
             data-target="files-include"
             data-types="['png','jpg']"
+            @drop="dropfiles"
           >
             <input
               type="file"
@@ -126,9 +164,6 @@
                   ></button>
                 </div>
               </div>
-              <div class="invalid-feedback" v-if="errors.errors+'.document_file.0'">
-            test
-              </div>
             </div>
           </div>
         </div>
@@ -138,12 +173,12 @@
       <div class="mt-5">
         <button
           style="margin-right: 0 !important"
-          id="btn_submit"
+          id="btn_submit_3"
           type="submit"
           class="btn btn-primary"
           @click="SendRequest"
         >
-          حفظ
+          ارسال
         </button>
       </div>
     </form>
@@ -176,6 +211,8 @@ export default {
       description: this.userinfos.description,
       type: this.userinfos.type,
       filesSelected: [],
+      expiration_date: null,
+      success: false,
       status: ["في انتظار", "جاري التحميل", "تم التحميل", "فشل التحميل"],
       sizefile: function bytesToSize(bytes) {
         var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
@@ -201,6 +238,45 @@ export default {
   methods: {
     removefile: function (index) {
       this.filesSelected.splice(index, 1);
+    },
+    dropfiles: function(e){
+   $("#files-include").prop("files", e.dataTransfer.files);
+      const file = e.dataTransfer.files;
+      let count = file.length;
+         for (var i = 0; count > i; i++) {
+
+        if (file[i].size > 1024 * 1024) {
+          this.$vs.notify({
+            text: " هذا الملف أكبر من اللازم الحد الأقصى (1 MB) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error",
+          });
+        } else if (this.filesSelected.length >= 2) {
+          this.$vs.notify({
+            title: "مسموح فقط بملفين",
+            text: "الحد الأقصى للملفات المسموح برفعها 2 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
+            color: "danger",
+            position: "top-right",
+            icon: "error",
+          });
+        } else if (
+          file[i].type != "image/jpg" &&
+          file[i].type != "image/jpeg" &&
+          file[i].type != "image/png" &&
+          file[i].type != "application/pdf"
+        ) {
+          this.$vs.notify({
+            text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, PDF) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error",
+          });
+        } else {
+          this.filesSelected.push([file[i], 0, 0]);
+        }
+      }
+  
     },
     files_selected: function (e) {
       const file = e.target.files;
@@ -245,35 +321,6 @@ export default {
           this.filesSelected.push([file[i], 0, 0]);
         }
       }
-      //this.filesSelected[0].file.name = 12054;
-      //console.log(this.filesSelected.length);
-      /* if (file.size > 1024 * 1024) {
-        e.preventDefault();
-        this.$vs.notify({
-          text: "هذا الملف أكبر من اللازم الحد الأقصى (1 MB)",
-          color: "danger",
-          position: "top-right",
-          icon: "error",
-        });
-      } else if (
-        !file ||
-        (file.type != "image/jpg" &&
-          file.type != "image/jpeg" &&
-          file.type != "application/pdf" &&
-          file.type != "image/png")
-      ) {
-        e.preventDefault();
-        this.$vs.notify({
-          text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, PDF)",
-          color: "danger",
-          position: "top-right",
-          icon: "error",
-        });
-      } else {
-        this.Uploaded_avatar = URL.createObjectURL(file);
-
-        this.popupActivo = true;
-      }*/
     },
     file_type_change: function () {
       if (this.file_type == 1) {
@@ -287,20 +334,21 @@ export default {
       }
     },
     openLoadingInDiv: function () {
-      $("#btn_submit").html(
+      $("#btn_submit_3").html(
         '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...'
       );
       this.$vs.loading({
-        container: "#loadform",
+        container: "#loadform_3",
         scale: 0.6,
         color: "#f96a0c",
       });
     },
     HideLoadingInDiv: function () {
-      $("#btn_submit").html("حفظ");
-      this.$vs.loading.close("#loadform > .con-vs-loading");
+      $("#btn_submit_3").html("ارسال");
+      this.$vs.loading.close("#loadform_3 > .con-vs-loading");
     },
     SendRequest: function () {
+      this.openLoadingInDiv();
       var config = {
         headers: { "Content-Type": "multipart/form-data" },
       };
@@ -308,22 +356,60 @@ export default {
       let data = new FormData();
       if (this.filesSelected.length > 0) {
         for (var i = 0; this.filesSelected.length > i; i++) {
-      
           data.append("document_file[]", this.filesSelected[i][0]);
         }
       } else {
         data.append("document_file[0]", null);
       }
+      data.append("expiration_date", this.expiration_date);
       data.append("document_type", this.file_type);
       data.append("document_id", this.document_id);
 
       axios
         .post("/ajax/user/request/verification", data, config)
         .then((response) => {
+          this.HideLoadingInDiv();
           this.errors = new Errors();
+          this.success = true;
+          this.$vs.notify({
+            title: "تم ارسال طلبك !",
+            text: "سيتم اشعارك من خلال البريد الالكتروني بردنا بعد الانتهاء من مراجعة طلبك",
+            color: "success",
+            position: "top-right",
+            icon: "warning",
+          });
         })
         .catch((error) => {
+          this.HideLoadingInDiv();
+
           this.errors.record(error.response.data);
+          if (error.response.status == 422) {
+            this.$vs.notify({
+              title: "هناك خطأ ما !",
+              text: "يرجى التحقق من مدخلاتك",
+              color: "danger",
+              position: "top-right",
+              icon: "warning",
+            });
+          } else if (error.response.status == 400) {
+            this.$vs.notify({
+              title: "هناك خطأ ما !",
+              text: error.response.data.errors,
+              color: "danger",
+              position: "top-right",
+              fixed: true,
+              icon: "warning",
+            });
+          } else {
+            this.$vs.notify({
+              title: "هناك خطأ ما !",
+              text: "حصل خطأ ما أثناء محاولة ارسال طلبك يرجى اعادة المحاولة, اذا استمر معك المشكل يرجى التواصل معنا",
+              color: "danger",
+              position: "top-right",
+              fixed: true,
+              icon: "warning",
+            });
+          }
         });
     },
   },

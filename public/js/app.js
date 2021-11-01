@@ -3815,6 +3815,41 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var Errors = /*#__PURE__*/function () {
   function Errors() {
     _classCallCheck(this, Errors);
@@ -3851,6 +3886,8 @@ var Errors = /*#__PURE__*/function () {
       description: this.userinfos.description,
       type: this.userinfos.type,
       filesSelected: [],
+      expiration_date: null,
+      success: false,
       status: ["في انتظار", "جاري التحميل", "تم التحميل", "فشل التحميل"],
       sizefile: function bytesToSize(bytes) {
         var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
@@ -3872,6 +3909,39 @@ var Errors = /*#__PURE__*/function () {
   methods: {
     removefile: function removefile(index) {
       this.filesSelected.splice(index, 1);
+    },
+    dropfiles: function dropfiles(e) {
+      $("#files-include").prop("files", e.dataTransfer.files);
+      var file = e.dataTransfer.files;
+      var count = file.length;
+
+      for (var i = 0; count > i; i++) {
+        if (file[i].size > 1024 * 1024) {
+          this.$vs.notify({
+            text: " هذا الملف أكبر من اللازم الحد الأقصى (1 MB) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else if (this.filesSelected.length >= 2) {
+          this.$vs.notify({
+            title: "مسموح فقط بملفين",
+            text: "الحد الأقصى للملفات المسموح برفعها 2 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else if (file[i].type != "image/jpg" && file[i].type != "image/jpeg" && file[i].type != "image/png" && file[i].type != "application/pdf") {
+          this.$vs.notify({
+            text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, PDF) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else {
+          this.filesSelected.push([file[i], 0, 0]);
+        }
+      }
     },
     files_selected: function files_selected(e) {
       var file = e.target.files;
@@ -3911,36 +3981,7 @@ var Errors = /*#__PURE__*/function () {
         } else {
           this.filesSelected.push([file[i], 0, 0]);
         }
-      } //this.filesSelected[0].file.name = 12054;
-      //console.log(this.filesSelected.length);
-
-      /* if (file.size > 1024 * 1024) {
-        e.preventDefault();
-        this.$vs.notify({
-          text: "هذا الملف أكبر من اللازم الحد الأقصى (1 MB)",
-          color: "danger",
-          position: "top-right",
-          icon: "error",
-        });
-      } else if (
-        !file ||
-        (file.type != "image/jpg" &&
-          file.type != "image/jpeg" &&
-          file.type != "application/pdf" &&
-          file.type != "image/png")
-      ) {
-        e.preventDefault();
-        this.$vs.notify({
-          text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, PDF)",
-          color: "danger",
-          position: "top-right",
-          icon: "error",
-        });
-      } else {
-        this.Uploaded_avatar = URL.createObjectURL(file);
-          this.popupActivo = true;
-      }*/
-
+      }
     },
     file_type_change: function file_type_change() {
       if (this.file_type == 1) {
@@ -3954,20 +3995,21 @@ var Errors = /*#__PURE__*/function () {
       }
     },
     openLoadingInDiv: function openLoadingInDiv() {
-      $("#btn_submit").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...');
+      $("#btn_submit_3").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...');
       this.$vs.loading({
-        container: "#loadform",
+        container: "#loadform_3",
         scale: 0.6,
         color: "#f96a0c"
       });
     },
     HideLoadingInDiv: function HideLoadingInDiv() {
-      $("#btn_submit").html("حفظ");
-      this.$vs.loading.close("#loadform > .con-vs-loading");
+      $("#btn_submit_3").html("ارسال");
+      this.$vs.loading.close("#loadform_3 > .con-vs-loading");
     },
     SendRequest: function SendRequest() {
       var _this = this;
 
+      this.openLoadingInDiv();
       var config = {
         headers: {
           "Content-Type": "multipart/form-data"
@@ -3983,12 +4025,54 @@ var Errors = /*#__PURE__*/function () {
         data.append("document_file[0]", null);
       }
 
+      data.append("expiration_date", this.expiration_date);
       data.append("document_type", this.file_type);
       data.append("document_id", this.document_id);
       axios.post("/ajax/user/request/verification", data, config).then(function (response) {
+        _this.HideLoadingInDiv();
+
         _this.errors = new Errors();
+        _this.success = true;
+
+        _this.$vs.notify({
+          title: "تم ارسال طلبك !",
+          text: "سيتم اشعارك من خلال البريد الالكتروني بردنا بعد الانتهاء من مراجعة طلبك",
+          color: "success",
+          position: "top-right",
+          icon: "warning"
+        });
       })["catch"](function (error) {
+        _this.HideLoadingInDiv();
+
         _this.errors.record(error.response.data);
+
+        if (error.response.status == 422) {
+          _this.$vs.notify({
+            title: "هناك خطأ ما !",
+            text: "يرجى التحقق من مدخلاتك",
+            color: "danger",
+            position: "top-right",
+            icon: "warning"
+          });
+        } else if (error.response.status == 400) {
+          _this.$vs.notify({
+            title: "هناك خطأ ما !",
+            text: error.response.data.errors,
+            color: "danger",
+            position: "top-right",
+            fixed: true,
+            icon: "warning"
+          });
+        } else {
+          _this.$vs.notify({
+            title: "هناك خطأ ما !",
+            text: "حصل خطأ ما أثناء محاولة ارسال طلبك يرجى اعادة المحاولة, اذا استمر معك المشكل يرجى التواصل معنا",
+            color: "danger",
+            position: "top-right",
+            fixed: true,
+            icon: "warning"
+          });
+        }
       });
     }
   }
@@ -42648,300 +42732,418 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        staticClass: "mt-3",
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-          }
-        }
-      },
-      [
-        _c("div", { attrs: { id: "loadform" } }),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c(
-            "label",
-            { staticClass: "form-label", attrs: { for: "username" } },
-            [_vm._v("نوع وثيقة التعريف")]
-          ),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.file_type,
-                  expression: "file_type"
-                }
-              ],
-              staticClass: "form-select",
-              class: { "is-invalid": _vm.errors.errors.document_type },
-              attrs: { name: "file_type", id: "file_type" },
-              on: {
-                change: [
-                  function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.file_type = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  },
-                  _vm.file_type_change
-                ]
+    _vm.success == true
+      ? _c(
+          "div",
+          { staticClass: "row row-cols-1 mx-auto text-center mt-5 mb-3" },
+          [_vm._m(0), _vm._v(" "), _vm._m(1)]
+        )
+      : _c(
+          "form",
+          {
+            staticClass: "mt-3",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
               }
-            },
-            [
-              _c("option", { attrs: { value: "" } }, [_vm._v("اختيار")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [_vm._v("بطاقة الهوية")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("جواز السفر")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [_vm._v("بطاقة الاقامة")])
-            ]
-          ),
-          _vm._v(" "),
-          _vm.errors.errors.document_type
-            ? _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm.errors.errors.document_type[0]) +
-                    "\n      "
-                )
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _vm.file_type_name != "" && _vm.file_type_name != null
-          ? _c("div", { staticClass: "mb-3" }, [
+            }
+          },
+          [
+            _c("div", { attrs: { id: "loadform_3" } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
               _c(
                 "label",
-                { staticClass: "form-label", attrs: { for: "document_id" } },
-                [_vm._v("رقم " + _vm._s(_vm.file_type_name))]
+                { staticClass: "form-label", attrs: { for: "username" } },
+                [_vm._v("نوع وثيقة التعريف")]
               ),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.document_id,
-                    expression: "document_id"
-                  }
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": _vm.errors.errors.document_id },
-                attrs: { type: "text", id: "document_id" },
-                domProps: { value: _vm.document_id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.file_type,
+                      expression: "file_type"
                     }
-                    _vm.document_id = $event.target.value
+                  ],
+                  staticClass: "form-select",
+                  class: { "is-invalid": _vm.errors.errors.document_type },
+                  attrs: { name: "file_type", id: "file_type" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.file_type = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.file_type_change
+                    ]
                   }
-                }
-              }),
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [_vm._v("اختيار")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [
+                    _vm._v("بطاقة الهوية")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [
+                    _vm._v("جواز السفر")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [
+                    _vm._v("بطاقة الاقامة")
+                  ])
+                ]
+              ),
               _vm._v(" "),
-              _vm.errors.errors.document_id
+              _vm.errors.errors.document_type
                 ? _c("div", { staticClass: "invalid-feedback" }, [
                     _vm._v(
                       "\n        " +
-                        _vm._s(_vm.errors.errors.document_id[0]) +
+                        _vm._s(_vm.errors.errors.document_type[0]) +
                         "\n      "
                     )
                   ])
                 : _vm._e()
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "col w-100" }, [
-          _c(
-            "div",
-            {
-              staticClass: "mb-3",
-              attrs: {
-                hidden: _vm.file_type_name == "" || _vm.file_type_name == null
-              }
-            },
-            [
-              _c(
-                "label",
-                { staticClass: "form-label", attrs: { for: "time" } },
-                [_vm._v(" ملفات توضيحية")]
-              ),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "alert alert-danger",
-                attrs: { id: "form_upload_error", hidden: "", role: "alert" }
-              }),
-              _vm._v(" "),
+            ]),
+            _vm._v(" "),
+            _vm.file_type_name != "" && _vm.file_type_name != null
+              ? _c("div", { staticClass: "mb-3" }, [
+                  _c("label", { staticClass: "form-label" }, [
+                    _vm._v("تاريخ انتهاء الصلاحية")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.expiration_date,
+                        expression: "expiration_date"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.errors.expiration_date },
+                    attrs: { type: "date" },
+                    domProps: { value: _vm.expiration_date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.expiration_date = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.errors.expiration_date
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n        " +
+                            _vm._s(_vm.errors.errors.expiration_date[0]) +
+                            "\n      "
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.file_type_name != "" && _vm.file_type_name != null
+              ? _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-label",
+                      attrs: { for: "document_id" }
+                    },
+                    [_vm._v("رقم " + _vm._s(_vm.file_type_name))]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.document_id,
+                        expression: "document_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.errors.document_id },
+                    attrs: { type: "text", id: "document_id" },
+                    domProps: { value: _vm.document_id },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.document_id = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.errors.document_id
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n        " +
+                            _vm._s(_vm.errors.errors.document_id[0]) +
+                            "\n      "
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "col w-100" }, [
               _c(
                 "div",
                 {
-                  staticClass: "upload-files-form",
+                  staticClass: "mb-3",
                   attrs: {
-                    id: "upload-files-form",
-                    "data-target": "files-include",
-                    "data-types": "['png','jpg']"
+                    hidden:
+                      _vm.file_type_name == "" || _vm.file_type_name == null
                   }
                 },
                 [
-                  _c("input", {
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm.errors.errors.document_file
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-danger",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.errors.errors.document_file[0]) +
+                              "\n        "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "alert alert-danger",
                     attrs: {
-                      type: "file",
-                      id: "files-include",
-                      name: "files[]",
-                      multiple: "",
-                      hidden: ""
-                    },
-                    on: { change: _vm.files_selected }
+                      id: "form_upload_error",
+                      hidden: "",
+                      role: "alert"
+                    }
                   }),
                   _vm._v(" "),
-                  _vm._m(0)
-                ]
-              ),
-              _vm._v(" "),
-              _vm._l(_vm.filesSelected, function(item, index) {
-                return _c(
-                  "div",
-                  {
-                    key: index,
-                    staticClass: "show-files-border mt-5 mb-5 position-relative"
-                  },
-                  [
-                    _c("div", { staticClass: "show_files_content mb-5" }, [
-                      _c("div", { staticClass: "row position-relative" }, [
-                        item[1] > 0
-                          ? _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "badge bg-success position-absolute bottom-0 end-0",
-                                staticStyle: {
-                                  "margin-left": "15px",
-                                  width: "initial !important"
-                                }
-                              },
-                              [_vm._v(_vm._s(_vm.status[item[1]]))]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-auto" }, [
-                          _c("div", { staticClass: "img_file_type" }, [
-                            _c("img", {
-                              attrs: {
-                                src: _vm.fileicon(item[0].type),
-                                alt: ""
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-auto position-relative" },
-                          [
-                            _c("div", { staticClass: "title_file" }, [
-                              _c("h3", { staticClass: "file_title" }, [
-                                _vm._v(_vm._s(item[0].name))
-                              ]),
-                              _vm._v(" "),
-                              _c("br"),
-                              _c("span", { staticClass: "file_size" }, [
-                                _vm._v(_vm._s(_vm.sizefile(item[0].size)))
-                              ])
-                            ])
-                          ]
-                        )
-                      ]),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "upload-files-form",
+                      attrs: {
+                        id: "upload-files-form",
+                        "data-target": "files-include",
+                        "data-types": "['png','jpg']"
+                      },
+                      on: { drop: _vm.dropfiles }
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "file",
+                          id: "files-include",
+                          name: "files[]",
+                          multiple: "",
+                          hidden: ""
+                        },
+                        on: { change: _vm.files_selected }
+                      }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "progress-bar-file mt-3" }, [
-                        _c("div", { staticClass: "row align-items-center" }, [
-                          item[1] > 0
-                            ? _c("div", { staticClass: "col w-100" }, [
-                                _c("div", { staticClass: "progress" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "progress-bar",
-                                      style: "width: " + item[2] + "%",
-                                      attrs: {
-                                        role: "progressbar",
-                                        "aria-valuenow": item[2],
-                                        "aria-valuemin": "0",
-                                        "aria-valuemax": "100"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                      " +
-                                          _vm._s(item[2]) +
-                                          "%\n                    "
-                                      )
-                                    ]
-                                  )
+                      _vm._m(3)
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.filesSelected, function(item, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass:
+                          "show-files-border mt-5 mb-5 position-relative"
+                      },
+                      [
+                        _c("div", { staticClass: "show_files_content mb-5" }, [
+                          _c("div", { staticClass: "row position-relative" }, [
+                            item[1] > 0
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "badge bg-success position-absolute bottom-0 end-0",
+                                    staticStyle: {
+                                      "margin-left": "15px",
+                                      width: "initial !important"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(_vm.status[item[1]]))]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-auto" }, [
+                              _c("div", { staticClass: "img_file_type" }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: _vm.fileicon(item[0].type),
+                                    alt: ""
+                                  }
+                                })
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-auto position-relative" },
+                              [
+                                _c("div", { staticClass: "title_file" }, [
+                                  _c("h3", { staticClass: "file_title" }, [
+                                    _vm._v(_vm._s(item[0].name))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _c("span", { staticClass: "file_size" }, [
+                                    _vm._v(_vm._s(_vm.sizefile(item[0].size)))
+                                  ])
                                 ])
-                              ])
-                            : _vm._e(),
+                              ]
+                            )
+                          ]),
                           _vm._v(" "),
-                          _c("button", {
-                            staticClass:
-                              "btn-close position-absolute top-0 end-0",
-                            attrs: { type: "button", "aria-label": "Close" },
-                            on: {
-                              click: function($event) {
-                                return _vm.removefile(index)
-                              }
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                       true
-                        ? _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("\n          test\n            ")
+                          _c("div", { staticClass: "progress-bar-file mt-3" }, [
+                            _c(
+                              "div",
+                              { staticClass: "row align-items-center" },
+                              [
+                                item[1] > 0
+                                  ? _c("div", { staticClass: "col w-100" }, [
+                                      _c("div", { staticClass: "progress" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "progress-bar",
+                                            style: "width: " + item[2] + "%",
+                                            attrs: {
+                                              role: "progressbar",
+                                              "aria-valuenow": item[2],
+                                              "aria-valuemin": "0",
+                                              "aria-valuemax": "100"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                      " +
+                                                _vm._s(item[2]) +
+                                                "%\n                    "
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c("button", {
+                                  staticClass:
+                                    "btn-close position-absolute top-0 end-0",
+                                  attrs: {
+                                    type: "button",
+                                    "aria-label": "Close"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.removefile(index)
+                                    }
+                                  }
+                                })
+                              ]
+                            )
                           ])
-                        : undefined
-                    ])
-                  ]
-                )
-              })
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "fine-uploader-gallery" } }),
-        _vm._v(" "),
-        _c("div", { staticClass: "mt-5" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              staticStyle: { "margin-right": "0 !important" },
-              attrs: { id: "btn_submit", type: "submit" },
-              on: { click: _vm.SendRequest }
-            },
-            [_vm._v("\n        حفظ\n      ")]
-          )
-        ])
-      ]
-    )
+                        ])
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "fine-uploader-gallery" } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "mt-5" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  staticStyle: { "margin-right": "0 !important" },
+                  attrs: { id: "btn_submit_3", type: "submit" },
+                  on: { click: _vm.SendRequest }
+                },
+                [_vm._v("\n        ارسال\n      ")]
+              )
+            ])
+          ]
+        )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col w-100" }, [
+      _c("div", { staticClass: "icon-large-top" }, [
+        _c("img", {
+          staticStyle: { "max-width": "100px" },
+          attrs: { src: "/img/icons/pending.png", alt: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col w-100 mt-3" }, [
+      _c("p", { staticClass: "text-icon" }, [
+        _vm._v(
+          "\n        طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من مراجعة طلبك\n      "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label", attrs: { for: "time" } }, [
+      _vm._v("  تحميل الوثائق "),
+      _c("i", {
+        staticClass: "fas fa-info-circle",
+        attrs: {
+          "data-bs-toggle": "tooltip",
+          title:
+            "يجب أن تقوم بتحميل صورة واضحة للوثيقة التي اخترت أن تقوم بتوثيق حسابك بواسطتها (في حال اخترت بطاقة الهوية أو بطاقة الاقامة بجب تقديم صورة من الخلف وصورة من الوراء)"
+        }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

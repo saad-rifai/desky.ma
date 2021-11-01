@@ -122,13 +122,15 @@
                
 
                 <div class="avatar-user-large ">
-
-                    <img src="{{ asset('img/users/3.jpg') }}" alt="">
+                    @php
+                    $avatar=$data->avatar; if($avatar == NULL || $avatar == ""){$avatar_url = 'img/icons/avatar.png';}else{$avatar_url = $avatar;}
+                    @endphp
+                    <img src="{{ asset($avatar_url) }}" alt="{{$data->username}}">
                 </div>
             </div>
             </div>
           <div class="col mt-2">
-                <h1 class="user-name">Saad Rifai
+                <h1 class="user-name">{{ucfirst($data->frist_name)}} {{ucfirst($data->last_name)}} 
                      <span data-bs-toggle="tooltip" data-bs-placement="top" title="حساب مقاول ذاتي موثق"   class="verified-icon verified-lv-1"  dir="rtl"></span>
                     </h1>
                 <br>
@@ -192,13 +194,7 @@
                             aria-labelledby="home-tab">
 
                             <p>
-                                هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
-                                العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
-                                التى يولدها التطبيق.
-                                إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد،
-                                النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه
-                                الخصوص، حيث يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.
-
+                                {{$data->description}}
                             </p>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

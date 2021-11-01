@@ -52,6 +52,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'request_verification' => \App\Http\Middleware\RequestVerification::class,
         'verified_account' => \App\Http\Middleware\verified_account::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'avatar' => \App\Http\Middleware\UserAvatar::class,
