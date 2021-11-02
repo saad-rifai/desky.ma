@@ -35,7 +35,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('account-settings', require('./components/user/account-settings.vue').default);
 Vue.component('public-profile-edit', require('./components/user/public-profile-edit.vue').default);
 Vue.component('request-verification', require('./components/user/request-verification.vue').default);
-
+Vue.component('request-ae-account', require('./components/user/request-ae-account.vue').default);
+/*request-ae-account*/
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

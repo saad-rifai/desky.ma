@@ -122,6 +122,16 @@ a.nav-link.active {
     padding-top: 14px !important;
     padding-bottom: 14px !important;
 }
+.primary-brand-alert {
+    background-color: #f96a0c;
+    color: white !important;
+}
+.input-select-validate-danger {
+    border-color: rgba(var(--vs-danger),1) !important;
+}
+.primary-brand-alert p {
+    margin-top: 10px;
+}
 .form-select.is-invalid, .was-validated .form-select:invalid {
     border-color: #dc3545 !important;
 }

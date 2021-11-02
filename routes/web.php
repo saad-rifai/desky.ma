@@ -29,6 +29,7 @@ Route::prefix('ajax')->group(function () {
     Route::post('user/update/profile', 'UserAccountController@UpdateProfile');
     Route::post('user/update/account', 'UserAccountController@UpdateAccount');
     Route::post('user/request/verification', 'DocumentationCenterController@RequestVerification');
+    Route::post('user/request/aeaccount', 'AeAccountController@RequestAccount');
 
 });
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');

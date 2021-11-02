@@ -3649,6 +3649,555 @@ var Errors = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/request-ae-account.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/request-ae-account.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _public_data_json_activite_ae_1_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../public/data/json/activite-ae-1.json */ "./public/data/json/activite-ae-1.json");
+var _public_data_json_activite_ae_1_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../../public/data/json/activite-ae-1.json */ "./public/data/json/activite-ae-1.json", 1);
+/* harmony import */ var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../public/data/json/activite-ae-2.json */ "./public/data/json/activite-ae-2.json");
+var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../../public/data/json/activite-ae-2.json */ "./public/data/json/activite-ae-2.json", 1);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var Errors = /*#__PURE__*/function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "get",
+    value: function get(filed) {
+      if (this.errors[filed]) {
+        return this.errors[filed][0];
+      }
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors.errors;
+    }
+  }]);
+
+  return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      errors: new Errors(),
+      Activites: [],
+      activite_selected: [],
+      sector: 0,
+      filesSelected: [],
+      terms: false,
+      cin: "",
+      cin_date_expiration: null,
+      ae_number: "",
+      join_date: null,
+      job_title: "",
+      sizefile: function bytesToSize(bytes) {
+        var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+        if (bytes == 0) return "0 Byte";
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
+      },
+      fileicon: function fileicon(filetype) {
+        if (filetype == "image/jpg" || filetype == "image/jpeg" || filetype == "image/png") {
+          return "/img/icons/file-type/jpg.svg";
+        } else if (filetype == "application/pdf") {
+          return "/img/icons/file-type/pdf.svg";
+        } else {
+          return "/img/icons/file-type/pdf.zip";
+        }
+      }
+    };
+  },
+  methods: {
+    SectorChange: function SectorChange() {
+      if (this.sector == 1) {
+        this.Activites = _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_1__;
+      } else if (this.sector == 2 || this.sector == 3 || this.sector == 4) {
+        this.Activites = _public_data_json_activite_ae_1_json__WEBPACK_IMPORTED_MODULE_0__;
+      } else {
+        this.Activites = [];
+        this.activite_selected = [];
+      }
+    },
+    removefile: function removefile(index) {
+      this.filesSelected.splice(index, 1);
+    },
+    dropfiles: function dropfiles(e) {
+      $("#files-include").prop("files", e.dataTransfer.files);
+      var file = e.dataTransfer.files;
+      var count = file.length;
+
+      for (var i = 0; count > i; i++) {
+        if (file[i].size > 1024 * 1024) {
+          this.$vs.notify({
+            text: " هذا الملف أكبر من اللازم الحد الأقصى (1 MB) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else if (this.filesSelected.length >= 3) {
+          this.$vs.notify({
+            title: "مسموح فقط بي 3 ملفات",
+            text: "الحد الأقصى للملفات المسموح برفعها 3 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else if (file[i].type != "image/jpg" && file[i].type != "image/jpeg" && file[i].type != "image/png" && file[i].type != "application/pdf") {
+          this.$vs.notify({
+            text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, PDF) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else {
+          this.filesSelected.push([file[i], 0, 0]);
+        }
+      }
+    },
+    files_selected: function files_selected(e) {
+      var file = e.target.files;
+      var count = file.length;
+
+      for (var i = 0; count > i; i++) {
+        if (file[i].size > 1024 * 1024) {
+          this.$vs.notify({
+            text: " هذا الملف أكبر من اللازم الحد الأقصى (1 MB) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else if (this.filesSelected.length >= 3) {
+          this.$vs.notify({
+            title: "مسموح فقط بي 3 ملفات",
+            text: "الحد الأقصى للملفات المسموح برفعها 3 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else if (file[i].type != "image/jpg" && file[i].type != "image/jpeg" && file[i].type != "image/png" && file[i].type != "application/pdf") {
+          this.$vs.notify({
+            text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, PDF) *",
+            color: "danger",
+            position: "top-right",
+            icon: "error"
+          });
+        } else {
+          this.filesSelected.push([file[i], 0, 0]);
+        }
+      }
+    },
+    openLoadingInDiv: function openLoadingInDiv() {
+      $("#btn_submit_4").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...');
+      this.$vs.loading({
+        container: "#loadform_4",
+        scale: 0.6,
+        color: "#f96a0c"
+      });
+    },
+    HideLoadingInDiv: function HideLoadingInDiv() {
+      $("#btn_submit_4").html("ارسال");
+      this.$vs.loading.close("#loadform_4 > .con-vs-loading");
+    },
+    SendRequest: function SendRequest() {
+      var _this = this;
+
+      this.openLoadingInDiv();
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data; charset=utf-8"
+        }
+      };
+      var data = new FormData();
+
+      if (this.filesSelected.length > 0) {
+        for (var i = 0; this.filesSelected.length > i; i++) {
+          data.append("document_file[]", this.filesSelected[i][0]);
+        }
+      } else {
+        data.append("document_file[0]", null);
+      }
+
+      data.append("cin", this.cin);
+      data.append("cin_date_expiration", this.cin_date_expiration);
+      data.append("ae_number", this.ae_number);
+      data.append("join_date", this.join_date);
+      data.append("sector", this.sector);
+      data.append("activite", this.activite_selected);
+      data.append("job_title", this.job_title);
+      data.append("terms", this.terms);
+      /*Send Data To Server */
+
+      axios.post("/ajax/user/request/aeaccount", data, config).then(function (response) {
+        _this.HideLoadingInDiv();
+
+        _this.errors = new Errors();
+        _this.success = true;
+
+        _this.$vs.notify({
+          title: "تم ارسال طلبك !",
+          text: "سيتم اشعارك من خلال البريد الالكتروني بردنا بعد الانتهاء من مراجعة طلبك",
+          color: "success",
+          position: "top-right",
+          icon: "warning"
+        });
+      })["catch"](function (error) {
+        _this.HideLoadingInDiv();
+
+        _this.errors.record(error.response.data);
+
+        if (error.response.status == 422) {
+          _this.$vs.notify({
+            title: "هناك خطأ ما !",
+            text: "يرجى التحقق من مدخلاتك",
+            color: "danger",
+            position: "top-right",
+            icon: "warning"
+          });
+        } else if (error.response.status == 400) {
+          _this.$vs.notify({
+            title: "هناك خطأ ما !",
+            text: error.response.data.errors,
+            color: "danger",
+            position: "top-right",
+            fixed: true,
+            icon: "warning"
+          });
+        } else {
+          _this.$vs.notify({
+            title: "هناك خطأ ما !",
+            text: "حصل خطأ ما أثناء محاولة ارسال طلبك يرجى اعادة المحاولة, اذا استمر معك المشكل يرجى التواصل معنا",
+            color: "danger",
+            position: "top-right",
+            fixed: true,
+            icon: "warning"
+          });
+        }
+      });
+      /* Send Data To Server */
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/request-verification.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/request-verification.vue?vue&type=script&lang=js& ***!
@@ -3664,6 +4213,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+//
+//
 //
 //
 //
@@ -3907,6 +4458,9 @@ var Errors = /*#__PURE__*/function () {
     };
   },
   methods: {
+    ChosseFiles: function ChosseFiles() {
+      $('.documents_inp').click();
+    },
     removefile: function removefile(index) {
       this.filesSelected.splice(index, 1);
     },
@@ -42716,6 +43270,716 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/request-ae-account.vue?vue&type=template&id=34d348cb&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/request-ae-account.vue?vue&type=template&id=34d348cb& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        attrs: { id: "loadform_4" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c(
+                "label",
+                { staticClass: "form-label", attrs: { for: "username" } },
+                [_vm._v("\n            رقم بطاقة الهوية (CIN)")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cin,
+                    expression: "cin"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.errors.errors.cin },
+                attrs: { type: "text" },
+                domProps: { value: _vm.cin },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.cin = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.errors.cin
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.errors.errors.cin[0]) +
+                        "\n      "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("تاريخ انتهاء الصلاحية")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cin_date_expiration,
+                    expression: "cin_date_expiration"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.errors.errors.cin_date_expiration },
+                attrs: { type: "date" },
+                domProps: { value: _vm.cin_date_expiration },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.cin_date_expiration = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.errors.cin_date_expiration
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.errors.errors.cin_date_expiration[0]) +
+                        "\n      "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c(
+                "label",
+                { staticClass: "form-label", attrs: { for: "username" } },
+                [_vm._v("\n            الرقم التعريفي للمقاول الذاتي")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.ae_number,
+                    expression: "ae_number"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.errors.errors.ae_number },
+                attrs: { maxlength: "20", type: "text" },
+                domProps: { value: _vm.ae_number },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.ae_number = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.errors.ae_number
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.errors.errors.ae_number[0]) +
+                        "\n      "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("تاريخ الانخراط")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.join_date,
+                    expression: "join_date"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.errors.errors.join_date },
+                attrs: { type: "date" },
+                domProps: { value: _vm.join_date },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.join_date = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.errors.join_date
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.errors.errors.join_date[0]) +
+                        "\n      "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c(
+                "label",
+                { staticClass: "form-label", attrs: { for: "username" } },
+                [_vm._v("القطاع")]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.sector,
+                      expression: "sector"
+                    }
+                  ],
+                  staticClass: "form-select",
+                  class: { "is-invalid": _vm.errors.errors.sector },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.sector = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.SectorChange
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [_vm._v("اختر")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("الخدمات")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("التجارة")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("الصناعة")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "4" } }, [_vm._v("الحرفية")])
+                ]
+              ),
+              _vm._v(" "),
+              _vm.errors.errors.sector
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.errors.errors.sector[0]) +
+                        "\n      "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm" }, [
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c("label", { staticClass: "form-label" }, [_vm._v("النشاط")]),
+                _vm._v(" "),
+                _c(
+                  "vs-select",
+                  {
+                    staticClass: "selectExample",
+                    attrs: {
+                      multiple: "",
+                      "max-selected": "3",
+                      width: "100%",
+                      autocomplete: ""
+                    },
+                    model: {
+                      value: _vm.activite_selected,
+                      callback: function($$v) {
+                        _vm.activite_selected = $$v
+                      },
+                      expression: "activite_selected"
+                    }
+                  },
+                  _vm._l(_vm.Activites, function(item, index) {
+                    return _c("vs-select-item", {
+                      key: index,
+                      attrs: { value: index, text: item }
+                    })
+                  }),
+                  1
+                ),
+                _vm._v(" "),
+                _vm.errors.errors.activite
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "invalid-feedback",
+                        staticStyle: { display: "block!important" }
+                      },
+                      [
+                        _vm._v(
+                          "\n        " +
+                            _vm._s(_vm.errors.errors.activite[0]) +
+                            "\n      "
+                        )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-text" }, [
+                  _vm._v("يمكنك تحديد حتى 3 نشاطات")
+                ])
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c(
+            "label",
+            { staticClass: "form-label", attrs: { for: "job_title" } },
+            [_vm._v("المسمى الوظيفي")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.job_title,
+                expression: "job_title"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": _vm.errors.errors.job_title },
+            attrs: { type: "text", id: "job_title" },
+            domProps: { value: _vm.job_title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.job_title = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.errors.errors.job_title
+            ? _c(
+                "div",
+                {
+                  staticClass: "invalid-feedback",
+                  staticStyle: { display: "block!important" }
+                },
+                [
+                  _vm._v(
+                    "\n        " +
+                      _vm._s(_vm.errors.errors.job_title[0]) +
+                      "\n      "
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-text" }, [
+            _vm._v(
+              "\n        أدخل مسمى وظيفي واحد لتظهر بنتائج البحث. مثال: مهندس معماري, نجار,\n        صباغ...\n      "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-100" }, [
+          _c(
+            "div",
+            { staticClass: "mb-3" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-text mb-3" }, [
+                _vm._v(
+                  "\n          من أجل تفعيل حسابك يلزمك رفع صورة لبطاقة الهوية الخاصة بك سارية\n          المفعول من الأمام والخلف وكذلك تحميل صورة لبطاقة المقاول الذاتي\n          سارية المفعول أو شهادة الانخراط في سجل المقاول الذاتي.\n        "
+                )
+              ]),
+              _vm._v(" "),
+              _vm.errors.errors.document_file
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      attrs: { role: "alert" }
+                    },
+                    [
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.errors.errors.document_file[0]))
+                      ])
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "alert alert-danger",
+                attrs: { id: "form_upload_error", hidden: "", role: "alert" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "upload-files-form",
+                  attrs: {
+                    id: "upload-files-form",
+                    "data-target": "files-include",
+                    "data-types": "['png','jpg']"
+                  },
+                  on: { drop: _vm.dropfiles }
+                },
+                [
+                  _c("input", {
+                    attrs: {
+                      type: "file",
+                      id: "files-include",
+                      name: "files[]",
+                      multiple: "",
+                      hidden: ""
+                    },
+                    on: { change: _vm.files_selected }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.filesSelected, function(item, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "show-files-border mt-5 mb-5 position-relative"
+                  },
+                  [
+                    _c("div", { staticClass: "show_files_content mb-5" }, [
+                      _c("div", { staticClass: "row position-relative" }, [
+                        item[1] > 0
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "badge bg-success position-absolute bottom-0 end-0",
+                                staticStyle: {
+                                  "margin-left": "15px",
+                                  width: "initial !important"
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.status[item[1]]))]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-auto" }, [
+                          _c("div", { staticClass: "img_file_type" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.fileicon(item[0].type),
+                                alt: ""
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-auto position-relative" },
+                          [
+                            _c("div", { staticClass: "title_file" }, [
+                              _c("h3", { staticClass: "file_title" }, [
+                                _vm._v(_vm._s(item[0].name))
+                              ]),
+                              _vm._v(" "),
+                              _c("br"),
+                              _c("span", { staticClass: "file_size" }, [
+                                _vm._v(_vm._s(_vm.sizefile(item[0].size)))
+                              ])
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "progress-bar-file mt-3" }, [
+                        _c("div", { staticClass: "row align-items-center" }, [
+                          item[1] > 0
+                            ? _c("div", { staticClass: "col w-100" }, [
+                                _c("div", { staticClass: "progress" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "progress-bar",
+                                      style: "width: " + item[2] + "%",
+                                      attrs: {
+                                        role: "progressbar",
+                                        "aria-valuenow": item[2],
+                                        "aria-valuemin": "0",
+                                        "aria-valuemax": "100"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                      " +
+                                          _vm._s(item[2]) +
+                                          "%\n                    "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass:
+                              "btn-close position-absolute top-0 end-0",
+                            attrs: { type: "button", "aria-label": "Close" },
+                            on: {
+                              click: function($event) {
+                                return _vm.removefile(index)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3 mt-5 position-relative" }, [
+          _c("div", { staticClass: "form-check" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.terms,
+                  expression: "terms"
+                }
+              ],
+              staticClass: "form-check-input",
+              class: { "is-invalid": _vm.errors.errors.terms },
+              attrs: { type: "checkbox", value: "true", id: "terms" },
+              domProps: {
+                checked: Array.isArray(_vm.terms)
+                  ? _vm._i(_vm.terms, "true") > -1
+                  : _vm.terms
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.terms,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = "true",
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.terms = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.terms = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.terms = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label terms-text",
+                attrs: { for: "terms" }
+              },
+              [
+                _vm._v(
+                  "\n          أقر بأن المعلومات التي قمت بادخالها والوثائق التي قمت بتحميلها صحيحة\n          وخاصة بي وكما أقر بأني أعلم انه انتحال شخصية شخص أخر يعاقب عليها\n          القانون الجنائي\n        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _vm.errors.errors.terms
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "invalid-feedback mt-2",
+                    staticStyle: { display: "block !important" }
+                  },
+                  [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(_vm.errors.errors.terms[0]) +
+                        "\n        "
+                    )
+                  ]
+                )
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-5" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              staticStyle: { "margin-right": "0 !important" },
+              attrs: { id: "btn_submit_4", type: "submit" },
+              on: { click: _vm.SendRequest }
+            },
+            [_vm._v("\n        ارسال\n      ")]
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "alert primary-brand-alert" }, [
+      _c("div", { staticClass: "row mx-auto align-items-center" }, [
+        _c("div", { staticClass: "col align-middle" }, [
+          _c("p", [
+            _vm._v("خطوات بسيطة لكي تنظم الى أكبر شبكة مقاولين ذاتيين بالمغرب")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-auto" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-light",
+              attrs: {
+                type: "button",
+                "data-bs-toggle": "modal",
+                "data-bs-target": "#staticBackdrop"
+              }
+            },
+            [_vm._v("\n          كيفية الانضمام\n        ")]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label", attrs: { for: "time" } }, [
+      _vm._v("\n          تحميل الوثائق\n          "),
+      _c("i", {
+        staticClass: "fas fa-info-circle",
+        attrs: {
+          "data-bs-toggle": "tooltip",
+          title:
+            "من أجل تفعيل حسابك يلزمك رفع صورة لبطاقة الهوية الخاصة بك سارية المفعول من الأمام والخلف وكذلك تحميل صورة لبطاقة المقاول الذاتي سارية المفعول أو شهادة الانخراط في سجل المقاول الذاتي"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "upload-files-form-content" }, [
+      _c("span", { staticClass: "icon-upload-file" }, [
+        _c("img", { attrs: { src: "/img/icons/upload.png", alt: "" } })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title-upload-file" }, [
+        _vm._v("اسحب الملفات الى هنا")
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-upload-file" }, [
+        _vm._v("أو انقر للاختيار يدويا")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/request-verification.vue?vue&type=template&id=465ef622&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/request-verification.vue?vue&type=template&id=465ef622& ***!
@@ -42954,10 +44218,11 @@ var render = function() {
                         "data-target": "files-include",
                         "data-types": "['png','jpg']"
                       },
-                      on: { drop: _vm.dropfiles }
+                      on: { click: _vm.ChosseFiles, drop: _vm.dropfiles }
                     },
                     [
                       _c("input", {
+                        staticClass: "documents_inp",
                         attrs: {
                           type: "file",
                           id: "files-include",
@@ -72363,6 +73628,28 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./public/data/json/activite-ae-1.json":
+/*!*********************************************!*\
+  !*** ./public/data/json/activite-ae-1.json ***!
+  \*********************************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[\"البيع عن طريق الأنترنت\",\"البيع عن طريق المراسلة\",\"النسيج وتحضير الألياف النسيجية والغزل بطريقة تقليدية\",\"أنشطة تحويل وحفظ الأسماك والقشريات والرخويات\",\"تجارة أجهزة الاتصالات بالتقسيط\",\"تجارة أخرى بالتقسيط خارج المتاجر والأكشاك والأسواق\",\"تجارة أخرى بالتقسيط في الأكشاك والأسواق\",\"تجارة الأثاث ومعدات الإضاءة وتجهيزات منزلية أخرى بالتقسيط\",\"تجارة الأجهزة السمعية البصرية بالتقسيط\",\"تجارة الأجهزة الكهربائية المنزلية بالتقسيط\",\"تجارة الأحذية ومنتجات من الجلد بالتقسيط\",\"تجارة الأسماك والقشريات والرخويات بالتقسيط\",\"تجارة الألعاب واللعب بالتقسيط\",\"تجارة البصريات وآلات التصوير بالتقسيط\",\"تجارة الحواسيب والوحدات الملحقة والبرمجيات بالتقسيط\",\"تجارة الخبز والحلويات والسكريات بالتقسيط\",\"تجارة الخردوات والصباغة والزجاج بالتقسيط\",\"تجارة الزرابي والموكيت وأغطية الجدران والأرض بالتقسيط\",\"تجارة السلع المستعملة بالتقسيط\",\"تجارة الصحف ومنتجات من الورق بالتقسيط\",\"تجارة العطور ومواد التجميل بالتقسيط\",\"تجارة الفواكه والخضر بالتقسيط\",\"تجارة الكتب بالتقسيط\",\"تجارة اللحوم ومشتقات اللحوم بالتقسيط\",\"تجارة المشروبات بالتقسيط\",\"تجارة الملابس بالتقسيط\",\"تجارة المنتجات الغذائية بالتقسيط في الأكشاك والأسواق\",\"تجارة المنسوجات بالتقسيط\",\"تجارة المنسوجات والملابس والأحذية في الأكشاك والأسواق\",\"تجارة المواد الغذائية\",\"تجارة تسجيلات الموسيقى والفيديو بالتقسيط\",\"تجارة معدات رياضية بالتقسيط\",\"تحضير وصنع منتجات من الجلد\",\"تحويل الحبوب\",\"تحويل اللحوم والدواجن وحفظها بطريقة تقليدية\",\"تحويل وحفظ الفواكه والخضر\",\"تفكيك الحطام واسترداد النفايات المفروزة\",\"صناعات تحويلية أخرى\",\"صناعة الخبز والحلويات\",\"صناعة الفراشي والمكانس والمنافض\",\"صناعة يدوية للأحذية\",\"صناعة يدوية للزرابي\",\"صنع الأثاث\",\"صنع الأطعمة والأطباق المعدة\",\"صنع الآلات الموسيقية\",\"صنع التوابل والبهارات\",\"صنع الزيوت والدهون\",\"صنع الشكولاتة والحلويات السكرية\",\"صنع الصباغة والبرنيق والحبر والصمغ\",\"صنع العجائن الغذائية والكسكس\",\"صنع الغراء\",\"صنع المثلجات والصوربي\",\"صنع المجوهرات المقلدة ومواد مشابهة\",\"صنع الملابس\",\"صنع الملونات والصباغ\",\"صنع حرفي لمنتجات النسيج والملابس التقليدية\",\"صنع حرفي لمنتجات تقليدية من المعادن والصفائح لحوافر الدواب\",\"صنع حرفي لمنتجات متنوعة من الخشب والقصب والحلفاء\",\"صنع منتجات الألبان بما في ذلك الجبن\",\"صنع منتجات تقليدية من الطين المعد\",\"صنع منتجات خزفية ومن الطين المعد\",\"صنع منتجات متنوعة من الخشب والفلين\",\"صنع منتجات معدنية\",\"صنع مواد التنظيف\",\"صنع وتحويل عناصر للبناء\",\"صياغة وتحويل الزجاج\",\"نشر ونجر الخشب\"]");
+
+/***/ }),
+
+/***/ "./public/data/json/activite-ae-2.json":
+/*!*********************************************!*\
+  !*** ./public/data/json/activite-ae-2.json ***!
+  \*********************************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[\"إزالة التلوث وخدمات أخرى لتدبير النفايات\",\"أستاذ الفن المسرحي (خارج المؤسسة المدرسية)\",\"أستاذ الفنون البصرية (خارج المؤسسة المدرسية)\",\"أستاذ الفنون السمعية البصرية (خارج المؤسسة المدرسية)\",\"أستاذ الموسيقى والغناء (خارج المؤسسة المدرسية)\",\"أستاذ فن السيرك (خارج المؤسسة المدرسية)\",\"أستاذ في تصميم الرقصات (خارج المؤسسة المدرسية)\",\"أشغال إعداد المواقع\",\"أشغال التركيب\",\"أشغال الصباغة\",\"أشغال النجارة\",\"أشغال الهدم\",\"أشغال تغليف الأرضية والجدران\",\"أشغال جبسية\",\"إصلاح الأثاث والتجهيزات المنزلية\",\"إصلاح الأحذية والمصنوعات الجلدية\",\"إصلاح الأدوات الشخصية والأدوات المنزلية\",\"إصلاح الدراجات النارية\",\"إصلاح الساعات والمجوهرات\",\"إصلاح مركبات معدنية\",\"إصلاح وصيانة التجهيزات والمعدات\",\"أصناف أخرى من النقل البري للمسافرين\",\"الاستشارة في الأعمال واستشارات أخرى في التدبير\",\"الاستشارة في العلاقات العامة والاتصال\",\"الإيواء السياحي وأصناف أخرى للإيواء\",\"البحث العلمي في ميدان التكنولوجيا الحيوية\",\"البحث العلمي في ميدان العلوم الإنسانية والاجتماعية\",\"البحث العلمي في ميداني علوم الفيزياء والعلوم الطبيعية الأخرى\",\"التخزين المبرد\",\"التخزين غير المبرد\",\"الحلاقة والتجميل والعناية بالجسم\",\"الخبرة الاستشارية وإيواء المواقع الالكترونية وتطوير الأنظمة المعلوماتية\",\"المغاسل والمصابغ\",\"المقاهي والمطاعم وخدمات المطاعم الأخرى\",\"النقل عبر الأنهار\",\"النقل على متن سيارات الأجرة\",\"النقل في الحواضر والضواحي\",\"الوكالات العقارية وإدارة الأملاك العقارية\",\"أنشطة أخرى لتوفير الموارد البشرية\",\"أنشطة أخرى متصلة بصحة الإنسان\",\"أنشطة الأمن الخاص\",\"أنشطة التحقيق\",\"أنشطة التصوير الفوتوغرافي\",\"أنشطة الدعم في مجال التعليم\",\"أنشطة الدعم للعروض الحية\",\"أنشطة العمل الاجتماعي بدون إيواء الخاصة بالأطفال الصغار والمسنين وذوي الاحتياجات الخاصة\",\"أنشطة الفحص و/أو العلاج المنظمة\",\"أنشطة المراقبة والتحاليل التقنية\",\"أنشطة تأجير حقوق الملكية الفكرية وحقوق مماثلة باستثناء الأعمال الخاضعة لحقوق النشر\",\"أنشطة تتعلق بتنظيم الأسفار والسياحة\",\"أنشطة تنظيف المباني بما في ذلك المباني الصناعية\",\"أنشطة توضيب السلع\",\"أنشطة لدعم الفلاحة واستغلال الغابات وصيد الأسماك\",\"أنشطة متخصصة أخرى علمية وتقنية\",\"أنشطة متخصصة في التصميم\",\"أنشطة مرتبطة بالرياضة\",\"بهلوان،\",\"تأجير واستئجار اللوازم والآلات والمعدات\",\"تأجير واستئجار وسائل النقل\",\"تجليد الكتب وأنشطة مكملة\",\"تحرير الأنباء وخدمات المعلومات\",\"تركيب المرايا والزجاج\",\"تقني الاضاءة\",\"تقني الصوت\",\"تقني المؤثرات الخاصة\",\"جمع النفايات غير الخطرة\",\"حفر الآبار والاستبار\",\"حكواتي في الفضاءات العامة والخاصة\",\"خدمات الترحيل\",\"خدمات دعم أخرى مقدمة للمقاولات\",\"خدمات ملحقة بالنقل\",\"دراسات السوق واستطلاعات الرأي\",\"راقص\",\"رسام الكاريكاتور\",\"رواقي\",\"رئيس فرقة موسيقية\",\"سينوغراف\",\"صانع في الطبع الفني (سيريغرافيست)\",\"صيانة وإصلاح السيارات\",\"عازف موسيقي\",\"عرائسي\",\"فضاءات للمخيمات وفضاءات للقوافل أو عربات الترفيه\",\"فنان الشارع\",\"فنان الميم\",\"فنان رسام\",\"فنان في الخدع البصرية\",\"كاتب المشاهد\",\"كاتب سيناريو\",\"لاعب الارجوحة بالسيرك\",\"لاعب التوازن بالسيرك\",\"لاعب خفة بالسيرك\",\"مازج الصوت\",\"مبرمج العروض الفنية\",\"مجازف سينمائي\",\"محافظ الأستوديو\",\"محافظ الخشبة\",\"محافظ السيرك\",\"محافظ سينما\",\"مخرج تلفزي أو سينمائي\",\"مخرج عرض الهواء في السيرك\",\"مخرج مساعد (الفنون السمعية البصرية)\",\"مخرج مساعد (الفنون المسرحية)\",\"مخرج مسرحي\",\"مدون الحروف الموسيقية (النوتة)\",\"مدير الفنانين\",\"مدير التصوير\",\"مدير فني\",\"مردد\",\"مرشد سياحي\",\"مزين فني (مكياج)\",\"مساعد تقني فني\",\"مساعد منفذ الديكور\",\"مصدر الأصوات\",\"مصمم الأعمال الفنية التفاعلية\",\"مصمم الرسوم ( غرافيك)\",\"مصمم الرسوم المتحركة\",\"مصمم المناظر (الديكور )\",\"مصمم الأزياء\",\"مصمم الصورة والحركة\",\"مصمم الملابس الفنية\",\"مصمم رقصات\",\"مصمم صور متعددة الأبعاد\",\"مصمم معلوماتي للرسوم (أنفوغرافيست )\",\"مصور بالكاميرا\",\"مصور فني\",\"مغني/مؤدي\",\"مقلد\",\"مكلف بالاتصال والعلاقات العامة في المجال الفني\",\"مكلف بالأكسسوار\",\"ملبس الفنانين\",\"ملحن\",\"ممثل\",\"مناولة البضائع\",\"منتج\",\"مندوب المعارض الفنية\",\"منشط فني\",\"منشط موسيقي( ديجي)\",\"منظم الجوالات الفنية\",\"مهندس الاضاءة\",\"مهندس الصوت\",\"موزع موسيقي\",\"موضب الصوت والصورة ( مونطاج)\",\"مؤلف\",\"مؤلف درامي\",\"نحات\",\"نسخ التسجيلات\",\"نسخ وإعداد الوثائق وأنشطة أخرى مختصة في دعم المكاتب\",\"نقل البضائع عبر الطرق\",\"وسيط فني\",\"وكيل الفنان\"]");
+
+/***/ }),
+
 /***/ "./public/data/json/list-moroccan-cities.json":
 /*!****************************************************!*\
   !*** ./public/data/json/list-moroccan-cities.json ***!
@@ -72424,6 +73711,9 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('account-settings', __webpack_require__(/*! ./components/user/account-settings.vue */ "./resources/js/components/user/account-settings.vue")["default"]);
 Vue.component('public-profile-edit', __webpack_require__(/*! ./components/user/public-profile-edit.vue */ "./resources/js/components/user/public-profile-edit.vue")["default"]);
 Vue.component('request-verification', __webpack_require__(/*! ./components/user/request-verification.vue */ "./resources/js/components/user/request-verification.vue")["default"]);
+Vue.component('request-ae-account', __webpack_require__(/*! ./components/user/request-ae-account.vue */ "./resources/js/components/user/request-ae-account.vue")["default"]);
+/*request-ae-account*/
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -72960,6 +74250,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_public_profile_edit_vue_vue_type_template_id_5f54a499___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_public_profile_edit_vue_vue_type_template_id_5f54a499___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/user/request-ae-account.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/user/request-ae-account.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _request_ae_account_vue_vue_type_template_id_34d348cb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./request-ae-account.vue?vue&type=template&id=34d348cb& */ "./resources/js/components/user/request-ae-account.vue?vue&type=template&id=34d348cb&");
+/* harmony import */ var _request_ae_account_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./request-ae-account.vue?vue&type=script&lang=js& */ "./resources/js/components/user/request-ae-account.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _request_ae_account_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _request_ae_account_vue_vue_type_template_id_34d348cb___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _request_ae_account_vue_vue_type_template_id_34d348cb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/user/request-ae-account.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/request-ae-account.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/user/request-ae-account.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_request_ae_account_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./request-ae-account.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/request-ae-account.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_request_ae_account_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/user/request-ae-account.vue?vue&type=template&id=34d348cb&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/user/request-ae-account.vue?vue&type=template&id=34d348cb& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_request_ae_account_vue_vue_type_template_id_34d348cb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./request-ae-account.vue?vue&type=template&id=34d348cb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/request-ae-account.vue?vue&type=template&id=34d348cb&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_request_ae_account_vue_vue_type_template_id_34d348cb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_request_ae_account_vue_vue_type_template_id_34d348cb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -1,84 +1,174 @@
 <template>
   <div>
-    <div
-      v-if="success == true"
-      class="row row-cols-1 mx-auto text-center mt-5 mb-3"
-    >
-      <div class="col w-100">
-        <div class="icon-large-top">
-          <img style="max-width: 100px" src="/img/icons/pending.png" alt="" />
+    <div class="alert primary-brand-alert">
+      <div class="row mx-auto align-items-center">
+        <div class="col align-middle">
+          <p>خطوات بسيطة لكي تنظم الى أكبر شبكة مقاولين ذاتيين بالمغرب</p>
         </div>
-      </div>
-      <div class="col w-100 mt-3">
-        <p class="text-icon">
-          طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من مراجعة طلبك
-        </p>
+        <div class="col-auto">
+          <button
+            type="button"
+            class="btn btn-outline-light"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            كيفية الانضمام
+          </button>
+        </div>
       </div>
     </div>
+    <form id="loadform_4" @submit.prevent>
+      <div class="row">
+        <div class="col-sm">
+          <div class="mb-3">
+            <label for="username" class="form-label">
+              رقم بطاقة الهوية (CIN)</label
+            >
+            <input
+              type="text"
+              v-model="cin"
+              class="form-control"
+              v-bind:class="{ 'is-invalid': errors.errors.cin }"
+            />
+        <div class="invalid-feedback" v-if="errors.errors.cin">
+          {{ errors.errors.cin[0] }}
+        </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="mb-3">
+            <label class="form-label">تاريخ انتهاء الصلاحية</label>
+            <input
+              type="date"
+              class="form-control"
+              v-model="cin_date_expiration"
+              v-bind:class="{ 'is-invalid': errors.errors.cin_date_expiration }"
+            />
+        <div class="invalid-feedback" v-if="errors.errors.cin_date_expiration">
+          {{ errors.errors.cin_date_expiration[0] }}
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <div class="mb-3">
+            <label for="username" class="form-label">
+              الرقم التعريفي للمقاول الذاتي</label
+            >
+            <input
+              maxlength="20"
+              type="text"
+              v-model="ae_number"
+              class="form-control"
+              v-bind:class="{ 'is-invalid': errors.errors.ae_number }"
+            />
+        <div class="invalid-feedback" v-if="errors.errors.ae_number">
+          {{ errors.errors.ae_number[0] }}
+        </div>
+     </div>
+        </div>
+        <div class="col-sm">
+          <div class="mb-3">
+            <label class="form-label">تاريخ الانخراط</label>
+            <input
+              type="date"
+              class="form-control"
+              v-model="join_date"
+              v-bind:class="{ 'is-invalid': errors.errors.join_date }"
+            />
+        <div class="invalid-feedback" v-if="errors.errors.join_date">
+          {{ errors.errors.join_date[0] }}
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <div class="mb-3">
+            <label for="username" class="form-label">القطاع</label>
+            <select
+              v-model="sector"
+              @change="SectorChange"
+              v-bind:class="{ 'is-invalid': errors.errors.sector }"
+              class="form-select"
+            >
+              <option value="">اختر</option>
+              <option value="1">الخدمات</option>
+              <option value="2">التجارة</option>
+              <option value="3">الصناعة</option>
+              <option value="4">الحرفية</option>
+            </select>
+        <div class="invalid-feedback" v-if="errors.errors.sector">
+          {{ errors.errors.sector[0] }}
+        </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="mb-3">
+            <label class="form-label">النشاط</label>
 
-    <form v-else class="mt-3" @submit.prevent>
-      <div id="loadform_3"></div>
-
+            <vs-select
+              multiple
+              max-selected="3"
+              width="100%"
+              autocomplete
+              class="selectExample"
+              v-model="activite_selected"
+            >
+              <vs-select-item
+                :key="index"
+                :value="index"
+                :text="item"
+                v-for="(item, index) in Activites"
+              />
+            </vs-select>
+        <div class="invalid-feedback" style="display:block!important" v-if="errors.errors.activite">
+          {{ errors.errors.activite[0] }}
+        </div>           
+         <div class="form-text">يمكنك تحديد حتى 3 نشاطات</div>
+          </div>
+        </div>
+      </div>
       <div class="mb-3">
-        <label for="username" class="form-label">نوع وثيقة التعريف</label>
-        <select
-          @change="file_type_change"
-          name="file_type"
-          v-model="file_type"
-          id="file_type"
-          class="form-select"
-          v-bind:class="{ 'is-invalid': errors.errors.document_type }"
-        >
-          <option value="">اختيار</option>
-          <option value="1">بطاقة الهوية</option>
-          <option value="2">جواز السفر</option>
-          <option value="3">بطاقة الاقامة</option>
-        </select>
-        <div class="invalid-feedback" v-if="errors.errors.document_type">
-          {{ errors.errors.document_type[0] }}
-        </div>
-      </div>
-      <div class="mb-3" v-if="file_type_name != '' && file_type_name != null">
-        <label class="form-label">تاريخ انتهاء الصلاحية</label>
-        <input
-          type="date"
-          class="form-control"
-          v-bind:class="{ 'is-invalid': errors.errors.expiration_date }"
-          v-model="expiration_date"
-        />
-
-        <div class="invalid-feedback" v-if="errors.errors.expiration_date">
-          {{ errors.errors.expiration_date[0] }}
-        </div>
-      </div>
-      <div class="mb-3" v-if="file_type_name != '' && file_type_name != null">
-        <label for="document_id" class="form-label"
-          >رقم {{ file_type_name }}</label
-        >
+        <label class="form-label" for="job_title">المسمى الوظيفي</label>
         <input
           type="text"
           class="form-control"
-          id="document_id"
-          v-model="document_id"
-          v-bind:class="{ 'is-invalid': errors.errors.document_id }"
+          id="job_title"
+          v-model="job_title"
+          v-bind:class="{ 'is-invalid': errors.errors.job_title }"
         />
-        <div class="invalid-feedback" v-if="errors.errors.document_id">
-          {{ errors.errors.document_id[0] }}
+        <div class="invalid-feedback" style="display:block!important" v-if="errors.errors.job_title">
+          {{ errors.errors.job_title[0] }}
+        </div>     
+        <div class="form-text">
+          أدخل مسمى وظيفي واحد لتظهر بنتائج البحث. مثال: مهندس معماري, نجار,
+          صباغ...
         </div>
       </div>
 
-      <div class="col w-100">
-        <div
-          class="mb-3"
-          v-bind:hidden="file_type_name == '' || file_type_name == null"
-        >
-          <label for="time" class="form-label">  تحميل الوثائق <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="يجب أن تقوم بتحميل صورة واضحة للوثيقة التي اخترت أن تقوم بتوثيق حسابك بواسطتها (في حال اخترت بطاقة الهوية أو بطاقة الاقامة بجب تقديم صورة من الخلف وصورة من الوراء)"></i></label>
+      <div class="w-100">
+        <div class="mb-3">
+          <label for="time" class="form-label">
+            تحميل الوثائق
+            <i
+              class="fas fa-info-circle"
+              data-bs-toggle="tooltip"
+              title="من أجل تفعيل حسابك يلزمك رفع صورة لبطاقة الهوية الخاصة بك سارية المفعول من الأمام والخلف وكذلك تحميل صورة لبطاقة المقاول الذاتي سارية المفعول أو شهادة الانخراط في سجل المقاول الذاتي"
+            ></i
+          ></label>
+          <div class="form-text mb-3">
+            من أجل تفعيل حسابك يلزمك رفع صورة لبطاقة الهوية الخاصة بك سارية
+            المفعول من الأمام والخلف وكذلك تحميل صورة لبطاقة المقاول الذاتي
+            سارية المفعول أو شهادة الانخراط في سجل المقاول الذاتي.
+          </div>
           <div
             class="alert alert-danger"
-            role="alert"
             v-if="errors.errors.document_file"
+            role="alert"
           >
-            {{ errors.errors.document_file[0] }}
+          <p>{{errors.errors.document_file[0]}}</p>
           </div>
 
           <div
@@ -92,14 +182,12 @@
             class="upload-files-form"
             data-target="files-include"
             data-types="['png','jpg']"
-            @click="ChosseFiles"
             @drop="dropfiles"
           >
             <input
               type="file"
               id="files-include"
               @change="files_selected"
-              class="documents_inp"
               name="files[]"
               multiple
               hidden
@@ -170,12 +258,35 @@
           </div>
         </div>
       </div>
-      <div id="fine-uploader-gallery"></div>
-
+      <div class="mb-3 mt-5 position-relative">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="true"
+            v-bind:class="{ 'is-invalid': errors.errors.terms }"
+            v-model="terms"
+            id="terms"
+          />
+          <label class="form-check-label terms-text" for="terms">
+            أقر بأن المعلومات التي قمت بادخالها والوثائق التي قمت بتحميلها صحيحة
+            وخاصة بي وكما أقر بأني أعلم انه انتحال شخصية شخص أخر يعاقب عليها
+            القانون الجنائي
+          </label>
+          <br />
+          <div
+            class="invalid-feedback mt-2"
+            style="display: block !important"
+            v-if="errors.errors.terms"
+          >
+            {{ errors.errors.terms[0] }}
+          </div>
+        </div>
+      </div>
       <div class="mt-5">
         <button
           style="margin-right: 0 !important"
-          id="btn_submit_3"
+          id="btn_submit_4"
           type="submit"
           class="btn btn-primary"
           @click="SendRequest"
@@ -187,6 +298,8 @@
   </div>
 </template>
 <script>
+import Activites1 from "../../../../public/data/json/activite-ae-1.json";
+import Activites2 from "../../../../public/data/json/activite-ae-2.json";
 class Errors {
   constructor() {
     this.errors = {};
@@ -200,22 +313,21 @@ class Errors {
     this.errors = errors.errors;
   }
 }
-
 export default {
-  props: ["userinfos"],
   data() {
     return {
       errors: new Errors(),
-      file_type: "",
-      file_type_name: "",
-      document_id: "",
-      username: this.userinfos.username,
-      description: this.userinfos.description,
-      type: this.userinfos.type,
+      Activites: [],
+      activite_selected: [],
+      sector: 0,
       filesSelected: [],
-      expiration_date: null,
-      success: false,
-      status: ["في انتظار", "جاري التحميل", "تم التحميل", "فشل التحميل"],
+      terms: false,
+      cin: "",
+      cin_date_expiration: null,
+      ae_number: "",
+      join_date: null,
+      job_title: "",
+
       sizefile: function bytesToSize(bytes) {
         var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
         if (bytes == 0) return "0 Byte";
@@ -238,18 +350,24 @@ export default {
     };
   },
   methods: {
-    ChosseFiles: function(){
-$('.documents_inp').click()
+    SectorChange: function () {
+      if (this.sector == 1) {
+        this.Activites = Activites2;
+      } else if (this.sector == 2 || this.sector == 3 || this.sector == 4) {
+        this.Activites = Activites1;
+      } else {
+        this.Activites = [];
+        this.activite_selected = [];
+      }
     },
     removefile: function (index) {
       this.filesSelected.splice(index, 1);
     },
-    dropfiles: function(e){
-   $("#files-include").prop("files", e.dataTransfer.files);
+    dropfiles: function (e) {
+      $("#files-include").prop("files", e.dataTransfer.files);
       const file = e.dataTransfer.files;
       let count = file.length;
-         for (var i = 0; count > i; i++) {
-
+      for (var i = 0; count > i; i++) {
         if (file[i].size > 1024 * 1024) {
           this.$vs.notify({
             text: " هذا الملف أكبر من اللازم الحد الأقصى (1 MB) *",
@@ -257,10 +375,10 @@ $('.documents_inp').click()
             position: "top-right",
             icon: "error",
           });
-        } else if (this.filesSelected.length >= 2) {
+        } else if (this.filesSelected.length >= 3) {
           this.$vs.notify({
-            title: "مسموح فقط بملفين",
-            text: "الحد الأقصى للملفات المسموح برفعها 2 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
+            title: "مسموح فقط بي 3 ملفات",
+            text: "الحد الأقصى للملفات المسموح برفعها 3 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
             color: "danger",
             position: "top-right",
             icon: "error",
@@ -281,20 +399,11 @@ $('.documents_inp').click()
           this.filesSelected.push([file[i], 0, 0]);
         }
       }
-  
     },
     files_selected: function (e) {
       const file = e.target.files;
       let count = file.length;
       for (var i = 0; count > i; i++) {
-        /**
-         * File Parameters(file,status,progressbar)
-         * File Status
-         * 0 = في انتظار
-         * 1 = جاري التحميل
-         * 2 = تم التحميل
-         * 3 = فشل التحميل
-         *  */
         if (file[i].size > 1024 * 1024) {
           this.$vs.notify({
             text: " هذا الملف أكبر من اللازم الحد الأقصى (1 MB) *",
@@ -302,10 +411,10 @@ $('.documents_inp').click()
             position: "top-right",
             icon: "error",
           });
-        } else if (this.filesSelected.length >= 2) {
+        } else if (this.filesSelected.length >= 3) {
           this.$vs.notify({
-            title: "مسموح فقط بملفين",
-            text: "الحد الأقصى للملفات المسموح برفعها 2 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
+            title: "مسموح فقط بي 3 ملفات",
+            text: "الحد الأقصى للملفات المسموح برفعها 3 اذا كنت تود تغيير الملفات المرجو حذف الملفات الموجودة حاليا *",
             color: "danger",
             position: "top-right",
             icon: "error",
@@ -327,35 +436,24 @@ $('.documents_inp').click()
         }
       }
     },
-    file_type_change: function () {
-      if (this.file_type == 1) {
-        this.file_type_name = "بطاقة الهوية";
-      } else if (this.file_type == 2) {
-        this.file_type_name = " جواز السفر";
-      } else if (this.file_type == 3) {
-        this.file_type_name = " بطاقة الاقامة";
-      } else {
-        this.file_type_name = "";
-      }
-    },
     openLoadingInDiv: function () {
-      $("#btn_submit_3").html(
+      $("#btn_submit_4").html(
         '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...'
       );
       this.$vs.loading({
-        container: "#loadform_3",
+        container: "#loadform_4",
         scale: 0.6,
         color: "#f96a0c",
       });
     },
     HideLoadingInDiv: function () {
-      $("#btn_submit_3").html("ارسال");
-      this.$vs.loading.close("#loadform_3 > .con-vs-loading");
+      $("#btn_submit_4").html("ارسال");
+      this.$vs.loading.close("#loadform_4 > .con-vs-loading");
     },
     SendRequest: function () {
       this.openLoadingInDiv();
       var config = {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data; charset=utf-8" },
       };
 
       let data = new FormData();
@@ -366,12 +464,18 @@ $('.documents_inp').click()
       } else {
         data.append("document_file[0]", null);
       }
-      data.append("expiration_date", this.expiration_date);
-      data.append("document_type", this.file_type);
-      data.append("document_id", this.document_id);
+      data.append("cin", this.cin);
+      data.append("cin_date_expiration", this.cin_date_expiration);
+      data.append("ae_number", this.ae_number);
+      data.append("join_date", this.join_date);
+      data.append("sector", this.sector);
+      data.append("activite", this.activite_selected);
+      data.append("job_title", this.job_title);
+      data.append("terms", this.terms);
+      /*Send Data To Server */
 
       axios
-        .post("/ajax/user/request/verification", data, config)
+        .post("/ajax/user/request/aeaccount", data, config)
         .then((response) => {
           this.HideLoadingInDiv();
           this.errors = new Errors();
@@ -416,6 +520,7 @@ $('.documents_inp').click()
             });
           }
         });
+      /* Send Data To Server */
     },
   },
 };
