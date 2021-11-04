@@ -24,7 +24,8 @@ class CreateAeAccountsTable extends Migration
             $table->string('activite', 150);
             $table->string('job_title', 50);
             $table->json('files');
-            $table->integer('status'); /* 0 = pending | 1 = Activited | 2 = rejected | 3 = permanently rejected */
+            $table->integer('status'); /* 1 = pending | 2 = Activited | 3 = rejected | 4 = permanently rejected */
+            $table->string("message", 250)->nullable();
             $table->timestamps();
         });
     }

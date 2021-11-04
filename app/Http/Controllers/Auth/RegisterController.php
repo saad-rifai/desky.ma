@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use \Swift_SmtpTransport;
 use Swift_Mailer;
 use Illuminate\Support\Str;
@@ -55,7 +56,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-  /*  protected function validator(array $data)
+    /*  protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -76,7 +77,8 @@ class RegisterController extends Controller
 
 
 
-    public function RegisterUser(Request $request){
+    public function RegisterUser(Request $request)
+    {
 
         //Validate User Data
 
@@ -85,7 +87,7 @@ class RegisterController extends Controller
             [
                 'User__fname' => 'required|min:3|max:11|regex:/^[\p{L} ]+$/u',
                 'User__lname' => 'required|min:3|max:11|regex:/^[\p{L} ]+$/u',
-                'User__email' =>'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:100|unique:users,email',
+                'User__email' => 'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:100|unique:users,email',
                 'User__phone' => 'required|regex:/[0-9]{9}/|unique:users,phone_number|max:10',
                 'User__cities' => 'required|max:5|regex:/^[\p{L} 0-9]+$/u',
                 'User__gender' => 'required|integer|max:2|min:1',
@@ -116,11 +118,11 @@ class RegisterController extends Controller
                 'User__email.unique' => 'هذا البريد الالكتروني مسجل من قبل  *',
                 'User__email.email' => ' يرجى ادخال بريد الكتروني صالح *',
 
-              
+
                 'User__phone.unique' => 'رقم الهاتف الذي ادخلته مسجل من قبل *',
                 'User__phone.regex' => 'يرجى ادخال رقم هاتف صالح مثال: (0601020304) *',
                 'User__phone.max' => 'رقم الهاتف الذي ادخلته أطول من اللازم يجب أن يتكون من 10 أرقام مثال: (0601020304) *',
-            
+
                 'User__cities.regex' => ' يرجى تحديد المدينة *',
                 'User__cities.max' => ' يرجى تحديد المدينة *',
 
@@ -134,7 +136,7 @@ class RegisterController extends Controller
 
                 'User__password.min' => ' يجب أن تتكون كلمة السر من 8 أحرف على الأقل *',
                 'User__password.max' => ' كلمة السر أطول من اللازم *',
-                ]
+            ]
 
         );
 
@@ -147,34 +149,10 @@ class RegisterController extends Controller
                 $resultcheck = true;
             }
         }
-        if($resultcheck == true){
+        if ($resultcheck == true) {
             $AccountNumber = random_int(100000, 9999999999);
             $verifiy_token = Str::random(25);
-           $stmt = User::create([
-               'frist_name' => $request->User__fname,
-               'last_name' => $request->User__lname,
-               'phone_number' => $request->User__phone,
-               'email' => $request->User__email,
-               'country' => 'MA',
-               'city' => $request->User__cities,
-               'gender' => $request->User__gender,
-               'type' => $request->User__type,
-               'avatar' => NULL,
-               'description	' => NULL,
-               'sector' => NULL,
-               'activity' => NULL,
-               'status' => 0,
-               'source' => 'REGISTER__FORM',
-               'password' => Hash::make($request->User__password),
-               'MAC_Address' => exec('getmac'),
-               'IP_Address' => $request->ip(),
-               'Account_number' => $AccountNumber,
-               'verifiy_token' => $verifiy_token,
-               'username' => $request->User__lname.'_'.$AccountNumber
-
-           ]);
-           if($stmt){
-            if (Auth::attempt([
+            $stmt = User::create([
                 'frist_name' => $request->User__fname,
                 'last_name' => $request->User__lname,
                 'phone_number' => $request->User__phone,
@@ -184,91 +162,116 @@ class RegisterController extends Controller
                 'gender' => $request->User__gender,
                 'type' => $request->User__type,
                 'avatar' => NULL,
+                'description	' => NULL,
                 'sector' => NULL,
                 'activity' => NULL,
                 'status' => 0,
+                'source' => 'REGISTER__FORM',
+                'password' => Hash::make($request->User__password),
+                'MAC_Address' => exec('getmac'),
+                'IP_Address' => $request->ip(),
                 'Account_number' => $AccountNumber,
-                'password' => $request->User__password,
-                'username' => $request->User__lname.'-'.$AccountNumber
+                'verifiy_token' => $verifiy_token,
+                'username' => $request->User__lname . '_' . $AccountNumber
 
+            ]);
+            if ($stmt) {
+
+                if (Auth::attempt([
+                    'email' => $request->User__email,
+                    'password' => $request->User__password,
 
                 ])) {
-                                      // Setup your gmail mailer
-                  $backup = Mail::getSwiftMailer();
+                    ignore_user_abort(true);
 
-                  $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
-                  $transport->setUsername('noreply@desky.ma');
-                  $transport->setPassword('Yg(H2)&48k!?');
-                  $gmail = new Swift_Mailer($transport);
+                    ob_start();
+                 //   echo response()->json(['s_token' => Session::getId()], 200);
+                    $serverProtocole = filter_input(
+                        INPUT_SERVER,
+                        'SERVER_PROTOCOL',
+                        FILTER_SANITIZE_STRING
+                    );
+                    header('Content-Type: application/json; charset=utf-8');
+                    header('s_token: '.Session::getId());
+                    header($serverProtocole . ' 200 OK');
+                    header('Content-Encoding: none');
+                    header('Content-Length: ' . ob_get_length());
+                    header('Connection: close');
+
+                    ob_end_flush();
+                    ob_flush();
+                    flush();
+                    // Setup your gmail mailer
+                    $backup = Mail::getSwiftMailer();
+
+                    $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
+                    $transport->setUsername('noreply@desky.ma');
+                    $transport->setPassword('Yg(H2)&48k!?');
+                    $gmail = new Swift_Mailer($transport);
 
 
-                  // Set the mailer as gmail
-                  Mail::setSwiftMailer($gmail);
-                  $valueArray2 = [
-                      'token' => $verifiy_token,
-                      'fullname' => $request->User__fname.' '.$request->User__lname,
-                      'AccountNumber' => $AccountNumber
+                    // Set the mailer as gmail
+                    Mail::setSwiftMailer($gmail);
+                    $valueArray2 = [
+                        'token' => $verifiy_token,
+                        'fullname' => $request->User__fname . ' ' . $request->User__lname,
+                        'AccountNumber' => $AccountNumber
 
-                  ];
+                    ];
 
-                  try {
-                      Mail::to($request->User__email)->send(new VerifiyEmail($valueArray2));
-                  } catch (\Exception $e) {
-                      //return 'Error - ' . $e;
-                   //   return response()->json(['Mail Filed !'], 500);
+                    try {
+                        Mail::to($request->User__email)->send(new VerifiyEmail($valueArray2));
+                    } catch (\Exception $e) {
+                        //return 'Error - ' . $e;
+                        //   return response()->json(['Mail Filed !'], 500);
 
-                  }
+                    }
 
 
                     return response()->json(['AccountCreated'], 200);
+                } else {
+                    return response()->json(['AccountCreated'], 500);
 
-            }else{
-                return response()->json(['حصل خطأ اثناء محاولة انشاء الحساب يرجى اعادة المحاولة (ERR:101027)'], 500);
- 
+                }
+            } else {
+                return response()->json(['حصل خطأ اثناء محاولة انشاء الحساب يرجى اعادة المحاولة (ERR:101031)'], 500);
             }
-           }else{
-            return response()->json(['حصل خطأ اثناء محاولة انشاء الحساب يرجى اعادة المحاولة (ERR:101031)'], 500);
-
-           }
-        }else{
+        } else {
             return response()->json(['errors' => ['User__cities' => [0 => 'يرجى اختيار مدينة صالحة']]], 422);
-
         }
-      // return response()->json(['errors' => ['password' => 'eroor']], 500);
-   //   return response()->json($request);
+        // return response()->json(['errors' => ['password' => 'eroor']], 500);
+        //   return response()->json($request);
     }
-    public function RequesFacebook(){
+    public function RequesFacebook()
+    {
         return Socialite::driver('facebook')->redirect();
-
     }
     public function handleProviderCallback__Facebook()
     {
         $user = Socialite::driver('facebook')->user();
 
-       if(isset($user->id)){
-           dd($user);
-       }else{
-           return 'Auth False !';
-       }
+        if (isset($user->id)) {
+            dd($user);
+        } else {
+            return 'Auth False !';
+        }
     }
 
 
 
 
-    public function RequesGoogle(){
+    public function RequesGoogle()
+    {
         return Socialite::driver('google')->redirect();
-
     }
     public function handleProviderCallback__Google()
     {
         $user = Socialite::driver('google')->user();
 
-       if(isset($user->id)){
-           dd($user);
-       }else{
-           return 'Auth False !';
-       }
+        if (isset($user->id)) {
+            dd($user);
+        } else {
+            return 'Auth False !';
+        }
     }
-
-
 }

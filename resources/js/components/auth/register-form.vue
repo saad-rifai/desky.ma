@@ -124,7 +124,7 @@
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
-            id="gender"
+            id="gender1"
             type="radio"
             name="gender1"
             v-bind:class="{ 'is-invalid': errors.errors.User__gender }"
@@ -339,7 +339,7 @@ export default {
         .post("ajax/new/user", data)
         .then((response) => {
           this.errors = new Errors();
-          this.apiresponse = response;
+          this.apiresponse = response.headers;
           this.$vs.notify({
             title: "تم انشاء حسابك !",
             text: "تم انشاء حسابك بنجاح سيتم تحويلك الأن",
@@ -347,7 +347,8 @@ export default {
             fixed: true,
             icon: "check",
           });
-        window.location.reload();
+        window.location.replace("/login?s_token="+this.apiresponse.s_token);
+     //  window.location.reload();
           this.HideLoadingInDiv();
         })
         .catch((error) => {

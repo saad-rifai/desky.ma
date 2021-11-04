@@ -70,7 +70,7 @@
 
             <div class="row text-center ">
                 <div dir="rtl" class="col-sm mb-5">
-                    <div class="card">
+                    <div class="card hover_card">
                         <div class="card-body">
                             <img src="img/icons/291-coin-dollar-outline.png" class="icon-card" alt="desky.ma">
                             <h2 class="title-icon">
@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-sm mb-5">
-                    <div class="card">
+                    <div class="card hover_card">
                         <div class="card-body">
                             <img src="img/icons/457-shield-security-outline.png" class="icon-card" alt="desky.ma">
                             <h2 class="title-icon">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-sm mb-5">
-                    <div class="card">
+                    <div class="card hover_card">
                         <div class="card-body">
                             <img src="img/icons/1007-organization-outline.png" class="icon-card" alt="desky.ma">
                             <h2 class="title-icon">
@@ -116,7 +116,7 @@
 
             <div class="row text-center">
                 <div dir="rtl" class="col-sm mb-5">
-                    <div class="card">
+                    <div class="card hover_card">
                         <div class="card-body">
                             <img src="img/icons/682-male-customer-service-outline.png" class="icon-card"
                                 alt="desky.ma">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="col-sm mb-5">
-                    <div class="card">
+                    <div class="card hover_card">
                         <div class="card-body">
                             <img src="img/icons/456-handshake-deal-outline.png" class="icon-card" alt="desky.ma">
                             <h2 class="title-icon">
@@ -145,7 +145,7 @@
                     </div>
                 </div>
                 <div class="col-sm mb-5">
-                    <div class="card">
+                    <div class="card hover_card">
                         <div class="card-body">
                             <img src="img/icons/453-savings-pig-outline.png" class="icon-card" alt="desky.ma">
                             <h2 class="title-icon">

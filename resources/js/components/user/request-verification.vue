@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="success == true"
+      v-if="RequestStatus == true"
       class="row row-cols-1 mx-auto text-center mt-5 mb-3"
     >
       <div class="col w-100">
@@ -183,6 +183,7 @@
           ارسال
         </button>
       </div>
+
     </form>
   </div>
 </template>
@@ -214,7 +215,7 @@ export default {
       type: this.userinfos.type,
       filesSelected: [],
       expiration_date: null,
-      success: false,
+      RequestStatus: false,
       status: ["في انتظار", "جاري التحميل", "تم التحميل", "فشل التحميل"],
       sizefile: function bytesToSize(bytes) {
         var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
@@ -375,7 +376,7 @@ $('.documents_inp').click()
         .then((response) => {
           this.HideLoadingInDiv();
           this.errors = new Errors();
-          this.success = true;
+          this.RequestStatus = true;
           this.$vs.notify({
             title: "تم ارسال طلبك !",
             text: "سيتم اشعارك من خلال البريد الالكتروني بردنا بعد الانتهاء من مراجعة طلبك",

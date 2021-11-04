@@ -1,6 +1,22 @@
 <template>
   <div>
-    <div class="alert primary-brand-alert">
+    <div
+      v-if="RequestStatus == true"
+      class="row row-cols-1 mx-auto text-center mt-5 mb-3"
+    >
+      <div class="col w-100">
+        <div class="icon-large-top">
+          <img style="max-width: 100px" src="/img/icons/pending.png" alt="" />
+        </div>
+      </div>
+      <div class="col w-100 mt-3">
+        <p class="text-icon">
+          طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من مراجعة طلبك
+        </p>
+      </div>
+    </div>
+<div v-else>
+      <div class="alert primary-brand-alert">
       <div class="row mx-auto align-items-center">
         <div class="col align-middle">
           <p>خطوات بسيطة لكي تنظم الى أكبر شبكة مقاولين ذاتيين بالمغرب</p>
@@ -114,6 +130,7 @@
               width="100%"
               autocomplete
               class="selectExample"
+            v-bind:class="{ 'is-invalid': errors.errors.activite }"
               v-model="activite_selected"
             >
               <vs-select-item
@@ -294,7 +311,9 @@
           ارسال
         </button>
       </div>
+
     </form>
+</div>
   </div>
 </template>
 <script>
@@ -317,6 +336,7 @@ export default {
   data() {
     return {
       errors: new Errors(),
+      RequestStatus: false,
       Activites: [],
       activite_selected: [],
       sector: 0,
@@ -477,9 +497,9 @@ export default {
       axios
         .post("/ajax/user/request/aeaccount", data, config)
         .then((response) => {
+          this.RequestStatus = true;
           this.HideLoadingInDiv();
           this.errors = new Errors();
-          this.success = true;
           this.$vs.notify({
             title: "تم ارسال طلبك !",
             text: "سيتم اشعارك من خلال البريد الالكتروني بردنا بعد الانتهاء من مراجعة طلبك",

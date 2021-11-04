@@ -7,10 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ResetPassword extends Mailable
+class ResetPassword extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
-
+    public $content;
     /**
      * Create a new message instance.
      *

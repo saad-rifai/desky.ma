@@ -18,82 +18,48 @@
     </div>
     <!-- Modal Info  -->
 
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content" dir="rtl">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">
-           كيفية تقديم طلب الحصول على حساب مقاول ذاتي ؟
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body position-relative">
-            <!-- Video -->
-            <div
-              class="wistia_responsive_padding"
-              style="padding: 56.25% 0 0 0; position: relative"
-            >
-              <div
-                class="wistia_responsive_wrapper"
-                style="
-                  height: 100%;
-                  left: 0;
-                  position: absolute;
-                  top: 0;
-                  width: 100%;
-                "
-              >
-                <iframe
-                  src="https://fast.wistia.net/embed/iframe/n1ik6rxzxh?videoFoam=true"
-                  title=" [Example Video] Wistia Video Essentials"
-                  allow="autoplay; fullscreen"
-                  allowtransparency="true"
-                  frameborder="0"
-                  scrolling="no"
-                  class="wistia_embed"
-                  name="wistia_embed"
-                  allowfullscreen
-                  msallowfullscreen
-                  width="100%"
-                  height="100%"
-                ></iframe>
-              </div>
-            </div>
-            <script
-              src="https://fast.wistia.net/assets/external/E-v1.js"
-              async
-            ></script>
+    <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" dir="rtl">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                        كيفية تقديم طلب الحصول على حساب مقاول ذاتي ؟
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body position-relative">
+                    <!-- Video -->
+                    <div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative">
+                        <div class="wistia_responsive_wrapper" style="
+                                      height: 100%;
+                                      left: 0;
+                                      position: absolute;
+                                      top: 0;
+                                      width: 100%;
+                                    ">
+                            <iframe src="https://fast.wistia.net/embed/iframe/n1ik6rxzxh?videoFoam=true"
+                                title=" [Example Video] Wistia Video Essentials" allow="autoplay; fullscreen"
+                                allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed"
+                                name="wistia_embed" allowfullscreen msallowfullscreen width="100%" height="100%"></iframe>
+                        </div>
+                    </div>
+                    <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
 
-            <!-- Video -->
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-dismiss="modal"
-            >
-              فهمت
-            </button>
-          </div>
+                    <!-- Video -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        فهمت
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Modal Info  -->
     <div id="app">
-        
+
         <div class="container">
             <div class="row mt-4" dir="rtl">
                 <div class="col-sm col-lg-4">
@@ -152,7 +118,62 @@
                             </div>
                             <div class="tab-pane fade" id="ae_account" role="tabpanel"
                                 aria-labelledby="list-messages-list">
-                                <request-ae-account></request-ae-account>
+                                <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> حساب المقاول الذاتي</h1>
+                                <br>
+                                @if (request()->request_ae_account == null || request()->request_ae_account == 3)
+                                    @if (request()->request_ae_account == 3)
+                                        <div role="alert" class="alert alert-warning">
+                                            {{ request()->request_ae_account_error }}
+                                        </div>
+                                    @endif
+                                    <request-ae-account></request-ae-account>
+
+                                @else
+                                    @if (request()->request_ae_account == 2)
+
+                                        <div class="row row-cols-1 mx-auto text-center mt-3 mb-3">
+                                            <div class="col w-100">
+                                                <div class="icon-large-top">
+                                                    <img src="{{ asset('img/icons/man-ceck.png') }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col w-100 mt-3">
+                                                <p class="text-icon">تم تفعيل حساب المقاول الذاتي</p>
+                                            </div>
+                                        </div>
+
+                                    @endif
+                                    @if (request()->request_ae_account == 1)
+                                        <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
+                                            <div class="col w-100">
+                                                <div class="icon-large-top">
+                                                    <img style="max-width: 100px"
+                                                        src="{{ asset('img/icons/pending.png') }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col w-100 mt-3">
+                                                <p class="text-icon">طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من
+                                                    مراجعة طلبك</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if (request()->request_ae_account == 4)
+                                        <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
+                                            <div class="col w-100">
+                                                <div class="icon-large-top">
+                                                    <img src="{{ asset('img/icons/forbidden.png') }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col w-100 mt-3">
+                                                <p class="text-icon">تم حظرك نهائيا من ارسال طلب تفعيل حساب المقاول
+                                                    الذاتي</p>
+                                            </div>
+                                        </div>
+
+
+                                    @endif
+                                @endif
+
                             </div>
                             <div class="tab-pane fade" id="documentation_center" role="tabpanel"
                                 aria-labelledby="list-settings-list">

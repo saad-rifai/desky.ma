@@ -32,11 +32,17 @@ Vue.component('update-password', require('./components/auth/update-password.vue'
 Vue.component('login-form', require('./components/auth/login-form.vue').default);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+/* User Section */
 Vue.component('account-settings', require('./components/user/account-settings.vue').default);
 Vue.component('public-profile-edit', require('./components/user/public-profile-edit.vue').default);
 Vue.component('request-verification', require('./components/user/request-verification.vue').default);
 Vue.component('request-ae-account', require('./components/user/request-ae-account.vue').default);
-/*request-ae-account*/
+
+/* Public Section */
+Vue.component('ae-list', require('./components/public/ae-list.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

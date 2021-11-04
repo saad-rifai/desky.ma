@@ -1,5 +1,44 @@
 <template>
   <div>
+    <!-- Modal dialog -->
+    <div
+      class="modal fade"
+      dir="rtl"
+      id="CeckSubmit"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">تنبيه !</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+    <p style="font-size:14px">        هل أنت متأكد من أنك تود اجراء تعديل على معلومات حسابك ؟ نظرا لان
+            حسابك موثق وفي حال قمت يتعديل معلوماتك سيتعين عليك القيام بطلب جديد
+            لتوثيق حسابك</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              الغاء
+            </button>
+            <button type="button" class="btn btn-primary" @click="UpdateAccount" data-bs-dismiss="modal">حفظ التغييرات</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal dialog -->
     <!-- Modal -->
     <!-- Button trigger modal -->
     <div class="centerx">
@@ -27,9 +66,9 @@
       </vs-popup>
     </div>
     <form @submit.prevent>
-              <div id="loadform_2"></div>
+      <div id="loadform_2"></div>
 
-      <div class="row row-cols-sm-2" >
+      <div class="row row-cols-sm-2">
         <div class="col w-100 mt-3 mb-3">
           <div class="row mr-auto ml-auto">
             <div class="col-auto mx-auto">
@@ -72,7 +111,14 @@
           </div>
         </div>
         <div class="col-sm w-100">
-          <div class="alert alert-warning" v-if="userinfos.verified_account != null && userinfos.verified_account != ''" role="alert">
+          <div
+            class="alert alert-warning"
+            v-if="
+              userinfos.verified_account != null &&
+              userinfos.verified_account != ''
+            "
+            role="alert"
+          >
             معلومات حسابك موثّقة، إذا قمت بتعديلها ستحتاج إلى إعادة التوثيق مرة
             أخرى.
           </div>
@@ -176,14 +222,20 @@
             </div>
           </div>
         </div>
-                <div class="col-sm">
+        <div class="col-sm">
           <div class="mb-3">
             <label class="form-label">تاريخ الازدياد</label>
-            <input type="date" class="form-control" 
-            v-bind:class="{ 'is-invalid': errors.errors.User__date_of_birth }"
-            v-model="User__date_of_birth">
+            <input
+              type="date"
+              class="form-control"
+              v-bind:class="{ 'is-invalid': errors.errors.User__date_of_birth }"
+              v-model="User__date_of_birth"
+            />
 
-            <div class="invalid-feedback" v-if="errors.errors.User__date_of_birth">
+            <div
+              class="invalid-feedback"
+              v-if="errors.errors.User__date_of_birth"
+            >
               {{ errors.errors.User__date_of_birth[0] }}
             </div>
           </div>
@@ -227,7 +279,11 @@
             >انثى</label
           >
         </div>
-        <div class="invalid-feedback" style="display:block!important;"  v-if="errors.errors.User__gender">
+        <div
+          class="invalid-feedback"
+          style="display: block !important"
+          v-if="errors.errors.User__gender"
+        >
           {{ errors.errors.User__gender[0] }}
         </div>
       </div>
@@ -236,9 +292,8 @@
         <button
           style="margin-right: 0 !important"
           id="btn_submit_2"
-          type="submit"
           class="btn btn-primary"
-          @click="UpdateAccount"
+          @click="openAlert"
         >
           حفظ
         </button>
@@ -271,6 +326,7 @@ export default {
       errors: new Errors(),
       citiesJson: ListCities,
       User__fname: this.userinfos.frist_name,
+      stat: this.userinfos.verified_account,
       User__lname: this.userinfos.last_name,
       User__email: this.userinfos.email,
       User__phone: this.userinfos.phone_number,
@@ -288,6 +344,16 @@ export default {
     change({ coordinates, canvas }) {
       console.log(coordinates, canvas);
     },
+    openAlert: function () {
+      if (this.stat > 0) {
+        var myModal = new bootstrap.Modal(
+          document.getElementById("CeckSubmit")
+        );
+        myModal.show();
+      } else {
+        this.UpdateAccount();
+      }
+    },
     onFileChange(e) {
       const file = e.target.files[0];
       if (file.size > 1024 * 1024) {
@@ -298,7 +364,11 @@ export default {
           position: "top-right",
           icon: "error",
         });
-      } else if (!file || (file.type != "image/jpg" && file.type != "image/jpeg" && file.type != "image/png")
+      } else if (
+        !file ||
+        (file.type != "image/jpg" &&
+          file.type != "image/jpeg" &&
+          file.type != "image/png")
       ) {
         e.preventDefault();
         this.$vs.notify({
@@ -371,7 +441,6 @@ export default {
         scale: 0.6,
         color: "#f96a0c",
       });
-
     },
     HideLoadingInDiv: function () {
       $("#btn_submit_2").html("حفظ");
@@ -386,9 +455,9 @@ export default {
       data.append("User__phone", this.User__phone);
       data.append("User__cities", this.User__cities);
       data.append("User__gender", this.User__gender);
- 
+
       data.append("User__date_of_birth", this.User__date_of_birth);
- 
+
       axios
         .post("/ajax/user/update/account", data)
         .then((response) => {

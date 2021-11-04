@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,7 @@ Route::prefix('ajax')->group(function () {
     Route::post('user/update/account', 'UserAccountController@UpdateAccount');
     Route::post('user/request/verification', 'DocumentationCenterController@RequestVerification');
     Route::post('user/request/aeaccount', 'AeAccountController@RequestAccount');
+    Route::post('public/request/aelist/all', 'AeAccountController@AelistAll');
 
 });
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
@@ -48,7 +51,7 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
 
     Route::get('/account/settings', function () {
         return view('user.settings');
-    })->middleware("request_verification");
+    })->middleware("request_verification", "request_ae_account");
 
 
     Route::get('/new/order', function () {
@@ -99,7 +102,17 @@ Route::group(['middleware' => 'avatar'], function () {
 
 Route::get('/login', function () {
 
-    return view('auth.login');
+    if(isset($_GET['s_token'])){
+        Session::setId($_GET['s_token']);
+        Session::start();
+      return  redirect('/dashboard?set_session.do&route');
+    }else{
+        return view('auth.login');
+
+    }
+
+    
+ 
 
 })->name('login')->middleware('guest');
 

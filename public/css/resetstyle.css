@@ -79,7 +79,19 @@ textarea {
     font-size: 14px !important;
     line-height: 2 !important;
 }
+button.btn:hover {
+    transition: ease 0.5s;
+    opacity: 0.8;
+    box-shadow: 0 0.5rem 1rem rgb(207 207 207) !important;
+}
 
+
+
+.card.hover_card:hover {
+    cursor: pointer;
+    margin-top: -10px;
+    box-shadow: 0 0.5rem 1rem rgb(207 207 207) !important;
+}
 .select2-container--default .select2-selection--single {
     border: solid 1px #ced4da !important;
     padding: 11px 15px !important;
@@ -126,6 +138,12 @@ a.nav-link.active {
     background-color: #f96a0c;
     color: white !important;
 }
+.is-invalid input {
+    border: solid 1px #dc3545 !important;
+    color: #dc3545 !important;
+}
+
+
 .input-select-validate-danger {
     border-color: rgba(var(--vs-danger),1) !important;
 }
