@@ -86,6 +86,12 @@ button.btn:hover {
 }
 
 
+.text-icon::after {
+    width: 17px !important;
+    height: 17px !important;
+    background-size: 17px 17px !important;
+    margin-bottom: -3px;
+}
 
 .card.hover_card:hover {
     cursor: pointer;

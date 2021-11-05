@@ -171,10 +171,10 @@
             </div>
           </form>
         </div>
-        <div class="col-sm">
-          <div class="box-left card p-4">
+        <div  class="col-sm ">
+          <div id="div-with-loading" class="box-left card p-4 vs-con-loading__container">
             <div
-              v-for="(item, index) in listdata"
+              v-for="(item, index ) in listdata"
               :key="index"
               class="box-article pb-3 mb-3"
             >
@@ -197,17 +197,29 @@
                       </div>
                       <div class="col-auto">
                         <div class="user-name-box-article">
-                          <h4 class="">
-                            {{ item.frist_name }} {{ item.last_name }}
-                            <span
-                              data-bs-toggle="tooltip"
-                              data-bs-placement="top"
-                              title="حساب مقاول ذاتي تم التحقق منه"
-                              style="margin-right: 0px !important"
-                              class="verified-icon verified-2 mt-2"
-                              dir="rtl"
-                            ></span>
-                          </h4>
+                          <div class="centerx">
+                            <vs-tooltip text="حساب مقاول ذاتي تم التحقق منه">
+                              <h4 class="">
+                                {{
+                                  item.frist_name[0].toUpperCase() +
+                                  item.frist_name.substring(1)
+                                }}
+                                {{
+                                  item.last_name[0].toUpperCase() +
+                                  item.last_name.substring(1)
+                                }}
+                                <span
+                                  style="margin-right: 0px !important"
+                                  class="
+                                    verified-icon verified-2
+                                    mt-2
+                                    text-icon
+                                  "
+                                  dir="rtl"
+                                ></span>
+                              </h4>
+                            </vs-tooltip>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -230,7 +242,8 @@
                         </div>
                         <div class="col-auto">
                           <div class="user-info-box-article">
-                            <i class="fas fa-briefcase"></i> {{item.job_title}}
+                            <i class="fas fa-briefcase"></i>
+                            {{ item.job_title }}
                           </div>
                         </div>
                       </div>
@@ -238,30 +251,36 @@
                   </div>
                   <div class="col-auto">
                     <div class="user-info-box-article">
-                      <i class="fas fa-map-marker-alt"></i> المغرب, {{citiesJson[item.city].ville}}
+                      <i class="fas fa-map-marker-alt"></i> المغرب,
+                      {{ citiesJson[item.city].ville }}
                     </div>
                   </div>
                 </div>
               </div>
               <div class="body-box-article mr-65">
-                <p class="box-article-description">
+                <p
+                  class="box-article-description"
+                  v-if="item.description != '' && item.description != null"
+                >
                   {{ item.description }}
                 </p>
+                <p class="box-article-description" v-else>لم يكتب نبذة شخصية</p>
               </div>
             </div>
           </div>
 
           <div class="show-more-section text-center mt-5">
             <button
-            v-if="Allresponse.next_page_url != null"
+              v-if="Allresponse.next_page_url != null"
               style="margin-right: 0 !important"
               type="button"
               class="btn btn-primary text-center"
+              @click="ShowMore"
             >
               مشاهدة المزيد
             </button>
-                        <button
-           v-else
+            <button
+              v-else
               style="margin-right: 0 !important"
               type="button"
               class="btn btn-primary text-center"
@@ -288,11 +307,49 @@ export default {
   },
 
   methods: {
+    openLoadingInDiv: function () {
+      this.$vs.loading({
+        container: "#div-with-loading",
+        scale: 0.6,
+        color: "#f96a0c",
+      });
+    },
+    HideLoadingInDiv: function () {
+      this.$vs.loading.close("#div-with-loading > .con-vs-loading");
+    },
     getData() {
       axios.post("/ajax/public/request/aelist/all").then((response) => {
         this.Allresponse = response.data;
         this.listdata = response.data.data;
       });
+    },
+    ShowMore() {
+      if (this.Allresponse.next_page_url != null) {
+        this.openLoadingInDiv();
+
+        axios
+          .post(
+            "/ajax/public/request/aelist/all?page=" +
+              (parseInt(this.Allresponse.current_page) + 1)
+          )
+          .then((response) => {
+            this.Allresponse = response.data;
+         /*   array1.forEach.call(element => {
+                  this.listdata.push(element);
+            });*/
+const entries = Object.values(this.Allresponse.data);
+
+
+
+            for (var i = 0; entries.length > i; i++) {
+              this.listdata.push(entries[i]);
+            }
+            this.HideLoadingInDiv();
+
+          });
+      } else {
+        console.log(null);
+      }
     },
   },
   created() {

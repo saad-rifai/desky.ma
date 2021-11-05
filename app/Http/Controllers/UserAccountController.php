@@ -51,7 +51,7 @@ class UserAccountController extends Controller
     {
         $this->validate($request, [
             'username' => 'required|min:6|max:25|regex:/^[a-z0-9][a-z0-9_.]*[a-z0-9]$/',
-            'description' => 'nullable|min:15|max:500|string',
+            'description' => 'nullable|min:15|max:700|string',
             'type' => 'required|integer|max:2|min:1',
         ], $message = [
             'required' => 'هذا الحقل مطلوب *',

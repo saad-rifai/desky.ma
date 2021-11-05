@@ -5,7 +5,7 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 $(document).ready(function() {
 
   $("[data-bs-toggle=tooltip]").tooltip();
-      })
+})
 document.addEventListener('DOMContentLoaded', function () {
 
   var mains = new Splide( '.splide', {

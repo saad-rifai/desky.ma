@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
 Route::get('api/OAuth/register/google/call', 'Auth\RegisterController@RequesGoogle')->name('google_register');
 Route::get('/backend/google/callback', 'Auth\RegisterController@handleProviderCallback__Google');
 
-
+Route::get('GeoLocationData', 'GeoLocationController@index');
 Route::get('api/OAuth/register/facebook/call', 'Auth\RegisterController@RequesFacebook')->name('facebook_register');
 Route::get('/backend/facebook/callback', 'Auth\RegisterController@handleProviderCallback__Facebook');
 

@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/resetstyle.css') }}">
     <!-- Scripts -->
+
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->

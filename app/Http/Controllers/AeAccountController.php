@@ -6,12 +6,96 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\AeAccount;
 use App\User;
+use App\UserRating;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use function GuzzleHttp\json_decode;
 
 class AeAccountController extends Controller
 {
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
+    public function RankingResultSample($Results){
+
+
+            $ResultRanking = [];
+            $ResultPoints = [];
+            $i=0;
+            $ratingaverage = [];
+
+        foreach($Results as $Result){
+        //   $rating = UserRating::all()->where('for', $Result->Account_number)->get('rating');
+           $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` ='."$Result->Account_number");
+
+           $ResultPoints[$i] = 0;
+           $ip = "196.112.138.192";
+
+           $areaCode = Cache::remember('GeoDataCache', $seconds=43200, function () use ($ip){
+
+            
+            $GeoData = \Location::get($ip);
+            if($GeoData != false && $GeoData != null){
+                $GeoDataF = intval($GeoData->areaCode);
+
+            }else{
+                $GeoDataF = null;
+            }
+            return $GeoDataF;
+        });
+            if($Result->avatar != null && $Result->avatar != ""){
+                $ResultPoints[$i]++;
+            }if($Result->description != null && $Result->avatar != ""){
+                $ResultPoints[$i]++;
+            }
+            if($Result->email_verified_at != null && $Result->email_verified_at != ""){
+                $ResultPoints[$i]++;
+            }if($Result->city != null && $Result->city != "" ){
+
+                $datajson = file_get_contents('data/json/list-moroccan-cities.json');
+                $jsondata = json_decode($datajson, true);
+               
+                $resultcheck = "";
+                foreach ($jsondata as $item) {
+                    if ($item['id'] == $Result->city) {
+                        $resultcheck = $item['region'];
+                    }
+                }
+               
+                if(intval($resultcheck) == intval($areaCode)){
+                $ResultPoints[$i]+=3;
+                }
+                //$ResultPoints[$i]++;
+                foreach($rating as $rating);
+            }if($rating->numRating != null && $rating->numRating != ""){
+               // dd($rating->numRating);
+                if(intval($rating->numRating) >= 4.5){
+                    $ResultPoints[$i]+=3;
+
+                }elseif(intval($rating->numRating) >= 3.9 && intval($rating->numRating) < 4.5){
+                    $ResultPoints[$i]+=1.5;
+
+                }
+
+            }
+           $Result->points = $ResultPoints[$i];
+           $Result->rating = $rating->numRating;
+            array_push($ResultRanking, $Result);
+
+            $i++;
+        }
+       return $ResultRanking;
+
+  
+
+    }
     public function RequestAccount(Request $request)
     {
         $this->validate($request, [
@@ -173,9 +257,35 @@ class AeAccountController extends Controller
         }
     }
     public function AelistAll(Request $request){
-        $data = User::join('ae_accounts', 'users.Account_number', '=', 'ae_accounts.Account_number')->where('ae_accounts.status',2)
-        ->where('users.verified_account', 2)->paginate(5, ['users.frist_name','users.last_name','users.country','users.city','users.username','users.description','users.avatar','ae_accounts.ae_number','ae_accounts.sector','ae_accounts.activite', 'ae_accounts.job_title']);
+        $data = Cache::remember('AelistAll', $seconds=43200, function (){
+        return User::join('ae_accounts', 'users.Account_number', '=', 'ae_accounts.Account_number')
+        ->where('ae_accounts.status',2)
+        ->where('users.verified_account', 2)->get(['users.frist_name','users.Account_number','users.last_name','users.country','users.city','users.username','users.description','users.avatar','users.email_verified_at','ae_accounts.ae_number','ae_accounts.sector','ae_accounts.activite', 'ae_accounts.job_title']);
+        });
+        $RankingData = $this->RankingResultSample($data);
+       //  dd($RankingData);
+         usort($RankingData, function($a, $b) {
+            return $b['points'] <=> $a['points'];
+        });
+        /*foreach($RankingData as $rsdata){
+            echo $rsdata->points.'<br>';
+        };*/
+
+        $data = $this->paginate($RankingData);
 
         return response()->json($data, 200);
+    }
+    public function SearchInAeList(Request $request){
+        /* Search values */
+        $query = $request->q;
+        $sector = $request->s;
+        $activite = $request->a;
+        $city = $request->c;
+        $ratio = $request->r;
+        /* Search values */
+
+        $data = User::join('ae_accounts', 'users.Account_number', '=', 'ae_accounts.Account_number')->where('ae_accounts.status',2)
+        ->where('users.verified_account', 2)->get(['users.frist_name','users.last_name','users.country','users.city','users.username','users.description','users.avatar','users.email_verified_at','ae_accounts.ae_number','ae_accounts.sector','ae_accounts.activite', 'ae_accounts.job_title']);
+
     }
 }
