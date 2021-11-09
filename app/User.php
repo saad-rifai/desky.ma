@@ -5,10 +5,13 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Support\Facades\Cache;
+use App\UserPortFolio;
+use App\UserRating;
 class User extends Authenticatable
 {
     use Notifiable;
+    protected $primaryKey = 'Account_number';
 
     /**
      * The attributes that are mass assignable.
@@ -36,4 +39,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public static function isOnline($Account_number){
+        return Cache::has('user-online-'.$Account_number);
+    }
+    public function Portfolio()
+    {
+        return $this->hasMany(UserPortFolio::class, 'Account_number');
+    }
+    public function rating()
+    {
+        return $this->hasMany(UserRating::class,'for');
+    }
 }

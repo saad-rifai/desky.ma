@@ -195,46 +195,64 @@ button.btn.btn-sm {
     overflow: hidden;
     height: 200px;
 }
-.splide__slide img {
-    width: 100%;
-    height: auto;
-  }
-  .splide__slide {
-    opacity: 0.3;
-  }
-  
-  .splide__slide.is-active {
-    opacity: 1;
-  }
+
   
 .box-portfolio-thumbnile img {
     width: 100%;
     min-height: 200px;
     object-fit: cover !important;
 }
-.splide__slide img {
-    width: auto !important;
-    max-width: 100% !important;
-    height: auto;
-    max-height: 500px;
-    object-fit: cover !important;
+
+
+
+#custCarousel .carousel-indicators {
+    position: static;
+    margin-top: 20px
 }
-.splide__slide {
-    max-height: 500px;
+
+#custCarousel .carousel-indicators>li {
+    width: 100px
 }
-.splide__list {
-    margin-top: 15px !important;
-    margin-right: auto !important;
-    margin-left: auto !important;
-    justify-content: center !important;
-}
-.splide__slide img {
-    margin-right: auto;
-    margin-left: auto;
+
+#custCarousel .carousel-indicators li img {
     display: block;
+    opacity: 0.5
+}
+
+#custCarousel .carousel-indicators li.active img {
+    opacity: 1
+}
+
+#custCarousel .carousel-indicators li:hover img {
+    opacity: 0.75
+}
+
+.carousel-item img {
+    width: 100%;
+    max-width: 90%;
+    height: 500px;
+    object-fit: contain;
+}
+.carousel-item {
+    max-height: 500px;
+    overflow: hidden;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    min-height: 70px;
+    object-fit: cover;
+}
+li.list-inline-item {
+    height: 70px;
+    overflow: hidden;
+    border: solid 1px#ededed;
+    cursor: pointer !important;
 }
 .box-portfolio-title {
     padding: 10px 10px;
+    height: 60px;
+    overflow: hidden;
 }
 button.btn {
  
@@ -667,7 +685,10 @@ h1.card__info_title {
     font-weight: 300;
     color: #323232;
 }
+p.box-article-description {
 
+    margin-right: 10px;
+    }
 h1.card__info_money {
     font-size: 35px;
     direction: ltr;
@@ -858,6 +879,7 @@ span.card-info-text {
 }
 
 @media (max-width: 650px) {
+ 
     .cropper {
         height: 300px;
     }

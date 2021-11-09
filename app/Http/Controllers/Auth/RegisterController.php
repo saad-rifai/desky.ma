@@ -202,7 +202,7 @@ class RegisterController extends Controller
                     ob_flush();
                     flush();
                     // Setup your gmail mailer
-                    $backup = Mail::getSwiftMailer();
+             /*       $backup = Mail::getSwiftMailer();
 
                     $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
                     $transport->setUsername('noreply@desky.ma');
@@ -211,7 +211,7 @@ class RegisterController extends Controller
 
 
                     // Set the mailer as gmail
-                    Mail::setSwiftMailer($gmail);
+                    Mail::setSwiftMailer($gmail);*/
                     $valueArray2 = [
                         'token' => $verifiy_token,
                         'fullname' => $request->User__fname . ' ' . $request->User__lname,

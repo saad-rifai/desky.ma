@@ -161,7 +161,7 @@ class ResetPasswordController extends Controller
                 $stmt = DB::table('password_resets')->insert(['email' => "$email", 'token' => "$hashToken", "created_at" => Carbon::now()]);
                 if ($stmt) {
 
-                    // Setup your gmail mailer
+                  /*  // Setup your gmail mailer
                     $backup = Mail::getSwiftMailer();
 
                     $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
@@ -172,19 +172,14 @@ class ResetPasswordController extends Controller
 
                     // Set the mailer as gmail
                     Mail::setSwiftMailer($gmail);
+                    */
                     $valueArray2 = [
                         'token' => $hashToken,
 
                     ];
 
-                    try {
-                        Mail::to($email)->send(new ResetPassword($valueArray2));
-                        return response()->json(['Mail Send Sucsess !', 'email' => $emailhidden], 200);
-                    } catch (\Exception $e) {
-                        return 'Error - ' . $e;
-                        //  return response()->json(['Mail Filed !'], 500);
+                    Mail::to($email)->send(new ResetPassword($valueArray2));
 
-                    }
                     Session::flash('success', 'Your E-mail was sent! Allegedly.');
 
                 } else {

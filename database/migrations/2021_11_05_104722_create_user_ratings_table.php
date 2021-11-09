@@ -20,6 +20,8 @@ class CreateUserRatingsTable extends Migration
             $table->mediumText('text',700);
             $table->integer('rating');
             $table->string('order_id',10);
+            $table->foreign('for')->references('Account_number')->on('users')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

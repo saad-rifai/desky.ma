@@ -41,6 +41,8 @@ Vue.component('request-ae-account', require('./components/user/request-ae-accoun
 
 /* Public Section */
 Vue.component('ae-list', require('./components/public/ae-list.vue').default);
+Vue.component('user-ratings-list', require('./components/public/user-ratings-list.vue').default);
+Vue.component('portfolio-section', require('./components/public/portfolio-section.vue').default);
 
 
 /**

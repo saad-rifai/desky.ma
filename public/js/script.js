@@ -6,38 +6,7 @@ $(document).ready(function() {
 
   $("[data-bs-toggle=tooltip]").tooltip();
 })
-document.addEventListener('DOMContentLoaded', function () {
 
-  var mains = new Splide( '.splide', {
-    type  : 'fade',
-    pagination : false,
-    heightRatio: 0.5,
-    rewind: true,
-  } );
- var thumbnails = new Splide( '#thumbnail-slider', {
-  arrows: false,
-    fixedWidth  : 100,
-    fixedHeight : 60,
-    gap         : 10,
-    rewind      : true,
-    pagination  : false,
-    cover       : true,
-    isNavigation: true,
-    breakpoints : {
-      600: {
-        fixedWidth : 60,
-        fixedHeight: 44,
-      },
-    },
-  } );
-  
-
-  mains.sync( thumbnails );
-  mains.mount(window.splide.Extensions);
-  thumbnails.mount(window.splide.Extensions);
-
- 
-} );
 
 var options = {
 	classname: 'page-load',

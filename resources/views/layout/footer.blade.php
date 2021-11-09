@@ -93,7 +93,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Suggest Tags Js -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.5.3/dist/js/splide-extension-video.min.js"></script>
 <script src="{{asset('js/fotorama.js')}}"></script>
 <script src="{{asset('js/script.js')}}"></script>
 

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="keywords" content="HTML, CSS, JavaScript">
-    <meta name="description" content="Free Web tutorials">
+    <meta name="description" content=" @yield('description', 'tests')">
     <meta name="author" content="Saad Rifai">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -43,9 +43,7 @@
     <!-- Basic Style for Tags Input -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.5.3/dist/css/splide-extension-video.min.css">
-    <script>
+        <script>
         window.Laravel = {
             csrfToken: '{{ csrf_token() }}'
         }

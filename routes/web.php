@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+use App\UserRating;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -32,12 +34,20 @@ Route::prefix('ajax')->group(function () {
     Route::post('user/update/account', 'UserAccountController@UpdateAccount');
     Route::post('user/request/verification', 'DocumentationCenterController@RequestVerification');
     Route::post('user/request/aeaccount', 'AeAccountController@RequestAccount');
+    Route::get('user/request/user/portfolio', 'UserPortFolioController@index');
     Route::post('public/request/aelist/all', 'AeAccountController@AelistAll');
+    Route::post('public/request/aelist/search', 'AeAccountController@SearchInAeList');
+    Route::get('public/request/ae/ratings', 'WebController@UserRatingList');
 
 });
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('try', function(){
+
+    $comments = User::where('Account_number', 2427457664)->first();
+  //  $comments = User::find(7684293048);
+ //var_dump($comments);
+dd($comments->Portfolio);
 
 });
 
@@ -83,6 +93,7 @@ Route::group(['middleware' => 'avatar'], function () {
         return view('order-page');
     });
     Route::get('/auto-entrepreneurs', function() {
+       
         return view('list-of-self-contractors');
     });
     Route::get('/conditions', function () {
