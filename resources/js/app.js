@@ -38,6 +38,10 @@ Vue.component('account-settings', require('./components/user/account-settings.vu
 Vue.component('public-profile-edit', require('./components/user/public-profile-edit.vue').default);
 Vue.component('request-verification', require('./components/user/request-verification.vue').default);
 Vue.component('request-ae-account', require('./components/user/request-ae-account.vue').default);
+Vue.component('add-to-portfolio', require('./components/user/add-to-portfolio.vue').default);
+Vue.component('like-portfolio', require('./components/user/like-portfolio.vue').default);
+Vue.component('delete-portfolio', require('./components/user/delete-from-portfolio.vue').default);
+Vue.component('edit-portfolio', require('./components/user/edit-portfolio.vue').default);
 
 /* Public Section */
 Vue.component('ae-list', require('./components/public/ae-list.vue').default);

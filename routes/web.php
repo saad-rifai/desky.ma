@@ -5,7 +5,7 @@ use App\UserRating;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
-
+use App\UserPortFolio;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,22 +34,23 @@ Route::prefix('ajax')->group(function () {
     Route::post('user/update/account', 'UserAccountController@UpdateAccount');
     Route::post('user/request/verification', 'DocumentationCenterController@RequestVerification');
     Route::post('user/request/aeaccount', 'AeAccountController@RequestAccount');
+    Route::post('user/portfolio/create', 'UserPortFolioController@create')->middleware("auth");
+    Route::post('user/portfolio/create', 'UserPortFolioController@create')->middleware("auth");
+    Route::post('user/portfolio/delete/{id}', 'UserPortFolioController@delete')->middleware("auth");
+    Route::get('/user/request/portfolio/infos/{id}', 'UserPortFolioController@PortfolioInfos')->middleware("auth");
     Route::get('user/request/user/portfolio', 'UserPortFolioController@index');
+    Route::get('user/check/portfolio/liked/{portfolio_id}', 'PortFolioLikesController@CheckWorkLike');
+    Route::post('user/request/portfolio/like/{portfolio_id}', 'PortFolioLikesController@likePortfolio');
+    
     Route::post('public/request/aelist/all', 'AeAccountController@AelistAll');
     Route::post('public/request/aelist/search', 'AeAccountController@SearchInAeList');
     Route::get('public/request/ae/ratings', 'WebController@UserRatingList');
 
+
 });
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
-Route::get('try', function(){
-
-    $comments = User::where('Account_number', 2427457664)->first();
-  //  $comments = User::find(7684293048);
- //var_dump($comments);
-dd($comments->Portfolio);
-
-});
+Route::get('try/{portfolio_id}/{from}', 'PortFolioLikesController@CheckWorkLike');
 
 /** 
  * Route Auth Groupe
@@ -58,6 +59,10 @@ dd($comments->Portfolio);
 
 Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function () {
 
+    Route::get('/portfolio/create', function(){
+        return view('actions.add-to-portfolio');
+    });
+    Route::get('/portfolio/edit/{id}', 'UserPortFolioController@ShowForEdit');
 
     Route::get('/account/settings', function () {
         return view('user.settings');
@@ -77,6 +82,10 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
 });
 
 Route::group(['middleware' => 'avatar'], function () {
+
+    Route::get('/portfolio/{id}/{title}', 'UserPortFolioController@show');
+    Route::get('/portfolio/{id}/', 'UserPortFolioController@redirect');
+ 
     Route::get('/', function () {
         if(Auth::check()){
             return view('user.dashboard');

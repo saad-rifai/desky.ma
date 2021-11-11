@@ -122,12 +122,12 @@
                                 type="button" role="tab" aria-controls="home" aria-selected="true">نبذة عني</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                type="button" role="tab" aria-controls="profile" aria-selected="false">معرض الأعمال</button>
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#portfolio"
+                                type="button" role="tab" aria-controls="portfolio" aria-selected="false">معرض الأعمال</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                                type="button" role="tab" aria-controls="contact" aria-selected="false">التقييمات</button>
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#rating"
+                                type="button" role="tab" aria-controls="rating" aria-selected="false">التقييمات</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -143,15 +143,17 @@
                                 } @endphp
                             </p>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade" id="portfolio" role="tabpanel" aria-labelledby="profile-tab">
                             @if(Auth::check() && $data->Account_number == Auth::user()->Account_number)
                             <div class="action-tab-sc mt-3 mb-3" style="text-align: left">
+                               <a href="{{asset('portfolio/create/')}}">
                                 <button class="btn btn-primary btn-sm ">اضافة عمل</button>
+                            </a>
                             </div>
                             @endif
                    <portfolio-section :account_number="{{$data->Account_number}}"></portfolio-section>
                         </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="contact-tab">
                             <user-ratings-list :ac="{{ $data->Account_number }}"></user-ratings-list>
 
                         </div>
@@ -260,6 +262,6 @@
     </div>
 
 
-
+ 
 
 @stop

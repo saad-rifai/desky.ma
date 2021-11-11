@@ -130,7 +130,7 @@
 
                 <div class="col-auto">
                   <div class="img_file_type">
-                    <img :src="fileicon(item[0].type)" alt="" />
+                    <img :src="fileicon(item[0])" alt="" />
                   </div>
                 </div>
                 <div class="col-auto position-relative">
@@ -223,14 +223,14 @@ export default {
         var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
         return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
       },
-      fileicon: function (filetype) {
+       fileicon: function (file) {
         if (
-          filetype == "image/jpg" ||
-          filetype == "image/jpeg" ||
-          filetype == "image/png"
+          file.type == "image/jpg" ||
+          file.type == "image/jpeg" ||
+          file.type == "image/png"
         ) {
-          return "/img/icons/file-type/jpg.svg";
-        } else if (filetype == "application/pdf") {
+          return URL.createObjectURL(file);
+        } else if (file.type == "application/pdf") {
           return "/img/icons/file-type/pdf.svg";
         } else {
           return "/img/icons/file-type/pdf.zip";
@@ -406,6 +406,15 @@ $('.documents_inp').click()
               fixed: true,
               icon: "warning",
             });
+          }else if (error.response.status == 401) {
+            this.$vs.notify({
+              text: 'انتهت الجلسة',
+              color: "danger",
+              position: "top-right",
+              fixed: true,
+              icon: "warning",
+            });
+            window.location.reload();
           } else {
             this.$vs.notify({
               title: "هناك خطأ ما !",

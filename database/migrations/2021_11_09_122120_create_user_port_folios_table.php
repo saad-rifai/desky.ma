@@ -19,8 +19,9 @@ class CreateUserPortFoliosTable extends Migration
             $table->string('title', 250);
             $table->mediumText('description', 700);
             $table->json('files');
+            $table->integer('sector');
+            $table->integer('activite');
             $table->integer('status');
-
             $table->foreign('Account_number')->references('Account_number')->on('users')
                 ->onDelete('cascade');
             $table->timestamps();

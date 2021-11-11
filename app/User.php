@@ -42,6 +42,9 @@ class User extends Authenticatable
     public static function isOnline($Account_number){
         return Cache::has('user-online-'.$Account_number);
     }
+    public function AeAccount(){
+        return $this->hasOne(AeAccount::class, 'Account_number');
+    }
     public function Portfolio()
     {
         return $this->hasMany(UserPortFolio::class, 'Account_number');

@@ -275,47 +275,26 @@ a.nav-link.active {
 .online-status.Search-status-user.border {
     margin-top: 15px;
 }
+button.like-btn {
+    background-color: inherit !important;
+    border: none !important;
+    color: #3a3a3a;
+    margin-left: 15px;
+    cursor: pointer;
+}
+button.like-btn:hover {
+    opacity: 0.8;
+}
+button.like-btn i{
+
+    font-size: 22px;
+
+}
 /* Color Brand Primary */
 .c-b-p {
     color: #f96a0c !important;
 }
-li.select2-results__option.select2-results__message {
-    font-size: 15px;
-    text-align: center;
-    padding: 10px;
-}
-.select2-container--default
-    .select2-selection--multiple
-    .select2-selection__choice__remove:hover,
-.select2-container--default
-    .select2-selection--multiple
-    .select2-selection__choice__remove:focus {
-    background-color: inherit !important;
-}
-textarea.select2-search__field {
-    font-family: "Noto Kufi Arabic" !important;
-}
-.select2-container--default .select2-results__option--selected {
-    background-color: #f96a0c59 !important;
-}
 
-.select2-container--default
-    .select2-results__option--highlighted.select2-results__option--selectable {
-    background-color: #f96a0c !important;
-    color: white !important;
-}
-.select2-dropdown {
-    background-color: white;
-    border: 1px solid #bdbdbd !important;
-    border-radius: 3px !important;
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    left: -100000px;
-    width: 100%;
-    z-index: 1051;
-    box-shadow: rgb(98 98 98 / 19%) -1px 4px 2.6px;
-}
 .form-select {
     font-size: 14px !important;
     padding: 10px 15px !important;

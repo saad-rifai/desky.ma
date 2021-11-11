@@ -92,76 +92,7 @@
               />
             </vs-select>
           </div>
-          <!--div class="mb-3 mt-5">
-              <label for="rating_w" class="form-label">التقييم</label>
-              <div class="row">
-                <div class="col">
-                  <div id="rating_w" class="position-relative rate-box">
-                    <div class="rate" dir="rtl">
-                      <input
-                        type="radio"
-                        id="star5_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="5"
-                        @change="Search"
-                      />
-                      <label for="star5_w" title="text">5 stars</label>
 
-                      <input
-                        type="radio"
-                        id="star4_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="4"
-                        @change="Search"
-                      />
-                      <label for="star4_w" title="text">4 stars</label>
-
-                      <input
-                        type="radio"
-                        id="star3_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="3"
-                        @change="Search"
-                      />
-                      <label for="star3_w" title="text">3 stars</label>
-                      <input
-                        type="radio"
-                        id="star2_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="2"
-                        @change="Search"
-                      />
-                      <label for="star2_w" title="text">2 stars</label>
-
-                      <input
-                        type="radio"
-                        id="star1_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="1"
-                        @change="Search"
-                      />
-                      <label for="star1_w" title="text">1 star</label>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  v-if="rating_n != '' && rating_n != null"
-                  class="col col-lg-2 mt-2"
-                >
-                  <button
-                    type="button"
-                    class="btn-close"
-                    @click="rating_n = ''"
-                    aria-label="Close"
-                  ></button>
-                </div>
-              </div>
-            </div-->
           <div class="d-grid gap-2 mt-5">
             <button
               data-bs-dismiss="offcanvas"
@@ -188,23 +119,6 @@
     </div>
     <!-- Mobile Filter Search -->
 
-    <div class="container mt-5 mb-5">
-      <div class="row text-center" dir="rtl">
-        <div class="col">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                المقاولين الذاتيين
-              </li>
-            </ol>
-          </nav>
-          <h1 align="right" class="breadcrumb-title">
-            قائمة المقاولين الذاتيين
-          </h1>
-        </div>
-      </div>
-    </div>
     <div class="container mb-5 mt-2">
       <div class="filter-mobile-toggle">
         <button
@@ -294,76 +208,7 @@
                 />
               </vs-select>
             </div>
-            <!--div class="mb-3 mt-5">
-              <label for="rating_w" class="form-label">التقييم</label>
-              <div class="row">
-                <div class="col">
-                  <div id="rating_w" class="position-relative rate-box">
-                    <div class="rate" dir="rtl">
-                      <input
-                        type="radio"
-                        id="star5_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="5"
-                        @change="Search"
-                      />
-                      <label for="star5_w" title="text">5 stars</label>
 
-                      <input
-                        type="radio"
-                        id="star4_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="4"
-                        @change="Search"
-                      />
-                      <label for="star4_w" title="text">4 stars</label>
-
-                      <input
-                        type="radio"
-                        id="star3_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="3"
-                        @change="Search"
-                      />
-                      <label for="star3_w" title="text">3 stars</label>
-                      <input
-                        type="radio"
-                        id="star2_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="2"
-                        @change="Search"
-                      />
-                      <label for="star2_w" title="text">2 stars</label>
-
-                      <input
-                        type="radio"
-                        id="star1_w"
-                        v-model="rating_n"
-                        name="rate1"
-                        value="1"
-                        @change="Search"
-                      />
-                      <label for="star1_w" title="text">1 star</label>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  v-if="rating_n != '' && rating_n != null"
-                  class="col col-lg-2 mt-2"
-                >
-                  <button
-                    type="button"
-                    class="btn-close"
-                    @click="rating_n = ''"
-                    aria-label="Close"
-                  ></button>
-                </div>
-              </div>
-            </div-->
             <div class="d-grid gap-2 mt-5">
               <button @click="Search" class="btn btn-primary" type="button">
                 البحث
@@ -390,7 +235,24 @@
             >
               لاتوجد بيانات لعرضها
             </div>
+            <div v-if="stopLazyLoading != true" class="lazy-load-box">
+              <div
+                v-for="index in 5"
+                :key="index"
+                class="lazy-load-ae-content"
+              >
+                <div class="row">
+                  <div class="col-auto lazy-load-ae load-avatar"></div>
+                  <div class="col">
+                    <div class="lazy-load-ae load-name"></div>
+                    <div class="lazy-load-ae down-name"></div>
+                  </div>
+                </div>
+                <div class="lazy-load-ae load-description"></div>
+              </div>
+            </div>
             <div
+              
               v-for="(item, index) in listdata"
               :key="index"
               class="box-article pb-3 mb-3"
@@ -402,7 +264,7 @@
                       <div class="row">
                         <div class="col-auto position-relative">
                           <span
-                          v-if="item.isOnline"
+                            v-if="item.isOnline"
                             class="
                               position-absolute
                               top-0
@@ -571,6 +433,7 @@ export default {
       city: "",
       //    rating_n: "",
       typeget: "all",
+      stopLazyLoading: false
     };
   },
 
@@ -594,31 +457,37 @@ export default {
       }
       this.Search();
     },
-    openLoadingInDiv: function () {
+    openLoadingInDiv() {
       this.$vs.loading({
         container: "#div-with-loading",
         scale: 0.6,
         color: "#f96a0c",
       });
     },
-    HideLoadingInDiv: function () {
+    HideLoadingInDiv() {
       this.$vs.loading.close("#div-with-loading > .con-vs-loading");
     },
     getData() {
       this.typeget = "all";
-      axios.post("/ajax/public/request/aelist/all").then((response) => {
-        this.Allresponse = response.data;
-        this.listdata = response.data.data;
-        if (
-          this.listdata == undefined ||
-          this.listdata == null ||
-          this.listdata == ""
-        ) {
-          this.nodata = true;
-        } else {
-          this.nodata = false;
-        }
-      });
+      axios
+        .post("/ajax/public/request/aelist/all")
+        .then((response) => {
+          this.Allresponse = response.data;
+          this.listdata = response.data.data;
+          if (
+            this.listdata == undefined ||
+            this.listdata == null ||
+            this.listdata == ""
+          ) {
+            this.nodata = true;
+          } else {
+            this.nodata = false;
+          }
+          this.stopLazyLoading = true;
+        })
+        .catch((error) => {
+          this.getData();
+        });
     },
     Search() {
       this.typeget = "search";
@@ -648,11 +517,6 @@ export default {
         data.append("c", "");
       }
 
-      /* if (this.rating_n != null) {
-        data.append("r", this.rating_n);
-      } else {
-        data.append("r", "");
-      }*/
       axios
         .post("/ajax/public/request/aelist/search", data)
         .then((response) => {
@@ -671,9 +535,9 @@ export default {
         });
     },
     ShowMore() {
-      if (this.Allresponse.next_page_url != null) {
-        this.openLoadingInDiv();
+      this.openLoadingInDiv();
 
+      if (this.Allresponse.next_page_url != null) {
         axios
           .post(
             "/ajax/public/request/aelist/" +

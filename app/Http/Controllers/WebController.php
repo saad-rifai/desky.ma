@@ -89,10 +89,10 @@ class WebController extends Controller
                     $sector = $aeInfos->sector;
                     $Activites = explode(',', $Activites);
                     if ($sector == 1) {
-                        $listActivites = file_get_contents('data/json/activite-ae-1.json');
+                        $listActivites = file_get_contents('data/json/activite-ae-2.json');
                         $listActivitesdata = json_decode($listActivites, true);
                     } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
-                        $listActivites = file_get_contents('data/json/activite-ae-2.json');
+                        $listActivites = file_get_contents('data/json/activite-ae-1.json');
                         $listActivitesdata = json_decode($listActivites, true);
                     }
                     for ($i = 0; count($Activites) > $i; $i++) {

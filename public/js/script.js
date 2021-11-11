@@ -5,7 +5,19 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 $(document).ready(function() {
 
   $("[data-bs-toggle=tooltip]").tooltip();
+  var hash = document.location.hash;
+if (hash) {
+    console.log(hash);
+    $('button[data-bs-target="'+hash+'"]').tab('show');
+} 
+
+
+
 })
+
+
+
+
 
 
 var options = {
