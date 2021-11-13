@@ -161,13 +161,14 @@
 
                       <div class="col-auto">
                         <div class="img_file_type">
-                          <img :src="fileicon(item[0])" alt="" />
+                          <img :src="fileicon(item)" alt="" />
                         </div>
                       </div>
                       <div class="col-auto position-relative">
                         <div class="title_file">
-                          <h3 class="file_title">{{ item[0].name }}</h3>
-                          <br /><span class="file_size">{{
+                          <h3 class="file_title" v-if="item[0]">{{ item[0].name }}</h3>
+                          <h3 class="file_title" v-else>{{index+1}} image</h3>
+                          <br /><span v-if="item[0]" class="file_size">{{
                             sizefile(item[0].size)
                           }}</span>
                         </div>
@@ -210,7 +211,7 @@
                   type="button"
                   class="btn btn-primary"
                   id="btn_submit_4"
-                 
+                  @click="SaveData"
                 >
                   اضافة العمل
                 </button>
@@ -257,22 +258,28 @@ export default {
         return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
       },
       fileicon: function (file) {
+        if(!file.server_file){
+        
         if (
-          file.type == "image/jpg" ||
-          file.type == "image/jpeg" ||
-          file.type == "image/png"
+          file[0].type == "image/jpg" ||
+          file[0].type == "image/jpeg" ||
+          file[0].type == "image/png"
         ) {
-          return URL.createObjectURL(file);
-        } else if (file.type == "application/pdf") {
+          return URL.createObjectURL(file[0]);
+        } else if (file[0].type == "application/pdf") {
           return "/img/icons/file-type/pdf.svg";
         } else {
           return "/img/icons/file-type/pdf.zip";
         }
+      }else{
+        return "/"+file.file_url
+      }
+
       },
     };
   },
   methods: {
-        openLoadingInDiv: function () {
+    openLoadingInDiv: function () {
       $("#btn_submit_4").html(
         '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...'
       );
@@ -381,37 +388,15 @@ export default {
           this.sector = this.infos.sector;
           this.SectorChange();
           this.activite_selected = this.infos.activite;
-          var filesPaths = JSON.parse(this.infos.files);
-/* Convert File Url To Object */
-   const uploadImage = async (uri) => {
-         const uniqid = () => Math.random().toString(36).substr(2, 9);
-         const ext = uri.split('.').pop(); // Extract image extension
-         const filename = `${uniqid()}.${ext}`; // Generate unique name
-         const ref = fb.storage().ref().child(`images/${filename}`);
-         const response = await fetch(uri);
-        // const blob = await response.blob();
-        const blob = await new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-             resolve(xhr.response);
-            };
-        xhr.onerror = function (e) {
-            console.log(e);
-            reject(new TypeError('Network request failed'));
-         };
-       xhr.responseType = 'blob';
-       xhr.open('GET', uri, true);
-       xhr.send(null);
-     });
-     const snapshot = await ref.put(blob);
-     blob.close();
-     const imgUrl = await snapshot.ref.getDownloadURL();
-      return imgUrl;
-   }
-          for(var i = 0; filesPaths.length > i; i++){
-         this.filesSelected.push(uploadImage("/"+filesPaths[i]));
+          var filesPaths = this.infos.files;
+          /* Convert File Url To Object */
+           console.log(this.infos.files);
 
-   //console.log(new File(filesPaths[i]));
+          var x = 1;
+          var id = 0;
+          for (var y = 0; this.infos.files.length > y; y++) {
+            this.filesSelected.push({'server_file': true, 'server_id': this.infos.files[y].server_id.server_id, 'file_url': this.infos.files[y][0]});
+ 
           }
         })
         .catch((error) => {
@@ -421,6 +406,34 @@ export default {
             position: "top-right",
             icon: "error",
           });
+        });
+    },
+    SaveData() {
+      let data = new FormData();
+      if (this.filesSelected.length > 0) {
+        for (var i = 0; this.filesSelected.length > i; i++) {
+          if (this.filesSelected[i].server_file) {
+            data.append("images_id[]", this.filesSelected[i].server_id);
+          } else {
+          data.append("image[]", this.filesSelected[i][0]);
+            data.append("images_id[]", null);
+          }
+        }
+      } else {
+        data.append("image[0]", null);
+        data.append("images_id[0]", null);
+      }
+      var config = {
+        headers: { "Content-Type": "multipart/form-data; charset=utf-8" },
+      };
+      axios
+        .post(
+          "/ajax/user/request/portfolio/edit/" + this.portfolio_id + "/save",
+          data,
+          config
+        )
+        .then((response) => {
+          console.log(response);
         });
     },
   },

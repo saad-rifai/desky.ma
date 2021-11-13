@@ -25,10 +25,7 @@
                     </div>
                     <div class="col-auto">
                         @if (Auth::check() && $data->Account_number == Auth::user()->Account_number)
-                            <a href="{{ asset('/account/settings') }}">
-                                <button class="btn btn-primary btn-sm">تعديل العمل</button>
-
-                            </a>
+                      
                             <delete-portfolio :portfolio_id="{{$data->id}}" :username="'{{$data->user->username}}'"></delete-portfolio>
                             @else
                             <span class="dropdown">

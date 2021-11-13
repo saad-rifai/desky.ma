@@ -6,6 +6,9 @@ use App\UserPortFolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Undefined;
+
+use function GuzzleHttp\json_decode;
 
 class UserPortFolioController extends Controller
 {
@@ -192,16 +195,18 @@ class UserPortFolioController extends Controller
             return response()->json(['errors' => ['image' => [0 => 'يرجى تحميل الصور  *']]], 422);
         }
     }
-    public function ShowForEdit(Request $request){
-        if(isset($request->id)){
+    public function ShowForEdit(Request $request)
+    {
+        if (isset($request->id)) {
             $stmt = UserPortFolio::where('id', $request->id)->where('Account_number', Auth::user()->Account_number)->get();
-            if($stmt->count() > 0){
-                foreach($stmt as $stmt);
+            if ($stmt->count() > 0) {
+                foreach ($stmt as $stmt);
+
                 return view('actions.edit-portfolio', ['data' => $stmt]);
-            }else{
+            } else {
                 abort(404);
             }
-        }else{
+        } else {
             abort(404);
         }
     }
@@ -219,19 +224,131 @@ class UserPortFolioController extends Controller
             return response()->json('error', 500);
         }
     }
-    public function PortfolioInfos(Request $request){
-        if(isset($request->id)){
+    public function PortfolioInfos(Request $request)
+    {
+        if (isset($request->id)) {
             $infos = UserPortFolio::all()->where('id', $request->id)->where('Account_number', auth::user()->Account_number);
-            if($infos->count() > 0){
-                foreach($infos as $info);
-                return response()->json($info, 200);
+            if ($infos->count() > 0) {
+                foreach ($infos as $info);
+                $files = json_decode($info->files, true);
 
-            }else{
+                $filesArray = [];
+                foreach ($files as $key => $file) {
+                    $filesArray[$key] = [$file, 'server_id' => ['server_id' => $key]];
+                }
+
+                $info->files = $filesArray;
+                return response()->json($info, 200);
+            } else {
                 return response()->json(['Bad Request'], 400);
             }
-        }else{
+        } else {
             return response()->json(['Bad Request'], 400);
+        }
+    }
+    public function edit(Request $request)
+    {
+        if (isset($request->image) || isset($request->images_id)) {
+            $files = UserPortFolio::where('id', $request->id)->where('Account_number', auth::user()->Account_number)->get(['files']);
+            if ($files->count() > 0) {
+                foreach ($files as $files);
+                $filesArray = json_decode($files->files);
+                $filesArrayToRemove = $filesArray;
 
+                /* Add New Images */
+        
+                foreach ($request->images_id as $image_id) {
+                    if ($request->images_id != null) {
+                        unset($filesArrayToRemove[intval($image_id)]);
+                    }
+                }
+             
+                foreach ($filesArrayToRemove as $idFile => $removeFile) {
+                    unset($filesArray[$idFile]);
+                }
+                if ($request->image) {
+
+                    /* Check New Images */
+                    $files = $request->file('image');
+                    $count = count($files);
+                    $error = null;
+                   // dd($filesArray);
+                    if ((count($filesArray) + $count) <= 5) {
+                        foreach ($files as $file) {
+                            if ($file->getSize() > 1000000) {
+                                $error = response()->json(['errors' => ['image' => [0 => '(' . $file->getClientOriginalName() . ') هذا الملف أكبر من اللازم الحد الأقصى 1MB']]], 422);
+                            } else {
+
+                                if ($file->getMimeType() != "image/jpg" && $file->getMimeType() != "image/jpeg"  && $file->getMimeType() != "image/png") {
+                                    $error = response()->json(['errors' => ['image' => [0 => '(' . $file->getClientOriginalName() . ') هذا الملف غير مدعوم مسموح فقط بي (PNG, JPG, JPEG)']]], 422);
+                                }
+                            }
+                        }
+                        if($error == null){
+                            /* Upload New Images */
+
+
+
+                            $uploads =  $request->image;
+                            $fullfilesUrl = [];
+                         
+                            $uploaded_count = 0;
+                            foreach ($uploads as $upload) {
+                                $image_type = $upload->extension();
+                                $folderPath = "img/users/portfolios/" . date("Y") . '/' . Auth::user()->Account_number . '/';
+                                $filname =  Auth::user()->Account_number . '-' . uniqid() . '.' . $image_type;
+                                $file = $upload;
+                                $upload_success = $file->move($folderPath, $filname);
+                                $fileFullName=$folderPath . $filname;
+                                array_push($filesArray, $fileFullName);
+                     
+                                if ($upload_success) {
+                                    $uploaded_count++;
+                                } else {
+                                    return response()->json(['errors' => ['image' => [0 => 'حدث خطأ اثناء محاولة رفع الصور يرجى اعادة المحاولة 0']]], 422);
+                                }
+                            }
+                            
+                            if ($uploaded_count == !$count) {
+                                $error = response()->json(['errors' => ['image' => [0 => 'حدث خطأ اثناء محاولة رفع الصور يرجى اعادة المحاولة 0']]], 422);
+
+                            }
+                           // $filesjson = json_encode($filesArray);
+
+
+
+                        }else{
+                            return $error;
+                        }
+                    } else {
+                        return response()->json(['errors' => ['image' => [0 => 'مسموح فقط بـ 5 ملفات']]], 422);
+                    }
+          
+                }
+
+                /* Update Data */
+                $filesArrayData = [];
+
+                dd($filesArray);
+                foreach($filesArray as $key=>$filesArray){
+                    $filesArrayData[$key] = $filesArray;
+                }
+                $filesjson = json_encode($filesArrayData);
+                $stmt = UserPortFolio::where('id', $request->id)->where('Account_number', auth::user()->Account_number)->update([
+                    'files' => $filesjson,
+                ]);
+                if($stmt){
+                    Cache::forget('portfolio-work-' . $request->id);
+                    return response()->json(['success'], 200);
+                }else{
+                    return response()->json(['error' => 'فشل ارسال طلبك'], 500);
+
+                }
+            } else {
+                return response()->json(['error', 'Bad Request :'], 400);
+            }
+        } else {
+            return response()->json(['error', ['image' => 'يرجى تحميل الصور *']], 422);
         }
     }
 }

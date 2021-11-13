@@ -255,6 +255,7 @@ export default {
         return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
       },
       fileicon: function (file) {
+        console.log(file);
         if (
           file.type == "image/jpg" ||
           file.type == "image/jpeg" ||
@@ -299,7 +300,7 @@ export default {
             position: "top-right",
             icon: "error",
           });
-        } else if (this.filesSelected.length >= 3) {
+        } else if (this.filesSelected.length >= 5) {
           this.$vs.notify({
             title: "مسموح فقط بي 5 صور كحد أقصى *",
             text: "الحد الأقصى للصور المسموح برفعها 5 اذا كنت تود تغيير الصور المرجو حذف الصور الموجودة حاليا *",
