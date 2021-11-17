@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\UserPortFolio;
+use Illuminate\Support\Facades\Cookie;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +55,17 @@ Route::prefix('ajax')->group(function () {
     Route::post('user/order/create', 'OrdersController@create')->middleware("auth");
 
     /***** */
+
+    /* Offers Routes */
+    Route::post('user/offer/create', 'OffersController@create')->middleware("auth");
+    Route::post('orders/offers/all', 'OffersController@index');
+
+    /********/
 });
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
-Route::get('try/{portfolio_id}/{from}', function () {
+Route::get('/try', function () {
+    dd(auth::user()->Offers->where('OID', "1708519923"));
 });
 
 /** 
@@ -87,6 +96,7 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
 });
 
 Route::group(['middleware' => 'avatar'], function () {
+    Route::get('/order/{OID}', 'OrdersController@show');
 
     Route::get('/portfolio/{id}/{title}', 'UserPortFolioController@show');
     Route::get('/portfolio/{id}/', 'UserPortFolioController@redirect');
@@ -101,9 +111,7 @@ Route::group(['middleware' => 'avatar'], function () {
     Route::get('/orders', function () {
         return view('orders');
     });
-    Route::get('/order/{OID}', function () {
-        return view('order-page');
-    });
+
     Route::get('/auto-entrepreneurs', function () {
 
         return view('list-of-self-contractors');
@@ -129,6 +137,10 @@ Route::get('/login', function () {
         Session::setId($_GET['s_token']);
         Session::start();
         return  redirect('/dashboard?set_session.do&route');
+    }elseif(isset($_GET['redirect'])){
+        Cookie::queue('redirect', $_GET['redirect'], 60);
+        return view('auth.login');
+
     } else {
         return view('auth.login');
     }
@@ -140,8 +152,14 @@ Route::get('/reset', function () {
 })->name('reset');
 
 Route::get('/register', function () {
+    if(isset($_GET['redirect'])){
+        Cookie::queue('redirect', $_GET['redirect'], 60);
+        return view('auth.login');
 
-    return view('auth.register');
+    }else{
+        return view('auth.register');
+
+    }
 })->name('register')->middleware('guest');
 
 Route::get('logout', function () {

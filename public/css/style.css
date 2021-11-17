@@ -757,6 +757,35 @@ h1.card__info_money {
     color: #f96a0c;
     margin-top: 10px;
 }
+.offer-infos-box {
+    text-align: center;
+    width: 100%;
+    background-color: #f6f6f6;
+    padding: 10px 0;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 25px;
+    border-radius: 3px;
+}
+.offer-info-item h1 {
+    font-size: 17px;
+    font-weight: 400;
+    color: #343434;
+}
+span.offer-info-icon {
+    font-size: 30px;
+    color: #343434;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+}
+.offer-info-item h2 {
+    font-weight: 400;
+    font-size: 20px;
+    color: #343434;
+    margin-bottom: 15px;
+}
 h3.pg-info-title {
     font-size: 25px;
     font-weight: 400;
@@ -924,11 +953,22 @@ span.card-info-text {
     font-size: 14px;
 }
 @media (max-width: 350px) {
+    .mobile-hidden-1{
+        display: none !important;
+    }
+}
+@media (max-width: 400px) {
+    .mobile-hidden-1{
+        display: none !important;
+    }
     img.logo-web {
         width: 100%;
         max-width: 80px;
     }
-    
+    .mobile-btn-sm {
+        font-size: 12px !important;
+        padding: 10px 14px !important;
+    }
 .pm-0{
     padding: 5px !important;
 }
@@ -958,7 +998,7 @@ span.card-info-text {
         margin-top: -20px;
         margin-right: 65px !important;
     }
-    .online-status {
+  .online-status-lg {
         margin-right: -5px;
     }
 

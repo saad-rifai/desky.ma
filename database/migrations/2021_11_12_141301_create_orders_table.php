@@ -21,10 +21,11 @@ class CreateOrdersTable extends Migration
             $table->integer('sector')->nullable();
             $table->integer('activite')->nullable();
             $table->mediumText('description');
-            $table->integer("place");
+            $table->integer("place")->nullable();
             $table->float('budget');
             $table->integer('time');
-            $table->json('files');
+            $table->json('files')->nullable();
+            $table->string('message', 200)->nullable();
             $table->integer('status'); /* 0 = Pending; 1 = Receipt of offers; 2 = implementation phase; 3 = done; 4 = rejected; 5 = Permanently rejected */
             $table->foreign('Account_number')->references('Account_number')->on('users')
             ->onDelete('cascade');

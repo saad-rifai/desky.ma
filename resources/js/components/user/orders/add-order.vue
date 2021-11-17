@@ -47,13 +47,13 @@
           <div class="mb-3">
             <label class="form-label">التخصص</label>
             <vs-select
-
               width="100%"
               autocomplete
               class="selectExample"
               v-bind:class="{ 'is-invalid': errors.errors.activite }"
               v-model="activite_selected"
             >
+              <vs-select-item :value="null" text="بدون تحديد" />
               <vs-select-item
                 :key="index"
                 :value="index"
@@ -166,7 +166,11 @@
                 v-model="budget"
               />
             </div>
-            <div class="invalid-feedback" v-if="errors.errors.budget">
+            <div
+              class="invalid-feedback"
+              style="display: block !important"
+              v-if="errors.errors.budget"
+            >
               {{ errors.errors.budget[0] }}
             </div>
           </div>
@@ -188,47 +192,17 @@
                 v-model="time"
               />
             </div>
-    <div class="form-text">
-            عدد الأيام
-            </div>
-            <div class="invalid-feedback" v-if="errors.errors.time">
+            <div class="form-text">عدد الأيام</div>
+            <div
+              class="invalid-feedback"
+              style="display: block !important"
+              v-if="errors.errors.time"
+            >
               {{ errors.errors.time[0] }}
             </div>
           </div>
         </div>
-        <div class="col w-100">
-            <vs-select
-        label="Multiple collapse chips"
-        filter
-        multiple
-        collapse-chips
-        placeholder="Collapse chips"
-        v-model="value3"
-      >
-      
-        <vs-option label="Vuesax" value="1">
-          Vuesax
-        </vs-option>
-        <vs-option label="Vue" value="2">
-          Vue
-        </vs-option>
-        <vs-option label="Javascript" value="3">
-          Javascript
-        </vs-option>
-        <vs-option label="Sass" value="4">
-          Sass
-        </vs-option>
-        <vs-option label="Typescript" value="5">
-          Typescript
-        </vs-option>
-        <vs-option label="Webpack" value="6">
-          Webpack
-        </vs-option>
-        <vs-option label="Nodejs" value="7">
-          Nodejs
-        </vs-option>
-      </vs-select>
-        </div>
+        <div class="col w-100"></div>
         <div class="col w-100">
           <div class="mb-3">
             <label for="time" class="form-label"> ملفات توضيحية</label>
@@ -251,7 +225,6 @@
               id="upload-files-form"
               class="upload-files-form"
               data-target="files-include"
-              data-types="['png','jpg']"
               @drop="dropfiles"
             >
               <input
@@ -420,6 +393,8 @@ export default {
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         ) {
           return "/img/icons/file-type/word.svg";
+        } else if (file.type == "application/psd") {
+          return "/img/icons/file-type/psd.svg";
         } else {
           return "/img/icons/file-type/zip.svg";
         }
@@ -490,11 +465,11 @@ export default {
           file[i].type != "application/octet-stream" &&
           file[i].type != "multipart/x-zip" &&
           file[i].type != "video/mp4" &&
+          file[i].type != "application/psd" &&
           file[i].type != "image/png"
         ) {
           this.$vs.notify({
-            text: file[i].type,
-            // text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, GIF, SVG, AVI, DOC, DOCX, ICO, JSON, MP3, MPEG, PDF, TXT, XLS, XSLX, ZIP, RAR, MP4) *",
+            text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, GIF, SVG, AVI, DOC, DOCX, ICO, JSON, MP3, MPEG, PDF, TXT, XLS, XSLX, ZIP, RAR, MP4) *",
             color: "danger",
             position: "top-right",
             icon: "error",
@@ -507,6 +482,7 @@ export default {
     files_selected: function (e) {
       const file = e.target.files;
       let count = file.length;
+
       for (var i = 0; count > i; i++) {
         if (file[i].size > 1024 * 1024) {
           this.$vs.notify({
@@ -549,8 +525,10 @@ export default {
           file[i].type != "application/octet-stream" &&
           file[i].type != "multipart/x-zip" &&
           file[i].type != "video/mp4" &&
+          file[i].type != "application/psd" &&
           file[i].type != "image/png"
         ) {
+          //       console.log("file:"+this.filesSelected);
           this.$vs.notify({
             text: "هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, GIF, SVG, AVI, DOC, DOCX, ICO, JSON, MP3, MPEG, PDF, TXT, XLS, XSLX, ZIP, RAR, MP4) *",
             color: "danger",
@@ -563,7 +541,7 @@ export default {
       }
     },
     SectorChange: function () {
-            this.activite_selected = null;
+      this.activite_selected = null;
 
       if (this.sector == 1) {
         this.Activites = Activites2;
@@ -583,15 +561,19 @@ export default {
 
       if (this.filesSelected.length > 0) {
         for (var i = 0; this.filesSelected.length > i; i++) {
-          data.append("files[]", this.filesSelected[i][0]);
+          data.append("files_u[]", this.filesSelected[i][0]);
         }
       } else {
-        data.append("files[0]", null);
+        data.append("files_u[0]", null);
       }
       data.append("title", this.title);
       data.append("description", this.description);
       data.append("sector", this.sector);
-      data.append("activite", this.activite_selected);
+      if (this.activite_selected != null && this.activite_selected != "") {
+        data.append("activite", this.activite_selected);
+      } else {
+        data.append("activite", "");
+      }
       data.append("budget", this.budget);
       data.append("time", this.time);
       data.append("onlineCeck", this.onlineCeck);
@@ -612,7 +594,7 @@ export default {
             position: "top-right",
             icon: "check",
           });
-          //   window.location.replace("/order/" + response.data.order_id);
+             window.location.replace("/order/" + response.data.oid);
         })
         .catch((error) => {
           this.HideLoadingInDiv();
@@ -645,6 +627,8 @@ export default {
             });
             window.location.reload();
           } else {
+            this.errors = new Errors();
+
             this.$vs.notify({
               title: "هناك خطأ ما !",
               text: "حصل خطأ ما أثناء محاولة ارسال طلبك يرجى اعادة المحاولة, اذا استمر معك المشكل يرجى التواصل معنا",

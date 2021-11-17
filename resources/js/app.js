@@ -44,7 +44,13 @@ Vue.use(Vuesax, {
  Vue.component('like-portfolio', require('./components/user/like-portfolio.vue').default);
  Vue.component('delete-portfolio', require('./components/user/delete-from-portfolio.vue').default);
  Vue.component('edit-portfolio', require('./components/user/edit-portfolio.vue').default);
+
+ /* Orders  Section */
  Vue.component('add-order', require('./components/user/orders/add-order.vue').default);
+
+ /* Offers Section */
+ Vue.component('add-offer', require('./components/user/offers/add-offer.vue').default);
+ Vue.component('offers-list', require('./components/user/offers/offers-list.vue').default);
  
  /* Public Section */
  Vue.component('ae-list', require('./components/public/ae-list.vue').default);

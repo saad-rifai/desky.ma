@@ -59,8 +59,13 @@ class LoginController extends Controller
             $remember_token = false;
         }
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember_token)) {
+            if(isset($request->previous)){
+                return response()->json(['Login Success !', 'previous' => $request->previous ], 200);
 
-            return response()->json(['Login Success !'], 200);
+            }else{
+                return response()->json(['Login Success !' ], 200);
+
+            }
 
         }else{
             return response()->json(['errors' => ['email' => [0 => 'البريد الالكتروني أو كلمة السر التي أدخلت غير متطابقة']]], 422);

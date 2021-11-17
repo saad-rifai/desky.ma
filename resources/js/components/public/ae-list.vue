@@ -325,6 +325,19 @@
                         </div>
                       </div>
                     </div>
+                    <div class="col-auto mobile-hidden-1">
+                    <button class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i></button>
+                    <span class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
+                            aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                        <ul class="dropdown-menu" aria-labelledby="menu_user">
+                            <li><a class="dropdown-item" href="#">مراسلة</a></li>
+                            <li><a class="dropdown-item" href="#">التبليغ</a></li>
+                        </ul>
+                    </span>
+
+
+                    </div>
                   </div>
                   <div class="row mr-65 mmt-35">
                     <div class="col-auto">

@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','verifiy_token'
+        'password', 'remember_token','verifiy_token', 'OAuth_ID', 'phone_number', 'email', 'gender', 'status', 'IP_Address', 'MAC_Address', 'source','date_of_birth', 'verified_account'
     ];
 
     /**
@@ -48,6 +48,14 @@ class User extends Authenticatable
     public function Portfolio()
     {
         return $this->hasMany(UserPortFolio::class, 'Account_number');
+    }
+    public function Offers()
+    {
+        return $this->hasMany(Offers::class, 'Account_number');
+    }
+    public function Orders()
+    {
+        return $this->hasMany(Orders::class, 'Account_number');
     }
     public function rating()
     {

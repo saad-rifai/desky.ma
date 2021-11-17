@@ -74,7 +74,7 @@
                     <span>أو</span>
                 </div>
                 <div id="app">
-                    <login-form :csrf="'{{csrf_token()}}'"></login-form>
+                    <login-form :csrf="'{{csrf_token()}}'" ></login-form>
 
                 </div>
            

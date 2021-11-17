@@ -152,7 +152,8 @@ export default {
             fixed: true,
             icon: "check",
           });
-         window.location.reload();
+           window.location.reload();
+ 
           this.HideLoadingInDiv();
         })
         .catch((error) => {
