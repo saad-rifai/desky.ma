@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->float('budget');
             $table->integer('time');
             $table->json('files')->nullable();
+            $table->string("keywords", 250)->nullable();
             $table->string('message', 200)->nullable();
             $table->integer('status'); /* 0 = Pending; 1 = Receipt of offers; 2 = implementation phase; 3 = done; 4 = rejected; 5 = Permanently rejected */
             $table->foreign('Account_number')->references('Account_number')->on('users')

@@ -156,8 +156,9 @@ h1.title-box-article {
     font-weight: 400;
 }
 p.box-article-description {
-    font-size: 13px;
+    font-size: 15px;
     color: #505050;
+    line-height: 1.8;
 }
 .avatar-large-box-article {
     width: 65px;
@@ -532,7 +533,66 @@ span.nb-step {
 }
 .box-article {
     border-bottom: solid 1px #efefef;
-    cursor: pointer;
+}
+.box-highlight {
+    background-color: #ffe2cf;
+    margin: -10px;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.bg-brand {
+    background-color: #f96a0c !important;
+    border-radius: 0 20px 20px 0;
+}
+h3.ul-title {
+    font-size: 16px;
+    font-weight: 400;
+}
+.exmples-menu ul li {
+    font-size: 15px;
+    color: #3e3e3e;
+    line-height: 2;
+    font-weight: 300;
+}
+span.icon-list-steps::after {
+    content: "";
+    width: 2px;
+    height: 47px;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: -31px;
+    right: 40px;
+}
+span.icon-list-steps.active {
+    background-color: white !important;
+    color: #f96a0c;
+}
+.list-group-item:last-child > .icon-list-steps::after{
+  display: none!important;
+}
+span.icon-list-steps {
+    color: white;
+    background-color: #f96a0c;
+    border: solid 2px white;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    font-size: 25px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 2;
+    margin-left: 15px;
+}
+.form-steps-bg ul.list-group.list-group-flush {
+    width: 100%;
+    padding: 25px;
+}
+.form-steps-bg .list-group-item {
+    background-color: inherit !important;
+    color: white !important;
+    border-bottom-color: #ffffff2e !important;
+    font-size: 14px;
 }
 .box-article:last-child {
     border: none !important;
@@ -664,7 +724,7 @@ header.vs-popup--header {
 
 
 .body-card-text p {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 2;
 }
 .rounded-pill.steps {
@@ -721,6 +781,43 @@ h1.title-page-cbrand {
 .rate:not(:checked) > label:before {
     content: "★ ";
 }
+.text-wrap-line{
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto;
+    white-space: pre-line !important;
+    margin-top: -1em;
+}
+.font-Naskh *{
+    font-family: Noto Naskh Arabic,Helvetica Neue,Helvetica,Arial,sans-serif !important;
+}
+.vuesax-app-is-ltr .vs-collapse-item--icon-header {
+    left: 0 !important;
+}
+.font-Naskh{
+    font-family: Noto Naskh Arabic,Helvetica Neue,Helvetica,Arial,sans-serif !important;
+}
+.con-chips {
+    border: solid 1px #cccccc !important;
+    padding: 2px 20px !important;
+}
+.vuesax-app-is-ltr .vs-chip--text {
+    margin-left: 5px !important;
+    padding-right: 10px !important;
+    font-size: 14px !important;
+}
+.con-chips .con-vs-chip{
+    margin-right: 0 !important;
+}
+input.con-chips--input::placeholder {
+    font-size: 15px !important;
+    font-family: 'Noto Naskh Arabic' !important;
+}
+
+
+button.btn-close.vs-chip--close {
+    margin-left: 0 !important;
+}
 .rate > input:checked ~ label {
     color: #ffc700;
 }
@@ -769,7 +866,7 @@ h1.card__info_money {
     border-radius: 3px;
 }
 .offer-info-item h1 {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
     color: #343434;
 }
@@ -782,7 +879,7 @@ span.offer-info-icon {
 }
 .offer-info-item h2 {
     font-weight: 400;
-    font-size: 20px;
+    font-size: 16px;
     color: #343434;
     margin-bottom: 15px;
 }
@@ -813,6 +910,11 @@ h3.pg-info-number {
     border-bottom: solid 1px #e5e5e5;
     padding-bottom: 15px;
 }
+.vuesax-app-is-ltr .con-vs-chip {
+    float: right !important;
+}
+
+
 .mbl-show{
     display: none !important;
 }
@@ -920,7 +1022,9 @@ ul.dropdown-menu li {
 
 
 
-
+.steps-add-order__mobile{
+    display: none !important;
+}
 
 
 
@@ -1048,6 +1152,21 @@ span.card-info-text {
         fill: white !important;
         filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
     }
+}
+@media (max-width: 767px) {
+    .steps-add-order__mobile{
+        display: flex !important;
+    }
+  .form-steps-bg{
+      display: none !important;
+  }
+  .bg-brand.img-fluid {
+    width: 100%;
+    border-radius: 0;
+    position: fixed;
+    bottom: 0;
+    z-index: 10000 !important;
+}
 }
 @media (max-width: 995px) {
     .filter-search-web {

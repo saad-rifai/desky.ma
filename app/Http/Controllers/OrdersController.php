@@ -20,12 +20,15 @@ class OrdersController extends Controller
            'onlineCeck' => 'required|integer|max:2|min:1',
            'budget' => 'required|integer|max:500000|min:150',
            'time' => 'required|integer|max:120|min:1',
+           'keywords' => 'nullable'
        ], $messages = [
         'required' => 'هذا الحقل مطلوب *',
         'sector.min' => 'يرجى تحديد القطاع *',
         'sector.max' => 'يرجى تحديد القطاع *',
         'sector.integer' => 'يرجى تحديد القطاع *',
         'activite.integer' => 'يرجى تحديد تصنيف صالح *',
+
+
 
         'title.min' => 'يرجى ادخال عنوان صالح العنوان الذي ادخلته أقصر من اللازم  *',
         'title.max' => 'يرجى ادخال عنوان صالح العنوان الذي ادخلته أطول من اللازم  *',
@@ -144,6 +147,7 @@ class OrdersController extends Controller
                                 'place' => $cityid,
                                 'time' => $request->time,
                                 'budget' => $request->budget,
+                                'keywords' => $request->keywords,
                                 'status' => 0
                             ]);
                             if ($stmt) {
@@ -176,6 +180,8 @@ class OrdersController extends Controller
                     'place' => $cityid,
                     'time' => $request->time,
                     'budget' => $request->budget,
+                    'keywords' => $request->keywords,
+
                     'status' => 0
                 ]);
                 if ($stmt) {
@@ -198,8 +204,10 @@ class OrdersController extends Controller
             if($infos->count() > 0){
                 foreach($infos as $info);
                 $info->AllowedToAddOffer = false;
+                if($info->files != null){
+                    $info->files = json_decode($info->files, true);
 
-                $info->files = json_decode($info->files, true);
+                }
                 if(Auth::check()){
                     if(auth::user()->verified_account == 2){
                         if(Auth::user()->Account_number != $info->Account_number){
@@ -231,14 +239,19 @@ class OrdersController extends Controller
 
                 $Activites = $info->activite;
                 $sector = $info->sector;
-                if ($sector == 1) {
-                    $listActivites = file_get_contents('data/json/activite-ae-2.json');
-                    $listActivitesdata = json_decode($listActivites, true);
-                } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
-                    $listActivites = file_get_contents('data/json/activite-ae-1.json');
-                    $listActivitesdata = json_decode($listActivites, true);
+                if($Activites != null){
+                    if ($sector == 1) {
+                        $listActivites = file_get_contents('data/json/activite-ae-2.json');
+                        $listActivitesdata = json_decode($listActivites, true);
+                    } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
+                        $listActivites = file_get_contents('data/json/activite-ae-1.json');
+                        $listActivitesdata = json_decode($listActivites, true);
+                    }
+                    $activite = $listActivitesdata[$Activites];
+                    $info->activite = $activite;
+
                 }
-                $activite = $listActivitesdata[$Activites];
+
 
                 /* Set Sector Name */
 
@@ -255,7 +268,6 @@ class OrdersController extends Controller
                 }
 
                 $info->sector = $sectorName;
-                $info->activite = $activite;
                 $info->budget= number_format((float)$info->budget, 2, '.', '');
                 switch($info->time){
                     case(1);

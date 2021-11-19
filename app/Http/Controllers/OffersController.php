@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Offers;
 use App\Orders;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -85,7 +86,12 @@ class OffersController extends Controller
     }
     public function index(Request $request){
         if(isset($request->OID) && $request->OID != null && $request->OID != ""){
-
+            $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
+            if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
+                $OrderCreator=true;
+            }else{
+                $OrderCreator=false;
+            }
             $infos = Offers::where('OID', $request->OID)->paginate(6);
             for($i=0; $i < count($infos); $i++){
                 $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
@@ -93,6 +99,22 @@ class OffersController extends Controller
                 $infos[$i]->userRating = $rating->numRating;
                 $infos[$i]->user = $infos[$i]->user;
                 $infos[$i]->AeAccount = $infos[$i]->user->AeAccount;
+                $infos[$i]->isOnline = User::isOnline($infos[$i]->Account_number);
+                if($OrderCreator == false){
+                    $infos[$i]->time = null;
+                    $infos[$i]->price = null;
+                }else{
+                    if ($infos[$i]->user->Portfolio->count() < 10 && $infos[$i]->user->Portfolio->count() > 1) {
+                        $infos[$i]->PortFolioCount = $infos[$i]->user->Portfolio->count().' أعمال';
+                
+                    }elseif($infos[$i]->user->Portfolio->count() == 1 || $infos[$i]->user->Portfolio->count() > 10){
+                        $infos[$i]->PortFolioCount = $infos[$i]->user->Portfolio->count().' عمل';
+
+                    }else{
+                        $infos[$i]->PortFolioCount = $infos[$i]->user->Portfolio->count();
+
+                    }
+                }
 
                 /* Get Activite Name */
                 $Activites = $infos[$i]->AeAccount->activite;
@@ -138,19 +160,13 @@ class OffersController extends Controller
                 $infos[$i]->sector = $sectorName;
                 $infos[$i]->verified_account = $infos[$i]->user->verified_account;
             }
-            $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
-            $infos->OrderCreator = $CeckIfOrderByUser;
-            if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
-                $OrderCreator=true;
-            }else{
-                $OrderCreator=false;
-            }
+
             return response()->json(['data'=>$infos, 'OrderCreator' => $OrderCreator], 200);
 
        
     
         }else{
-            return response()->json(['error' => 'Bad Request !21'], 400);
+            return response()->json(['error' => 'Bad Request !'], 400);
         }
     }
 }

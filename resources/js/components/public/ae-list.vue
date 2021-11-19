@@ -281,7 +281,7 @@
                             data-bs-placement="top"
                             title="متصل"
                           >
-                            <span class="visually-hidden">New alerts</span>
+                            <span class="visually-hidden">Online</span>
                           </span>
 
                           <div class="avatar-large-box-article">
@@ -389,7 +389,7 @@
                 </div>
                 <div class="body-box-article mr-65">
                   <p
-                    class="box-article-description"
+                    class="box-article-description font-Naskh"
                     v-if="item.description != '' && item.description != null"
                   >
                     {{ item.description }}
@@ -560,9 +560,6 @@ export default {
           )
           .then((response) => {
             this.Allresponse = response.data;
-            /*   array1.forEach.call(element => {
-                  this.listdata.push(element);
-            });*/
             const entries = Object.values(this.Allresponse.data);
 
             for (var i = 0; entries.length > i; i++) {

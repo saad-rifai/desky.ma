@@ -1,6 +1,6 @@
 @extends('layout.master')
-@section('title',  $data->title )
-@section('description',  $data->description)
+@section('title', $data->title)
+@section('description', $data->description)
 
 @section('content')
 
@@ -245,40 +245,7 @@
                     </a>
                 </div>
 
-                <div class="card p-5 pb-3 mb-4">
-                    <div class="position-relative m-4">
-                        <div class="progress" style="height: 1px;">
-                            <div class="progress-bar" role="progressbar" style=" @php
-                                if ($data->status == 1) {
-                                    echo 'width:0%';
-                                } elseif ($data->status == 2) {
-                                    echo 'width:50%';
-                                } elseif ($data->status == 3) {
-                                    echo 'width:100%';
-                                }
-                            @endphp" aria-valuenow="50"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="position-relative">
-                            <span class="step-title position-absolute top-0 start-0 translate-middle">استلام العروض</span>
-                            <button type="button"
-                                class="position-absolute top-0 start-0 translate-middle btn btn-sm @php if($data->status >= 1 && $data->status < 4){ echo 'btn-primary'; }else{ echo 'btn-secondary'; } @endphp rounded-pill steps"
-                                style="width: 2rem; height:2rem;">1</button>
-                        </div>
-                        <div class="position-relative">
-                            <span class="step-title position-absolute top-0 start-50 translate-middle">مرحلة التنفيذ</span>
-                            <button type="button"
-                                class="position-absolute top-0 start-50 translate-middle btn btn-sm @php if($data->status >= 2 && $data->status < 4){ echo 'btn-primary'; }else{ echo 'btn-secondary'; } @endphp rounded-pill steps"
-                                style="width: 2rem; height:2rem;">2</button>
-                        </div>
-                        <div class="position-relative">
-                            <span class="step-title position-absolute top-0 start-100 translate-middle">تم الانجاز</span>
-                            <button type="button"
-                                class="position-absolute top-0 start-100 translate-middle btn btn-sm  @php if($data->status == 3 ){ echo 'btn-primary'; }else{ echo 'btn-secondary'; } @endphp rounded-pill steps"
-                                style="width: 2rem; height:2rem;">3</button>
-                        </div>
-                    </div>
-                </div>
+  
                 <div class="card p-4 mb-4">
                     <div class="head-card position-relative">
                         @switch($data->status)
@@ -317,11 +284,21 @@
                         <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> وصف الطلب</h1>
                     </div>
                     <div class="body-card-text">
-                        <p style="white-space: pre-line !important">
+                        <p class="font-Naskh text-wrap-line">
                             {{ $data->description }}
                         </p>
                     </div>
 
+                </div>
+                <div class="card p-4 mb-4">
+                    <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> الكلمات المفتاحية</h1>
+                    <div class="keywords-wraper" dir="rtl" align="right">
+                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
+                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
+                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
+                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
+                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
+                    </div>
                 </div>
                 @if ($data->files && count($data->files))
                     <div class="card p-4 mb-4">
@@ -354,7 +331,7 @@
                     @if ($data->AllowedToAddOffer)
                         <div class="card p-4 mb-4">
                             <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> أضف عرضك</h1>
-                            <add-offer :oid="'{{$data->OID}}'"></add-offer>
+                            <add-offer :oid="'{{ $data->OID }}'"></add-offer>
 
                         </div>
                     @endif
@@ -363,26 +340,21 @@
                         <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> أضف عرضك</h1>
                         <div class=" gap-2 d-md-block text-center">
 
-                            <a href="{{ asset('login?redirect='.url()->current()) }}">
+                            <a href="{{ asset('login?redirect=' . url()->current()) }}">
                                 <button type="button" class="btn btn-outline-primary ">الدخول</button>
                             </a>
-                            <a href="{{ asset('register?redirect='.url()->current()) }}">
+                            <a href="{{ asset('register?redirect=' . url()->current()) }}">
                                 <button type="button" class="btn btn-primary">انشاء حساب</button>
                             </a>
                         </div>
                     </div>
                 @endauth
-                <div class="card p-4 mb-4 position-relative" >
-                    <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> العروض</h1>
 
-                    <offers-list oid="{{$data->OID}}"></offers-list>
 
-                </div>
-                <div class="show-more-section text-center mt-5 mb-4">
-                    <button style="margin-right: 0 !important;" type="button" class="btn btn-primary text-center">مشاهدة
-                        المزيد</button>
+                <offers-list oid="{{ $data->OID }}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"></offers-list>
 
-                </div>
+
+
             </div>
             <div class="col-sm col-lg-4 ">
                 <div class="box-left  card p-4 mbl-hide">

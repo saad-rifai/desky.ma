@@ -134,7 +134,7 @@
                         <div class="tab-pane fade show active p-3 body-card-text" id="home" role="tabpanel"
                             aria-labelledby="home-tab">
 
-                            <p>
+                            <p class="font-Naskh">
                                 @php 
                                 if ($data->description != '' && $data->description != null) {
                                         echo $data->description;

@@ -85,7 +85,7 @@
       <div class="body-box-article mr-65">
         <p class="box-article-description"></p>
         <p
-          class="box-article-description"
+          class="box-article-description font-Naskh"
           v-if="item.text != '' && item.text != null"
         >
           {{ item.text }}

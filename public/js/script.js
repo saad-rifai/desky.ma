@@ -37,7 +37,6 @@ window.addEventListener("drop",function(e){
   e.preventDefault();
 },false);
 
-  $('.js-country-basic').select2();
 
 
 
@@ -119,31 +118,6 @@ $("#"+form_file).on('change', function () {
 });
 
 
-
-  $('#activety-tags').select2({
-    placeholder: "تحديد النشاط",
-    allowClear: true,
-    language: {
-      noResults: function() {
-        return 'لا توجد نتيجة';
-      },
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
-  });
-  $('#activety-tags-2').select2({
-    placeholder: "النشاط",
-    allowClear: true,
-    language: {
-      noResults: function() {
-        return 'لا توجد نتيجة';
-      },
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
-  });
 
 
 function redirectUserPage(e,id){
