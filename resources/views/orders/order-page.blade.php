@@ -290,16 +290,16 @@
                     </div>
 
                 </div>
+                @if(isset($data->keywords) && $data->keywords != null)
                 <div class="card p-4 mb-4">
                     <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> الكلمات المفتاحية</h1>
                     <div class="keywords-wraper" dir="rtl" align="right">
-                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
-                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
-                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
-                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
-                        <vs-chip>تحرير الفيديو<vs-avatar icon="tag"/></vs-chip>
+                        @foreach($data->keywords as $keyword)
+                        <vs-chip>{{$keyword}}<vs-avatar icon="tag"/></vs-chip>
+                        @endforeach
                     </div>
                 </div>
+                @endif
                 @if ($data->files && count($data->files))
                     <div class="card p-4 mb-4">
                         <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> ملفات مرفقة</h1>

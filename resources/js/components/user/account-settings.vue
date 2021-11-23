@@ -318,6 +318,7 @@ class Errors {
 import { Cropper, CircleStencil } from "vue-advanced-cropper";
 
 import ListCities from "../../../../public/data/json/list-moroccan-cities.json";
+import 'vue-advanced-cropper/dist/style.css';
 
 export default {
   props: ["userinfos"],

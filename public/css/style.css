@@ -131,8 +131,8 @@ icon-dropdown:hover {
     color: wheat !important;
 }
 .user-info-box-article-avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     overflow: hidden;
     border-radius: 100%;
     cursor: pointer;
@@ -140,6 +140,8 @@ icon-dropdown:hover {
 }
 .user-info-box-article-avatar img {
     width: 100%;
+    height: 100%;
+    display: block;
 }
 h5.user-info-box-article-name-h5 {
     font-size: 15px;
@@ -154,6 +156,7 @@ h1.title-box-article {
     font-size: 20px;
     color: #f96a0c;
     font-weight: 400;
+    line-height: 1.6;
 }
 p.box-article-description {
     font-size: 15px;
@@ -532,7 +535,7 @@ span.nb-step {
     color: white;
 }
 .box-article {
-    border-bottom: solid 1px #efefef;
+    border-bottom: solid 1px #efefef !important;
 }
 .box-highlight {
     background-color: #ffe2cf;
@@ -594,9 +597,10 @@ span.icon-list-steps {
     border-bottom-color: #ffffff2e !important;
     font-size: 14px;
 }
-.box-article:last-child {
+.box-left a:last-child .box-article {
     border: none !important;
 }
+
 .show-files-border:last-child {
     border-bottom: none !important;
 }
@@ -854,34 +858,13 @@ h1.card__info_money {
     color: #f96a0c;
     margin-top: 10px;
 }
-.offer-infos-box {
-    text-align: center;
+.no-data-message img {
     width: 100%;
-    background-color: #f6f6f6;
-    padding: 10px 0;
+    max-width: 200px;
     display: block;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 25px;
-    border-radius: 3px;
-}
-.offer-info-item h1 {
-    font-size: 16px;
-    font-weight: 400;
-    color: #343434;
-}
-span.offer-info-icon {
-    font-size: 30px;
-    color: #343434;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: block;
-}
-.offer-info-item h2 {
-    font-weight: 400;
-    font-size: 16px;
-    color: #343434;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 h3.pg-info-title {
     font-size: 25px;
@@ -913,8 +896,6 @@ h3.pg-info-number {
 .vuesax-app-is-ltr .con-vs-chip {
     float: right !important;
 }
-
-
 .mbl-show{
     display: none !important;
 }
@@ -996,6 +977,10 @@ ul.dropdown-menu li {
     position: absolute;
     left: 15px;
     color: #585858;
+}
+.lazy-order {
+    margin-right: 0 !important;
+    margin-top: 10px;
 }
 .item-w-icn {
     line-height: 2.5;
@@ -1084,7 +1069,9 @@ span.card-info-text {
 }
 
 @media (max-width: 650px) {
- 
+    h1.title-box-article{
+        font-size: 18px;
+    }
     .cropper {
         height: 300px;
     }

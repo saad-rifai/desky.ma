@@ -7,7 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Cache;
 class UserAccountController extends Controller
 {
     public function __construct()
@@ -37,6 +37,7 @@ class UserAccountController extends Controller
         if ($upload_success) {
             $stmt = User::where('email', auth::user()->email)->where('Account_number', auth::user()->Account_number)->update(['avatar' => "$fullavatarUrl"]);
             if ($stmt) {
+                Cache::forget(Auth::user()->username . 'PP');
                 File::delete(Auth::user()->avatar);
 
                 return response()->json(['success' => 'تم تحديث الصورة الشخصية بنجاح '], 200);

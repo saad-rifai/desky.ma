@@ -84,15 +84,21 @@ class OffersController extends Controller
 
 
     }
-    public function index(Request $request){
+    public function NewOffers(Request $request){
         if(isset($request->OID) && $request->OID != null && $request->OID != ""){
-            $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
-            if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
-                $OrderCreator=true;
+            if(Auth::check()){
+                $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
+                if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
+                    $OrderCreator=true;
+                }else{
+                    $OrderCreator=false;
+                }   
             }else{
                 $OrderCreator=false;
-            }
-            $infos = Offers::where('OID', $request->OID)->paginate(6);
+            } 
+
+
+            $infos = Offers::where('OID', $request->OID)->where("status", "0")->paginate(6);
             for($i=0; $i < count($infos); $i++){
                 $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
                 foreach ($rating as $rating);
@@ -103,17 +109,6 @@ class OffersController extends Controller
                 if($OrderCreator == false){
                     $infos[$i]->time = null;
                     $infos[$i]->price = null;
-                }else{
-                    if ($infos[$i]->user->Portfolio->count() < 10 && $infos[$i]->user->Portfolio->count() > 1) {
-                        $infos[$i]->PortFolioCount = $infos[$i]->user->Portfolio->count().' أعمال';
-                
-                    }elseif($infos[$i]->user->Portfolio->count() == 1 || $infos[$i]->user->Portfolio->count() > 10){
-                        $infos[$i]->PortFolioCount = $infos[$i]->user->Portfolio->count().' عمل';
-
-                    }else{
-                        $infos[$i]->PortFolioCount = $infos[$i]->user->Portfolio->count();
-
-                    }
                 }
 
                 /* Get Activite Name */
@@ -146,6 +141,80 @@ class OffersController extends Controller
 
                 /* Get City Name */
 
+                $datajson = file_get_contents('data/json/list-moroccan-cities.json');
+                $jsondata = json_decode($datajson, true);
+
+                $resultcheck = "";
+                foreach ($jsondata as $item) {
+                    if ($item['id'] == $infos[$i]->user->city) {
+                        $resultcheck = $item['ville'];
+                    }
+                }
+                $infos[$i]->activite = $activite;
+                $infos[$i]->city = $resultcheck;
+                $infos[$i]->sector = $sectorName;
+                $infos[$i]->verified_account = $infos[$i]->user->verified_account;
+            }
+
+            return response()->json(['data'=>$infos, 'OrderCreator' => $OrderCreator], 200);
+
+       
+    
+        }else{
+            return response()->json(['error' => 'Bad Request !'], 400);
+        }
+    }
+    public function hired(Request $request){
+        if(isset($request->OID) && $request->OID != null && $request->OID != ""){
+            if(Auth::check()){
+                $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
+                if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
+                    $OrderCreator=true;
+                }else{
+                    $OrderCreator=false;
+                }   
+            }else{
+                $OrderCreator=false;
+            } 
+            $infos = Offers::where('OID', $request->OID)->where("status", "1")->paginate(6);
+            for($i=0; $i < count($infos); $i++){
+                $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
+                foreach ($rating as $rating);
+                $infos[$i]->userRating = $rating->numRating;
+                $infos[$i]->user = $infos[$i]->user;
+                $infos[$i]->AeAccount = $infos[$i]->user->AeAccount;
+                $infos[$i]->isOnline = User::isOnline($infos[$i]->Account_number);
+                if($OrderCreator == false){
+                    $infos[$i]->time = null;
+                    $infos[$i]->price = null;
+                }
+
+                /* Get Activite Name */
+                $Activites = $infos[$i]->AeAccount->activite;
+                $sector = $infos[$i]->AeAccount->sector;
+                if ($sector == 1) {
+                    $listActivites = file_get_contents('data/json/activite-ae-2.json');
+                    $listActivitesdata = json_decode($listActivites, true);
+                } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
+                    $listActivites = file_get_contents('data/json/activite-ae-1.json');
+                    $listActivitesdata = json_decode($listActivites, true);
+                }
+                $activite = $listActivitesdata[$Activites];
+
+                /* Set Sector Name */
+
+                if ($sector == 1) {
+                    $sectorName = "الخدمات";
+                } elseif ($sector == 2) {
+                    $sectorName = "التجارة";
+                } elseif ($sector == 3) {
+                    $sectorName = "الصناعة";
+                } elseif ($sector == 4) {
+                    $sectorName = "الحرفية";
+                } else {
+                    $sectorName = "";
+                }
+                /* Get City Name */
                 $datajson = file_get_contents('data/json/list-moroccan-cities.json');
                 $jsondata = json_decode($datajson, true);
 

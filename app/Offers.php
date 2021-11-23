@@ -12,4 +12,8 @@ class Offers extends Model
     {
         return $this->belongsTo(User::class, 'Account_number');
     }
+    public function Orders()
+    {
+        return $this->belongsTo(Orders::class, 'OID');
+    }
 }

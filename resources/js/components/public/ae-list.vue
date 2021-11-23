@@ -267,7 +267,7 @@
                             v-if="item.isOnline"
                             class="
                               position-absolute
-                              top-0
+                              bottom-0
                               start-100
                               translate-middle
                               p-2
@@ -444,7 +444,7 @@ export default {
       sector: "",
       activite: null,
       city: "",
-      //    rating_n: "",
+  
       typeget: "all",
       stopLazyLoading: false
     };

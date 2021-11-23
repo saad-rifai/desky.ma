@@ -53,12 +53,15 @@ Route::prefix('ajax')->group(function () {
     /* Orders Route */
 
     Route::post('user/order/create', 'OrdersController@create')->middleware("auth");
+    Route::get('orders/all', 'OrdersController@all');
+    Route::post('orders/search', 'OrdersController@search');
 
     /***** */
 
     /* Offers Routes */
     Route::post('user/offer/create', 'OffersController@create')->middleware("auth");
-    Route::post('orders/offers/all', 'OffersController@index');
+    Route::post('orders/offers/new', 'OffersController@NewOffers');
+    Route::post('orders/offers/hired', 'OffersController@hired');
 
     /********/
 });
@@ -109,7 +112,7 @@ Route::group(['middleware' => 'avatar'], function () {
         }
     });
     Route::get('/orders', function () {
-        return view('orders');
+        return view('orders.orders');
     });
 
     Route::get('/auto-entrepreneurs', function () {

@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Ramsey\Uuid\Type\Decimal;
-
 use function GuzzleHttp\json_decode;
-
+use Illuminate\Support\Facades\DB;
 class OrdersController extends Controller
 {
     public function create(Request $request){
@@ -19,7 +17,7 @@ class OrdersController extends Controller
            'activite'=> 'nullable|integer',
            'onlineCeck' => 'required|integer|max:2|min:1',
            'budget' => 'required|integer|max:500000|min:150',
-           'time' => 'required|integer|max:120|min:1',
+           'time' => 'required|integer|max:180|min:1',
            'keywords' => 'nullable'
        ], $messages = [
         'required' => 'هذا الحقل مطلوب *',
@@ -42,7 +40,7 @@ class OrdersController extends Controller
         'budget.max' => 'الحد الأقصى للميزانية المسموح بها 500 الف درهم مغربي *',
 
         'time.min' => 'يرجى تحديد عدد الأيام المتوقعة *',
-        'time.max' => 'الحد الأقصى 120 يوم *',
+        'time.max' => 'الحد الأقصى 180 يوم (6 أشهر) *',
         ]);
         /* Place Validation */
         if($request->onlineCeck  == 2){
@@ -206,16 +204,13 @@ class OrdersController extends Controller
                 $info->AllowedToAddOffer = false;
                 if($info->files != null){
                     $info->files = json_decode($info->files, true);
-
                 }
                 if(Auth::check()){
                     if(auth::user()->verified_account == 2){
                         if(Auth::user()->Account_number != $info->Account_number){
                             if(count(Auth::user()->Offers->where('OID', $request->OID)) < 1 && count(Auth::user()->Orders->where('OID', $request->OID)) < 1){
                                 $info->AllowedToAddOffer = true;
-
                             }
-
                         }
                     }
                 }
@@ -235,8 +230,15 @@ class OrdersController extends Controller
             }else{
                 $info->place = null;
             }
+            /* Add Keywords to array */
+            if($info->keywords != null && $info->keywords != ""){
+            $info->keywords = explode(",",$info->keywords);
+                
+            }else{
+                $info->keywords = null;
+            }
+            /* Add Keywords to array */
                 /* Get Activite And Sector NAme */
-
                 $Activites = $info->activite;
                 $sector = $info->sector;
                 if($Activites != null){
@@ -249,12 +251,8 @@ class OrdersController extends Controller
                     }
                     $activite = $listActivitesdata[$Activites];
                     $info->activite = $activite;
-
                 }
-
-
                 /* Set Sector Name */
-
                 if ($sector == 1) {
                     $sectorName = "الخدمات";
                 } elseif ($sector == 2) {
@@ -266,7 +264,6 @@ class OrdersController extends Controller
                 } else {
                     $sectorName = "";
                 }
-
                 $info->sector = $sectorName;
                 $info->budget= number_format((float)$info->budget, 2, '.', '');
                 switch($info->time){
@@ -302,4 +299,55 @@ class OrdersController extends Controller
             abort(404);
         }
     }
+    public function all(Request $request){
+        $infos = Orders::where('status', 1)->orderBy("created_at", "DESC")->paginate(10);
+        for($i=0; count($infos) > $i; $i++){
+            $infos[$i]->user_sector = $infos[$i]->user->sector;
+            $infos[$i]->OffersCount = $infos[$i]->Offers->count();
+        }
+        return response()->json($infos, 200);
+
+    }
+    public function search(Request $request){
+        /* Search values */
+        $query = $request->q;
+        $sector = $request->s;
+        $activite = $request->a;
+        $city = $request->c;
+    if($city == null || $city == ""){
+            $cityquery = "%%";
+        }else if($city == "remotely"){
+            $cityquery = "remotely";
+        }else{
+            $cityquery = "%".$city."%";
+        }
+        $budget = explode(",", $request->b);
+        $time = $request->t;
+        
+        /*  Search values */
+        
+            $data = Orders::where('status', 1)
+                ->where('activite', 'LIKE', '%' . $activite . '%')
+                ->where('sector', 'LIKE', '%' . $sector . '%')
+                ->where("place","LIKE", $cityquery)
+                ->where('time', '<', intval($time) )
+                ->where('budget', '>', intval($budget[0]) )
+                ->where('budget', '<',intval($budget[1]) )
+
+                ->where(function ($qu) use ($query) {
+                    $qu->where('title', 'LIKE', '%' . $query . '%')
+                        ->orWhere('description', 'LIKE', '%' . $query . '%')
+                        ->orWhere('keywords', 'LIKE', '%' . $query . '%');
+                })->orderBy("created_at", "DESC")->paginate(10);
+               
+                for($i=0; $data->count() > $i; $i++){
+                    $data[$i]->user_sector = $data[$i]->user->sector;
+                    $data[$i]->OffersCount = $data[$i]->Offers->count();
+                }
+                    return response()->json($data, 200);
+            
+   
+
+    }
+    
 }
