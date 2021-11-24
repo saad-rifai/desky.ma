@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -5639,7 +5639,7 @@ var Errors = /*#__PURE__*/function () {
           icon: "check"
         });
 
-        window.location.replace("/order/" + response.data.oid);
+        window.location.replace("/order/" + _this.oid + "?offer=" + response.data.offer_id);
       })["catch"](function (error) {
         _this.HideLoadingInDiv();
 
@@ -6254,8 +6254,6 @@ __webpack_require__.r(__webpack_exports__);
       OrderCreator: false,
       listData2: [],
       listData: [],
-      offerget: parseInt(this.offerget),
-      offerget2: parseInt(this.offerget),
       nodata: false,
       nodata2: false
     };
@@ -7171,7 +7169,6 @@ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___nam
 var _public_data_json_activite_ae_1_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../../../public/data/json/activite-ae-1.json */ "./public/data/json/activite-ae-1.json", 1);
 /* harmony import */ var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../public/data/json/activite-ae-2.json */ "./public/data/json/activite-ae-2.json");
 var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../../../public/data/json/activite-ae-2.json */ "./public/data/json/activite-ae-2.json", 1);
-//
 //
 //
 //
@@ -50603,9 +50600,14 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _vm.OrderCreator
-                            ? _c("div", { staticClass: "order-act-section" }, [
-                                _vm._m(2, true)
-                              ])
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "order-act-section ",
+                                  attrs: { align: "left", dir: "ltr" }
+                                },
+                                [_vm._m(2, true)]
+                              )
                             : _vm._e()
                         ]
                       )
@@ -50639,7 +50641,8 @@ var render = function() {
                           : _c(
                               "button",
                               {
-                                staticClass: "btn btn-primary text-center",
+                                staticClass:
+                                  "btn btn-primary text-center end-data-btn",
                                 staticStyle: { "margin-right": "0 !important" },
                                 attrs: { type: "button", disabled: "" }
                               },
@@ -51263,10 +51266,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-auto" }, [
         _c(
           "button",
-          {
-            staticClass: "btn btn-primary mobile-btn-sm",
-            attrs: { type: "button" }
-          },
+          { staticClass: "btn btn-primary btn-sm", attrs: { type: "button" } },
           [
             _c("i", { staticClass: "fas fa-check" }),
             _vm._v(" قبول العرض\n                  ")
@@ -51278,7 +51278,7 @@ var staticRenderFns = [
         _c(
           "button",
           {
-            staticClass: "btn btn-outline-primary mobile-btn-sm",
+            staticClass: "btn btn-outline-primary btn-sm",
             attrs: { type: "button" }
           },
           [
@@ -85635,26 +85635,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/***/ 1:
+/*!***********************************!*\
+  !*** multi ./resources/js/app.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\desky2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\desky2\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\desky2\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

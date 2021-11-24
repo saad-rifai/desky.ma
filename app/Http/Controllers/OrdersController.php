@@ -230,6 +230,22 @@ class OrdersController extends Controller
             }else{
                 $info->place = null;
             }
+            /* Get User City */
+            if(isset($info->user->city) && $info->user->city != null){
+                $datajson = file_get_contents('data/json/list-moroccan-cities.json');
+                $jsondata = json_decode($datajson, true);
+                $resultcheck2 = "";
+                foreach ($jsondata as $item) {
+                    if ($item['id'] == $info->user->city) {
+                        $resultcheck2 = $item['ville'];
+                    }
+                }
+                $info->userCity = $resultcheck2;
+            }else{
+                $info->userCity = 'غير محدد';
+            }
+            /* Get User City */
+
             /* Add Keywords to array */
             if($info->keywords != null && $info->keywords != ""){
             $info->keywords = explode(",",$info->keywords);

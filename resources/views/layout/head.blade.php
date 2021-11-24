@@ -14,6 +14,7 @@
     <!-- Scripts -->
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/navbar.js') }}" defer></script>
 
     <!-- Styles -->
 
@@ -92,52 +93,37 @@
                 padding-left: 5px;" dir="rtl">
                 @auth
 
-                    <div class="auth-user">
+                    <div class="auth-user" id="navbar">
                         <div class="row">
                             <div class="col-auto pm-0">
-                                <div id="drop-group">
-                                    <button class="icon-dropdown " id="menu-btn" data-target="menu_bell" type="button">
-                                        <i class="fas fa-bell"></i>
-                                    </button>
-                                    <div class="menu-dropdown-lg" id="menu_bell">
-                                        <div class="menu-dropdown-lg-content position-relative">
-
-                                            <h5 class="menu-title mb-4 mt-2" style="font-size: 14px"> الاشعارات</h1>
-
-                                                <a href="#" class="position-absolute top-0 end-0"
-                                                    style="font-size: 12px">الكل</a>
-
-
-                                                @for ($i = 1; $i < 5; $i++)
-                                                    <div class="box-article pb-3 mb-3">
-                                                        <div class="    head-box-article">
-                                                            <div class="row text-center">
-                                                                <div class="col">
-                                                                    <div class="row">
-
-                                                                        <div class="col-auto">
-                                                                            <div class="notification-title">
-                                                                                <h4>
-                                                                                    ندعوك الى <a href="#">توثيق حسابك</a>
-                                                                                    لكي تتمكن من التقديم على طلبات العروض
-                                                                                </h4>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <span class="date-not">قبل 10 ساعات</span>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                @endfor
-
-                                        </div>
-                                    </div>
-                                </div>
+                                <vs-button class="btnx" type="filled">Dropdown</vs-button>
+                                <vs-dropdown>
+                                  <vs-button class="btn-drop" type="filled" icon="expand_more"></vs-button>
+                                  <!-- <a href="#">Hola mundo</a> -->
+                            
+                                  <vs-dropdown-menu>
+                                    <vs-dropdown-item>
+                                      option 1
+                                    </vs-dropdown-item>
+                                    <vs-dropdown-item>
+                                      option 2
+                                    </vs-dropdown-item>
+                                    <vs-dropdown-group >
+                                      <vs-dropdown-item>
+                                        option 1
+                                      </vs-dropdown-item>
+                                      <vs-dropdown-item>
+                                        option 2
+                                      </vs-dropdown-item>
+                            
+                                    </vs-dropdown-group>
+                                    <vs-dropdown-item divider>
+                                      option 3
+                                    </vs-dropdown-item>
+                                  </vs-dropdown-menu>
+                                </vs-dropdown>
+                            
+                            
                             </div>
                             <div class="col-auto pm-0">
                                 <div id="drop-group-2">

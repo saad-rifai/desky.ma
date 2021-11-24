@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\FilesToRemove;
 use App\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
+
 class UserAccountController extends Controller
 {
     public function __construct()
@@ -38,8 +40,10 @@ class UserAccountController extends Controller
             $stmt = User::where('email', auth::user()->email)->where('Account_number', auth::user()->Account_number)->update(['avatar' => "$fullavatarUrl"]);
             if ($stmt) {
                 Cache::forget(Auth::user()->username . 'PP');
-                File::delete(Auth::user()->avatar);
-
+                FilesToRemove::create([
+                    'filepath' => Auth::user()->avatar,
+                    'date_to_remove' => Carbon::now()->addDay()
+                ]);
                 return response()->json(['success' => 'تم تحديث الصورة الشخصية بنجاح '], 200);
             } else {
                 return response()->json(['error' => 'فشل تحديث الصورة الشخصية يرجى اعادة المحاولة fx0500124'], 500);

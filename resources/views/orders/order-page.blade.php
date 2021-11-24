@@ -235,7 +235,7 @@
                                     @endif
                                     <div class="col-auto">
                                         <div class="user-info-box-article">
-                                            <i class="fas fa-map-marker-alt"></i> {{ $data->city }}, المغرب
+                                            <i class="fas fa-map-marker-alt"></i> {{ $data->userCity }}, المغرب
                                         </div>
                                     </div>
 
@@ -349,12 +349,7 @@
                         </div>
                     </div>
                 @endauth
-
-
-                <offers-list oid="{{ $data->OID }}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"></offers-list>
-
-
-
+                <offers-list oid="{{ $data->OID }}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"  offerget2="@if (isset($_GET['offer2'])){{ $_GET['offer2'] }}@endif"></offers-list>
             </div>
             <div class="col-sm col-lg-4 ">
                 <div class="box-left  card p-4 mbl-hide">
@@ -541,7 +536,7 @@
                                     @endif
                                     <div class="col-auto">
                                         <div class="user-info-box-article">
-                                            <i class="fas fa-map-marker-alt"></i> {{ $data->city }}, المغرب
+                                            <i class="fas fa-map-marker-alt"></i> {{ $data->userCity }}, المغرب
                                         </div>
                                     </div>
 

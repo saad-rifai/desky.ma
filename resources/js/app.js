@@ -45,6 +45,8 @@ Vue.use(Vuesax, {
  Vue.component('delete-portfolio', require('./components/user/delete-from-portfolio.vue').default);
  Vue.component('edit-portfolio', require('./components/user/edit-portfolio.vue').default);
 
+
+
  /* Orders  Section */
  Vue.component('add-order', require('./components/user/orders/add-order.vue').default);
  Vue.component('open-orders-list', require('./components/user/orders/orders-open-lists.vue').default);

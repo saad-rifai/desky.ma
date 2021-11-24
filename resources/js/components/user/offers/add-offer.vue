@@ -144,11 +144,10 @@ export default {
             position: "top-right",
             icon: "check",
           });
-          window.location.replace("/order/" + response.data.oid);
+          window.location.replace("/order/"+this.oid+"?offer="+response.data.offer_id);
         })
         .catch((error) => {
           this.HideLoadingInDiv();
-
           this.errors.record(error.response.data);
           if (error.response.status == 422) {
             this.$vs.notify({

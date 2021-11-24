@@ -15,7 +15,10 @@ if (hash) {
 
 })
 
-
+var dropdownElementList = [].slice.call(document.querySelectorAll('.icon-dropdown'))
+var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+  return new bootstrap.Dropdown(dropdownToggleEl)
+})
 
 
 

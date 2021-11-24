@@ -288,7 +288,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="row">
                     <div class="col-auto">
                       <div class="user-info-box-article">

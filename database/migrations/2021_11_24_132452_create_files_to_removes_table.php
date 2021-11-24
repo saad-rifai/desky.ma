@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserReportsTable extends Migration
+class CreateFilesToRemovesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateUserReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_reports', function (Blueprint $table) {
+        Schema::create('files_to_removes', function (Blueprint $table) {
             $table->id();
-            $table->string('claimant', 10);
-            $table->string('defendant', 10);
-            $table->enum("about", ['0', '1', '2']); /* 0 => about user; 1 => About => Order; 2 => About Platforme */
-            $table->enum("category", ['0','1','2']);
+            $table->string("filepath");
+            $table->date("date_to_remove");
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateUserReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_reports');
+        Schema::dropIfExists('files_to_removes');
     }
 }

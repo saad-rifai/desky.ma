@@ -112,7 +112,7 @@
                                 aria-labelledby="list-profile-list">
                                 <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> اعدادات الحساب</h1>
                                 <div class="p-3">
-                                    <account-settings :userinfos="{{ Auth::user() }}"></account-settings>
+                                    <account-settings :userinfos="{{ Auth::user()->makeVisible(["email", "phone_number", "gender", "date_of_birth"]) }}"></account-settings>
                                 </div>
 
                             </div>

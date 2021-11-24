@@ -243,17 +243,17 @@
                 </p>
               </div>
 
-              <div v-if="OrderCreator" class="order-act-section">
+              <div v-if="OrderCreator" class="order-act-section " align="left" dir="ltr">
                 <div class="row">
                   <div class="col-auto">
-                    <button type="button" class="btn btn-primary mobile-btn-sm">
+                    <button type="button" class="btn btn-primary btn-sm">
                       <i class="fas fa-check"></i> قبول العرض
                     </button>
                   </div>
                   <div class="col-auto">
                     <button
                       type="button"
-                      class="btn btn-outline-primary mobile-btn-sm"
+                      class="btn btn-outline-primary btn-sm"
                     >
                       <i class="fas fa-envelope"></i> مراسلة
                     </button>
@@ -283,7 +283,7 @@
               v-else
               style="margin-right: 0 !important"
               type="button"
-              class="btn btn-primary text-center"
+              class="btn btn-primary text-center end-data-btn"
               disabled
             >
               نهائة النتائج
@@ -548,8 +548,7 @@ export default {
       OrderCreator: false,
       listData2: [],
       listData: [],
-      offerget: parseInt(this.offerget),
-      offerget2: parseInt(this.offerget),
+
       nodata: false,
       nodata2: false,
     };

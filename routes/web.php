@@ -1,12 +1,12 @@
 <?php
 
-use App\User;
-use App\UserRating;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
-use App\UserPortFolio;
 use Illuminate\Support\Facades\Cookie;
+use App\FilesToRemove;
+use Illuminate\Support\Carbon;
 
 
 /*
@@ -68,7 +68,8 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    dd(auth::user()->Offers->where('OID', "1708519923"));
+    $data = auth::user()->notification;
+    dd($data);
 });
 
 /** 

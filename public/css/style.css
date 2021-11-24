@@ -913,6 +913,9 @@ ul.list-social-media.bg-border li a {
     margin-right: -15px;
     margin-top: 30px;
 }
+.box-article:last-child {
+    border-bottom: none !important;
+}
 span.verified-icon.verified-2::after {
     background-image: url(/img/icons/verified-2.png);
     content: '';
@@ -982,6 +985,12 @@ ul.dropdown-menu li {
     margin-right: 0 !important;
     margin-top: 10px;
 }
+.end-data-btn {
+    background-color: #f0f8ff00 !important;
+    color: #626262 !important;
+    border: none !important;
+}
+
 .item-w-icn {
     line-height: 2.5;
     width: 100%;

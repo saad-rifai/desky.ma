@@ -53,7 +53,7 @@ class OffersController extends Controller
                       
                                 ]);
                                 if($stmt){
-                                    return response()->json(['success' => 'تم اضافة عرضك بنجاح !'], 200);
+                                    return response()->json(['success' => 'تم اضافة عرضك بنجاح !', 'offer_id' => $stmt->id], 200);
                                 }else{
                                     return response()->json(['error' => 'حدث خطأ ما اثناء محاولة اضافة عرضك يرجى اعادة المحاولة'], 500);
 
