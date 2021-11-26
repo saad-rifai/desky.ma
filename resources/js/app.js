@@ -1,19 +1,20 @@
 /**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+  * First we will load all of this project's JavaScript dependencies which
+  * includes Vue and other libraries. It is a great starting point when
+  * building robust, powerful web applications using Vue and Laravel.
+*/
 
  require('./bootstrap');
-
+ 
  window.Vue = require('vue');
- import Vuesax from 'vuesax'
+ import Vuesax from 'vuesax';
+
  import 'material-icons/iconfont/material-icons.css';
 
-import 'vuesax/dist/vuesax.css' //Vuesax styles
-Vue.use(Vuesax, {
-  // options here
-})
+ import 'vuesax/dist/vuesax.css' //Vuesax styles
+ Vue.use(Vuesax, {
+   // options here
+ })
  
  
  

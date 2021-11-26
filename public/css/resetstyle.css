@@ -137,7 +137,16 @@ span.user-rating-stars i {
     text-shadow: none;
     
 }
-
+.icon-dropdown button {
+    background-color: #e4e6eb;
+    border: none !important;
+    font-size: 21px;
+    color: #585858;
+    width: 40px;
+    height: 40px;
+    line-height: 1;
+    border-radius: 100%;
+}
 .rate-area > label:active {
     position:relative;
     top:0px;

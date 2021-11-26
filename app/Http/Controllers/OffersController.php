@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Offers;
 use App\Orders;
 use App\User;
+use App\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +54,15 @@ class OffersController extends Controller
                       
                                 ]);
                                 if($stmt){
+                                    $to_account_number = Orders::where('OID', $request->OID)->get(["Account_number", "title"]);
+                                    foreach($to_account_number as $to);
+                                     UserNotification::create([
+                                        'to' => $to->Account_number,
+                                        'from', null,
+                                        'message' => 'قام <a href="/@'.Auth::user()->username.'">'.auth::user()->frist_name.'</a> باضافة عرض على طلبك <a href="/order/'.$request->OID.'?offer='.$stmt->id.'">'.$to->title.'</a>',
+                                        'notifybyemail' => "0",
+                                        'email_status' => "0"
+                                    ]);
                                     return response()->json(['success' => 'تم اضافة عرضك بنجاح !', 'offer_id' => $stmt->id], 200);
                                 }else{
                                     return response()->json(['error' => 'حدث خطأ ما اثناء محاولة اضافة عرضك يرجى اعادة المحاولة'], 500);

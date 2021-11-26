@@ -25,19 +25,22 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Fonts -->
 
 
-    <link rel="shortcut icon" href="{{ asset('img/icons/favicon-32x32.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" id="favicon" href="{{ asset('img/icons/favicon-32x32.png') }}" type="image/x-icon">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
     <title>Desky - @yield('title')</title>
     <!-- Font Awesome Pro CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js"
@@ -45,12 +48,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Basic Style for Tags Input -->
     <link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
-        <script>
+    <script>
         window.Laravel = {
             csrfToken: '{{ csrf_token() }}'
         }
     </script>
 </head>
+
 <body>
     <!-- Nav Bar  -->
     <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar">
@@ -96,37 +100,12 @@
                     <div class="auth-user" id="navbar">
                         <div class="row">
                             <div class="col-auto pm-0">
-                                <vs-button class="btnx" type="filled">Dropdown</vs-button>
-                                <vs-dropdown>
-                                  <vs-button class="btn-drop" type="filled" icon="expand_more"></vs-button>
-                                  <!-- <a href="#">Hola mundo</a> -->
-                            
-                                  <vs-dropdown-menu>
-                                    <vs-dropdown-item>
-                                      option 1
-                                    </vs-dropdown-item>
-                                    <vs-dropdown-item>
-                                      option 2
-                                    </vs-dropdown-item>
-                                    <vs-dropdown-group >
-                                      <vs-dropdown-item>
-                                        option 1
-                                      </vs-dropdown-item>
-                                      <vs-dropdown-item>
-                                        option 2
-                                      </vs-dropdown-item>
-                            
-                                    </vs-dropdown-group>
-                                    <vs-dropdown-item divider>
-                                      option 3
-                                    </vs-dropdown-item>
-                                  </vs-dropdown-menu>
-                                </vs-dropdown>
-                            
-                            
+
+                                <notification-menu></notification-menu>
+
                             </div>
                             <div class="col-auto pm-0">
-                                <div id="drop-group-2">
+                                <div id="drop-group-2" hidden>
                                     <button class="icon-dropdown " id="menu-btn-2" data-target="message_bell" type="button">
                                         <i class="fas fa-envelope"></i>
                                     </button>
@@ -184,22 +163,9 @@
                                 </div>
                             </div>
                             <div class="col-auto pm-0">
-                                <div class="dropdown">
-                                    <div class="user-info-box-article-avatar " data-toggle="dropdown" aria-expanded="false">
-                                        <img src="{{ asset(request()->Avatar) }}" id="menu_user"
-                                            alt="{{ Auth::user()->frist_name . ' ' . Auth::user()->last_name }} - avatar">
-
-                                    </div>
-                                    <ul class="dropdown-menu shadow-sm" aria-labelledby="menu_user" style="left: 0;top: 60px;">
-                                        <li><a class="dropdown-item item-w-icn" href="{{asset('/')}}"><span class="bg-icn"><i class="fas fa-tachometer-alt"></i></span> لوحة التحكم</a></li>
-                                        <li><a class="dropdown-item item-w-icn" href="{{asset('@'.auth::user()->username)}}"><span class="bg-icn"><i class="fas fa-at"></i></span> حسابي</a></li>
-                                        <li><a class="dropdown-item item-w-icn" href="{{asset('account/settings')}}"><span class="bg-icn"><i class="fas fa-cog"></i></span> اعدادات</a></li>
-                                        <li><a class="dropdown-item item-w-icn" href="{{route('logout')}}"><span class="bg-icn"><i class="fas fa-sign-out-alt"></i></span> تسجيل الخروج</a></li>
-                                        
-                                        
-                                    </ul>
-                                </div>
+                                <navbar-menu :user="{{ Auth::user() }}"></navbar-menu>
                             </div>
+
 
 
                         </div>

@@ -1,18 +1,39 @@
-
  require('./bootstrap');
+ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+
+
 
  window.Vue = require('vue');
  import Vuesax from 'vuesax'
  import 'material-icons/iconfont/material-icons.css';
-
-import 'vuesax/dist/vuesax.css' //Vuesax styles
+ import 'vuesax/dist/vuesax.css' //Vuesax styles
 Vue.use(Vuesax, {
   // options here
-
-  
 })
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+
+
+
+
+
+
+
+
+
  /* Notification */
 Vue.component('notification-menu', require('./components/user/notification/notification-menu.vue').default);
+
+/* Navbar Menu */
+
+Vue.component('navbar-menu', require('./components/auth/navbar-menu.vue').default);
+
+
+
+
 const app = new Vue({
-    el: '#navbar',
+  el: '#navbar',
 });

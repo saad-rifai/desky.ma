@@ -1,12 +1,11 @@
 <?php
 
-
+use App\Orders;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
-use App\FilesToRemove;
-use Illuminate\Support\Carbon;
 
 
 /*
@@ -64,12 +63,21 @@ Route::prefix('ajax')->group(function () {
     Route::post('orders/offers/hired', 'OffersController@hired');
 
     /********/
+
+    /* Notification */
+    Route::get('user/menu/notification', 'UserNotificationController@NotificationForMenu')->middleware("auth");
+    Route::post('user/menu/notification/click', 'UserNotificationController@AllNotificationReaded')->middleware("auth");
+
+
+    /*****************/
 });
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    $data = auth::user()->notification;
-    dd($data);
+  $data = Orders::where('OID', "1708519923")->get("Account_number");
+  foreach($data as $data);
+echo $data->Account_number;
+
 });
 
 /** 

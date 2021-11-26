@@ -84146,10 +84146,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuesax_dist_vuesax_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuesax/dist/vuesax.css */ "./node_modules/vuesax/dist/vuesax.css");
 /* harmony import */ var vuesax_dist_vuesax_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuesax_dist_vuesax_css__WEBPACK_IMPORTED_MODULE_2__);
 /**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+  * First we will load all of this project's JavaScript dependencies which
+  * includes Vue and other libraries. It is a great starting point when
+  * building robust, powerful web applications using Vue and Laravel.
+*/
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
