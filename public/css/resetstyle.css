@@ -44,11 +44,11 @@ a {
     box-shadow: none !important;
 }
 button.btn.btn-outline-primary {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     border: solid 1px #f96a0c;
     border-radius: 50px;
-    padding: 10px 30px;
-    font-size: 17px;
+    padding: 10px 30px !important;
+    font-size: 17px !important;
     color: #f96a0c;
 }
 .btn-act-section button {
@@ -160,7 +160,18 @@ span.user-rating-stars i {
     background-size: 17px 17px !important;
     margin-bottom: -3px;
 }
-
+header.vs-dialog-header {
+    padding: 0 !important;
+    text-align: right;
+}
+.vs-dialog-text {
+    text-align: right;
+    padding: 24px 15px !important;
+}
+.con-vs-dialog .vs-dialog footer {
+    padding: 19px 5px;
+    direction: rtl;
+}
 .card.hover_card:hover {
     cursor: pointer;
     margin-top: -10px;

@@ -9,8 +9,7 @@ use App\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
-
+use App\Jobs\NewOffersMailNot;
 
 class OffersController extends Controller
 {
@@ -59,10 +58,20 @@ class OffersController extends Controller
                                      UserNotification::create([
                                         'to' => $to->Account_number,
                                         'from', null,
-                                        'message' => 'قام <a href="/@'.Auth::user()->username.'">'.auth::user()->frist_name.'</a> باضافة عرض على طلبك <a href="/order/'.$request->OID.'?offer='.$stmt->id.'">'.$to->title.'</a>',
+                                        'message' => 'قام <a href="/@'.Auth::user()->username.'">'.auth::user()->frist_name.'</a> باضافة عرض على طلبك <a href="/order/'.$request->OID.'?offer='.$stmt->id.'#'.$stmt->id.'">'.$to->title.'</a>',
                                         'notifybyemail' => "0",
                                         'email_status' => "0"
                                     ]);
+                                    $offersCount = Offers::where('OID', $request->OID)->count();
+                                    if($offersCount == 1 || $offersCount == 4 || $offersCount ==  8 || $offersCount  == 12 || $offersCount  == 16){
+                                        $datajob = [
+                                            'to' => $to,
+                                            'OID' => $request->OID,
+                                            'order_title' => $to->title,
+                                            'offer_id' => $stmt->id
+                                        ];
+                                        dispatch(new NewOffersMailNot($datajob));
+                                    }
                                     return response()->json(['success' => 'تم اضافة عرضك بنجاح !', 'offer_id' => $stmt->id], 200);
                                 }else{
                                     return response()->json(['error' => 'حدث خطأ ما اثناء محاولة اضافة عرضك يرجى اعادة المحاولة'], 500);
@@ -108,7 +117,7 @@ class OffersController extends Controller
             } 
 
 
-            $infos = Offers::where('OID', $request->OID)->where("status", "0")->paginate(6);
+            $infos = Offers::where('OID', $request->OID)->whereIn("status", ["0","1"])->orderBy("created_at", "DESC")->paginate(6);
             for($i=0; $i < count($infos); $i++){
                 $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
                 foreach ($rating as $rating);
@@ -186,7 +195,7 @@ class OffersController extends Controller
             }else{
                 $OrderCreator=false;
             } 
-            $infos = Offers::where('OID', $request->OID)->where("status", "1")->paginate(6);
+            $infos = Offers::where('OID', $request->OID)->where("status", "1")->orderBy("created_at", "DESC")->paginate(6);
             for($i=0; $i < count($infos); $i++){
                 $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
                 foreach ($rating as $rating);

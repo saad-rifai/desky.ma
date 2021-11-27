@@ -72,6 +72,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ asset('orders') }}">طلبات العروض</a>
                     </li>
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('myorders') }}"> طلباتي</a>
+                    </li>
+                    @endauth
                     <li class="nav-item">
                         <a class="nav-link"
                             href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}">اضف

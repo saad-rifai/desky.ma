@@ -15,11 +15,6 @@ if (hash) {
 
 })
 
-var dropdownElementList = [].slice.call(document.querySelectorAll('.icon-dropdown'))
-var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-  return new bootstrap.Dropdown(dropdownToggleEl)
-})
-
 
 
 
@@ -97,16 +92,7 @@ $("#upload-files-form").click(function() {
 });
 
 
-/*$('#upload-files-form').on('dragover', function(e) {
-  $("#"+form_file).prop("files", e.originalEvent.dataTransfer.files);
-});
 
-
-$('#upload-files-form').on('drop', function(e) {
-
-  $("#"+form_file).prop("files", e.originalEvent.dataTransfer.files);
-
-});*/
 
 
 $("#"+form_file).on('change', function () {
@@ -128,3 +114,11 @@ function redirectUserPage(e,id){
   e.preventDefault();
 }
 
+var myCollapse = document.getElementById('navbarSupportedContent')
+var bsCollapse = new bootstrap.Collapse(myCollapse, {
+  toggle: false
+})
+$(document).on('click',function(){
+
+    $('.collapse').toggle();
+})

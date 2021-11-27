@@ -1,5 +1,5 @@
  require('./bootstrap');
- import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+ import { DropdownPlugin, IconsPlugin } from 'bootstrap-vue'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 
 
@@ -12,7 +12,7 @@ Vue.use(Vuesax, {
   // options here
 })
 // Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue)
+Vue.use(DropdownPlugin)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 

@@ -6243,10 +6243,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["oid", "offerget", "offerget2"],
   data: function data() {
     return {
+      userid: null,
       stopLazyLoading: false,
       stopLazyLoading2: false,
       allresponse: [],
@@ -6254,11 +6317,69 @@ __webpack_require__.r(__webpack_exports__);
       OrderCreator: false,
       listData2: [],
       listData: [],
+      activePromptCheck: false,
       nodata: false,
-      nodata2: false
+      nodata2: false,
+      OrderStatusCheck: false
     };
   },
   methods: {
+    AcceptOfferCheck: function AcceptOfferCheck() {
+      this.$vs.dialog({
+        type: "confirm",
+        color: "success",
+        title: "\u0642\u0628\u0648\u0644 \u0627\u0644\u0639\u0631\u0636",
+        text: "هل انت متأكد من أنك تود قبول هذا العرض وتوظيف هذا المقاول الذاتي ؟",
+        accept_text: "قبول",
+        accept: this.AcceptOffer
+      });
+    },
+    AcceptOffer: function AcceptOffer() {
+      var _this = this;
+
+      var data = new FormData();
+      data.append("OID", this.oid);
+      data.append("userid", this.userid);
+      axios.post("/ajax/order/hire/user", data).then(function (response) {
+        $("#profile-tab").click();
+
+        _this.$vs.notify({
+          title: "تمت العملية بنجاح",
+          text: "لقد قمت بتوظيف مقاول ذاتي لتنفيذ طلبك.",
+          color: "success",
+          fixed: true,
+          icon: "check"
+        });
+
+        _this.OrderStatusCheck = true;
+      })["catch"](function (error) {
+        _this.$vs.notify({
+          title: "فشلة العملية",
+          text: "حدث خطأ ما أثناء محاولة تنفيذ طلبك يرجى اعادة المحاولة.",
+          color: "danger",
+          fixed: true,
+          icon: "check"
+        });
+      });
+    },
+    OrderNextStatu: function OrderNextStatu() {
+      var _this2 = this;
+
+      var data = new FormData();
+      data.append("OID", this.oid);
+      data.append("s", "2");
+      axios.post("/ajax/order/status", data).then(function (response) {
+        window.location.reload();
+      })["catch"](function (error) {
+        _this2.$vs.notify({
+          title: "فشلة العملية",
+          text: "حدث خطأ ما أثناء محاولة تنفيذ طلبك يرجى اعادة المحاولة.",
+          color: "danger",
+          fixed: true,
+          icon: "check"
+        });
+      });
+    },
     openLoadingInDiv: function openLoadingInDiv() {
       this.$vs.loading({
         container: "#div-with-loading12",
@@ -6270,51 +6391,51 @@ __webpack_require__.r(__webpack_exports__);
       this.$vs.loading.close("#div-with-loading12 > .con-vs-loading");
     },
     getNewOffer: function getNewOffer() {
-      var _this = this;
+      var _this3 = this;
 
       var data = new FormData();
       data.append("OID", this.oid);
       axios.post("/ajax/orders/offers/new", data).then(function (response) {
-        _this.allresponse = response.data;
-        _this.listData = _this.allresponse.data.data;
-        _this.OrderCreator = _this.allresponse.OrderCreator;
+        _this3.allresponse = response.data;
+        _this3.listData = _this3.allresponse.data.data;
+        _this3.OrderCreator = _this3.allresponse.OrderCreator;
 
-        if (_this.listData == undefined || _this.listData == null || _this.listData == "") {
-          _this.nodata = true;
+        if (_this3.listData == undefined || _this3.listData == null || _this3.listData == "") {
+          _this3.nodata = true;
         } else {
-          _this.nodata = false;
+          _this3.nodata = false;
         }
 
-        _this.stopLazyLoading = true;
+        _this3.stopLazyLoading = true;
       })["catch"](function (error) {
         console.log(error);
-        _this.stopLazyLoading = true;
+        _this3.stopLazyLoading = true;
       });
     },
     getHired: function getHired() {
-      var _this2 = this;
+      var _this4 = this;
 
       var data = new FormData();
       data.append("OID", this.oid);
       axios.post("/ajax/orders/offers/hired", data).then(function (response) {
-        _this2.allresponse2 = response.data;
-        _this2.listData2 = _this2.allresponse2.data.data;
-        _this2.OrderCreator = _this2.allresponse2.OrderCreator;
+        _this4.allresponse2 = response.data;
+        _this4.listData2 = _this4.allresponse2.data.data;
+        _this4.OrderCreator = _this4.allresponse2.OrderCreator;
 
-        if (_this2.listData2 == undefined || _this2.listData2 == null || _this2.listData2 == "") {
-          _this2.nodata2 = true;
+        if (_this4.listData2 == undefined || _this4.listData2 == null || _this4.listData2 == "") {
+          _this4.nodata2 = true;
         } else {
-          _this2.nodata2 = false;
+          _this4.nodata2 = false;
         }
 
-        _this2.stopLazyLoading2 = true;
+        _this4.stopLazyLoading2 = true;
       })["catch"](function (error) {
         console.log(error);
-        _this2.stopLazyLoading2 = true;
+        _this4.stopLazyLoading2 = true;
       });
     },
     ShowMore: function ShowMore() {
-      var _this3 = this;
+      var _this5 = this;
 
       this.openLoadingInDiv();
       var data = new FormData();
@@ -6322,21 +6443,21 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.allresponse.data.next_page_url != null) {
         axios.post("/ajax/orders/offers/all/?page=" + (parseInt(this.allresponse.data.current_page) + 1), data).then(function (response) {
-          _this3.allresponse = response.data;
-          var entries = Object.values(_this3.allresponse.data.data);
+          _this5.allresponse = response.data;
+          var entries = Object.values(_this5.allresponse.data.data);
 
           for (var i = 0; entries.length > i; i++) {
-            _this3.listData.push(entries[i]);
+            _this5.listData.push(entries[i]);
           }
 
-          _this3.HideLoadingInDiv();
+          _this5.HideLoadingInDiv();
         });
       } else {
         console.log(null);
       }
     },
     ShowMore2: function ShowMore2() {
-      var _this4 = this;
+      var _this6 = this;
 
       this.openLoadingInDiv();
       var data = new FormData();
@@ -6344,14 +6465,14 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.allresponse2.data.next_page_url != null) {
         axios.post("/ajax/orders/offers/hired/?page=" + (parseInt(this.allresponse2.data.current_page) + 1), data).then(function (response) {
-          _this4.allresponse2 = response.data;
-          var entries = Object.values(_this4.allresponse2.data.data);
+          _this6.allresponse2 = response.data;
+          var entries = Object.values(_this6.allresponse2.data.data);
 
           for (var i = 0; entries.length > i; i++) {
-            _this4.listData2.push(entries[i]);
+            _this6.listData2.push(entries[i]);
           }
 
-          _this4.HideLoadingInDiv();
+          _this6.HideLoadingInDiv();
         });
       } else {
         console.log(null);
@@ -6392,6 +6513,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+//
 //
 //
 //
@@ -6913,6 +7035,10 @@ var Errors = /*#__PURE__*/function () {
     };
   },
   methods: {
+    form_file_click: function form_file_click() {
+      $("#files-include").click();
+      $(".vs-collapse-item--content").css("max-height", "max-content");
+    },
     removeKey: function removeKey(item) {
       this.keywords.splice(this.keywords.indexOf(item), 1);
     },
@@ -50145,6 +50271,62 @@ var render = function() {
       },
       [
         _c(
+          "vs-prompt",
+          {
+            attrs: {
+              title: "قبول العرض",
+              color: "warning",
+              "accept-text": "قبول العرض",
+              "cancel-text": "الغاء",
+              active: _vm.activePromptCheck
+            },
+            on: {
+              accept: function($event) {
+                return _vm.AcceptOffer()
+              },
+              "update:active": function($event) {
+                _vm.activePromptCheck = $event
+              }
+            }
+          },
+          [
+            _c("p", [
+              _vm._v(
+                "\n        هل انت متأكد من أنك تود قبول هذا العرض وتوظيف هذا المقاول الذاتي ؟\n      "
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "vs-prompt",
+          {
+            attrs: {
+              title: "تنبيه",
+              color: "danger",
+              "accept-text": "لا",
+              "cancel-text": "نعم",
+              active: _vm.OrderStatusCheck
+            },
+            on: {
+              accept: function($event) {
+                return _vm.OrderNextStatu()
+              },
+              "update:active": function($event) {
+                _vm.OrderStatusCheck = $event
+              }
+            }
+          },
+          [
+            _c("p", [
+              _vm._v(
+                "\n        هل لازلت تود تلقي عروض جديدة من المقاولين الذاتيين على هذه الصفقة ؟\n      "
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
           "ul",
           {
             staticClass: "nav nav-tabs",
@@ -50266,7 +50448,10 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { class: { "box-highlight": _vm.offerget == item.id } },
+                        {
+                          class: { "box-highlight": _vm.offerget == item.id },
+                          attrs: { id: item.id }
+                        },
                         [
                           _c(
                             "a",
@@ -50582,6 +50767,14 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
+                          item.status == 1
+                            ? _c(
+                                "span",
+                                { staticClass: "badge bg-warning mr-65" },
+                                [_vm._v("موظف")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
                           _c("div", { staticClass: "mr-65" }, [
                             _c(
                               "p",
@@ -50599,14 +50792,43 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm.OrderCreator
+                          _vm.OrderCreator && item.status == 0
                             ? _c(
                                 "div",
                                 {
-                                  staticClass: "order-act-section ",
+                                  staticClass: "order-act-section",
                                   attrs: { align: "left", dir: "ltr" }
                                 },
-                                [_vm._m(2, true)]
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary btn-sm",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.activePromptCheck = true
+                                              _vm.userid =
+                                                item.user.Account_number
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-check"
+                                          }),
+                                          _vm._v(
+                                            " قبول العرض\n                  "
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._m(2, true)
+                                  ])
+                                ]
                               )
                             : _vm._e()
                         ]
@@ -50713,7 +50935,7 @@ var render = function() {
                             ),
                             _c("p", { staticClass: "font-Naskh" }, [
                               _vm._v(
-                                "أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو مجموعة من المقاولين الذاتيين"
+                                "\n            أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو\n            مجموعة من المقاولين الذاتيين\n          "
                               )
                             ])
                           ]
@@ -50733,197 +50955,261 @@ var render = function() {
                               }
                             },
                             [
-                              _c(
-                                "a",
-                                { attrs: { href: "/@" + item.user.username } },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "head-box-article" },
-                                    [
+                              _c("div", { staticClass: "head-box-article" }, [
+                                _c("div", { staticClass: "row text-center" }, [
+                                  _c("div", { staticClass: "col" }, [
+                                    _c("div", { staticClass: "row" }, [
                                       _c(
                                         "div",
-                                        { staticClass: "row text-center" },
+                                        {
+                                          staticClass:
+                                            "col-auto position-relative"
+                                        },
                                         [
-                                          _c("div", { staticClass: "col" }, [
-                                            _c("div", { staticClass: "row" }, [
+                                          item.isOnline
+                                            ? _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "\n                            position-absolute\n                            bottom-0\n                            start-100\n                            translate-middle\n                            p-2\n                            bg-success\n                            online-status\n                            Search-status-user\n                            border border-light\n                            rounded-circle\n                          ",
+                                                  attrs: {
+                                                    "data-bs-toggle": "tooltip",
+                                                    "data-bs-placement": "top",
+                                                    title: "متصل"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "visually-hidden"
+                                                    },
+                                                    [_vm._v("Online")]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href: "/@" + item.user.username
+                                              }
+                                            },
+                                            [
                                               _c(
                                                 "div",
                                                 {
                                                   staticClass:
-                                                    "col-auto position-relative"
+                                                    "avatar-large-box-article"
                                                 },
                                                 [
-                                                  item.isOnline
-                                                    ? _c(
-                                                        "span",
-                                                        {
-                                                          staticClass:
-                                                            "\n                            position-absolute\n                            bottom-0\n                            start-100\n                            translate-middle\n                            p-2\n                            bg-success\n                            online-status\n                            Search-status-user\n                            border border-light\n                            rounded-circle\n                          ",
-                                                          attrs: {
-                                                            "data-bs-toggle":
-                                                              "tooltip",
-                                                            "data-bs-placement":
-                                                              "top",
-                                                            title: "متصل"
-                                                          }
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "visually-hidden"
-                                                            },
-                                                            [_vm._v("Online")]
-                                                          )
-                                                        ]
-                                                      )
-                                                    : _vm._e(),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "avatar-large-box-article"
-                                                    },
-                                                    [
-                                                      item.user.avatar != "" &&
-                                                      item.user.avatar != null
-                                                        ? _c("img", {
-                                                            attrs: {
-                                                              src:
-                                                                "/" +
-                                                                item.user
-                                                                  .avatar,
-                                                              alt:
-                                                                item.user
-                                                                  .username
-                                                            }
-                                                          })
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      _c("img", {
+                                                  item.user.avatar != "" &&
+                                                  item.user.avatar != null
+                                                    ? _c("img", {
                                                         attrs: {
                                                           src:
-                                                            "/img/icons/avatar.png",
+                                                            "/" +
+                                                            item.user.avatar,
                                                           alt:
                                                             item.user.username
                                                         }
                                                       })
-                                                    ]
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "col-auto" },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "user-name-box-article"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "h4",
-                                                        [
-                                                          _vm._v(
-                                                            "\n                            " +
-                                                              _vm._s(
-                                                                item.user.frist_name[0].toUpperCase() +
-                                                                  item.user.frist_name.substring(
-                                                                    1
-                                                                  )
-                                                              ) +
-                                                              "\n                            " +
-                                                              _vm._s(
-                                                                item.user.last_name[0].toUpperCase() +
-                                                                  item.user.last_name.substring(
-                                                                    1
-                                                                  )
-                                                              ) +
-                                                              "\n                            "
-                                                          ),
-                                                          _c(
-                                                            "vs-tooltip",
-                                                            {
-                                                              staticStyle: {
-                                                                display:
-                                                                  "initial !important"
-                                                              },
-                                                              attrs: {
-                                                                text:
-                                                                  "حساب مقاول ذاتي تم التحقق منه"
-                                                              }
-                                                            },
-                                                            [
-                                                              item.verified_account ==
-                                                              2
-                                                                ? _c("span", {
-                                                                    staticClass:
-                                                                      "\n                                  verified-icon verified-2\n                                  mt-2\n                                  text-icon\n                                ",
-                                                                    staticStyle: {
-                                                                      "margin-right":
-                                                                        "0px !important"
-                                                                    },
-                                                                    attrs: {
-                                                                      dir: "rtl"
-                                                                    }
-                                                                  })
-                                                                : _vm._e()
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "vs-tooltip",
-                                                            {
-                                                              staticStyle: {
-                                                                display:
-                                                                  "initial !important"
-                                                              },
-                                                              attrs: {
-                                                                text:
-                                                                  "حساب تم التحقق منه"
-                                                              }
-                                                            },
-                                                            [
-                                                              item.verified_account ==
-                                                              1
-                                                                ? _c("span", {
-                                                                    staticClass:
-                                                                      "\n                                  verified-icon verified-1\n                                  mt-2\n                                  text-icon\n                                ",
-                                                                    staticStyle: {
-                                                                      "margin-right":
-                                                                        "0px !important"
-                                                                    },
-                                                                    attrs: {
-                                                                      dir: "rtl"
-                                                                    }
-                                                                  })
-                                                                : _vm._e()
-                                                            ]
-                                                          )
-                                                        ],
-                                                        1
-                                                      )
-                                                    ]
-                                                  )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src:
+                                                        "/img/icons/avatar.png",
+                                                      alt: item.user.username
+                                                    }
+                                                  })
                                                 ]
                                               )
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _vm._m(4, true)
+                                            ]
+                                          )
                                         ]
                                       ),
                                       _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "row mr-65 mmt-35" },
-                                        [
+                                      _c("div", { staticClass: "col-auto" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "user-name-box-article"
+                                          },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: {
+                                                  href:
+                                                    "/@" + item.user.username
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "h4",
+                                                  [
+                                                    _vm._v(
+                                                      "\n                            " +
+                                                        _vm._s(
+                                                          item.user.frist_name[0].toUpperCase() +
+                                                            item.user.frist_name.substring(
+                                                              1
+                                                            )
+                                                        ) +
+                                                        "\n                            " +
+                                                        _vm._s(
+                                                          item.user.last_name[0].toUpperCase() +
+                                                            item.user.last_name.substring(
+                                                              1
+                                                            )
+                                                        ) +
+                                                        "\n                            "
+                                                    ),
+                                                    _c(
+                                                      "vs-tooltip",
+                                                      {
+                                                        staticStyle: {
+                                                          display:
+                                                            "initial !important"
+                                                        },
+                                                        attrs: {
+                                                          text:
+                                                            "حساب مقاول ذاتي تم التحقق منه"
+                                                        }
+                                                      },
+                                                      [
+                                                        item.verified_account ==
+                                                        2
+                                                          ? _c("span", {
+                                                              staticClass:
+                                                                "\n                                  verified-icon verified-2\n                                  mt-2\n                                  text-icon\n                                ",
+                                                              staticStyle: {
+                                                                "margin-right":
+                                                                  "0px !important"
+                                                              },
+                                                              attrs: {
+                                                                dir: "rtl"
+                                                              }
+                                                            })
+                                                          : _vm._e()
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "vs-tooltip",
+                                                      {
+                                                        staticStyle: {
+                                                          display:
+                                                            "initial !important"
+                                                        },
+                                                        attrs: {
+                                                          text:
+                                                            "حساب تم التحقق منه"
+                                                        }
+                                                      },
+                                                      [
+                                                        item.verified_account ==
+                                                        1
+                                                          ? _c("span", {
+                                                              staticClass:
+                                                                "\n                                  verified-icon verified-1\n                                  mt-2\n                                  text-icon\n                                ",
+                                                              staticStyle: {
+                                                                "margin-right":
+                                                                  "0px !important"
+                                                              },
+                                                              attrs: {
+                                                                dir: "rtl"
+                                                              }
+                                                            })
+                                                          : _vm._e()
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-auto mobile-hidden-1" },
+                                    [
+                                      _c("div", { staticClass: "row" }, [
+                                        _vm._m(4, true),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-auto p-1 ",
+                                            on: {
+                                              click: function($event) {
+                                                $event.stopPropagation()
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "vs-dropdown",
+                                              {
+                                                attrs: {
+                                                  "vs-trigger-click": ""
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.stopPropagation()
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("vs-button", {
+                                                  staticClass:
+                                                    "btn btn-outline-primary btn-sm",
+                                                  attrs: {
+                                                    type: "filled",
+                                                    icon: "more_vert"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "vs-dropdown-menu",
+                                                  [
+                                                    _c("vs-dropdown-item", [
+                                                      _vm._v("التبليغ")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("vs-dropdown-item", [
+                                                      _vm._v(" الغاء التوظيف ")
+                                                    ])
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row mr-65 mmt-35" }, [
+                                  _c("div", { staticClass: "col-auto" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "user-info-box-article" },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
                                           _c(
                                             "div",
                                             { staticClass: "col-auto" },
@@ -50936,118 +51222,49 @@ var render = function() {
                                                 },
                                                 [
                                                   _c(
-                                                    "div",
-                                                    { staticClass: "row" },
+                                                    "vs-tooltip",
+                                                    {
+                                                      attrs: {
+                                                        text:
+                                                          parseFloat(
+                                                            item.userRating
+                                                          ).toFixed(1) >= 0
+                                                            ? parseFloat(
+                                                                item.userRating
+                                                              ).toFixed(1)
+                                                            : "0"
+                                                      }
+                                                    },
                                                     [
                                                       _c(
-                                                        "div",
+                                                        "span",
                                                         {
                                                           staticClass:
-                                                            "col-auto"
+                                                            "user-rating-stars",
+                                                          attrs: {
+                                                            id:
+                                                              "rating-section",
+                                                            dir: "rtl"
+                                                          }
                                                         },
-                                                        [
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "user-info-box-article"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "vs-tooltip",
-                                                                {
-                                                                  attrs: {
-                                                                    text:
-                                                                      parseFloat(
-                                                                        item.userRating
-                                                                      ).toFixed(
-                                                                        1
-                                                                      ) >= 0
-                                                                        ? parseFloat(
-                                                                            item.userRating
-                                                                          ).toFixed(
-                                                                            1
-                                                                          )
-                                                                        : "0"
-                                                                  }
-                                                                },
-                                                                [
-                                                                  _c(
-                                                                    "span",
-                                                                    {
-                                                                      staticClass:
-                                                                        "user-rating-stars",
-                                                                      attrs: {
-                                                                        id:
-                                                                          "rating-section",
-                                                                        dir:
-                                                                          "rtl"
-                                                                      }
-                                                                    },
-                                                                    _vm._l(
-                                                                      5,
-                                                                      function(
-                                                                        n
-                                                                      ) {
-                                                                        return _c(
-                                                                          "i",
-                                                                          {
-                                                                            key: n,
-                                                                            class:
-                                                                              n <=
-                                                                              parseInt(
-                                                                                item.userRating
-                                                                              )
-                                                                                ? "fas fa-star"
-                                                                                : "far fa-star"
-                                                                          }
-                                                                        )
-                                                                      }
-                                                                    ),
-                                                                    0
-                                                                  )
-                                                                ]
+                                                        _vm._l(5, function(n) {
+                                                          return _c("i", {
+                                                            key: n,
+                                                            class:
+                                                              n <=
+                                                              parseInt(
+                                                                item.userRating
                                                               )
-                                                            ],
-                                                            1
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "col-auto"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "user-info-box-article"
-                                                            },
-                                                            [
-                                                              _c("i", {
-                                                                staticClass:
-                                                                  "fas fa-briefcase"
-                                                              }),
-                                                              _vm._v(
-                                                                "\n                            " +
-                                                                  _vm._s(
-                                                                    item
-                                                                      .AeAccount
-                                                                      .job_title
-                                                                  ) +
-                                                                  "\n                          "
-                                                              )
-                                                            ]
-                                                          )
-                                                        ]
+                                                                ? "fas fa-star"
+                                                                : "far fa-star"
+                                                          })
+                                                        }),
+                                                        0
                                                       )
                                                     ]
                                                   )
-                                                ]
+                                                ],
+                                                1
                                               )
                                             ]
                                           ),
@@ -51065,23 +51282,42 @@ var render = function() {
                                                 [
                                                   _c("i", {
                                                     staticClass:
-                                                      "fas fa-map-marker-alt"
+                                                      "fas fa-briefcase"
                                                   }),
                                                   _vm._v(
-                                                    "\n                      المغرب, " +
-                                                      _vm._s(item.city) +
-                                                      "\n                    "
+                                                    "\n                            " +
+                                                      _vm._s(
+                                                        item.AeAccount.job_title
+                                                      ) +
+                                                      "\n                          "
                                                   )
                                                 ]
                                               )
                                             ]
                                           )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              ),
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-auto" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "user-info-box-article" },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-map-marker-alt"
+                                        }),
+                                        _vm._v(
+                                          "\n                      المغرب, " +
+                                            _vm._s(item.city) +
+                                            "\n                    "
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]),
                               _vm._v(" "),
                               _vm.OrderCreator
                                 ? _c(
@@ -51118,6 +51354,14 @@ var render = function() {
                                       )
                                     ],
                                     1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              item.status == 1
+                                ? _c(
+                                    "span",
+                                    { staticClass: "badge bg-warning mr-65" },
+                                    [_vm._v("موظف")]
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
@@ -51193,7 +51437,8 @@ var render = function() {
               : _vm._e()
           ]
         )
-      ]
+      ],
+      1
     )
   ])
 }
@@ -51262,31 +51507,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-auto" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-sm", attrs: { type: "button" } },
-          [
-            _c("i", { staticClass: "fas fa-check" }),
-            _vm._v(" قبول العرض\n                  ")
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-auto" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-primary btn-sm",
-            attrs: { type: "button" }
-          },
-          [
-            _c("i", { staticClass: "fas fa-envelope" }),
-            _vm._v(" مراسلة\n                  ")
-          ]
-        )
-      ])
+    return _c("div", { staticClass: "col-auto" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary btn-sm",
+          attrs: { type: "button" }
+        },
+        [
+          _c("i", { staticClass: "fas fa-envelope" }),
+          _vm._v(" مراسلة\n                  ")
+        ]
+      )
     ])
   },
   function() {
@@ -51307,51 +51539,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto mobile-hidden-1" }, [
+    return _c("div", { staticClass: "col-auto p-1" }, [
       _c("button", { staticClass: "btn btn-primary btn-sm" }, [
         _c("i", { staticClass: "fas fa-envelope" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "dropdown" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-primary btn-sm",
-            attrs: {
-              id: "menu_user",
-              "data-toggle": "dropdown",
-              "aria-expanded": "false"
-            }
-          },
-          [_c("i", { staticClass: "fas fa-ellipsis-v" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "ul",
-          {
-            staticClass: "dropdown-menu",
-            attrs: { "aria-labelledby": "menu_user" }
-          },
-          [
-            _c("li", [
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _vm._v("مراسلة")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _vm._v("الغاء التوظيف")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _vm._v("التبليغ")
-              ])
-            ])
-          ]
-        )
       ])
     ])
   }
@@ -52096,6 +52286,7 @@ var render = function() {
                           [
                             _c(
                               "vs-collapse-item",
+                              { staticStyle: { "max-height": "max-content" } },
                               [
                                 _c(
                                   "div",
@@ -52137,7 +52328,10 @@ var render = function() {
                                       id: "upload-files-form",
                                       "data-target": "files-include"
                                     },
-                                    on: { drop: _vm.dropfiles }
+                                    on: {
+                                      drop: _vm.dropfiles,
+                                      click: _vm.form_file_click
+                                    }
                                   },
                                   [
                                     _c("input", {

@@ -303,7 +303,7 @@
             <div v-if="step == 3" class="col w-100">
               <div class="mb-3">
                 <vs-collapse>
-                  <vs-collapse-item>
+                  <vs-collapse-item style="max-height: max-content;">
                     <div slot="header">هل تود القيام برفع ملفات توضيحية ؟</div>
                     <div
                       class="alert alert-danger"
@@ -324,6 +324,7 @@
                       class="upload-files-form"
                       data-target="files-include"
                       @drop="dropfiles"
+                      @click="form_file_click"
                     >
                       <input
                         type="file"
@@ -523,6 +524,10 @@ export default {
     };
   },
   methods: {
+    form_file_click(){
+      $("#files-include").click();
+      $(".vs-collapse-item--content").css("max-height", "max-content");
+    },
     removeKey(item) {
       this.keywords.splice(this.keywords.indexOf(item), 1);
     },

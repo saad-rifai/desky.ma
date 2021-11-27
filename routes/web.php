@@ -1,12 +1,11 @@
 <?php
 
-use App\Orders;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
-
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +51,8 @@ Route::prefix('ajax')->group(function () {
     /* Orders Route */
 
     Route::post('user/order/create', 'OrdersController@create')->middleware("auth");
+    Route::post('order/hire/user', 'OrdersController@hire')->middleware("auth");
+    Route::post('order/status', 'OrdersController@status')->middleware("auth");
     Route::get('orders/all', 'OrdersController@all');
     Route::post('orders/search', 'OrdersController@search');
 
@@ -74,9 +75,10 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-  $data = Orders::where('OID', "1708519923")->get("Account_number");
-  foreach($data as $data);
-echo $data->Account_number;
+    $userInfos = User::where('Account_number', "7684293048")->get(['email', 'frist_name']);
+    foreach($userInfos as $userInfo);
+    dd($userInfo->email);
+
 
 });
 

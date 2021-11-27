@@ -4,6 +4,31 @@
       class="card p-4 mb-4 position-relative vs-con-loading__container"
       id="div-with-loading12"
     >
+      <vs-prompt
+        @accept="AcceptOffer()"
+        title="قبول العرض"
+        color="warning"
+        accept-text="قبول العرض"
+        cancel-text="الغاء"
+        :active.sync="activePromptCheck"
+      >
+        <p>
+          هل انت متأكد من أنك تود قبول هذا العرض وتوظيف هذا المقاول الذاتي ؟
+        </p>
+      </vs-prompt>
+      <vs-prompt
+        @accept="OrderNextStatu()"
+        title="تنبيه"
+        color="danger"
+        accept-text="لا"
+        cancel-text="نعم"
+        :active.sync="OrderStatusCheck"
+      >
+        <p>
+          هل لازلت تود تلقي عروض جديدة من المقاولين الذاتيين على هذه الصفقة ؟
+        </p>
+      </vs-prompt>
+
       <!--h1 class="card-title mb-4 mt-2" style="font-size: 16px">العروض</h1-->
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -67,7 +92,10 @@
             :key="index"
             class="box-article pb-3 mb-3"
           >
-            <div v-bind:class="{ 'box-highlight': offerget == item.id }">
+            <div
+              :id="item.id"
+              v-bind:class="{ 'box-highlight': offerget == item.id }"
+            >
               <a :href="'/@' + item.user.username">
                 <div class="head-box-article">
                   <div class="row text-center">
@@ -237,16 +265,32 @@
                   >
                 </vs-tooltip>
               </div>
+              <span v-if="item.status == 1" class="badge bg-warning mr-65"
+                >موظف</span
+              >
+
               <div class="mr-65">
                 <p class="box-article-description font-Naskh text-wrap-line">
                   {{ item.description }}
                 </p>
               </div>
 
-              <div v-if="OrderCreator" class="order-act-section " align="left" dir="ltr">
+              <div
+                v-if="OrderCreator && item.status == 0"
+                class="order-act-section"
+                align="left"
+                dir="ltr"
+              >
                 <div class="row">
                   <div class="col-auto">
-                    <button type="button" class="btn btn-primary btn-sm">
+                    <button
+                      type="button"
+                      @click="
+                        activePromptCheck = true;
+                        userid = item.user.Account_number;
+                      "
+                      class="btn btn-primary btn-sm"
+                    >
                       <i class="fas fa-check"></i> قبول العرض
                     </button>
                   </div>
@@ -315,9 +359,15 @@
             v-if="nodata2 == true"
             class="no-data-message text-center mt-5 mb-4"
           >
-          <img src="/img/icons/215-SEARCH-AE.jpg" alt="   لم تقم بتوظيف مقاول بعد في هذا المشروع">
+            <img
+              src="/img/icons/215-SEARCH-AE.jpg"
+              alt="   لم تقم بتوظيف مقاول بعد في هذا المشروع"
+            />
             لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع
-            <p class="font-Naskh">أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو مجموعة من المقاولين الذاتيين</p>
+            <p class="font-Naskh">
+              أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو
+              مجموعة من المقاولين الذاتيين
+            </p>
           </div>
           <div
             v-for="(item, index) in listData2"
@@ -325,11 +375,11 @@
             class="box-article pb-3 mb-3"
           >
             <div v-bind:class="{ 'box-highlight': offerget2 == item.id }">
-              <a :href="'/@' + item.user.username">
                 <div class="head-box-article">
                   <div class="row text-center">
                     <div class="col">
                       <div class="row">
+
                         <div class="col-auto position-relative">
                           <span
                             v-if="item.isOnline"
@@ -351,6 +401,7 @@
                           >
                             <span class="visually-hidden">Online</span>
                           </span>
+                                      <a :href="'/@' + item.user.username">
 
                           <div class="avatar-large-box-article">
                             <img
@@ -365,10 +416,12 @@
                               src="/img/icons/avatar.png"
                               :alt="item.user.username"
                             />
-                          </div>
+                          </div></a>
                         </div>
                         <div class="col-auto">
                           <div class="user-name-box-article">
+                                                                  <a :href="'/@' + item.user.username">
+
                             <h4>
                               {{
                                 item.user.frist_name[0].toUpperCase() +
@@ -409,29 +462,36 @@
                                 ></span>
                               </vs-tooltip>
                             </h4>
+                                                                  </a>
                           </div>
                         </div>
+                                   
                       </div>
                     </div>
                     <div class="col-auto mobile-hidden-1">
-                      <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-envelope"></i>
-                      </button>
-                      <span class="dropdown">
-                        <button
-                          class="btn btn-outline-primary btn-sm"
-                          id="menu_user"
-                          data-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <i class="fas fa-ellipsis-v"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="menu_user">
-                          <li><a class="dropdown-item" href="#">مراسلة</a></li>
-                          <li><a class="dropdown-item" href="#">الغاء التوظيف</a></li>
-                          <li><a class="dropdown-item" href="#">التبليغ</a></li>
-                        </ul>
-                      </span>
+                      <div class="row">
+                        <div class="col-auto p-1">
+                          <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-envelope"></i>
+                          </button>
+                        </div>
+                        <div class="col-auto p-1 " @click.stop>
+                          <vs-dropdown vs-trigger-click @click.stop>
+                            <vs-button
+                              class="btn btn-outline-primary btn-sm"
+                              type="filled"
+                              icon="more_vert"
+                            ></vs-button>
+                            <!-- <a href="#">Hola mundo</a> -->
+
+                            <vs-dropdown-menu>
+                              <vs-dropdown-item>التبليغ</vs-dropdown-item>
+                              <vs-dropdown-item> الغاء التوظيف </vs-dropdown-item>
+                         
+                            </vs-dropdown-menu>
+                          </vs-dropdown>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="row mr-65 mmt-35">
@@ -482,7 +542,7 @@
                     </div>
                   </div>
                 </div>
-              </a>
+             
               <div v-if="OrderCreator" class="mr-65 p-2">
                 <vs-tooltip
                   style="width: max-content"
@@ -495,12 +555,14 @@
                   >
                 </vs-tooltip>
               </div>
+              <span v-if="item.status == 1" class="badge bg-warning mr-65"
+                >موظف</span
+              >
               <div class="mr-65">
                 <p class="box-article-description font-Naskh text-wrap-line">
                   {{ item.description }}
                 </p>
               </div>
-
             </div>
           </div>
 
@@ -541,6 +603,7 @@ export default {
   props: ["oid", "offerget", "offerget2"],
   data() {
     return {
+      userid: null,
       stopLazyLoading: false,
       stopLazyLoading2: false,
       allresponse: [],
@@ -548,12 +611,69 @@ export default {
       OrderCreator: false,
       listData2: [],
       listData: [],
-
+      activePromptCheck: false,
       nodata: false,
       nodata2: false,
+      OrderStatusCheck: false,
     };
   },
   methods: {
+    AcceptOfferCheck() {
+      this.$vs.dialog({
+        type: "confirm",
+        color: "success",
+        title: `قبول العرض`,
+        text: "هل انت متأكد من أنك تود قبول هذا العرض وتوظيف هذا المقاول الذاتي ؟",
+        accept_text: "قبول",
+        accept: this.AcceptOffer,
+      });
+    },
+    AcceptOffer() {
+      let data = new FormData();
+      data.append("OID", this.oid);
+      data.append("userid", this.userid);
+      axios
+        .post("/ajax/order/hire/user", data)
+        .then((response) => {
+          $("#profile-tab").click();
+          this.$vs.notify({
+            title: "تمت العملية بنجاح",
+            text: "لقد قمت بتوظيف مقاول ذاتي لتنفيذ طلبك.",
+            color: "success",
+            fixed: true,
+            icon: "check",
+          });
+          this.OrderStatusCheck = true;
+        })
+        .catch((error) => {
+          this.$vs.notify({
+            title: "فشلة العملية",
+            text: "حدث خطأ ما أثناء محاولة تنفيذ طلبك يرجى اعادة المحاولة.",
+            color: "danger",
+            fixed: true,
+            icon: "check",
+          });
+        });
+    },
+    OrderNextStatu() {
+      let data = new FormData();
+      data.append("OID", this.oid);
+      data.append("s", "2");
+      axios
+        .post("/ajax/order/status", data)
+        .then((response) => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          this.$vs.notify({
+            title: "فشلة العملية",
+            text: "حدث خطأ ما أثناء محاولة تنفيذ طلبك يرجى اعادة المحاولة.",
+            color: "danger",
+            fixed: true,
+            icon: "check",
+          });
+        });
+    },
     openLoadingInDiv() {
       this.$vs.loading({
         container: "#div-with-loading12",

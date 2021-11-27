@@ -31,14 +31,27 @@
               لوحة التحكم</a
             >
           </li>
-          <li>
+                    <li>
             <a
               class="dropdown-item item-w-icn"
               :href="'/@'+user.username"
               ><span class="bg-icn"><i class="fas fa-at"></i></span> حسابي</a
             >
           </li>
-          <li>
+                    <li>
+            <a class="dropdown-item item-w-icn" href="/myorders"
+              ><span class="bg-icn"><i class="fas fa-folder"></i></span>
+              طلباتي</a
+            >
+          </li>
+                              <li>
+            <a class="dropdown-item item-w-icn" href="/myoffers"
+              ><span class="bg-icn"><i class="fas fa-ticket-alt"></i></span>
+              عروضي</a
+            >
+          </li>
+
+          <li >
             <a
               class="dropdown-item item-w-icn"
               href="/account/settings"
