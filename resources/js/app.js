@@ -51,6 +51,7 @@
  /* Orders  Section */
  Vue.component('add-order', require('./components/user/orders/add-order.vue').default);
  Vue.component('open-orders-list', require('./components/user/orders/orders-open-lists.vue').default);
+ Vue.component('form-order-chat', require('./components/user/orders/chat/form-order-chat.vue').default);
 
  /* Offers Section */
  Vue.component('add-offer', require('./components/user/offers/add-offer.vue').default);

@@ -412,4 +412,16 @@ class OrdersController extends Controller
         }
         return response()->json($data, 200);
     }
+    public function MyOrderShow(Request $request){
+        if(isset($request->OID) && $request->OID != null){
+            $infos = Orders::where('Account_number', Auth::user()->Account_number)->where('OID', $request->OID)->get();
+            if($infos->count() > 0){
+                foreach($infos as $info);
+                return view('orders.manage-my-order',['data' => $info]);
+
+            }else{
+                abort(404);
+            }
+        }
+    }
 }

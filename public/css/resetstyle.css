@@ -43,6 +43,33 @@ a {
     border-color: #86b7fe00 !important;
     box-shadow: none !important;
 }
+.shepherd-text {
+    text-align: right !important;
+    direction: rtl !important;
+    font-family: 'Noto Naskh Arabic' !important;
+    font-size: 16px;
+}
+.shepherd-header{
+    direction: rtl !important;
+}
+button.shepherd-button {
+    background-color: #f96a0c;
+    color: white;
+}
+a.nav-link i {
+    margin-right: 5px;
+    font-size: 10px;
+    margin-top: 5px;
+    font-weight: 600;
+    color: #484848;
+}
+.shepherd-button:hover {
+    background: rgb(249 106 12 / 75%) !important;
+}
+.shepherd-button.shepherd-button-secondary:hover{
+    background: rgb(214, 217, 219) !important;
+
+}
 button.btn.btn-outline-primary {
     background-color: #ffffff !important;
     border: solid 1px #f96a0c;
@@ -200,6 +227,31 @@ span.select2-selection.select2-selection--multiple {
     height: 40px !important;
 }
 a.nav-link:hover {
+    color: #f96a0c !important;
+}
+
+.mr-tabs-last-message {
+    margin-right: 45px !important;
+}
+
+button.btn-icon-no-bg.vs-button-primary {
+    background-color: #ffffff00 !important;
+    border: none !important;
+    color: #424242;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+}
+button.btn-icon-no-bg.vs-button-primary:hover{
+    transition: ease 0.4s;
+    box-shadow: none !important;
+    opacity: 0.7;
+}
+
+.btn-icon-no-bg i {
+    font-size: 30px !important;
+}
+a.nav-link:hover > i {
     color: #f96a0c !important;
 }
 a.nav-link {

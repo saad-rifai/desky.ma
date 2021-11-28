@@ -122,3 +122,6 @@ $(document).on('click',function(){
 
     $('.collapse').toggle();
 })
+$(document).ready(function () {
+  $('.dropdown-toggle').dropdown();
+});

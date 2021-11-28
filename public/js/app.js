@@ -7280,6 +7280,179 @@ var Errors = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      chatbox: false,
+      chat_box_avatar: "",
+      message: ""
+    };
+  },
+  methods: {
+    users_menu_chat_click: function users_menu_chat_click(avatar) {
+      this.chat_box_avatar = avatar;
+      this.chatbox = true;
+    },
+    messageTyping: function messageTyping() {
+      if (this.message != "") {}
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/orders-open-lists.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/orders-open-lists.vue?vue&type=script&lang=js& ***!
@@ -52712,6 +52885,388 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=template&id=78b8084c&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=template&id=78b8084c& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "position-relative" }, [
+    !_vm.chatbox
+      ? _c("div", { staticClass: "users-messages-menu" }, [
+          _c(
+            "div",
+            { staticClass: "messages-menu-content" },
+            [
+              _c("vs-list", [
+                _c(
+                  "div",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.users_menu_chat_click(
+                          "/img/users/2021/8529090451-61a21c1dd5f5f.jpg"
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "vs-list-item",
+                      {
+                        attrs: {
+                          title: "Saad Rifai",
+                          subtitle: "Top Contributor"
+                        }
+                      },
+                      [
+                        _c(
+                          "template",
+                          { slot: "avatar" },
+                          [
+                            _c("vs-avatar", {
+                              attrs: {
+                                src:
+                                  "/img/users/2021/8529090451-61a21c1dd5f5f.jpg"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "list-users-message-badge" },
+                          [_vm._v("1")]
+                        )
+                      ],
+                      2
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.users_menu_chat_click(
+                          "/img/users/2021/7684293048-619e582db97f0.jpg"
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "vs-list-item",
+                      {
+                        attrs: { title: "Adil Miftah", subtitle: "11 Points" }
+                      },
+                      [
+                        _c(
+                          "template",
+                          { slot: "avatar" },
+                          [
+                            _c("vs-avatar", {
+                              attrs: {
+                                src:
+                                  "/img/users/2021/7684293048-619e582db97f0.jpg"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      2
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.users_menu_chat_click("")
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "vs-list-item",
+                      {
+                        attrs: {
+                          title: "desky maroc",
+                          subtitle: "l'ASMEX organise le 27 octobre 2021 à"
+                        }
+                      },
+                      [
+                        _c(
+                          "template",
+                          { slot: "avatar" },
+                          [_c("vs-avatar", { attrs: { "vs-text": "Vuesax" } })],
+                          1
+                        )
+                      ],
+                      2
+                    )
+                  ],
+                  1
+                )
+              ])
+            ],
+            1
+          )
+        ])
+      : _c("div", { staticClass: "chat-tab-border-box mt-2" }, [
+          _c("div", { staticClass: "chat-head" }, [
+            _c("div", { staticClass: "row w-100 mt-1 mx-auto" }, [
+              _c("div", { staticClass: "col" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-auto chat-tools" },
+                    [
+                      _c("vs-button", {
+                        staticClass: "btn-icon-no-bg",
+                        attrs: { type: "filled", icon: "arrow_forward_ios" },
+                        on: {
+                          click: function($event) {
+                            _vm.chatbox = false
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-auto p-0" },
+                    [
+                      _c("vs-avatar", {
+                        attrs: { size: "large", src: _vm.chat_box_avatar }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-auto chat-tools" },
+                [
+                  _c(
+                    "vs-dropdown",
+                    {
+                      attrs: { "vs-trigger-click": "" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                        }
+                      }
+                    },
+                    [
+                      _c("vs-button", {
+                        staticClass: "btn-icon-no-bg",
+                        attrs: { type: "filled", icon: "more_vert" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "vs-dropdown-menu",
+                        [
+                          _c("vs-dropdown-item", [_vm._v("التبليغ")]),
+                          _vm._v(" "),
+                          _c("vs-dropdown-item", [_vm._v(" الغاء التوظيف ")])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "chat-footer" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", [
+                  _c("button", { staticClass: "chat-btn" }, [
+                    _vm.message == ""
+                      ? _c("span", { staticClass: "material-icons-outlined" }, [
+                          _vm._v(" mic ")
+                        ])
+                      : _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-testid": "send",
+                              "data-icon": "send"
+                            }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                attrs: {
+                                  viewBox: "0 0 24 24",
+                                  width: "24",
+                                  height: "24"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    fill: "currentColor",
+                                    d:
+                                      "M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col" }, [
+                _c("div", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.message,
+                        expression: "message"
+                      }
+                    ],
+                    staticClass: "input-text-chat",
+                    attrs: { dir: "auto", type: "text" },
+                    domProps: { value: _vm.message },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.message = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(2)
+            ])
+          ])
+        ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto mt-2 p-0" }, [
+      _c("h1", { staticClass: "chat-box-title" }, [_vm._v("Saad Rifai")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "user-check-status" }, [_vm._v("متصل")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "chat-body" }, [
+      _c("div", [
+        _c("div", { staticClass: "chat-message-container" }, [
+          _c("div", { staticClass: "message-box" }, [
+            _c("div", { staticClass: "message-item" }, [
+              _c("div", { staticClass: "message-text" }, [
+                _vm._v(
+                  "\n                sf db ntrada wnji aji dik l3iba xno 3melti fiha\n              "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "message-footer" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-auto" }, [
+                    _c("div", { staticClass: "message-time" }, [
+                      _vm._v("12:25")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "message-box" }, [
+            _c("div", { staticClass: "message-item send" }, [
+              _c("div", { staticClass: "message-text" }, [
+                _vm._v(
+                  "\n                hadi mz2ana banetli nas dyal encg 3andom m3a had xi\n              "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "message-footer" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-auto" }, [
+                    _c("div", { staticClass: "message-time" }, [
+                      _vm._v("12:25")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-auto" }, [
+                    _c("div", { staticClass: "message-status" }, [
+                      _c("i", { staticClass: "received fas fa-check-circle" })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("button", { staticClass: "chat-btn" }, [
+        _c("span", { staticClass: "material-icons-outlined" }, [
+          _vm._v(" attach_file ")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/orders-open-lists.vue?vue&type=template&id=017531ce&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/orders-open-lists.vue?vue&type=template&id=017531ce& ***!
@@ -84383,6 +84938,7 @@ Vue.component('edit-portfolio', __webpack_require__(/*! ./components/user/edit-p
 
 Vue.component('add-order', __webpack_require__(/*! ./components/user/orders/add-order.vue */ "./resources/js/components/user/orders/add-order.vue")["default"]);
 Vue.component('open-orders-list', __webpack_require__(/*! ./components/user/orders/orders-open-lists.vue */ "./resources/js/components/user/orders/orders-open-lists.vue")["default"]);
+Vue.component('form-order-chat', __webpack_require__(/*! ./components/user/orders/chat/form-order-chat.vue */ "./resources/js/components/user/orders/chat/form-order-chat.vue")["default"]);
 /* Offers Section */
 
 Vue.component('add-offer', __webpack_require__(/*! ./components/user/offers/add-offer.vue */ "./resources/js/components/user/offers/add-offer.vue")["default"]);
@@ -85548,6 +86104,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_order_vue_vue_type_template_id_e42b69fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_order_vue_vue_type_template_id_e42b69fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/chat/form-order-chat.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/user/orders/chat/form-order-chat.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_order_chat_vue_vue_type_template_id_78b8084c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form-order-chat.vue?vue&type=template&id=78b8084c& */ "./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=template&id=78b8084c&");
+/* harmony import */ var _form_order_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-order-chat.vue?vue&type=script&lang=js& */ "./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _form_order_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _form_order_chat_vue_vue_type_template_id_78b8084c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _form_order_chat_vue_vue_type_template_id_78b8084c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/user/orders/chat/form-order-chat.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_form_order_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./form-order-chat.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_form_order_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=template&id=78b8084c&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=template&id=78b8084c& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_order_chat_vue_vue_type_template_id_78b8084c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./form-order-chat.vue?vue&type=template&id=78b8084c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=template&id=78b8084c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_order_chat_vue_vue_type_template_id_78b8084c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_order_chat_vue_vue_type_template_id_78b8084c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

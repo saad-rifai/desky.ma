@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
         return view('actions.add-order');
     });
 
+    Route::get('/myorder/{OID}', 'OrdersController@MyOrderShow');
 
     Route::get('/dashboard', function () {
         return view('user.dashboard');

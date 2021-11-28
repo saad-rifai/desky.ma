@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="ar">
 
@@ -35,17 +35,19 @@
 
     <link rel="shortcut icon" id="favicon" href="{{ asset('img/icons/favicon-32x32.png') }}" type="image/x-icon">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/library/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/library/clicky-menu.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
     <title>Desky - @yield('title')</title>
     <!-- Font Awesome Pro CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js"
-        integrity="sha512-1Al+dnfE+1gI7IBmpUZ8XnZ3l3Nv6cyA+XgdtlaptVNxJcWWRzHxOPzT+2pbp52qtXa2jkwk0MWYSmxslMsHCQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Jquery -->
+<script src="{{asset('js/library/jquery.js')}}"></script>
+
+
+    <script src="{{asset('js/library/nanobar.min.js')}}"></script>
     <!-- Basic Style for Tags Input -->
     <link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
     <script>
@@ -57,32 +59,40 @@
 
 <body>
     <!-- Nav Bar  -->
-    <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar">
+    <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar" id="navbar">
         <div class="container-fluid container">
             <a class="navbar-brand" href="{{ asset('/') }}"><img class="logo-web"
                     src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky"></a>
 
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto  mb-2 mb-lg-0">
+                <ul class="navbar-nav mx-auto  mb-2 mb-lg-0 clicky-menu no-js">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ asset('auto-entrepreneurs') }}">تصفح
-                            المقاولين</a>
+                        <a href="#" class="nav-link">
+                           المقاولين الذاتيين <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul>
+                            <li><a href="{{ asset('/auto-entrepreneurs') }}"><i class="fas fa-users"></i> تصفح المقاولين الذاتيين </a></li>
+                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i> جميع العقود</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ asset('orders') }}">طلبات العروض</a>
-                    </li>
+            
                     @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ asset('myorders') }}"> طلباتي</a>
                     </li>
                     @endauth
-                    <li class="nav-item">
-                        <a class="nav-link"
-                            href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}">اضف
-                            طلب عروض</a>
+          
+                    <li class="nav-item" id="hero-example">
+                        <a href="#" class="nav-link">
+                            طلبات العروض <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul>
+                            <li><a href="{{ asset('orders') }}"><i class="fas fa-folders"></i> جميع طلبات العروض </a></li>
+                            <li><a href="#"><i class="fas fa-folder"></i> طلباتي</a></li>
+                            <li><a href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i class="fas fa-folder-plus"></i> نشر طلب عروض</a></li>
+                        </ul>
                     </li>
-
                 </ul>
                 @guest
                     <div class="btn-act-section" dir="rtl">
@@ -102,7 +112,7 @@
                 padding-left: 5px;" dir="rtl">
                 @auth
 
-                    <div class="auth-user" id="navbar">
+                    <div class="auth-user">
                         <div class="row">
                             <div class="col-auto pm-0">
 
