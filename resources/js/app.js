@@ -5,16 +5,20 @@
 */
 
  require('./bootstrap');
- 
+ import VuePlyr from 'vue-plyr'
+ import 'vue-plyr/dist/vue-plyr.css'
+
  window.Vue = require('vue');
  import Vuesax from 'vuesax';
 
  import 'material-icons/iconfont/material-icons.css';
 
  import 'vuesax/dist/vuesax.css' //Vuesax styles
+import Vue from 'vue';
  Vue.use(Vuesax, {
    // options here
  })
+ Vue.use(VuePlyr)
  
  
  

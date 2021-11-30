@@ -49,6 +49,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserPortFolio::class, 'Account_number');
     }
+
     public function Offers()
     {
         return $this->hasMany(Offers::class, 'Account_number');

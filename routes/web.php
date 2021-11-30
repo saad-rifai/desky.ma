@@ -35,10 +35,7 @@ Route::prefix('ajax')->group(function () {
     Route::post('user/update/account', 'UserAccountController@UpdateAccount');
     Route::post('user/request/verification', 'DocumentationCenterController@RequestVerification');
     Route::post('user/request/aeaccount', 'AeAccountController@RequestAccount');
-    Route::post('user/portfolio/create', 'UserPortFolioController@create')->middleware("auth");
-    Route::post('user/portfolio/create', 'UserPortFolioController@create')->middleware("auth");
-    Route::post('user/portfolio/delete/{id}', 'UserPortFolioController@delete')->middleware("auth");
-    Route::get('/user/request/portfolio/infos/{id}', 'UserPortFolioController@PortfolioInfos')->middleware("auth");
+
     //Route::post('/user/request/portfolio/edit/{id}/save', 'UserPortFolioController@edit')->middleware("auth");
     Route::get('user/request/user/portfolio', 'UserPortFolioController@index');
     Route::get('user/check/portfolio/liked/{portfolio_id}', 'PortFolioLikesController@CheckWorkLike');
@@ -50,28 +47,49 @@ Route::prefix('ajax')->group(function () {
    
     /* Orders Route */
 
-    Route::post('user/order/create', 'OrdersController@create')->middleware("auth");
-    Route::post('order/hire/user', 'OrdersController@hire')->middleware("auth");
-    Route::post('order/status', 'OrdersController@status')->middleware("auth");
     Route::get('orders/all', 'OrdersController@all');
     Route::post('orders/search', 'OrdersController@search');
 
     /***** */
 
     /* Offers Routes */
-    Route::post('user/offer/create', 'OffersController@create')->middleware("auth");
     Route::post('orders/offers/new', 'OffersController@NewOffers');
     Route::post('orders/offers/hired', 'OffersController@hired');
 
     /********/
 
-    /* Notification */
-    Route::get('user/menu/notification', 'UserNotificationController@NotificationForMenu')->middleware("auth");
-    Route::post('user/menu/notification/click', 'UserNotificationController@AllNotificationReaded')->middleware("auth");
-
-
     /*****************/
+    Route::group(['middleware' => ['auth']], function () {
+
+        Route::post('user/portfolio/create', 'UserPortFolioController@create');
+        Route::post('user/portfolio/create', 'UserPortFolioController@create');
+        Route::post('user/portfolio/delete/{id}', 'UserPortFolioController@delete');
+        Route::get('/user/request/portfolio/infos/{id}', 'UserPortFolioController@PortfolioInfos');
+        
+        /* Orders Route */
+    
+        Route::post('user/order/create', 'OrdersController@create');
+        Route::post('order/hire/user', 'OrdersController@hire');
+        Route::post('order/status', 'OrdersController@status');
+    
+        /* Offers Routes */
+        Route::post('user/offer/create', 'OffersController@create');
+    
+        /* Notification */
+        Route::get('user/menu/notification', 'UserNotificationController@NotificationForMenu');
+        Route::post('user/menu/notification/click', 'UserNotificationController@AllNotificationReaded');
+
+        /* Chat System */
+        Route::post('project/chat/send', 'ChatSystemController@NewMessageInsideProject');
+        Route::post('project/chatList/get', 'ChatSystemController@ProjectGetChatList');
+
+        /* Chat System */
+    
+    });
+    
 });
+
+
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {

@@ -92,9 +92,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Suggest Tags Js -->
-<!--script src="{{ asset('js/library/clicky-menus.js') }}" rel="stylesheet"></script-->
-<script src="{{ asset('js/library/shepherd.js') }}" rel="stylesheet"></script>
-<script src="{{ asset('js/tools/navbar-steps.js') }}" rel="stylesheet"></script>
+<!--script src="{{ asset('js/library/clicky-menus.js') }}"></script-->
+<script src="{{ asset('js/library/shepherd.js') }}"></script>
+<script src="{{ asset('js/tools/navbar-steps.js') }}"></script>
 
 <script src="{{asset('js/fotorama.js')}}"></script>
 <script src="{{asset('js/script.js')}}"></script>

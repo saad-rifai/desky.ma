@@ -36,6 +36,7 @@
     <link rel="shortcut icon" id="favicon" href="{{ asset('img/icons/favicon-32x32.png') }}" type="image/x-icon">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/library/jquery-ui.min.css') }}" rel="stylesheet">
+    <!--link href="{{ asset('css/library/audio-player.css') }}" rel="stylesheet"-->
     <link href="{{ asset('css/library/clicky-menu.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">

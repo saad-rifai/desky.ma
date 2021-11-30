@@ -56,7 +56,7 @@
                             </div>
                             <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
                                 <!-- Chat Box -->
-                                <form-order-chat></form-order-chat>
+                                <form-order-chat :oid="{{$data->OID}}"></form-order-chat>
                                 <!-- Chat Box -->
 
 
@@ -188,3 +188,5 @@
         </div>
     </div>
 @stop
+<script src="{{ asset('js/library/p5.min.js') }}"></script>
+<script src="{{ asset('js/library/audio-record.js') }}" ></script>

@@ -694,6 +694,9 @@ h5.menu-title-h5 {
     font-size: 13px !important;
     color: #2e2e2e;
 }
+.plyr {
+    height: max-content !important;
+}
 .menu-dropdown-lg::-webkit-scrollbar-thumb:hover {
     background: darkgrey;
 }
