@@ -65,16 +65,30 @@ h1.chat-box-title {
 .message-item {
     width: 100%;
     max-width: 350px;
+    color: #979797;
+
     margin-right: auto !important;
 }
+
 .message-status {
-    font-size: 14px;
+    font-size: 11px;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 1px;
 }
-.message-status i.received {
-    color: #b9b9b9 !important;
+.received-chat-icon {
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    display: block;
+    object-fit: cover;
+    position: relative;
+    border-radius: 100%;
 }
+.received-chat-icon img{
+        width: 100%;
+        height: 100%;
+}
+
 .chat-footer {
     width: 100%;
     background-color: #e9e9e9;
@@ -180,6 +194,25 @@ span.file-item-name {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+.vs-list--avatar {
+    position: relative;
+}
+span.isOnlineBadgVuesax {
+    width: 20px;
+    height: 20px;
+    background-color: #198754;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    border-radius: 100%;
+    border: solid 4px white;
+}
+.message-item.send .message-footer .message-status {
+    display: none;
+}
+.message-box.send:last-child .message-item.send .message-footer .message-status {
+    display: block;
+}
 .chat-tabs-last-message {
     margin: 0 !important;
     margin-top: 5px !important;
@@ -208,7 +241,7 @@ span.file-item-name {
     display: block;
 }
 .message-time {
-    font-size: 12px;
+    font-size: 10px;
 }
 .vs-list--title {
     font-size: 15px !important;

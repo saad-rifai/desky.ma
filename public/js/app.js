@@ -7289,6 +7289,8 @@ var Errors = /*#__PURE__*/function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -7458,74 +7460,134 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+/* Convert Time Post  Function */
+var MONTH_NAMES = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"];
+
+function getFormattedDate(date) {
+  var prefomattedDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var hideYear = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var day = date.getDate();
+  var month = MONTH_NAMES[date.getMonth()];
+  var year = date.getFullYear();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+
+  if (minutes < 10) {
+    // Adding leading zero to minutes
+    minutes = "0".concat(minutes);
+  }
+
+  if (prefomattedDate) {
+    // Today at 10:20
+    // Yesterday at 10:20
+    return "".concat(prefomattedDate, " \u0645\u0639 ").concat(hours, ":").concat(minutes);
+  }
+
+  if (hideYear) {
+    // 10. January at 10:20
+    return "".concat(day, ". ").concat(month, " \u0645\u0639 ").concat(hours, ":").concat(minutes);
+  } // 10. January 2017. at 10:20
+
+
+  return "".concat(day, ". ").concat(month, " ").concat(year, ". \u0645\u0639 ").concat(hours, ":").concat(minutes);
+} // --- Main function
+
+/* Convert Time Post  Function */
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['oid'],
+  props: ["oid"],
   data: function data() {
     return {
       chatbox: false,
       chat_box_avatar: "",
       message: "",
-      to: "4566682357",
-      ChatList: []
+      to: "",
+      ChatList: [],
+      ChatRoomData: [],
+      fullusername: "",
+      IsOnline: null,
+      convertTime: function timeAgo(dateParam) {
+        if (!dateParam) {
+          return null;
+        }
+
+        var date = _typeof(dateParam) === "object" ? dateParam : new Date(dateParam);
+        var DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
+
+        var today = new Date();
+        var yesterday = new Date(today - DAY_IN_MS);
+        var seconds = Math.round((today - date) / 1000);
+        var minutes = Math.round(seconds / 60);
+        var isToday = today.toDateString() === date.toDateString();
+        var isYesterday = yesterday.toDateString() === date.toDateString();
+        var isThisYear = today.getFullYear() === date.getFullYear();
+
+        if (seconds < 5) {
+          return "الأن";
+        } else if (seconds <= 10) {
+          return "".concat(seconds, " \u062B\u0648\u0627\u0646\u064A \u0645\u0636\u062A");
+        } else if (seconds < 60 && seconds > 10) {
+          return "".concat(seconds, " \u062B\u0627\u0646\u064A\u0629 \u0645\u0636\u062A");
+        } else if (seconds < 90) {
+          return "منذ دقيقة واحدة";
+        } else if (minutes <= 10) {
+          return "".concat(minutes, " \u062F\u0642\u0627\u0626\u0642 \u0645\u0636\u062A");
+        } else if (minutes < 60 && minutes > 10) {
+          return "".concat(minutes, " \u062F\u0642\u064A\u0642\u0629 \u0645\u0636\u062A");
+        } else if (isToday) {
+          return getFormattedDate(date, "اليوم"); // Today at 10:20
+        } else if (isYesterday) {
+          return getFormattedDate(date, "البارحة"); // Yesterday at 10:20
+        } else if (isThisYear) {
+          return getFormattedDate(date, false, true); // 10. January at 10:20
+        }
+
+        return getFormattedDate(date); // 10. January 2017. at 10:20
+      }
     };
   },
   methods: {
+    backToList: function backToList() {
+      this.chatbox = false;
+      clearInterval(this.interval2);
+    },
+    sortedChatRoomData: function sortedChatRoomData() {
+      this.ChatRoomData.sort(function (a, b) {
+        return new Date(a.date) - new Date(b.date);
+      });
+      return this.ChatRoomData;
+    },
+    avatarLink: function avatarLink(link) {
+      if (link != "" && link != null) {
+        return "/" + link;
+      } else {
+        return "/img/icons/avatar.png";
+      }
+    },
     getChatList: function getChatList() {
       var _this = this;
 
       var data = new FormData();
       data.append("OID", this.oid);
       axios.post("/ajax/project/chatList/get", data).then(function (response) {
-        _this.ChatList = response.data;
+        _this.ChatList = response.data.data;
       });
     },
     sendMessage: function sendMessage() {
       var _this2 = this;
 
+      this.ChatRoomData.push({
+        date: new Date(),
+        message: this.message,
+        to: this.to
+      });
       var data = new FormData();
       data.append("OID", this.oid);
       data.append("to", this.to);
       data.append("message", this.message);
+      this.message = "";
       axios.post("/ajax/project/chat/send", data).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -7546,16 +7608,60 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    users_menu_chat_click: function users_menu_chat_click(avatar) {
+    getChatRoom: function getChatRoom() {
+      var _this3 = this;
+
+      var data = new FormData();
+      data.append("OID", this.oid);
+      data.append("to", this.to);
+      axios.post("/ajax/project/chatroom/get", data).then(function (response) {
+        _this3.ChatRoomData = response.data.data.data;
+        _this3.IsOnline = response.data.IsOnline;
+
+        _this3.sortedChatRoomData();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    users_menu_chat_click: function users_menu_chat_click(avatar, to, fullname) {
+      var _this4 = this;
+
+      this.IsOnline = null;
+      this.to = to;
+      this.fullusername = fullname;
+
+      if (this.to != "") {
+        this.interval2 = setInterval(function () {
+          return _this4.getChatRoom();
+        }, 5000);
+      }
+
+      this.ChatRoomData = [];
       this.chat_box_avatar = avatar;
       this.chatbox = true;
+      var data = new FormData();
+      data.append("OID", this.oid);
+      data.append("to", this.to);
+      axios.post("/ajax/project/chatroom/get", data).then(function (response) {
+        _this4.ChatRoomData = response.data.data.data;
+        _this4.IsOnline = response.data.IsOnline;
+
+        _this4.sortedChatRoomData();
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     messageTyping: function messageTyping() {
       if (this.message != "") {}
     }
   },
   created: function created() {
+    var _this5 = this;
+
     this.getChatList();
+    this.interval1 = setInterval(function () {
+      return _this5.getChatList();
+    }, 5000);
   }
 });
 
@@ -53034,124 +53140,79 @@ var render = function() {
             "div",
             { staticClass: "messages-menu-content" },
             [
-              _c("vs-list", [
-                _c(
-                  "div",
-                  {
-                    on: {
-                      click: function($event) {
-                        return _vm.users_menu_chat_click(
-                          "/img/users/2021/8529090451-61a21c1dd5f5f.jpg"
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "vs-list-item",
-                      {
-                        attrs: {
-                          title: "Saad Rifai",
-                          subtitle: "Top Contributor"
+              _c(
+                "vs-list",
+                _vm._l(_vm.ChatList, function(item, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      on: {
+                        click: function($event) {
+                          _vm.users_menu_chat_click(
+                            _vm.avatarLink(item.FromInfo.avatar),
+                            item.Account_number,
+                            (_vm.Fullname =
+                              item.FromInfo.frist_name[0].toUpperCase() +
+                              item.FromInfo.frist_name.substring(1) +
+                              " " +
+                              item.FromInfo.last_name[0].toUpperCase() +
+                              item.FromInfo.last_name.substring(1))
+                          )
                         }
-                      },
-                      [
-                        _c(
-                          "template",
-                          { slot: "avatar" },
-                          [
-                            _c("vs-avatar", {
-                              attrs: {
-                                src:
-                                  "/img/users/2021/8529090451-61a21c1dd5f5f.jpg"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          { staticClass: "list-users-message-badge" },
-                          [_vm._v("1")]
-                        )
-                      ],
-                      2
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    on: {
-                      click: function($event) {
-                        return _vm.users_menu_chat_click(
-                          "/img/users/2021/7684293048-619e582db97f0.jpg"
-                        )
                       }
-                    }
-                  },
-                  [
-                    _c(
-                      "vs-list-item",
-                      {
-                        attrs: { title: "Adil Miftah", subtitle: "11 Points" }
-                      },
-                      [
-                        _c(
-                          "template",
-                          { slot: "avatar" },
-                          [
-                            _c("vs-avatar", {
-                              attrs: {
-                                src:
-                                  "/img/users/2021/7684293048-619e582db97f0.jpg"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      2
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    on: {
-                      click: function($event) {
-                        return _vm.users_menu_chat_click("")
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "vs-list-item",
-                      {
-                        attrs: {
-                          title: "desky maroc",
-                          subtitle: "l'ASMEX organise le 27 octobre 2021 à"
-                        }
-                      },
-                      [
-                        _c(
-                          "template",
-                          { slot: "avatar" },
-                          [_c("vs-avatar", { attrs: { "vs-text": "Vuesax" } })],
-                          1
-                        )
-                      ],
-                      2
-                    )
-                  ],
-                  1
-                )
-              ])
+                    },
+                    [
+                      _c(
+                        "vs-list-item",
+                        {
+                          attrs: {
+                            title:
+                              item.FromInfo.frist_name[0].toUpperCase() +
+                              item.FromInfo.frist_name.substring(1) +
+                              " " +
+                              item.FromInfo.last_name[0].toUpperCase() +
+                              item.FromInfo.last_name.substring(1),
+                            subtitle: item.LastMessage
+                          }
+                        },
+                        [
+                          _c(
+                            "template",
+                            { slot: "avatar" },
+                            [
+                              _c("vs-avatar", {
+                                attrs: {
+                                  size: "large",
+                                  src: _vm.avatarLink(item.FromInfo.avatar)
+                                }
+                              }),
+                              _vm._v(" "),
+                              item.IsOnline == true
+                                ? _c("span", {
+                                    staticClass: "isOnlineBadgVuesax"
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          item.NewMessages > 0
+                            ? _c(
+                                "span",
+                                { staticClass: "list-users-message-badge" },
+                                [_vm._v(_vm._s(item.NewMessages))]
+                              )
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+                }),
+                0
+              )
             ],
             1
           )
@@ -53168,11 +53229,7 @@ var render = function() {
                       _c("vs-button", {
                         staticClass: "btn-icon-no-bg",
                         attrs: { type: "filled", icon: "arrow_forward_ios" },
-                        on: {
-                          click: function($event) {
-                            _vm.chatbox = false
-                          }
-                        }
+                        on: { click: _vm.backToList }
                       })
                     ],
                     1
@@ -53189,7 +53246,23 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _c("div", { staticClass: "col-auto mt-2 p-0" }, [
+                    _c("h1", { staticClass: "chat-box-title" }, [
+                      _vm._v(_vm._s(_vm.fullusername))
+                    ]),
+                    _vm._v(" "),
+                    _vm.IsOnline == true
+                      ? _c("div", { staticClass: "user-check-status" }, [
+                          _vm._v("متصل")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.IsOnline == false
+                      ? _c("div", { staticClass: "user-check-status" }, [
+                          _vm._v("غير متصل")
+                        ])
+                      : _vm._e()
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -53233,87 +53306,115 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "chat-body" }, [
             _c("div", [
-              _c("div", { staticClass: "chat-message-container" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _c("div", { staticClass: "message-box" }, [
-                  _c("div", { staticClass: "message-item" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "message-audio",
-                        attrs: { id: "audio-player" }
-                      },
-                      [
-                        _c("vue-plyr", [
-                          _c(
-                            "audio",
-                            {
-                              attrs: {
-                                controls: "",
-                                crossorigin: "",
-                                playsinline: ""
-                              }
-                            },
-                            [
-                              _c("source", {
-                                attrs: {
-                                  src:
-                                    "https://greghub.github.io/green-audio-player/examples/audio/example-1.mp3",
-                                  type: "audio/mp3"
-                                }
-                              })
-                            ]
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm._m(3)
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "message-box" }, [
-                  _c("div", { staticClass: "message-item send" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "message-audio",
-                        attrs: { id: "audio-player" }
-                      },
-                      [
-                        _c("vue-plyr", [
-                          _c(
-                            "audio",
-                            {
-                              attrs: {
-                                controls: "",
-                                crossorigin: "",
-                                playsinline: ""
-                              }
-                            },
-                            [
-                              _c("source", {
-                                attrs: {
-                                  src:
-                                    "https://greghub.github.io/green-audio-player/examples/audio/example-1.mp3",
-                                  type: "audio/mp3"
-                                }
-                              })
-                            ]
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm._m(4)
-                  ])
-                ])
-              ])
+              _c(
+                "div",
+                { staticClass: "chat-message-container" },
+                _vm._l(_vm.ChatRoomData, function(item, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "message-box",
+                      class: { send: item.to == _vm.to }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "message-item",
+                          class: { send: item.to == _vm.to }
+                        },
+                        [
+                          _c("div", { staticClass: "message-text" }, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(item.message) +
+                                "\n              "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "message-footer" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-auto" }, [
+                                _c("div", { staticClass: "message-time" }, [
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(_vm.convertTime(item.date)) +
+                                      "\n                    "
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              item.to == _vm.to
+                                ? _c("div", { staticClass: "col-md-auto" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "message-status" },
+                                      [
+                                        _c(
+                                          "vs-tooltip",
+                                          { attrs: { text: "تم الارسال" } },
+                                          [
+                                            item.status == 0
+                                              ? _c("i", {
+                                                  staticClass:
+                                                    "far fa-check-circle"
+                                                })
+                                              : _vm._e()
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "vs-tooltip",
+                                          { attrs: { text: "تم التوصل" } },
+                                          [
+                                            item.status == 1
+                                              ? _c("i", {
+                                                  staticClass:
+                                                    "fas fa-check-circle"
+                                                })
+                                              : _vm._e()
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "vs-tooltip",
+                                          { attrs: { text: "تمت المشاهدة" } },
+                                          [
+                                            item.status == 2
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "received-chat-icon"
+                                                  },
+                                                  [
+                                                    _c("img", {
+                                                      attrs: {
+                                                        src:
+                                                          _vm.chat_box_avatar,
+                                                        alt: ""
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ])
+                                : _vm._e()
+                            ])
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
             ])
           ]),
           _vm._v(" "),
@@ -53372,6 +53473,21 @@ var render = function() {
                     attrs: { dir: "auto", type: "text" },
                     domProps: { value: _vm.message },
                     on: {
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.sendMessage.apply(null, arguments)
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -53387,104 +53503,7 @@ var render = function() {
         ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto mt-2 p-0" }, [
-      _c("h1", { staticClass: "chat-box-title" }, [_vm._v("Saad Rifai")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "user-check-status" }, [_vm._v("متصل")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "message-box" }, [
-      _c("div", { staticClass: "message-item" }, [
-        _c("div", { staticClass: "message-text" }, [
-          _vm._v(
-            "\n                sf db ntrada wnji aji dik l3iba xno 3melti fiha\n              "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "message-footer" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-auto" }, [
-              _c("div", { staticClass: "message-time" }, [_vm._v("12:25")])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "message-box" }, [
-      _c("div", { staticClass: "message-item send" }, [
-        _c("div", { staticClass: "message-text" }, [
-          _vm._v(
-            "\n                hadi mz2ana banetli nas dyal encg 3andom m3a had xi\n              "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "message-footer" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-auto" }, [
-              _c("div", { staticClass: "message-time" }, [_vm._v("12:25")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-auto" }, [
-              _c("div", { staticClass: "message-status" }, [
-                _c("i", { staticClass: "received fas fa-check-circle" })
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "message-footer" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-auto" }, [
-          _c("div", { staticClass: "message-time" }, [_vm._v("12:25")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-auto" }, [
-          _c("div", { staticClass: "message-status" }, [
-            _c("i", { staticClass: "received fas fa-check-circle" })
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "message-footer" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-auto" }, [
-          _c("div", { staticClass: "message-time" }, [_vm._v("12:25")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-auto" }, [
-          _c("div", { staticClass: "message-status" }, [
-            _c("i", { staticClass: "received fas fa-check-circle" })
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

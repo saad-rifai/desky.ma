@@ -4,40 +4,40 @@
       <div class="messages-menu-content">
         <vs-list>
           <div
+            v-for="(item, index) in ChatList"
+            :key="index"
             @click="
               users_menu_chat_click(
-                '/img/users/2021/8529090451-61a21c1dd5f5f.jpg'
+                avatarLink(item.FromInfo.avatar),
+                item.Account_number, Fullname=item.FromInfo.frist_name[0].toUpperCase() +
+                item.FromInfo.frist_name.substring(1) +
+                ' ' +
+                item.FromInfo.last_name[0].toUpperCase() +
+                item.FromInfo.last_name.substring(1)
               )
             "
           >
-            <vs-list-item title="Saad Rifai" subtitle="Top Contributor">
-              <template slot="avatar">
-                <vs-avatar src="/img/users/2021/8529090451-61a21c1dd5f5f.jpg" />
-              </template>
-              <span class="list-users-message-badge">1</span>
-            </vs-list-item>
-          </div>
-          <div
-            @click="
-              users_menu_chat_click(
-                '/img/users/2021/7684293048-619e582db97f0.jpg'
-              )
-            "
-          >
-            <vs-list-item title="Adil Miftah" subtitle="11 Points">
-              <template slot="avatar">
-                <vs-avatar src="/img/users/2021/7684293048-619e582db97f0.jpg" />
-              </template>
-            </vs-list-item>
-          </div>
-          <div @click="users_menu_chat_click('')">
             <vs-list-item
-              title="desky maroc"
-              subtitle="l'ASMEX organise le 27 octobre 2021 à"
+              :title="
+                item.FromInfo.frist_name[0].toUpperCase() +
+                item.FromInfo.frist_name.substring(1) +
+                ' ' +
+                item.FromInfo.last_name[0].toUpperCase() +
+                item.FromInfo.last_name.substring(1)
+                
+              "
+           
+              :subtitle="item.LastMessage"
             >
               <template slot="avatar">
-                <vs-avatar vs-text="Vuesax" />
+                <vs-avatar size="large" :src="avatarLink(item.FromInfo.avatar)" />
+                <span v-if="item.IsOnline == true" class="isOnlineBadgVuesax"></span>
               </template>
+              <span
+                class="list-users-message-badge"
+                v-if="item.NewMessages > 0"
+                >{{ item.NewMessages }}</span
+              >
             </vs-list-item>
           </div>
         </vs-list>
@@ -50,7 +50,7 @@
             <div class="row">
               <div class="col-auto chat-tools">
                 <vs-button
-                  @click="chatbox = false"
+                  @click="backToList"
                   class="btn-icon-no-bg"
                   type="filled"
                   icon="arrow_forward_ios"
@@ -60,8 +60,9 @@
                 <vs-avatar size="large" :src="chat_box_avatar" />
               </div>
               <div class="col-auto mt-2 p-0">
-                <h1 class="chat-box-title">Saad Rifai</h1>
-                <div class="user-check-status">متصل</div>
+                <h1 class="chat-box-title">{{fullusername}}</h1>
+                <div class="user-check-status" v-if="IsOnline == true">متصل</div>
+                <div class="user-check-status" v-if="IsOnline == false">غير متصل</div>
               </div>
             </div>
           </div>
@@ -85,87 +86,45 @@
       <div class="chat-body">
         <div>
           <div class="chat-message-container">
-            <div class="message-box">
-              <div class="message-item">
+            <div
+              v-for="(item, index) in ChatRoomData"
+              :key="index"
+              class="message-box"
+              v-bind:class="{ send: item.to == to }"
+            >
+              <div class="message-item" v-bind:class="{ send: item.to == to }">
                 <div class="message-text">
-                  sf db ntrada wnji aji dik l3iba xno 3melti fiha
+                  {{ item.message }}
                 </div>
                 <div class="message-footer">
                   <div class="row">
                     <div class="col-md-auto">
-                      <div class="message-time">12:25</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="message-box">
-              <div class="message-item send">
-                <div class="message-text">
-                  hadi mz2ana banetli nas dyal encg 3andom m3a had xi
-                </div>
-                <div class="message-footer">
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <div class="message-time">12:25</div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="message-status">
-                        <i class="received fas fa-check-circle"></i>
+                      <div class="message-time">
+                        {{ convertTime(item.date) }}
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="message-box">
-              <div class="message-item">
-                <div class="message-audio" id="audio-player">
-                  <vue-plyr>
-                    <audio controls crossorigin playsinline>
-                      <source
-                        src="https://greghub.github.io/green-audio-player/examples/audio/example-1.mp3"
-                        type="audio/mp3"
-                      />
-                    </audio>
-                  </vue-plyr>
-                </div>
-                <div class="message-footer">
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <div class="message-time">12:25</div>
-                    </div>
-                    <div class="col-md-auto">
+              
+                    <div class="col-md-auto" v-if="item.to == to">
                       <div class="message-status">
-                        <i class="received fas fa-check-circle"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="message-box">
-              <div class="message-item send">
-                <div class="message-audio" id="audio-player">
-                  <vue-plyr>
-                    <audio controls crossorigin playsinline>
-                      <source
-                        src="https://greghub.github.io/green-audio-player/examples/audio/example-1.mp3"
-                        type="audio/mp3"
-                      />
-                    </audio>
-                  </vue-plyr>
-                </div>
-                <div class="message-footer">
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <div class="message-time">12:25</div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="message-status">
-                        <i class="received fas fa-check-circle"></i>
+                        <vs-tooltip text="تم الارسال">
+                          <i
+                            v-if="item.status == 0"
+                            class="far fa-check-circle"
+                          ></i>
+                        </vs-tooltip>
+                        <vs-tooltip text="تم التوصل">
+                          <i
+                            v-if="item.status == 1"
+                            class="fas fa-check-circle"
+                          ></i>
+                        </vs-tooltip>
+                        <vs-tooltip text="تمت المشاهدة">
+                          <span
+                            v-if="item.status == 2"
+                            class="received-chat-icon"
+                            ><img :src="chat_box_avatar" alt=""
+                          /></span>
+                        </vs-tooltip>
                       </div>
                     </div>
                   </div>
@@ -197,6 +156,7 @@
               <input
                 dir="auto"
                 v-model="message"
+                v-on:keyup.enter="sendMessage"
                 type="text"
                 class="input-text-chat"
               />
@@ -208,33 +168,140 @@
   </div>
 </template>
 <script>
+/* Convert Time Post  Function */
+const MONTH_NAMES = [
+  "يناير",
+  "فبراير",
+  "مارس",
+  "أبريل",
+  "مايو",
+  "يونيو",
+  "يوليو",
+  "أغسطس",
+  "سبتمبر",
+  "اكتوبر",
+  "نوفمبر",
+  "ديسمبر",
+];
+
+function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
+  const day = date.getDate();
+  const month = MONTH_NAMES[date.getMonth()];
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  let minutes = date.getMinutes();
+
+  if (minutes < 10) {
+    // Adding leading zero to minutes
+    minutes = `0${minutes}`;
+  }
+
+  if (prefomattedDate) {
+    // Today at 10:20
+    // Yesterday at 10:20
+    return `${prefomattedDate} مع ${hours}:${minutes}`;
+  }
+
+  if (hideYear) {
+    // 10. January at 10:20
+    return `${day}. ${month} مع ${hours}:${minutes}`;
+  }
+
+  // 10. January 2017. at 10:20
+  return `${day}. ${month} ${year}. مع ${hours}:${minutes}`;
+}
+
+// --- Main function
+
+/* Convert Time Post  Function */
 export default {
-  props:['oid'],
+  props: ["oid"],
   data() {
     return {
       chatbox: false,
       chat_box_avatar: "",
       message: "",
-      to: "4566682357",
+      to: "",
       ChatList: [],
+      ChatRoomData: [],
+      fullusername: "",
+      IsOnline: null,
+      convertTime: function timeAgo(dateParam) {
+        if (!dateParam) {
+          return null;
+        }
+
+        const date =
+          typeof dateParam === "object" ? dateParam : new Date(dateParam);
+        const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
+        const today = new Date();
+        const yesterday = new Date(today - DAY_IN_MS);
+        const seconds = Math.round((today - date) / 1000);
+        const minutes = Math.round(seconds / 60);
+        const isToday = today.toDateString() === date.toDateString();
+        const isYesterday = yesterday.toDateString() === date.toDateString();
+        const isThisYear = today.getFullYear() === date.getFullYear();
+
+        if (seconds < 5) {
+          return "الأن";
+        } else if (seconds <= 10) {
+          return `${seconds} ثواني مضت`;
+        } else if (seconds < 60 && seconds > 10) {
+          return `${seconds} ثانية مضت`;
+        } else if (seconds < 90) {
+          return "منذ دقيقة واحدة";
+        } else if (minutes <= 10) {
+          return `${minutes} دقائق مضت`;
+        } else if (minutes < 60 && minutes > 10) {
+          return `${minutes} دقيقة مضت`;
+        } else if (isToday) {
+          return getFormattedDate(date, "اليوم"); // Today at 10:20
+        } else if (isYesterday) {
+          return getFormattedDate(date, "البارحة"); // Yesterday at 10:20
+        } else if (isThisYear) {
+          return getFormattedDate(date, false, true); // 10. January at 10:20
+        }
+
+        return getFormattedDate(date); // 10. January 2017. at 10:20
+      },
     };
   },
   methods: {
-    getChatList(){
+    backToList(){
+this.chatbox = false; 
+clearInterval(this.interval2);
+    },
+        sortedChatRoomData: function() {
+        this.ChatRoomData.sort( ( a, b) => {
+            return new Date(a.date) - new Date(b.date);
+        });
+        return this.ChatRoomData;
+    },
+    avatarLink(link) {
+      if (link != "" && link != null) {
+        return "/" + link;
+      } else {
+        return "/img/icons/avatar.png";
+      }
+    },
+    getChatList() {
       let data = new FormData();
       data.append("OID", this.oid);
-      axios
-        .post("/ajax/project/chatList/get", data)
-        .then((response) => {
-         this.ChatList = response.data;
-        });
+      axios.post("/ajax/project/chatList/get", data).then((response) => {
+        this.ChatList = response.data.data;
+      });
     },
     sendMessage() {
+      this.ChatRoomData.push({
+        date: new Date(),
+        message: this.message,
+        to: this.to,
+      });
       let data = new FormData();
       data.append("OID", this.oid);
       data.append("to", this.to);
       data.append("message", this.message);
-
+      this.message = "";
       axios
         .post("/ajax/project/chat/send", data)
         .then((response) => {
@@ -258,9 +325,47 @@ export default {
           }
         });
     },
-    users_menu_chat_click(avatar) {
+    getChatRoom() {
+      let data = new FormData();
+      data.append("OID", this.oid);
+      data.append("to", this.to);
+      axios
+        .post("/ajax/project/chatroom/get", data)
+        .then((response) => {
+          this.ChatRoomData = response.data.data.data;
+        this.IsOnline = response.data.IsOnline;
+
+          this.sortedChatRoomData();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    users_menu_chat_click(avatar, to, fullname) {
+      this.IsOnline = null;
+      this.to = to;
+      this.fullusername = fullname;
+      if (this.to != "") {
+        this.interval2 = setInterval(() => this.getChatRoom(), 5000);
+      }
+      this.ChatRoomData = [];
       this.chat_box_avatar = avatar;
       this.chatbox = true;
+      let data = new FormData();
+      data.append("OID", this.oid);
+      data.append("to", this.to);
+      axios
+        .post("/ajax/project/chatroom/get", data)
+        .then((response) => {
+          this.ChatRoomData = response.data.data.data;
+        this.IsOnline = response.data.IsOnline;
+
+          this.sortedChatRoomData();
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     messageTyping() {
@@ -270,6 +375,7 @@ export default {
   },
   created() {
     this.getChatList();
+    this.interval1 = setInterval(() => this.getChatList(), 5000);
   },
 };
 </script>

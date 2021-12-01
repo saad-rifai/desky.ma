@@ -70,35 +70,79 @@ class ChatSystemController extends Controller
             return response()->json(['error' => 'طلب خاطئ لا يمكن ارسال الرسالة !'], 400);
         }
     }
-    public function ProjectGetChatList(Request $request){
-        if(isset($request->OID)){
+    public function ProjectGetChatList(Request $request)
+    {
+        if (isset($request->OID)) {
             $OrderOwnerCeck = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->count();
-            if($OrderOwnerCeck > 0){
-                $Destination = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2'])->get();
-                
+            if ($OrderOwnerCeck > 0) {
+                $Destination = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2'])->get(['Account_number']);
+
                 /* Count New Messages */
-              //  foreach($GetDestinations as $Destination);
-                for($i=0; $i < $Destination->count(); $i++){
-                    $NewMessagesSended = chat_system::where('from', $Destination[$i]->Account_number)->whereIn('status', ['0','1'])->count();
+                //  foreach($GetDestinations as $Destination);
+                for ($i = 0; $i < $Destination->count(); $i++) {
+                    $IsOnline = User::isOnline($Destination[$i]->Account_number);
+                    $NewMessagesSended = chat_system::where('from', $Destination[$i]->Account_number)->where('to', Auth::user()->Account_number)->whereIn('status', ['0', '1'])->count();
                     $Destination[$i]->NewMessages = $NewMessagesSended;
-                    $LastMessage = chat_system::where('OID', $request->OID)->where('type', "1")->where(function ($qu) use ($Destination,$i){
-                        $qu->where('from', $Destination[$i]->Account_number)
-                        ->where('to', Auth::user()->Account_number);
+                    $acNumber =$Destination[$i]->Account_number;
+                    $LastMessage = chat_system::where(function ($qu) use ( $request, $acNumber) {
+                        $qu->where('OID', $request->OID)->where('type', "1")
+                            ->where('from', $acNumber);
+                    })->orWhere(function ($qu) use ( $request,$acNumber) {
+                        $qu->where('OID', $request->OID)->where('type', "1")
+                            ->where('to', $acNumber);
+                    })->orderBy('created_at', 'DESC')->first();
+                 if(isset($Destination[$i])){
+                    $Destination[$i]->IsOnline = $IsOnline;
+                     if(isset($LastMessage->message)){
+                        $Destination[$i]->LastMessage = $LastMessage->message;
 
-                    })->orWhere(function ($qu) use ($Destination,$i){
-                        $qu->where('to', $Destination[$i]->Account_number)
-                        ->where('from', Auth::user()->Account_number);
-                    })->first();
-                    $Destination[$i]->LastMessage = $LastMessage;
+                     }else{
+                        $Destination[$i]->LastMessage = null;
+                     }
 
+                 }
+                    $UserInfos = User::where("Account_number", $Destination[$i]->Account_number)->get(['avatar', 'frist_name', 'last_name', 'Account_number']);
+                    foreach ($UserInfos as $UserInfo);
+                    $Destination[$i]->FromInfo = $UserInfo;
+                    if (isset($LastMessage->created_at)) {
+                        $Destination[$i]->date = $LastMessage->created_at;
+                   
+                    } else {
+                        $Destination[$i]->date = null;
+                    }
                 }
-                return response()->json(['data' => $Destination], 200);
-
-            }else{
+       
+                $data =  $Destination->sortBy("date");
+                return response()->json(['data' => $data], 200);
+            } else {
                 return response()->json(['error' => 'طلب خاطئ !'], 400);
             }
-        }else{
-           return response()->json(['error' => 'bad request'], 400);
+        } else {
+            return response()->json(['error' => 'bad request'], 400);
+        }
+    }
+    public function ProjectChatRoom(Request $request)
+    {
+        if (isset($request->OID) && isset($request->to)) {
+            $ChatsData = chat_system::where(function ($qu) use ($request) {
+                $qu->where('OID', $request->OID)->where('type', "1")
+                    ->where('from', $request->to)
+                    ->where('to', Auth::user()->Account_number);
+            })->orWhere(function ($qu) use ($request) {
+                $qu->where('OID', $request->OID)->where('type', "1")
+                    ->where('to', $request->to)
+                    ->where('from', Auth::user()->Account_number);
+            })->orderBy('created_at', 'DESC')->paginate(5);
+            $IsOnline = User::isOnline($request->to);
+           // foreach ($ChatsData as $ChatData);
+           for($i=0; $i < $ChatsData->count(); $i++){
+               $ChatsData[$i]->date = date("Y-m-d H:i:s", strtotime($ChatsData[$i]->created_at));
+           }
+       
+           $UpdateMessagesStatus = chat_system::where('OID', $request->OID)->where('from', $request->to)->update(['status'=> '2']);
+            return response()->json(['data' => $ChatsData, 'IsOnline' => $IsOnline], 200);
+        } else {
+            return response()->json(['error' => 'طلب خاطئ !'], 400);
         }
     }
 }
