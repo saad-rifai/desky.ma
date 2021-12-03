@@ -199,7 +199,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="menu_user">
                           <li><a class="dropdown-item" href="#">مراسلة</a></li>
-                          <li><a class="dropdown-item" href="#">التبليغ</a></li>
+                          <li><a class="dropdown-item" type="button" data-toggle="modal" data-target="#reportModal">التبليغ</a></li>
                         </ul>
                       </span>
                     </div>
@@ -269,11 +269,14 @@
                 >موظف</span
               >
 
-              <div class="mr-65">
-                <p class="box-article-description font-Naskh text-wrap-line">
-                  {{ item.description }}
-                </p>
-              </div>
+              <div class="mr-65" v-if="OrderCreator" id="text-wraper-desky">
+                <p
+                        class="box-article-description font-Naskh text-wrap-line collapse TextCollapse"
+                   :id="'TextCollapse2'+index" aria-expanded="false">
+                        {{ item.description }}
+                    </p>
+                      <a role="button" class="collapsed" data-toggle="collapse" :href="'#TextCollapse2'+index" aria-expanded="false" :aria-controls="'TextCollapse2'+index"></a>
+            </div>
 
               <div
                 v-if="OrderCreator && item.status == 0"
@@ -327,7 +330,7 @@
               v-else
               style="margin-right: 0 !important"
               type="button"
-              class="btn btn-primary text-center end-data-btn"
+              class="text-center end-data-btn"
               disabled
             >
               نهائة النتائج
@@ -461,8 +464,7 @@
                                   dir="rtl"
                                 ></span>
                               </vs-tooltip>
-                            </h4>
-                                                                  </a>
+                            </h4></a>
                           </div>
                         </div>
                                    
@@ -558,11 +560,14 @@
               <span v-if="item.status == 1" class="badge bg-warning mr-65"
                 >موظف</span
               >
-              <div class="mr-65">
-                <p class="box-article-description font-Naskh text-wrap-line">
-                  {{ item.description }}
-                </p>
-              </div>
+              <div class="mr-65" v-if="OrderCreator" id="text-wraper-desky">
+                <p
+                        class="box-article-description font-Naskh text-wrap-line collapse TextCollapse"
+                   :id="'TextCollapse1'+index" aria-expanded="false">
+                        {{ item.description }}
+                    </p>
+                      <a role="button" class="collapsed" data-toggle="collapse" :href="'#TextCollapse1'+index" aria-expanded="false" :aria-controls="'TextCollapse1'+index"></a>
+            </div>
             </div>
           </div>
 
@@ -586,7 +591,7 @@
               v-else
               style="margin-right: 0 !important"
               type="button"
-              class="btn btn-primary text-center"
+              class="end-data-btn text-center"
               disabled
             >
               نهائة النتائج

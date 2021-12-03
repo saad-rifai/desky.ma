@@ -4,6 +4,7 @@
 <link href="{{ asset('css/chat/chat-style.css') }}" rel="stylesheet">
 
 @section('content')
+<div id="app">
     <div class="container mt-5 mb-5">
         <div class="row text-center" dir="rtl">
             <div class="col">
@@ -15,10 +16,14 @@
                 </nav>
                 <h1 align="right" class="breadcrumb-title">{{ $data->title }}</h1>
             </div>
+            <div class="col-sm-auto mt-3" align="right">
+
+                <manage-order-menu></manage-order-menu>
+            </div>
 
         </div>
     </div>
-    <div id="app" class="container mb-5 mt-2">
+    <div  class="container mb-5 mt-2">
         <div class="row justify-content-md-center" dir="rtl">
             <div class="col-sm ">
 
@@ -50,11 +55,12 @@
                                     {{ $data->description }}
                                 </p>
                             </div>
-                            <div class="tab-pane fade" id="auto-entrepreneur" role="tabpanel"
+                            <div class="tab-pane fade  p-3 position-relative" id="auto-entrepreneur" role="tabpanel"
                                 aria-labelledby="auto-entrepreneur">
+                                <hired-list :oid="{{$data->OID}}"></hired-list>
 
                             </div>
-                            <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                            <div class="tab-pane  fade  p-3 position-relative" id="messages" role="tabpanel" aria-labelledby="messages-tab">
                                 <!-- Chat Box -->
                                 <form-order-chat :oid="{{$data->OID}}"></form-order-chat>
                                 <!-- Chat Box -->
@@ -65,6 +71,16 @@
 
                     </div>
                 </div>
+                @if(isset($data->keywords) && $data->keywords != null)
+                <div class="card p-4 mb-4">
+                    <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> الكلمات المفتاحية</h1>
+                    <div class="keywords-wraper" dir="rtl" align="right">
+                        @foreach($data->keywords as $keyword)
+                        <vs-chip>{{$keyword}}<vs-avatar icon="tag"/></vs-chip>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="col-sm col-lg-4 ">
                 <div class="box-left  card p-4">
@@ -75,7 +91,9 @@
                             <span class="card-info-title"><i class="fas fa-info-circle"></i> حالة الطلب:</span>
                         </div>
                         <div class="col mb-3" align="right">
-                            <span class="card-info-text">
+                            <span class="card-info-text" style="margin-top: 20px !important;
+                            position: relative;
+                            display: block;">
                                 @switch($data->status)
                                     @case(0)
                                         <span class="badge rounded-pill bg-warning order-status">قيد المراجعة</span>
@@ -184,9 +202,13 @@
 
 
                 </div>
+
+
             </div>
         </div>
     </div>
+</div>
+
 @stop
 <script src="{{ asset('js/library/p5.min.js') }}"></script>
 <script src="{{ asset('js/library/audio-record.js') }}" ></script>

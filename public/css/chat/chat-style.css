@@ -197,6 +197,10 @@ span.file-item-name {
 .vs-list--avatar {
     position: relative;
 }
+.order-status {
+    margin-top: -10px !important;
+
+}
 span.isOnlineBadgVuesax {
     width: 20px;
     height: 20px;

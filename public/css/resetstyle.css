@@ -7,11 +7,11 @@ body {
     background-color: #f6f6f6 !important;
 }
 button.btn.btn-primary {
-    background-color: #f96a0c;
-    border: solid 1px #f96a0c;
+    background-color: #f96a0c !important;
+    border: solid 1px #f96a0c !important;
     border-radius: 50px;
     padding: 10px 30px;
-    font-size: 17px;
+    font-size: 17px !important;
 }
 button.btn {
     border-radius: 50px;
@@ -325,6 +325,38 @@ a.nav-link.active {
     padding: 10px 15px !important;
     font-size: 14px !important;
 }
+.modal-content{
+    border: 0 !important;
+    box-shadow: 0 24px 38px 3px rgb(60 75 100 / 14%), 0 9px 46px 8px rgb(60 75 100 / 12%), 0 11px 15px -7px rgb(60 75 100 / 20%) !important;
+}
+
+
+button.btn.btn-secondary {
+    color: #505050 !important;
+    background-color: #dddddd !important;
+    border: solid 1px #dddddd !important;
+}
+.modal-header .btn-close {
+    font-size: 11px !important;
+}
+.modal-title {
+    font-size: 16px !important;
+    color: #484848 !important;
+    font-weight: 300 !important;
+}
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between !important;
+    padding: 1rem !important;
+    border-bottom: 1px solid !important;
+    border-top-left-radius: calc(0.3rem - 1px) !important;
+    border-top-right-radius: calc(0.3rem - 1px) !important;
+    border-color: #d8dbe0 !important;
+}
 .select2-container--default
     .select2-selection--multiple
     .select2-selection__choice {
@@ -480,11 +512,7 @@ label.form-label {
     left: 100%;
     margin-left: 15px;
 }
-.modal-header {
 
-    margin-right: 25px;
-    margin-left: 25px;
-}
 .vs-select-group h4 {
     font-size: 15px;
     text-align: right;

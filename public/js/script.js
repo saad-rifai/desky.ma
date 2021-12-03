@@ -14,7 +14,9 @@ if (hash) {
 
 
 })
-
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
 
 
@@ -114,14 +116,11 @@ function redirectUserPage(e,id){
   e.preventDefault();
 }
 
-var myCollapse = document.getElementById('navbarSupportedContent')
-var bsCollapse = new bootstrap.Collapse(myCollapse, {
-  toggle: false
-})
-$(document).on('click',function(){
+
+/*$(document).on('click',function(){
 
     $('.collapse').toggle();
-})
+})*/
 $(document).ready(function () {
   $('.dropdown-toggle').dropdown();
 });

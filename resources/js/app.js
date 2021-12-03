@@ -4,7 +4,10 @@
   * building robust, powerful web applications using Vue and Laravel.
 */
 
+
+
  require('./bootstrap');
+ 
  import VuePlyr from 'vue-plyr'
  import 'vue-plyr/dist/vue-plyr.css'
 
@@ -18,7 +21,7 @@ import Vue from 'vue';
  Vue.use(Vuesax, {
    // options here
  })
- Vue.use(VuePlyr)
+ Vue.use(VuePlyr )
  
  
  
@@ -56,6 +59,8 @@ import Vue from 'vue';
  Vue.component('add-order', require('./components/user/orders/add-order.vue').default);
  Vue.component('open-orders-list', require('./components/user/orders/orders-open-lists.vue').default);
  Vue.component('form-order-chat', require('./components/user/orders/chat/form-order-chat.vue').default);
+ Vue.component('hired-list', require('./components/user/orders/hired-list.vue').default);
+ Vue.component('manage-order-menu', require('./components/user/orders/manage-order-menu.vue').default);
 
  /* Offers Section */
  Vue.component('add-offer', require('./components/user/offers/add-offer.vue').default);
@@ -66,6 +71,10 @@ import Vue from 'vue';
  Vue.component('user-ratings-list', require('./components/public/user-ratings-list.vue').default);
  Vue.component('portfolio-section', require('./components/public/portfolio-section.vue').default);
  
+ /* Tools */
+ Vue.component('report-popup', require('./components/user/tools/report-popup.vue').default);
+
+ /* Tools */
  
  /**
   * Next, we will create a fresh Vue application instance and attach it to

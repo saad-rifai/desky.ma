@@ -211,14 +211,14 @@
             <div dir="rtl" class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-toggle="collapse"
-                            data-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                        <button class="accordion-button" type="button" data-toggle="collapse"
+                            data-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                             aria-controls="panelsStayOpen-collapseOne">
                             ما هي منصة desky ؟
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
-                        aria-labelledby="panelsStayOpen-headingOne">
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse show"
+                        aria-labelledby="panelsStayOpen-headingOne" data-parent="#accordionPanelsStayOpenExample">
                         <div class="accordion-body">
                             <p>
                                 مستقل هو منصة عربية تتيح لأصحاب المشاريع والشركات التعاقد مع مستقلين محترفين للقيام
@@ -239,7 +239,7 @@
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-                        aria-labelledby="panelsStayOpen-headingTwo">
+                        aria-labelledby="panelsStayOpen-headingTwo" data-parent="#accordionPanelsStayOpenExample">
                         <div class="accordion-body">
                             <strong>This is the second item's accordion body.</strong> It is hidden by default, until the
                             collapse plugin adds the appropriate classes that we use to style each element. These classes
@@ -260,7 +260,7 @@
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
-                        aria-labelledby="panelsStayOpen-headingThree">
+                        aria-labelledby="panelsStayOpen-headingThree" data-parent="#accordionPanelsStayOpenExample">
                         <div class="accordion-body">
                             <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
                             collapse plugin adds the appropriate classes that we use to style each element. These classes
@@ -289,5 +289,5 @@
             </div>
         </div>
     </div>
-    <div id="app"></div>
+
 @stop

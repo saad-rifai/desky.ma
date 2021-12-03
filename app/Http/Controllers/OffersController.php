@@ -128,6 +128,7 @@ class OffersController extends Controller
                 if($OrderCreator == false){
                     $infos[$i]->time = null;
                     $infos[$i]->price = null;
+                    $infos[$i]->description = null;
                 }
 
                 /* Get Activite Name */

@@ -45,7 +45,6 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
     <!-- Jquery -->
-<script src="{{asset('js/library/jquery.js')}}"></script>
 
 
     <script src="{{asset('js/library/nanobar.min.js')}}"></script>
@@ -62,20 +61,24 @@
     <!-- Nav Bar  -->
     <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar" id="navbar">
         <div class="container-fluid container">
-            <a class="navbar-brand" href="{{ asset('/') }}"><img class="logo-web"
-                    src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky"></a>
+            <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip" data-placement="top" title="هذه المنصة لازالت قيد التطوير والتحسين">
+
+                <img class="logo-web "
+                    src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky">
+                </a>
 
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto  mb-2 mb-lg-0 clicky-menu no-js">
+            <div class="collapse navbar-collapse" id="PhoneNavbar">
+                <ul class="navbar-nav mx-auto  mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                           المقاولين الذاتيين <i class="fas fa-chevron-down"></i>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                            المقاولين الذاتيين <i class="fas fa-chevron-down"></i>
                         </a>
-                        <ul>
-                            <li><a href="{{ asset('/auto-entrepreneurs') }}"><i class="fas fa-users"></i> تصفح المقاولين الذاتيين </a></li>
-                            <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i> جميع العقود</a></li>
-                        </ul>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
+                            <a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i> جميع العقود</a>
+                          </div>
+ 
                     </li>
             
                     @auth
@@ -84,15 +87,16 @@
                     </li>
                     @endauth
           
-                    <li class="nav-item" id="hero-example">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                             طلبات العروض <i class="fas fa-chevron-down"></i>
                         </a>
-                        <ul>
-                            <li><a href="{{ asset('orders') }}"><i class="fas fa-folders"></i> جميع طلبات العروض </a></li>
-                            <li><a href="#"><i class="fas fa-folder"></i> طلباتي</a></li>
-                            <li><a href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i class="fas fa-folder-plus"></i> نشر طلب عروض</a></li>
-                        </ul>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i> جميع جميع طلبات العروض</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-folder"></i> طلباتي </a>
+                            <a class="dropdown-item" href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i class="fas fa-folder-plus"></i> نشر طلب عروض</a>
+                          </div>
+                  
                     </li>
                 </ul>
                 @guest
@@ -189,13 +193,13 @@
                 @endauth
 
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#PhoneNavbar"
+                aria-controls="PhoneNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
     <div class="page-load" id="page-load"></div>
     <!-- Nav Bar  -->
-
     @yield('content')
+

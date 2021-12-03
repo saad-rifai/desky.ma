@@ -29,7 +29,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">فهمت</button>
+          <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">فهمت</button>
         </div>
       </div>
     </div>

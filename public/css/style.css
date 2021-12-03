@@ -188,13 +188,68 @@ span.user-rating-stars {
     overflow: hidden;
 }
 button.btn.btn-sm {
-    font-size: 16px !important;
-    padding: 6px 20px;
-}
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: #f96a0c!important;
+    font-size: 13px !important;
+    padding: 8px 20px !important;
+    width: auto !important;
+    height: auto !important;
+   /* display: inline-grid;*/
 
 }
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #ffffff!important;
+    background-color: #f96a0c !important;
+    border-color: #f96a0c !important;
+
+}
+a.navbar-brand {
+    position: relative;
+}
+span.beta-icon {
+    font-weight: 700;
+    font-size: 18px;
+    position: absolute;
+    right: -40px;
+    top: 9px;
+    cursor: pointer;
+    color: rgb(249 178 31);
+}
+a.navbar-brand.beta::before {
+    content: "BETA";
+    font-size: 20px;
+    vertical-align: top;
+    font-weight: 700;
+    color: #f9b21f;
+}
+#text-wraper-desky .TextCollapse.collapse:not(.show)::before {
+    content: "....";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 30px;
+}
+  #text-wraper-desky .TextCollapse.collapse:not(.show) {
+    display: block;
+    height: 4rem;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  #text-wraper-desky .TextCollapse.collapsing {
+    height: 3rem;
+  }
+  
+  #text-wraper-desky a.collapsed::after {
+    content: '+ اظهار المزيد';
+  }
+  
+  #text-wraper-desky a:not(.collapsed)::after {
+    content: '- اظهار أقل';
+  }
+ul.vs-component.vs-dropdown--menu * {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
 .nav-tabs .nav-link {
     color: #303030 !important;
 
@@ -1049,6 +1104,9 @@ ul.dropdown-menu {
     background-color: #f0f8ff00 !important;
     color: #626262 !important;
     border: none !important;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 12px !important;
 }
 
 .item-w-icn {

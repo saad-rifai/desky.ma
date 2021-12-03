@@ -17,11 +17,16 @@
                 </nav>
                 <h1 align="right" class="breadcrumb-title">{{ $data->title }}</h1>
             </div>
-
+            @if($data->orderCreator)
+            <div class="col-sm-auto mt-3" align="right">
+               <a href="{{asset("/myorder/$data->OID")}}"> <button class="btn btn-primary btn-sm">ادارة الطلب</button></a>
+            </div>
+            @endif
         </div>
     </div>
 
     <div id="app" class="container mb-5 mt-2">
+        <report-popup></report-popup>
         <div class="row" dir="rtl" align="right">
             <div class="col-lg-8">
                 @auth

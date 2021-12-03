@@ -197,52 +197,50 @@ class OrdersController extends Controller
             return $error;
         }
     }
-    public function hire(Request $request){
-        if(isset($request->userid) && $request->userid != null && isset($request->OID) && $request->OID != null){
-            $order= Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get(['title']);
-          
-            $orderAuthCheck = $order->count();
-            foreach($order as $order);
-           if($orderAuthCheck > 0){
-               $stmt = Offers::where('OID', $request->OID)->where('Account_number', $request->userid)->update([
-                   'status' => "1"
-               ]);
-               if($stmt){
-                UserNotification::create([
-                    'to' => $request->userid,
-                    'from', null,
-                    'message' => 'مبروك لقد قام '.Auth::user()->frist_name.' بقبول عرضك على <a href="/order/'.$request->OID.'">'.$order->title.'</a> ',
-                    'notifybyemail' => "1",
-                    'email_status' => "0"
-                ]);
-               return response()->json(['success', 'success'], 200);
+    public function hire(Request $request)
+    {
+        if (isset($request->userid) && $request->userid != null && isset($request->OID) && $request->OID != null) {
+            $order = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get(['title']);
 
-               }else{
-                return response()->json(['error', 'server error'], 500);
+            $orderAuthCheck = $order->count();
+            foreach ($order as $order);
+            if ($orderAuthCheck > 0) {
+                $stmt = Offers::where('OID', $request->OID)->where('Account_number', $request->userid)->update([
+                    'status' => "1"
+                ]);
+                if ($stmt) {
+                    UserNotification::create([
+                        'to' => $request->userid,
+                        'from', null,
+                        'message' => 'مبروك لقد قام ' . Auth::user()->frist_name . ' بقبول عرضك على <a href="/order/' . $request->OID . '">' . $order->title . '</a> ',
+                        'notifybyemail' => "1",
+                        'email_status' => "0"
+                    ]);
+                    return response()->json(['success', 'success'], 200);
+                } else {
+                    return response()->json(['error', 'server error'], 500);
+                }
+            } else {
+                return response()->json(['error', 'bad request'], 400);
             }
-           }else{
-               return response()->json(['error', 'bad request'], 400);
-           }
         }
     }
-    public function status(Request $request){
-        if(isset($request->s) && isset($request->OID) && in_array($request->s, ['2','3'])){
-            $orderCheck=Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->count();
-            if($orderCheck > 0){
+    public function status(Request $request)
+    {
+        if (isset($request->s) && isset($request->OID) && in_array($request->s, ['2', '3'])) {
+            $orderCheck = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->count();
+            if ($orderCheck > 0) {
                 $stmt = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->update([
                     "status" => $request->s
                 ]);
-                if($stmt){
+                if ($stmt) {
 
-                return response()->json(['success', 'success'], 200);
-                    
-                }else{
-                return response()->json(['error', 'server error'], 500);
-
+                    return response()->json(['success', 'success'], 200);
+                } else {
+                    return response()->json(['error', 'server error'], 500);
                 }
-            }else{
+            } else {
                 return response()->json(['error', 'bad request'], 400);
-
             }
         }
     }
@@ -264,6 +262,12 @@ class OrdersController extends Controller
                             }
                         }
                     }
+                    $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
+                    if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
+                        $OrderCreator=true;
+                    }else{
+                        $OrderCreator=false;
+                    }   
                 }
                 /* Get City Name */
                 if (isset($info->place) && $info->place != null) {
@@ -331,6 +335,7 @@ class OrdersController extends Controller
                 }
                 $info->sector = $sectorName;
                 $info->budget = number_format((float)$info->budget, 2, '.', '');
+                $info->orderCreator = $OrderCreator;
                 switch ($info->time) {
                     case (1);
                         $info->time = 'يوم واحد';
@@ -412,14 +417,92 @@ class OrdersController extends Controller
         }
         return response()->json($data, 200);
     }
-    public function MyOrderShow(Request $request){
-        if(isset($request->OID) && $request->OID != null){
+    public function MyOrderShow(Request $request)
+    {
+        if (isset($request->OID) && $request->OID != null) {
             $infos = Orders::where('Account_number', Auth::user()->Account_number)->where('OID', $request->OID)->get();
-            if($infos->count() > 0){
-                foreach($infos as $info);
-                return view('orders.manage-my-order',['data' => $info]);
+            if ($infos->count() > 0) {
+                foreach ($infos as $info);
+                /* Get City Name */
+                if (isset($info->place) && $info->place != null) {
+                    $datajson = file_get_contents('data/json/list-moroccan-cities.json');
+                    $jsondata = json_decode($datajson, true);
 
-            }else{
+                    $resultcheck = "";
+                    foreach ($jsondata as $item) {
+                        if ($item['id'] == $info->place) {
+                            $resultcheck = $item['ville'];
+                        }
+                    }
+                    $info->place = $resultcheck;
+                } else {
+                    $info->place = null;
+                }
+                /* Get User City */
+
+
+                  /* Get Activite And Sector NAme */
+                  $Activites = $info->activite;
+                  $sector = $info->sector;
+                  if ($Activites != null) {
+                      if ($sector == 1) {
+                          $listActivites = file_get_contents('data/json/activite-ae-2.json');
+                          $listActivitesdata = json_decode($listActivites, true);
+                      } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
+                          $listActivites = file_get_contents('data/json/activite-ae-1.json');
+                          $listActivitesdata = json_decode($listActivites, true);
+                      }
+                      $activite = $listActivitesdata[$Activites];
+                      $info->activite = $activite;
+                  }
+                  /* Set Sector Name */
+                  if ($sector == 1) {
+                      $sectorName = "الخدمات";
+                  } elseif ($sector == 2) {
+                      $sectorName = "التجارة";
+                  } elseif ($sector == 3) {
+                      $sectorName = "الصناعة";
+                  } elseif ($sector == 4) {
+                      $sectorName = "الحرفية";
+                  } else {
+                      $sectorName = "";
+                  }
+                  $info->sector = $sectorName;
+                  $info->budget = number_format((float)$info->budget, 2, '.', '');
+                  switch ($info->time) {
+                      case (1);
+                          $info->time = 'يوم واحد';
+                          break;
+                      case (2);
+                          $info->time = ' يومان';
+                          break;
+                      case (3);
+                          $info->time = ' 3 أيام';
+                          break;
+                      case (7);
+                          $info->time = ' اسبوع';
+                          break;
+                      case (30);
+                          $info->time = ' شهر';
+                          break;
+                      case (60);
+                          $info->time = ' 2 أشهر';
+                          break;
+                      case (90);
+                          $info->time = ' 3 أشهر';
+                          break;
+                      default:
+                          $info->time = $info->time . ' يوم';
+                  }
+                                  /* Add Keywords to array */
+                if ($info->keywords != null && $info->keywords != "") {
+                    $info->keywords = explode(",", $info->keywords);
+                } else {
+                    $info->keywords = null;
+                }
+                /* Add Keywords to array */
+                return view('orders.manage-my-order', ['data' => $info]);
+            } else {
                 abort(404);
             }
         }
