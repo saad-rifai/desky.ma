@@ -26,7 +26,7 @@
     </div>
 
     <div id="app" class="container mb-5 mt-2">
-        <report-popup></report-popup>
+        
         <div class="row" dir="rtl" align="right">
             <div class="col-lg-8">
                 @auth
@@ -333,13 +333,28 @@
 
 
                 @auth
-                    @if ($data->AllowedToAddOffer)
+              
+                @switch($data->AllowedToAddOffer)
+                    @case(true)
+                    <div class="card p-4 mb-4">
+                        <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> أضف عرضك</h1>
+                        <add-offer :oid="'{{ $data->OID }}'"></add-offer>
+
+                    </div>
+                        @break
+                    @case(false)
+                        @if($data->orderCreator == false && Auth::user()->verified_account != 2)
                         <div class="card p-4 mb-4">
                             <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> أضف عرضك</h1>
-                            <add-offer :oid="'{{ $data->OID }}'"></add-offer>
-
+                            <p class="text-center font-Naskh">لايمكنك اضافة عرض لأنك لاتمتلك {{$data->orderCreator}} <a href="{{asset("/account/settings#ae_account")}}">حساب مقاول ذاتي</a></p>
                         </div>
-                    @endif
+
+                        @endif
+                        @break
+                    @default
+                        
+                @endswitch
+
                 @else
                     <div class="card p-4 mb-4">
                         <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> أضف عرضك</h1>
@@ -354,7 +369,7 @@
                         </div>
                     </div>
                 @endauth
-                <offers-list oid="{{ $data->OID }}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"  offerget2="@if (isset($_GET['offer2'])){{ $_GET['offer2'] }}@endif"></offers-list>
+                <offers-list oid="{{ $data->OID }}" from_url="{{url()->current()}}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"  offerget2="@if (isset($_GET['offer2'])){{ $_GET['offer2'] }}@endif"></offers-list>
             </div>
             <div class="col-sm col-lg-4 ">
                 <div class="box-left  card p-4 mbl-hide">

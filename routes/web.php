@@ -61,6 +61,11 @@ Route::prefix('ajax')->group(function () {
     /*****************/
     Route::group(['middleware' => ['auth']], function () {
 
+        /* Support Route */
+        Route::post('support/report', 'UserReportController@CreateReport');
+        /* Support Route */
+
+
         Route::post('user/portfolio/create', 'UserPortFolioController@create');
         Route::post('user/portfolio/create', 'UserPortFolioController@create');
         Route::post('user/portfolio/delete/{id}', 'UserPortFolioController@delete');
@@ -71,6 +76,8 @@ Route::prefix('ajax')->group(function () {
         Route::post('user/order/create', 'OrdersController@create');
         Route::post('order/hire/user', 'OrdersController@hire');
         Route::post('order/status', 'OrdersController@status');
+        Route::get('order/status/get/{OID}', 'OrdersController@GetStatus');
+        
     
         /* Offers Routes */
         Route::post('user/offer/create', 'OffersController@create');

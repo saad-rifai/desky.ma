@@ -27,6 +27,7 @@
                 مجموعة من المقاولين الذاتيين
             </p>
         </div>
+        <div>
         <div
             v-for="(item, index) in listData"
             :key="index"
@@ -248,10 +249,13 @@
                 </div>
             </div>
         </div>
+        </div>
+
+
 
         <div
             v-if="listData.length > 0"
-            class="show-more-section text-center mt-5 mb-4"
+            class="show-more-section text-center"
         >
             <button
                 v-if="
@@ -266,6 +270,7 @@
                 مشاهدة المزيد
             </button>
             <button
+            hidden
                 v-else
                 style="margin-right: 0 !important"
                 type="button"
@@ -275,6 +280,7 @@
                 نهائة النتائج
             </button>
         </div>
+
         <!-- -->
     </div>
 </template>

@@ -18,7 +18,7 @@
             </div>
             <div class="col-sm-auto mt-3" align="right">
 
-                <manage-order-menu></manage-order-menu>
+                <manage-order-menu :oid="{{$data->OID}}"></manage-order-menu>
             </div>
 
         </div>

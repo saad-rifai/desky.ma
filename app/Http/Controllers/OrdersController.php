@@ -268,6 +268,7 @@ class OrdersController extends Controller
                     }else{
                         $OrderCreator=false;
                     }   
+                    $info->orderCreator = $OrderCreator;
                 }
                 /* Get City Name */
                 if (isset($info->place) && $info->place != null) {
@@ -335,7 +336,7 @@ class OrdersController extends Controller
                 }
                 $info->sector = $sectorName;
                 $info->budget = number_format((float)$info->budget, 2, '.', '');
-                $info->orderCreator = $OrderCreator;
+ 
                 switch ($info->time) {
                     case (1);
                         $info->time = 'يوم واحد';
@@ -504,6 +505,19 @@ class OrdersController extends Controller
                 return view('orders.manage-my-order', ['data' => $info]);
             } else {
                 abort(404);
+            }
+        }
+    }
+    public function GetStatus(Request $request){
+        if(isset($request->OID)){
+
+            $infos = Orders::where('OID', $request->OID)->get(["status"]);
+            if(count($infos) > 0){
+                foreach($infos as $info);
+                return response()->json(['status' => $info->status], 200);
+
+            }else{
+               return response()->json(['error' => 'Not Found'], 404);
             }
         }
     }

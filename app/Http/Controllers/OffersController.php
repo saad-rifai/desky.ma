@@ -117,7 +117,7 @@ class OffersController extends Controller
             } 
 
 
-            $infos = Offers::where('OID', $request->OID)->whereIn("status", ["0","1"])->orderBy("created_at", "DESC")->paginate(6);
+            $infos = Offers::where('OID', $request->OID)->whereIn("status", ["0","1"])->orderBy("created_at", "DESC")->paginate(10);
             for($i=0; $i < count($infos); $i++){
                 $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
                 foreach ($rating as $rating);

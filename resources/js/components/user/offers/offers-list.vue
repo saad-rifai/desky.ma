@@ -1,5 +1,6 @@
 <template>
   <div>
+    <report-popup about="0" :from_url="from_url" :to="reportTo"></report-popup>
     <div
       class="card p-4 mb-4 position-relative vs-con-loading__container"
       id="div-with-loading12"
@@ -87,6 +88,7 @@
           >
             لاتوجد عروض بعد
           </div>
+          <div>
           <div
             v-for="(item, index) in listData"
             :key="index"
@@ -199,7 +201,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="menu_user">
                           <li><a class="dropdown-item" href="#">مراسلة</a></li>
-                          <li><a class="dropdown-item" type="button" data-toggle="modal" data-target="#reportModal">التبليغ</a></li>
+                          <li @click="reportTo = item.Account_number"><a class="dropdown-item"  type="button" data-toggle="modal" data-target="#reportModal">التبليغ</a></li>
                         </ul>
                       </span>
                     </div>
@@ -309,10 +311,10 @@
               </div>
             </div>
           </div>
-
-          <div
+          </div>
+                 <div
             v-if="listData.length > 0"
-            class="show-more-section text-center mt-5 mb-4"
+            class="show-more-section text-center "
           >
             <button
               v-if="
@@ -327,6 +329,7 @@
               مشاهدة المزيد
             </button>
             <button
+            hidden
               v-else
               style="margin-right: 0 !important"
               type="button"
@@ -336,6 +339,7 @@
               نهائة النتائج
             </button>
           </div>
+   
         </div>
 
         <div
@@ -605,7 +609,7 @@
 </template>
 <script>
 export default {
-  props: ["oid", "offerget", "offerget2"],
+  props: ["oid", "offerget", "offerget2", "from_url"],
   data() {
     return {
       userid: null,
@@ -620,6 +624,7 @@ export default {
       nodata: false,
       nodata2: false,
       OrderStatusCheck: false,
+      reportTo: null
     };
   },
   methods: {
@@ -746,7 +751,7 @@ export default {
       if (this.allresponse.data.next_page_url != null) {
         axios
           .post(
-            "/ajax/orders/offers/all/?page=" +
+            "/ajax/orders/offers/new/?page=" +
               (parseInt(this.allresponse.data.current_page) + 1),
             data
           )

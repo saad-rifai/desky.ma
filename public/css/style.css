@@ -1069,6 +1069,7 @@ span.bg-icn {
     border-radius: 100%;
     color: #585858;
     line-height: 2.3;
+    padding: 9px !important;
 }
 .dropdown-toggle::after{
     display: none !important;

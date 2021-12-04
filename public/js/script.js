@@ -9,6 +9,8 @@ $(document).ready(function() {
 if (hash) {
     console.log(hash);
     $('button[data-bs-target="'+hash+'"]').tab('show');
+    $('button[data-target="'+hash+'"]').tab('show');
+    $('a[href="'+hash+'"]').tab('show');
 } 
 
 

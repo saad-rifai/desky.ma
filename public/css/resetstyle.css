@@ -9,14 +9,14 @@ body {
 button.btn.btn-primary {
     background-color: #f96a0c !important;
     border: solid 1px #f96a0c !important;
-    border-radius: 50px;
+    border-radius: 8px;
     padding: 10px 30px;
-    font-size: 17px !important;
+    font-size: 14px !important;
 }
 button.btn {
-    border-radius: 50px;
+    border-radius: 8px;
     padding: 10px 30px;
-    font-size: 17px;
+    font-size: 14px !important;
 }
 .accordion-button::after {
     margin-left: 0 !important;
@@ -70,12 +70,17 @@ a.nav-link i {
     background: rgb(214, 217, 219) !important;
 
 }
+
+
+
+
+
 button.btn.btn-outline-primary {
     background-color: #ffffff !important;
     border: solid 1px #f96a0c;
-    border-radius: 50px;
+    border-radius: 8px;
     padding: 10px 30px !important;
-    font-size: 17px !important;
+    font-size: 14px !important;
     color: #f96a0c;
 }
 .btn-act-section button {
@@ -344,6 +349,7 @@ button.btn.btn-secondary {
     color: #484848 !important;
     font-weight: 300 !important;
 }
+
 .modal-header {
     display: -ms-flexbox;
     display: flex;

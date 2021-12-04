@@ -10,11 +10,12 @@ class UserReportController extends Controller
 {
    public function CreateReport(Request $request){
        $this->validate($request, [
-           'about' => 'integer|max:2|min:0',
-           'category' => 'integer|max:2|min:0',
-           'description' => 'min:30|max:700',
+           'about' => 'required|integer|max:2|min:0',
+           'category' => 'required|integer|max:2|min:0',
+           'description' => 'required|min:30|max:700',
            'from_url' => 'max:500',
        ], $messages = [
+           'required' => 'هذا الحقل مطلوب',
            'about.integer' => 'Bad Request',
            'about.max' => 'Bad Request',
            'about.min' => 'Bad Request',
@@ -26,7 +27,7 @@ class UserReportController extends Controller
            'description.min' => 'الوصف الذي ادخلته أقصر من اللازم',
            'description.max' => 'الوصف اللذي أدخلته أطول من اللازم الحد الأقصى 700 حرف'
        ]);
-       if(isset($request->to)){
+       if(isset($request->to) && $request->to != null){
           $CeckToUser = User::where('Account_number', $request->to)->count();
           if($CeckToUser > 0){
               $claimant = $request->to;
