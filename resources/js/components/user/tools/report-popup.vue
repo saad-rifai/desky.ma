@@ -149,7 +149,10 @@ export default {
         sendReport() {
             this.openLoadingInDiv();
             let data = new FormData();
+            if(this.to != undefined && this.to != null){
             data.append("to", this.to);
+
+            }
             data.append("from_url", this.from_url);
             data.append("about", this.about);
             data.append("category", this.subject);

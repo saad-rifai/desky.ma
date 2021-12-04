@@ -77,6 +77,7 @@ Route::prefix('ajax')->group(function () {
         Route::post('order/hire/user', 'OrdersController@hire');
         Route::post('order/status', 'OrdersController@status');
         Route::get('order/status/get/{OID}', 'OrdersController@GetStatus');
+        Route::post('order/status/update', 'OrdersController@UserUpdateStatus');
         
     
         /* Offers Routes */

@@ -329,9 +329,12 @@ button.btn {
     font-size: 15px !important;
 }
 a.dropdown-item {
-    color: #212529 !important;
+    color: #303030 !important;
     font-size: 14px !important;
     position: relative;
+    line-height: 2;
+    font-weight: 600;
+
 }
 ul.menulinks-nav {
     list-style-type: none !important;
@@ -455,10 +458,35 @@ header {
 }
 h1.header-text {
     text-align: right;
-    font-size: 39px;
-    font-weight: 700;
+    font-size: 41px;
+    font-weight: 800;
+    line-height: 1.7;
+    color: #202020;
+    position: relative;
+}
+button.btn.dropdown-toggle.btn-link.btn-lg.icon-dropdown {
+    padding: 0 !important;
 }
 
+.btn.btn-lg {
+    font-size: 22px !important;
+    padding: 13px 40px !important;
+}
+.nav-item:hover .dropdown-menu {
+    display: block !important;
+    opacity: 1;
+}
+li.nav-item:hover .nav-link i {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.nav-item .dropdown-menu {
+    opacity: 0;
+    transition: ease 0.3s;
+}
 .img-header img {
     width: 100%;
     max-width: 490px;
@@ -1068,14 +1096,14 @@ span.bg-icn {
     font-size: 16px;
     border-radius: 100%;
     color: #585858;
-    line-height: 2.3;
+    line-height: 1;
     padding: 9px !important;
 }
 .dropdown-toggle::after{
     display: none !important;
 }
 .dropdown-item:focus, .dropdown-item:hover {
-    background-color: #f2f2f2 !important;
+    background-color: #f96a0c52 !important;
     border-radius: 10px;
 }
 .dropdown-item.active, .dropdown-item:active{
@@ -1147,10 +1175,62 @@ ul.dropdown-menu {
 .steps-add-order__mobile{
     display: none !important;
 }
+span.video-canva-modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #f96a0c6b;
+    display: block;
+    top: -25px;
+    left: -25px;
+}
+img.col-img-nobg {
+    width: 100%;
+    max-width: 350px;
+    z-index: 10000 !important;
+    position: relative;
+}
 
 
-
-
+span.img-user-modal-2 {
+    background-color: #fa8030;
+    width: 215px;
+    height: 25px;
+    display: block;
+    position: absolute;
+    bottom: -25px;
+    border-radius: 25px 0;
+    z-index: 1000000;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+span.img-user-modal-3 {
+    background-color: #ff9f60;
+    width: 180px;
+    height: 25px;
+    display: block;
+    position: absolute;
+    bottom: -60px;
+    right: 75px;
+    border-radius: 0px;
+    z-index: 1000000;
+}
+span.img-user-modal {
+    background-color: #f96a0cd9;
+    width: 200px;
+    height: 200px;
+    display: block;
+    position: absolute;
+    top: 125px;
+    right: 90px;
+    z-index: 0;
+    border-radius: 100%;
+}
+.card-col-img {
+    position: relative;
+    z-index: 100;
+}
 
 .mr-menu {
     margin-right: 45px;

@@ -11277,8 +11277,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['oid'],
+  props: ["oid", "from_url"],
   data: function data() {
     return {
       status: ""
@@ -11288,10 +11310,48 @@ __webpack_require__.r(__webpack_exports__);
     getOrderStatus: function getOrderStatus() {
       var _this = this;
 
-      axios.get('/ajax/order/status/get/' + this.oid).then(function (response) {
-        _this.data = response.data.status;
+      axios.get("/ajax/order/status/get/" + this.oid).then(function (response) {
+        _this.status = response.data.status;
       })["catch"](function (error) {
         console.log(error);
+      });
+    },
+    openLoadingInDiv: function openLoadingInDiv() {
+      $("#btnsend_1457").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...');
+    },
+    HideLoadingInDiv: function HideLoadingInDiv() {
+      $("#btnsend_1457").html('ادارة الطلب <i class="fas fa-caret-down"></i>');
+    },
+    updateStatus: function updateStatus(status) {
+      var _this2 = this;
+
+      this.openLoadingInDiv();
+      var data = new FormData();
+      data.append("status", status);
+      data.append("OID", this.oid);
+      axios.post("/ajax/order/status/update", data).then(function (response) {
+        if (status == 1) {
+          $("#order_status").html('<span class="badge rounded-pill bg-success order-status">مفتوح</span>');
+        } else if (status == 2) {
+          $("#order_status").html('<span class="badge rounded-pill bg-primary order-status"> مرحلة التنفيذ</span>');
+        } else if (status == 4) {
+          $("#order_status").html('<span class="badge rounded-pill bg-danger order-status"> مغلق</span>');
+        }
+
+        _this2.status = status;
+
+        _this2.$vs.notify({
+          text: "تم تحديث الطلب",
+          color: "success",
+          fixed: true,
+          icon: "check"
+        });
+
+        _this2.HideLoadingInDiv();
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.HideLoadingInDiv();
       });
     }
   },
@@ -13257,7 +13317,11 @@ var Errors = /*#__PURE__*/function () {
 
       this.openLoadingInDiv();
       var data = new FormData();
-      data.append("to", this.to);
+
+      if (this.to != undefined && this.to != null) {
+        data.append("to", this.to);
+      }
+
       data.append("from_url", this.from_url);
       data.append("about", this.about);
       data.append("category", this.subject);
@@ -58687,31 +58751,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+  return _c(
+    "div",
+    [
+      _c("report-popup", { attrs: { about: "1", from_url: _vm.from_url } }),
+      _vm._v(" "),
       _c("div", { staticClass: "dropdown" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-sm dropdown-toggle",
-            attrs: {
-              type: "button",
-              id: "dropdownMenuButton",
-              "data-toggle": "dropdown",
-              "aria-expanded": "false"
-            }
-          },
-          [
-            _vm._v("\n            ادارة الطلب "),
-            _c("i", { staticClass: "fas fa-caret-down" })
-          ]
-        ),
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "div",
@@ -58720,17 +58766,94 @@ var staticRenderFns = [
             attrs: { "aria-labelledby": "dropdownMenuButton" }
           },
           [
-            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("ايقاف تلقي العروض")
-            ]),
+            _vm.status == 1
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateStatus(2)
+                      }
+                    }
+                  },
+                  [_vm._v("الانتقال الى مرحلة التنفيذ")]
+                )
+              : _vm._e(),
             _vm._v(" "),
-            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("الابلاغ عن مشكلة")
-            ])
+            _vm.status == 1
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateStatus(4)
+                      }
+                    }
+                  },
+                  [_vm._v("اغلاق نهائياََ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.status == 4
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateStatus(1)
+                      }
+                    }
+                  },
+                  [_vm._v("اعادة نشر الطلب")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item",
+                attrs: {
+                  type: "button",
+                  "data-toggle": "modal",
+                  "data-target": "#reportModal"
+                }
+              },
+              [_vm._v("الابلاغ عن مشكلة")]
+            )
           ]
         )
       ])
-    ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-sm dropdown-toggle",
+        attrs: {
+          type: "button",
+          id: "btnsend_1457",
+          "data-toggle": "dropdown",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _vm._v("\n            ادارة الطلب "),
+        _c("i", { staticClass: "fas fa-caret-down" })
+      ]
+    )
   }
 ]
 render._withStripped = true

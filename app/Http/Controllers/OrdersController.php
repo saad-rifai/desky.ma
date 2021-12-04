@@ -441,7 +441,9 @@ class OrdersController extends Controller
                 }
                 /* Get User City */
 
-
+                if ($info->files != null) {
+                    $info->files = json_decode($info->files, true);
+                }
                   /* Get Activite And Sector NAme */
                   $Activites = $info->activite;
                   $sector = $info->sector;
@@ -520,5 +522,28 @@ class OrdersController extends Controller
                return response()->json(['error' => 'Not Found'], 404);
             }
         }
+    }
+    public function UserUpdateStatus(Request $request){
+        if(isset($request->status) && isset($request->OID) && $request->status == 1 || $request->status == 2 || $request->status == 4){
+            $OrderCheck = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get(['status']);
+            if(count($OrderCheck) > 0){
+                $stmt = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->update([
+                    'status' => $request->status
+                ]);
+                if($stmt){
+                    return response()->json(['success' => 'تم تحديث الطلب'], 200);
+                }else{
+                return response()->json(['error' => 'حصل خطأ ما يرجى اعادة المحاولة لاحقاََ '], 500);
+
+                }
+
+            }else{
+                return response()->json(['error' => 'Bad Request'], 400);
+            }
+
+        }else{
+            return response()->json(['error' => 'Bad Request'], 400);
+        }
+
     }
 }

@@ -47,7 +47,7 @@
     <!-- Jquery -->
 
 
-    <script src="{{asset('js/library/nanobar.min.js')}}"></script>
+    <script src="{{ asset('js/library/nanobar.min.js') }}"></script>
     <!-- Basic Style for Tags Input -->
     <link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
     <script>
@@ -61,42 +61,50 @@
     <!-- Nav Bar  -->
     <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar" id="navbar">
         <div class="container-fluid container">
-            <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip" data-placement="top" title="هذه المنصة لازالت قيد التطوير والتحسين">
+            <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip" data-placement="top"
+                title="هذه المنصة لازالت قيد التطوير والتحسين">
 
-                <img class="logo-web "
-                    src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky">
-                </a>
+                <img class="logo-web " src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky">
+            </a>
 
 
             <div class="collapse navbar-collapse" id="PhoneNavbar">
                 <ul class="navbar-nav mx-auto  mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle dropdown-hover" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
                             المقاولين الذاتيين <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
-                            <a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i> جميع العقود</a>
-                          </div>
- 
+                            <a class="dropdown-item" href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i
+                                    class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
+                            <a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
+                                title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i>
+                                جميع العقود</a>
+                        </div>
+
                     </li>
-            
+
                     @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ asset('myorders') }}"> طلباتي</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ asset('myorders') }}"> طلباتي</a>
+                        </li>
                     @endauth
-          
+
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
                             طلبات العروض <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i> جميع جميع طلبات العروض</a>
+                            <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
+                                جميع جميع طلبات العروض</a>
                             <a class="dropdown-item" href="#"><i class="fas fa-folder"></i> طلباتي </a>
-                            <a class="dropdown-item" href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i class="fas fa-folder-plus"></i> نشر طلب عروض</a>
-                          </div>
-                  
+                            <a class="dropdown-item"
+                                href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i
+                                    class="fas fa-folder-plus"></i> نشر طلب عروض</a>
+                        </div>
+
                     </li>
                 </ul>
                 @guest
@@ -193,13 +201,82 @@
                 @endauth
 
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#PhoneNavbar"
-                aria-controls="PhoneNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#MobileMenuHumber" aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
     <div class="page-load" id="page-load"></div>
     <!-- Nav Bar  -->
-    @yield('content')
 
+      
+      <div class="offcanvas offcanvas-start" dir="rtl" tabindex="-1" id="MobileMenuHumber" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+            <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip"
+            title="هذه المنصة لازالت قيد التطوير والتحسين">
+
+            <img class="logo-web " src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky">
+        </a>
+
+          </h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-group list-unstyled">
+            
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">
+                            المقاولين الذاتيين
+                        </a>
+                        <ul class="list-group list-group-flush list-unstyled">
+                            <li>
+                                <a class="dropdown-item" href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i
+                                    class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
+                                title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i>
+                                جميع العقود</a>
+                            </li>
+
+                            </ul>
+
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">
+                            طلبات العروض 
+                        </a>
+                        <ul class="list-group list-group-flush list-unstyled">
+                            <li>
+                                <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
+                                    جميع جميع طلبات العروض</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"><i class="fas fa-folder"></i> طلباتي </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i
+                                    class="fas fa-folder-plus"></i> نشر طلب عروض</a>
+                            </li>
+                            </ul>
+
+                    </li>
+                    @guest
+                    <div class="btn-act-section mt-3" dir="rtl">
+
+                        <div class="non-auth">
+                            <a href="{{ asset('login') }}">
+                                <button type="button" class="btn btn-outline-primary w-100 mb-3">الدخول</button>
+                            </a>
+                            <a href="{{ asset('register') }}">
+                                <button type="button" class="btn btn-primary w-100">انشاء حساب</button>
+                            </a>
+                        </div>
+                    </div>
+                @endguest
+              </ul>
+        </div>
+      </div>
+    @yield('content')

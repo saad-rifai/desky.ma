@@ -6,13 +6,16 @@
         <div class="container">
             <div class="row text-center" dir="rtl">
                 <div class="col-sm">
-                    <div class="header-box text-right ">
-                        <h1 class="header-text mt-5">أنجز مشاريعك <span class="orange-text">بسهولة وأمان</span> مع أول
+                    <div class="header-box text-right position-relative">
+                        <span class="text-background-md1"></span>
+
+                        <h1 class="header-text mt-5 ">
+                            أنجز مشاريعك <span class="orange-text">بسهولة وأمان</span> مع أول
                             وأكبر شبكة للمقاولين الذاتيين بالمغرب</h1>
                         <div class="btn-act-section mt-5 mb-5" style="    text-align: right;" dir="rtl">
-                            <button style="margin-right: 0 !important;" type="button" class="btn btn-outline-primary mb-2">تصفح المشاريع</button>
+                            <button style="margin-right: 0 !important;" type="button" class="btn btn-outline-primary mb-2 btn-lg">تصفح المشاريع</button>
 
-                       <a href="{{asset('new/order')}}"><button style="margin-right: 0 !important;" type="button" class="btn btn-primary mb-2">أضف مشروع</button></a>
+                       <a href="{{asset('new/order')}}"><button style="margin-right: 0 !important;" type="button" class="btn btn-primary mb-2 btn-lg">أضف مشروع</button></a>
 
                         </div>
                     </div>
@@ -31,21 +34,43 @@
             <div class="row text-center" dir="rtl">
                 <div class="col-sm">
                     <ul class="steps-list mt-5 mb-5">
-                        <li class="steps-list-li"><span class="nb-step position-relative"><span
-                                    class="position-absolute top-50 start-45 translate-middle">1</span></span>أنشر مشروعك مع
-                            كافة تفاصيل العمل الذي توده وابد باستقبال عروض المقاولين</li>
-                        <li class="steps-list-li"><span class="nb-step position-relative"><span
-                                    class="position-absolute top-50 start-45 translate-middle">2</span></span>من بين العروض
-                            المقدمة على مشروعك اختر العرض
-                            المناسب لك وقم بالتواصل مع المقاول المختار للاتفاق
-                            على تفاصيل المشروع</li>
-                        <li class="steps-list-li"><span class="nb-step position-relative"><span
-                                    class="position-absolute top-50 start-45 translate-middle">3</span></span>الانتقال الى
-                            مرحلة التنفيذ, في هذه المرحلة سيقوم
-                            المقاول الذي اخترته بالعمل على مشروعك حتى النهاية</li>
+                        <li class="steps-list-li">
+                                   <div class="row">
+                                       <div class="col-auto">
+                                        <span class="nb-step position-relative"><span class="position-absolute top-50 start-45 translate-middle">1</span></span>
+                                       </div>
+                                       <div class="col">
+                                        أنشر مشروعك مع
+                                        كافة تفاصيل العمل الذي توده وابد باستقبال عروض المقاولين
+                                       </div>
+                                   </div>
+                        </li>
+                        <li class="steps-list-li">
+                            <div class="row">
+                                <div class="col-auto">
+                                 <span class="nb-step position-relative"><span class="position-absolute top-50 start-45 translate-middle">1</span></span>
+                                </div>
+                                <div class="col">
+                                 أنشر مشروعك مع
+                                 كافة تفاصيل العمل الذي توده وابد باستقبال عروض المقاولين
+                                </div>
+                            </div>
+                        </li>
+                        <li class="steps-list-li">
+                            <div class="row">
+                                <div class="col-auto">
+                                 <span class="nb-step position-relative"><span class="position-absolute top-50 start-45 translate-middle">1</span></span>
+                                </div>
+                                <div class="col">
+                                 أنشر مشروعك مع
+                                 كافة تفاصيل العمل الذي توده وابد باستقبال عروض المقاولين
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                <div class="col-sm">
+                <div class="col-sm position-relative">
+                    <span class="video-canva-modal"></span>
                     <div>
                         <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
                             <div class="wistia_responsive_wrapper"
@@ -168,7 +193,30 @@
     </div>
     <div class="white-bg">
         <div class="container">
-            <h1 dir="rtl" class="text-section-t text-center">هل انت مقاول ذاتي ؟</h1>
+            <h1 dir="rtl" class="text-section-t text-center mb-2">هل انت مقاول ذاتي ؟</h1>
+            <div class="card-image-text">
+                <div class="row justify-content-md-center align-items-center" dir="rtl">
+
+                    <div class="col-sm  mb-5" align="center">
+                        <div class="card-col-img  mb-5">
+                            <span class="img-user-modal"></span>
+                            <span class="img-user-modal-2"></span>
+     
+                            <img class="col-img-nobg" src="{{asset('/img/icons/user-nobg.png')}}" alt="مالذي تقدمه لك منصة desky ؟">
+                        </div>
+                    </div>
+                    <div class="col-sm" align="right">
+                        <h1 class="col-title" style="font-size: 20px"> مالذي تقدمه لك منصة desky ؟</h1>
+                        <br>
+                        
+                        <p>أنجز مشاريعك بسهولة وأمان مع أول وأكبر شبكة للمقاولين الذاتيين بالمغرب
+                            أنجز مشاريعك بسهولة وأمان مع أول وأكبر شبكة للمقاولين الذاتيين بالمغرب
+                            أنجز مشاريعك بسهولة وأمان مع أول وأكبر شبكة للمقاولين الذاتيين بالمغرب
+                        </p>
+                    </div>
+                </div>
+
+            </div>
             <h3 dir="rtl" class="text-section text-center">انضم الى أكبر شبكة مقاوليين ذاتيين بالمغرب</h3>
             <div class="users-avatars-section">
                 <div class="user-av-show">

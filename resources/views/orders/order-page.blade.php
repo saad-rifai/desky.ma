@@ -305,7 +305,7 @@
                     </div>
                 </div>
                 @endif
-                @if ($data->files && count($data->files))
+                @if ($data->files && count($data->files) > 0)
                     <div class="card p-4 mb-4">
                         <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> ملفات مرفقة</h1>
 
