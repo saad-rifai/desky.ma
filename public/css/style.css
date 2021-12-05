@@ -1099,6 +1099,19 @@ span.bg-icn {
     line-height: 1;
     padding: 9px !important;
 }
+.modal-art-icon {
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin-right: auto;
+    margin-left: auto;
+}
+.modal-art-icon img {
+    width: 100%;
+}
+
 .dropdown-toggle::after{
     display: none !important;
 }

@@ -369,7 +369,7 @@
                         </div>
                     </div>
                 @endauth
-                <offers-list oid="{{ $data->OID }}" from_url="{{url()->current()}}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"  offerget2="@if (isset($_GET['offer2'])){{ $_GET['offer2'] }}@endif"></offers-list>
+                <offers-list oid="{{ $data->OID }}" status="{{$data->status}}" from_url="{{url()->current()}}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"  offerget2="@if (isset($_GET['offer2'])){{ $_GET['offer2'] }}@endif"></offers-list>
             </div>
             <div class="col-sm col-lg-4 ">
                 <div class="box-left  card p-4 mbl-hide">

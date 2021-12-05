@@ -61,6 +61,7 @@ import Vue from 'vue';
  Vue.component('form-order-chat', require('./components/user/orders/chat/form-order-chat.vue').default);
  Vue.component('hired-list', require('./components/user/orders/hired-list.vue').default);
  Vue.component('manage-order-menu', require('./components/user/orders/manage-order-menu.vue').default);
+ Vue.component('canceling-contract', require('./components/user/orders/canceling-contract.vue').default);
 
  /* Offers Section */
  Vue.component('add-offer', require('./components/user/offers/add-offer.vue').default);

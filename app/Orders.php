@@ -14,6 +14,10 @@ class Orders extends Model
     {
         return $this->belongsTo(User::class, 'Account_number');
     }
+    public function Contracts()
+    {
+        return $this->belongsTo(User::class, 'OID');
+    }
     public function Offers()
     {
         return $this->hasMany(Offers::class, 'OID');

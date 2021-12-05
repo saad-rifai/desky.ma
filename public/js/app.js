@@ -9485,10 +9485,370 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["oid", "offerget", "offerget2", "from_url"],
+  props: ["oid", "offerget", "offerget2", "from_url", "status"],
   data: function data() {
     return {
+      contract_aename: null,
+      contract_price: null,
+      contract_duration: null,
       userid: null,
       stopLazyLoading: false,
       stopLazyLoading2: false,
@@ -9505,16 +9865,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    AcceptOfferCheck: function AcceptOfferCheck() {
-      this.$vs.dialog({
-        type: "confirm",
-        color: "success",
-        title: "\u0642\u0628\u0648\u0644 \u0627\u0644\u0639\u0631\u0636",
-        text: "هل انت متأكد من أنك تود قبول هذا العرض وتوظيف هذا المقاول الذاتي ؟",
-        accept_text: "قبول",
-        accept: this.AcceptOffer
-      });
-    },
     AcceptOffer: function AcceptOffer() {
       var _this = this;
 
@@ -9532,7 +9882,11 @@ __webpack_require__.r(__webpack_exports__);
           icon: "check"
         });
 
-        _this.OrderStatusCheck = true;
+        $("#close-modal-btn-4587").click();
+
+        if (_this.status == 1) {
+          $("#modal-order-update-status").modal('toggle');
+        }
       })["catch"](function (error) {
         _this.$vs.notify({
           title: "فشلة العملية",
@@ -55204,67 +55558,172 @@ var render = function() {
       _c(
         "div",
         {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modal-accept-offer",
+            "data-backdrop": "static",
+            "data-keyboard": "false",
+            tabindex: "-1",
+            "aria-labelledby": "staticBackdropLabel",
+            "aria-hidden": "true",
+            dir: "rtl"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "modal-dialog modal-dialog-centered modal-lg vs-con-loading__container"
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body " }, [
+                  _c("div", { staticClass: "mx-auto text-center font-Naskh" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            هل انت متأكد من أنك تود قبول هذا العرض والتعاقد\n                            مع هذا المقاول الذاتي\n                            "
+                      ),
+                      _c("strong", [_vm._v(_vm._s(_vm.contract_aename))]),
+                      _vm._v(" ؟\n                        ")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "مدة العقد: " + _vm._s(_vm.contract_duration) + " يوم"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            تكلفة العقد:\n                            "
+                      ),
+                      _c("strong", [
+                        _vm._v(_vm._s(_vm.contract_price) + " درهم")
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-sm",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        id: "close-modal-btn-4587"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        الغاء\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-sm",
+                      attrs: { type: "button", id: "btnsend" },
+                      on: { click: _vm.AcceptOffer }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        تأكيد\n                    "
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modal-order-update-status",
+            "data-backdrop": "static",
+            "data-keyboard": "false",
+            tabindex: "-1",
+            "aria-labelledby": "staticBackdropLabel124",
+            "aria-hidden": "true",
+            dir: "rtl"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "modal-dialog modal-dialog-centered modal-lg vs-con-loading__container"
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        id: "close-modal-btn"
+                      },
+                      on: { click: _vm.OrderNextStatu }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        لا\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-sm",
+                      attrs: {
+                        type: "button",
+                        id: "close-modal-btn",
+                        "data-dismiss": "modal"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        نعم\n                    "
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
           staticClass:
             "card p-4 mb-4 position-relative vs-con-loading__container",
           attrs: { id: "div-with-loading12" }
         },
         [
-          _c(
-            "vs-prompt",
-            {
-              attrs: {
-                title: "قبول العرض",
-                color: "warning",
-                "accept-text": "قبول العرض",
-                "cancel-text": "الغاء",
-                active: _vm.activePromptCheck
-              },
-              on: {
-                accept: function($event) {
-                  return _vm.AcceptOffer()
-                },
-                "update:active": function($event) {
-                  _vm.activePromptCheck = $event
-                }
-              }
-            },
-            [
-              _c("p", [
-                _vm._v(
-                  "\n        هل انت متأكد من أنك تود قبول هذا العرض وتوظيف هذا المقاول الذاتي ؟\n      "
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "vs-prompt",
-            {
-              attrs: {
-                title: "تنبيه",
-                color: "danger",
-                "accept-text": "لا",
-                "cancel-text": "نعم",
-                active: _vm.OrderStatusCheck
-              },
-              on: {
-                accept: function($event) {
-                  return _vm.OrderNextStatu()
-                },
-                "update:active": function($event) {
-                  _vm.OrderStatusCheck = $event
-                }
-              }
-            },
-            [
-              _c("p", [
-                _vm._v(
-                  "\n        هل لازلت تود تلقي عروض جديدة من المقاولين الذاتيين على هذه الصفقة ؟\n      "
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
           _c(
             "ul",
             {
@@ -55293,9 +55752,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n          العروض (" +
+                        "\n                    العروض (" +
                           _vm._s(_vm.listData.length) +
-                          ")\n        "
+                          ")\n                "
                       )
                     ]
                   )
@@ -55327,9 +55786,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n          الموظفون (" +
+                            "\n                    الموظفون (" +
                               _vm._s(_vm.listData2.length) +
-                              ")\n        "
+                              ")\n                "
                           )
                         ]
                       )
@@ -55363,7 +55822,7 @@ var render = function() {
                             "div",
                             { key: index, staticClass: "lazy-load-ae-content" },
                             [
-                              _vm._m(0, true),
+                              _vm._m(4, true),
                               _vm._v(" "),
                               _c("div", {
                                 staticClass: "lazy-load-ae load-description"
@@ -55381,7 +55840,11 @@ var render = function() {
                         {
                           staticClass: "no-data-message text-center mt-4 mb-4"
                         },
-                        [_vm._v("\n          لاتوجد عروض بعد\n        ")]
+                        [
+                          _vm._v(
+                            "\n                    لاتوجد عروض بعد\n                "
+                          )
+                        ]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -55427,7 +55890,7 @@ var render = function() {
                                                         "span",
                                                         {
                                                           staticClass:
-                                                            "\n                            position-absolute\n                            bottom-0\n                            start-100\n                            translate-middle\n                            p-2\n                            bg-success\n                            online-status\n                            Search-status-user\n                            border border-light\n                            rounded-circle\n                          ",
+                                                            "\n                          position-absolute\n                          bottom-0\n                          start-100\n                          translate-middle\n                          p-2\n                          bg-success\n                          online-status\n                          Search-status-user\n                          border border-light\n                          rounded-circle\n                        ",
                                                           attrs: {
                                                             "data-bs-toggle":
                                                               "tooltip",
@@ -55499,21 +55962,21 @@ var render = function() {
                                                         "h4",
                                                         [
                                                           _vm._v(
-                                                            "\n                            " +
+                                                            "\n                                                            " +
                                                               _vm._s(
                                                                 item.user.frist_name[0].toUpperCase() +
                                                                   item.user.frist_name.substring(
                                                                     1
                                                                   )
                                                               ) +
-                                                              "\n                            " +
+                                                              "\n                                                            " +
                                                               _vm._s(
                                                                 item.user.last_name[0].toUpperCase() +
                                                                   item.user.last_name.substring(
                                                                     1
                                                                   )
                                                               ) +
-                                                              "\n                            "
+                                                              "\n                                                            "
                                                           ),
                                                           _c(
                                                             "vs-tooltip",
@@ -55532,7 +55995,7 @@ var render = function() {
                                                               2
                                                                 ? _c("span", {
                                                                     staticClass:
-                                                                      "\n                                  verified-icon verified-2\n                                  mt-2\n                                  text-icon\n                                ",
+                                                                      "\n                                verified-icon verified-2\n                                mt-2\n                                text-icon\n                              ",
                                                                     staticStyle: {
                                                                       "margin-right":
                                                                         "0px !important"
@@ -55562,7 +56025,7 @@ var render = function() {
                                                               1
                                                                 ? _c("span", {
                                                                     staticClass:
-                                                                      "\n                                  verified-icon verified-1\n                                  mt-2\n                                  text-icon\n                                ",
+                                                                      "\n                                verified-icon verified-1\n                                mt-2\n                                text-icon\n                              ",
                                                                     staticStyle: {
                                                                       "margin-right":
                                                                         "0px !important"
@@ -55591,13 +56054,13 @@ var render = function() {
                                                 "col-auto mobile-hidden-1"
                                             },
                                             [
-                                              _vm._m(1, true),
+                                              _vm._m(5, true),
                                               _vm._v(" "),
                                               _c(
                                                 "span",
                                                 { staticClass: "dropdown" },
                                                 [
-                                                  _vm._m(2, true),
+                                                  _vm._m(6, true),
                                                   _vm._v(" "),
                                                   _c(
                                                     "ul",
@@ -55610,7 +56073,7 @@ var render = function() {
                                                       }
                                                     },
                                                     [
-                                                      _vm._m(3, true),
+                                                      _vm._m(7, true),
                                                       _vm._v(" "),
                                                       _c(
                                                         "li",
@@ -55764,13 +56227,13 @@ var render = function() {
                                                                   "fas fa-briefcase"
                                                               }),
                                                               _vm._v(
-                                                                "\n                            " +
+                                                                "\n                                                            " +
                                                                   _vm._s(
                                                                     item
                                                                       .AeAccount
                                                                       .job_title
                                                                   ) +
-                                                                  "\n                          "
+                                                                  "\n                                                        "
                                                               )
                                                             ]
                                                           )
@@ -55799,9 +56262,9 @@ var render = function() {
                                                       "fas fa-map-marker-alt"
                                                   }),
                                                   _vm._v(
-                                                    "\n                      المغرب, " +
+                                                    "\n                                                المغرب, " +
                                                       _vm._s(item.city) +
-                                                      "\n                    "
+                                                      "\n                                            "
                                                   )
                                                 ]
                                               )
@@ -55838,7 +56301,7 @@ var render = function() {
                                               _c("strong", [
                                                 _vm._v(
                                                   _vm._s(item.price) +
-                                                    " درهم - " +
+                                                    " درهم -\n                                            " +
                                                     _vm._s(item.time) +
                                                     " يوم"
                                                 )
@@ -55880,9 +56343,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                      " +
+                                            "\n                                    " +
                                               _vm._s(item.description) +
-                                              "\n                  "
+                                              "\n                                "
                                           )
                                         ]
                                       ),
@@ -55917,12 +56380,31 @@ var render = function() {
                                             {
                                               staticClass:
                                                 "btn btn-primary btn-sm",
-                                              attrs: { type: "button" },
+                                              attrs: {
+                                                type: "button",
+                                                "data-toggle": "modal",
+                                                "data-target":
+                                                  "#modal-accept-offer"
+                                              },
                                               on: {
                                                 click: function($event) {
                                                   _vm.activePromptCheck = true
                                                   _vm.userid =
                                                     item.user.Account_number
+                                                  _vm.contract_aename =
+                                                    item.user.frist_name[0].toUpperCase() +
+                                                    item.user.frist_name.substring(
+                                                      1
+                                                    ) +
+                                                    " " +
+                                                    item.user.last_name[0].toUpperCase() +
+                                                    item.user.last_name.substring(
+                                                      1
+                                                    )
+                                                  _vm.contract_price =
+                                                    item.price
+                                                  _vm.contract_duration =
+                                                    item.time
                                                 }
                                               }
                                             },
@@ -55931,13 +56413,13 @@ var render = function() {
                                                 staticClass: "fas fa-check"
                                               }),
                                               _vm._v(
-                                                " قبول العرض\n                  "
+                                                "\n                                            قبول العرض\n                                        "
                                               )
                                             ]
                                           )
                                         ]),
                                         _vm._v(" "),
-                                        _vm._m(4, true)
+                                        _vm._m(8, true)
                                       ])
                                     ]
                                   )
@@ -55969,7 +56451,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n            مشاهدة المزيد\n          "
+                                    "\n                        مشاهدة المزيد\n                    "
                                   )
                                 ]
                               )
@@ -55988,7 +56470,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n            نهائة النتائج\n          "
+                                    "\n                        نهائة النتائج\n                    "
                                   )
                                 ]
                               )
@@ -56022,7 +56504,7 @@ var render = function() {
                                   staticClass: "lazy-load-ae-content"
                                 },
                                 [
-                                  _vm._m(5, true),
+                                  _vm._m(9, true),
                                   _vm._v(" "),
                                   _c("div", {
                                     staticClass: "lazy-load-ae load-description"
@@ -56050,11 +56532,11 @@ var render = function() {
                                 }
                               }),
                               _vm._v(
-                                "\n          لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع\n          "
+                                "\n                    لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع\n                    "
                               ),
                               _c("p", { staticClass: "font-Naskh" }, [
                                 _vm._v(
-                                  "\n            أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو\n            مجموعة من المقاولين الذاتيين\n          "
+                                  "\n                        أختر من بين العروض المقدمة على طلبك أفضل عرض وقم\n                        بتوظيف مقاول أو مجموعة من المقاولين الذاتيين\n                    "
                                 )
                               ])
                             ]
@@ -56093,7 +56575,7 @@ var render = function() {
                                                     "span",
                                                     {
                                                       staticClass:
-                                                        "\n                            position-absolute\n                            bottom-0\n                            start-100\n                            translate-middle\n                            p-2\n                            bg-success\n                            online-status\n                            Search-status-user\n                            border border-light\n                            rounded-circle\n                          ",
+                                                        "\n                          position-absolute\n                          bottom-0\n                          start-100\n                          translate-middle\n                          p-2\n                          bg-success\n                          online-status\n                          Search-status-user\n                          border border-light\n                          rounded-circle\n                        ",
                                                       attrs: {
                                                         "data-bs-toggle":
                                                           "tooltip",
@@ -56186,21 +56668,21 @@ var render = function() {
                                                         "h4",
                                                         [
                                                           _vm._v(
-                                                            "\n                            " +
+                                                            "\n                                                        " +
                                                               _vm._s(
                                                                 item.user.frist_name[0].toUpperCase() +
                                                                   item.user.frist_name.substring(
                                                                     1
                                                                   )
                                                               ) +
-                                                              "\n                            " +
+                                                              "\n                                                        " +
                                                               _vm._s(
                                                                 item.user.last_name[0].toUpperCase() +
                                                                   item.user.last_name.substring(
                                                                     1
                                                                   )
                                                               ) +
-                                                              "\n                            "
+                                                              "\n                                                        "
                                                           ),
                                                           _c(
                                                             "vs-tooltip",
@@ -56219,7 +56701,7 @@ var render = function() {
                                                               2
                                                                 ? _c("span", {
                                                                     staticClass:
-                                                                      "\n                                  verified-icon verified-2\n                                  mt-2\n                                  text-icon\n                                ",
+                                                                      "\n                                verified-icon verified-2\n                                mt-2\n                                text-icon\n                              ",
                                                                     staticStyle: {
                                                                       "margin-right":
                                                                         "0px !important"
@@ -56249,7 +56731,7 @@ var render = function() {
                                                               1
                                                                 ? _c("span", {
                                                                     staticClass:
-                                                                      "\n                                  verified-icon verified-1\n                                  mt-2\n                                  text-icon\n                                ",
+                                                                      "\n                                verified-icon verified-1\n                                mt-2\n                                text-icon\n                              ",
                                                                     staticStyle: {
                                                                       "margin-right":
                                                                         "0px !important"
@@ -56281,61 +56763,71 @@ var render = function() {
                                         },
                                         [
                                           _c("div", { staticClass: "row" }, [
-                                            _vm._m(6, true),
+                                            _vm._m(10, true),
                                             _vm._v(" "),
                                             _c(
                                               "div",
-                                              {
-                                                staticClass: "col-auto p-1 ",
-                                                on: {
-                                                  click: function($event) {
-                                                    $event.stopPropagation()
-                                                  }
-                                                }
-                                              },
+                                              { staticClass: "col-auto p-1 " },
                                               [
                                                 _c(
-                                                  "vs-dropdown",
-                                                  {
-                                                    attrs: {
-                                                      "vs-trigger-click": ""
-                                                    },
-                                                    on: {
-                                                      click: function($event) {
-                                                        $event.stopPropagation()
-                                                      }
-                                                    }
-                                                  },
+                                                  "span",
+                                                  { staticClass: "dropdown" },
                                                   [
-                                                    _c("vs-button", {
-                                                      staticClass:
-                                                        "btn btn-outline-primary btn-sm",
-                                                      attrs: {
-                                                        type: "filled",
-                                                        icon: "more_vert"
-                                                      }
-                                                    }),
+                                                    _vm._m(11, true),
                                                     _vm._v(" "),
                                                     _c(
-                                                      "vs-dropdown-menu",
+                                                      "ul",
+                                                      {
+                                                        staticClass:
+                                                          "dropdown-menu",
+                                                        attrs: {
+                                                          "aria-labelledby":
+                                                            "menu_user"
+                                                        }
+                                                      },
                                                       [
-                                                        _c("vs-dropdown-item", [
-                                                          _vm._v("التبليغ")
-                                                        ]),
+                                                        _vm._m(12, true),
                                                         _vm._v(" "),
-                                                        _c("vs-dropdown-item", [
-                                                          _vm._v(
-                                                            " الغاء التوظيف "
-                                                          )
-                                                        ])
-                                                      ],
-                                                      1
+                                                        _c(
+                                                          "li",
+                                                          {
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                _vm.reportTo =
+                                                                  item.Account_number
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "a",
+                                                              {
+                                                                staticClass:
+                                                                  "dropdown-item",
+                                                                attrs: {
+                                                                  type:
+                                                                    "button",
+                                                                  "data-toggle":
+                                                                    "modal",
+                                                                  "data-target":
+                                                                    "#reportModal"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "التبليغ"
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
                                                     )
-                                                  ],
-                                                  1
+                                                  ]
                                                 )
-                                              ],
-                                              1
+                                              ]
                                             )
                                           ])
                                         ]
@@ -56432,12 +56924,12 @@ var render = function() {
                                                           "fas fa-briefcase"
                                                       }),
                                                       _vm._v(
-                                                        "\n                            " +
+                                                        "\n                                                    " +
                                                           _vm._s(
                                                             item.AeAccount
                                                               .job_title
                                                           ) +
-                                                          "\n                          "
+                                                          "\n                                                "
                                                       )
                                                     ]
                                                   )
@@ -56460,9 +56952,9 @@ var render = function() {
                                                 "fas fa-map-marker-alt"
                                             }),
                                             _vm._v(
-                                              "\n                      المغرب, " +
+                                              "\n                                        المغرب, " +
                                                 _vm._s(item.city) +
-                                                "\n                    "
+                                                "\n                                    "
                                             )
                                           ]
                                         )
@@ -56497,7 +56989,7 @@ var render = function() {
                                                 _c("strong", [
                                                   _vm._v(
                                                     _vm._s(item.price) +
-                                                      " درهم - " +
+                                                      " درهم -\n                                        " +
                                                       _vm._s(item.time) +
                                                       " يوم"
                                                   )
@@ -56539,9 +57031,9 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                      " +
+                                              "\n                                " +
                                                 _vm._s(item.description) +
-                                                "\n                  "
+                                                "\n                            "
                                             )
                                           ]
                                         ),
@@ -56589,7 +57081,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n            مشاهدة المزيد\n          "
+                                        "\n                        مشاهدة المزيد\n                    "
                                       )
                                     ]
                                   )
@@ -56604,7 +57096,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n            نهائة النتائج\n          "
+                                        "\n                        نهائة النتائج\n                    "
                                       )
                                     ]
                                   )
@@ -56617,14 +57109,82 @@ var render = function() {
                 : _vm._e()
             ]
           )
-        ],
-        1
+        ]
       )
     ],
     1
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "staticBackdropLabel" } },
+        [_vm._v("\n                        تنبيه\n                    ")]
+      ),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-art-icon" }, [
+      _c("img", {
+        attrs: {
+          src: "/img/icons/Consulting-bro.jpg",
+          alt: "قبول عرض مقاول ذاتي desky"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "staticBackdropLabel124" } },
+        [_vm._v("\n                        تنبيه\n                    ")]
+      ),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body " }, [
+      _c("div", { staticClass: "mx-auto text-center font-Naskh" }, [
+        _c("p", [
+          _vm._v(
+            "\n                            هل لازلت تود تلقي عروض جديدة من المقاولين\n                            الذاتيين على هذه الصفقة ؟\n                        "
+          )
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -56687,7 +57247,9 @@ var staticRenderFns = [
         },
         [
           _c("i", { staticClass: "fas fa-envelope" }),
-          _vm._v(" مراسلة\n                  ")
+          _vm._v(
+            "\n                                            مراسلة\n                                        "
+          )
         ]
       )
     ])
@@ -56713,6 +57275,33 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-auto p-1" }, [
       _c("button", { staticClass: "btn btn-primary btn-sm" }, [
         _c("i", { staticClass: "fas fa-envelope" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-primary btn-sm",
+        attrs: {
+          id: "menu_user",
+          "data-toggle": "dropdown",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+        _vm._v("الغاء العقد")
       ])
     ])
   }
@@ -57874,6 +58463,134 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-text" }, [
       _c("i", { staticClass: "fas fa-stopwatch" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/canceling-contract.vue?vue&type=template&id=5615cec8&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/canceling-contract.vue?vue&type=template&id=5615cec8& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "canceling-ae-contract",
+          "data-backdrop": "static",
+          "data-keyboard": "false",
+          tabindex: "-1",
+          "aria-labelledby": "staticBackdropLabel124_canceling_contract",
+          "aria-hidden": "true",
+          dir: "rtl"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "modal-dialog modal-dialog-centered modal-lg vs-con-loading__container"
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      id: "close-modal-btn"
+                    },
+                    on: { click: _vm.OrderNextStatu }
+                  },
+                  [_vm._v("\n                        لا\n                    ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary btn-sm",
+                    attrs: {
+                      type: "button",
+                      id: "close-modal-btn",
+                      "data-dismiss": "modal"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        نعم\n                    "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title",
+          attrs: { id: "staticBackdropLabel124_canceling_contract" }
+        },
+        [_vm._v("\n                        تنبيه\n                    ")]
+      ),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body " }, [
+      _c("div", { staticClass: "mx-auto text-center font-Naskh" }, [
+        _c("p", [
+          _vm._v(
+            "\n                            هل أنت متأكد بأنك تود الغاء هذا العقد\n\n                            \n                        "
+          )
+        ])
+      ])
     ])
   }
 ]
@@ -90824,6 +91541,7 @@ vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('open-orders-list', __webpa
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('form-order-chat', __webpack_require__(/*! ./components/user/orders/chat/form-order-chat.vue */ "./resources/js/components/user/orders/chat/form-order-chat.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('hired-list', __webpack_require__(/*! ./components/user/orders/hired-list.vue */ "./resources/js/components/user/orders/hired-list.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('manage-order-menu', __webpack_require__(/*! ./components/user/orders/manage-order-menu.vue */ "./resources/js/components/user/orders/manage-order-menu.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('canceling-contract', __webpack_require__(/*! ./components/user/orders/canceling-contract.vue */ "./resources/js/components/user/orders/canceling-contract.vue")["default"]);
 /* Offers Section */
 
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('add-offer', __webpack_require__(/*! ./components/user/offers/add-offer.vue */ "./resources/js/components/user/offers/add-offer.vue")["default"]);
@@ -91994,6 +92712,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_order_vue_vue_type_template_id_e42b69fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_order_vue_vue_type_template_id_e42b69fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/canceling-contract.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/user/orders/canceling-contract.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canceling-contract.vue?vue&type=template&id=5615cec8& */ "./resources/js/components/user/orders/canceling-contract.vue?vue&type=template&id=5615cec8&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/user/orders/canceling-contract.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/canceling-contract.vue?vue&type=template&id=5615cec8&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/user/orders/canceling-contract.vue?vue&type=template&id=5615cec8& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./canceling-contract.vue?vue&type=template&id=5615cec8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/canceling-contract.vue?vue&type=template&id=5615cec8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

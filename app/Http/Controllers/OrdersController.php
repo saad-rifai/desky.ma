@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Offers;
 use App\Orders;
+use App\orders_contracts;
 use App\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function GuzzleHttp\json_decode;
-use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -205,21 +205,50 @@ class OrdersController extends Controller
             $orderAuthCheck = $order->count();
             foreach ($order as $order);
             if ($orderAuthCheck > 0) {
-                $stmt = Offers::where('OID', $request->OID)->where('Account_number', $request->userid)->update([
-                    'status' => "1"
-                ]);
-                if ($stmt) {
-                    UserNotification::create([
-                        'to' => $request->userid,
-                        'from', null,
-                        'message' => 'مبروك لقد قام ' . Auth::user()->frist_name . ' بقبول عرضك على <a href="/order/' . $request->OID . '">' . $order->title . '</a> ',
-                        'notifybyemail' => "1",
-                        'email_status' => "0"
+                $checkContacts = orders_contracts::where('OID', $request->OID)->where('self_contracter', $request->userid)->count();
+                $offersInfos =  Offers::where('OID', $request->OID)->where('Account_number', $request->userid)->get(['price', 'time']);
+                foreach($offersInfos as $offersInfo);
+                if($checkContacts > 0){
+ 
+                    $MakeContract = orders_contracts::where('OID', $request->OID)
+                    ->where('self_contracter', $request->userid)
+                    ->where('order_owner', Auth::user()->Account_number)
+                    ->update([
+                        'price' => $offersInfo->price,
+                        'time' => $offersInfo->time,
+                        'status' => '0',
                     ]);
-                    return response()->json(['success', 'success'], 200);
-                } else {
-                    return response()->json(['error', 'server error'], 500);
+                }else{
+                    $MakeContract = orders_contracts::create([
+                        'OID' => $request->OID,
+                        'order_owner' => Auth::user()->Account_number,
+                        'self_contracter' => $request->userid,
+                        'price' => $offersInfo->price,
+                        'time' => $offersInfo->time,
+                        'status' => '0',
+                    ]);
                 }
+                if($MakeContract){
+                    $stmt = Offers::where('OID', $request->OID)->where('Account_number', $request->userid)->update([
+                        'status' => "1"
+                    ]);
+                    if ($stmt) {
+                        UserNotification::create([
+                            'to' => $request->userid,
+                            'from', null,
+                            'message' => 'مبروك لقد قام ' . Auth::user()->frist_name . ' بقبول عرضك على <a href="/order/' . $request->OID . '">' . $order->title . '</a> ',
+                            'notifybyemail' => "1",
+                            'email_status' => "0"
+                        ]);
+                        return response()->json(['success', 'success'], 200);
+                    } else {
+                        return response()->json(['error', 'server error'], 500);
+                    }
+                }else{
+                    return response()->json(['error', 'تعذر انشاء العقد يرجى اعادة المحاولة'], 500);
+
+                }
+
             } else {
                 return response()->json(['error', 'bad request'], 400);
             }
