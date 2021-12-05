@@ -1,10 +1,12 @@
 <template>
     <div>
+        <button hidden id="openUpdateOrderStatusModal" type="button" data-toggle="modal" data-target="#modal-order-update-status"></button>
         <report-popup
             about="0"
             :from_url="from_url"
             :to="reportTo"
         ></report-popup>
+        <canceling-contract :oid="oid" :userid="userid"></canceling-contract>
         <!-- Modal -->
         <div
             class="modal fade"
@@ -473,11 +475,21 @@
                                         >
                                     </vs-tooltip>
                                 </div>
+                                <div v-if="OrderCreator">
                                 <span
                                     v-if="item.status == 1"
                                     class="badge bg-warning mr-65"
-                                    >موظف</span
-                                >
+                                    >موظف</span>
+                                    <span
+                                    v-if="item.status == 2"
+                                    class="badge bg-success mr-65"
+                                    >انتهى العقد</span>
+                                    <span
+                                    v-if="item.status == 3"
+                                    class="badge bg-danger mr-65"
+                                    >ملغي</span>
+                                </div>
+
 
                                 <div
                                     class="mr-65"
@@ -793,10 +805,12 @@
                                                         class="dropdown-menu"
                                                         aria-labelledby="menu_user"
                                                     >
-                                                        <li>
+                                                        <li @click="userid = item.Account_number">
                                                             <a
                                                                 class="dropdown-item"
-                                                                href="#"
+                                                                type="button"
+                                                                data-toggle="modal"
+                                                                data-target="#canceling-ae-contract"
                                                                 >الغاء العقد</a
                                                             >
                                                         </li>
@@ -1005,7 +1019,7 @@ export default {
                     });
                     $("#close-modal-btn-4587").click();
                     if(this.status == 1){
-                    $("#modal-order-update-status").modal('toggle');
+                    $("#openUpdateOrderStatusModal").click();
 
                     }
                 })

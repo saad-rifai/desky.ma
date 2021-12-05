@@ -9842,6 +9842,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["oid", "offerget", "offerget2", "from_url", "status"],
   data: function data() {
@@ -9885,7 +9899,7 @@ __webpack_require__.r(__webpack_exports__);
         $("#close-modal-btn-4587").click();
 
         if (_this.status == 1) {
-          $("#modal-order-update-status").modal('toggle');
+          $("#openUpdateOrderStatusModal").click();
         }
       })["catch"](function (error) {
         _this.$vs.notify({
@@ -10815,6 +10829,170 @@ var Errors = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/canceling-contract.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/canceling-contract.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["oid", "userid"],
+  data: function data() {
+    return {};
+  },
+  methods: {
+    openLoadingInDiv: function openLoadingInDiv() {
+      $("#btnsend_kr4370").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...');
+      this.$vs.loading({
+        container: "#modal_kr4370",
+        scale: 0.6,
+        type: "point",
+        color: "#f96a0c"
+      });
+    },
+    HideLoadingInDiv: function HideLoadingInDiv() {
+      $("#btnsend_kr4370").html("الغاء العقد");
+      this.$vs.loading.close("#modal_kr4370 > .con-vs-loading");
+    },
+    cancelContract: function cancelContract() {
+      var _this = this;
+
+      this.openLoadingInDiv();
+      var data = new FormData();
+      data.append("OID", this.oid);
+      data.append("userid", this.userid);
+      axios.post("/ajax/user/contract/cancel", data).then(function (response) {
+        _this.$vs.notify({
+          text: "تم الغاء العقد",
+          color: "success",
+          fixed: true,
+          icon: "check"
+        });
+
+        $("#profile-tab").click();
+        $("#close-modal-btn_kr4370").click();
+
+        _this.HideLoadingInDiv();
+      })["catch"](function (error) {
+        if (error.response.status == 401) {
+          _this.$vs.notify({
+            text: "يجب تسجيل الدخول",
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+
+          window.location.href = "/login?redirect=" + window.location.href + "";
+        } else {
+          _this.$vs.notify({
+            text: error.response.data.error,
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+        }
+
+        _this.HideLoadingInDiv();
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/chat/form-order-chat.vue?vue&type=script&lang=js& ***!
@@ -11538,15 +11716,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["oid"],
+  props: ["oid", "status"],
   data: function data() {
     return {
       stopLazyLoading: false,
       allresponse: [],
       nodata: false,
       listData: [],
-      OrderCreator: false
+      OrderCreator: false,
+      userid: null
     };
   },
   methods: {
@@ -55551,9 +55739,21 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("button", {
+        attrs: {
+          hidden: "",
+          id: "openUpdateOrderStatusModal",
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#modal-order-update-status"
+        }
+      }),
+      _vm._v(" "),
       _c("report-popup", {
         attrs: { about: "0", from_url: _vm.from_url, to: _vm.reportTo }
       }),
+      _vm._v(" "),
+      _c("canceling-contract", { attrs: { oid: _vm.oid, userid: _vm.userid } }),
       _vm._v(" "),
       _c(
         "div",
@@ -56315,12 +56515,40 @@ var render = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              item.status == 1
-                                ? _c(
-                                    "span",
-                                    { staticClass: "badge bg-warning mr-65" },
-                                    [_vm._v("موظف")]
-                                  )
+                              _vm.OrderCreator
+                                ? _c("div", [
+                                    item.status == 1
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-warning mr-65"
+                                          },
+                                          [_vm._v("موظف")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status == 2
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-success mr-65"
+                                          },
+                                          [_vm._v("انتهى العقد")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status == 3
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass: "badge bg-danger mr-65"
+                                          },
+                                          [_vm._v("ملغي")]
+                                        )
+                                      : _vm._e()
+                                  ])
                                 : _vm._e(),
                               _vm._v(" "),
                               _vm.OrderCreator
@@ -56786,7 +57014,41 @@ var render = function() {
                                                         }
                                                       },
                                                       [
-                                                        _vm._m(12, true),
+                                                        _c(
+                                                          "li",
+                                                          {
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                _vm.userid =
+                                                                  item.Account_number
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "a",
+                                                              {
+                                                                staticClass:
+                                                                  "dropdown-item",
+                                                                attrs: {
+                                                                  type:
+                                                                    "button",
+                                                                  "data-toggle":
+                                                                    "modal",
+                                                                  "data-target":
+                                                                    "#canceling-ae-contract"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "الغاء العقد"
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        ),
                                                         _vm._v(" "),
                                                         _c(
                                                           "li",
@@ -57294,16 +57556,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fas fa-ellipsis-v" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-        _vm._v("الغاء العقد")
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -58505,49 +58757,102 @@ var render = function() {
       [
         _c(
           "div",
-          {
-            staticClass:
-              "modal-dialog modal-dialog-centered modal-lg vs-con-loading__container"
-          },
+          { staticClass: "modal-dialog modal-dialog-centered modal-lg  " },
           [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger btn-sm",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      id: "close-modal-btn"
-                    },
-                    on: { click: _vm.OrderNextStatu }
-                  },
-                  [_vm._v("\n                        لا\n                    ")]
-                ),
+            _c(
+              "div",
+              {
+                staticClass: "modal-content vs-con-loading__container",
+                attrs: { id: "modal_kr4370" }
+              },
+              [
+                _vm._m(0),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary btn-sm",
-                    attrs: {
-                      type: "button",
-                      id: "close-modal-btn",
-                      "data-dismiss": "modal"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        نعم\n                    "
-                    )
-                  ]
-                )
-              ])
-            ])
+                _c("div", { staticClass: "modal-body " }, [
+                  _c("div", { staticClass: "mx-auto font-Naskh" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "alert alert-danger d-flex align-items-center",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass:
+                              "bi bi-exclamation-triangle-fill flex-shrink-0 me-2",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "24",
+                              height: "24",
+                              fill: "currentColor",
+                              viewBox: "0 0 16 16",
+                              role: "img",
+                              "aria-label": "Warning:"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v(
+                            "\n                                يرجى التأكد من أنك قد قمت بأداء أي مستحاقات\n                                للمقاول الذاتي حسب العمل المنجز ويفضل\n                                الاتفاق مع المقاول قبل الغاء العقد لتجنب\n                                اغلاق حسابك أو أي متابعات قانونية\n                            "
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            هل أنت متأكد بأنك تود الغاء هذا العقد ؟\n                        "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-sm",
+                      attrs: {
+                        type: "button",
+                        id: "close-modal-btn_kr4370",
+                        "data-dismiss": "modal"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        التراجع\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "button", id: "btnsend_kr4370" },
+                      on: { click: _vm.cancelContract }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        الغاء العقد\n                    "
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
           ]
         )
       ]
@@ -58577,20 +58882,6 @@ var staticRenderFns = [
           "aria-label": "Close"
         }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body " }, [
-      _c("div", { staticClass: "mx-auto text-center font-Naskh" }, [
-        _c("p", [
-          _vm._v(
-            "\n                            هل أنت متأكد بأنك تود الغاء هذا العقد\n\n                            \n                        "
-          )
-        ])
-      ])
     ])
   }
 ]
@@ -59019,407 +59310,442 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.stopLazyLoading != true
-      ? _c(
-          "div",
-          { staticClass: "lazy-load-box" },
-          _vm._l(5, function(index) {
-            return _c(
-              "div",
-              { key: index, staticClass: "lazy-load-ae-content" },
-              [
-                _vm._m(0, true),
-                _vm._v(" "),
-                _c("div", { staticClass: "lazy-load-ae load-description" })
-              ]
-            )
-          }),
-          0
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.nodata == true
-      ? _c("div", { staticClass: "no-data-message text-center mt-5 mb-4" }, [
-          _c("img", {
-            attrs: {
-              src: "/img/icons/215-SEARCH-AE.jpg",
-              alt: "   لم تقم بتوظيف مقاول بعد في هذا المشروع"
-            }
-          }),
-          _vm._v(
-            "\n        لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع\n        "
-          ),
-          _c("p", { staticClass: "font-Naskh" }, [
+  return _c(
+    "div",
+    [
+      _c("button", {
+        attrs: { hidden: "", id: "profile-tab" },
+        on: { click: _vm.getHired }
+      }),
+      _vm._v(" "),
+      _c("canceling-contract", { attrs: { oid: _vm.oid, userid: _vm.userid } }),
+      _vm._v(" "),
+      _vm.stopLazyLoading != true
+        ? _c(
+            "div",
+            { staticClass: "lazy-load-box" },
+            _vm._l(5, function(index) {
+              return _c(
+                "div",
+                { key: index, staticClass: "lazy-load-ae-content" },
+                [
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "lazy-load-ae load-description" })
+                ]
+              )
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.nodata == true
+        ? _c("div", { staticClass: "no-data-message text-center mt-5 mb-4" }, [
+            _c("img", {
+              attrs: {
+                src: "/img/icons/215-SEARCH-AE.jpg",
+                alt: "   لم تقم بتوظيف مقاول بعد في هذا المشروع"
+              }
+            }),
             _vm._v(
-              "\n            أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو\n            مجموعة من المقاولين الذاتيين\n        "
-            )
+              "\n        لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع\n        "
+            ),
+            _c("p", { staticClass: "font-Naskh" }, [
+              _vm._v(
+                "\n            أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو\n            مجموعة من المقاولين الذاتيين\n        "
+              )
+            ])
           ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "div",
-      _vm._l(_vm.listData, function(item, index) {
-        return _c("div", { key: index, staticClass: "box-article pb-3 mb-3" }, [
-          _c("div", [
-            _c("div", { staticClass: "head-box-article" }, [
-              _c("div", { staticClass: "row text-center" }, [
-                _c("div", { staticClass: "col" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-auto position-relative" }, [
-                      item.isOnline
-                        ? _c(
-                            "span",
-                            {
-                              staticClass:
-                                "\n                          position-absolute\n                          bottom-0\n                          start-100\n                          translate-middle\n                          p-2\n                          bg-success\n                          online-status\n                          Search-status-user\n                          border border-light\n                          rounded-circle\n                        ",
-                              attrs: {
-                                "data-bs-toggle": "tooltip",
-                                "data-bs-placement": "top",
-                                title: "متصل"
-                              }
-                            },
-                            [
-                              _c("span", { staticClass: "visually-hidden" }, [
-                                _vm._v("Online")
-                              ])
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "/@" + item.user.username } }, [
-                        _c("div", { staticClass: "avatar-large-box-article" }, [
-                          item.user.avatar != "" && item.user.avatar != null
-                            ? _c("img", {
-                                attrs: {
-                                  src: "/" + item.user.avatar,
-                                  alt: item.user.username
-                                }
-                              })
-                            : _vm._e(),
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        _vm._l(_vm.listData, function(item, index) {
+          return _c(
+            "div",
+            { key: index, staticClass: "box-article pb-3 mb-3" },
+            [
+              _c("div", [
+                _c("div", { staticClass: "head-box-article" }, [
+                  _c("div", { staticClass: "row text-center" }, [
+                    _c("div", { staticClass: "col" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-auto position-relative" },
+                          [
+                            item.isOnline
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "\n                          position-absolute\n                          bottom-0\n                          start-100\n                          translate-middle\n                          p-2\n                          bg-success\n                          online-status\n                          Search-status-user\n                          border border-light\n                          rounded-circle\n                        ",
+                                    attrs: {
+                                      "data-bs-toggle": "tooltip",
+                                      "data-bs-placement": "top",
+                                      title: "متصل"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "visually-hidden" },
+                                      [_vm._v("Online")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              { attrs: { href: "/@" + item.user.username } },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "avatar-large-box-article" },
+                                  [
+                                    item.user.avatar != "" &&
+                                    item.user.avatar != null
+                                      ? _c("img", {
+                                          attrs: {
+                                            src: "/" + item.user.avatar,
+                                            alt: item.user.username
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      attrs: {
+                                        src: "/img/icons/avatar.png",
+                                        alt: item.user.username
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-auto" }, [
+                          _c("div", { staticClass: "user-name-box-article" }, [
+                            _c(
+                              "a",
+                              { attrs: { href: "/@" + item.user.username } },
+                              [
+                                _c(
+                                  "h4",
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(
+                                          item.user.frist_name[0].toUpperCase() +
+                                            item.user.frist_name.substring(1)
+                                        ) +
+                                        "\n                                            " +
+                                        _vm._s(
+                                          item.user.last_name[0].toUpperCase() +
+                                            item.user.last_name.substring(1)
+                                        ) +
+                                        "\n                                            "
+                                    ),
+                                    _c(
+                                      "vs-tooltip",
+                                      {
+                                        staticStyle: {
+                                          display: "initial !important"
+                                        },
+                                        attrs: {
+                                          text: "حساب مقاول ذاتي تم التحقق منه"
+                                        }
+                                      },
+                                      [
+                                        item.verified_account == 2
+                                          ? _c("span", {
+                                              staticClass:
+                                                "\n                                verified-icon verified-2\n                                mt-2\n                                text-icon\n                              ",
+                                              staticStyle: {
+                                                "margin-right": "0px !important"
+                                              },
+                                              attrs: { dir: "rtl" }
+                                            })
+                                          : _vm._e()
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "vs-tooltip",
+                                      {
+                                        staticStyle: {
+                                          display: "initial !important"
+                                        },
+                                        attrs: { text: "حساب تم التحقق منه" }
+                                      },
+                                      [
+                                        item.verified_account == 1
+                                          ? _c("span", {
+                                              staticClass:
+                                                "\n                                verified-icon verified-1\n                                mt-2\n                                text-icon\n                              ",
+                                              staticStyle: {
+                                                "margin-right": "0px !important"
+                                              },
+                                              attrs: { dir: "rtl" }
+                                            })
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-auto mobile-hidden-1" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(1, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-auto p-1 " }, [
+                          _c("span", { staticClass: "dropdown" }, [
+                            _vm._m(2, true),
+                            _vm._v(" "),
+                            _c(
+                              "ul",
+                              {
+                                staticClass: "dropdown-menu",
+                                attrs: { "aria-labelledby": "menu_user" }
+                              },
+                              [
+                                _c(
+                                  "li",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        _vm.userid = item.Account_number
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "dropdown-item",
+                                        attrs: {
+                                          type: "button",
+                                          "data-toggle": "modal",
+                                          "data-target":
+                                            "#canceling-ae-contract"
+                                        }
+                                      },
+                                      [_vm._v("الغاء العقد")]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row mr-65 mmt-35" }, [
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c("div", { staticClass: "user-info-box-article" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-auto" }, [
+                            _c(
+                              "div",
+                              { staticClass: "user-info-box-article" },
+                              [
+                                _c(
+                                  "vs-tooltip",
+                                  {
+                                    attrs: {
+                                      text:
+                                        parseFloat(item.userRating).toFixed(
+                                          1
+                                        ) >= 0
+                                          ? parseFloat(item.userRating).toFixed(
+                                              1
+                                            )
+                                          : "0"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "user-rating-stars",
+                                        attrs: {
+                                          id: "rating-section",
+                                          dir: "rtl"
+                                        }
+                                      },
+                                      _vm._l(5, function(n) {
+                                        return _c("i", {
+                                          key: n,
+                                          class:
+                                            n <= parseInt(item.userRating)
+                                              ? "fas fa-star"
+                                              : "far fa-star"
+                                        })
+                                      }),
+                                      0
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]),
                           _vm._v(" "),
-                          _c("img", {
-                            attrs: {
-                              src: "/img/icons/avatar.png",
-                              alt: item.user.username
-                            }
-                          })
+                          _c("div", { staticClass: "col-auto" }, [
+                            _c(
+                              "div",
+                              { staticClass: "user-info-box-article" },
+                              [
+                                _c("i", { staticClass: "fas fa-briefcase" }),
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(item.AeAccount.job_title) +
+                                    "\n                                    "
+                                )
+                              ]
+                            )
+                          ])
                         ])
                       ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-auto" }, [
-                      _c("div", { staticClass: "user-name-box-article" }, [
-                        _c(
-                          "a",
-                          { attrs: { href: "/@" + item.user.username } },
-                          [
-                            _c(
-                              "h4",
-                              [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(
-                                      item.user.frist_name[0].toUpperCase() +
-                                        item.user.frist_name.substring(1)
-                                    ) +
-                                    "\n                                            " +
-                                    _vm._s(
-                                      item.user.last_name[0].toUpperCase() +
-                                        item.user.last_name.substring(1)
-                                    ) +
-                                    "\n                                            "
-                                ),
-                                _c(
-                                  "vs-tooltip",
-                                  {
-                                    staticStyle: {
-                                      display: "initial !important"
-                                    },
-                                    attrs: {
-                                      text: "حساب مقاول ذاتي تم التحقق منه"
-                                    }
-                                  },
-                                  [
-                                    item.verified_account == 2
-                                      ? _c("span", {
-                                          staticClass:
-                                            "\n                                verified-icon verified-2\n                                mt-2\n                                text-icon\n                              ",
-                                          staticStyle: {
-                                            "margin-right": "0px !important"
-                                          },
-                                          attrs: { dir: "rtl" }
-                                        })
-                                      : _vm._e()
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "vs-tooltip",
-                                  {
-                                    staticStyle: {
-                                      display: "initial !important"
-                                    },
-                                    attrs: { text: "حساب تم التحقق منه" }
-                                  },
-                                  [
-                                    item.verified_account == 1
-                                      ? _c("span", {
-                                          staticClass:
-                                            "\n                                verified-icon verified-1\n                                mt-2\n                                text-icon\n                              ",
-                                          staticStyle: {
-                                            "margin-right": "0px !important"
-                                          },
-                                          attrs: { dir: "rtl" }
-                                        })
-                                      : _vm._e()
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ]
+                      _c("div", { staticClass: "user-info-box-article" }, [
+                        _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                        _vm._v(
+                          "\n                            المغرب, " +
+                            _vm._s(item.city) +
+                            "\n                        "
                         )
                       ])
                     ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-auto mobile-hidden-1" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _vm._m(1, true),
-                    _vm._v(" "),
-                    _c(
+                _vm.OrderCreator
+                  ? _c(
                       "div",
-                      {
-                        staticClass: "col-auto p-1 ",
-                        on: {
-                          click: function($event) {
-                            $event.stopPropagation()
-                          }
-                        }
-                      },
+                      { staticClass: "mr-65 p-2" },
                       [
                         _c(
-                          "vs-dropdown",
+                          "vs-tooltip",
                           {
-                            attrs: { color: "#f96a0c", "vs-trigger-click": "" },
-                            on: {
-                              click: function($event) {
-                                $event.stopPropagation()
-                              }
-                            }
+                            staticStyle: { width: "max-content" },
+                            attrs: { text: "التكلفة - مدة التنفيذ" }
                           },
                           [
-                            _c("vs-button", {
-                              staticClass: "btn btn-outline-primary btn-sm",
-                              attrs: { type: "filled", icon: "more_vert" }
-                            }),
-                            _vm._v(" "),
                             _c(
-                              "vs-dropdown-menu",
+                              "span",
+                              {
+                                staticClass: "text-brand cur-p",
+                                attrs: { dir: "rtl" }
+                              },
                               [
-                                _c("vs-dropdown-item", [_vm._v("التبليغ")]),
-                                _vm._v(" "),
-                                _c("vs-dropdown-item", [
+                                _c("strong", [
                                   _vm._v(
-                                    "\n                                            الغاء التوظيف\n                                        "
+                                    _vm._s(item.price) +
+                                      " درهم -\n                            " +
+                                      _vm._s(item.time) +
+                                      " يوم"
                                   )
                                 ])
-                              ],
-                              1
+                              ]
                             )
-                          ],
-                          1
+                          ]
                         )
                       ],
                       1
                     )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row mr-65 mmt-35" }, [
-                _c("div", { staticClass: "col-auto" }, [
-                  _c("div", { staticClass: "user-info-box-article" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-auto" }, [
-                        _c(
-                          "div",
-                          { staticClass: "user-info-box-article" },
-                          [
-                            _c(
-                              "vs-tooltip",
-                              {
-                                attrs: {
-                                  text:
-                                    parseFloat(item.userRating).toFixed(1) >= 0
-                                      ? parseFloat(item.userRating).toFixed(1)
-                                      : "0"
-                                }
-                              },
-                              [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "user-rating-stars",
-                                    attrs: { id: "rating-section", dir: "rtl" }
-                                  },
-                                  _vm._l(5, function(n) {
-                                    return _c("i", {
-                                      key: n,
-                                      class:
-                                        n <= parseInt(item.userRating)
-                                          ? "fas fa-star"
-                                          : "far fa-star"
-                                    })
-                                  }),
-                                  0
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-auto" }, [
-                        _c("div", { staticClass: "user-info-box-article" }, [
-                          _c("i", { staticClass: "fas fa-briefcase" }),
-                          _vm._v(
-                            "\n                                        " +
-                              _vm._s(item.AeAccount.job_title) +
-                              "\n                                    "
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ]),
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-auto" }, [
-                  _c("div", { staticClass: "user-info-box-article" }, [
-                    _c("i", { staticClass: "fas fa-map-marker-alt" }),
-                    _vm._v(
-                      "\n                            المغرب, " +
-                        _vm._s(item.city) +
-                        "\n                        "
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _vm.OrderCreator
-              ? _c(
+                item.status == 1
+                  ? _c("span", { staticClass: "badge bg-warning mr-65" }, [
+                      _vm._v("موظف")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
                   "div",
-                  { staticClass: "mr-65 p-2" },
+                  { staticClass: "mr-65", attrs: { id: "text-wraper-desky" } },
                   [
                     _c(
-                      "vs-tooltip",
+                      "p",
                       {
-                        staticStyle: { width: "max-content" },
-                        attrs: { text: "التكلفة - مدة التنفيذ" }
+                        staticClass:
+                          "box-article-description font-Naskh text-wrap-line collapse TextCollapse",
+                        attrs: {
+                          id: "TextCollapse" + index,
+                          "aria-expanded": "false"
+                        }
                       },
                       [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-brand cur-p",
-                            attrs: { dir: "rtl" }
-                          },
-                          [
-                            _c("strong", [
-                              _vm._v(
-                                _vm._s(item.price) +
-                                  " درهم -\n                            " +
-                                  _vm._s(item.time) +
-                                  " يوم"
-                              )
-                            ])
-                          ]
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(item.description) +
+                            "\n                "
                         )
                       ]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            item.status == 1
-              ? _c("span", { staticClass: "badge bg-warning mr-65" }, [
-                  _vm._v("موظف")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "mr-65", attrs: { id: "text-wraper-desky" } },
-              [
-                _c(
-                  "p",
-                  {
-                    staticClass:
-                      "box-article-description font-Naskh text-wrap-line collapse TextCollapse",
-                    attrs: {
-                      id: "TextCollapse" + index,
-                      "aria-expanded": "false"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(item.description) +
-                        "\n                "
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("a", {
+                      staticClass: "collapsed",
+                      attrs: {
+                        role: "button",
+                        "data-toggle": "collapse",
+                        href: "#TextCollapse" + index,
+                        "aria-expanded": "false",
+                        "aria-controls": "TextCollapse" + index
+                      }
+                    })
                   ]
-                ),
-                _vm._v(" "),
-                _c("a", {
-                  staticClass: "collapsed",
-                  attrs: {
-                    role: "button",
-                    "data-toggle": "collapse",
-                    href: "#TextCollapse" + index,
-                    "aria-expanded": "false",
-                    "aria-controls": "TextCollapse" + index
-                  }
-                })
-              ]
-            )
+                )
+              ])
+            ]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm.listData.length > 0
+        ? _c("div", { staticClass: "show-more-section text-center" }, [
+            _vm.allresponse.data.next_page_url &&
+            _vm.allresponse.data.next_page_url != null
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary text-center",
+                    staticStyle: { "margin-right": "0 !important" },
+                    attrs: { type: "button" },
+                    on: { click: _vm.ShowMore }
+                  },
+                  [_vm._v("\n            مشاهدة المزيد\n        ")]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: " end-data-btn text-center",
+                    staticStyle: { "margin-right": "0 !important" },
+                    attrs: { hidden: "", type: "button", disabled: "" }
+                  },
+                  [_vm._v("\n            نهائة النتائج\n        ")]
+                )
           ])
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.listData.length > 0
-      ? _c("div", { staticClass: "show-more-section text-center" }, [
-          _vm.allresponse.data.next_page_url &&
-          _vm.allresponse.data.next_page_url != null
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary text-center",
-                  staticStyle: { "margin-right": "0 !important" },
-                  attrs: { type: "button" },
-                  on: { click: _vm.ShowMore }
-                },
-                [_vm._v("\n            مشاهدة المزيد\n        ")]
-              )
-            : _c(
-                "button",
-                {
-                  staticClass: " end-data-btn text-center",
-                  staticStyle: { "margin-right": "0 !important" },
-                  attrs: { hidden: "", type: "button", disabled: "" }
-                },
-                [_vm._v("\n            نهائة النتائج\n        ")]
-              )
-        ])
-      : _vm._e()
-  ])
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -59445,6 +59771,23 @@ var staticRenderFns = [
         _c("i", { staticClass: "fas fa-envelope" })
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-primary btn-sm",
+        attrs: {
+          id: "menu_user",
+          "data-toggle": "dropdown",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
   }
 ]
 render._withStripped = true
@@ -92727,15 +93070,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canceling-contract.vue?vue&type=template&id=5615cec8& */ "./resources/js/components/user/orders/canceling-contract.vue?vue&type=template&id=5615cec8&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _canceling_contract_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./canceling-contract.vue?vue&type=script&lang=js& */ "./resources/js/components/user/orders/canceling-contract.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _canceling_contract_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__["render"],
   _canceling_contract_vue_vue_type_template_id_5615cec8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -92749,6 +93094,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/user/orders/canceling-contract.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/canceling-contract.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/user/orders/canceling-contract.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_canceling_contract_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./canceling-contract.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/canceling-contract.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_canceling_contract_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

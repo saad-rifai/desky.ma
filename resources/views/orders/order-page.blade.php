@@ -19,7 +19,7 @@
             </div>
             @if($data->orderCreator)
             <div class="col-sm-auto mt-3" align="right">
-               <a href="{{asset("/myorder/$data->OID")}}"> <button class="btn btn-primary btn-sm">ادارة الطلب</button></a>
+               <a href="{{asset("/myorder/$data->OID")}}"> <button class="btn btn-primary btn-sm"><i class="fas fa-cog"></i> ادارة الطلب </button></a>
             </div>
             @endif
         </div>

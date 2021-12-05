@@ -93,6 +93,13 @@ Route::prefix('ajax')->group(function () {
         Route::post('project/chatroom/get', 'ChatSystemController@ProjectChatRoom');
 
         /* Chat System */
+
+
+        /* USER CONTRACTS */
+
+        Route::post('user/contract/cancel', 'OrdersContractsController@cancel');
+
+        /* USER CONTRACTS */
     
     });
     

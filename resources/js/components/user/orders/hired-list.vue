@@ -1,5 +1,7 @@
 <template>
     <div>
+        <button hidden id="profile-tab" @click="getHired"></button>
+        <canceling-contract :oid="oid" :userid="userid"></canceling-contract>
         <!-- -->
         <div v-if="stopLazyLoading != true" class="lazy-load-box">
             <div v-for="index in 5" :key="index" class="lazy-load-ae-content">
@@ -141,28 +143,35 @@
                                         <i class="fas fa-envelope"></i>
                                     </button>
                                 </div>
-                                <div class="col-auto p-1 " @click.stop>
-                                    <vs-dropdown
-                                        color="#f96a0c"
-                                        vs-trigger-click
-                                        @click.stop
-                                    >
-                                        <vs-button
-                                            class="btn btn-outline-primary btn-sm"
-                                            type="filled"
-                                            icon="more_vert"
-                                        ></vs-button>
-                                        <!-- <a href="#">Hola mundo</a> -->
-
-                                        <vs-dropdown-menu>
-                                            <vs-dropdown-item
-                                                >التبليغ</vs-dropdown-item
-                                            >
-                                            <vs-dropdown-item>
-                                                الغاء التوظيف
-                                            </vs-dropdown-item>
-                                        </vs-dropdown-menu>
-                                    </vs-dropdown>
+                                <div class="col-auto p-1 ">
+                                    <span class="dropdown">
+                                                    <button
+                                                        class="btn btn-outline-primary btn-sm"
+                                                        id="menu_user"
+                                                        data-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                    >
+                                                        <i
+                                                            class="fas fa-ellipsis-v"
+                                                        ></i>
+                                                    </button>
+                                                    <ul
+                                                        class="dropdown-menu"
+                                                        aria-labelledby="menu_user"
+                                                    >
+                                                        <li @click="userid = item.Account_number">
+                                                            <a
+                                                                class="dropdown-item"
+                                                                type="button"
+                                                                data-toggle="modal"
+                                                                data-target="#canceling-ae-contract"
+                                                                >الغاء العقد</a
+                                                            >
+                                                        </li>
+                          
+                                                    </ul>
+                                                </span>
+                       
                                 </div>
                             </div>
                         </div>
@@ -286,14 +295,16 @@
 </template>
 <script>
 export default {
-    props: ["oid"],
+    props: ["oid", "status"],
     data() {
         return {
             stopLazyLoading: false,
             allresponse: [],
             nodata: false,
             listData: [],
-            OrderCreator: false
+            OrderCreator: false,
+            userid: null
+
         };
     },
     methods: {

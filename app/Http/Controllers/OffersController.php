@@ -117,7 +117,7 @@ class OffersController extends Controller
             } 
 
 
-            $infos = Offers::where('OID', $request->OID)->whereIn("status", ["0"])->orderBy("created_at", "DESC")->paginate(10);
+            $infos = Offers::where('OID', $request->OID)->orderBy("created_at", "DESC")->paginate(10);
             for($i=0; $i < count($infos); $i++){
                 $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
                 foreach ($rating as $rating);
@@ -249,7 +249,9 @@ class OffersController extends Controller
                 $infos[$i]->sector = $sectorName;
                 $infos[$i]->verified_account = $infos[$i]->user->verified_account;
             }
-
+            if($OrderCreator == false){
+                $infos=null;
+            }
             return response()->json(['data'=>$infos, 'OrderCreator' => $OrderCreator], 200);
 
        

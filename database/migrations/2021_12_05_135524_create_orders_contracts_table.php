@@ -21,7 +21,7 @@ class CreateOrdersContractsTable extends Migration
             $table->decimal('price');
             $table->integer('time');
             $table->enum('status', ['0','1','2', '3'])->default('0'); /* 0 => Open; 1 => done; 2 => dispute; 3 => canceled */
-            $table->date('canceled_at')->nullable();
+            $table->dateTime('canceled_at')->nullable();
             $table->timestamps();
             $table->foreign('order_owner')->references('Account_number')->on('users')
             ->onDelete('cascade');
