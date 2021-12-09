@@ -17,7 +17,7 @@ class CreateUserReportsTable extends Migration
             $table->id();
             $table->string('claimant', 10);
             $table->string('defendant', 10);
-            $table->enum("about", ['0', '1', '2']); /* 0 => about user; 1 => About Order; 2 => About Platforme */
+            $table->enum("about", ['0', '1', '2', '3']); /* 0 => about user; 1 => About Order; 2 => About Platforme; 3 => About Portfolio */
             $table->enum("category", ['0','1','2']); /* 0 => I Dont Like This Content; 1 => this content is spam; 2 => This content violates the terms of use; 3 => other */
             $table->mediumText("description");
             $table->mediumText("from_url");

@@ -62,22 +62,17 @@
                                                 <ul class="list-group list-group-flush">
 
                                                     @foreach ($data->files as $item)
-                                                        @php
-                                                            $infoPath = pathinfo(public_path($item));
-                                                            $extension = $infoPath['extension'];
-                                                        @endphp
-
-                                                        <li
-                                                            class="list-group-item d-flex justify-content-between align-items-center">
-                                                            <a href="{{ asset($item) }}"
-                                                                class="text-truncate text-primary"
-                                                                style="width: 100% !important;max-width: 200px!important;display: block;">
-                                                                {{ $item }}</a>
-                                                            <span
-                                                                class="badge bg-primary rounded-pill">{{ $extension }}</span>
-
-                                                        </li>
-                                                    @endforeach
+                                                    @php
+                                                        $infoPath = pathinfo(public_path($item['file_url']));
+                                                        $extension = $infoPath['extension'];
+                                                    @endphp
+                
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"> 
+                                                        <a href="{{ asset($item['file_url']) }}" class="text-truncate text-primary" style="width: 100% !important;max-width: 200px!important;display: block;">{{ $item['filename'] }}</a>
+                                                        <span class="badge bg-primary rounded-pill">{{ $extension }}</span>
+                
+                                                    </li>
+                                                @endforeach
                                                 </ul>
                                             </div>
                                         </div>

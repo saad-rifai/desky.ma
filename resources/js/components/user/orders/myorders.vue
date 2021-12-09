@@ -17,83 +17,147 @@
         ></button>
       </div>
       <div class="offcanvas-body" align="right" dir="rtl">
-        <form align="right" dir="rtl">
-          <div class="mb-3">
-            <input
-              placeholder="البحث..."
-              type="text"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div class="mb-3">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>القطاع</option>
-              <option value="1">الخدمات</option>
-              <option value="2">التجارة</option>
-              <option value="3">الصناعة</option>
-              <option value="3">الصناعة التقليدية</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <input
-              class="form-control"
-              list="datalistOptions"
-              id="exampleDataList"
-              placeholder="النشاط"
-            />
-          </div>
-          <div class="mb-3">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>المدينة</option>
-              <option value="1">الخدمات</option>
-              <option value="2">التجارة</option>
-              <option value="3">الصناعة</option>
-              <option value="3">الصناعة التقليدية</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="customRange3" class="form-label">الميزانية</label>
+                    <form align="right">
+            <div class="mb-4">
+              <label for="searchbox" class="form-label">كلمات مفتاحية</label>
 
-            <div class="row g-2 text-center">
-              <div class="col-auto" align="right">
-                <div class="row g-3 align-items-center">
-                  <div class="col-auto">
-                    <label for="inputPassword6" class="col-form-label"
-                      >من</label
-                    >
-                  </div>
-                  <div class="col-auto">
-                    <input
-                      type="number"
-                      class="form-control"
-                      value="0"
-                      id="min-inp"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="col-auto" align="left">
-                <div class="row g-3 align-items-center">
-                  <div class="col-auto">
-                    <label for="inputPassword6" class="col-form-label"
-                      >الى</label
-                    >
-                  </div>
-                  <div class="col-auto">
-                    <input
-                      type="number"
-                      class="form-control"
-                      value="500000"
-                      id="min-inp"
-                    />
-                  </div>
-                </div>
-              </div>
+              <input
+                id="searchbox"
+                type="text"
+                class="form-control"
+                v-model="query"
+                @change="Search"
+              />
             </div>
-          </div>
-        </form>
+            <div class="mb-4">
+              <label for="sector" class="form-label"> القطاع</label>
+
+              <select
+                id="sector"
+                v-model="sector"
+                class="form-select"
+                @change="SectorChange"
+              >
+                <option value="">جميع القطاعات</option>
+                <option value="1">الخدمات</option>
+                <option value="2">التجارة</option>
+                <option value="3">الصناعة</option>
+                <option value="4">الحرفية</option>
+              </select>
+            </div>
+            <div v-if="sector != '' && sector != null" class="mb-4">
+              <label for="activite" class="form-label"> النشاط</label>
+
+              <vs-select
+                @change="Search"
+                width="100%"
+                autocomplete
+                id="activite"
+                v-model="activite"
+              >
+                <vs-select-item text="جميع النشاطات" />
+
+                <vs-select-item
+                  :key="index"
+                  :value="index"
+                  :text="item"
+                  v-for="(item, index) in Activites"
+                />
+              </vs-select>
+            </div>
+            <div class="mb-3">
+              <label for="activite" class="form-label"> مكان الانجاز</label>
+              <div class="mb-3">
+                <label class="form-label">عن بعد </label>
+                <vs-switch
+                  v-model="remotely"
+                  color="success"
+                  vs-icon-off="close"
+                  vs-icon-on="check"
+                  @change="Search"
+                />
+              </div>
+
+              <vs-select
+                v-if="!remotely"
+                @change="Search"
+                width="100%"
+                autocomplete
+                id="city"
+                v-model="city"
+                placeholder="المدينة"
+              >
+                <vs-select-item value="" text="جميع المدن" />
+                <vs-select-item
+                  :key="index"
+                  :value="item.id"
+                  :text="item.ville"
+                  v-for="(item, index) in citiesJson"
+                />
+              </vs-select>
+            </div>
+            <div class="mb-3 mt-5">
+              <label class="form-label">الحالة</label>
+                <vs-select @change="Search" width="100%" v-model="status">
+                <vs-select-item value="" text="الكل" />
+                <vs-select-item value="0" text="قيد المراجعة" />
+                <vs-select-item value="1" text="مفتوح " />
+                <vs-select-item value="2" text=" مرحلة التنفيذ " />
+                <vs-select-item value="3" text="تم الانجاز" />
+                <vs-select-item value="4" text="مغلق" />
+                <vs-select-item value="5" text="مرفوض" />
+              </vs-select>
+
+            </div>
+            <div class="mb-3 mt-5">
+              <label class="form-label">الميزانية</label>
+              <vs-slider
+                step="100"
+                ticks
+                text-fixed=" درهم "
+                color="#f96a0c"
+                max="500000"
+                :min="150"
+                v-model.lazy="budget"
+                @change="Search"
+              />
+            </div>
+            <div class="mb-3 mt-5">
+              <label for="" class="form-label">مدة التنفيذ</label>
+              <vs-select @change="Search" width="100%" v-model="time">
+                <vs-select-item value="180" text="الكل" />
+                <vs-select-item value="7" text="أقل من أسبوع واحد" />
+                <vs-select-item value="14" text="أقل من أسبوعين " />
+                <vs-select-item value="30" text="أقل من شهر " />
+                <vs-select-item value="60" text="أقل من شهرين " />
+                <vs-select-item value="90" text="أقل من 3 أشهر " />
+                <vs-select-item value="120" text="أقل من 4 أشهر " />
+                <vs-select-item value="150" text="أقل من 5 أشهر " />
+                <vs-select-item value="180" text="أقل من 6 أشهر " />
+              </vs-select>
+            </div>
+            <div class="d-grid gap-2 mt-5">
+              <button
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+                @click="Search"
+                class="btn btn-primary"
+                type="button"
+              >
+                البحث
+              </button>
+
+              <button
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+                @click="reset"
+                class="btn btn-outline-primary"
+                type="button"
+              >
+                اعادة التعيين
+              </button>
+            </div>
+          </form>
       </div>
     </div>
     <!-- Mobile Filter Search -->
@@ -192,6 +256,19 @@
               </vs-select>
             </div>
             <div class="mb-3 mt-5">
+              <label class="form-label">الحالة</label>
+                <vs-select @change="Search" width="100%" v-model="status">
+                <vs-select-item value="" text="الكل" />
+                <vs-select-item value="0" text="قيد المراجعة" />
+                <vs-select-item value="1" text="مفتوح " />
+                <vs-select-item value="2" text=" مرحلة التنفيذ " />
+                <vs-select-item value="3" text="تم الانجاز" />
+                <vs-select-item value="4" text="مغلق" />
+                <vs-select-item value="5" text="مرفوض" />
+              </vs-select>
+
+            </div>
+            <div class="mb-3 mt-5">
               <label class="form-label">الميزانية</label>
               <vs-slider
                 step="100"
@@ -273,58 +350,30 @@
                   <div class="row text-center">
                     <div class="col">
                       <h1 align="right" class="title-box-article">
-                        {{ item.title }}
+                       <span class="badge bg-primary badge-sm">قيد التنفيذ</span>  {{ item.title }}
                       </h1>
                     </div>
                     <div class="col-3">
                       <div align="left" class="box-article-cta">
-                        <button
-                          align="left"
-                          type="button"
-                          class="btn btn-primary btn-sm bid-mobile-icon"
-                        >
-                          قدم عرضك
-                        </button>
+                       <span class="dropdown">
+                           <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i></button>
+                         <ul class="dropdown-menu" aria-labelledby="menu_user">
+                             <li>
+                                 <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> تعديل</a></li>
+                                 <li>
+                                <a class="dropdown-item" type="button"><i class="fas fa-cog"></i> ادارة</a>
+                                </li>
+                                <li>
+                                <a class="dropdown-item" type="button"><i class="fas fa-trash-alt"></i> حذف</a>
+                                </li>
+                         </ul>
+                        </span>
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-auto">
-                      <div class="user-info-box-article">
-                        <div class="row" onclick="redirectUserPage(event,11)">
-                          <div class="col-auto">
-                            <div class="user-info-box-article-avatar">
-                              <img
-                                v-if="
-                                  item.user.avatar != '' &&
-                                  item.user.avatar != null
-                                "
-                                :src="'/' + item.user.avatar"
-                                :alt="item.user.username"
-                              />
-                              <img
-                                src="/img/icons/avatar.png"
-                                :alt="item.user.username"
-                              />
-                            </div>
-                          </div>
-                          <div class="col-auto">
-                            <div class="user-info-box-article-name">
-                              <h5 class="user-info-box-article-name-h5">
-                                {{
-                                  item.user.frist_name[0].toUpperCase() +
-                                  item.user.frist_name.substring(1)
-                                }}
-                                {{
-                                  item.user.last_name[0].toUpperCase() +
-                                  item.user.last_name.substring(1)
-                                }}
-                              </h5>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="row ps-2">
+           
                     <div class="col-auto">
                       <div class="user-info-box-article">
                         <i class="fas fa-map-marker-alt"></i>
@@ -403,6 +452,7 @@ export default {
       budget: [150, 500000],
       time: 180,
       typeget: "all",
+      status: ""
     };
   },
   methods: {
@@ -414,6 +464,7 @@ export default {
       this.remotely = false;
       this.budget = [150, 500000];
       this.time = 180;
+      this.status = "",
 
       this.getData();
     },
@@ -443,7 +494,7 @@ export default {
       this.stopLazyLoading = false;
       this.typeget = "all";
       axios
-        .get("/ajax/orders/all")
+        .get("/ajax/MyOrders/all")
         .then((response) => {
           this.allresponse = response.data;
           this.listData = this.allresponse.data;
@@ -470,7 +521,7 @@ export default {
       if (this.allresponse.next_page_url != null) {
         axios
           .get(
-            "/ajax/orders/" +
+            "/ajax/MyOrders/" +
               this.typeget +
               "/?page=" +
               (parseInt(this.allresponse.current_page) + 1)
@@ -492,6 +543,11 @@ export default {
       this.typeget = "search";
       this.openLoadingInDiv();
       let data = new FormData();
+      if (this.status != null) {
+        data.append("st", this.status);
+      } else {
+        data.append("st", "");
+      }
       if (this.query != null) {
         data.append("q", this.query);
       } else {
@@ -520,7 +576,7 @@ export default {
       data.append("b", this.budget);
       data.append("t", this.time);
 
-      axios.post("/ajax/orders/search", data).then((response) => {
+      axios.post("/ajax/MyOrders/search", data).then((response) => {
         this.allresponse = response.data;
         this.listData = response.data.data;
         if (

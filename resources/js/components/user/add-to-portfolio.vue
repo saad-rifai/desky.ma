@@ -8,7 +8,7 @@
             اضافة عمل
           </h1>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
-            <div class="col w-100">
+            <div class="col-sm">
               <div class="mb-3">
                 <label class="form-label" for="title">عنوان العمل</label>
                 <input
@@ -24,7 +24,7 @@
                 </div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-sm">
               <div class="mb-3">
                 <label class="form-label">القطاع</label>
                 <select
@@ -85,7 +85,7 @@
                 <div class="invalid-feedback" v-if="errors.errors.description">
                   {{ errors.errors.description[0] }}
                 </div>
-                <div class="form-text">أضف وصفا دقيقا ومختصرا للعمل</div>
+                <div class="form-text font-Naskh">أضف وصفا دقيقا ومختصرا للعمل</div>
               </div>
             </div>
 
@@ -132,7 +132,7 @@
                     <span class="text-upload-file">أو انقر للاختيار يدويا</span>
                   </div>
                 </div>
-                <div class="form-text">
+                <div class="form-text font-Naskh">
                   يرجى التأكد من أن الصور غير مخالفة
                   <a href="/conditions#images?from=portfolio" target="_blank"
                     >لسياستنا</a

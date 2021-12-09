@@ -21,7 +21,14 @@
   </div>
 
 <div id="app">
-    <ae-list></ae-list>
+  @php
+      if(Auth::check()){
+        $myAccountNumber = Auth::user()->Account_number;
+      }else{
+        $myAccountNumber = null;
+      }
+  @endphp
+    <ae-list from_url="{{url()->current()}}" myaccountnumber="{{$myAccountNumber}}"></ae-list>
 </div>
 
 @stop

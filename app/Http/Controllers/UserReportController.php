@@ -10,7 +10,7 @@ class UserReportController extends Controller
 {
    public function CreateReport(Request $request){
        $this->validate($request, [
-           'about' => 'required|integer|max:2|min:0',
+           'about' => 'required|integer|max:3|min:0',
            'category' => 'required|integer|max:2|min:0',
            'description' => 'required|min:30|max:700',
            'from_url' => 'max:500',

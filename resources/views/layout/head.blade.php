@@ -61,7 +61,7 @@
     <!-- Nav Bar  -->
     <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar" id="navbar">
         <div class="container-fluid container">
-            <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip" data-placement="top"
+            <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip"
                 title="هذه المنصة لازالت قيد التطوير والتحسين">
 
                 <img class="logo-web " src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky">

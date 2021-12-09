@@ -58,6 +58,8 @@ import Vue from 'vue';
  /* Orders  Section */
  Vue.component('add-order', require('./components/user/orders/add-order.vue').default);
  Vue.component('open-orders-list', require('./components/user/orders/orders-open-lists.vue').default);
+ Vue.component('myorders', require('./components/user/orders/myorders.vue').default);
+ Vue.component('edit-order', require('./components/user/orders/edit-order.vue').default);
  Vue.component('form-order-chat', require('./components/user/orders/chat/form-order-chat.vue').default);
  Vue.component('hired-list', require('./components/user/orders/hired-list.vue').default);
  Vue.component('manage-order-menu', require('./components/user/orders/manage-order-menu.vue').default);
@@ -66,6 +68,7 @@ import Vue from 'vue';
  /* Offers Section */
  Vue.component('add-offer', require('./components/user/offers/add-offer.vue').default);
  Vue.component('offers-list', require('./components/user/offers/offers-list.vue').default);
+ Vue.component('edit-offer', require('./components/user/offers/edit-offer.vue').default);
  
  /* Public Section */
  Vue.component('ae-list', require('./components/public/ae-list.vue').default);

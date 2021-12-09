@@ -1,7 +1,5 @@
 <!doctype html>
-
 <html lang="ar">
-
 <head>
     <meta charset="UTF-8">
     <meta name="keywords" content="HTML, CSS, JavaScript">
@@ -11,9 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/resetstyle.css') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Styles -->
-
     <!-- Fonts -->
     <link rel="shortcut icon" href="{{asset('img/icons/favicon-32x32.png')}}" type="image/x-icon">
 
@@ -23,17 +19,17 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Fonts -->
-
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
 
-
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <title>Desky - انشاء حساب</title>
     <!-- Font-awsome -->
-
     <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"
         integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg=="
         crossorigin="anonymous"></script>
@@ -45,39 +41,36 @@
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
     </script> 
 </head>
-
 <body>
-
-
     <div class="page-load" id="page-load"></div>
-
-
     <div class="container">
         <div class="logo-brand-top-card mt-5 mb-5">
             <img src="{{ asset('img/brand/logo-web.png') }}" alt="desky - login">
         </div>
+        <div class="form-head text-center" dir="rtl">
+            <h1 class="form-head-title">مرحبا بك سعداء بانضمامك لنا</h1>
+            <p class="form-head-text">نحتاج بعض المعلومات منك لانشاء حسابك</p>
+        </div>
         <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
             <div class="content-form p-3 pt-1">
-                <h1 class="card-title mb-4 mt-3">انشاء حساب</h1>
 
+
+
+  <!--div  class="strike mt-3 mb-3">
+                    <span>أو</span>
+                </div>
                 <div class="row text-center mt-3 mb-2">
-                    <div class="col-sm mb-2">
-                      <a href="{{route('facebook_register')}}">  
-                        <button class="login-opt facebook">
-                            <span class="icon-login-opt">
-                                <i class="fab fa-facebook"></i>
-                              </span> باستخدام فيسبوك </button></a>
+                    <div class="col col-lg-1 mb-2 w-100">
+                        <button class="login-opt facebook"><span class="icon-login-opt"><i
+                                    class="fab fa-facebook-f"></i></span> باستخدام فيسبوك </button>
 
                     </div>
-                    <div class="col-sm mb-2">
+                    <div class="col col-lg-1 mb-2 w-100">
                         <button class="login-opt google"><span class="icon-login-opt"><i
                                     class="fab fa-google"></i></span> باستخدام جوجل </button>
 
                     </div>
-                </div>
-                <div class="strike mt-3 mb-3">
-                    <span>أو</span>
-                </div>
+                </div-->
            
       
               <div id="app">
@@ -87,7 +80,7 @@
 
 
         </div>
-        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
+        <div class="text-center p-3 mt-3 mb-5 mx-auto font-Naskh" style="max-width: 750px" dir="rtl">
             <div class="content-form p-3 mx-auto">
                 <span class="text-center"> لديك حساب بالفعل ؟ <a href="{{ asset('login') }}">سجل الدخول</a></span>
             </div>
@@ -99,7 +92,7 @@
     <footer dir="rtl">
         <div class=" content-footer">
 
-            <div class="bottom-footer">
+            <div class="bottom-footer font-Naskh">
                 <p class="footer-copyright text-center" dir="rtl">© {{date("Y")}} desky. جميع الحقوق محفوظة.
                 </p>
             </div>

@@ -229,7 +229,7 @@
             v-model="terms"
             id="terms"
           />
-          <label class="form-check-label terms-text" for="terms">
+          <label class="form-check-label terms-text font-Naskh" for="terms">
             لقد قرأت <a href="#">شروط الاستخدام</a> و
             <a href="#">سياسة الخصوصية</a> وأوافق عليها
             <br>
@@ -252,7 +252,7 @@
           style="margin-right: 0 !important"
           id="btn_submit"
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-primary w-100"
         >
           انشاء حساب
         </button>

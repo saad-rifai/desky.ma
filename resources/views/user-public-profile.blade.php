@@ -100,13 +100,19 @@
                     </a>
 
                 @else
+                <report-popup
+                about="0"
+                from_url="{{url()->current()}}"
+                to="{{$data->Account_number}}"
+
+            ></report-popup>
                     <button class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i></button>
                     <span class="dropdown">
                         <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
                             aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                         <ul class="dropdown-menu" aria-labelledby="menu_user">
                             <li><a class="dropdown-item" href="#">مراسلة</a></li>
-                            <li><a class="dropdown-item" href="#">التبليغ</a></li>
+                            <li><a class="dropdown-item" data-toggle="modal" href="#reportModal" data-target="#reportModal" >التبليغ</a></li>
                         </ul>
                     </span>
                 @endif

@@ -49,13 +49,17 @@ Route::prefix('ajax')->group(function () {
 
     Route::get('orders/all', 'OrdersController@all');
     Route::post('orders/search', 'OrdersController@search');
+    Route::get('order/{OID}/json', 'OrdersController@MyOrderJson');
 
     /***** */
 
     /* Offers Routes */
     Route::post('orders/offers/new', 'OffersController@NewOffers');
+    Route::post('order/offer/status', 'OffersController@offerStatus');
     Route::post('orders/offers/hired', 'OffersController@hired');
-
+    Route::get('order/{OID}/myoffer/', 'OffersController@getMyOffer');
+    Route::post('order/offer/update/', 'OffersController@UpdateOffer');
+    
     /********/
 
     /*****************/
@@ -74,11 +78,15 @@ Route::prefix('ajax')->group(function () {
         /* Orders Route */
     
         Route::post('user/order/create', 'OrdersController@create');
+        Route::post('user/order/update', 'OrdersController@update');
+        Route::post('order/remove/file', 'OrdersController@removeFile');
         Route::post('order/hire/user', 'OrdersController@hire');
         Route::post('order/status', 'OrdersController@status');
         Route::get('order/status/get/{OID}', 'OrdersController@GetStatus');
         Route::post('order/status/update', 'OrdersController@UserUpdateStatus');
-        
+        Route::get('MyOrders/all', 'OrdersController@allMyOrders');
+        Route::post('MyOrders/search', 'OrdersController@MyOrdersSearch');
+
     
         /* Offers Routes */
         Route::post('user/offer/create', 'OffersController@create');
@@ -122,6 +130,7 @@ Route::get('/try', function () {
 
 
 Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function () {
+    Route::get('order/{OID}/edit', 'OrdersController@editPage');
 
     Route::get('/portfolio/create', function () {
         return view('actions.add-to-portfolio');
@@ -135,6 +144,9 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
 
     Route::get('/new/order', function () {
         return view('actions.add-order');
+    });
+    Route::get('/MyOrders', function () {
+        return view('orders.myorders');
     });
 
     Route::get('/myorder/{OID}', 'OrdersController@MyOrderShow');

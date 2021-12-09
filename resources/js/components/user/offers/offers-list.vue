@@ -1,6 +1,13 @@
 <template>
     <div>
-        <button hidden id="openUpdateOrderStatusModal" type="button" data-toggle="modal" data-target="#modal-order-update-status"></button>
+        <edit-offer :oid="oid"></edit-offer>
+        <button
+            hidden
+            id="openUpdateOrderStatusModal"
+            type="button"
+            data-toggle="modal"
+            data-target="#modal-order-update-status"
+        ></button>
         <report-popup
             about="0"
             :from_url="from_url"
@@ -18,7 +25,9 @@
             aria-hidden="true"
             dir="rtl"
         >
-            <div class="modal-dialog modal-dialog-centered modal-lg vs-con-loading__container">
+            <div
+                class="modal-dialog modal-dialog-centered modal-lg vs-con-loading__container"
+            >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">
@@ -86,7 +95,9 @@
             aria-hidden="true"
             dir="rtl"
         >
-            <div class="modal-dialog modal-dialog-centered modal-lg vs-con-loading__container">
+            <div
+                class="modal-dialog modal-dialog-centered modal-lg vs-con-loading__container"
+            >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel124">
@@ -132,7 +143,7 @@
 
         <!-- MODAL CHANGE ORDER STATUS -->
         <div
-            class="card p-4 mb-4 position-relative vs-con-loading__container"
+            class="card mb-4 position-relative vs-con-loading__container"
             id="div-with-loading12"
         >
             <!--h1 class="card-title mb-4 mt-2" style="font-size: 16px">العروض</h1-->
@@ -170,7 +181,7 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div
-                    class="tab-pane fade show active p-3 body-card-text"
+                    class="tab-pane fade show active mb-3 p-3 body-card-text"
                     id="offers"
                     role="tabpanel"
                     aria-labelledby="home-tab"
@@ -232,6 +243,7 @@
                               Search-status-user
                               border border-light
                               rounded-circle
+                              mb-status-hide
                             "
                                                             data-bs-toggle="tooltip"
                                                             data-bs-placement="top"
@@ -244,7 +256,7 @@
                                                         </span>
 
                                                         <div
-                                                            class="avatar-large-box-article"
+                                                            class="avatar-large-box-article mb-avatar-size"
                                                         >
                                                             <img
                                                                 v-if="
@@ -332,19 +344,110 @@
                                                             </h4>
                                                         </div>
                                                     </div>
+                                                    <div class="col-auto">
+                                                        <div
+                                                            class="user-info-box-article"
+                                                        >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-auto"
+                                                                >
+                                                                    <div
+                                                                        class="user-info-box-article"
+                                                                    >
+                                                                        <vs-tooltip
+                                                                            v-bind:text="
+                                                                                parseFloat(
+                                                                                    item.userRating
+                                                                                ).toFixed(
+                                                                                    1
+                                                                                ) >=
+                                                                                0
+                                                                                    ? parseFloat(
+                                                                                          item.userRating
+                                                                                      ).toFixed(
+                                                                                          1
+                                                                                      )
+                                                                                    : '0'
+                                                                            "
+                                                                        >
+                                                                            <span
+                                                                                id="rating-section"
+                                                                                class="user-rating-stars"
+                                                                                dir="rtl"
+                                                                            >
+                                                                                <i
+                                                                                    v-for="n in 5"
+                                                                                    :key="
+                                                                                        n
+                                                                                    "
+                                                                                    :class="
+                                                                                        n <=
+                                                                                        parseInt(
+                                                                                            item.userRating
+                                                                                        )
+                                                                                            ? 'fas fa-star'
+                                                                                            : 'far fa-star'
+                                                                                    "
+                                                                                ></i>
+                                                                            </span>
+                                                                        </vs-tooltip>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div
-                                                class="col-auto mobile-hidden-1"
+                                                class="col-auto mobile-btn-act-position"
                                             >
                                                 <button
-                                                    class="btn btn-primary btn-sm"
+                                                    v-if="
+                                                        item.Account_number ==
+                                                            myaccountnumber
+                                                    "
+                                                    @click.prevent
+                                                    type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#modal_pr1825"
+                                                    class="btn btn-outline-primary btn-sm "
+                                                >
+                                                    <i class="fas fa-eye"> </i>
+                                                </button>
+                                                <button
+                                                    v-if="
+                                                        item.Account_number ==
+                                                            myaccountnumber &&
+                                                            AllowdToEdit
+                                                    "
+                                                    @click.prevent
+                                                    type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#modal_kr1825"
+                                                    class="btn btn-outline-primary btn-sm"
+                                                >
+                                                    <i class="fas fa-edit"> </i>
+                                                </button>
+
+                                                <button
+                                                    v-if="
+                                                        item.Account_number !=
+                                                            myaccountnumber
+                                                    "
+                                                    class="btn btn-primary btn-sm mobile-hidden-1"
                                                 >
                                                     <i
                                                         class="fas fa-envelope"
                                                     ></i>
                                                 </button>
-                                                <span class="dropdown">
+                                                <span
+                                                    class="dropdown"
+                                                    v-if="
+                                                        item.Account_number !=
+                                                            myaccountnumber
+                                                    "
+                                                >
                                                     <button
                                                         class="btn btn-outline-primary btn-sm"
                                                         id="menu_user"
@@ -384,69 +487,17 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="row mr-65 mmt-35">
+                                        <div class="row mg-mb">
                                             <div class="col-auto">
                                                 <div
                                                     class="user-info-box-article"
                                                 >
-                                                    <div class="row">
-                                                        <div class="col-auto">
-                                                            <div
-                                                                class="user-info-box-article"
-                                                            >
-                                                                <vs-tooltip
-                                                                    v-bind:text="
-                                                                        parseFloat(
-                                                                            item.userRating
-                                                                        ).toFixed(
-                                                                            1
-                                                                        ) >= 0
-                                                                            ? parseFloat(
-                                                                                  item.userRating
-                                                                              ).toFixed(
-                                                                                  1
-                                                                              )
-                                                                            : '0'
-                                                                    "
-                                                                >
-                                                                    <span
-                                                                        id="rating-section"
-                                                                        class="user-rating-stars"
-                                                                        dir="rtl"
-                                                                    >
-                                                                        <i
-                                                                            v-for="n in 5"
-                                                                            :key="
-                                                                                n
-                                                                            "
-                                                                            :class="
-                                                                                n <=
-                                                                                parseInt(
-                                                                                    item.userRating
-                                                                                )
-                                                                                    ? 'fas fa-star'
-                                                                                    : 'far fa-star'
-                                                                            "
-                                                                        ></i>
-                                                                    </span>
-                                                                </vs-tooltip>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div
-                                                                class="user-info-box-article"
-                                                            >
-                                                                <i
-                                                                    class="fas fa-briefcase"
-                                                                ></i>
-                                                                {{
-                                                                    item
-                                                                        .AeAccount
-                                                                        .job_title
-                                                                }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <i
+                                                        class="fas fa-briefcase"
+                                                    ></i>
+                                                    {{
+                                                        item.AeAccount.job_title
+                                                    }}
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -462,46 +513,49 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div v-if="OrderCreator" class="mr-65 p-2">
+                                <div v-if="OrderCreator" class="text-wraper-desky-mg p-2">
                                     <vs-tooltip
                                         style="width: max-content"
                                         text="التكلفة - مدة التنفيذ"
                                     >
-                                        <span class="text-brand cur-p" dir="rtl"
-                                            ><strong
-                                                >{{ item.price }} درهم -
-                                                {{ item.time }} يوم</strong
-                                            ></span
+                                        <span
+                                            class="text-brand cur-p"
+                                            dir="rtl"
                                         >
+                                            <strong>
+                                                {{ item.price }} درهم -
+                                                {{ item.time }} يوم
+                                            </strong>
+                                        </span>
                                     </vs-tooltip>
-                                </div>
-                                <div v-if="OrderCreator">
-                                <span
-                                    v-if="item.status == 1"
-                                    class="badge bg-warning mr-65"
-                                    >موظف</span>
+                               <span
+                                        v-if="item.status == 1"
+                                        class="badge bg-warning "
+                                        >موظف</span
+                                    >
                                     <span
-                                    v-if="item.status == 2"
-                                    class="badge bg-success mr-65"
-                                    >انتهى العقد</span>
+                                        v-if="item.status == 2"
+                                        class="badge bg-success "
+                                        >انتهى العقد</span
+                                    >
                                     <span
-                                    v-if="item.status == 3"
-                                    class="badge bg-danger mr-65"
-                                    >ملغي</span>
+                                        v-if="item.status == 3"
+                                        class="badge bg-danger"
+                                        >ملغي</span
+                                    >
                                 </div>
-
+              
 
                                 <div
-                                    class="mr-65"
+                                    class="text-wraper-desky-mg"
                                     v-if="OrderCreator"
-                                    id="text-wraper-desky"
-                                >
+                                    id="text-wraper-desky">
                                     <p
                                         class="box-article-description font-Naskh text-wrap-line collapse TextCollapse"
                                         :id="'TextCollapse2' + index"
                                         aria-expanded="false"
                                     >
-                                        {{ item.description }}
+                                    {{ item.description }}
                                     </p>
                                     <a
                                         role="button"
@@ -646,7 +700,7 @@
                             <div class="head-box-article">
                                 <div class="row text-center">
                                     <div class="col">
-                                        <div class="row">
+                                        <div class="row ">
                                             <div
                                                 class="col-auto position-relative"
                                             >
@@ -662,16 +716,13 @@
                               online-status
                               Search-status-user
                               border border-light
-                              rounded-circle
-                            "
+                              rounded-circle"
                                                     data-bs-toggle="tooltip"
                                                     data-bs-placement="top"
-                                                    title="متصل"
-                                                >
+                                                    title="متصل">
                                                     <span
                                                         class="visually-hidden"
-                                                        >Online</span
-                                                    >
+                                                        >Online</span>
                                                 </span>
                                                 <a
                                                     :href="
@@ -680,7 +731,7 @@
                                                     "
                                                 >
                                                     <div
-                                                        class="avatar-large-box-article"
+                                                        class="avatar-large-box-article mb-avatar-size"
                                                     >
                                                         <img
                                                             v-if="
@@ -773,72 +824,7 @@
                                                     ></a>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto mobile-hidden-1">
-                                        <div class="row">
-                                            <div class="col-auto p-1">
-                                                <button
-                                                    class="btn btn-primary btn-sm"
-                                                >
-                                                    <i
-                                                        class="fas fa-envelope"
-                                                    ></i>
-                                                </button>
-                                            </div>
-                                            <div
-                                                class="col-auto p-1 "
-                                           
-                                            >
-                                            <span class="dropdown">
-                                                    <button
-                                                        class="btn btn-outline-primary btn-sm"
-                                                        id="menu_user"
-                                                        data-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                    >
-                                                        <i
-                                                            class="fas fa-ellipsis-v"
-                                                        ></i>
-                                                    </button>
-                                                    <ul
-                                                        class="dropdown-menu"
-                                                        aria-labelledby="menu_user"
-                                                    >
-                                                        <li @click="userid = item.Account_number">
-                                                            <a
-                                                                class="dropdown-item"
-                                                                type="button"
-                                                                data-toggle="modal"
-                                                                data-target="#canceling-ae-contract"
-                                                                >الغاء العقد</a
-                                                            >
-                                                        </li>
-                                                        <li
-                                                            @click="
-                                                                reportTo =
-                                                                    item.Account_number
-                                                            "
-                                                        >
-                                                            <a
-                                                                class="dropdown-item"
-                                                                type="button"
-                                                                data-toggle="modal"
-                                                                data-target="#reportModal"
-                                                                >التبليغ</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mr-65 mmt-35">
-                                    <div class="col-auto">
-                                        <div class="user-info-box-article">
-                                            <div class="row">
-                                                <div class="col-auto">
+                                           <div class="col-auto">
                                                     <div
                                                         class="user-info-box-article"
                                                     >
@@ -877,6 +863,74 @@
                                                         </vs-tooltip>
                                                     </div>
                                                 </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto mobile-btn-act-position">
+                                        <div class="row">
+                                            <div class="col-auto mobile-hidden-1 p-1">
+                                                <button
+                                                    class="btn btn-primary btn-sm"
+                                                >
+                                                    <i
+                                                        class="fas fa-envelope"
+                                                    ></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-auto p-1 ">
+                                                <span class="dropdown">
+                                                    <button
+                                                        class="btn btn-outline-primary btn-sm"
+                                                        id="menu_user"
+                                                        data-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                    >
+                                                        <i
+                                                            class="fas fa-ellipsis-v"
+                                                        ></i>
+                                                    </button>
+                                                    <ul
+                                                        class="dropdown-menu"
+                                                        aria-labelledby="menu_user"
+                                                    >
+                                                        <li
+                                                            @click="
+                                                                userid =
+                                                                    item.Account_number
+                                                            "
+                                                        >
+                                                            <a
+                                                                class="dropdown-item"
+                                                                type="button"
+                                                                data-toggle="modal"
+                                                                data-target="#canceling-ae-contract"
+                                                                >الغاء العقد</a
+                                                            >
+                                                        </li>
+                                                        <li
+                                                            @click="
+                                                                reportTo =
+                                                                    item.Account_number
+                                                            "
+                                                        >
+                                                            <a
+                                                                class="dropdown-item"
+                                                                type="button"
+                                                                data-toggle="modal"
+                                                                data-target="#reportModal"
+                                                                >التبليغ</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mg-mb">
+                                    <div class="col-auto">
+                                        <div class="user-info-box-article">
+                                            <div class="row">
+
                                                 <div class="col-auto">
                                                     <div
                                                         class="user-info-box-article"
@@ -904,7 +958,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="OrderCreator" class="mr-65 p-2">
+                            <div v-if="OrderCreator" class="mg-mb p-2">
                                 <vs-tooltip
                                     style="width: max-content"
                                     text="التكلفة - مدة التنفيذ"
@@ -916,16 +970,17 @@
                                         ></span
                                     >
                                 </vs-tooltip>
-                            </div>
-                            <span
+                        <span
                                 v-if="item.status == 1"
-                                class="badge bg-warning mr-65"
+                                class="badge bg-warning"
                                 >موظف</span
                             >
+                            </div>
+
                             <div
-                                class="mr-65"
                                 v-if="OrderCreator"
                                 id="text-wraper-desky"
+                                class="text-wraper-desky-mg"
                             >
                                 <p
                                     class="box-article-description font-Naskh text-wrap-line collapse TextCollapse"
@@ -980,7 +1035,14 @@
 </template>
 <script>
 export default {
-    props: ["oid", "offerget", "offerget2", "from_url", "status"],
+    props: [
+        "oid",
+        "offerget",
+        "offerget2",
+        "from_url",
+        "status",
+        "myaccountnumber"
+    ],
     data() {
         return {
             contract_aename: null,
@@ -998,10 +1060,27 @@ export default {
             nodata: false,
             nodata2: false,
             OrderStatusCheck: false,
-            reportTo: null
+            reportTo: null,
+            AllowdToEdit: false
         };
     },
     methods: {
+        CheckIfAllowedToEdit() {
+            let data = new FormData();
+            data.append("OID", this.oid);
+            axios
+                .post("/ajax/order/offer/status", data)
+                .then(response => {
+                    if (response.data.status == 0) {
+                        this.AllowdToEdit = true;
+                    } else {
+                        this.AllowdToEdit = false;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
         AcceptOffer() {
             let data = new FormData();
             data.append("OID", this.oid);
@@ -1018,9 +1097,8 @@ export default {
                         icon: "check"
                     });
                     $("#close-modal-btn-4587").click();
-                    if(this.status == 1){
-                    $("#openUpdateOrderStatusModal").click();
-
+                    if (this.status == 1) {
+                        $("#openUpdateOrderStatusModal").click();
                     }
                 })
                 .catch(error => {
@@ -1170,6 +1248,7 @@ export default {
     created() {
         this.getNewOffer();
         this.getHired();
+        this.CheckIfAllowedToEdit();
     },
     mounted() {
         $(document).ready(function() {

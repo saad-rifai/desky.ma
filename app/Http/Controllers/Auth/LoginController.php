@@ -37,12 +37,12 @@ class LoginController extends Controller
                  'email' =>'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:100',
                  'password' => 'required|string|min:8|max:25',
                 //'typeaccount' => 'required|integer|max:1|min:0',
-                'g_recaptcha_response' => 'required|captcha',
+               /* 'g_recaptcha_response' => 'required|captcha',*/
             ],
             $message = [
                 'required' => 'هذا الحقل مطلوب *',
-                'g_recaptcha_response.required' => 'يرجى التحقق من الكابشا *',
-                'g_recaptcha_response.captcha' => 'يرجى التحقق من الكابشا *',
+              /*  'g_recaptcha_response.required' => 'يرجى التحقق من الكابشا *',
+                'g_recaptcha_response.captcha' => 'يرجى التحقق من الكابشا *',*/
 
                 'email.email' => ' يرجى ادخال بريد الكتروني صالح *',
                 'email.regex' => ' يرجى ادخال بريد الكتروني صالح *',

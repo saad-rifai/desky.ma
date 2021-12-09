@@ -260,4 +260,70 @@ class OffersController extends Controller
             return response()->json(['error' => 'Bad Request !'], 400);
         }
     }
+    public function offerStatus(Request $request){
+        if(isset($request->OID)){
+            $status = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get(['status']);
+            if(count($status) > 0){
+                foreach($status as $statu);
+                return response()->json(['status' => $statu->status], 200);
+            }else{
+            return response()->json(['error' => 'Not Found'], 404);
+
+            }
+
+        }else{
+            return response()->json(['error' => 'Bad Request !'], 400);
+
+        }
+    }
+    public function getMyOffer(Request $request){
+        if(isset($request->OID)){
+            $infos = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get();
+            foreach($infos as $info);
+            return response()->json(['data' => $info], 200);
+        }else{
+            return response()->json(['error' => 'bad Request'], 400);
+        }
+    }
+    public function UpdateOffer(Request $request){
+        if(isset($request->OID)){
+            $this->validate($request, [
+                'description' => 'required|min:50|max:700|string',
+                'price' => 'required|numeric|min:150|max:500000',
+                'time' => 'required|integer|min:1|max:120'
+            ], $messages = [
+                'required' => 'هذا الحقل مطلوب *',
+    
+                'description.string' => 'يرجى ادخال وصف صالح *',
+                'description.min' => 'يرجى ادخال وصف كافي لعرضك الحد الأدنى 50 حرف *',
+                'description.max' => 'الوصف اللذي ادخلته أطول من اللازم الحد الأقصى 700 حرف *',
+                
+                'price.numeric' => 'يرجى تحديد التكلفة *',
+                'price.max' => 'الحد الأقصى 500 الف درهم *',
+                'price.min' => 'الحد الأدنى 150 درهم *',
+    
+                'time.integer' => 'يرجى تحديد مدة التنفيذ *',
+                'time.max' => 'الحد الأقصى 120 يوم *',
+                'time.min' => 'يرجى تحديد مدة التنفيذ *',
+    
+            ]);
+
+            $stmt = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->where('status', '0')
+            ->update([
+                'description' => $request->description,
+                'time' => $request->time,
+                'price' => $request->price
+            ]);
+            if($stmt){
+                return response()->json(['offer_id' => $request->offer_id], 200);
+
+            }else{
+                return response()->json(['error' => 'لايمكن تحديث هذا العرض'], 400);
+
+            }
+        }else{
+            return response()->json(['error' => 'Bad Request'], 400);
+        }
+
+    }
 }

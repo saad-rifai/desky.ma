@@ -20,6 +20,7 @@
             @if($data->orderCreator)
             <div class="col-sm-auto mt-3" align="right">
                <a href="{{asset("/myorder/$data->OID")}}"> <button class="btn btn-primary btn-sm"><i class="fas fa-cog"></i> ادارة الطلب </button></a>
+               <a href="{{asset("/order/$data->OID/edit")}}"> <button class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i> </button></a>
             </div>
             @endif
         </div>
@@ -314,14 +315,12 @@
 
                                 @foreach ($data->files as $item)
                                     @php
-                                        $infoPath = pathinfo(public_path($item));
+                                        $infoPath = pathinfo(public_path($item['file_url']));
                                         $extension = $infoPath['extension'];
                                     @endphp
 
-                                    <li class="list-group-item d-flex justify-content-between align-items-center"> <a
-                                            href="{{ asset($item) }}" class="text-truncate text-primary"
-                                            style="width: 100% !important;max-width: 200px!important;display: block;">
-                                            {{ $item }}</a>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center"> 
+                                        <a href="{{ asset($item['file_url']) }}" class="text-truncate text-primary" style="width: 100% !important;max-width: 200px!important;display: block;">{{ $item['filename'] }}</a>
                                         <span class="badge bg-primary rounded-pill">{{ $extension }}</span>
 
                                     </li>
@@ -369,7 +368,15 @@
                         </div>
                     </div>
                 @endauth
-                <offers-list oid="{{ $data->OID }}" status="{{$data->status}}" from_url="{{url()->current()}}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"  offerget2="@if (isset($_GET['offer2'])){{ $_GET['offer2'] }}@endif"></offers-list>
+                @php
+                    if(Auth::check()){
+                        $myAccountNumber = Auth::user()->Account_number;
+                    }else{
+                        $myAccountNumber = null;
+
+                    }
+                @endphp
+                <offers-list oid="{{ $data->OID }}" status="{{$data->status}}" myaccountnumber="{{$myAccountNumber}}" from_url="{{url()->current()}}" offerget="@if (isset($_GET['offer'])){{ $_GET['offer'] }}@endif"  offerget2="@if (isset($_GET['offer2'])){{ $_GET['offer2'] }}@endif"></offers-list>
             </div>
             <div class="col-sm col-lg-4 ">
                 <div class="box-left  card p-4 mbl-hide">

@@ -29,17 +29,21 @@ button.like-btn.active {
     color: #f96a0c;
 }
 span.text-upload-file {
-    font-size: 13px;
-    color: #444646;
+    font-size: 14px;
+    color: #323232;
+    font-family: 'Noto Naskh Arabic' !important;
 }
 .upload-files-form {
     width: 100%;
-    background-color: #f96a0c3d;
+    background-color: #f6f6f6;
     text-align: center;
-    border: dashed 2px #f96a0c;
+    border: dashed 2px #7e7e7e;
     padding: 20px 0;
     cursor: pointer;
     border-radius: 3px;
+}
+.upload-files-form-content {
+    margin-bottom: 10px;
 }
 .img_file_type img {
     width: 100%;
@@ -114,6 +118,7 @@ h1.user-name {
 span.title-upload-file {
     font-size: 20px;
     color: #4a4a4a;
+    font-family: 'Noto Naskh Arabic' !important;
 }
 li.footer-li-title h3 {
     color: #f96a0c;
@@ -176,7 +181,7 @@ span.user-rating-stars {
     width: 100%;
 }
 .user-name-box-article h4 {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 400;
     margin-right: -15px;
     line-height: 1.9;
@@ -187,7 +192,7 @@ span.user-rating-stars {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-button.btn.btn-sm {
+.btn.btn-sm {
     font-size: 13px !important;
     padding: 8px 20px !important;
     width: auto !important;
@@ -213,12 +218,17 @@ span.beta-icon {
     cursor: pointer;
     color: rgb(249 178 31);
 }
+
+div#modal-report-load {
+    text-align: right;
+    direction: rtl;
+}
 a.navbar-brand.beta::before {
     content: "BETA";
-    font-size: 20px;
-    vertical-align: top;
+    font-size: 8px;
+    vertical-align: text-top;
     font-weight: 700;
-    color: #f9b21f;
+    color: #484848;
 }
 #text-wraper-desky .TextCollapse.collapse:not(.show)::before {
     content: "....";
@@ -593,8 +603,9 @@ h2.title-icon {
     color: #383838;
 }
 .card {
-    border: solid 1px #ededed !important;
-    border-radius: 20px !important;
+    border: solid 1px #ebebeb !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0.21053rem 0.84211rem 0 rgb(137 137 137 / 15%);
 }
 p.icon-text {
     font-size: 15px;
@@ -739,9 +750,20 @@ button.login-opt.google {
     background-color: #db4437;
     border: solid 1px #db4437;
 }
+h1.form-head-title {
+    font-size: 25px;
+    color: #282828;
+    font-family: 'Noto Naskh Arabic';
+    font-weight: 700;
+}
+p.form-head-text {
+    font-family: 'Noto Naskh Arabic';
+    font-size: 17px;
+    color: #282828;
+}
 button.login-opt {
     position: relative;
-    width: 90%;
+    width: 100%;
     padding: 15px 0px;
     direction: rtl;
     border-radius: 3px;
@@ -895,7 +917,16 @@ h1.title-page-cbrand {
     text-align: right;
     direction: rtl;
 }
-
+.mg-mb {
+    margin: 0px 65px !important;
+    margin-top: -30px !important;
+}
+.text-wraper-desky-mg {
+    margin-right: 22px;
+}
+.order-act-section {
+    margin-top: 10px;
+}
 .page-text h4 {
     font-size: 20px;
     color: #373737;
@@ -931,6 +962,7 @@ h1.title-page-cbrand {
 .font-Naskh *{
     font-family: Noto Naskh Arabic,Helvetica Neue,Helvetica,Arial,sans-serif !important;
 }
+
 .vuesax-app-is-ltr .vs-collapse-item--icon-header {
     left: 0 !important;
 }
@@ -1276,7 +1308,20 @@ span.card-info-text {
         display: none !important;
     }
 }
-@media (max-width: 400px) {
+@media (max-width: 500px) {
+    .user-name-box-article h4 {
+        font-size: 15px;
+        margin-top: 5px;
+    }
+    .mobile-btn-act-position > button.btn {
+        padding: 5px 10px !important;
+    }
+    .mobile-btn-act-position .btn.btn-outline-primary.btn-sm {
+        padding: 5px 10px !important;
+    }
+    .mg-mb {
+        margin: -10px 20px !important;
+    }
     .mobile-hidden-1{
         display: none !important;
     }
@@ -1285,17 +1330,27 @@ span.card-info-text {
         max-width: 80px;
     }
     .mobile-btn-sm {
-        font-size: 12px !important;
-        padding: 10px 14px !important;
+      font-size: 12px !important;
+      padding: 10px 14px !important;
     }
-.pm-0{
-    padding: 5px !important;
-}
+    .pm-0{
+     padding: 5px !important;
+    }
+    .user-info-box-article {
+     font-size: 10px;
+    }
+    .mb-avatar-size {
+        height: 30px !important;
+        width: 30px !important;
+        margin-top: 10px;
+    }
     .user-info-box-article-avatar {
-        height: 35px;
-        width: 35px;
+        height: 25px;
+        width: 25px;
     }
-        
+    .mb-status-hide {
+        display: none !important;
+    } 
 }
 
 @media (max-width: 650px) {
@@ -1348,7 +1403,7 @@ span.card-info-text {
     .mr-65 {
         margin-right: 53px !important;
     }
-    button.btn.btn-primary.btn-sm.bid-mobile-icon {
+    .btn.btn-primary.btn-sm.bid-mobile-icon {
         text-indent: -9999px;
         line-height: 0;
         overflow: hidden;

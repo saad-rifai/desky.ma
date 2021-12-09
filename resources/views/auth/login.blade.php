@@ -23,7 +23,8 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Fonts -->
-
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
@@ -54,35 +55,39 @@
         <div class="logo-brand-top-card mt-5 mb-5">
             <img src="{{ asset('img/brand/logo-web.png') }}" alt="desky - login">
         </div>
-        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
+        <div class="form-head text-center" dir="rtl">
+            <h1 class="form-head-title">مرحبا بعودتك !</h1>
+            <p class="form-head-text">سجل الدخول للمتابعة</p>
+        </div>
+        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 500px" dir="rtl">
             <div class="content-form p-3 pt-1">
-                <h1 class="card-title mb-4 mt-3">تسجيل الدخول</h1>
          
-                <div class="row text-center mt-3 mb-2">
-                    <div class="col-sm mb-2">
-                        <button class="login-opt facebook"><span class="icon-login-opt"><i
-                                    class="fab fa-facebook-f"></i></span> باستخدام فيسبوك </button>
 
-                    </div>
-                    <div class="col-sm mb-2">
-                        <button class="login-opt google"><span class="icon-login-opt"><i
-                                    class="fab fa-google"></i></span> باستخدام جوجل </button>
 
-                    </div>
-                </div>
-                <div class="strike mt-3 mb-3">
-                    <span>أو</span>
-                </div>
                 <div id="app">
                     <login-form :csrf="'{{csrf_token()}}'" ></login-form>
 
                 </div>
-           
+                <!--div  class="strike mt-3 mb-3">
+                    <span>أو</span>
+                </div>
+                <div class="row text-center mt-3 mb-2">
+                    <div class="col col-lg-1 mb-2 w-100">
+                        <button class="login-opt facebook"><span class="icon-login-opt"><i
+                                    class="fab fa-facebook-f"></i></span> باستخدام فيسبوك </button>
+
+                    </div>
+                    <div class="col col-lg-1 mb-2 w-100">
+                        <button class="login-opt google"><span class="icon-login-opt"><i
+                                    class="fab fa-google"></i></span> باستخدام جوجل </button>
+
+                    </div>
+                </div-->
             </div>
 
 
         </div>
-        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
+        <div class="font-Naskh p-3 mt-3 mb-5 mx-auto text-center" style="max-width: 500px" dir="rtl">
             <div class="content-form p-3 mx-auto" >
                 <span class="text-center">ليس لديك حساب بعد <a href="{{asset("register")}}">انشاء حساب</a></span>
             </div>
@@ -92,7 +97,7 @@
 
 
     <footer dir="rtl">
-        <div class=" content-footer">
+        <div class=" content-footer font-Naskh">
 
             <div class="bottom-footer">
                 <p class="footer-copyright text-center" dir="rtl">© {{date("Y")}} desky. جميع الحقوق محفوظة.

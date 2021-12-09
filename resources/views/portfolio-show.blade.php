@@ -28,13 +28,19 @@
                       
                             <delete-portfolio :portfolio_id="{{$data->id}}" :username="'{{$data->user->username}}'"></delete-portfolio>
                             @else
-                            <span class="dropdown">
+                            <report-popup
+                            about="3"
+                            from_url="{{url()->current()}}"
+            
+                        ></report-popup>
+                            <span class="dropdown ">
                                 <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
                                     aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                                 <ul class="dropdown-menu" aria-labelledby="menu_user">
-                                    <li><a class="dropdown-item" href="#">التبليغ</a></li>
+                                    <li><a class="dropdown-item" type="button" data-toggle="modal" data-target="#reportModal">التبليغ</a></li>
                                 </ul>
                             </span>
+
                         @endif
                     </div>
                 </div>

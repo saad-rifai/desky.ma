@@ -1,5 +1,6 @@
 <template>
   <div>
+<report-popup about="0" :to="ReportTo" :from_url="from_url"></report-popup>
     <!-- Mobile Filter Search -->
     <div
       class="offcanvas offcanvas-start"
@@ -325,14 +326,14 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-auto mobile-hidden-1">
+                    <div v-if="item.Account_number != myaccountnumber" class="col-auto mobile-hidden-1">
                     <button class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i></button>
                     <span class="dropdown">
                         <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
                             aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                         <ul class="dropdown-menu" aria-labelledby="menu_user">
                             <li><a class="dropdown-item" href="#">مراسلة</a></li>
-                            <li><a class="dropdown-item" href="#">التبليغ</a></li>
+                            <li @click="ReportTo = item.Account_number"><a class="dropdown-item" href="#reportModal" type="button" data-toggle="modal" data-target="#reportModal">التبليغ</a></li>
                         </ul>
                     </span>
 
@@ -432,6 +433,7 @@ import ListCities from "../../../../public/data/json/list-moroccan-cities.json";
 import Activites1 from "../../../../public/data/json/activite-ae-1.json";
 import Activites2 from "../../../../public/data/json/activite-ae-2.json";
 export default {
+  props:['from_url', 'myaccountnumber'],
   data() {
     return {
       citiesJson: ListCities,
@@ -444,7 +446,7 @@ export default {
       sector: "",
       activite: null,
       city: "",
-  
+      ReportTo: null,
       typeget: "all",
       stopLazyLoading: false
     };

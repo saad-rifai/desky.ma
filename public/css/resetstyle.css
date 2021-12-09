@@ -6,14 +6,20 @@
 body {
     background-color: #f6f6f6 !important;
 }
-button.btn.btn-primary {
+.badge-sm {
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    padding: 5px 8px !important;
+}
+.btn.btn-primary {
     background-color: #f96a0c !important;
     border: solid 1px #f96a0c !important;
     border-radius: 8px;
     padding: 10px 30px;
     font-size: 14px !important;
+    color: white !important;
 }
-button.btn {
+.btn {
     border-radius: 8px;
     padding: 10px 30px;
     font-size: 14px !important;
@@ -106,19 +112,7 @@ button.btn.btn-outline-primary {
     border: 1px solid rgb(201 201 201 / 15%) !important;
 
 }
-.dropdown-menu::before {
-    content: '';
-    background: #fff;
-    display: block;
-    height: 0.52632rem;
-    left: 50%;
-    margin: 0 auto;
-    position: absolute;
-    top: -0.26316rem;
-    -webkit-transform: translateX(-50%) rotate(45deg);
-    transform: translateX(-50%) rotate(45deg);
-    width: 0.52632rem;
-}
+
 .navbar-light .navbar-nav .nav-link:hover {
     color: #f96a0c !important;
 }

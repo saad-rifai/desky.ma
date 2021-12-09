@@ -28,12 +28,12 @@
         />
         <span class="icon-input-btn" @click="PasswordShowFn"> <i class="far fa-eye"></i> </span>
         </div>
-        <div class="invalid-feedback" v-if="errors.errors.password">
+        <div class="invalid-feedback" style="display:block !important" v-if="errors.errors.password">
 {{errors.errors.password[0]}}
 </div>
-        <a href="/reset" class="fg-pass">نسيت كلمة السر</a>
+        <a href="/reset" class="fg-pass font-Naskh">نسيت كلمة السر</a>
       </div>
-      <div class="mb-3 mt-5 position-relative">
+      <!--div class="mb-3 mt-5 position-relative">
         <vue-recaptcha
           sitekey="6Lcs2N4cAAAAAK7Du9RE38xp5_h3Qos_sQJzwnMd"
           :loadRecaptchaScript="true"
@@ -45,7 +45,7 @@
         >
           {{ errors.errors.g_recaptcha_response[0] }}
         </div>
-      </div>
+      </div-->
       <div class="mb-3">
         <div class="form-check">
           <input
@@ -54,7 +54,7 @@
             v-model="remember"
             id="flexCheckDefault"
           />
-          <label class="form-check-label" for="flexCheckDefault">
+          <label class="form-check-label font-Naskh" for="flexCheckDefault">
             تذكرني
           </label>
         </div>
@@ -63,7 +63,7 @@
         <button
           style="margin-right: 0 !important"
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-primary w-100"
           id="btn_submit"
         >
           الدخول
@@ -139,7 +139,7 @@ export default {
       data.append("password", this.password);
       data.append("remember", this.remember);
       data.append("csrf_token", this.csrf_token);
-      data.append("g_recaptcha_response", $("#g-recaptcha-response").val());
+     // data.append("g_recaptcha_response", $("#g-recaptcha-response").val());
       axios
         .post("ajax/login/user", data)
         .then((response) => {

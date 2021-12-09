@@ -28,16 +28,23 @@ class PortFolioLikesController extends Controller
         if(Auth::check()){
             if(isset($request->like) && isset($request->portfolio_id)){
                 if($request->like == 1){
-                    $stmt = PortFolioLikes::create([
-                        'from' => Auth::user()->Account_number,
-                        'to' => $request->portfolio_id,
-                    ]);
-                    if($stmt){
-                        return response()->json('success', 200);
+                    $checkLike = PortFolioLikes::where('from', Auth::user()->Account_number)->where('to', $request->portfolio_id)->count();
+                    if($checkLike < 1){
+                        $stmt = PortFolioLikes::create([
+                            'from' => Auth::user()->Account_number,
+                            'to' => $request->portfolio_id,
+                        ]);
+                        if($stmt){
+                            return response()->json('success', 200);
+                        }else{
+                            return response()->json('error', 400);
+      
+                        }
                     }else{
-                        return response()->json('error', 400);
-  
+                        return response()->json(['error' => 'قمت بالاعجاب بهذا العمل من قبل !'], 403);
+
                     }
+
     
                 }elseif($request->like == 0){
                     $stmt = PortFolioLikes::where('from', Auth::user()->Account_number)->where('to', $request->portfolio_id)->delete();
