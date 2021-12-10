@@ -57,6 +57,8 @@ import Vue from 'vue';
 
  /* Orders  Section */
  Vue.component('add-order', require('./components/user/orders/add-order.vue').default);
+ Vue.component('rate-ae', require('./components/user/orders/rate-ae.vue').default);
+ Vue.component('delete-order', require('./components/user/orders/delete-order.vue').default);
  Vue.component('open-orders-list', require('./components/user/orders/orders-open-lists.vue').default);
  Vue.component('myorders', require('./components/user/orders/myorders.vue').default);
  Vue.component('edit-order', require('./components/user/orders/edit-order.vue').default);

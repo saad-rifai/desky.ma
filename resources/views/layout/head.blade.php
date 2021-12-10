@@ -87,7 +87,7 @@
 
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ asset('myorders') }}"> طلباتي</a>
+                            <a class="nav-link" href="{{ asset('MyOrders') }}"> طلباتي</a>
                         </li>
                     @endauth
 
@@ -99,7 +99,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
                                 جميع جميع طلبات العروض</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-folder"></i> طلباتي </a>
+                            <a class="dropdown-item" href="{{asset('MyOrders')}}"><i class="fas fa-folder"></i> طلباتي </a>
                             <a class="dropdown-item"
                                 href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i
                                     class="fas fa-folder-plus"></i> نشر طلب عروض</a>
@@ -253,7 +253,7 @@
                                     جميع جميع طلبات العروض</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"><i class="fas fa-folder"></i> طلباتي </a>
+                                <a class="dropdown-item" href="{{asset('MyOrders')}}"><i class="fas fa-folder"></i> طلباتي </a>
                             </li>
                             <li>
                                 <a class="dropdown-item"

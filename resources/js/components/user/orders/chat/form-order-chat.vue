@@ -1,7 +1,7 @@
 <template>
     <div class="position-relative">
         <div v-if="!chatbox" class="users-messages-menu">
-            <div class="messages-menu-content">
+            <div v-if="ChatList.length > 0" class="messages-menu-content">
                 <vs-list>
                     <div
                         v-for="(item, index) in ChatList"
@@ -48,6 +48,19 @@
                     </div>
                 </vs-list>
             </div>
+            <div v-else>
+        <div class="no-data-message text-center mt-5 mb-4">
+            <img
+                src="/img/icons/215-SEARCH-AE.jpg"
+                alt="   لم تقم بتوظيف مقاول بعد في هذا المشروع"
+            />
+            لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع
+            <p class="font-Naskh">
+                أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو
+                مجموعة من المقاولين الذاتيين
+            </p>
+        </div>
+        </div>
         </div>
         <div v-else class="chat-tab-border-box mt-2">
             <div class="chat-head">

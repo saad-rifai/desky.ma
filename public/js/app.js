@@ -11689,6 +11689,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* Convert Time Post  Function */
 var MONTH_NAMES = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"];
@@ -11891,6 +11904,143 @@ function getFormattedDate(date) {
     this.interval1 = setInterval(function () {
       return _this5.getChatList();
     }, 5000);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/delete-order.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/delete-order.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["oid"],
+  data: function data() {
+    return {};
+  },
+  methods: {
+    openLoadingInDiv: function openLoadingInDiv() {
+      $("#btnsend_96r57").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...');
+      this.$vs.loading({
+        container: "#modal_delete_order_load",
+        scale: 0.6,
+        type: "point",
+        color: "#f96a0c"
+      });
+    },
+    HideLoadingInDiv: function HideLoadingInDiv() {
+      $("#btnsend_96r57").html("حذف");
+      this.$vs.loading.close("#modal_delete_order_load > .con-vs-loading");
+    },
+    deleteOrder: function deleteOrder() {
+      var _this = this;
+
+      this.openLoadingInDiv();
+      var data = new FormData();
+      data.append("OID", this.oid);
+      axios.post("/ajax/user/order/delete", data).then(function (response) {
+        _this.$vs.notify({
+          text: "تم حذف الطلب",
+          color: "success",
+          fixed: true,
+          icon: "check"
+        });
+
+        window.location.href = "/MyOrders?item.deleted";
+      })["catch"](function (error) {
+        if (error.response.status == 401) {
+          _this.$vs.notify({
+            text: "يجب تسجيل الدخول  ",
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+
+          window.location.href = "/login?redirect=" + window.location.href + "";
+        } else if (error.response.status == 403) {
+          _this.$vs.notify({
+            text: error.response.data.error,
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+        } else {
+          _this.$vs.notify({
+            title: "خطأ في النظام",
+            text: "حصل خطأ في النظام أثناء محاولة معالجة طلبك يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+        }
+
+        _this.HideLoadingInDiv();
+      });
+    }
   }
 });
 
@@ -12951,11 +13101,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["oid", "status"],
   data: function data() {
@@ -13031,6 +13176,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -13583,6 +13737,14 @@ var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2___namespace 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13603,7 +13765,8 @@ var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2___namespace 
       budget: [150, 500000],
       time: 180,
       typeget: "all",
-      status: ""
+      status: "",
+      oid_selected: null
     };
   },
   methods: {
@@ -14292,6 +14455,130 @@ var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2___namespace 
   },
   created: function created() {
     this.getData();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/rate-ae.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/rate-ae.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      rating: 0
+    };
+  },
+  methods: {
+    sendRating: function sendRating() {}
   }
 });
 
@@ -61335,86 +61622,88 @@ var render = function() {
   return _c("div", { staticClass: "position-relative" }, [
     !_vm.chatbox
       ? _c("div", { staticClass: "users-messages-menu" }, [
-          _c(
-            "div",
-            { staticClass: "messages-menu-content" },
-            [
-              _c(
-                "vs-list",
-                _vm._l(_vm.ChatList, function(item, index) {
-                  return _c(
-                    "div",
-                    {
-                      key: index,
-                      on: {
-                        click: function($event) {
-                          _vm.users_menu_chat_click(
-                            _vm.avatarLink(item.FromInfo.avatar),
-                            item.Account_number,
-                            (_vm.Fullname =
-                              item.FromInfo.frist_name[0].toUpperCase() +
-                              item.FromInfo.frist_name.substring(1) +
-                              " " +
-                              item.FromInfo.last_name[0].toUpperCase() +
-                              item.FromInfo.last_name.substring(1))
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "vs-list-item",
+          _vm.ChatList.length > 0
+            ? _c(
+                "div",
+                { staticClass: "messages-menu-content" },
+                [
+                  _c(
+                    "vs-list",
+                    _vm._l(_vm.ChatList, function(item, index) {
+                      return _c(
+                        "div",
                         {
-                          attrs: {
-                            title:
-                              item.FromInfo.frist_name[0].toUpperCase() +
-                              item.FromInfo.frist_name.substring(1) +
-                              " " +
-                              item.FromInfo.last_name[0].toUpperCase() +
-                              item.FromInfo.last_name.substring(1),
-                            subtitle: item.LastMessage
+                          key: index,
+                          on: {
+                            click: function($event) {
+                              _vm.users_menu_chat_click(
+                                _vm.avatarLink(item.FromInfo.avatar),
+                                item.Account_number,
+                                (_vm.Fullname =
+                                  item.FromInfo.frist_name[0].toUpperCase() +
+                                  item.FromInfo.frist_name.substring(1) +
+                                  " " +
+                                  item.FromInfo.last_name[0].toUpperCase() +
+                                  item.FromInfo.last_name.substring(1))
+                              )
+                            }
                           }
                         },
                         [
                           _c(
-                            "template",
-                            { slot: "avatar" },
+                            "vs-list-item",
+                            {
+                              attrs: {
+                                title:
+                                  item.FromInfo.frist_name[0].toUpperCase() +
+                                  item.FromInfo.frist_name.substring(1) +
+                                  " " +
+                                  item.FromInfo.last_name[0].toUpperCase() +
+                                  item.FromInfo.last_name.substring(1),
+                                subtitle: item.LastMessage
+                              }
+                            },
                             [
-                              _c("vs-avatar", {
-                                attrs: {
-                                  size: "large",
-                                  src: _vm.avatarLink(item.FromInfo.avatar)
-                                }
-                              }),
+                              _c(
+                                "template",
+                                { slot: "avatar" },
+                                [
+                                  _c("vs-avatar", {
+                                    attrs: {
+                                      size: "large",
+                                      src: _vm.avatarLink(item.FromInfo.avatar)
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  item.IsOnline == true
+                                    ? _c("span", {
+                                        staticClass: "isOnlineBadgVuesax"
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
-                              item.IsOnline == true
-                                ? _c("span", {
-                                    staticClass: "isOnlineBadgVuesax"
-                                  })
+                              item.NewMessages > 0
+                                ? _c(
+                                    "span",
+                                    { staticClass: "list-users-message-badge" },
+                                    [_vm._v(_vm._s(item.NewMessages))]
+                                  )
                                 : _vm._e()
                             ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          item.NewMessages > 0
-                            ? _c(
-                                "span",
-                                { staticClass: "list-users-message-badge" },
-                                [_vm._v(_vm._s(item.NewMessages))]
-                              )
-                            : _vm._e()
+                            2
+                          )
                         ],
-                        2
+                        1
                       )
-                    ],
-                    1
+                    }),
+                    0
                   )
-                }),
-                0
+                ],
+                1
               )
-            ],
-            1
-          )
+            : _c("div", [_vm._m(0)])
         ])
       : _c("div", { staticClass: "chat-tab-border-box mt-2" }, [
           _c("div", { staticClass: "chat-head" }, [
@@ -61714,7 +62003,148 @@ var render = function() {
         ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "no-data-message text-center mt-5 mb-4" }, [
+      _c("img", {
+        attrs: {
+          src: "/img/icons/215-SEARCH-AE.jpg",
+          alt: "   لم تقم بتوظيف مقاول بعد في هذا المشروع"
+        }
+      }),
+      _vm._v("\n        لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع\n        "),
+      _c("p", { staticClass: "font-Naskh" }, [
+        _vm._v(
+          "\n            أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو\n            مجموعة من المقاولين الذاتيين\n        "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/delete-order.vue?vue&type=template&id=01b854c6&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/delete-order.vue?vue&type=template&id=01b854c6& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "delet_order_Modal",
+          "data-backdrop": "static",
+          "data-keyboard": "false",
+          tabindex: "-1",
+          "aria-labelledby": "staticBackdropLabel",
+          "aria-hidden": "true",
+          dir: "rtl"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-lg vs-con-loading__container",
+            attrs: { id: "modal_delete_order_load" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", [
+                  _c("p", { staticClass: "font-Naskh" }, [
+                    _vm._v(
+                      "\n                            هل متأكد بأنك تود حذف هذا الطلب #" +
+                        _vm._s(_vm.oid) +
+                        "\n                        "
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary btn-sm",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      id: "close-modal-btn"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        الغاء\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    attrs: { type: "button", id: "btnsend_96r57" },
+                    on: { click: _vm.deleteOrder }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        حذف\n                    "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "staticBackdropLabel" } },
+        [_vm._v("\n                        تنبيه\n                    ")]
+      ),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -62574,6 +63004,8 @@ var render = function() {
       _vm._v(" "),
       _c("canceling-contract", { attrs: { oid: _vm.oid, userid: _vm.userid } }),
       _vm._v(" "),
+      _c("rate-ae"),
+      _vm._v(" "),
       _vm.stopLazyLoading != true
         ? _c(
             "div",
@@ -62816,44 +63248,23 @@ var render = function() {
                               { staticClass: "user-info-box-article" },
                               [
                                 _c(
-                                  "vs-tooltip",
+                                  "span",
                                   {
-                                    attrs: {
-                                      text:
-                                        parseFloat(item.userRating).toFixed(
-                                          1
-                                        ) >= 0
-                                          ? parseFloat(item.userRating).toFixed(
-                                              1
-                                            )
-                                          : "0"
-                                    }
+                                    staticClass: "user-rating-stars",
+                                    attrs: { id: "rating-section", dir: "rtl" }
                                   },
-                                  [
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "user-rating-stars",
-                                        attrs: {
-                                          id: "rating-section",
-                                          dir: "rtl"
-                                        }
-                                      },
-                                      _vm._l(5, function(n) {
-                                        return _c("i", {
-                                          key: n,
-                                          class:
-                                            n <= parseInt(item.userRating)
-                                              ? "fas fa-star"
-                                              : "far fa-star"
-                                        })
-                                      }),
-                                      0
-                                    )
-                                  ]
+                                  _vm._l(5, function(n) {
+                                    return _c("i", {
+                                      key: n,
+                                      class:
+                                        n <= parseInt(item.userRating)
+                                          ? "fas fa-star"
+                                          : "far fa-star"
+                                    })
+                                  }),
+                                  0
                                 )
-                              ],
-                              1
+                              ]
                             )
                           ]),
                           _vm._v(" "),
@@ -62964,7 +63375,15 @@ var render = function() {
                       }
                     })
                   ]
-                )
+                ),
+                _vm._v(" "),
+                item.NeedRating
+                  ? _c(
+                      "div",
+                      { staticClass: "mt-3", attrs: { align: "left" } },
+                      [_vm._m(3, true)]
+                    )
+                  : _vm._e()
               ])
             ]
           )
@@ -63042,6 +63461,23 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fas fa-ellipsis-v" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-sm",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#Rate_modal"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-star" }), _vm._v(" تقييم")]
+    )
   }
 ]
 render._withStripped = true
@@ -63069,6 +63505,8 @@ var render = function() {
     "div",
     [
       _c("report-popup", { attrs: { about: "1", from_url: _vm.from_url } }),
+      _vm._v(" "),
+      _c("delete-order", { attrs: { oid: _vm.oid } }),
       _vm._v(" "),
       _c("div", { staticClass: "dropdown" }, [
         _vm._m(0),
@@ -63128,6 +63566,21 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
+            _vm.status == 0 || _vm.status == 4 || _vm.status == 5
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#delet_order_Modal"
+                    }
+                  },
+                  [_vm._v("حذف الطلب")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "a",
               {
@@ -63164,7 +63617,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\n            ادارة الطلب "),
+        _vm._v("\n              ادارة الطلب "),
         _c("i", { staticClass: "fas fa-caret-down" })
       ]
     )
@@ -63191,1010 +63644,1178 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "offcanvas offcanvas-start",
-        attrs: {
-          tabindex: "-1",
-          id: "filter-search",
-          "aria-labelledby": "filter-search-label"
-        }
-      },
-      [
-        _vm._m(0),
+  return _c(
+    "div",
+    [
+      _c("delete-order", { attrs: { oid: _vm.oid_selected } }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "offcanvas offcanvas-start",
+          attrs: {
+            tabindex: "-1",
+            id: "filter-search",
+            "aria-labelledby": "filter-search-label"
+          }
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "offcanvas-body",
+              attrs: { align: "right", dir: "rtl" }
+            },
+            [
+              _c("form", { attrs: { align: "right" } }, [
+                _c("div", { staticClass: "mb-4" }, [
+                  _c(
+                    "label",
+                    { staticClass: "form-label", attrs: { for: "searchbox" } },
+                    [_vm._v("كلمات مفتاحية")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.query,
+                        expression: "query"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "searchbox", type: "text" },
+                    domProps: { value: _vm.query },
+                    on: {
+                      change: _vm.Search,
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.query = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-4" }, [
+                  _c(
+                    "label",
+                    { staticClass: "form-label", attrs: { for: "sector" } },
+                    [_vm._v(" القطاع")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.sector,
+                          expression: "sector"
+                        }
+                      ],
+                      staticClass: "form-select",
+                      attrs: { id: "sector" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.sector = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          _vm.SectorChange
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("جميع القطاعات")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v("الخدمات")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [
+                        _vm._v("التجارة")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("الصناعة")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "4" } }, [
+                        _vm._v("الحرفية")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.sector != "" && _vm.sector != null
+                  ? _c(
+                      "div",
+                      { staticClass: "mb-4" },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "activite" }
+                          },
+                          [_vm._v(" النشاط")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "vs-select",
+                          {
+                            attrs: {
+                              width: "100%",
+                              autocomplete: "",
+                              id: "activite"
+                            },
+                            on: { change: _vm.Search },
+                            model: {
+                              value: _vm.activite,
+                              callback: function($$v) {
+                                _vm.activite = $$v
+                              },
+                              expression: "activite"
+                            }
+                          },
+                          [
+                            _c("vs-select-item", {
+                              attrs: { text: "جميع النشاطات" }
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.Activites, function(item, index) {
+                              return _c("vs-select-item", {
+                                key: index,
+                                attrs: { value: index, text: item }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "form-label", attrs: { for: "activite" } },
+                      [_vm._v(" مكان الانجاز")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "mb-3" },
+                      [
+                        _c("label", { staticClass: "form-label" }, [
+                          _vm._v("عن بعد ")
+                        ]),
+                        _vm._v(" "),
+                        _c("vs-switch", {
+                          attrs: {
+                            color: "success",
+                            "vs-icon-off": "close",
+                            "vs-icon-on": "check"
+                          },
+                          on: { change: _vm.Search },
+                          model: {
+                            value: _vm.remotely,
+                            callback: function($$v) {
+                              _vm.remotely = $$v
+                            },
+                            expression: "remotely"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    !_vm.remotely
+                      ? _c(
+                          "vs-select",
+                          {
+                            attrs: {
+                              width: "100%",
+                              autocomplete: "",
+                              id: "city",
+                              placeholder: "المدينة"
+                            },
+                            on: { change: _vm.Search },
+                            model: {
+                              value: _vm.city,
+                              callback: function($$v) {
+                                _vm.city = $$v
+                              },
+                              expression: "city"
+                            }
+                          },
+                          [
+                            _c("vs-select-item", {
+                              attrs: { value: "", text: "جميع المدن" }
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.citiesJson, function(item, index) {
+                              return _c("vs-select-item", {
+                                key: index,
+                                attrs: { value: item.id, text: item.ville }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3 mt-5" },
+                  [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("الحالة")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "vs-select",
+                      {
+                        attrs: { width: "100%" },
+                        on: { change: _vm.Search },
+                        model: {
+                          value: _vm.status,
+                          callback: function($$v) {
+                            _vm.status = $$v
+                          },
+                          expression: "status"
+                        }
+                      },
+                      [
+                        _c("vs-select-item", {
+                          attrs: { value: "", text: "الكل" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "0", text: "قيد المراجعة" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "1", text: "مفتوح " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "2", text: " مرحلة التنفيذ " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "3", text: "تم الانجاز" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "4", text: "مغلق" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "5", text: "مرفوض" }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3 mt-5" },
+                  [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("الميزانية")
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-slider", {
+                      attrs: {
+                        step: "100",
+                        ticks: "",
+                        "text-fixed": " درهم ",
+                        color: "#f96a0c",
+                        max: "500000",
+                        min: 150
+                      },
+                      on: { change: _vm.Search },
+                      model: {
+                        value: _vm.budget,
+                        callback: function($$v) {
+                          _vm.budget = $$v
+                        },
+                        expression: "budget"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3 mt-5" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "form-label", attrs: { for: "" } },
+                      [_vm._v("مدة التنفيذ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-select",
+                      {
+                        attrs: { width: "100%" },
+                        on: { change: _vm.Search },
+                        model: {
+                          value: _vm.time,
+                          callback: function($$v) {
+                            _vm.time = $$v
+                          },
+                          expression: "time"
+                        }
+                      },
+                      [
+                        _c("vs-select-item", {
+                          attrs: { value: "180", text: "الكل" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "7", text: "أقل من أسبوع واحد" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "14", text: "أقل من أسبوعين " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "30", text: "أقل من شهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "60", text: "أقل من شهرين " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "90", text: "أقل من 3 أشهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "120", text: "أقل من 4 أشهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "150", text: "أقل من 5 أشهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "180", text: "أقل من 6 أشهر " }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-grid gap-2 mt-5" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: {
+                        "data-bs-dismiss": "offcanvas",
+                        "aria-label": "Close",
+                        type: "button"
+                      },
+                      on: { click: _vm.Search }
+                    },
+                    [_vm._v("\n              البحث\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-primary",
+                      attrs: {
+                        "data-bs-dismiss": "offcanvas",
+                        "aria-label": "Close",
+                        type: "button"
+                      },
+                      on: { click: _vm.reset }
+                    },
+                    [_vm._v("\n              اعادة التعيين\n            ")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container mb-5 mt-2" }, [
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "div",
           {
-            staticClass: "offcanvas-body",
-            attrs: { align: "right", dir: "rtl" }
+            staticClass: "row justify-content-md-center",
+            attrs: { dir: "rtl" }
           },
           [
-            _c("form", { attrs: { align: "right" } }, [
-              _c("div", { staticClass: "mb-4" }, [
-                _c(
-                  "label",
-                  { staticClass: "form-label", attrs: { for: "searchbox" } },
-                  [_vm._v("كلمات مفتاحية")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.query,
-                      expression: "query"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "searchbox", type: "text" },
-                  domProps: { value: _vm.query },
-                  on: {
-                    change: _vm.Search,
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.query = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "mb-4" }, [
-                _c(
-                  "label",
-                  { staticClass: "form-label", attrs: { for: "sector" } },
-                  [_vm._v(" القطاع")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
+            _c("div", { staticClass: "col-sm col-lg-3 filter-search-web" }, [
+              _c("form", { attrs: { align: "right" } }, [
+                _c("div", { staticClass: "mb-4" }, [
+                  _c(
+                    "label",
+                    { staticClass: "form-label", attrs: { for: "searchbox" } },
+                    [_vm._v("كلمات مفتاحية")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.sector,
-                        expression: "sector"
+                        value: _vm.query,
+                        expression: "query"
                       }
                     ],
-                    staticClass: "form-select",
-                    attrs: { id: "sector" },
+                    staticClass: "form-control",
+                    attrs: { id: "searchbox", type: "text" },
+                    domProps: { value: _vm.query },
                     on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.sector = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        },
-                        _vm.SectorChange
-                      ]
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("جميع القطاعات")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [
-                      _vm._v("الخدمات")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [
-                      _vm._v("التجارة")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "3" } }, [
-                      _vm._v("الصناعة")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "4" } }, [_vm._v("الحرفية")])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.sector != "" && _vm.sector != null
-                ? _c(
-                    "div",
-                    { staticClass: "mb-4" },
-                    [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-label",
-                          attrs: { for: "activite" }
-                        },
-                        [_vm._v(" النشاط")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "vs-select",
-                        {
-                          attrs: {
-                            width: "100%",
-                            autocomplete: "",
-                            id: "activite"
-                          },
-                          on: { change: _vm.Search },
-                          model: {
-                            value: _vm.activite,
-                            callback: function($$v) {
-                              _vm.activite = $$v
-                            },
-                            expression: "activite"
-                          }
-                        },
-                        [
-                          _c("vs-select-item", {
-                            attrs: { text: "جميع النشاطات" }
-                          }),
-                          _vm._v(" "),
-                          _vm._l(_vm.Activites, function(item, index) {
-                            return _c("vs-select-item", {
-                              key: index,
-                              attrs: { value: index, text: item }
-                            })
-                          })
-                        ],
-                        2
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "form-label", attrs: { for: "activite" } },
-                    [_vm._v(" مكان الانجاز")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "mb-3" },
-                    [
-                      _c("label", { staticClass: "form-label" }, [
-                        _vm._v("عن بعد ")
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-switch", {
-                        attrs: {
-                          color: "success",
-                          "vs-icon-off": "close",
-                          "vs-icon-on": "check"
-                        },
-                        on: { change: _vm.Search },
-                        model: {
-                          value: _vm.remotely,
-                          callback: function($$v) {
-                            _vm.remotely = $$v
-                          },
-                          expression: "remotely"
+                      change: _vm.Search,
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  !_vm.remotely
-                    ? _c(
-                        "vs-select",
-                        {
-                          attrs: {
-                            width: "100%",
-                            autocomplete: "",
-                            id: "city",
-                            placeholder: "المدينة"
-                          },
-                          on: { change: _vm.Search },
-                          model: {
-                            value: _vm.city,
-                            callback: function($$v) {
-                              _vm.city = $$v
-                            },
-                            expression: "city"
-                          }
-                        },
-                        [
-                          _c("vs-select-item", {
-                            attrs: { value: "", text: "جميع المدن" }
-                          }),
-                          _vm._v(" "),
-                          _vm._l(_vm.citiesJson, function(item, index) {
-                            return _c("vs-select-item", {
-                              key: index,
-                              attrs: { value: item.id, text: item.ville }
-                            })
-                          })
-                        ],
-                        2
-                      )
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3 mt-5" },
-                [
-                  _c("label", { staticClass: "form-label" }, [
-                    _vm._v("الحالة")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "vs-select",
-                    {
-                      attrs: { width: "100%" },
-                      on: { change: _vm.Search },
-                      model: {
-                        value: _vm.status,
-                        callback: function($$v) {
-                          _vm.status = $$v
-                        },
-                        expression: "status"
+                        _vm.query = $event.target.value
                       }
-                    },
-                    [
-                      _c("vs-select-item", {
-                        attrs: { value: "", text: "الكل" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "0", text: "قيد المراجعة" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "1", text: "مفتوح " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "2", text: " مرحلة التنفيذ " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "3", text: "تم الانجاز" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "4", text: "مغلق" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "5", text: "مرفوض" }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3 mt-5" },
-                [
-                  _c("label", { staticClass: "form-label" }, [
-                    _vm._v("الميزانية")
-                  ]),
-                  _vm._v(" "),
-                  _c("vs-slider", {
-                    attrs: {
-                      step: "100",
-                      ticks: "",
-                      "text-fixed": " درهم ",
-                      color: "#f96a0c",
-                      max: "500000",
-                      min: 150
-                    },
-                    on: { change: _vm.Search },
-                    model: {
-                      value: _vm.budget,
-                      callback: function($$v) {
-                        _vm.budget = $$v
-                      },
-                      expression: "budget"
                     }
                   })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3 mt-5" },
-                [
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-4" }, [
                   _c(
                     "label",
-                    { staticClass: "form-label", attrs: { for: "" } },
-                    [_vm._v("مدة التنفيذ")]
+                    { staticClass: "form-label", attrs: { for: "sector" } },
+                    [_vm._v(" القطاع")]
                   ),
                   _vm._v(" "),
                   _c(
-                    "vs-select",
+                    "select",
                     {
-                      attrs: { width: "100%" },
-                      on: { change: _vm.Search },
-                      model: {
-                        value: _vm.time,
-                        callback: function($$v) {
-                          _vm.time = $$v
-                        },
-                        expression: "time"
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.sector,
+                          expression: "sector"
+                        }
+                      ],
+                      staticClass: "form-select",
+                      attrs: { id: "sector" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.sector = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          _vm.SectorChange
+                        ]
                       }
                     },
                     [
-                      _c("vs-select-item", {
-                        attrs: { value: "180", text: "الكل" }
-                      }),
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("جميع القطاعات")
+                      ]),
                       _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "7", text: "أقل من أسبوع واحد" }
-                      }),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v("الخدمات")
+                      ]),
                       _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "14", text: "أقل من أسبوعين " }
-                      }),
+                      _c("option", { attrs: { value: "2" } }, [
+                        _vm._v("التجارة")
+                      ]),
                       _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "30", text: "أقل من شهر " }
-                      }),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("الصناعة")
+                      ]),
                       _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "60", text: "أقل من شهرين " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "90", text: "أقل من 3 أشهر " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "120", text: "أقل من 4 أشهر " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "150", text: "أقل من 5 أشهر " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "180", text: "أقل من 6 أشهر " }
-                      })
-                    ],
-                    1
+                      _c("option", { attrs: { value: "4" } }, [
+                        _vm._v("الحرفية")
+                      ])
+                    ]
                   )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "d-grid gap-2 mt-5" }, [
+                ]),
+                _vm._v(" "),
+                _vm.sector != "" && _vm.sector != null
+                  ? _c(
+                      "div",
+                      { staticClass: "mb-4" },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "activite" }
+                          },
+                          [_vm._v(" النشاط")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "vs-select",
+                          {
+                            attrs: {
+                              width: "100%",
+                              autocomplete: "",
+                              id: "activite"
+                            },
+                            on: { change: _vm.Search },
+                            model: {
+                              value: _vm.activite,
+                              callback: function($$v) {
+                                _vm.activite = $$v
+                              },
+                              expression: "activite"
+                            }
+                          },
+                          [
+                            _c("vs-select-item", {
+                              attrs: { text: "جميع النشاطات" }
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.Activites, function(item, index) {
+                              return _c("vs-select-item", {
+                                key: index,
+                                attrs: { value: index, text: item }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      "data-bs-dismiss": "offcanvas",
-                      "aria-label": "Close",
-                      type: "button"
-                    },
-                    on: { click: _vm.Search }
-                  },
-                  [_vm._v("\n              البحث\n            ")]
+                  "div",
+                  { staticClass: "mb-3" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "form-label", attrs: { for: "activite" } },
+                      [_vm._v(" مكان الانجاز")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "mb-3" },
+                      [
+                        _c("label", { staticClass: "form-label" }, [
+                          _vm._v("عن بعد ")
+                        ]),
+                        _vm._v(" "),
+                        _c("vs-switch", {
+                          attrs: {
+                            color: "success",
+                            "vs-icon-off": "close",
+                            "vs-icon-on": "check"
+                          },
+                          on: { change: _vm.Search },
+                          model: {
+                            value: _vm.remotely,
+                            callback: function($$v) {
+                              _vm.remotely = $$v
+                            },
+                            expression: "remotely"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    !_vm.remotely
+                      ? _c(
+                          "vs-select",
+                          {
+                            attrs: {
+                              width: "100%",
+                              autocomplete: "",
+                              id: "city",
+                              placeholder: "المدينة"
+                            },
+                            on: { change: _vm.Search },
+                            model: {
+                              value: _vm.city,
+                              callback: function($$v) {
+                                _vm.city = $$v
+                              },
+                              expression: "city"
+                            }
+                          },
+                          [
+                            _c("vs-select-item", {
+                              attrs: { value: "", text: "جميع المدن" }
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.citiesJson, function(item, index) {
+                              return _c("vs-select-item", {
+                                key: index,
+                                attrs: { value: item.id, text: item.ville }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      : _vm._e()
+                  ],
+                  1
                 ),
                 _vm._v(" "),
                 _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-primary",
-                    attrs: {
-                      "data-bs-dismiss": "offcanvas",
-                      "aria-label": "Close",
-                      type: "button"
+                  "div",
+                  { staticClass: "mb-3 mt-5" },
+                  [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("الحالة")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "vs-select",
+                      {
+                        attrs: { width: "100%" },
+                        on: { change: _vm.Search },
+                        model: {
+                          value: _vm.status,
+                          callback: function($$v) {
+                            _vm.status = $$v
+                          },
+                          expression: "status"
+                        }
+                      },
+                      [
+                        _c("vs-select-item", {
+                          attrs: { value: "", text: "الكل" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "0", text: "قيد المراجعة" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "1", text: "مفتوح " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "2", text: " مرحلة التنفيذ " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "3", text: "تم الانجاز" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "4", text: "مغلق" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "5", text: "مرفوض" }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3 mt-5" },
+                  [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("الميزانية")
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-slider", {
+                      attrs: {
+                        step: "100",
+                        ticks: "",
+                        "text-fixed": " درهم ",
+                        color: "#f96a0c",
+                        max: "500000",
+                        min: 150
+                      },
+                      on: { change: _vm.Search },
+                      model: {
+                        value: _vm.budget,
+                        callback: function($$v) {
+                          _vm.budget = $$v
+                        },
+                        expression: "budget"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3 mt-5" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "form-label", attrs: { for: "" } },
+                      [_vm._v("مدة التنفيذ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-select",
+                      {
+                        attrs: { width: "100%" },
+                        on: { change: _vm.Search },
+                        model: {
+                          value: _vm.time,
+                          callback: function($$v) {
+                            _vm.time = $$v
+                          },
+                          expression: "time"
+                        }
+                      },
+                      [
+                        _c("vs-select-item", {
+                          attrs: { value: "180", text: "الكل" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "7", text: "أقل من أسبوع واحد" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "14", text: "أقل من أسبوعين " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "30", text: "أقل من شهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "60", text: "أقل من شهرين " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "90", text: "أقل من 3 أشهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "120", text: "أقل من 4 أشهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "150", text: "أقل من 5 أشهر " }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { value: "180", text: "أقل من 6 أشهر " }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-grid gap-2 mt-5" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: {
+                        "data-bs-dismiss": "offcanvas",
+                        "aria-label": "Close",
+                        type: "button"
+                      },
+                      on: { click: _vm.Search }
                     },
-                    on: { click: _vm.reset }
-                  },
-                  [_vm._v("\n              اعادة التعيين\n            ")]
-                )
+                    [_vm._v("\n              البحث\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-primary",
+                      attrs: {
+                        "data-bs-dismiss": "offcanvas",
+                        "aria-label": "Close",
+                        type: "button"
+                      },
+                      on: { click: _vm.reset }
+                    },
+                    [_vm._v("\n              اعادة التعيين\n            ")]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "box-left card p-4 vs-con-loading__container",
+                  attrs: { id: "div-with-loading" }
+                },
+                [
+                  _vm.nodata == true
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "no-data-message text-center mt-4 mb-4"
+                        },
+                        [
+                          _vm._v(
+                            "\n            لاتوجد بيانات لعرضها\n          "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.stopLazyLoading != true
+                    ? _c(
+                        "div",
+                        { staticClass: "lazy-load-box" },
+                        _vm._l(5, function(index) {
+                          return _c(
+                            "div",
+                            { key: index, staticClass: "lazy-load-ae-content" },
+                            [
+                              _vm._m(2, true),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass:
+                                  "lazy-load-ae load-description lazy-order"
+                              })
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.listData, function(item, index) {
+                    return _c(
+                      "a",
+                      { key: index, attrs: { href: "/order/" + item.OID } },
+                      [
+                        _c("div", { staticClass: "box-article pb-3 mb-4" }, [
+                          _c("div", { staticClass: "head-box-article" }, [
+                            _c("div", { staticClass: "row text-center" }, [
+                              _c("div", { staticClass: "col" }, [
+                                _c(
+                                  "h1",
+                                  {
+                                    staticClass: "title-box-article",
+                                    attrs: { align: "right" }
+                                  },
+                                  [
+                                    item.status == 0
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-warning badge-sm"
+                                          },
+                                          [_vm._v("قيد المراجعة")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status == 1
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-success badge-sm"
+                                          },
+                                          [_vm._v("مفتوح")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status == 2
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-primary badge-sm"
+                                          },
+                                          [_vm._v(" مرحلة التنفيذ")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status == 3
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-success badge-sm"
+                                          },
+                                          [_vm._v("  تم الانجاز")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status == 4
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-danger badge-sm"
+                                          },
+                                          [_vm._v("  مغلق ")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status == 5
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "badge bg-danger badge-sm"
+                                          },
+                                          [_vm._v("  مرفوض")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(
+                                      "  \n                     " +
+                                        _vm._s(item.title) +
+                                        "\n                    "
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-3" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "box-article-cta",
+                                    attrs: { align: "left" }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "dropdown" }, [
+                                      _vm._m(3, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "ul",
+                                        {
+                                          staticClass: "dropdown-menu",
+                                          attrs: {
+                                            "aria-labelledby": "menu_user"
+                                          }
+                                        },
+                                        [
+                                          item.status == 0 ||
+                                          item.status == 4 ||
+                                          item.status == 5
+                                            ? _c("li", [
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "dropdown-item",
+                                                    attrs: {
+                                                      href:
+                                                        "/order/" +
+                                                        item.OID +
+                                                        "/edit"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass: "fas fa-edit"
+                                                    }),
+                                                    _vm._v(" تعديل")
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c("li", [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass: "dropdown-item",
+                                                attrs: {
+                                                  href:
+                                                    "/myorder/" + item.OID + "",
+                                                  type: "button"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fas fa-cog"
+                                                }),
+                                                _vm._v(" ادارة")
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          item.status == 0 ||
+                                          item.status == 4 ||
+                                          item.status == 5
+                                            ? _c(
+                                                "li",
+                                                {
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.oid_selected =
+                                                        item.OID
+                                                    }
+                                                  }
+                                                },
+                                                [_vm._m(4, true)]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row ps-2" }, [
+                              _c("div", { staticClass: "col-auto" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "user-info-box-article" },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-map-marker-alt"
+                                    }),
+                                    _vm._v(" "),
+                                    item.place && item.place != "remotely"
+                                      ? _c("span", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.citiesJson[item.place].ville
+                                            ) + ", المغرب"
+                                          )
+                                        ])
+                                      : _c("span", [_vm._v("عن بعد")])
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-auto" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "user-info-box-article" },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-ticket-alt"
+                                    }),
+                                    _vm._v(
+                                      "\n                      " +
+                                        _vm._s(item.OffersCount) +
+                                        "\n                      "
+                                    ),
+                                    item.OffersCount > 1 &&
+                                    item.OffersCount < 11
+                                      ? _c("span", [_vm._v("عروض")])
+                                      : _c("span", [_vm._v("عرض")])
+                                  ]
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "body-box-article mb-3" }, [
+                            _c(
+                              "p",
+                              {
+                                staticClass:
+                                  "box-article-description font-Naskh"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(item.description) +
+                                    "\n                "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div")
+                        ])
+                      ]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "show-more-section text-center mt-5" }, [
+                _vm.allresponse.next_page_url != null
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary text-center",
+                        staticStyle: { "margin-right": "0 !important" },
+                        attrs: { type: "button" },
+                        on: { click: _vm.ShowMore }
+                      },
+                      [_vm._v("\n            مشاهدة المزيد\n          ")]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary text-center",
+                        staticStyle: { "margin-right": "0 !important" },
+                        attrs: { type: "button", disabled: "" }
+                      },
+                      [_vm._v("\n            نهائة النتائج\n          ")]
+                    )
               ])
             ])
           ]
         )
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "container mb-5 mt-2" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row justify-content-md-center", attrs: { dir: "rtl" } },
-        [
-          _c("div", { staticClass: "col-sm col-lg-3 filter-search-web" }, [
-            _c("form", { attrs: { align: "right" } }, [
-              _c("div", { staticClass: "mb-4" }, [
-                _c(
-                  "label",
-                  { staticClass: "form-label", attrs: { for: "searchbox" } },
-                  [_vm._v("كلمات مفتاحية")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.query,
-                      expression: "query"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "searchbox", type: "text" },
-                  domProps: { value: _vm.query },
-                  on: {
-                    change: _vm.Search,
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.query = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "mb-4" }, [
-                _c(
-                  "label",
-                  { staticClass: "form-label", attrs: { for: "sector" } },
-                  [_vm._v(" القطاع")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.sector,
-                        expression: "sector"
-                      }
-                    ],
-                    staticClass: "form-select",
-                    attrs: { id: "sector" },
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.sector = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        },
-                        _vm.SectorChange
-                      ]
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("جميع القطاعات")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [
-                      _vm._v("الخدمات")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [
-                      _vm._v("التجارة")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "3" } }, [
-                      _vm._v("الصناعة")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "4" } }, [_vm._v("الحرفية")])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.sector != "" && _vm.sector != null
-                ? _c(
-                    "div",
-                    { staticClass: "mb-4" },
-                    [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-label",
-                          attrs: { for: "activite" }
-                        },
-                        [_vm._v(" النشاط")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "vs-select",
-                        {
-                          attrs: {
-                            width: "100%",
-                            autocomplete: "",
-                            id: "activite"
-                          },
-                          on: { change: _vm.Search },
-                          model: {
-                            value: _vm.activite,
-                            callback: function($$v) {
-                              _vm.activite = $$v
-                            },
-                            expression: "activite"
-                          }
-                        },
-                        [
-                          _c("vs-select-item", {
-                            attrs: { text: "جميع النشاطات" }
-                          }),
-                          _vm._v(" "),
-                          _vm._l(_vm.Activites, function(item, index) {
-                            return _c("vs-select-item", {
-                              key: index,
-                              attrs: { value: index, text: item }
-                            })
-                          })
-                        ],
-                        2
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "form-label", attrs: { for: "activite" } },
-                    [_vm._v(" مكان الانجاز")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "mb-3" },
-                    [
-                      _c("label", { staticClass: "form-label" }, [
-                        _vm._v("عن بعد ")
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-switch", {
-                        attrs: {
-                          color: "success",
-                          "vs-icon-off": "close",
-                          "vs-icon-on": "check"
-                        },
-                        on: { change: _vm.Search },
-                        model: {
-                          value: _vm.remotely,
-                          callback: function($$v) {
-                            _vm.remotely = $$v
-                          },
-                          expression: "remotely"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  !_vm.remotely
-                    ? _c(
-                        "vs-select",
-                        {
-                          attrs: {
-                            width: "100%",
-                            autocomplete: "",
-                            id: "city",
-                            placeholder: "المدينة"
-                          },
-                          on: { change: _vm.Search },
-                          model: {
-                            value: _vm.city,
-                            callback: function($$v) {
-                              _vm.city = $$v
-                            },
-                            expression: "city"
-                          }
-                        },
-                        [
-                          _c("vs-select-item", {
-                            attrs: { value: "", text: "جميع المدن" }
-                          }),
-                          _vm._v(" "),
-                          _vm._l(_vm.citiesJson, function(item, index) {
-                            return _c("vs-select-item", {
-                              key: index,
-                              attrs: { value: item.id, text: item.ville }
-                            })
-                          })
-                        ],
-                        2
-                      )
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3 mt-5" },
-                [
-                  _c("label", { staticClass: "form-label" }, [
-                    _vm._v("الحالة")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "vs-select",
-                    {
-                      attrs: { width: "100%" },
-                      on: { change: _vm.Search },
-                      model: {
-                        value: _vm.status,
-                        callback: function($$v) {
-                          _vm.status = $$v
-                        },
-                        expression: "status"
-                      }
-                    },
-                    [
-                      _c("vs-select-item", {
-                        attrs: { value: "", text: "الكل" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "0", text: "قيد المراجعة" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "1", text: "مفتوح " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "2", text: " مرحلة التنفيذ " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "3", text: "تم الانجاز" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "4", text: "مغلق" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "5", text: "مرفوض" }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3 mt-5" },
-                [
-                  _c("label", { staticClass: "form-label" }, [
-                    _vm._v("الميزانية")
-                  ]),
-                  _vm._v(" "),
-                  _c("vs-slider", {
-                    attrs: {
-                      step: "100",
-                      ticks: "",
-                      "text-fixed": " درهم ",
-                      color: "#f96a0c",
-                      max: "500000",
-                      min: 150
-                    },
-                    on: { change: _vm.Search },
-                    model: {
-                      value: _vm.budget,
-                      callback: function($$v) {
-                        _vm.budget = $$v
-                      },
-                      expression: "budget"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "mb-3 mt-5" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "form-label", attrs: { for: "" } },
-                    [_vm._v("مدة التنفيذ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "vs-select",
-                    {
-                      attrs: { width: "100%" },
-                      on: { change: _vm.Search },
-                      model: {
-                        value: _vm.time,
-                        callback: function($$v) {
-                          _vm.time = $$v
-                        },
-                        expression: "time"
-                      }
-                    },
-                    [
-                      _c("vs-select-item", {
-                        attrs: { value: "180", text: "الكل" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "7", text: "أقل من أسبوع واحد" }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "14", text: "أقل من أسبوعين " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "30", text: "أقل من شهر " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "60", text: "أقل من شهرين " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "90", text: "أقل من 3 أشهر " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "120", text: "أقل من 4 أشهر " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "150", text: "أقل من 5 أشهر " }
-                      }),
-                      _vm._v(" "),
-                      _c("vs-select-item", {
-                        attrs: { value: "180", text: "أقل من 6 أشهر " }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "d-grid gap-2 mt-5" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      "data-bs-dismiss": "offcanvas",
-                      "aria-label": "Close",
-                      type: "button"
-                    },
-                    on: { click: _vm.Search }
-                  },
-                  [_vm._v("\n              البحث\n            ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-primary",
-                    attrs: {
-                      "data-bs-dismiss": "offcanvas",
-                      "aria-label": "Close",
-                      type: "button"
-                    },
-                    on: { click: _vm.reset }
-                  },
-                  [_vm._v("\n              اعادة التعيين\n            ")]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm" }, [
-            _c(
-              "div",
-              {
-                staticClass: "box-left card p-4 vs-con-loading__container",
-                attrs: { id: "div-with-loading" }
-              },
-              [
-                _vm.nodata == true
-                  ? _c(
-                      "div",
-                      { staticClass: "no-data-message text-center mt-4 mb-4" },
-                      [_vm._v("\n            لاتوجد بيانات لعرضها\n          ")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.stopLazyLoading != true
-                  ? _c(
-                      "div",
-                      { staticClass: "lazy-load-box" },
-                      _vm._l(5, function(index) {
-                        return _c(
-                          "div",
-                          { key: index, staticClass: "lazy-load-ae-content" },
-                          [
-                            _vm._m(2, true),
-                            _vm._v(" "),
-                            _c("div", {
-                              staticClass:
-                                "lazy-load-ae load-description lazy-order"
-                            })
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._l(_vm.listData, function(item, index) {
-                  return _c(
-                    "a",
-                    { key: index, attrs: { href: "/order/" + item.OID } },
-                    [
-                      _c("div", { staticClass: "box-article pb-3 mb-4" }, [
-                        _c("div", { staticClass: "head-box-article" }, [
-                          _c("div", { staticClass: "row text-center" }, [
-                            _c("div", { staticClass: "col" }, [
-                              _c(
-                                "h1",
-                                {
-                                  staticClass: "title-box-article",
-                                  attrs: { align: "right" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "badge bg-primary badge-sm"
-                                    },
-                                    [_vm._v("قيد التنفيذ")]
-                                  ),
-                                  _vm._v(
-                                    "  " +
-                                      _vm._s(item.title) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(3, true)
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "row ps-2" }, [
-                            _c("div", { staticClass: "col-auto" }, [
-                              _c(
-                                "div",
-                                { staticClass: "user-info-box-article" },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-map-marker-alt"
-                                  }),
-                                  _vm._v(" "),
-                                  item.place && item.place != "remotely"
-                                    ? _c("span", [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.citiesJson[item.place].ville
-                                          ) + ", المغرب"
-                                        )
-                                      ])
-                                    : _c("span", [_vm._v("عن بعد")])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-auto" }, [
-                              _c(
-                                "div",
-                                { staticClass: "user-info-box-article" },
-                                [
-                                  _c("i", { staticClass: "fas fa-ticket-alt" }),
-                                  _vm._v(
-                                    "\n                      " +
-                                      _vm._s(item.OffersCount) +
-                                      "\n                      "
-                                  ),
-                                  item.OffersCount > 1 && item.OffersCount < 11
-                                    ? _c("span", [_vm._v("عروض")])
-                                    : _c("span", [_vm._v("عرض")])
-                                ]
-                              )
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "body-box-article mb-3" }, [
-                          _c(
-                            "p",
-                            {
-                              staticClass: "box-article-description font-Naskh"
-                            },
-                            [
-                              _vm._v(
-                                "\n                  " +
-                                  _vm._s(item.description) +
-                                  "\n                "
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div")
-                      ])
-                    ]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "show-more-section text-center mt-5" }, [
-              _vm.allresponse.next_page_url != null
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary text-center",
-                      staticStyle: { "margin-right": "0 !important" },
-                      attrs: { type: "button" },
-                      on: { click: _vm.ShowMore }
-                    },
-                    [_vm._v("\n            مشاهدة المزيد\n          ")]
-                  )
-                : _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary text-center",
-                      staticStyle: { "margin-right": "0 !important" },
-                      attrs: { type: "button", disabled: "" }
-                    },
-                    [_vm._v("\n            نهائة النتائج\n          ")]
-                  )
-            ])
-          ])
-        ]
-      )
-    ])
-  ])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -64264,57 +64885,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-3" }, [
-      _c("div", { staticClass: "box-article-cta", attrs: { align: "left" } }, [
-        _c("span", { staticClass: "dropdown" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-primary btn-sm",
-              attrs: {
-                id: "menu_user",
-                "data-toggle": "dropdown",
-                "aria-expanded": "false"
-              }
-            },
-            [_c("i", { staticClass: "fas fa-ellipsis-v" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "dropdown-menu",
-              attrs: { "aria-labelledby": "menu_user" }
-            },
-            [
-              _c("li", [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_c("i", { staticClass: "fas fa-edit" }), _vm._v(" تعديل")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { type: "button" } },
-                  [_c("i", { staticClass: "fas fa-cog" }), _vm._v(" ادارة")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { type: "button" } },
-                  [_c("i", { staticClass: "fas fa-trash-alt" }), _vm._v(" حذف")]
-                )
-              ])
-            ]
-          )
-        ])
-      ])
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-primary btn-sm",
+        attrs: {
+          id: "menu_user",
+          "data-toggle": "dropdown",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "dropdown-item",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#delet_order_Modal"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-trash-alt" }), _vm._v(" حذف")]
+    )
   }
 ]
 render._withStripped = true
@@ -65196,6 +65795,306 @@ var staticRenderFns = [
           [_vm._v("\n                        قدم عرضك\n                      ")]
         )
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/rate-ae.vue?vue&type=template&id=a2171360&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/orders/rate-ae.vue?vue&type=template&id=a2171360& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "Rate_modal",
+          "data-backdrop": "static",
+          "data-keyboard": "false",
+          tabindex: "-1",
+          "aria-labelledby": "staticBackdropLabel",
+          "aria-hidden": "true",
+          dir: "rtl"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-lg vs-con-loading__container",
+            attrs: { id: "modal-rate-load" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row align-items-center" }, [
+                  _c("div", { staticClass: "col-auto" }, [
+                    _c("span", { staticClass: "rating-text" }, [
+                      _vm._v(_vm._s(_vm.rating))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-auto" }, [
+                    _c("div", { staticClass: "rating" }, [
+                      _c("label", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.rating,
+                              expression: "rating"
+                            }
+                          ],
+                          attrs: { type: "radio", name: "stars", value: "1" },
+                          domProps: { checked: _vm._q(_vm.rating, "1") },
+                          on: {
+                            change: function($event) {
+                              _vm.rating = "1"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")])
+                      ]),
+                      _vm._v(" "),
+                      _c("label", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.rating,
+                              expression: "rating"
+                            }
+                          ],
+                          attrs: { type: "radio", name: "stars", value: "2" },
+                          domProps: { checked: _vm._q(_vm.rating, "2") },
+                          on: {
+                            change: function($event) {
+                              _vm.rating = "2"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")])
+                      ]),
+                      _vm._v(" "),
+                      _c("label", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.rating,
+                              expression: "rating"
+                            }
+                          ],
+                          attrs: { type: "radio", name: "stars", value: "3" },
+                          domProps: { checked: _vm._q(_vm.rating, "3") },
+                          on: {
+                            change: function($event) {
+                              _vm.rating = "3"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")])
+                      ]),
+                      _vm._v(" "),
+                      _c("label", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.rating,
+                              expression: "rating"
+                            }
+                          ],
+                          attrs: { type: "radio", name: "stars", value: "4" },
+                          domProps: { checked: _vm._q(_vm.rating, "4") },
+                          on: {
+                            change: function($event) {
+                              _vm.rating = "4"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")])
+                      ]),
+                      _vm._v(" "),
+                      _c("label", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.rating,
+                              expression: "rating"
+                            }
+                          ],
+                          attrs: { type: "radio", name: "stars", value: "5" },
+                          domProps: { checked: _vm._q(_vm.rating, "5") },
+                          on: {
+                            change: function($event) {
+                              _vm.rating = "5"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon" }, [_vm._v("★")])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.rating > 0
+                    ? _c("div", { staticClass: "col-auto" }, [
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button", "aria-label": "Close" },
+                          on: {
+                            click: function($event) {
+                              _vm.rating = 0
+                            }
+                          }
+                        })
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3 mt-4" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-label",
+                      attrs: { for: "description" }
+                    },
+                    [_vm._v("أخبر الآخرين عن رأيك")]
+                  ),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.decription,
+                        expression: "decription"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "description", rows: "3" },
+                    domProps: { value: _vm.decription },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.decription = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary btn-sm",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      id: "close-modal-btn"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        الغاء\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-sm",
+                    attrs: { type: "button", id: "btnsend" },
+                    on: { click: _vm.sendRating }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        ارسال\n                    "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "staticBackdropLabel" } },
+        [_vm._v("\n                        تقييم\n                    ")]
+      ),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
     ])
   }
 ]
@@ -96281,6 +97180,8 @@ vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('edit-portfolio', __webpack
 /* Orders  Section */
 
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('add-order', __webpack_require__(/*! ./components/user/orders/add-order.vue */ "./resources/js/components/user/orders/add-order.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('rate-ae', __webpack_require__(/*! ./components/user/orders/rate-ae.vue */ "./resources/js/components/user/orders/rate-ae.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('delete-order', __webpack_require__(/*! ./components/user/orders/delete-order.vue */ "./resources/js/components/user/orders/delete-order.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('open-orders-list', __webpack_require__(/*! ./components/user/orders/orders-open-lists.vue */ "./resources/js/components/user/orders/orders-open-lists.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('myorders', __webpack_require__(/*! ./components/user/orders/myorders.vue */ "./resources/js/components/user/orders/myorders.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component('edit-order', __webpack_require__(/*! ./components/user/orders/edit-order.vue */ "./resources/js/components/user/orders/edit-order.vue")["default"]);
@@ -97671,6 +98572,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/user/orders/delete-order.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/user/orders/delete-order.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _delete_order_vue_vue_type_template_id_01b854c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./delete-order.vue?vue&type=template&id=01b854c6& */ "./resources/js/components/user/orders/delete-order.vue?vue&type=template&id=01b854c6&");
+/* harmony import */ var _delete_order_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./delete-order.vue?vue&type=script&lang=js& */ "./resources/js/components/user/orders/delete-order.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _delete_order_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _delete_order_vue_vue_type_template_id_01b854c6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _delete_order_vue_vue_type_template_id_01b854c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/user/orders/delete-order.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/delete-order.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/user/orders/delete-order.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_delete_order_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./delete-order.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/delete-order.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_delete_order_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/delete-order.vue?vue&type=template&id=01b854c6&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/user/orders/delete-order.vue?vue&type=template&id=01b854c6& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_delete_order_vue_vue_type_template_id_01b854c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./delete-order.vue?vue&type=template&id=01b854c6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/delete-order.vue?vue&type=template&id=01b854c6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_delete_order_vue_vue_type_template_id_01b854c6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_delete_order_vue_vue_type_template_id_01b854c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/user/orders/edit-order.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/user/orders/edit-order.vue ***!
@@ -98011,6 +98981,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_orders_open_lists_vue_vue_type_template_id_017531ce___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_orders_open_lists_vue_vue_type_template_id_017531ce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/rate-ae.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/user/orders/rate-ae.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _rate_ae_vue_vue_type_template_id_a2171360___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./rate-ae.vue?vue&type=template&id=a2171360& */ "./resources/js/components/user/orders/rate-ae.vue?vue&type=template&id=a2171360&");
+/* harmony import */ var _rate_ae_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./rate-ae.vue?vue&type=script&lang=js& */ "./resources/js/components/user/orders/rate-ae.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _rate_ae_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _rate_ae_vue_vue_type_template_id_a2171360___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _rate_ae_vue_vue_type_template_id_a2171360___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/user/orders/rate-ae.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/rate-ae.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/user/orders/rate-ae.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_rate_ae_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./rate-ae.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/rate-ae.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_rate_ae_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/user/orders/rate-ae.vue?vue&type=template&id=a2171360&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/user/orders/rate-ae.vue?vue&type=template&id=a2171360& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rate_ae_vue_vue_type_template_id_a2171360___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./rate-ae.vue?vue&type=template&id=a2171360& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/orders/rate-ae.vue?vue&type=template&id=a2171360&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rate_ae_vue_vue_type_template_id_a2171360___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rate_ae_vue_vue_type_template_id_a2171360___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

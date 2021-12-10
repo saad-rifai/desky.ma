@@ -1,6 +1,7 @@
 <template>
     <div>
           <report-popup about="1" :from_url="from_url" ></report-popup>
+  <delete-order :oid="oid"></delete-order>
 
         <div class="dropdown">
             <button
@@ -33,6 +34,14 @@
                     href="#"
                     v-if="status == 4"
                     >اعادة نشر الطلب</a
+                >
+                <a
+                    class="dropdown-item"
+                    type="button" 
+                    data-toggle="modal" 
+                    data-target="#delet_order_Modal"
+                    v-if="status == 0 || status == 4 || status == 5"
+                    >حذف الطلب</a
                 >
                 <a class="dropdown-item" type="button" data-toggle="modal" data-target="#reportModal">الابلاغ عن مشكلة</a>
             </div>

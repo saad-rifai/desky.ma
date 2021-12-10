@@ -2,6 +2,7 @@
     <div>
         <button hidden id="profile-tab" @click="getHired"></button>
         <canceling-contract :oid="oid" :userid="userid"></canceling-contract>
+        <rate-ae></rate-ae>
         <!-- -->
         <div v-if="stopLazyLoading != true" class="lazy-load-box">
             <div v-for="index in 5" :key="index" class="lazy-load-ae-content">
@@ -182,17 +183,7 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="user-info-box-article">
-                                            <vs-tooltip
-                                                v-bind:text="
-                                                    parseFloat(
-                                                        item.userRating
-                                                    ).toFixed(1) >= 0
-                                                        ? parseFloat(
-                                                              item.userRating
-                                                          ).toFixed(1)
-                                                        : '0'
-                                                "
-                                            >
+                           
                                                 <span
                                                     id="rating-section"
                                                     class="user-rating-stars"
@@ -211,7 +202,6 @@
                                                         "
                                                     ></i>
                                                 </span>
-                                            </vs-tooltip>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -255,6 +245,11 @@
                         {{ item.description }}
                     </p>
                       <a role="button" class="collapsed" data-toggle="collapse" :href="'#TextCollapse'+index" aria-expanded="false" :aria-controls="'TextCollapse'+index"></a>
+                </div>
+                <div v-if="item.NeedRating" class="mt-3" align="left">
+                <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#Rate_modal"
+                ><i class="fas fa-star"></i> تقييم</button>
+
                 </div>
             </div>
         </div>

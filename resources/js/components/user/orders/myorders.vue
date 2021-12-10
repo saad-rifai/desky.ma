@@ -1,5 +1,7 @@
 <template>
   <div>
+  <delete-order :oid="oid_selected"></delete-order>
+
     <!-- Mobile Filter Search -->
     <div
       class="offcanvas offcanvas-start"
@@ -350,7 +352,13 @@
                   <div class="row text-center">
                     <div class="col">
                       <h1 align="right" class="title-box-article">
-                       <span class="badge bg-primary badge-sm">قيد التنفيذ</span>  {{ item.title }}
+                       <span v-if="item.status == 0" class="badge bg-warning badge-sm">قيد المراجعة</span> 
+                       <span v-if="item.status == 1" class="badge bg-success badge-sm">مفتوح</span>  
+                       <span v-if="item.status == 2" class="badge bg-primary badge-sm"> مرحلة التنفيذ</span>  
+                       <span v-if="item.status == 3" class="badge bg-success badge-sm">  تم الانجاز</span>  
+                       <span v-if="item.status == 4" class="badge bg-danger badge-sm">  مغلق </span>  
+                       <span v-if="item.status == 5" class="badge bg-danger badge-sm">  مرفوض</span>  
+                       {{ item.title }}
                       </h1>
                     </div>
                     <div class="col-3">
@@ -359,13 +367,13 @@
                            <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i></button>
                          <ul class="dropdown-menu" aria-labelledby="menu_user">
-                             <li>
-                                 <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> تعديل</a></li>
+                             <li v-if="item.status == 0 || item.status == 4 || item.status == 5">
+                                 <a class="dropdown-item"  :href="'/order/' + item.OID+'/edit'"><i class="fas fa-edit"></i> تعديل</a></li>
                                  <li>
-                                <a class="dropdown-item" type="button"><i class="fas fa-cog"></i> ادارة</a>
+                                <a :href="'/myorder/' + item.OID+''" class="dropdown-item" type="button"><i class="fas fa-cog"></i> ادارة</a>
                                 </li>
-                                <li>
-                                <a class="dropdown-item" type="button"><i class="fas fa-trash-alt"></i> حذف</a>
+                                <li @click="oid_selected = item.OID" v-if="item.status == 0 || item.status == 4 || item.status == 5">
+                                <a class="dropdown-item" type="button" data-toggle="modal" data-target="#delet_order_Modal"><i class="fas fa-trash-alt"></i> حذف</a>
                                 </li>
                          </ul>
                         </span>
@@ -452,7 +460,8 @@ export default {
       budget: [150, 500000],
       time: 180,
       typeget: "all",
-      status: ""
+      status: "",
+      oid_selected: null
     };
   },
   methods: {

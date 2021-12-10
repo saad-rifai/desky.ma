@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Jobs\NewOffersMailNot;
+use App\UserRating;
 
 class OffersController extends Controller
 {
@@ -196,11 +197,12 @@ class OffersController extends Controller
             }else{
                 $OrderCreator=false;
             } 
-            $infos = Offers::where('OID', $request->OID)->where("status", "1")->orderBy("created_at", "DESC")->paginate(6);
+            $infos = Offers::where('OID', $request->OID)->whereIn("status", ["1","2","3"])->orderBy("created_at", "DESC")->paginate(6);
             for($i=0; $i < count($infos); $i++){
                 $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
                 foreach ($rating as $rating);
                 $infos[$i]->userRating = $rating->numRating;
+
                 $infos[$i]->user = $infos[$i]->user;
                 $infos[$i]->AeAccount = $infos[$i]->user->AeAccount;
                 $infos[$i]->isOnline = User::isOnline($infos[$i]->Account_number);
@@ -208,6 +210,7 @@ class OffersController extends Controller
                     $infos[$i]->time = null;
                     $infos[$i]->price = null;
                 }
+
 
                 /* Get Activite Name */
                 $Activites = $infos[$i]->AeAccount->activite;
@@ -248,6 +251,19 @@ class OffersController extends Controller
                 $infos[$i]->city = $resultcheck;
                 $infos[$i]->sector = $sectorName;
                 $infos[$i]->verified_account = $infos[$i]->user->verified_account;
+                if($infos[$i]->status == "2" || $infos[$i]->status == "3"){
+                    $checkRating = UserRating::where('for', $infos[$i]->Account_number)->where('from', Auth::user()->Account_number)->where('order_id', $request->OID)->count();
+                 if($checkRating > 0){
+                    $infos[$i]->NeedRating = false;
+
+                 }else{
+                    $infos[$i]->NeedRating = true;
+
+                 }
+                }else{
+                    $infos[$i]->NeedRating = false;
+
+                }
             }
             if($OrderCreator == false){
                 $infos=null;

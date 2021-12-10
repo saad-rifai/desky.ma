@@ -176,6 +176,8 @@ p.box-article-description {
 }
 span.user-rating-stars {
     color: #ffc107;
+    display: list-item;
+    list-style-type: none !important;
 }
 .avatar-large-box-article img {
     width: 100%;

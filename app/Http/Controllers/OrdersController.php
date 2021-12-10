@@ -820,7 +820,10 @@ class OrdersController extends Controller
                 }else{
                     $data->keywords = []; 
                 }
-                $data->files = json_decode($data->files, true);
+                if($data->files != null){
+                    $data->files = json_decode($data->files, true);
+
+                }
                 return response()->json(['data' => $data], 200);
             }else{
             return response()->json(['error' => 'Bad Request'], 400);
@@ -912,6 +915,23 @@ class OrdersController extends Controller
             }
         }else{
             return response()->json(['error' => 'Bad Request'], 400);
+        }
+    }
+    public function deleteOrder(Request $request){
+        if(isset($request->OID)){
+            $checkOrders = Offers::where('OID', $request->OID)->whereIn('status', ['1','2','3'])->count();
+            if($checkOrders < 1){
+                $delete = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)
+                ->whereIn('status', ['0','1','4','5'])->delete();
+            if($delete){
+                return response()->json(['success', 'تم حذف الطلب'], 200);
+            }else{
+                return response()->json(['error' => 'لايمكن حذف هذا الطلب.'], 403);
+            }
+            }else{
+                return response()->json(['error' => 'لايمكن حذف هذا الطلب   '], 403);
+            }
+
         }
     }
 }

@@ -78,6 +78,7 @@ Route::prefix('ajax')->group(function () {
         /* Orders Route */
     
         Route::post('user/order/create', 'OrdersController@create');
+        Route::post('user/order/delete', 'OrdersController@deleteOrder');
         Route::post('user/order/update', 'OrdersController@update');
         Route::post('order/remove/file', 'OrdersController@removeFile');
         Route::post('order/hire/user', 'OrdersController@hire');
