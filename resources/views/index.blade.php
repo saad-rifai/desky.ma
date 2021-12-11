@@ -13,9 +13,9 @@
                             أنجز مشاريعك <span class="orange-text">بسهولة وأمان</span> مع أول
                             وأكبر شبكة للمقاولين الذاتيين بالمغرب</h1>
                         <div class="btn-act-section mt-5 mb-5" style="    text-align: right;" dir="rtl">
-                            <button style="margin-right: 0 !important;" type="button" class="btn btn-outline-primary mb-2 btn-lg">تصفح المشاريع</button>
+                            <button style="margin-right: 0 !important;" type="button" class="btn btn-outline-primary mb-2 ">تصفح المشاريع</button>
 
-                       <a href="{{asset('new/order')}}"><button style="margin-right: 0 !important;" type="button" class="btn btn-primary mb-2 btn-lg">أضف مشروع</button></a>
+                       <a href="{{asset('new/order')}}"><button style="margin-right: 0 !important;" type="button" class="btn btn-primary mb-2">أضف مشروع</button></a>
 
                         </div>
                     </div>

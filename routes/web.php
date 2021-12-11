@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
-
+use App\Mail\ResetPasswordMail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,12 +58,15 @@ Route::prefix('ajax')->group(function () {
     Route::post('order/offer/status', 'OffersController@offerStatus');
     Route::post('orders/offers/hired', 'OffersController@hired');
     Route::get('order/{OID}/myoffer/', 'OffersController@getMyOffer');
-    Route::post('order/offer/update/', 'OffersController@UpdateOffer');
     
     /********/
 
     /*****************/
     Route::group(['middleware' => ['auth']], function () {
+
+        /* Rating */
+        Route::post('user/rate', 'UserRatingController@create');
+        /* Rating */
 
         /* Support Route */
         Route::post('support/report', 'UserReportController@CreateReport');
@@ -91,7 +94,8 @@ Route::prefix('ajax')->group(function () {
     
         /* Offers Routes */
         Route::post('user/offer/create', 'OffersController@create');
-    
+        Route::post('order/offer/update/', 'OffersController@UpdateOffer');
+        
         /* Notification */
         Route::get('user/menu/notification', 'UserNotificationController@NotificationForMenu');
         Route::post('user/menu/notification/click', 'UserNotificationController@AllNotificationReaded');
@@ -118,9 +122,19 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    $userInfos = User::where('Account_number', "7684293048")->get(['email', 'frist_name']);
-    foreach($userInfos as $userInfo);
-    dd($userInfo->email);
+    $valueArray2 = [
+        'token' => "57d4fgg5fd74g65f7dg657fd",
+
+    ];
+
+
+    try {
+        Mail::to("rifaisaad3@gmail.com")->send(new ResetPasswordMail($valueArray2));
+    } catch (\Exception $e) {
+        return 'Error - ' . $e;
+     
+
+    }
 
 
 });

@@ -2,7 +2,7 @@
     <div>
         <button hidden id="profile-tab" @click="getHired"></button>
         <canceling-contract :oid="oid" :userid="userid"></canceling-contract>
-        <rate-ae></rate-ae>
+        <rate-ae :to="rateUserId" :oid="oid"></rate-ae>
         <!-- -->
         <div v-if="stopLazyLoading != true" class="lazy-load-box">
             <div v-for="index in 5" :key="index" class="lazy-load-ae-content">
@@ -34,7 +34,7 @@
         <div
             v-for="(item, index) in listData"
             :key="index"
-            class="box-article pb-3 mb-3"
+            class="box-article  mb-3"
         >
             <div>
                 <div class="head-box-article">
@@ -65,7 +65,7 @@
                                         >
                                     </span>
                                     <a :href="'/@' + item.user.username">
-                                        <div class="avatar-large-box-article">
+                                        <div class="avatar-large-box-article mb-avatar-size">
                                             <img
                                                 v-if="
                                                     item.user.avatar != '' &&
@@ -135,53 +135,7 @@
                                         ></a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-auto mobile-hidden-1">
-                            <div class="row">
-                                <div class="col-auto p-1">
-                                    <button class="btn btn-primary btn-sm">
-                                        <i class="fas fa-envelope"></i>
-                                    </button>
-                                </div>
-                                <div class="col-auto p-1 ">
-                                    <span class="dropdown">
-                                                    <button
-                                                        class="btn btn-outline-primary btn-sm"
-                                                        id="menu_user"
-                                                        data-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                    >
-                                                        <i
-                                                            class="fas fa-ellipsis-v"
-                                                        ></i>
-                                                    </button>
-                                                    <ul
-                                                        class="dropdown-menu"
-                                                        aria-labelledby="menu_user"
-                                                    >
-                                                        <li @click="userid = item.Account_number">
-                                                            <a
-                                                                class="dropdown-item"
-                                                                type="button"
-                                                                data-toggle="modal"
-                                                                data-target="#canceling-ae-contract"
-                                                                >الغاء العقد</a
-                                                            >
-                                                        </li>
-                          
-                                                    </ul>
-                                                </span>
-                       
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mr-65 mmt-35">
-                        <div class="col-auto">
-                            <div class="user-info-box-article">
-                                <div class="row">
-                                    <div class="col-auto">
+                                                     <div class="col-auto">
                                         <div class="user-info-box-article">
                            
                                                 <span
@@ -204,6 +158,49 @@
                                                 </span>
                                         </div>
                                     </div>
+                            </div>
+                        </div>
+                        <div class="col-auto ">
+                            <div class="row">
+            
+                                <div class="col-auto p-1 ">
+                                    <span class="dropdown" v-if="item.status == 1">
+                                                    <button
+                                                        class="btn btn-outline-primary btn-sm"
+                                                        id="menu_user"
+                                                        data-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                    >
+                                                        <i
+                                                            class="fas fa-ellipsis-v"
+                                                        ></i>
+                                                    </button>
+                                                    <ul
+                                                        class="dropdown-menu"
+                                                        aria-labelledby="menu_user"
+                                                    >
+                                                        <li  @click="userid = item.Account_number">
+                                                            <a
+                                                                class="dropdown-item"
+                                                                type="button"
+                                                                data-toggle="modal"
+                                                                data-target="#canceling-ae-contract"
+                                                                >الغاء العقد</a
+                                                            >
+                                                        </li>
+                          
+                                                    </ul>
+                                                </span>
+                       
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mg-mb">
+                        <div class="col-auto">
+                            <div class="user-info-box-article">
+                                <div class="row">
+               
                                     <div class="col-auto">
                                         <div class="user-info-box-article">
                                             <i class="fas fa-briefcase"></i>
@@ -222,7 +219,7 @@
                     </div>
                 </div>
 
-                <div v-if="OrderCreator" class="mr-65 p-2">
+                <div v-if="OrderCreator" class="mg-mb mt-1 p-2">
                     <vs-tooltip
                         style="width: max-content"
                         text="التكلفة - مدة التنفيذ"
@@ -235,10 +232,25 @@
                         >
                     </vs-tooltip>
                 </div>
-                <span v-if="item.status == 1" class="badge bg-warning mr-65"
-                    >موظف</span
-                >
-                <div class="mr-65" id="text-wraper-desky" >
+                <div class="mg-mb mt-2 mb-2">
+                             <span
+                                        v-if="item.status == 1"
+                                        class="badge bg-warning"
+                                        >موظف</span
+                                    >
+                                    <span
+                                        v-if="item.status == 2"
+                                        class="badge bg-success"
+                                        >انتهى العقد</span
+                                    >
+                                    <span
+                                        v-if="item.status == 3"
+                                        class="badge bg-danger"
+                                        >ملغي</span
+                                    >
+                </div>
+  
+                <div class="mg-mb" id="text-wraper-desky" >
                     <p
                         class="box-article-description font-Naskh text-wrap-line collapse TextCollapse"
                    :id="'TextCollapse'+index" aria-expanded="false">
@@ -247,7 +259,7 @@
                       <a role="button" class="collapsed" data-toggle="collapse" :href="'#TextCollapse'+index" aria-expanded="false" :aria-controls="'TextCollapse'+index"></a>
                 </div>
                 <div v-if="item.NeedRating" class="mt-3" align="left">
-                <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#Rate_modal"
+                <button class="btn btn-primary btn-sm" @click="rateUserId = item.Account_number" type="button" data-toggle="modal" data-target="#Rate_modal"
                 ><i class="fas fa-star"></i> تقييم</button>
 
                 </div>
@@ -298,7 +310,8 @@ export default {
             nodata: false,
             listData: [],
             OrderCreator: false,
-            userid: null
+            userid: null,
+            rateUserId: null
 
         };
     },

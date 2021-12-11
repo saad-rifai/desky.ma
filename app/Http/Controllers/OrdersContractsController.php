@@ -11,6 +11,8 @@ class OrdersContractsController extends Controller
 {
     public function cancel(Request $request){
         if(isset($request->OID) && isset($request->userid)){
+           $checkOffer = Offers::where('OID', $request->OID)->where('Account_number', $request->userid)->whereIn('status', ['1'])->count();
+           if($checkOffer){
             $CancelContrat = orders_contracts::where('OID', $request->OID)->where('self_contracter', $request->userid)
             ->where('order_owner', Auth::user()->Account_number)
             ->where('status', '0')
@@ -39,6 +41,16 @@ class OrdersContractsController extends Controller
             return response()->json(['error' => 'حدث خطأ ما يرجى اعادة المحاولة, اذا استمر معك الخطأ يرجى التواصل معنا CODE:CA260512'], 500);
 
             }
+           }else{
+            return response()->json(['error' => 'لايمكنك الغاء توظيف هذا المقاول لأنه لايوجد صفقة مفتوحة بينكم'], 403);
+
+           }
+           
+           
+
+
+
+
         }else{
             return response()->json(['error' => 'bad Request'], 400);
         }

@@ -101,27 +101,19 @@
                         </div>
                     </div>
                     <div class="col-auto chat-tools">
-                        <vs-dropdown vs-trigger-click @click.stop>
-                            <vs-button
-                                class="btn-icon-no-bg"
-                                type="filled"
-                                icon="more_vert"
-                            ></vs-button>
-                            <!-- <a href="#">Hola mundo</a> -->
-
-                            <vs-dropdown-menu>
-                                <vs-dropdown-item>التبليغ</vs-dropdown-item>
-                                <vs-dropdown-item>
-                                    الغاء التوظيف
-                                </vs-dropdown-item>
-                            </vs-dropdown-menu>
-                        </vs-dropdown>
+         
                     </div>
                 </div>
             </div>
-            <div class="chat-body">
+            <div class="chat-body position-relative">
                 <div>
                     <div class="chat-message-container">
+                        <div class="chat-header-top">
+                            <button @click="NexChatMessage" v-if="NextPageChat != null" class="btn-read-more-chat">رسائل أقدم</button>
+                        </div>
+                        <br>
+                        <br>
+
                         <div
                             v-for="(item, index) in ChatRoomData"
                             :key="index"
@@ -280,6 +272,8 @@ export default {
             ChatRoomData: [],
             fullusername: "",
             IsOnline: null,
+            NextPageChat: null,
+            chatCount: 10,
             convertTime: function timeAgo(dateParam) {
                 if (!dateParam) {
                     return null;
@@ -324,6 +318,10 @@ export default {
         };
     },
     methods: {
+        NexChatMessage(){
+            this.chatCount+=10;
+            this.getChatRoom();
+        },
         backToList() {
             this.chatbox = false;
             clearInterval(this.interval2);
@@ -386,10 +384,12 @@ export default {
             let data = new FormData();
             data.append("OID", this.oid);
             data.append("to", this.to);
+            data.append("count", this.chatCount)
             axios
                 .post("/ajax/project/chatroom/get", data)
                 .then(response => {
                     this.ChatRoomData = response.data.data.data;
+                    this.NextPageChat = response.data.data.next_page_url;
                     this.IsOnline = response.data.IsOnline;
 
                     this.sortedChatRoomData();
@@ -398,6 +398,7 @@ export default {
                     console.log(error);
                 });
         },
+     
         users_menu_chat_click(avatar, to, fullname) {
             this.IsOnline = null;
             this.to = to;
@@ -411,10 +412,12 @@ export default {
             let data = new FormData();
             data.append("OID", this.oid);
             data.append("to", this.to);
+            data.append("count", this.chatCount);
             axios
                 .post("/ajax/project/chatroom/get", data)
                 .then(response => {
                     this.ChatRoomData = response.data.data.data;
+                    this.NextPageChat = response.data.data.next_page_url;
                     this.IsOnline = response.data.IsOnline;
 
                     this.sortedChatRoomData();

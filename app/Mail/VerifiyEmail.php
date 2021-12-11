@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class VerifiyEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $content;
     /**
      * Create a new message instance.
      *

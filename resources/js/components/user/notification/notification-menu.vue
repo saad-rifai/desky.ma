@@ -9,12 +9,13 @@
         <i class="fas fa-bell"></i>
       </template>
       <div class="menu-dropdown-lg position-relative" align="right">
+        <div v-if="datalist.length > 0">
         <div>
           <h5 class="menu-title-h5" style="font-size: 14px">الاشعارات</h5>
 
           <a
             href="#"
-            class="position-absolute top-0 end-0"
+            class="position-absolute top-0 end-0 top-menu-link"
             style="font-size: 12px"
             >الكل</a
           >
@@ -28,6 +29,15 @@
           </div>
           <span class="date-not"> {{ convertTime(item.date) }}</span>
         </div>
+</div>
+<div v-else>
+              <div
+              class="no-data-message text-center mt-4 mb-4 col-6"
+            >
+              لاتوجد بيانات لعرضها
+            </div>
+</div>
+
       </div>
     </b-dropdown>
   </div>

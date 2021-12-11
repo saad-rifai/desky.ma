@@ -74,7 +74,13 @@
                         </div>
                         <div class="mb-3 mt-4">
                             <label for="description" class="form-label">أخبر الآخرين عن رأيك</label>
-                            <textarea id="description" v-model="decription" class="form-control" rows="3" ></textarea>
+                            <textarea id="description" v-bind:class="{'is-invalid': errors.errors.description}" v-model="description" class="form-control" rows="3" ></textarea>
+                                                       <div
+                                    class="invalid-feedback"
+                                    v-if="errors.errors.description"
+                                >
+                                    {{ errors.errors.description[0] }}
+                                </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -88,7 +94,7 @@
                         </button>
                         <button
                             type="button"
-                            id="btnsend"
+                            id="btn_pr85942037"
                             @click="sendRating"
                             class="btn btn-primary btn-sm"
                         >
@@ -101,14 +107,95 @@
     </div>
 </template>
 <script>
+
+class Errors {
+    constructor() {
+        this.errors = {};
+    }
+    get(filed) {
+        if (this.errors[filed]) {
+            return this.errors[filed][0];
+        }
+    }
+    record(errors) {
+        this.errors = errors.errors;
+    }
+}
 export default {
+    props:['to', 'oid'],
     data() {
         return {
+            errors: new Errors(),
             rating: 0,
+            description: "",
         };
     },
     methods: {
-        sendRating() {}
+            openLoadingInDiv: function () {
+      $("#btn_pr85942037").html(
+        '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...'
+      );
+      this.$vs.loading({
+        container: "#modal-rate-load",
+        scale: 0.6,
+        type: "point",
+        color: "#f96a0c",
+      });
+    },
+    HideLoadingInDiv: function () {
+      $("#btn_pr85942037").html("ارسال");
+      this.$vs.loading.close("#modal-rate-load > .con-vs-loading");
+    },
+        sendRating() {
+            this.openLoadingInDiv();
+
+            let data = new FormData();
+            data.append("to", this.to)
+            data.append("OID", this.oid)
+            data.append("rating", this.rating)
+            data.append("description", this.description)
+            axios.post("/ajax/user/rate", data).then((response) => {
+                console.log(response);
+            }).catch((error) => {
+              this.errors.record(error.response.data);
+                if (error.response.status == 500) {
+                        this.errors.record(error.response.data);
+                        this.$vs.notify({
+                            title: "خطأ في النظام",
+                            text:"حصل خطأ في النظام أثناء محاولة معالجة طلبك يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
+                            color: "danger",
+                            fixed: true,
+                            icon: "warning"
+                        });
+                    } else if (error.response.status == 401) {
+                        this.errors.record(error.response.data);
+                        this.$vs.notify({
+                            text: "يجب تسجيل الدخول",
+                            color: "danger",
+                            fixed: true,
+                            icon: "warning"
+                        });
+                        window.location.href="/login?redirect="+window.location.href+"";
+                    }  else if (error.response.status == 422) {
+                        this.errors.record(error.response.data);
+                        this.$vs.notify({
+                            text: "تحقق من المدخلات",
+                            color: "danger",
+                            fixed: true,
+                            icon: "warning"
+                        });
+                    } else {
+                        this.errors.record(error.response.data);
+                        this.$vs.notify({
+                            text: error.response.data.error,
+                            color: "danger",
+                            fixed: true,
+                            icon: "warning"
+                        });
+                    }
+                    this.HideLoadingInDiv();
+            });
+        }
     }
 };
 </script>

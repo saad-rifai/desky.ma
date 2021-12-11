@@ -123,7 +123,7 @@ class ChatSystemController extends Controller
     }
     public function ProjectChatRoom(Request $request)
     {
-        if (isset($request->OID) && isset($request->to)) {
+        if (isset($request->OID) && isset($request->to) && isset($request->count)) {
             $ChatsData = chat_system::where(function ($qu) use ($request) {
                 $qu->where('OID', $request->OID)->where('type', "1")
                     ->where('from', $request->to)
@@ -132,7 +132,7 @@ class ChatSystemController extends Controller
                 $qu->where('OID', $request->OID)->where('type', "1")
                     ->where('to', $request->to)
                     ->where('from', Auth::user()->Account_number);
-            })->orderBy('created_at', 'DESC')->paginate(5);
+            })->orderBy('created_at', 'DESC')->paginate($request->count);
             $IsOnline = User::isOnline($request->to);
            // foreach ($ChatsData as $ChatData);
            for($i=0; $i < $ChatsData->count(); $i++){

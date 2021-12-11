@@ -27,7 +27,7 @@
             <div class="row justify-content-md-center" dir="rtl">
                 <div class="col-sm ">
 
-                    <div class="card p-4 mb-4">
+                    <div class="card  mb-4">
                         <div class="head-card position-relative">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="body-card-text">
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="details" role="tabpanel"
+                                <div class="tab-pane p-4 fade show active" id="details" role="tabpanel"
                                     aria-labelledby="details-tab">
                                     <p class="font-Naskh text-wrap-line">
                                         {{ $data->description }}

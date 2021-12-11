@@ -800,9 +800,27 @@ h5.menu-title-h5 {
     padding-bottom: 15px;
     font-size: 13px !important;
     color: #2e2e2e;
+    padding-top: 10px;
+
+}
+.top-menu-link {
+    margin-top: 8px;
 }
 .plyr {
     height: max-content !important;
+}
+.chat-header-top {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+button.btn-read-more-chat {
+    font-size: 12px;
+    background-color: #ffffff;
+    color: #f96a0c;
+    border: solid 1px #f96a0c;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 .menu-dropdown-lg::-webkit-scrollbar-thumb:hover {
     background: darkgrey;
@@ -878,6 +896,7 @@ header.vs-popup--header {
 .menu-dropdown-lg {
     width: 100%;
     max-width: 330px;
+    min-width: 300px;
     max-height: 390px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1311,6 +1330,11 @@ span.card-info-text {
     }
 }
 @media (max-width: 500px) {
+    span.user-rating-stars {
+
+        margin-right: 0 !important;
+        margin-top: 3px;
+    }
     .user-name-box-article h4 {
         font-size: 15px;
         margin-top: 5px;

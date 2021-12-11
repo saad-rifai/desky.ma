@@ -513,7 +513,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div v-if="OrderCreator" class="text-wraper-desky-mg p-2">
+                                <div v-if="OrderCreator" class="mg-mb mt-1 p-2">
                                     <vs-tooltip
                                         style="width: max-content"
                                         text="التكلفة - مدة التنفيذ"
@@ -547,7 +547,7 @@
               
 
                                 <div
-                                    class="text-wraper-desky-mg"
+                                    class="mg-mb"
                                     v-if="OrderCreator"
                                     id="text-wraper-desky">
                                     <p
@@ -958,7 +958,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="OrderCreator" class="mg-mb p-2">
+                            <div v-if="OrderCreator" class="mg-mb mt-1 p-2">
                                 <vs-tooltip
                                     style="width: max-content"
                                     text="التكلفة - مدة التنفيذ"
@@ -980,7 +980,7 @@
                             <div
                                 v-if="OrderCreator"
                                 id="text-wraper-desky"
-                                class="text-wraper-desky-mg"
+                                class="mg-mb"
                             >
                                 <p
                                     class="box-article-description font-Naskh text-wrap-line collapse TextCollapse"

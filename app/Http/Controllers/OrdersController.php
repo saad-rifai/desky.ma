@@ -212,7 +212,7 @@ class OrdersController extends Controller
         if(isset($request->OID)){
             $checkOrder = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['0','1','4'])->count();
             if($checkOrder < 1){
-                return response()->json(['error' => 'لايمكن تحديث هذا الطلب 45'], 403);
+                return response()->json(['error' => 'لايمكن تحديث هذا الطلب '], 403);
             }else{
                 $checkOffers = Offers::where('OID', $request->OID)->count();
                 if($checkOffers < 1){

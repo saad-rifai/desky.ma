@@ -11694,14 +11694,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* Convert Time Post  Function */
 var MONTH_NAMES = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"];
@@ -11750,6 +11742,8 @@ function getFormattedDate(date) {
       ChatRoomData: [],
       fullusername: "",
       IsOnline: null,
+      NextPageChat: null,
+      chatCount: 10,
       convertTime: function timeAgo(dateParam) {
         if (!dateParam) {
           return null;
@@ -11791,6 +11785,10 @@ function getFormattedDate(date) {
     };
   },
   methods: {
+    NexChatMessage: function NexChatMessage() {
+      this.chatCount += 10;
+      this.getChatRoom();
+    },
     backToList: function backToList() {
       this.chatbox = false;
       clearInterval(this.interval2);
@@ -11856,8 +11854,10 @@ function getFormattedDate(date) {
       var data = new FormData();
       data.append("OID", this.oid);
       data.append("to", this.to);
+      data.append("count", this.chatCount);
       axios.post("/ajax/project/chatroom/get", data).then(function (response) {
         _this3.ChatRoomData = response.data.data.data;
+        _this3.NextPageChat = response.data.data.next_page_url;
         _this3.IsOnline = response.data.IsOnline;
 
         _this3.sortedChatRoomData();
@@ -11884,8 +11884,10 @@ function getFormattedDate(date) {
       var data = new FormData();
       data.append("OID", this.oid);
       data.append("to", this.to);
+      data.append("count", this.chatCount);
       axios.post("/ajax/project/chatroom/get", data).then(function (response) {
         _this4.ChatRoomData = response.data.data.data;
+        _this4.NextPageChat = response.data.data.next_page_url;
         _this4.IsOnline = response.data.IsOnline;
 
         _this4.sortedChatRoomData();
@@ -13101,6 +13103,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["oid", "status"],
   data: function data() {
@@ -13110,7 +13124,8 @@ __webpack_require__.r(__webpack_exports__);
       nodata: false,
       listData: [],
       OrderCreator: false,
-      userid: null
+      userid: null,
+      rateUserId: null
     };
   },
   methods: {
@@ -14469,6 +14484,12 @@ var _public_data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2___namespace 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 //
 //
 //
@@ -14571,14 +14592,117 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+var Errors = /*#__PURE__*/function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "get",
+    value: function get(filed) {
+      if (this.errors[filed]) {
+        return this.errors[filed][0];
+      }
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors.errors;
+    }
+  }]);
+
+  return Errors;
+}();
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['to', 'oid'],
   data: function data() {
     return {
-      rating: 0
+      errors: new Errors(),
+      rating: 0,
+      description: ""
     };
   },
   methods: {
-    sendRating: function sendRating() {}
+    openLoadingInDiv: function openLoadingInDiv() {
+      $("#btn_pr85942037").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...');
+      this.$vs.loading({
+        container: "#modal-rate-load",
+        scale: 0.6,
+        type: "point",
+        color: "#f96a0c"
+      });
+    },
+    HideLoadingInDiv: function HideLoadingInDiv() {
+      $("#btn_pr85942037").html("ارسال");
+      this.$vs.loading.close("#modal-rate-load > .con-vs-loading");
+    },
+    sendRating: function sendRating() {
+      var _this = this;
+
+      this.openLoadingInDiv();
+      var data = new FormData();
+      data.append("to", this.to);
+      data.append("OID", this.oid);
+      data.append("rating", this.rating);
+      data.append("description", this.description);
+      axios.post("/ajax/user/rate", data).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        _this.errors.record(error.response.data);
+
+        if (error.response.status == 500) {
+          _this.errors.record(error.response.data);
+
+          _this.$vs.notify({
+            title: "خطأ في النظام",
+            text: "حصل خطأ في النظام أثناء محاولة معالجة طلبك يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+        } else if (error.response.status == 401) {
+          _this.errors.record(error.response.data);
+
+          _this.$vs.notify({
+            text: "يجب تسجيل الدخول",
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+
+          window.location.href = "/login?redirect=" + window.location.href + "";
+        } else if (error.response.status == 422) {
+          _this.errors.record(error.response.data);
+
+          _this.$vs.notify({
+            text: "تحقق من المدخلات",
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+        } else {
+          _this.errors.record(error.response.data);
+
+          _this.$vs.notify({
+            text: error.response.data.error,
+            color: "danger",
+            fixed: true,
+            icon: "warning"
+          });
+        }
+
+        _this.HideLoadingInDiv();
+      });
+    }
   }
 });
 
@@ -59213,7 +59337,7 @@ var render = function() {
                               _vm.OrderCreator
                                 ? _c(
                                     "div",
-                                    { staticClass: "text-wraper-desky-mg p-2" },
+                                    { staticClass: "mg-mb mt-1 p-2" },
                                     [
                                       _c(
                                         "vs-tooltip",
@@ -59281,7 +59405,7 @@ var render = function() {
                                 ? _c(
                                     "div",
                                     {
-                                      staticClass: "text-wraper-desky-mg",
+                                      staticClass: "mg-mb",
                                       attrs: { id: "text-wraper-desky" }
                                     },
                                     [
@@ -59947,7 +60071,7 @@ var render = function() {
                                 _vm.OrderCreator
                                   ? _c(
                                       "div",
-                                      { staticClass: "mg-mb p-2" },
+                                      { staticClass: "mg-mb mt-1 p-2" },
                                       [
                                         _c(
                                           "vs-tooltip",
@@ -59998,7 +60122,7 @@ var render = function() {
                                   ? _c(
                                       "div",
                                       {
-                                        staticClass: "text-wraper-desky-mg",
+                                        staticClass: "mg-mb",
                                         attrs: { id: "text-wraper-desky" }
                                       },
                                       [
@@ -61762,158 +61886,139 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-auto chat-tools" },
-                [
-                  _c(
-                    "vs-dropdown",
-                    {
-                      attrs: { "vs-trigger-click": "" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                        }
-                      }
-                    },
-                    [
-                      _c("vs-button", {
-                        staticClass: "btn-icon-no-bg",
-                        attrs: { type: "filled", icon: "more_vert" }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "vs-dropdown-menu",
-                        [
-                          _c("vs-dropdown-item", [_vm._v("التبليغ")]),
-                          _vm._v(" "),
-                          _c("vs-dropdown-item", [
-                            _vm._v(
-                              "\n                                الغاء التوظيف\n                            "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              _c("div", { staticClass: "col-auto chat-tools" })
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "chat-body" }, [
+          _c("div", { staticClass: "chat-body position-relative" }, [
             _c("div", [
               _c(
                 "div",
                 { staticClass: "chat-message-container" },
-                _vm._l(_vm.ChatRoomData, function(item, index) {
-                  return _c(
-                    "div",
-                    {
-                      key: index,
-                      staticClass: "message-box",
-                      class: { send: item.to == _vm.to }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "message-item",
-                          class: { send: item.to == _vm.to }
-                        },
-                        [
-                          _c("div", { staticClass: "message-text" }, [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(item.message) +
-                                "\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "message-footer" }, [
-                            _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-md-auto" }, [
-                                _c("div", { staticClass: "message-time" }, [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(_vm.convertTime(item.date)) +
-                                      "\n                                        "
-                                  )
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              item.to == _vm.to
-                                ? _c("div", { staticClass: "col-md-auto" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "message-status" },
-                                      [
-                                        _c(
-                                          "vs-tooltip",
-                                          { attrs: { text: "تم الارسال" } },
-                                          [
-                                            item.status == 0
-                                              ? _c("i", {
-                                                  staticClass:
-                                                    "far fa-check-circle"
-                                                })
-                                              : _vm._e()
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "vs-tooltip",
-                                          { attrs: { text: "تم التوصل" } },
-                                          [
-                                            item.status == 1
-                                              ? _c("i", {
-                                                  staticClass:
-                                                    "fas fa-check-circle"
-                                                })
-                                              : _vm._e()
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "vs-tooltip",
-                                          { attrs: { text: "تمت المشاهدة" } },
-                                          [
-                                            item.status == 2
-                                              ? _c(
-                                                  "span",
-                                                  {
-                                                    staticClass:
-                                                      "received-chat-icon"
-                                                  },
-                                                  [
-                                                    _c("img", {
-                                                      attrs: {
-                                                        src:
-                                                          _vm.chat_box_avatar,
-                                                        alt: ""
-                                                      }
-                                                    })
-                                                  ]
-                                                )
-                                              : _vm._e()
-                                          ]
-                                        )
-                                      ],
-                                      1
+                [
+                  _c("div", { staticClass: "chat-header-top" }, [
+                    _vm.NextPageChat != null
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn-read-more-chat",
+                            on: { click: _vm.NexChatMessage }
+                          },
+                          [_vm._v("رسائل أقدم")]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._l(_vm.ChatRoomData, function(item, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "message-box",
+                        class: { send: item.to == _vm.to }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "message-item",
+                            class: { send: item.to == _vm.to }
+                          },
+                          [
+                            _c("div", { staticClass: "message-text" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(item.message) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "message-footer" }, [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-md-auto" }, [
+                                  _c("div", { staticClass: "message-time" }, [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(_vm.convertTime(item.date)) +
+                                        "\n                                        "
                                     )
                                   ])
-                                : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                item.to == _vm.to
+                                  ? _c("div", { staticClass: "col-md-auto" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "message-status" },
+                                        [
+                                          _c(
+                                            "vs-tooltip",
+                                            { attrs: { text: "تم الارسال" } },
+                                            [
+                                              item.status == 0
+                                                ? _c("i", {
+                                                    staticClass:
+                                                      "far fa-check-circle"
+                                                  })
+                                                : _vm._e()
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "vs-tooltip",
+                                            { attrs: { text: "تم التوصل" } },
+                                            [
+                                              item.status == 1
+                                                ? _c("i", {
+                                                    staticClass:
+                                                      "fas fa-check-circle"
+                                                  })
+                                                : _vm._e()
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "vs-tooltip",
+                                            { attrs: { text: "تمت المشاهدة" } },
+                                            [
+                                              item.status == 2
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "received-chat-icon"
+                                                    },
+                                                    [
+                                                      _c("img", {
+                                                        attrs: {
+                                                          src:
+                                                            _vm.chat_box_avatar,
+                                                          alt: ""
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                : _vm._e()
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ])
                             ])
-                          ])
-                        ]
-                      )
-                    ]
-                  )
-                }),
-                0
+                          ]
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
               )
             ])
           ]),
@@ -63004,7 +63109,7 @@ var render = function() {
       _vm._v(" "),
       _c("canceling-contract", { attrs: { oid: _vm.oid, userid: _vm.userid } }),
       _vm._v(" "),
-      _c("rate-ae"),
+      _c("rate-ae", { attrs: { to: _vm.rateUserId, oid: _vm.oid } }),
       _vm._v(" "),
       _vm.stopLazyLoading != true
         ? _c(
@@ -63047,190 +63152,224 @@ var render = function() {
       _c(
         "div",
         _vm._l(_vm.listData, function(item, index) {
-          return _c(
-            "div",
-            { key: index, staticClass: "box-article pb-3 mb-3" },
-            [
-              _c("div", [
-                _c("div", { staticClass: "head-box-article" }, [
-                  _c("div", { staticClass: "row text-center" }, [
-                    _c("div", { staticClass: "col" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c(
-                          "div",
-                          { staticClass: "col-auto position-relative" },
-                          [
-                            item.isOnline
-                              ? _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "\n                          position-absolute\n                          bottom-0\n                          start-100\n                          translate-middle\n                          p-2\n                          bg-success\n                          online-status\n                          Search-status-user\n                          border border-light\n                          rounded-circle\n                        ",
-                                    attrs: {
-                                      "data-bs-toggle": "tooltip",
-                                      "data-bs-placement": "top",
-                                      title: "متصل"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "span",
-                                      { staticClass: "visually-hidden" },
-                                      [_vm._v("Online")]
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              { attrs: { href: "/@" + item.user.username } },
+          return _c("div", { key: index, staticClass: "box-article  mb-3" }, [
+            _c("div", [
+              _c("div", { staticClass: "head-box-article" }, [
+                _c("div", { staticClass: "row text-center" }, [
+                  _c("div", { staticClass: "col" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-auto position-relative" }, [
+                        item.isOnline
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "\n                          position-absolute\n                          bottom-0\n                          start-100\n                          translate-middle\n                          p-2\n                          bg-success\n                          online-status\n                          Search-status-user\n                          border border-light\n                          rounded-circle\n                        ",
+                                attrs: {
+                                  "data-bs-toggle": "tooltip",
+                                  "data-bs-placement": "top",
+                                  title: "متصل"
+                                }
+                              },
                               [
-                                _c(
-                                  "div",
-                                  { staticClass: "avatar-large-box-article" },
-                                  [
-                                    item.user.avatar != "" &&
-                                    item.user.avatar != null
-                                      ? _c("img", {
-                                          attrs: {
-                                            src: "/" + item.user.avatar,
-                                            alt: item.user.username
-                                          }
-                                        })
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _c("img", {
+                                _c("span", { staticClass: "visually-hidden" }, [
+                                  _vm._v("Online")
+                                ])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          { attrs: { href: "/@" + item.user.username } },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "avatar-large-box-article mb-avatar-size"
+                              },
+                              [
+                                item.user.avatar != "" &&
+                                item.user.avatar != null
+                                  ? _c("img", {
                                       attrs: {
-                                        src: "/img/icons/avatar.png",
+                                        src: "/" + item.user.avatar,
                                         alt: item.user.username
                                       }
                                     })
-                                  ]
-                                )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c("img", {
+                                  attrs: {
+                                    src: "/img/icons/avatar.png",
+                                    alt: item.user.username
+                                  }
+                                })
                               ]
                             )
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-auto" }, [
-                          _c("div", { staticClass: "user-name-box-article" }, [
-                            _c(
-                              "a",
-                              { attrs: { href: "/@" + item.user.username } },
-                              [
-                                _c(
-                                  "h4",
-                                  [
-                                    _vm._v(
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-auto" }, [
+                        _c("div", { staticClass: "user-name-box-article" }, [
+                          _c(
+                            "a",
+                            { attrs: { href: "/@" + item.user.username } },
+                            [
+                              _c(
+                                "h4",
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        item.user.frist_name[0].toUpperCase() +
+                                          item.user.frist_name.substring(1)
+                                      ) +
                                       "\n                                            " +
-                                        _vm._s(
-                                          item.user.frist_name[0].toUpperCase() +
-                                            item.user.frist_name.substring(1)
-                                        ) +
-                                        "\n                                            " +
-                                        _vm._s(
-                                          item.user.last_name[0].toUpperCase() +
-                                            item.user.last_name.substring(1)
-                                        ) +
-                                        "\n                                            "
-                                    ),
-                                    _c(
-                                      "vs-tooltip",
-                                      {
-                                        staticStyle: {
-                                          display: "initial !important"
-                                        },
-                                        attrs: {
-                                          text: "حساب مقاول ذاتي تم التحقق منه"
-                                        }
+                                      _vm._s(
+                                        item.user.last_name[0].toUpperCase() +
+                                          item.user.last_name.substring(1)
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c(
+                                    "vs-tooltip",
+                                    {
+                                      staticStyle: {
+                                        display: "initial !important"
                                       },
-                                      [
-                                        item.verified_account == 2
-                                          ? _c("span", {
-                                              staticClass:
-                                                "\n                                verified-icon verified-2\n                                mt-2\n                                text-icon\n                              ",
-                                              staticStyle: {
-                                                "margin-right": "0px !important"
-                                              },
-                                              attrs: { dir: "rtl" }
-                                            })
-                                          : _vm._e()
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "vs-tooltip",
-                                      {
-                                        staticStyle: {
-                                          display: "initial !important"
-                                        },
-                                        attrs: { text: "حساب تم التحقق منه" }
+                                      attrs: {
+                                        text: "حساب مقاول ذاتي تم التحقق منه"
+                                      }
+                                    },
+                                    [
+                                      item.verified_account == 2
+                                        ? _c("span", {
+                                            staticClass:
+                                              "\n                                verified-icon verified-2\n                                mt-2\n                                text-icon\n                              ",
+                                            staticStyle: {
+                                              "margin-right": "0px !important"
+                                            },
+                                            attrs: { dir: "rtl" }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "vs-tooltip",
+                                    {
+                                      staticStyle: {
+                                        display: "initial !important"
                                       },
-                                      [
-                                        item.verified_account == 1
-                                          ? _c("span", {
-                                              staticClass:
-                                                "\n                                verified-icon verified-1\n                                mt-2\n                                text-icon\n                              ",
-                                              staticStyle: {
-                                                "margin-right": "0px !important"
-                                              },
-                                              attrs: { dir: "rtl" }
-                                            })
-                                          : _vm._e()
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]
-                            )
-                          ])
+                                      attrs: { text: "حساب تم التحقق منه" }
+                                    },
+                                    [
+                                      item.verified_account == 1
+                                        ? _c("span", {
+                                            staticClass:
+                                              "\n                                verified-icon verified-1\n                                mt-2\n                                text-icon\n                              ",
+                                            staticStyle: {
+                                              "margin-right": "0px !important"
+                                            },
+                                            attrs: { dir: "rtl" }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-auto" }, [
+                        _c("div", { staticClass: "user-info-box-article" }, [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "user-rating-stars",
+                              attrs: { id: "rating-section", dir: "rtl" }
+                            },
+                            _vm._l(5, function(n) {
+                              return _c("i", {
+                                key: n,
+                                class:
+                                  n <= parseInt(item.userRating)
+                                    ? "fas fa-star"
+                                    : "far fa-star"
+                              })
+                            }),
+                            0
+                          )
                         ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-auto mobile-hidden-1" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _vm._m(1, true),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-auto p-1 " }, [
-                          _c("span", { staticClass: "dropdown" }, [
-                            _vm._m(2, true),
-                            _vm._v(" "),
-                            _c(
-                              "ul",
-                              {
-                                staticClass: "dropdown-menu",
-                                attrs: { "aria-labelledby": "menu_user" }
-                              },
-                              [
-                                _c(
-                                  "li",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        _vm.userid = item.Account_number
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "dropdown-item",
-                                        attrs: {
-                                          type: "button",
-                                          "data-toggle": "modal",
-                                          "data-target":
-                                            "#canceling-ae-contract"
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-auto " }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-auto p-1 " }, [
+                        item.status == 1
+                          ? _c("span", { staticClass: "dropdown" }, [
+                              _vm._m(1, true),
+                              _vm._v(" "),
+                              _c(
+                                "ul",
+                                {
+                                  staticClass: "dropdown-menu",
+                                  attrs: { "aria-labelledby": "menu_user" }
+                                },
+                                [
+                                  _c(
+                                    "li",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.userid = item.Account_number
                                         }
-                                      },
-                                      [_vm._v("الغاء العقد")]
-                                    )
-                                  ]
-                                )
-                              ]
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            type: "button",
+                                            "data-toggle": "modal",
+                                            "data-target":
+                                              "#canceling-ae-contract"
+                                          }
+                                        },
+                                        [_vm._v("الغاء العقد")]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mg-mb" }, [
+                  _c("div", { staticClass: "col-auto" }, [
+                    _c("div", { staticClass: "user-info-box-article" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-auto" }, [
+                          _c("div", { staticClass: "user-info-box-article" }, [
+                            _c("i", { staticClass: "fas fa-briefcase" }),
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(item.AeAccount.job_title) +
+                                "\n                                    "
                             )
                           ])
                         ])
@@ -63238,155 +63377,137 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row mr-65 mmt-35" }, [
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c("div", { staticClass: "user-info-box-article" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c(
-                              "div",
-                              { staticClass: "user-info-box-article" },
-                              [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "user-rating-stars",
-                                    attrs: { id: "rating-section", dir: "rtl" }
-                                  },
-                                  _vm._l(5, function(n) {
-                                    return _c("i", {
-                                      key: n,
-                                      class:
-                                        n <= parseInt(item.userRating)
-                                          ? "fas fa-star"
-                                          : "far fa-star"
-                                    })
-                                  }),
-                                  0
-                                )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c(
-                              "div",
-                              { staticClass: "user-info-box-article" },
-                              [
-                                _c("i", { staticClass: "fas fa-briefcase" }),
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(item.AeAccount.job_title) +
-                                    "\n                                    "
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c("div", { staticClass: "user-info-box-article" }, [
-                        _c("i", { staticClass: "fas fa-map-marker-alt" }),
-                        _vm._v(
-                          "\n                            المغرب, " +
-                            _vm._s(item.city) +
-                            "\n                        "
-                        )
-                      ])
+                  _c("div", { staticClass: "col-auto" }, [
+                    _c("div", { staticClass: "user-info-box-article" }, [
+                      _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                      _vm._v(
+                        "\n                            المغرب, " +
+                          _vm._s(item.city) +
+                          "\n                        "
+                      )
                     ])
                   ])
-                ]),
-                _vm._v(" "),
-                _vm.OrderCreator
-                  ? _c(
-                      "div",
-                      { staticClass: "mr-65 p-2" },
-                      [
-                        _c(
-                          "vs-tooltip",
-                          {
-                            staticStyle: { width: "max-content" },
-                            attrs: { text: "التكلفة - مدة التنفيذ" }
-                          },
-                          [
-                            _c(
-                              "span",
-                              {
-                                staticClass: "text-brand cur-p",
-                                attrs: { dir: "rtl" }
-                              },
-                              [
-                                _c("strong", [
-                                  _vm._v(
-                                    _vm._s(item.price) +
-                                      " درهم -\n                            " +
-                                      _vm._s(item.time) +
-                                      " يوم"
-                                  )
-                                ])
-                              ]
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.OrderCreator
+                ? _c(
+                    "div",
+                    { staticClass: "mg-mb mt-1 p-2" },
+                    [
+                      _c(
+                        "vs-tooltip",
+                        {
+                          staticStyle: { width: "max-content" },
+                          attrs: { text: "التكلفة - مدة التنفيذ" }
+                        },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "text-brand cur-p",
+                              attrs: { dir: "rtl" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(item.price) +
+                                    " درهم -\n                            " +
+                                    _vm._s(item.time) +
+                                    " يوم"
+                                )
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "mg-mb mt-2 mb-2" }, [
                 item.status == 1
-                  ? _c("span", { staticClass: "badge bg-warning mr-65" }, [
+                  ? _c("span", { staticClass: "badge bg-warning" }, [
                       _vm._v("موظف")
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "mr-65", attrs: { id: "text-wraper-desky" } },
-                  [
+                item.status == 2
+                  ? _c("span", { staticClass: "badge bg-success" }, [
+                      _vm._v("انتهى العقد")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                item.status == 3
+                  ? _c("span", { staticClass: "badge bg-danger" }, [
+                      _vm._v("ملغي")
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "mg-mb", attrs: { id: "text-wraper-desky" } },
+                [
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "box-article-description font-Naskh text-wrap-line collapse TextCollapse",
+                      attrs: {
+                        id: "TextCollapse" + index,
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(item.description) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("a", {
+                    staticClass: "collapsed",
+                    attrs: {
+                      role: "button",
+                      "data-toggle": "collapse",
+                      href: "#TextCollapse" + index,
+                      "aria-expanded": "false",
+                      "aria-controls": "TextCollapse" + index
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              item.NeedRating
+                ? _c("div", { staticClass: "mt-3", attrs: { align: "left" } }, [
                     _c(
-                      "p",
+                      "button",
                       {
-                        staticClass:
-                          "box-article-description font-Naskh text-wrap-line collapse TextCollapse",
+                        staticClass: "btn btn-primary btn-sm",
                         attrs: {
-                          id: "TextCollapse" + index,
-                          "aria-expanded": "false"
+                          type: "button",
+                          "data-toggle": "modal",
+                          "data-target": "#Rate_modal"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateUserId = item.Account_number
+                          }
                         }
                       },
                       [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item.description) +
-                            "\n                "
-                        )
+                        _c("i", { staticClass: "fas fa-star" }),
+                        _vm._v(" تقييم")
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c("a", {
-                      staticClass: "collapsed",
-                      attrs: {
-                        role: "button",
-                        "data-toggle": "collapse",
-                        href: "#TextCollapse" + index,
-                        "aria-expanded": "false",
-                        "aria-controls": "TextCollapse" + index
-                      }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                item.NeedRating
-                  ? _c(
-                      "div",
-                      { staticClass: "mt-3", attrs: { align: "left" } },
-                      [_vm._m(3, true)]
                     )
-                  : _vm._e()
-              ])
-            ]
-          )
+                  ])
+                : _vm._e()
+            ])
+          ])
         }),
         0
       ),
@@ -63439,16 +63560,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto p-1" }, [
-      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
-        _c("i", { staticClass: "fas fa-envelope" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "button",
       {
@@ -63460,23 +63571,6 @@ var staticRenderFns = [
         }
       },
       [_c("i", { staticClass: "fas fa-ellipsis-v" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-primary btn-sm",
-        attrs: {
-          type: "button",
-          "data-toggle": "modal",
-          "data-target": "#Rate_modal"
-        }
-      },
-      [_c("i", { staticClass: "fas fa-star" }), _vm._v(" تقييم")]
     )
   }
 ]
@@ -66017,22 +66111,33 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.decription,
-                        expression: "decription"
+                        value: _vm.description,
+                        expression: "description"
                       }
                     ],
                     staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.errors.description },
                     attrs: { id: "description", rows: "3" },
-                    domProps: { value: _vm.decription },
+                    domProps: { value: _vm.description },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.decription = $event.target.value
+                        _vm.description = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.errors.description
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.errors.errors.description[0]) +
+                            "\n                            "
+                        )
+                      ])
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
@@ -66058,7 +66163,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-sm",
-                    attrs: { type: "button", id: "btnsend" },
+                    attrs: { type: "button", id: "btn_pr85942037" },
                     on: { click: _vm.sendRating }
                   },
                   [
