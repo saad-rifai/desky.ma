@@ -102,8 +102,11 @@ Route::prefix('ajax')->group(function () {
 
         /* Chat System */
         Route::post('project/chat/send', 'ChatSystemController@NewMessageInsideProject');
+
         Route::post('project/chatList/get', 'ChatSystemController@ProjectGetChatList');
         Route::post('project/chatroom/get', 'ChatSystemController@ProjectChatRoom');
+
+        Route::get('messages/chatList/get', 'ChatSystemController@MessagesChatList');
 
         /* Chat System */
 
@@ -145,6 +148,15 @@ Route::get('/try', function () {
 
 
 Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function () {
+
+    /* Messages */
+
+    Route::get('messages', function(){
+        return view('chat/messages');
+    });
+
+    /* Messages */
+
     Route::get('order/{OID}/edit', 'OrdersController@editPage');
 
     Route::get('/portfolio/create', function () {

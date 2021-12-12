@@ -255,7 +255,9 @@
                         class="box-article-description font-Naskh text-wrap-line collapse TextCollapse"
                    :id="'TextCollapse'+index" aria-expanded="false">
                         {{ item.description }}
+                              <span class="text-hidden-opacity"></span>
                     </p>
+              
                       <a role="button" class="collapsed" data-toggle="collapse" :href="'#TextCollapse'+index" aria-expanded="false" :aria-controls="'TextCollapse'+index"></a>
                 </div>
                 <div v-if="item.NeedRating" class="mt-3" align="left">

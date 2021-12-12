@@ -75,7 +75,7 @@ class ChatSystemController extends Controller
         if (isset($request->OID)) {
             $OrderOwnerCeck = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->count();
             if ($OrderOwnerCeck > 0) {
-                $Destination = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2'])->get(['Account_number']);
+                $Destination = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2', '3'])->get(['Account_number']);
 
                 /* Count New Messages */
                 //  foreach($GetDestinations as $Destination);
@@ -145,4 +145,27 @@ class ChatSystemController extends Controller
             return response()->json(['error' => 'طلب خاطئ !'], 400);
         }
     }
+    public function MessagesChatList(){
+    $messages = chat_system::where(function ($query) {
+        $query->where('to', Auth::user()->Account_number)
+              ->orWhere('from', Auth::user()->Account_number);
+    })->orderBy('created_at', 'DESC')->paginate(10)->unique('room_id');
+    for($i=0; count($messages) > $i; $i++){
+
+        if($messages[$i]->to != Auth::user()->Account_number){
+
+            $UserInfos = User::where('Account_number', $messages[$i]->to)->get(['avatar', 'frist_name', 'last_name']);
+            foreach($UserInfos as $UserInfo);
+            $messages[$i]->userInfos = $UserInfo;
+
+        }elseif($messages[$i]->from != Auth::user()->Account_number){
+            $UserInfos = User::where('Account_number', $messages[$i]->from)->get(['avatar', 'frist_name', 'last_name']);
+            foreach($UserInfos as $UserInfo);
+            $messages[$i]->userInfos = $UserInfo;
+
+        }
+    }
+    return response()->json(['data' => $messages], 200);
+    }
+    
 }

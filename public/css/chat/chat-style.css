@@ -305,3 +305,158 @@ span.list-users-message-badge {
 .chat-body::-webkit-scrollbar {
     width: 7px !important;
 }
+
+/*messages Style*/
+
+.messages-user-avatar {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+p.last-message {
+    font-size: 12px;
+    color: #8b8b8b;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+button.btn-icon-no-bg {
+    background: none;
+    border: none !important;
+    font-size: 30px;
+    padding: 9px 15px;
+    color: #505050;
+}
+button.btn-icon-no-bg.mb-show-chat {
+    display: none;
+}
+.messages-users-list {
+    border-left: solid 1px #dfdfdf;
+    height: 559px;
+    overflow-y: auto;
+    position: relative;
+}
+button.btn-close.messages-users-btn-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+.chat-box-not-selected img {
+    width: 100%;
+    max-width: 250px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+.chat-box-not-selected h1 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    color: #4a4a4a;
+}
+.chat-box-not-selected p {
+    text-align: center;
+    direction: rtl;
+    font-size: 13px;
+    color: #787878;
+}
+button.btn-icon-no-bg.mb-icon-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #f96a0c;
+    color: white;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    display: block;
+    margin: 15px;
+}
+h1.messages-users-list-title {
+    text-align: right;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 15px 24px;
+    border-bottom: solid 1px #dfdfdf;
+}
+.messages-footer {
+    background-color: #ededed;
+    padding: 10px;
+}
+.messages-user-avatar img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.messages-user-infos h1 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+p.isOnline-text {
+    font-size: 13px;
+    color: #4c4c4c;
+}
+.messages-users-list li:hover {
+    background-color: #f6f6f6;
+    opacity: 0.8;
+}
+
+span.new-notification-badge {
+    width: 15px;
+    height: 15px;
+    background-color: #f96a0c;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(50%, -50%);
+    border-radius: 100%;
+}
+.messages-header {
+    padding: 10px;
+    background-color: #ededed;
+    display: block;
+    width: 100%;
+}
+.messages-body {
+    display: block;
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+
+}
+.messages-users-list li {
+    cursor: pointer;
+}
+
+
+
+@media (min-width: 768px) {
+    .collapse.dont-collapse-sm {
+      display: block !important;
+      height: auto !important;
+      visibility: visible;
+    }
+  }
+  @media (max-width: 768px) {
+    button.btn-close.messages-users-btn-close{
+        display: block;
+    }
+    button.btn-icon-no-bg.mb-show-chat {
+        display: block;
+    }
+    .mb-menu-users-list {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+   
+    }
+  }

@@ -199,8 +199,12 @@ span.user-rating-stars {
     padding: 8px 20px !important;
     width: auto !important;
     height: auto !important;
-   /* display: inline-grid;*/
 
+}
+.no-data-message.text-center {
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'Noto Naskh Arabic';
 }
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     color: #ffffff!important;
@@ -232,16 +236,13 @@ a.navbar-brand.beta::before {
     font-weight: 700;
     color: #484848;
 }
-#text-wraper-desky .TextCollapse.collapse:not(.show)::before {
-    content: "....";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    top: 30px;
+
+#text-wraper-desky .TextCollapse.collapse.show > .text-hidden-opacity {
+    display: none !important;
 }
   #text-wraper-desky .TextCollapse.collapse:not(.show) {
     display: block;
-    height: 4rem;
+    height: 5rem;
     overflow: hidden;
     position: relative;
   }
@@ -360,6 +361,17 @@ ul.dropdown-menu.show {
 .icon-large-top img {
     width: 100%;
     max-width: 180px;
+}
+.text-hidden-opacity {
+    opacity: 1;
+    transition: all .3s linear;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-image: linear-gradient(to bottom, transparent 65%, white);
 }
 .show-files-border {
     border-bottom: solid 1px#dddddd;

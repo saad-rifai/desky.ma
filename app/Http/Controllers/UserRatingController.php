@@ -8,6 +8,7 @@ use App\UserRating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\UserNotification;
+use Illuminate\Support\Facades\Cache;
 class UserRatingController extends Controller
 {
     public function create(Request $request){

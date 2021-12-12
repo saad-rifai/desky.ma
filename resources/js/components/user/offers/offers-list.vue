@@ -556,6 +556,7 @@
                                         aria-expanded="false"
                                     >
                                     {{ item.description }}
+                                    <span class="text-hidden-opacity"></span>
                                     </p>
                                     <a
                                         role="button"
@@ -988,6 +989,7 @@
                                     aria-expanded="false"
                                 >
                                     {{ item.description }}
+                                    <span class="text-hidden-opacity"></span>
                                 </p>
                                 <a
                                     role="button"
