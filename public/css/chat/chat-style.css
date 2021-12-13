@@ -65,7 +65,7 @@ h1.chat-box-title {
 .message-item {
     width: 100%;
     max-width: 350px;
-    color: #979797;
+    color: #161616;
 
     margin-right: auto !important;
 }
@@ -193,6 +193,7 @@ span.file-item-name {
     border-radius: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
+    box-shadow: -3px 5px 0.5px rgb(0 0 0 / 10%);
 }
 .vs-list--avatar {
     position: relative;
@@ -217,6 +218,10 @@ span.isOnlineBadgVuesax {
 .message-box.send:last-child .message-item.send .message-footer .message-status {
     display: block;
 }
+.message-box.box-messages-2.send:first-child .message-item.send .message-footer .message-status {
+    display: block;
+}
+
 .chat-tabs-last-message {
     margin: 0 !important;
     margin-top: 5px !important;
@@ -352,31 +357,37 @@ button.btn-close.messages-users-btn-close {
     margin-left: auto;
     display: block;
 }
+
+
 .chat-box-not-selected h1 {
     text-align: center;
     font-size: 20px;
     font-weight: 400;
     color: #4a4a4a;
 }
+
 .chat-box-not-selected p {
     text-align: center;
     direction: rtl;
     font-size: 13px;
     color: #787878;
 }
+
 button.btn-icon-no-bg.mb-icon-bottom {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: #f96a0c;
-    color: white;
+    top: 0;
+    left: 0;
+    color: #444444;
     border-radius: 100%;
     width: 60px;
     height: 60px;
     text-align: center;
     display: block;
     margin: 15px;
+    z-index: 100;
+    display: none;
 }
+
 h1.messages-users-list-title {
     text-align: right;
     font-size: 14px;
@@ -445,6 +456,9 @@ span.new-notification-badge {
     }
   }
   @media (max-width: 768px) {
+    button.btn-icon-no-bg.mb-icon-bottom{
+    display: block;
+    }
     button.btn-close.messages-users-btn-close{
         display: block;
     }

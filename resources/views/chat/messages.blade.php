@@ -7,7 +7,7 @@
 <div class="container">
     <div class="card mt-5 mb-5">
         <div id="app">
-            <messages-box></messages-box>
+            <messages-box account_number="{{Auth::user()->Account_number}}"></messages-box>
 
         </div>
     </div>

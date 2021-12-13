@@ -107,6 +107,8 @@ Route::prefix('ajax')->group(function () {
         Route::post('project/chatroom/get', 'ChatSystemController@ProjectChatRoom');
 
         Route::get('messages/chatList/get', 'ChatSystemController@MessagesChatList');
+        Route::get('messages/conversation/get/{room_id}/{paginate}', 'ChatSystemController@GetConversation');
+        Route::post('user/message/send', 'ChatSystemController@SendMessage');
 
         /* Chat System */
 
