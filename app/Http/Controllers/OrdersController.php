@@ -9,7 +9,7 @@ use App\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\json_decode;
 
 class OrdersController extends Controller
@@ -18,7 +18,7 @@ class OrdersController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string|max:180|min:10',
-            'description' => 'required|string|max:2000|min:100',
+            'description' => 'required|string|max:2000|min:80',
             'sector' => 'required|integer|max:4|min:1',
             'activite' => 'nullable|integer',
             'onlineCeck' => 'required|integer|max:2|min:1',
@@ -119,11 +119,9 @@ class OrdersController extends Controller
                         $uploaded_count = 0;
                         foreach ($uploads as $upload) {
                             $image_type = $upload->extension();
-                            $folderPath = "img/users/orders/" . date("Y") . '/' . Auth::user()->Account_number . '/';
-                            $filname =  Auth::user()->Account_number . '-' . uniqid() . '.' . $image_type;
                             $file = $upload;
-                            $upload_success = $file->move($folderPath, $filname);
-                            $fullfilesUrl[$index] = ['file_url' => $folderPath . $filname, 'filename' => $upload->getClientOriginalName()];
+                            $upload_success = $file->store('users/'.Auth::user()->Account_number.'/orders', 's3');
+                            $fullfilesUrl[$index] = ['file_url' => Storage::disk('s3')->url($upload_success), 'filename' => $upload->getClientOriginalName()];
                             $index++;
                             if ($upload_success) {
                                 $uploaded_count++;
@@ -219,7 +217,7 @@ class OrdersController extends Controller
 
                     $this->validate($request, [
                         'title' => 'required|string|max:180|min:10',
-                        'description' => 'required|string|max:2000|min:100',
+                        'description' => 'required|string|max:2000|min:80',
                         'sector' => 'required|integer|max:4|min:1',
                         'activite' => 'nullable|integer',
                         'onlineCeck' => 'required|integer|max:2|min:1',
@@ -280,7 +278,9 @@ class OrdersController extends Controller
                 if($fileAtSystem != null){
                     $fileAtSystem = json_decode($fileAtSystem, true);
                     $filesAtSystemCount = count($fileAtSystem);
-                }
+             }
+            
+
 
                 if (($count+$filesAtSystemCount) <= 5) {
                     foreach ($files as $file) {
@@ -327,12 +327,9 @@ class OrdersController extends Controller
                         $index = 0;
                         $uploaded_count = 0;
                         foreach ($uploads as $upload) {
-                            $image_type = $upload->extension();
-                            $folderPath = "img/users/orders/" . date("Y") . '/' . Auth::user()->Account_number . '/';
-                            $filname =  Auth::user()->Account_number . '-' . uniqid() . '.' . $image_type;
                             $file = $upload;
-                            $upload_success = $file->move($folderPath, $filname);
-                            $fullfilesUrl[$index] = ['file_url' => $folderPath . $filname, 'filename' => $upload->getClientOriginalName()];
+                            $upload_success = $file->store('users/'.Auth::user()->Account_number.'/orders', 's3');
+                            $fullfilesUrl[$index] = ['file_url' => Storage::disk('s3')->url($upload_success), 'filename' => $upload->getClientOriginalName()];
                             $index++;
                             if ($upload_success) {
                                 $uploaded_count++;
@@ -340,10 +337,18 @@ class OrdersController extends Controller
                                 return response()->json(['errors' => ['files_u' => [0 => 'حدث خطأ اثناء محاولة رفع الملف يرجى اعادة المحاولة ']]], 422);
                             }
                         }
-                        foreach($fileAtSystem as $fileItem){
-                         $fileItem= json_decode($fileItem, true);
-                            array_push($fullfilesUrl, $fileItem[0]);
+                        //dd($fileAtSystem);
+                        if(count($fileAtSystem) > 0){
+                            foreach($fileAtSystem as $fileItem){
+                                $fileItem= json_decode($fileItem, true);
+
+                                if(count($fileItem) > 0){
+                                    array_push($fullfilesUrl, $fileItem[0]);
+                                }
+
+                               }
                         }
+
                         $filesjson = json_encode($fullfilesUrl);
 
                         if ($uploaded_count == $count) {

@@ -1,6 +1,6 @@
 <template>
   <div>
-<div v-if="EMailSent" dir="rtl" class="alert alert-success" role="alert">
+<div v-if="EMailSent" dir="rtl" class="alert alert-success font-Naskh" role="alert">
       <h4 class="alert-heading">تم تغيير كلمة المرور</h4>
 <p>
     تمت اعادة تعيين كلمة المرور الخاصة بك بنجاح, بامكانك الأن تسحيل الدخول الى حسابك.
@@ -58,7 +58,7 @@
         <button
           style="margin-right: 0 !important"
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-primary w-100"
           id="btn_submit"
         >
           اعادة تعيين

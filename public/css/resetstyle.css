@@ -92,6 +92,10 @@ button.btn.btn-outline-primary {
 .btn-act-section button {
     margin-right: 10px !important;
 }
+.vs-select--options.vs-select-primary {
+    border: 1px solid #aab7b852;
+    box-shadow: 0 0.21053rem 0.84211rem 0 rgb(137 137 137 / 15%);
+}
 .btn-check:focus + .btn-outline-primary,
 .btn-outline-primary:focus {
     box-shadow: 0 0 0 0.25rem rgb(249 106 12 / 46%) !important;
@@ -431,7 +435,7 @@ button.btn.btn-secondary {
 .modal-title {
     font-size: 16px !important;
     color: #484848 !important;
-    font-weight: 300 !important;
+    font-weight: 400 !important;
 }
 
 .modal-header {

@@ -23,7 +23,8 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Fonts -->
-
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
@@ -54,9 +55,11 @@
         <div class="logo-brand-top-card mt-5 mb-5">
             <img src="{{ asset('img/brand/logo-web.png') }}" alt="desky - login">
         </div>
-        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
+        <div class="form-head text-center" dir="rtl">
+            <h1 class="form-head-title">اعادة تعيين كلمة المرور</h1>
+        </div>
+        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 500px" dir="rtl">
             <div class="content-form p-3 pt-1">
-                <h1 class="card-title mb-4 mt-3"> اعادة تعيين كلمة المرور</h1>
 
                 <div id="app">
                     <reset-form :csrf="'{{csrf_token()}}'"></reset-form>
@@ -67,9 +70,9 @@
 
 
         </div>
-        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
+        <div class="text-center p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
             <div class="content-form p-3 mx-auto" >
-                <span class="text-center"> تذكرت كلمة المرور ؟ <a href="{{ asset('login') }}">سجل الدخول</a></span>
+                <span class="text-center font-Naskh"> تذكرت كلمة المرور ؟ <a href="{{ asset('login') }}">سجل الدخول</a></span>
             </div>
         </div>
     </div>
@@ -80,7 +83,7 @@
         <div class=" content-footer">
 
             <div class="bottom-footer">
-                <p class="footer-copyright text-center" dir="rtl">© {{date("Y")}} desky. جميع الحقوق محفوظة.
+                <p class="footer-copyright text-center font-Naskh" dir="rtl">© {{date("Y")}} desky. جميع الحقوق محفوظة.
                 </p>
             </div>
         </div>

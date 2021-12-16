@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+
 
 class UserAccountController extends Controller
 {
@@ -33,11 +35,14 @@ class UserAccountController extends Controller
         $folderPath = "img/users/" . date("Y") . '/';
         $filname =  Auth::user()->Account_number . '-' . uniqid() . '.' . $image_type;
         $avatar = $request->avatar;
-        $upload_success = $avatar->move($folderPath, $filname);
-        $fullavatarUrl = $folderPath . $filname;
+        $upload_success = $request->file('avatar')->store('avatar', 's3');
+
+      //  $upload_success = $avatar->move($folderPath, $filname);
+       
 
         if ($upload_success) {
-            $stmt = User::where('email', auth::user()->email)->where('Account_number', auth::user()->Account_number)->update(['avatar' => "$fullavatarUrl"]);
+           $AvatarUrlS3 = Storage::disk('s3')->url($upload_success);
+            $stmt = User::where('email', auth::user()->email)->where('Account_number', auth::user()->Account_number)->update(['avatar' => "$AvatarUrlS3"]);
             if ($stmt) {
                 Cache::forget(Auth::user()->username . 'PP');
                 if(Auth::user()->avatar != null && Auth::user()->avatar != ""){
@@ -46,12 +51,15 @@ class UserAccountController extends Controller
                         'date_to_remove' => Carbon::now()->addDay()
                     ]);
                 }
- 
+
+               // $S3Link = Storage::disk('s3')->temporaryUrl($upload_success, now()->addMinutes(10));
                 return response()->json(['success' => 'تم تحديث الصورة الشخصية بنجاح '], 200);
             } else {
                 return response()->json(['error' => 'فشل تحديث الصورة الشخصية يرجى اعادة المحاولة fx0500124'], 500);
             }
         } else {
+
+           
             return response()->json(['error' => 'فشل تحديث الصورة الشخصية يرجى اعادة المحاولة fx0500159'], 500);
         }
     }

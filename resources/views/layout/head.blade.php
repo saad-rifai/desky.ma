@@ -191,6 +191,7 @@
                                 </div>
                             </div>
                             <div class="col-auto pm-0">
+                            
                                 <navbar-menu :user="{{ Auth::user() }}"></navbar-menu>
                             </div>
 

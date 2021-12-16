@@ -109,6 +109,7 @@ Route::prefix('ajax')->group(function () {
         Route::get('messages/chatList/get', 'ChatSystemController@MessagesChatList');
         Route::get('messages/conversation/get/{room_id}/{paginate}', 'ChatSystemController@GetConversation');
         Route::post('user/message/send', 'ChatSystemController@SendMessage');
+        Route::get('user/new/message/{to}/{message}', 'ChatSystemController@NewMessage');
 
         /* Chat System */
 
@@ -128,13 +129,11 @@ Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@Veri
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
     $valueArray2 = [
-        'token' => "57d4fgg5fd74g65f7dg657fd",
+        'token' => "test token",
 
     ];
-
-
     try {
-        Mail::to("rifaisaad3@gmail.com")->send(new ResetPasswordMail($valueArray2));
+        Mail::to('rifaisaad3@gmail.com')->send(new ResetPasswordMail($valueArray2));
     } catch (\Exception $e) {
         return 'Error - ' . $e;
      

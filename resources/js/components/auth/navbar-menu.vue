@@ -14,7 +14,7 @@
         >
           <img
             v-if="user.avatar != '' && user.avatar != null"
-            :src="'/'+user.avatar"
+            :src="user.avatar"
             :alt="user.username"
           />
           <img src="/img/icons/avatar.png" :alt="user.username" />

@@ -42,6 +42,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Basic Style for Tags Input -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -54,9 +56,11 @@
         <div class="logo-brand-top-card mt-5 mb-5">
             <img src="{{ asset('img/brand/logo-web.png') }}" alt="desky - login">
         </div>
-        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
+        <div class="form-head text-center" dir="rtl">
+            <h1 class="form-head-title">اعادة تعيين كلمة المرور</h1>
+        </div>
+        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 500px" dir="rtl">
             <div class="content-form p-3 pt-1">
-                <h1 class="card-title mb-4 mt-3"> اعادة تعيين كلمة المرور</h1>
 
                 <div id="app">
                     @if ($ValideToken && $ValideToken == true)
@@ -123,8 +127,8 @@
 
 
         </div>
-        <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
-            <div class="content-form p-3 mx-auto">
+        <div class="text-center p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
+            <div class="content-form p-3 font-Naskh mx-auto">
                 <span class="text-center"> تذكرت كلمة المرور ؟ <a href="{{ asset('login') }}">سجل
                         الدخول</a></span>
             </div>
@@ -137,7 +141,7 @@
         <div class=" content-footer">
 
             <div class="bottom-footer">
-                <p class="footer-copyright text-center" dir="rtl">© {{ date('Y') }} desky. جميع الحقوق محفوظة.
+                <p class="footer-copyright text-center font-Naskh" dir="rtl">© {{ date('Y') }} desky. جميع الحقوق محفوظة.
                 </p>
             </div>
         </div>

@@ -271,4 +271,43 @@ class ChatSystemController extends Controller
             return response()->json(['error' => 'bad Reuqest'], 400);
         }
     }
+    public function NewMessage(Request $request){
+        if(isset($request->to) && isset($request->message)){
+            $CheckReciver = User::where('Account_number', $request->to)->where('verified_account', '2')->count();
+            if($CheckReciver > 0){
+                $CheckChatRooms = chat_system::where(function ($query) use ($request) {
+                    $query->where('to', Auth::user()->Account_number)
+                        ->where('from', $request->to);
+                })->orWhere(function ($query) use ($request) {
+                    $query->where('from', Auth::user()->Account_number)
+                        ->where('to', $request->to);
+                })->where('type', '0')->first();
+             if($CheckChatRooms == null){
+                 $newRoomId = strval(Auth::user()->Account_number.strval($request->to));
+             
+
+                $stmt = chat_system::create([
+                    'type' => '0',
+                    'to' => $request->to,
+                    'from' => Auth::user()->Account_number,
+                    'message' => $request->message,
+                    'room_id' =>$newRoomId,
+                    'status' => '0',
+                ]);
+                if($stmt){
+                    return response()->json(['success' => $stmt], 200);
+                }else{
+                return response()->json(['error' => 'حصل خطأ ما اثناء محاولة معالجة طلبك يرجى اعادة المحاولة لاحقاََ'], 403);
+
+                }
+             }else {
+                 echo 'true';
+             }
+            }else{
+                return response()->json(['error' => 'لايمكنك ارسال هذه الرسالة'], 403);
+            }
+        }else{
+            return response()->json(['error' => 'Bad Request'], 400);
+        }
+    }
 }

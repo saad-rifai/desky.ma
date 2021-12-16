@@ -6,8 +6,7 @@ use App\UserPortFolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
-use Mockery\Undefined;
-
+use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\json_decode;
 
 class UserPortFolioController extends Controller
@@ -144,12 +143,10 @@ class UserPortFolioController extends Controller
                     $index = 0;
                     $uploaded_count = 0;
                     foreach ($uploads as $upload) {
-                        $image_type = $upload->extension();
-                        $folderPath = "img/users/portfolios/" . date("Y") . '/' . Auth::user()->Account_number . '/';
-                        $filname =  Auth::user()->Account_number . '-' . uniqid() . '.' . $image_type;
-                        $file = $upload;
-                        $upload_success = $file->move($folderPath, $filname);
-                        $fullfilesUrl[$index] = $folderPath . $filname;
+                 
+                        
+                        $upload_success = $upload->store('users/'.Auth::user()->Account_number.'/portfolio', 's3');
+                        $fullfilesUrl[$index] = Storage::disk('s3')->url($upload_success);
                         $index++;
                         if ($upload_success) {
                             $uploaded_count++;

@@ -15,7 +15,7 @@ class CreateChatSystemsTable extends Migration
     {
         Schema::create('chat_systems', function (Blueprint $table) {
             $table->id();
-            $table->integer("room_id")->nullable();
+            $table->string("room_id", 35)->nullable();
             $table->enum("type", ['0','1'])->default(0); /* 0 => Chat Normal; 1 => Chat inside a project */
             $table->string("OID", 11)->nullable();
             $table->string("from", 11);

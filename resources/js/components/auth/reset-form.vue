@@ -38,7 +38,7 @@
         <button
           style="margin-right: 0 !important"
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-primary w-100"
           id="btn_submit"
         >
           اعادة تعيين

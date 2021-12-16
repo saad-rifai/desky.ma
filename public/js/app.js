@@ -55010,7 +55010,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "btn btn-primary w-100",
           staticStyle: { "margin-right": "0 !important" },
           attrs: { type: "submit", id: "btn_submit" }
         },
@@ -55045,7 +55045,7 @@ var render = function() {
       ? _c(
           "div",
           {
-            staticClass: "alert alert-success",
+            staticClass: "alert alert-success font-Naskh",
             attrs: { dir: "rtl", role: "alert" }
           },
           [
@@ -55212,7 +55212,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "btn btn-primary w-100",
           staticStyle: { "margin-right": "0 !important" },
           attrs: { type: "submit", id: "btn_submit" }
         },
