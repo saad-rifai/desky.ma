@@ -78,7 +78,9 @@ a.nav-link i {
 }
 
 
-
+button.navbar-toggler {
+    margin-right: 10px !important;
+}
 
 
 button.btn.btn-outline-primary {

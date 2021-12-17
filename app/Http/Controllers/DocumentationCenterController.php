@@ -8,6 +8,18 @@ use App\DocumentationCenter;
 
 class DocumentationCenterController extends Controller
 {
+    public function DocumentationCenterCheck(){
+        $AccountStatus = Auth::user()->verified_account;
+        $Request = DocumentationCenter::where('Account_number', Auth::user()->Account_number)->get(['status', 'message', 'document_id', 'created_at']);
+        $Request = $Request->makeVisible([ 'document_id']);
+
+        if(count($Request) < 1){
+            $Request = null;
+        }else{
+            foreach($Request as $Request);
+        }
+        return response()->json(['account_status' => $AccountStatus, 'request' => $Request], 200);
+    }
     public function RequestVerification(Request $request)
     {
         $this->validate($request, [
@@ -78,7 +90,7 @@ class DocumentationCenterController extends Controller
                                     'document_id' => $request->document_id,
                                     'expiration_date' => $request->expiration_date,
                                     'files' => $filesjson,
-                                    'status' => 1
+                                    'status' => '0'
                                 ]);
                                 if ($stmt) {
                                     return response()->json(['success' => 'تم ارسال طلبك'], 200);
@@ -92,13 +104,13 @@ class DocumentationCenterController extends Controller
                             }
                         } else {
                             $filesjson = json_encode($fullfilesUrl);
-                            $stmt = DocumentationCenter::where('Account_number', auth::user()->Account_number)->insert([
+                            $stmt = DocumentationCenter::create([
                                 'Account_number' => auth::user()->Account_number,
                                 'file_type' => $request->document_type,
                                 'document_id' => $request->document_id,
                                 'expiration_date' => $request->expiration_date,
                                 'files' => $filesjson,
-                                'status' => 1
+                                'status' => '0'
                             ]);
                             if ($stmt) {
                                 return response()->json(['success' => 'تم ارسال طلبك'], 200);

@@ -143,8 +143,7 @@
                             <label class="form-label">النشاط</label>
 
                             <vs-select
-                                multiple
-                                max-selected="3"
+                            
                                 width="100%"
                                 autocomplete
                                 class="selectExample"
@@ -167,9 +166,7 @@
                             >
                                 {{ errors.errors.activite[0] }}
                             </div>
-                            <div class="form-text">
-                                يمكنك تحديد حتى 3 نشاطات
-                            </div>
+              
                         </div>
                     </div>
                 </div>
@@ -192,8 +189,7 @@
                         {{ errors.errors.job_title[0] }}
                     </div>
                     <div class="form-text">
-                        أدخل مسمى وظيفي واحد لتظهر بنتائج البحث. مثال: مهندس
-                        معماري, نجار, صباغ...
+    أدخل مسمى وظيفي واحد لتظهر بنتائج البحث. مثال: نجار, صباغ, جباص, أستاذ موسيقى...
                     </div>
                 </div>
 
@@ -203,7 +199,7 @@
                             تحميل الوثائق
                             <i
                                 class="fas fa-info-circle"
-                                data-bs-toggle="tooltip"
+                                data-toggle="tooltip"
                                 title="من أجل تفعيل حسابك يلزمك رفع صورة لبطاقة الهوية الخاصة بك سارية المفعول من الأمام والخلف وكذلك تحميل صورة لبطاقة المقاول الذاتي سارية المفعول أو شهادة الانخراط في سجل المقاول الذاتي"
                             ></i
                         ></label>
@@ -230,7 +226,6 @@
                         <div
                             id="upload-files-form"
                             class="upload-files-form"
-                            data-target="files-include-254781210"
                             data-types="['png','jpg']"
                             @drop="dropfiles"
                             @click="SelectFilesOpen"
@@ -455,9 +450,17 @@
                 </span>
             </div>
             <div class="col mt-3 w-100">
-              <div v-if="checkAeRequest.request_ae_account.status == 3" class="col mb-2">
-              <button @click="new_request_is_allowed = true" class="btn btn-primary btn-sm">ارسال الطلب من جديد</button>
-            </div>
+                <div
+                    v-if="checkAeRequest.request_ae_account.status == 3"
+                    class="col mb-2"
+                >
+                    <button
+                        @click="new_request_is_allowed = true"
+                        class="btn btn-primary btn-sm"
+                    >
+                        ارسال الطلب من جديد
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -555,8 +558,8 @@ export default {
         removefile: function(index) {
             this.filesSelected.splice(index, 1);
         },
-        SelectFilesOpen(){
-          $("#files-include-254781210").click();
+        SelectFilesOpen() {
+            $("#files-include-254781210").click();
         },
         dropfiles: function(e) {
             $("#files-include-254781210").prop("files", e.dataTransfer.files);
@@ -649,13 +652,17 @@ export default {
             $("#btn_submit_4").html("ارسال");
             this.$vs.loading.close("#loadform_4 > .con-vs-loading");
         },
+        
         CheckRequestAe() {
             axios
                 .get("/ajax/user/aeaccount/check")
                 .then(response => {
                     this.checkAeRequest = response.data;
                     this.account_status = this.checkAeRequest.account_status;
-                    if (this.account_status != 2 && this.checkAeRequest.request_ae_account == null) {
+                    if (
+                        this.account_status != 2 &&
+                        this.checkAeRequest.request_ae_account == null
+                    ) {
                         this.new_request_is_allowed = true;
                     } else {
                         this.new_request_is_allowed = false;
@@ -698,6 +705,7 @@ export default {
                     this.HideLoadingInDiv();
                     this.new_request_is_allowed = false;
                     this.errors = new Errors();
+                    this.CheckRequestAe();
                     this.$vs.notify({
                         title: "تم ارسال طلبك !",
                         text:
@@ -719,6 +727,15 @@ export default {
                             position: "top-right",
                             icon: "warning"
                         });
+                    } else if (error.response.status == 401) {
+                        this.$vs.notify({
+                            text: "انتهت الجلسة",
+                            color: "danger",
+                            position: "top-right",
+                            fixed: true,
+                            icon: "warning"
+                        });
+                        window.location.reload();
                     } else if (error.response.status == 400) {
                         this.$vs.notify({
                             title: "هناك خطأ ما !",

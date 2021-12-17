@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,7 @@ Route::prefix('ajax')->group(function () {
     Route::group(['middleware' => ['auth']], function () {
         /* USER */
     Route::get('user/aeaccount/check', 'AeAccountController@AeCheck');
+    Route::get('user/documentation_center/check', 'DocumentationCenterController@DocumentationCenterCheck');
 
 
         /* Rating */
@@ -130,7 +132,7 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-
+    return view("layout.try");
 
 });
 

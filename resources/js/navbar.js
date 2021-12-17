@@ -27,6 +27,9 @@ Vue.use(IconsPlugin)
  /* Notification */
 Vue.component('notification-menu', require('./components/user/notification/notification-menu.vue').default);
 
+/* Messages */
+Vue.component('nav-menu-messages', require('./components/user/messages/nav-menu-messages.vue').default);
+
 /* Navbar Menu */
 
 Vue.component('navbar-menu', require('./components/auth/navbar-menu.vue').default);

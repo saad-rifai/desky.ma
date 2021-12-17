@@ -122,52 +122,14 @@
                                
                                     <request-ae-account></request-ae-account>
 
-                                    <!--
-                                        <div class="row row-cols-1 mx-auto text-center mt-3 mb-3">
-                                            <div class="col w-100">
-                                                <div class="icon-large-top">
-                                                    <img src="{{ asset('img/icons/man-ceck.png') }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col w-100 mt-3">
-                                                <p class="text-icon">تم تفعيل حساب المقاول الذاتي</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
-                                            <div class="col w-100">
-                                                <div class="icon-large-top">
-                                                    <img style="max-width: 100px"
-                                                        src="{{ asset('img/icons/pending.png') }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col w-100 mt-3">
-                                                <p class="text-icon">طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من
-                                                    مراجعة طلبك</p>
-                                            </div>
-                                        </div>
-                                        <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
-                                            <div class="col w-100">
-                                                <div class="icon-large-top">
-                                                    <img src="{{ asset('img/icons/forbidden.png') }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col w-100 mt-3">
-                                                <p class="text-icon">تم حظرك نهائيا من ارسال طلب تفعيل حساب المقاول
-                                                    الذاتي</p>
-                                            </div>
-                                        </div>
-                                    -->
-
+                     
                    
 
                             </div>
                                 <div class="tab-pane fade" id="documentation_center" role="tabpanel"
                                     aria-labelledby="list-settings-list">
                                     <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> مركز التوثيق</h1>
-                                            <div class="alert alert-warning mt-3" role="alert">
-                                               Error Here
-                                            </div>
+                                      
 
                                             <div hidden class="row row-cols-1 mx-auto text-center mt-3 mb-3">
                                                 <div class="col w-100">
@@ -179,41 +141,7 @@
                                                     <p class="text-icon">تم توثيق الهوية بنجاح، شكرا لك</p>
                                                 </div>
                                             </div>
-
-                                   
                                             <request-verification :userinfos="{{ Auth::user() }}"></request-verification>
-                                  
-
-                                
-                                            <div hidden class="row row-cols-1 mx-auto text-center mt-5 mb-3">
-                                                <div class="col w-100">
-                                                    <div class="icon-large-top">
-                                                        <img style="max-width: 100px"
-                                                            src="{{ asset('img/icons/pending.png') }}" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="col w-100 mt-3">
-                                                    <p class="text-icon">طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء
-                                                        من
-                                                        مراجعة طلبك</p>
-                                                </div>
-                                            </div>
-
-                                            <div hidden class="row row-cols-1 mx-auto text-center mt-5 mb-3">
-                                                <div class="col w-100">
-                                                    <div class="icon-large-top">
-                                                        <img src="{{ asset('img/icons/forbidden.png') }}" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="col w-100 mt-3">
-                                                    <p class="text-icon">تم حظرك نهائيا من ارسال طلب توثيق الحساب</p>
-                                                </div>
-                                            </div>
-
-
-
-                                   
-
                                 </div>
                         </div>
                     </div>

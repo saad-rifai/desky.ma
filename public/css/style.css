@@ -1,6 +1,7 @@
 img.logo-web {
     width: 100%;
-    max-width: 105px;
+    max-width: 100px;
+    margin-top: -5px;
 }
 
 nav.web-navbar {
@@ -1339,10 +1340,26 @@ button.navbar-toggler {
 span.card-info-text {
     font-size: 14px;
 }
+@media (max-width: 380px){
+    .icon-dropdown{
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 17px !important;
+    }
+    .dropdown .user-info-box-article-avatar {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .icon-dropdown i {
+        font-size: 17px !important;
+    }
+}
 @media (max-width: 350px) {
     .mobile-hidden-1{
         display: none !important;
     }
+ 
 }
 @media (max-width: 500px) {
     span.user-rating-stars {

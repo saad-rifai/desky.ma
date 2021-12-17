@@ -19,7 +19,7 @@ class CreateDocumentationCentersTable extends Migration
             $table->integer('file_type'); /* 1 = cin, 2 = passport, 3 = residence card */
             $table->string("document_id", 10);
             $table->date("expiration_date");
-            $table->integer('status');
+            $table->enum("status",['0','1','2','3']); /* 0 => pending review; 1 => accepted; 2 => request rejected; 3 => request rejected permanently  */
             $table->json("files");
             $table->string("message", 250)->nullable();
             $table->timestamps();

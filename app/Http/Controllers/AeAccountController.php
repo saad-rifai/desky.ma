@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\AeAccount;
+use App\DocumentationCenter;
 use App\User;
-use App\UserRating;
 use Illuminate\Support\Facades\File;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use function GuzzleHttp\json_decode;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 class AeAccountController extends Controller
 {
     public function AeCheck(){
@@ -22,7 +23,7 @@ class AeAccountController extends Controller
         $AERequest = AeAccount::where('Account_number', Auth::user()->Account_number)->get(['status', 'message', 'cin','ae_number','sector','activite','job_title', 'created_at']);
         $AERequest = $AERequest->makeVisible(['status', 'message', 'ae_number', 'cin']);
 
-        if(count($AERequest) < 0){
+        if(count($AERequest) < 1){
             $AERequest = null;
         }else{
             foreach($AERequest as $AERequest);
@@ -56,6 +57,7 @@ class AeAccountController extends Controller
                 }
         return response()->json(['account_status' => $AccountStatus, 'request_ae_account' => $AERequest], 200);
     }
+
     public function paginate($items, $perPage = 5, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
@@ -176,8 +178,8 @@ class AeAccountController extends Controller
         if (!preg_match($pattern, $request->job_title)) {
 
             $ActiviteSelected = explode(',', $request->activite);
-            if (count($ActiviteSelected) > 3) {
-                return response()->json(['errors' => ['activite' => [0 => 'مسموح بـ 3 أنشطة فقط *']]], 422);
+            if (count($ActiviteSelected) > 1) {
+                return response()->json(['errors' => ['activite' => [0 => 'بنشاط واحد فقط *']]], 422);
             } else {
 
                 foreach ($ActiviteSelected as $Activite) {
@@ -240,10 +242,11 @@ class AeAccountController extends Controller
                                             ]);
                                             if ($stmt) {
                                                 $filesUploaded = json_decode($alredyCount->files);
-                                                /*
+                                                $ControllerFunctions = new Controller;
                                                 foreach ($filesUploaded as $fullfileUrl) {
-                                                    File::delete($fullfileUrl);
-                                                }*/
+                                                    $s3FileUrl = $ControllerFunctions->GetS3FileDirection($fullfileUrl);
+                                                    Storage::disk('s3')->delete($s3FileUrl);
+                                                }
                                                 return response()->json(['success' => 'تم ارسال طلبك'], 200);
                                             } else {
                                                 return response()->json(['error' => 'فشل ارسال طلبك'], 500);
@@ -261,7 +264,7 @@ class AeAccountController extends Controller
                                         }
                                     } else {
                                         $filesjson = json_encode($fullfilesUrl);
-                                        $stmt = AeAccount::where('Account_number', auth::user()->Account_number)->insert([
+                                        $stmt = AeAccount::create([
                                             'Account_number' => auth::user()->Account_number,
                                             'cin' => "$request->cin",
                                             'ae_number' => "$request->ae_number",

@@ -133,62 +133,7 @@
 
                             </div>
                             <div class="col-auto pm-0">
-                                <div id="drop-group-2" hidden>
-                                    <button class="icon-dropdown " id="menu-btn-2" data-target="message_bell" type="button">
-                                        <i class="fas fa-envelope"></i>
-                                    </button>
-                                    <div class="menu-dropdown-lg" id="message_bell">
-                                        <div class="menu-dropdown-lg-content position-relative">
-
-                                            <h5 class="menu-title mb-4 mt-2" style="font-size: 14px"> الرسائل</h1>
-
-                                                <a href="#" class="position-absolute top-0 end-0"
-                                                    style="font-size: 12px">الكل</a>
-
-
-                                                @for ($i = 1; $i < 5; $i++)
-                                                    <div class="box-article pb-3 mb-3">
-                                                        <div class="    head-box-article">
-                                                            <div class="row text-center">
-                                                                <div class="col">
-                                                                    <div class="row">
-                                                                        <div class="col-auto">
-                                                                            <div class="user-info-box-article-avatar">
-                                                                                <img src="{{ asset('img/users/' . $i . '.jpg') }}"
-                                                                                    alt="">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-auto">
-                                                                            <div class="user-name-box-article">
-                                                                                <h4>
-                                                                                    Saad Rifai
-                                                                                </h4>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="body-box-article  mr-menu ">
-                                                            <p class="box-article-description ">
-                                                                هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم
-                                                                توليد
-                                                                هذا النص من مولد النص
-                                                                العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص
-                                                                الأخرى إضافة إلى زيادة عدد الحروف
-                                                                التى يولدها التطبيق.
-
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                @endfor
-
-                                        </div>
-                                    </div>
-                                </div>
+                            <nav-menu-messages></nav-menu-messages>
                             </div>
                             <div class="col-auto pm-0">
                             
