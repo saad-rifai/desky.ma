@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ResetPasswordMail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +62,9 @@ Route::prefix('ajax')->group(function () {
 
     /*****************/
     Route::group(['middleware' => ['auth']], function () {
+        /* USER */
+    Route::get('user/aeaccount/check', 'AeAccountController@AeCheck');
+
 
         /* Rating */
         Route::post('user/rate', 'UserRatingController@create');
@@ -128,17 +130,6 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    $valueArray2 = [
-        'token' => "test token",
-
-    ];
-    try {
-        Mail::to('rifaisaad3@gmail.com')->send(new ResetPasswordMail($valueArray2));
-    } catch (\Exception $e) {
-        return 'Error - ' . $e;
-     
-
-    }
 
 
 });

@@ -32,12 +32,12 @@
                     <!-- Video -->
                     <div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative">
                         <div class="wistia_responsive_wrapper" style="
-                                      height: 100%;
-                                      left: 0;
-                                      position: absolute;
-                                      top: 0;
-                                      width: 100%;
-                                    ">
+                                          height: 100%;
+                                          left: 0;
+                                          position: absolute;
+                                          top: 0;
+                                          width: 100%;
+                                        ">
                             <iframe src="https://fast.wistia.net/embed/iframe/n1ik6rxzxh?videoFoam=true"
                                 title=" [Example Video] Wistia Video Essentials" allow="autoplay; fullscreen"
                                 allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed"
@@ -79,9 +79,6 @@
                     </div>
                     <div class="card mb-3 " style="overflow: hidden">
                         <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> الاعدادت</h1>
-
-
-
                         <div class="list-group list-group-flush mt-0" id="list-tab" role="tablist">
                             <a class="list-group-item list-group-item-action active" id="list-home-list"
                                 data-bs-toggle="list" href="#edit_profile" role="tab" aria-controls="list-home"><i
@@ -92,9 +89,9 @@
                             <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list"
                                 href="#ae_account" role="tab" aria-controls="list-messages"><i class="fas fa-id-card"></i>
                                 حساب المقاول الذاتي</a>
-                            <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list"
-                                href="#documentation_center" role="tab" aria-controls="list-settings"><i
-                                    class="fas fa-badge-check"></i> مركز التوثيق</a>
+                                <a class="list-group-item list-group-item-action" id="list-settings-list"
+                                    data-bs-toggle="list" href="#documentation_center" role="tab"
+                                    aria-controls="list-settings"><i class="fas fa-badge-check"></i> مركز التوثيق</a>
                         </div>
                     </div>
                 </div>
@@ -112,7 +109,9 @@
                                 aria-labelledby="list-profile-list">
                                 <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> اعدادات الحساب</h1>
                                 <div class="p-3">
-                                    <account-settings :userinfos="{{ Auth::user()->makeVisible(["email", "phone_number", "gender", "date_of_birth"]) }}"></account-settings>
+                                    <account-settings
+                                        :userinfos="{{ Auth::user()->makeVisible(['email', 'phone_number', 'gender', 'date_of_birth']) }}">
+                                    </account-settings>
                                 </div>
 
                             </div>
@@ -120,17 +119,10 @@
                                 aria-labelledby="list-messages-list">
                                 <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> حساب المقاول الذاتي</h1>
                                 <br>
-                                @if (request()->request_ae_account == null || request()->request_ae_account == 3)
-                                    @if (request()->request_ae_account == 3)
-                                        <div role="alert" class="alert alert-warning">
-                                            {{ request()->request_ae_account_error }}
-                                        </div>
-                                    @endif
+                               
                                     <request-ae-account></request-ae-account>
 
-                                @else
-                                    @if (request()->request_ae_account == 2)
-
+                                    <!--
                                         <div class="row row-cols-1 mx-auto text-center mt-3 mb-3">
                                             <div class="col w-100">
                                                 <div class="icon-large-top">
@@ -142,8 +134,6 @@
                                             </div>
                                         </div>
 
-                                    @endif
-                                    @if (request()->request_ae_account == 1)
                                         <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
                                             <div class="col w-100">
                                                 <div class="icon-large-top">
@@ -156,8 +146,6 @@
                                                     مراجعة طلبك</p>
                                             </div>
                                         </div>
-                                    @endif
-                                    @if (request()->request_ae_account == 4)
                                         <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
                                             <div class="col w-100">
                                                 <div class="icon-large-top">
@@ -169,70 +157,64 @@
                                                     الذاتي</p>
                                             </div>
                                         </div>
+                                    -->
 
-
-                                    @endif
-                                @endif
-
-                            </div>
-                            <div class="tab-pane fade" id="documentation_center" role="tabpanel"
-                                aria-labelledby="list-settings-list">
-                                <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> مركز التوثيق</h1>
-                                @if (request()->request_verification == null || request()->request_verification == 3 || request()->request_verification == 2)
-                                    @if (request()->request_verification == 3)
-                                        <div class="alert alert-warning mt-3" role="alert">
-                                            {{ request()->request_verification_error }}
-                                        </div>
-                                    @endif
-                                    @if (auth::user()->verified_account == 1 || auth::user()->verified_account == 2)
-
-                                        <div class="row row-cols-1 mx-auto text-center mt-3 mb-3">
-                                            <div class="col w-100">
-                                                <div class="icon-large-top">
-                                                    <img src="{{ asset('img/icons/man-ceck.png') }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col w-100 mt-3">
-                                                <p class="text-icon">تم توثيق الهوية بنجاح، شكرا لك</p>
-                                            </div>
-                                        </div>
-
-                                    @else
-                                        <request-verification :userinfos="{{ Auth::user() }}"></request-verification>
-                                    @endif
-
-                                @else
-                                    @if (request()->request_verification == 1)
-                                        <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
-                                            <div class="col w-100">
-                                                <div class="icon-large-top">
-                                                    <img style="max-width: 100px"
-                                                        src="{{ asset('img/icons/pending.png') }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col w-100 mt-3">
-                                                <p class="text-icon">طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء من
-                                                    مراجعة طلبك</p>
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class="row row-cols-1 mx-auto text-center mt-5 mb-3">
-                                            <div class="col w-100">
-                                                <div class="icon-large-top">
-                                                    <img src="{{ asset('img/icons/forbidden.png') }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col w-100 mt-3">
-                                                <p class="text-icon">تم حظرك نهائيا من ارسال طلب توثيق الحساب</p>
-                                            </div>
-                                        </div>
-
-
-
-                                    @endif
-                                @endif
+                   
 
                             </div>
+                                <div class="tab-pane fade" id="documentation_center" role="tabpanel"
+                                    aria-labelledby="list-settings-list">
+                                    <h1 class="card-title mb-0 mt-2 p-3 " style="font-size: 16px"> مركز التوثيق</h1>
+                                            <div class="alert alert-warning mt-3" role="alert">
+                                               Error Here
+                                            </div>
+
+                                            <div hidden class="row row-cols-1 mx-auto text-center mt-3 mb-3">
+                                                <div class="col w-100">
+                                                    <div class="icon-large-top">
+                                                        <img src="{{ asset('img/icons/man-ceck.png') }}" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col w-100 mt-3">
+                                                    <p class="text-icon">تم توثيق الهوية بنجاح، شكرا لك</p>
+                                                </div>
+                                            </div>
+
+                                   
+                                            <request-verification :userinfos="{{ Auth::user() }}"></request-verification>
+                                  
+
+                                
+                                            <div hidden class="row row-cols-1 mx-auto text-center mt-5 mb-3">
+                                                <div class="col w-100">
+                                                    <div class="icon-large-top">
+                                                        <img style="max-width: 100px"
+                                                            src="{{ asset('img/icons/pending.png') }}" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col w-100 mt-3">
+                                                    <p class="text-icon">طلبك قيد المراجعة, ستتوصل باشعار عند الانتهاء
+                                                        من
+                                                        مراجعة طلبك</p>
+                                                </div>
+                                            </div>
+
+                                            <div hidden class="row row-cols-1 mx-auto text-center mt-5 mb-3">
+                                                <div class="col w-100">
+                                                    <div class="icon-large-top">
+                                                        <img src="{{ asset('img/icons/forbidden.png') }}" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col w-100 mt-3">
+                                                    <p class="text-icon">تم حظرك نهائيا من ارسال طلب توثيق الحساب</p>
+                                                </div>
+                                            </div>
+
+
+
+                                   
+
+                                </div>
                         </div>
                     </div>
                 </div>

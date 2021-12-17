@@ -334,7 +334,7 @@ export default {
       User__cities: this.userinfos.city,
       User__gender: this.userinfos.gender,
       User__date_of_birth: this.userinfos.date_of_birth,
-      User_avatar: "/" + this.userinfos.avatar,
+      User_avatar: this.userinfos.avatar,
       Uploaded_avatar: "",
       apiresponse: "",
       apierror: "",

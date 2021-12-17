@@ -18,6 +18,9 @@
 
  import 'vuesax/dist/vuesax.css' //Vuesax styles
 import Vue from 'vue';
+import moment from 'moment';
+Vue.prototype.moment = moment
+
  Vue.use(Vuesax, {
    // options here
  })
@@ -86,6 +89,7 @@ import Vue from 'vue';
  /* Messages Section */
  Vue.component('messages-box', require('./components/user/messages/messages-box.vue').default);
 
+ Vue.component('try-tool', require('./components/try.vue').default);
 
  /**
   * Next, we will create a fresh Vue application instance and attach it to

@@ -14,9 +14,48 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use function GuzzleHttp\json_decode;
-
+use Illuminate\Support\Facades\Storage;
 class AeAccountController extends Controller
 {
+    public function AeCheck(){
+        $AccountStatus = Auth::user()->verified_account;
+        $AERequest = AeAccount::where('Account_number', Auth::user()->Account_number)->get(['status', 'message', 'cin','ae_number','sector','activite','job_title', 'created_at']);
+        $AERequest = $AERequest->makeVisible(['status', 'message', 'ae_number', 'cin']);
+
+        if(count($AERequest) < 0){
+            $AERequest = null;
+        }else{
+            foreach($AERequest as $AERequest);
+                /* Set Sector Name */
+                $sector = $AERequest->sector;
+                if ($sector == 1) {
+                    $sectorName = "الخدمات";
+                } elseif ($sector == 2) {
+                    $sectorName = "التجارة";
+                } elseif ($sector == 3) {
+                    $sectorName = "الصناعة";
+                } elseif ($sector == 4) {
+                    $sectorName = "الحرفية";
+                } else {
+                    $sectorName = "";
+                }
+                $AERequest->sector = $sectorName;    
+                /* Get Activite Name */
+                $Activites = $AERequest->activite;
+                if ($Activites != null) {
+                    if ($sector == 1) {
+                        $listActivites = file_get_contents('data/json/activite-ae-2.json');
+                        $listActivitesdata = json_decode($listActivites, true);
+                    } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
+                        $listActivites = file_get_contents('data/json/activite-ae-1.json');
+                        $listActivitesdata = json_decode($listActivites, true);
+                    }
+                    $activite = $listActivitesdata[$Activites];
+                    $AERequest->activite = $activite;
+                }
+                }
+        return response()->json(['account_status' => $AccountStatus, 'request_ae_account' => $AERequest], 200);
+    }
     public function paginate($items, $perPage = 5, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
@@ -166,11 +205,9 @@ class AeAccountController extends Controller
                                 $uploaded_count = 0;
                                 foreach ($uploads as $upload) {
                                     $image_type = $upload->extension();
-                                    $folderPath = "files/users/AeAccount/" . date("Y") . '/';
-                                    $filname =  Auth::user()->Account_number . '-' . uniqid() . '.' . $image_type;
                                     $file = $upload;
-                                    $upload_success = $file->move($folderPath, $filname);
-                                    $fullfilesUrl[$index] = $folderPath . $filname;
+                                    $upload_success = $file->store('users/'.Auth::user()->Account_number.'/request_ae_account', 's3');
+                                    $fullfilesUrl[$index] = Storage::disk('s3')->url($upload_success);
                                     $index++;
                                     if ($upload_success) {
                                         $uploaded_count++;
@@ -203,9 +240,10 @@ class AeAccountController extends Controller
                                             ]);
                                             if ($stmt) {
                                                 $filesUploaded = json_decode($alredyCount->files);
+                                                /*
                                                 foreach ($filesUploaded as $fullfileUrl) {
                                                     File::delete($fullfileUrl);
-                                                }
+                                                }*/
                                                 return response()->json(['success' => 'تم ارسال طلبك'], 200);
                                             } else {
                                                 return response()->json(['error' => 'فشل ارسال طلبك'], 500);

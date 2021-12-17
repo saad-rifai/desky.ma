@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container">
+
     <div class="head-dashboard mt-5 mb-3">
         <div class="row" dir="rtl">
             <div class="col">

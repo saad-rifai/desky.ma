@@ -208,9 +208,9 @@ class OrdersController extends Controller
     }
     public function update(Request $request){
         if(isset($request->OID)){
-            $checkOrder = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['0','1','4'])->count();
+            $checkOrder = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['0','5'])->count();
             if($checkOrder < 1){
-                return response()->json(['error' => 'لايمكن تحديث هذا الطلب '], 403);
+                return response()->json(['error' => 'لايمكنك تحديث هذا الطلب '], 403);
             }else{
                 $checkOffers = Offers::where('OID', $request->OID)->count();
                 if($checkOffers < 1){
