@@ -1,6 +1,8 @@
-@include('layout.head')
+@extends('layout.master')
+@section('title', 'تأكيد البريد الالكتروني')
 
 
+@section('content')
 
 
 <div class="container mt-5 ">
@@ -69,5 +71,4 @@
 
     </div>
 </div>
-
-@include('layout.footer')
+@stop
