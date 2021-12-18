@@ -64,7 +64,7 @@
             <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip"
                 title="هذه المنصة لازالت قيد التطوير والتحسين">
 
-                <img class="logo-web " src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky">
+                <img class="logo-web " src="{{ asset('https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/brand/logo-web.png') }}" alt="logo brand desky">
             </a>
 
 
@@ -225,4 +225,7 @@
               </ul>
         </div>
       </div>
-    @yield('content')
+      <div class="page-wrapper-desky">
+
+      @yield('content')
+    </div>

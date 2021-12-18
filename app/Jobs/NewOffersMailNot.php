@@ -37,7 +37,7 @@ class NewOffersMailNot implements ShouldQueue
     public function handle()
     {
 
-   
+   /*
      $userInfos = User::where('Account_number', $this->datajob['to'])->get(['email', 'frist_name']);
 
      foreach($userInfos as $userInfo);
@@ -54,6 +54,6 @@ class NewOffersMailNot implements ShouldQueue
      }else{
          return true;
      }
-
+*/
     }
 }

@@ -357,7 +357,6 @@ export default {
               title: "فشل انشاء الحساب ",
               text: "حصل خطأ في النظام أثناء محاولة انشاء الحساب يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           } else {
@@ -366,7 +365,6 @@ export default {
               title: "فشل انشاء الحساب ",
               text: "يرجى التحقق من المدخلات",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           }

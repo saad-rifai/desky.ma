@@ -778,7 +778,6 @@ if(this.errors.errors.title){
               text: error.response.data.errors,
               color: "danger",
               position: "top-right",
-              fixed: true,
               icon: "warning",
             });
           } else if (error.response.status == 401) {
@@ -786,7 +785,6 @@ if(this.errors.errors.title){
               text: "انتهت الجلسة",
               color: "danger",
               position: "top-right",
-              fixed: true,
               icon: "warning",
             });
             window.location.reload();
@@ -798,7 +796,6 @@ if(this.errors.errors.title){
               text: "حصل خطأ ما أثناء محاولة ارسال طلبك يرجى اعادة المحاولة, اذا استمر معك المشكل يرجى التواصل معنا",
               color: "danger",
               position: "top-right",
-              fixed: true,
               icon: "warning",
             });
           }

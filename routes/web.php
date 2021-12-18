@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmail;
+use App\Mail\VerifiyEmail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -132,8 +135,8 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    return view("layout.try");
 
+    return view('layout.try')->with(['success' => true]);
 });
 
 /** 

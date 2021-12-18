@@ -222,7 +222,7 @@
 
                                 </div>
                                 <div class="row mr-65 mmt-35">
-                                    @if ($data->user->AeAccount->job_title)
+                                    @if (isset($data->user->AeAccount->job_title))
 
 
                                         <div class="col-auto">
@@ -544,7 +544,7 @@
 
                                 </div>
                                 <div class="row mr-65 mmt-35">
-                                    @if ($data->user->AeAccount->job_title)
+                                    @if (isset($data->user->AeAccount->job_title))
 
 
                                         <div class="col-auto">

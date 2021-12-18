@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use \Swift_SmtpTransport;
-use Swift_Mailer;
 use Illuminate\Support\Str;
+use App\Account_limits;
+use App\Jobs\SendEmail;
 
 class RegisterController extends Controller
 {
@@ -142,9 +142,9 @@ class RegisterController extends Controller
 
         $datajson = file_get_contents('data/json/list-moroccan-cities.json');
         $jsondata = json_decode($datajson, true);
-        $resultcheck = false;
+        $resultcheck = true;
         $cityid = $request->User__cities;
-        foreach ($jsondata as $item) {
+       foreach ($jsondata as $item) {
             if ($item['id'] == $cityid) {
                 $resultcheck = true;
             }
@@ -168,7 +168,7 @@ class RegisterController extends Controller
                 'status' => 0,
                 'source' => 'REGISTER__FORM',
                 'password' => Hash::make($request->User__password),
-                'MAC_Address' => exec('getmac'),
+                'MAC_Address' => NULL,
                 'IP_Address' => $request->ip(),
                 'Account_number' => $AccountNumber,
                 'verifiy_token' => $verifiy_token,
@@ -176,71 +176,38 @@ class RegisterController extends Controller
 
             ]);
             if ($stmt) {
-
+                $Account_limits = Account_limits::create([
+                    'Account_number' => $AccountNumber
+                ]);
                 if (Auth::attempt([
                     'email' => $request->User__email,
                     'password' => $request->User__password,
 
                 ])) {
-                    ignore_user_abort(true);
-
-                    ob_start();
-                 //   echo response()->json(['s_token' => Session::getId()], 200);
-                    $serverProtocole = filter_input(
-                        INPUT_SERVER,
-                        'SERVER_PROTOCOL',
-                        FILTER_SANITIZE_STRING
-                    );
-                    header('Content-Type: application/json; charset=utf-8');
-                    header('s_token: '.Session::getId());
-                    header($serverProtocole . ' 200 OK');
-                    header('Content-Encoding: none');
-                    header('Content-Length: ' . ob_get_length());
-                    header('Connection: close');
-
-                    ob_end_flush();
-                    ob_flush();
-                    flush();
-                    // Setup your gmail mailer
-             /*       $backup = Mail::getSwiftMailer();
-
-                    $transport = new Swift_SmtpTransport('desky.ma', 465, 'ssl');
-                    $transport->setUsername('noreply@desky.ma');
-                    $transport->setPassword('Yg(H2)&48k!?');
-                    $gmail = new Swift_Mailer($transport);
-
-
-                    // Set the mailer as gmail
-                    Mail::setSwiftMailer($gmail);*/
-                    $valueArray2 = [
+                    $dataEmail = [
                         'token' => $verifiy_token,
                         'fullname' => $request->User__fname . ' ' . $request->User__lname,
                         'AccountNumber' => $AccountNumber
-
                     ];
+                    $datajob = [
+                        'to' => $request->User__email,
+                        'emailData' => new VerifiyEmail($dataEmail)
+                    ];
+                    dispatch(new SendEmail($datajob));
+                    $s_token = Session::getId();
+                    return response()->json(['s_token' => $s_token], 200);
 
-                    try {
-                        Mail::to($request->User__email)->send(new VerifiyEmail($valueArray2));
-                    } catch (\Exception $e) {
-                        //return 'Error - ' . $e;
-                        //   return response()->json(['Mail Filed !'], 500);
-
-                    }
-
-
-                    return response()->json(['AccountCreated'], 200);
                 } else {
-                    return response()->json(['AccountCreated'], 500);
+                    return response()->json(['error' => 'Account Not Created'], 500);
 
                 }
             } else {
-                return response()->json(['حصل خطأ اثناء محاولة انشاء الحساب يرجى اعادة المحاولة (ERR:101031)'], 500);
+                return response()->json(['error' => 'حصل خطأ اثناء محاولة انشاء الحساب يرجى اعادة المحاولة (ERR:101031)'], 500);
             }
         } else {
             return response()->json(['errors' => ['User__cities' => [0 => 'يرجى اختيار مدينة صالحة']]], 422);
         }
-        // return response()->json(['errors' => ['password' => 'eroor']], 500);
-        //   return response()->json($request);
+
     }
     public function RequesFacebook()
     {

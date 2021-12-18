@@ -53,7 +53,7 @@
 
     <div class="container">
         <div class="logo-brand-top-card mt-5 mb-5">
-            <img src="{{ asset('img/brand/logo-web.png') }}" alt="desky - login">
+            <img src="{{ asset('https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/brand/logo-web.png') }}" alt="desky - login">
         </div>
         <div class="form-head text-center" dir="rtl">
             <h1 class="form-head-title">مرحبا بعودتك !</h1>

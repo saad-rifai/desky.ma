@@ -30,7 +30,8 @@ class RemoveAvatar implements ShouldQueue
      */
     public function handle()
     {
+        /*
         File::delete($this->filepath);
-
+*/
     }
 }

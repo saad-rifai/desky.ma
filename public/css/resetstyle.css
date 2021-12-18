@@ -3,8 +3,16 @@
     font-family: "Noto Kufi Arabic", sans-serif;
     transition: ease 0.4s;
 }
+html, body {
+    height: 100%;
+    margin: 0;
+  }
 body {
     background-color: #f6f6f6 !important;
+    position: relative;
+
+  
+
 }
 .badge-sm {
     font-size: 11px !important;

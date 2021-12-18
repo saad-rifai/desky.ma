@@ -51,7 +51,7 @@
     },
     {
         "id": "10",
-        "ville": "Ajdir‎",
+        "ville": "Ajdir",
         "region": "1"
     },
     {
@@ -71,7 +71,7 @@
     },
     {
         "id": "14",
-        "ville": "Aknoul‎",
+        "ville": "Aknoul",
         "region": "3"
     },
     {
@@ -81,7 +81,7 @@
     },
     {
         "id": "16",
-        "ville": "Al Hoceïma‎",
+        "ville": "Al Hoceïma",
         "region": "1"
     },
     {
@@ -226,7 +226,7 @@
     },
     {
         "id": "45",
-        "ville": "Aït Hichem‎",
+        "ville": "Aït Hichem",
         "region": "1"
     },
     {
@@ -346,7 +346,7 @@
     },
     {
         "id": "69",
-        "ville": "Bni Bouayach‎",
+        "ville": "Bni Bouayach",
         "region": "1"
     },
     {
@@ -361,7 +361,7 @@
     },
     {
         "id": "72",
-        "ville": "Bni Hadifa‎",
+        "ville": "Bni Hadifa",
         "region": "1"
     },
     {
@@ -406,7 +406,7 @@
     },
     {
         "id": "81",
-        "ville": "Boujdour‎",
+        "ville": "Boujdour",
         "region": "11"
     },
     {
@@ -596,7 +596,7 @@
     },
     {
         "id": "119",
-        "ville": "El Marsa‎",
+        "ville": "El Marsa",
         "region": "11"
     },
     {
@@ -686,7 +686,7 @@
     },
     {
         "id": "137",
-        "ville": "Ghafsai‎",
+        "ville": "Ghafsai",
         "region": "3"
     },
     {
@@ -711,7 +711,7 @@
     },
     {
         "id": "142",
-        "ville": "Guercif‎",
+        "ville": "Guercif",
         "region": "2"
     },
     {
@@ -826,12 +826,12 @@
     },
     {
         "id": "165",
-        "ville": "Imzouren‎",
+        "ville": "Imzouren",
         "region": "1"
     },
     {
         "id": "166",
-        "ville": "Inahnahen‎",
+        "ville": "Inahnahen",
         "region": "1"
     },
     {
@@ -846,7 +846,7 @@
     },
     {
         "id": "169",
-        "ville": "Issaguen (Ketama)‎",
+        "ville": "Issaguen (Ketama)",
         "region": "1"
     },
     {
@@ -896,12 +896,12 @@
     },
     {
         "id": "179",
-        "ville": "Karia (El Jadida)‎",
+        "ville": "Karia (El Jadida)",
         "region": "6"
     },
     {
         "id": "180",
-        "ville": "Karia Ba Mohamed‎",
+        "ville": "Karia Ba Mohamed",
         "region": "3"
     },
     {
@@ -991,7 +991,7 @@
     },
     {
         "id": "198",
-        "ville": "Laayoune‎",
+        "ville": "Laayoune",
         "region": "11"
     },
     {
@@ -1101,7 +1101,7 @@
     },
     {
         "id": "220",
-        "ville": "Meknès‎",
+        "ville": "Meknès",
         "region": "3"
     },
     {
@@ -1226,7 +1226,7 @@
     },
     {
         "id": "245",
-        "ville": "Oued Amlil‎",
+        "ville": "Oued Amlil",
         "region": "3"
     },
     {
@@ -1331,7 +1331,7 @@
     },
     {
         "id": "266",
-        "ville": "Oulad Zbair‎",
+        "ville": "Oulad Zbair",
         "region": "3"
     },
     {
@@ -1656,12 +1656,12 @@
     },
     {
         "id": "331",
-        "ville": "Tahla‎",
+        "ville": "Tahla",
         "region": "3"
     },
     {
         "id": "332",
-        "ville": "Tala Tazegwaght‎",
+        "ville": "Tala Tazegwaght",
         "region": "1"
     },
     {
@@ -1696,7 +1696,7 @@
     },
     {
         "id": "339",
-        "ville": "Tamassint‎",
+        "ville": "Tamassint",
         "region": "1"
     },
     {
@@ -1731,7 +1731,7 @@
     },
     {
         "id": "346",
-        "ville": "Tanger‎",
+        "ville": "Tanger",
         "region": "1"
     },
     {
@@ -1741,7 +1741,7 @@
     },
     {
         "id": "348",
-        "ville": "Taounate‎",
+        "ville": "Taounate",
         "region": "3"
     },
     {
@@ -1756,12 +1756,12 @@
     },
     {
         "id": "351",
-        "ville": "Tarfaya‎",
+        "ville": "Tarfaya",
         "region": "11"
     },
     {
         "id": "352",
-        "ville": "Targuist‎",
+        "ville": "Targuist",
         "region": "1"
     },
     {
@@ -1776,12 +1776,12 @@
     },
     {
         "id": "355",
-        "ville": "Taza‎",
+        "ville": "Taza",
         "region": "3"
     },
     {
         "id": "356",
-        "ville": "Taïnaste‎",
+        "ville": "Taïnaste",
         "region": "3"
     },
     {
@@ -1796,7 +1796,7 @@
     },
     {
         "id": "359",
-        "ville": "Thar Es-Souk‎",
+        "ville": "Thar Es-Souk",
         "region": "3"
     },
     {
@@ -1846,7 +1846,7 @@
     },
     {
         "id": "369",
-        "ville": "Tissa‎",
+        "ville": "Tissa",
         "region": "3"
     },
     {
@@ -1861,7 +1861,7 @@
     },
     {
         "id": "372",
-        "ville": "Tizi Ouasli‎",
+        "ville": "Tizi Ouasli",
         "region": "3"
     },
     {
@@ -1911,7 +1911,7 @@
     },
     {
         "id": "382",
-        "ville": "Tétouan‎",
+        "ville": "Tétouan",
         "region": "1"
     },
     {

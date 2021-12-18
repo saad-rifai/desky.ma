@@ -45,6 +45,9 @@ class User extends Authenticatable
     public function AeAccount(){
         return $this->hasOne(AeAccount::class, 'Account_number');
     }
+    public function AccountLimits(){
+        return $this->hasOne(Account_limits::class, 'Account_number');
+    }
     public function Portfolio()
     {
         return $this->hasMany(UserPortFolio::class, 'Account_number');

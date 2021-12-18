@@ -1,9 +1,9 @@
 
-<footer dir="rtl" >
+<footer dir="rtl"  class="footer mt-auto">
     <div class=" content-footer">
         <div class="head-footer">
             <div class="container">
-                <div class="row">
+                <div class="row mx-auto">
                   <div class="col-sm ">
                   <ul class="footer-list list-unstyled">
                       <li class="footer-li-title"><h3>عن المنصة</h3></li>

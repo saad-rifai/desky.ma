@@ -1,7 +1,7 @@
 <template>
     <div>
-          <report-popup about="1" :from_url="from_url" ></report-popup>
-  <delete-order :oid="oid"></delete-order>
+        <report-popup about="1" :from_url="from_url"></report-popup>
+        <delete-order :oid="oid"></delete-order>
 
         <div class="dropdown">
             <button
@@ -37,13 +37,19 @@
                 >
                 <a
                     class="dropdown-item"
-                    type="button" 
-                    data-toggle="modal" 
+                    type="button"
+                    data-toggle="modal"
                     data-target="#delet_order_Modal"
                     v-if="status == 0 || status == 4 || status == 5"
                     >حذف الطلب</a
                 >
-                <a class="dropdown-item" type="button" data-toggle="modal" data-target="#reportModal">الابلاغ عن مشكلة</a>
+                <a
+                    class="dropdown-item"
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#reportModal"
+                    >الابلاغ عن مشكلة</a
+                >
             </div>
         </div>
     </div>
@@ -85,27 +91,51 @@ export default {
             axios
                 .post("/ajax/order/status/update", data)
                 .then(response => {
-                  if(status == 1){
-                  $("#order_status").html('<span class="badge rounded-pill bg-success order-status">مفتوح</span>');
-
-                  }else if(status == 2){
-                  $("#order_status").html('<span class="badge rounded-pill bg-primary order-status"> مرحلة التنفيذ</span>');
-
-                  }else if(status == 4){
-                  $("#order_status").html('<span class="badge rounded-pill bg-danger order-status"> مغلق</span>');
-
-                  }
-                  this.status = status;
+                    if (status == 1) {
+                        $("#order_status").html(
+                            '<span class="badge rounded-pill bg-success order-status">مفتوح</span>'
+                        );
+                    } else if (status == 2) {
+                        $("#order_status").html(
+                            '<span class="badge rounded-pill bg-primary order-status"> مرحلة التنفيذ</span>'
+                        );
+                    } else if (status == 4) {
+                        $("#order_status").html(
+                            '<span class="badge rounded-pill bg-danger order-status"> مغلق</span>'
+                        );
+                    }
+                    this.status = status;
                     this.$vs.notify({
                         text: "تم تحديث الطلب",
                         color: "success",
-                        fixed: true,
                         icon: "check"
                     });
                     this.HideLoadingInDiv();
                 })
                 .catch(error => {
-                    console.log(error);
+                    if (
+                        error.response.status == 400 ||
+                        error.response.status == 403
+                    ) {
+                        this.$vs.notify({
+                            text: error.response.data.error,
+                            color: "danger",
+                            icon: "warning"
+                        });
+                    } else if (error.response.status == 401) {
+                        this.$vs.notify({
+                            text: "انتهت الجلسة يرجى تسجيل الدخول",
+                            color: "danger",
+                            icon: "warning"
+                        });
+                        window.location.reload();
+                    } else if (error.response.status) {
+                        this.$vs.notify({
+                            text: "حدث خطأ ما يرجى اعادة المحاولة",
+                            color: "danger",
+                            icon: "warning"
+                        });
+                    }
                     this.HideLoadingInDiv();
                 });
         }

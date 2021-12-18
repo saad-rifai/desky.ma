@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-sm">
                     <div class="img-header">
-                        <img src="{{ asset('img/icons/Connected world-bro.png') }}" alt="desky.ma">
+                        <img src="{{ asset('https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/icons/Connected+world-bro-min.png') }}" alt="desky.ma">
                     </div>
                 </div>
             </div>
