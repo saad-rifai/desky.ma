@@ -268,12 +268,7 @@
                                                                             .avatar !=
                                                                             null
                                                                 "
-                                                                :src="
-                                                                    '/' +
-                                                                        item
-                                                                            .user
-                                                                            .avatar
-                                                                "
+                                                                :src="item.user.avatar"
                                                                 :alt="
                                                                     item.user
                                                                         .username
@@ -744,7 +739,6 @@
                                                                         null
                                                             "
                                                             :src="
-                                                                '/' +
                                                                     item.user
                                                                         .avatar
                                                             "

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AeAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DocumentationCenter;
@@ -11,14 +12,33 @@ class DocumentationCenterController extends Controller
     public function DocumentationCenterCheck(){
         $AccountStatus = Auth::user()->verified_account;
         $Request = DocumentationCenter::where('Account_number', Auth::user()->Account_number)->get(['status', 'message', 'document_id', 'created_at']);
+        $RequestAe = AeAccount::where('Account_number', Auth::user()->Account_number)->get(['status']);
         $Request = $Request->makeVisible([ 'document_id']);
+        $RequestAe = $RequestAe->makeVisible(['status']);
+        $RequestAePending = null;
+        if(count($RequestAe) > 0){
+            foreach($RequestAe as $RequestAeStatus);
+            switch ($RequestAeStatus->status) {
+                case 1:
+                    $RequestAePending = true;
+                    break;
+                case 2:
+                    $RequestAePending = true;
+                    break;
+                default:
+                $RequestAePending = null;
+                    break;
+            }
+        }else{
+            $RequestAePending = null;
+        }
 
         if(count($Request) < 1){
             $Request = null;
         }else{
             foreach($Request as $Request);
         }
-        return response()->json(['account_status' => $AccountStatus, 'request' => $Request], 200);
+        return response()->json(['account_status' => $AccountStatus, 'request' => $Request, 'request_ae_account_pending' => $RequestAePending], 200);
     }
     public function RequestVerification(Request $request)
     {

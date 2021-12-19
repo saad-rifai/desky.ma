@@ -61,11 +61,13 @@ class ChatSystemController extends Controller
                 /* If Is hired in Project */
                 $destinationCeck2 = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['1', '2'])->count();
                 if ($destinationCeck2 > 0) {
+                    $OrderOwenerAccountNumber = Orders::where('OID', $request->OID)->get(['Account_number']);
+                    foreach($OrderOwenerAccountNumber as $OrderOwenerAccountNumber);
                     $stmt = chat_system::create([
                         'OID' => $request->OID,
 
                         'from' => Auth::user()->Account_number,
-                        'to' => $request->to,
+                        'to' => $OrderOwenerAccountNumber->Account_number,
                         'type' => "1",
                         'message' => $request->message,
                         'status' => "0"
@@ -83,7 +85,7 @@ class ChatSystemController extends Controller
         if (isset($request->OID)) {
             $OrderOwnerCeck = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->count();
             if ($OrderOwnerCeck > 0) {
-                $Destination = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2', '3'])->get(['Account_number']);
+                $Destination = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2', '3'])->orderBy('created_at', 'DESC')->get(['Account_number']);
 
                 /* Count New Messages */
                 //  foreach($GetDestinations as $Destination);
@@ -118,7 +120,9 @@ class ChatSystemController extends Controller
                 }
 
                 $data =  $Destination->sortBy("date");
-                return response()->json(['data' => $data], 200);
+                $dataFinal = $this->paginate($data, $request->PerPage);
+
+                return response()->json(['data' => $dataFinal], 200);
             } else {
                 return response()->json(['error' => 'طلب خاطئ !'], 400);
             }
@@ -146,6 +150,31 @@ class ChatSystemController extends Controller
 
             $UpdateMessagesStatus = chat_system::where('OID', $request->OID)->where('from', $request->to)->update(['status' => '2']);
             return response()->json(['data' => $ChatsData, 'IsOnline' => $IsOnline], 200);
+        } else {
+            return response()->json(['error' => 'طلب خاطئ !'], 400);
+        }
+    }
+    public function DealChatRoom(Request $request){
+        if (isset($request->OID) && isset($request->PerPage)) {
+            $ChatsData = chat_system::where(function ($qu) use ($request) {
+                $qu->where('OID', $request->OID)->where('type', "1")
+                    ->where('to', Auth::user()->Account_number);
+            })->orWhere(function ($qu) use ($request) {
+                $qu->where('OID', $request->OID)->where('type', "1")
+                    ->where('from', Auth::user()->Account_number);
+            })->orderBy('created_at', 'DESC')->paginate($request->PerPage);
+            // foreach ($ChatsData as $ChatData);
+            for ($i = 0; $i < $ChatsData->count(); $i++) {
+                $ChatsData[$i]->date = date("Y-m-d H:i:s", strtotime($ChatsData[$i]->created_at));
+            }
+            $OrderOwenerInfo = User::first()->Orders->where('OID', "9159563247")->first();
+            $OrderOwenerName = ucfirst($OrderOwenerInfo->user->frist_name).' '.ucfirst($OrderOwenerInfo->user->last_name);
+            $OrderOwenerAvatar = $OrderOwenerInfo->user->avatar;
+            $OrderOwenerAccountNumber = $OrderOwenerInfo->user->Account_number;
+            $IsOnline = User::isOnline($OrderOwenerInfo->user->Account_number);
+
+            $UpdateMessagesStatus = chat_system::where('OID', $request->OID)->where('to', Auth::user()->Account_number)->update(['status' => '2']);
+            return response()->json(['data' => $ChatsData, 'IsOnline' => $IsOnline, 'OrderOwenerName' => $OrderOwenerName, 'OrderOwenerAvatar' => $OrderOwenerAvatar, 'OrderOwenerAccountNumber' => $OrderOwenerAccountNumber], 200);
         } else {
             return response()->json(['error' => 'طلب خاطئ !'], 400);
         }

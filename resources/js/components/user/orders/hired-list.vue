@@ -71,7 +71,7 @@
                                                     item.user.avatar != '' &&
                                                         item.user.avatar != null
                                                 "
-                                                :src="'/' + item.user.avatar"
+                                                :src="item.user.avatar"
                                                 :alt="item.user.username"
                                             />
                                             <img

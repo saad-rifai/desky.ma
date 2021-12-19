@@ -224,11 +224,9 @@
                             role="alert"
                         ></div>
                         <div
-                            id="upload-files-form"
+                        @click="SelectFilesOpen"
                             class="upload-files-form"
-                            data-types="['png','jpg']"
                             @drop="dropfiles"
-                            @click="SelectFilesOpen"
                         >
                             <input
                                 type="file"
@@ -360,9 +358,9 @@
         </div>
         <div
             v-if="new_request_is_allowed == false"
-            class="row row-cols-2 mx-auto text-right mb-3"
+            class="row row-cols-sm-2 mx-auto text-right mb-3"
         >
-            <div class="col mb-2">
+            <div class="col-sm mb-2">
                 <span class="col-label-text">
                     حالة الطلب:
                 </span>
@@ -376,7 +374,7 @@
                     }}
                 </span>
             </div>
-            <div class="col mb-2">
+            <div class="col-sm mb-2">
                 <span class="col-label-text">
                     تاريخ الطلب:
                 </span>
@@ -393,7 +391,7 @@
                     checkAeRequest.request_ae_account.status == 3 ||
                         checkAeRequest.request_ae_account.status == 4
                 "
-                class="col mb-2"
+                class="col-sm mb-2"
             >
                 <span class="col-label-text">
                     سبب الرفض
@@ -403,13 +401,13 @@
                 </span>
             </div>
 
-            <div class="col w-100 mb-3">
+            <div class="col-sm w-100 mb-3">
                 <span class="col-label-text d-block">
                     معلومات الطلب:
                 </span>
                 <hr />
             </div>
-            <div class="col mb-3">
+            <div class="col-sm mb-3">
                 <span class="col-label-text">
                     رقم بطاقة الهوية:
                 </span>
@@ -417,7 +415,7 @@
                     {{ checkAeRequest.request_ae_account.cin }}
                 </span>
             </div>
-            <div class="col mb-3">
+            <div class="col-sm mb-3">
                 <span class="col-label-text">
                     رقم تعريف المقاول الذاتي:
                 </span>
@@ -425,7 +423,7 @@
                     {{ checkAeRequest.request_ae_account.ae_number }}
                 </span>
             </div>
-            <div class="col mb-3">
+            <div class="col-sm mb-3">
                 <span class="col-label-text">
                     القطاع:
                 </span>
@@ -433,7 +431,7 @@
                     {{ checkAeRequest.request_ae_account.sector }}
                 </span>
             </div>
-            <div class="col mb-3">
+            <div class="col-sm mb-3">
                 <span class="col-label-text">
                     النشاط:
                 </span>
@@ -441,7 +439,7 @@
                     {{ checkAeRequest.request_ae_account.activite }}
                 </span>
             </div>
-            <div class="col mb-3">
+            <div class="col-sm mb-3">
                 <span class="col-label-text">
                     المسمى الوظيفي:
                 </span>
@@ -449,10 +447,10 @@
                     {{ checkAeRequest.request_ae_account.job_title }}
                 </span>
             </div>
-            <div class="col mt-3 w-100">
+            <div class="col-sm mt-3 w-100">
                 <div
                     v-if="checkAeRequest.request_ae_account.status == 3"
-                    class="col mb-2"
+                    class="col-sm mb-2"
                 >
                     <button
                         @click="new_request_is_allowed = true"
@@ -485,7 +483,6 @@ export default {
     data() {
         return {
             errors: new Errors(),
-            RequestStatus: false,
             Activites: [],
             activite_selected: [],
             sector: 0,
@@ -693,7 +690,13 @@ export default {
             data.append("ae_number", this.ae_number);
             data.append("join_date", this.join_date);
             data.append("sector", this.sector);
+            if(this.activite_selected == ""){
+            data.append("activite", 0);
+
+            }else{
             data.append("activite", this.activite_selected);
+                
+            }
             data.append("job_title", this.job_title);
             data.append("terms", this.terms);
             /*Send Data To Server */
@@ -701,10 +704,9 @@ export default {
             axios
                 .post("/ajax/user/request/aeaccount", data, config)
                 .then(response => {
-                    this.RequestStatus = true;
+                    this.errors = new Errors();
                     this.HideLoadingInDiv();
                     this.new_request_is_allowed = false;
-                    this.errors = new Errors();
                     this.CheckRequestAe();
                     this.$vs.notify({
                         title: "تم ارسال طلبك !",

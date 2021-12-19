@@ -133,7 +133,7 @@
                         </div>
                         <div class="col mb-3" align="right">
                             <span class="card-info-text">
-                                عرضان
+                                {{$data->offers_number}}
                             </span>
                         </div>
                         @if ($data->place != null && $data->place != '')
@@ -456,7 +456,7 @@
                         </div>
                         <div class="col mb-3" align="right">
                             <span class="card-info-text">
-                                عرضان
+                                {{$data->offers_number}}
                             </span>
                         </div>
                         @if ($data->place != null && $data->place != '')

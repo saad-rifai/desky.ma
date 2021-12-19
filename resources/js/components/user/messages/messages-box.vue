@@ -272,7 +272,7 @@
                     </h1>
 
                     <div
-                        v-if="ConversationsList.length < 0"
+                        v-if="ConversationsList.length < 1"
                         class="no-data-message text-center mt-4 mb-4 col-6"
                     >
                         <img

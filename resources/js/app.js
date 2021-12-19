@@ -74,7 +74,8 @@ Vue.prototype.moment = moment
  Vue.component('add-offer', require('./components/user/offers/add-offer.vue').default);
  Vue.component('offers-list', require('./components/user/offers/offers-list.vue').default);
  Vue.component('edit-offer', require('./components/user/offers/edit-offer.vue').default);
- 
+ Vue.component('my-offers', require('./components/user/offers/my-offers.vue').default);
+
  /* Public Section */
  Vue.component('ae-list', require('./components/public/ae-list.vue').default);
  Vue.component('user-ratings-list', require('./components/public/user-ratings-list.vue').default);
@@ -88,8 +89,11 @@ Vue.prototype.moment = moment
 
  /* Messages Section */
  Vue.component('messages-box', require('./components/user/messages/messages-box.vue').default);
-
  Vue.component('try-tool', require('./components/try.vue').default);
+
+ /* Deals Chats */
+ Vue.component('deal-messages', require('./components/user/deals/deal-messages.vue').default);
+
 
  /**
   * Next, we will create a fresh Vue application instance and attach it to

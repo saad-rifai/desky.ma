@@ -254,10 +254,10 @@
                     </button>
             </div>
         </div>
-                <div v-if="new_request_is_allowed == false && checkRequest.request.status == 3"
+        <div v-if="new_request_is_allowed == false && checkRequest.request.status == 3"
             class="row row-cols-1 mx-auto text-center mt-3 mb-3"
         >
-            <div class="col w-100">
+            <div class="col w-100" >
                 <div class="icon-large-top">
                     <img
                         style="max-width: 100px"
@@ -278,6 +278,48 @@
             </div>
 
 
+        </div>
+        <div v-if="new_request_is_allowed == false && checkRequest.request.status == 1" class="row row-cols-1 mx-auto text-center mt-3 mb-3">
+            <div class="col w-100">
+                <div class="icon-large-top">
+                    <img
+                        style="max-width: 100px"
+                        src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/icons/check.png"
+                        alt="لقد تم توثيق حسابك بنجاح"
+                    />
+                </div>
+            </div>
+            <div class="col w-100 mt-3">
+                <p class="text-icon">
+                    لقد تم توثيق حسابك بنجاح
+                    <span class="d-block font-Naskh text-secondary">
+                      {{checkRequest.request.message}}
+                    </span>
+                </p>
+              
+              
+            </div>
+        </div>
+        <div v-if="request_ae_account_pending == true" class="row row-cols-1 mx-auto text-center mt-3 mb-3">
+            <div class="col w-100">
+                <div class="icon-large-top">
+                    <img
+                        style="max-width: 100px"
+                        src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/icons/info.png"
+                        alt="تنبيه"
+                    />
+                </div>
+            </div>
+            <div class="col w-100 mt-3">
+                <p class="text-icon">
+                    في حال قدمت طلب لتفعيل حساب المقاول الذاتي فحسابك يوثق تلقائياََ
+                    <span class="d-block font-Naskh text-secondary">
+                      {{checkRequest.request.message}}
+                    </span>
+                </p>
+              
+              
+            </div>
         </div>
     </div>
 </template>
@@ -301,6 +343,7 @@ export default {
     data() {
         return {
             errors: new Errors(),
+            request_ae_account_pending: false,
             file_type: "",
             file_type_name: "",
             document_id: "",
@@ -461,11 +504,18 @@ export default {
                     this.account_status = this.checkRequest.account_status;
                     if (
                         this.account_status == null &&
-                        this.checkRequest.request_ae_account == null
+                        this.checkRequest.request == null &&
+                        this.checkRequest.request_ae_account_pending == null
                     ) {
                         this.new_request_is_allowed = true;
                     } else {
                         this.new_request_is_allowed = false;
+                        if(this.checkRequest.request == null){
+                            this.checkRequest.request = {status: null};
+                        }
+                    }
+                    if(this.checkRequest.request_ae_account_pending == true && this.checkRequest.request.status == null){
+                        this.request_ae_account_pending = true;
                     }
                 })
                 .catch(error => {

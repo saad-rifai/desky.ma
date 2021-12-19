@@ -4,6 +4,7 @@
 <link href="{{ asset('css/chat/chat-style.css') }}" rel="stylesheet">
 
 @section('content')
+
     <div id="app">
         <div class="container mt-5 mb-5">
             <div class="row text-center" dir="rtl">
@@ -189,7 +190,7 @@
                             </div>
                             <div class="col mb-3" align="right">
                                 <span class="card-info-text">
-                                    عرضان
+                                    {{$data->offers_number}}
                                 </span>
                             </div>
                             @if ($data->place != null && $data->place != '')
@@ -238,5 +239,5 @@
     </div>
 
 @stop
-<script src="{{ asset('js/library/p5.min.js') }}"></script>
-<script src="{{ asset('js/library/audio-record.js') }}"></script>
+<!--script src="{{ asset('js/library/p5.min.js') }}"></script-->
+<!--script src="{{ asset('js/library/audio-record.js') }}"></script-->

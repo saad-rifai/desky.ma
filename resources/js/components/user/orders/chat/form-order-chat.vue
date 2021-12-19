@@ -1,7 +1,14 @@
 <template>
     <div class="position-relative">
-        <div v-if="!chatbox" class="users-messages-menu">
-            <div v-if="ChatList.length > 0" class="messages-menu-content">
+        <div
+            v-if="!chatbox"
+            class="users-messages-menu vs-con-loading__container"
+            id="ChatListLoad"
+        >
+            <div
+                v-if="Object.keys(this.ChatList).length > 0"
+                class="messages-menu-content"
+            >
                 <vs-list>
                     <div
                         v-for="(item, index) in ChatList"
@@ -47,22 +54,34 @@
                         </vs-list-item>
                     </div>
                 </vs-list>
+                <div
+                    class="text-center mt-3 mb-3"
+                    v-if="list_next_page_url != null"
+                >
+                    <button
+                        class="btn btn-primary btn-sm"
+                        id="ChatListLoadBtn"
+                        @click="UserListShowMore"
+                    >
+                        <i class="fas fa-arrow-circle-down"></i> مشاهدة المزيد
+                    </button>
+                </div>
             </div>
             <div v-else>
-        <div class="no-data-message text-center mt-5 mb-4">
-            <img
-                src="/img/icons/215-SEARCH-AE.jpg"
-                alt="   لم تقم بتوظيف مقاول بعد في هذا المشروع"
-            />
-            لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع
-            <p class="font-Naskh">
-                أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف مقاول أو
-                مجموعة من المقاولين الذاتيين
-            </p>
+                <div class="no-data-message text-center mt-5 mb-4">
+                    <img
+                        src="/img/icons/215-SEARCH-AE.jpg"
+                        alt="   لم تقم بتوظيف مقاول بعد في هذا المشروع"
+                    />
+                    لم تقم بتوظيف مقاول ذاتي بعد في هذا المشروع
+                    <p class="font-Naskh">
+                        أختر من بين العروض المقدمة على طلبك أفضل عرض وقم بتوظيف
+                        مقاول أو مجموعة من المقاولين الذاتيين
+                    </p>
+                </div>
+            </div>
         </div>
-        </div>
-        </div>
-        <div v-else class="chat-tab-border-box mt-2">
+        <div v-else class="chat-tab-border-box">
             <div class="chat-head">
                 <div class="row w-100 mt-1 mx-auto">
                     <div class="col">
@@ -100,19 +119,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto chat-tools">
-         
-                    </div>
+                    <div class="col-auto chat-tools"></div>
                 </div>
             </div>
             <div class="chat-body position-relative">
                 <div>
                     <div class="chat-message-container">
                         <div class="chat-header-top">
-                            <button @click="NexChatMessage" v-if="NextPageChat != null" class="btn-read-more-chat">رسائل أقدم</button>
+                            <button
+                                @click="NexChatMessage"
+                                v-if="NextPageChat != null"
+                                class="btn-read-more-chat"
+                            >
+                                رسائل أقدم
+                            </button>
                         </div>
-                        <br>
-                        <br>
+                        <br />
+                        <br />
 
                         <div
                             v-for="(item, index) in ChatRoomData"
@@ -274,6 +297,9 @@ export default {
             IsOnline: null,
             NextPageChat: null,
             chatCount: 10,
+            ChatListAllResponse: null,
+            list_next_page_url: null,
+            users_per_page: 10,
             convertTime: function timeAgo(dateParam) {
                 if (!dateParam) {
                     return null;
@@ -318,8 +344,24 @@ export default {
         };
     },
     methods: {
-        NexChatMessage(){
-            this.chatCount+=10;
+        ChatListLoad: function() {
+            $("#ChatListLoadBtn").html(
+                '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> جاري التحميل...'
+            );
+            this.$vs.loading({
+                container: "#ChatListLoad",
+                scale: 0.6,
+                color: "#f96a0c"
+            });
+        },
+        HideChatListLoad: function() {
+            $("#ChatListLoadBtn").html(
+                "<i class='fas fa-arrow-circle-down'></i> مشاهدة المزيد"
+            );
+            this.$vs.loading.close("#ChatListLoad > .con-vs-loading");
+        },
+        NexChatMessage() {
+            this.chatCount += 10;
             this.getChatRoom();
         },
         backToList() {
@@ -334,7 +376,7 @@ export default {
         },
         avatarLink(link) {
             if (link != "" && link != null) {
-                return "/" + link;
+                return link;
             } else {
                 return "/img/icons/avatar.png";
             }
@@ -342,49 +384,84 @@ export default {
         getChatList() {
             let data = new FormData();
             data.append("OID", this.oid);
-            axios.post("/ajax/project/chatList/get", data).then(response => {
-                this.ChatList = response.data.data;
-            });
-        },
-        sendMessage() {
-            this.ChatRoomData.push({
-                date: new Date(),
-                message: this.message,
-                to: this.to
-            });
-            let data = new FormData();
-            data.append("OID", this.oid);
-            data.append("to", this.to);
-            data.append("message", this.message);
-            this.message = "";
+            data.append("PerPage", this.users_per_page);
             axios
-                .post("/ajax/project/chat/send", data)
+                .post("/ajax/project/chatList/get", data)
                 .then(response => {
-                    console.log(response);
+                    this.ChatListAllResponse = response.data.data;
+                    this.ChatList = response.data.data.data;
+                    this.list_next_page_url = this.ChatListAllResponse.next_page_url;
+                    this.HideChatListLoad();
                 })
                 .catch(error => {
-                    if (error.response.status == 422) {
+                    if (error.response.status == 401) {
                         this.$vs.notify({
-                            text: this.errors.errors[0],
+                            text: "انتهت الجلسة",
                             color: "danger",
                             position: "top-right",
-                            icon: "error"
+                            icon: "warning"
                         });
+                        window.location.reload();
                     } else {
                         this.$vs.notify({
-                            text: error.response.data.error,
+                            text:
+                                " حصل خطأ ما يرجى اعادة تحميل الصفحة VUEFRONT-408-BACK-INC",
                             color: "danger",
                             position: "top-right",
-                            icon: "error"
+                            icon: "warning"
                         });
                     }
                 });
+        },
+        sendMessage() {
+            if (this.message != "") {
+                this.ChatRoomData.push({
+                    date: new Date(),
+                    message: this.message,
+                    to: this.to
+                });
+                let data = new FormData();
+                data.append("OID", this.oid);
+                data.append("to", this.to);
+                data.append("message", this.message);
+                this.message = "";
+                axios
+                    .post("/ajax/project/chat/send", data)
+                    .then(response => {
+                        this.getChatRoom();
+                    })
+                    .catch(error => {
+                        if (error.response.status == 422) {
+                            this.$vs.notify({
+                                text: this.errors.errors[0],
+                                color: "danger",
+                                position: "top-right",
+                                icon: "error"
+                            });
+                        } else if (error.response.status == 401) {
+                            this.$vs.notify({
+                                text: "انتهت الجلسة",
+                                color: "danger",
+                                position: "top-right",
+                                icon: "warning"
+                            });
+                            window.location.reload();
+                        } else {
+                            this.$vs.notify({
+                                text: error.response.data.error,
+                                color: "danger",
+                                position: "top-right",
+                                icon: "error"
+                            });
+                        }
+                    });
+            }
         },
         getChatRoom() {
             let data = new FormData();
             data.append("OID", this.oid);
             data.append("to", this.to);
-            data.append("count", this.chatCount)
+            data.append("count", this.chatCount);
             axios
                 .post("/ajax/project/chatroom/get", data)
                 .then(response => {
@@ -395,10 +472,33 @@ export default {
                     this.sortedChatRoomData();
                 })
                 .catch(error => {
-                    console.log(error);
+                    if (error.response.status == 401) {
+                        this.$vs.notify({
+                            text: "انتهت الجلسة",
+                            color: "danger",
+                            position: "top-right",
+                            icon: "warning"
+                        });
+                        window.location.reload();
+                    } else {
+                        this.$vs.notify({
+                            text:
+                                " حصل خطأ ما يرجى اعادة تحميل الصفحة VUEFRONT-486-BACK-INC",
+                            color: "danger",
+                            position: "top-right",
+                            icon: "warning"
+                        });
+                    }
                 });
         },
-     
+        UserListShowMore() {
+            if (this.list_next_page_url != null) {
+                this.ChatListLoad();
+                this.users_per_page += 10;
+                this.getChatList();
+            }
+        },
+
         users_menu_chat_click(avatar, to, fullname) {
             this.IsOnline = null;
             this.to = to;
@@ -423,7 +523,23 @@ export default {
                     this.sortedChatRoomData();
                 })
                 .catch(error => {
-                    console.log(error);
+                    if (error.response.status == 401) {
+                        this.$vs.notify({
+                            text: "انتهت الجلسة",
+                            color: "danger",
+                            position: "top-right",
+                            icon: "warning"
+                        });
+                        window.location.reload();
+                    } else {
+                        this.$vs.notify({
+                            text:
+                                " حصل خطأ ما يرجى اعادة تحميل الصفحة VUEFRONT-537-BACK-INC",
+                            color: "danger",
+                            position: "top-right",
+                            icon: "warning"
+                        });
+                    }
                 });
         },
 

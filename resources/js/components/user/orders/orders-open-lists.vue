@@ -263,12 +263,11 @@
                 <div class="lazy-load-ae load-description lazy-order"></div>
               </div>
             </div>
-            <a
-              v-for="(item, index) in listData"
-              :key="index"
-              :href="'/order/' + item.OID"
+
+              <div class="box-article pb-3 mb-4" v-for="(item, index) in listData"
+              :key="index">
+            <a :href="'/order/' + item.OID"
             >
-              <div class="box-article pb-3 mb-4">
                 <div class="head-box-article">
                   <div class="row text-center">
                     <div class="col">
@@ -299,7 +298,7 @@
                                   item.user.avatar != '' &&
                                   item.user.avatar != null
                                 "
-                                :src="'/' + item.user.avatar"
+                                :src="item.user.avatar"
                                 :alt="item.user.username"
                               />
                               <img
@@ -353,8 +352,9 @@
                   </p>
                 </div>
                 <div></div>
+                 </a>
               </div>
-            </a>
+           
           </div>
 
           <div class="show-more-section text-center mt-5">

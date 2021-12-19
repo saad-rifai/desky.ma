@@ -553,6 +553,26 @@ class OrdersController extends Controller
                     $info->userCity = 'غير محدد';
                 }
                 /* Get User City */
+                $OffersCount = Offers::where('OID', $request->OID)->count();
+                switch ($OffersCount) {
+                    case 1:
+                        $info->offers_number = "عرض واحد";
+                        break;
+                    case 2:
+                        $info->offers_number = "عرضان";
+                        break;
+                    case $OffersCount > 2 && $OffersCount < 11:
+                        $info->offers_number = $OffersCount." عروض";
+                        break;
+                    case $OffersCount > 10:
+                        $info->offers_number = $OffersCount." عرض";
+                        break;
+                    default:
+                    $info->offers_number = "لاتوجد عروض";
+                    break;
+                }
+
+
 
                 /* Add Keywords to array */
                 if ($info->keywords != null && $info->keywords != "") {
@@ -692,7 +712,28 @@ class OrdersController extends Controller
                 } else {
                     $info->place = null;
                 }
+
                 /* Get User City */
+
+                /* Count Offers */
+                $OffersCount = Offers::where('OID', $request->OID)->count();
+                switch ($OffersCount) {
+                    case 1:
+                        $info->offers_number = "عرض واحد";
+                        break;
+                    case 2:
+                        $info->offers_number = "عرضان";
+                        break;
+                    case $OffersCount > 2 && $OffersCount < 11:
+                        $info->offers_number = $OffersCount." عروض";
+                        break;
+                    case $OffersCount > 10:
+                        $info->offers_number = $OffersCount." عرض";
+                        break;
+                    default:
+                    $info->offers_number = "لاتوجد عروض";
+                    break;
+                }
 
                 if ($info->files != null) {
                     $info->files = json_decode($info->files, true);
@@ -966,6 +1007,132 @@ class OrdersController extends Controller
                 }
             } else {
                 return response()->json(['error' => 'لايمكن حذف هذا الطلب'], 403);
+            }
+        }
+    }
+    /* Deals */
+    public function ManageDeal(Request $request){
+        if (isset($request->OID) && $request->OID != null) {
+            $infos = Orders::where('OID', $request->OID)->get();
+            if ($infos->count() > 0) {
+
+                $userOfferCheck = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['1','2','3'])->get();
+                if(count($userOfferCheck) > 0){
+                    foreach($userOfferCheck as $userOfferCheck);
+ 
+                foreach ($infos as $info);
+                /* Get City Name */
+                $info->OfferInfos = $userOfferCheck;
+                if (isset($info->place) && $info->place != null) {
+                    $datajson = file_get_contents('data/json/list-moroccan-cities.json');
+                    $jsondata = json_decode($datajson, true);
+
+                    $resultcheck = "";
+                    foreach ($jsondata as $item) {
+                        if ($item['id'] == $info->place) {
+                            $resultcheck = $item['ville'];
+                        }
+                    }
+                    $info->place = $resultcheck;
+                } else {
+                    $info->place = null;
+                }
+                /* Get User City */
+                /* Count Offers */
+                $OffersCount = Offers::where('OID', $request->OID)->count();
+                switch ($OffersCount) {
+                    case 1:
+                        $info->offers_number = "عرض واحد";
+                        break;
+                    case 2:
+                        $info->offers_number = "عرضان";
+                        break;
+                    case $OffersCount > 2 && $OffersCount < 11:
+                        $info->offers_number = $OffersCount." عروض";
+                        break;
+                    case $OffersCount > 10:
+                        $info->offers_number = $OffersCount." عرض";
+                        break;
+                    default:
+                    $info->offers_number = "لاتوجد عروض";
+                    break;
+                }
+
+                if ($info->files != null) {
+                    $info->files = json_decode($info->files, true);
+                }
+                /* Get Activite And Sector NAme */
+                $Activites = $info->activite;
+                $sector = $info->sector;
+                if ($Activites != null) {
+                    if ($sector == 1) {
+                        $listActivites = file_get_contents('data/json/activite-ae-2.json');
+                        $listActivitesdata = json_decode($listActivites, true);
+                    } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
+                        $listActivites = file_get_contents('data/json/activite-ae-1.json');
+                        $listActivitesdata = json_decode($listActivites, true);
+                    }
+                    $activite = $listActivitesdata[$Activites];
+                    $info->activite = $activite;
+                }
+                /* Set Sector Name */
+                if ($sector == 1) {
+                    $sectorName = "الخدمات";
+                } elseif ($sector == 2) {
+                    $sectorName = "التجارة";
+                } elseif ($sector == 3) {
+                    $sectorName = "الصناعة";
+                } elseif ($sector == 4) {
+                    $sectorName = "الحرفية";
+                } else {
+                    $sectorName = "";
+                }
+                $info->sector = $sectorName;
+                $info->budget = number_format((float)$info->budget, 2, '.', '');
+                switch ($info->time) {
+                    case (1);
+                        $info->time = 'يوم واحد';
+                        break;
+                    case (2);
+                        $info->time = ' يومان';
+                        break;
+                    case (3);
+                        $info->time = ' 3 أيام';
+                        break;
+                    case (7);
+                        $info->time = ' اسبوع';
+                        break;
+                    case (30);
+                        $info->time = ' شهر';
+                        break;
+                    case (60);
+                        $info->time = ' 2 أشهر';
+                        break;
+                    case (90);
+                        $info->time = ' 3 أشهر';
+                        break;
+                    default:
+                        $info->time = $info->time . ' يوم';
+                }
+                /* Add Keywords to array */
+                if ($info->keywords != null && $info->keywords != "") {
+                    $info->keywords = explode(",", $info->keywords);
+                } else {
+                    $info->keywords = null;
+                }
+                /* Add Keywords to array */
+                return view('offers.manage-deal', ['data' => $info]);
+            }else{
+                //abort(404);
+                echo 'error 1';
+
+            }
+
+
+
+
+            } else {
+              echo 'error 2';
             }
         }
     }

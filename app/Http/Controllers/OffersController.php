@@ -301,6 +301,29 @@ class OffersController extends Controller
             return response()->json(['error' => 'bad Request'], 400);
         }
     }
+    public function allMyOffers(){
+        $Offers = Offers::where('Account_number', Auth::user()->Account_number)->orderBy("created_at", "DESC")->paginate(10);
+      
+        $count = count($Offers);
+    
+
+        for($i = 0; $i < $count; $i++){
+            $Offers[$i]->OrderInfo = Orders::where('OID', $Offers[$i]->OID)->get()->first();
+        }
+        return response()->json(['data' => $Offers], 200);
+    }
+    public function MyOffersSearch(Request $request){
+        $status = $request->st;
+        $Offers = Offers::where('Account_number', Auth::user()->Account_number)->where('status', 'LIKE', $status)->orderBy("created_at", "DESC")->paginate(10);
+      
+        $count = count($Offers);
+    
+
+        for($i = 0; $i < $count; $i++){
+            $Offers[$i]->OrderInfo = Orders::where('OID', $Offers[$i]->OID)->get()->first();
+        }
+        return response()->json(['data' => $Offers], 200);
+    }
     public function UpdateOffer(Request $request){
         if(isset($request->OID)){
             $this->validate($request, [

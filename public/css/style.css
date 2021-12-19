@@ -121,6 +121,11 @@ span.title-upload-file {
     color: #4a4a4a;
     font-family: 'Noto Naskh Arabic' !important;
 }
+.vs-list--item:last-child {
+    border-bottom: none !important;
+}
+
+
 li.footer-li-title h3 {
     color: #f96a0c;
     font-size: 20px !important;
@@ -680,10 +685,10 @@ span.nb-step {
     border-bottom: solid 1px #efefef !important;
 }
 .box-highlight {
-    background-color: #ffe2cf;
     margin: -10px;
     padding: 10px;
     border-radius: 3px;
+    border: solid 1px #f96a0c;
 }
 
 .bg-brand {

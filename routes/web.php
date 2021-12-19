@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\Controller;
-use App\Jobs\SendEmail;
-use App\Mail\VerifiyEmail;
+use App\Orders;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,7 +100,9 @@ Route::prefix('ajax')->group(function () {
         /* Offers Routes */
         Route::post('user/offer/create', 'OffersController@create');
         Route::post('order/offer/update/', 'OffersController@UpdateOffer');
-        
+
+        Route::get('MyOffers/all', 'OffersController@allMyOffers');
+        Route::post('MyOffers/search', 'OffersController@MyOffersSearch');
         /* Notification */
         Route::get('user/menu/notification', 'UserNotificationController@NotificationForMenu');
         Route::post('user/menu/notification/click', 'UserNotificationController@AllNotificationReaded');
@@ -126,6 +126,11 @@ Route::prefix('ajax')->group(function () {
         Route::post('user/contract/cancel', 'OrdersContractsController@cancel');
 
         /* USER CONTRACTS */
+
+        /* Deals Chat */
+        //DealChatRoom
+        Route::post('deal/messages', 'ChatSystemController@DealChatRoom');
+
     
     });
     
@@ -136,7 +141,9 @@ Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@Veri
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
 
-    return view('layout.try')->with(['success' => true]);
+    $OrderOwenerName =  User::first()->Orders->where('OID', "9159563247")->first();
+dd($OrderOwenerName->user);
+
 });
 
 /** 
@@ -145,6 +152,10 @@ Route::get('/try', function () {
 
 
 Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function () {
+
+    /* Deals */
+    Route::get('deal/{OID}/manage', 'OrdersController@ManageDeal');
+
 
     /* Messages */
 
@@ -172,7 +183,9 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
     Route::get('/MyOrders', function () {
         return view('orders.myorders');
     });
-
+    Route::get('/MyOffers', function () {
+        return view('offers.my-offers');
+    });
     Route::get('/myorder/{OID}', 'OrdersController@MyOrderShow');
 
     Route::get('/dashboard', function () {
