@@ -114,18 +114,11 @@ class WebController extends Controller
     public function UserRatingList(Request $request)
     {
         if (isset($request->ac) && $request->ac != "") {
-            $ratingInfos = UserRating::join('users', 'user_ratings.from', 'users.Account_number')->where('for', $request->ac)
-                    ->join('ae_accounts', 'users.Account_number', '=', 'ae_accounts.Account_number')
-                    ->paginate(
-                        2,
-                        [
-                            'user_ratings.*',
-                            'users.Account_number', 'users.last_name',  'users.frist_name', 'users.country', 'users.city', 'users.username', 'users.description',
-                            'users.avatar', 'users.created_at', 'users.type', 'users.gender', 'users.verified_account',
-                            'ae_accounts.ae_number', 'ae_accounts.sector', 'ae_accounts.activite', 'ae_accounts.job_title'
-                        ]
-                    );
-           
+            $ratingInfos = UserRating::where('for', $request->ac)->paginate(1);
+           for($i =0; count($ratingInfos) > $i; $i++){
+            $ratingInfos[$i]->UserInfos = $ratingInfos[$i]->Auther;
+    
+           }
 
             return response()->json($ratingInfos, 200);
         } else {

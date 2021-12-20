@@ -14,7 +14,7 @@ class UserRatingController extends Controller
     public function create(Request $request){
         if(isset($request->OID) && isset($request->to)){
             $this->validate($request, [
-                'description' => 'required|min:15|max:350|string',
+                'description' => 'required|min:10|max:350|string',
                 'rating' => 'required|integer|min:0|max:5',
     
             ], $message = [
@@ -23,7 +23,7 @@ class UserRatingController extends Controller
                 'rating.max' => 'يرجى تحديد التقييم  *',
                 'rating.integer' => 'يرجى تحديد التقييم *',
 
-                'description.min' => 'يجب أن يتكون الوصف من 15 حرف على الأقل  *',
+                'description.min' => 'يجب أن يتكون الوصف من 10 أحرف على الأقل  *',
                 'description.max' => 'الوصف أطول من اللازم الحد الأقصى 350 حرف *',
             ]);
 

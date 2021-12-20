@@ -328,6 +328,7 @@ p.last-message {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 button.btn-icon-no-bg {
     background: none;
     border: none !important;

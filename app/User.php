@@ -65,6 +65,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserRating::class,'for');
     }
+    public function Myrating()
+    {
+        return $this->hasMany(UserRating::class,'Account_number');
+    }
     public function notification()
     {
         return $this->hasMany(UserNotification::class,'to')->orderBy('created_at', 'desc');

@@ -153,7 +153,7 @@ export default {
           const favicon = document.getElementById("favicon");
       favicon.href = "/img/icons/favicon-32x32.png";
     },
-    playSound (sound = "/audio/notification.wav") {
+    playSound (sound = "https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/audio/notification.wav") {
       if(sound) {
         var audio = new Audio(sound);
         audio.play();

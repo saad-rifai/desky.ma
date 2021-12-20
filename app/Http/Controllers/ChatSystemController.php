@@ -181,6 +181,8 @@ class ChatSystemController extends Controller
     }
     public function MessagesChatList(Request $request)
     {
+        $NotSound = false;
+        $NotReadMessages = 0;
         if(isset($request->perPage)){
 
         }else{
@@ -203,17 +205,30 @@ class ChatSystemController extends Controller
                 $UserInfos = User::where('Account_number', $messages[$i]->to)->get(['avatar', 'frist_name', 'last_name']);
                 foreach ($UserInfos as $UserInfo);
                 $messages[$i]->userInfos = $UserInfo;
+                $messages[$i]->date = date("Y-m-d H:i:s", strtotime($messages[$i]->created_at));
+
                 $messages[$i]->IsOnline = User::isOnline($messages[$i]->userInfos->Account_number);
             } elseif ($messages[$i]->from != Auth::user()->Account_number) {
                 $UserInfos = User::where('Account_number', $messages[$i]->from)->get(['avatar', 'frist_name', 'last_name']);
                 foreach ($UserInfos as $UserInfo);
                 $messages[$i]->userInfos = $UserInfo;
                 $messages[$i]->IsOnline = User::isOnline($messages[$i]->userInfos->Account_number);
+                $messages[$i]->date = date("Y-m-d H:i:s", strtotime($messages[$i]->created_at));
+
+            }
+        }
+        if(isset($request->NotSoundCheck)){
+            $NotSoundCount = chat_system::where('type', '0')->where('to', Auth::user()->Account_number)->where('status', '0')->count();
+            $NotReadMessages = chat_system::where('type', '0')->where('to', Auth::user()->Account_number)->whereIn('status', ['0', '1'])->count();
+            if($NotSoundCount > 0){
+                $NotSound = true;
+            }else{
+                $NotSound = false;
             }
         }
         $updateStatus = chat_system::where('type', '0')->where('status', '0')->where('to', Auth::user()->Account_number)->update(['status' => '1']);
         $data = $this->paginate($messages, $request->perPage);
-        return response()->json(['data' => $data], 200);
+        return response()->json(['data' => $data, 'NotSound' => $NotSound, 'NotReadMessages' => $NotReadMessages], 200);
 
     }
     public function GetConversation(Request $request)
@@ -251,12 +266,11 @@ class ChatSystemController extends Controller
     }
     public function SendMessage(Request $request){
         $this->validate($request, [
-            'room_id' => 'required|integer',
+            'room_id' => 'required',
             'message' => 'required|max:1500|min:1',
         ], $messages = [
             'room_id.required' => 'طلب خاطئ يرجى اعادة تحميل الصفحة',
 
-            'room_id.integer' => 'طلب خاطئ يرجى اعادة تحميل الصفحة',
 
             'message.required' => 'يرجى كتابة رسالة',
             'message.min' => 'يرجى كتابة رسالة',
@@ -302,6 +316,13 @@ class ChatSystemController extends Controller
     }
     public function NewMessage(Request $request){
         if(isset($request->to) && isset($request->message)){
+            $this->validate($request, [
+                'message' => 'required|max:1500|min:1',
+            ], $messages = [
+                'message.required' => 'يرجى كتابة رسالة',
+                'message.min' => 'يرجى كتابة رسالة',
+                'message.max' => 'الرسالة أطول من اللازم الحد الأقصى 1500 حرف',
+            ]);
             $CheckReciver = User::where('Account_number', $request->to)->where('verified_account', '2')->count();
             if($CheckReciver > 0){
                 $CheckChatRooms = chat_system::where(function ($query) use ($request) {
@@ -330,7 +351,20 @@ class ChatSystemController extends Controller
 
                 }
              }else {
-                 echo 'true';
+               $room_id = $CheckChatRooms->room_id;
+               $stmt = chat_system::create([
+                'type' => '0',
+                'to' => $request->to,
+                'from' => Auth::user()->Account_number,
+                'message' => $request->message,
+                'room_id' =>$room_id,
+                'status' => '0',]);
+                if($stmt){
+                    return response()->json(['success' => $stmt], 200);
+                }else{
+                return response()->json(['error' => 'حصل خطأ ما اثناء محاولة معالجة طلبك يرجى اعادة المحاولة لاحقاََ'], 403);
+
+                }
              }
             }else{
                 return response()->json(['error' => 'لايمكنك ارسال هذه الرسالة'], 403);

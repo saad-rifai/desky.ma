@@ -5,6 +5,8 @@
 
 
  window.Vue = require('vue');
+ import moment from 'moment';
+Vue.prototype.moment = moment
  import Vuesax from 'vuesax'
  import 'material-icons/iconfont/material-icons.css';
  import 'vuesax/dist/vuesax.css' //Vuesax styles

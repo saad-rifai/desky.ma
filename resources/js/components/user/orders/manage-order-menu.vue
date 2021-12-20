@@ -19,37 +19,32 @@
                     @click="updateStatus(2)"
                     href="#"
                     v-if="status == 1"
-                    >الانتقال الى مرحلة التنفيذ</a
-                >
+                    >الانتقال الى مرحلة التنفيذ</a>
                 <a
                     class="dropdown-item"
                     @click="updateStatus(4)"
                     href="#"
-                    v-if="status == 1"
-                    >اغلاق نهائياََ</a
-                >
+                    v-if="status == 1 || status == 2 && AllowedToClose && OffersCount < 1"
+                    >اغلاق نهائياََ</a>
                 <a
                     class="dropdown-item"
                     @click="updateStatus(1)"
                     href="#"
                     v-if="status == 4"
-                    >اعادة نشر الطلب</a
-                >
+                    >اعادة نشر الطلب</a>
                 <a
                     class="dropdown-item"
                     type="button"
                     data-toggle="modal"
                     data-target="#delet_order_Modal"
-                    v-if="status == 0 || status == 4 || status == 5"
-                    >حذف الطلب</a
-                >
+                    v-if="status == 0 || status == 4 || status == 5 && OffersCount < 1"
+                    >حذف الطلب</a>
                 <a
                     class="dropdown-item"
                     type="button"
                     data-toggle="modal"
                     data-target="#reportModal"
-                    >الابلاغ عن مشكلة</a
-                >
+                    >الابلاغ عن مشكلة</a>
             </div>
         </div>
     </div>
@@ -59,7 +54,9 @@ export default {
     props: ["oid", "from_url"],
     data() {
         return {
-            status: ""
+            status: "",
+            AllowedToClose: false,
+            OffersCount: 0,
         };
     },
     methods: {
@@ -68,6 +65,8 @@ export default {
                 .get("/ajax/order/status/get/" + this.oid)
                 .then(response => {
                     this.status = response.data.status;
+                    this.AllowedToClose = response.data.AllowedToClose;
+                    this.OffersCount = response.data.OffersCount;
                 })
                 .catch(error => {
                     console.log(error);

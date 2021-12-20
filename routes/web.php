@@ -116,7 +116,8 @@ Route::prefix('ajax')->group(function () {
         Route::get('messages/chatList/get', 'ChatSystemController@MessagesChatList');
         Route::get('messages/conversation/get/{room_id}/{paginate}', 'ChatSystemController@GetConversation');
         Route::post('user/message/send', 'ChatSystemController@SendMessage');
-        Route::get('user/new/message/{to}/{message}', 'ChatSystemController@NewMessage');
+        Route::post('user/new/message', 'ChatSystemController@NewMessage'); /* Need {to} and {message} */
+        Route::get('messages/new/notification', 'ChatSystemController@Notification');
 
         /* Chat System */
 
@@ -127,9 +128,9 @@ Route::prefix('ajax')->group(function () {
 
         /* USER CONTRACTS */
 
-        /* Deals Chat */
-        //DealChatRoom
+        /* Deals  */
         Route::post('deal/messages', 'ChatSystemController@DealChatRoom');
+        Route::post('deal/delivery', 'OrdersController@dealDelivery');
 
     
     });

@@ -1,6 +1,7 @@
 <template>
   <div>
 <report-popup about="0" :to="ReportTo" :from_url="from_url"></report-popup>
+<new-message :to="NewMessageTo"></new-message>
     <!-- Mobile Filter Search -->
     <div
       class="offcanvas offcanvas-start"
@@ -326,13 +327,15 @@
                         </div>
                       </div>
                     </div>
+
                     <div v-if="item.Account_number != myaccountnumber" class="col-auto mobile-hidden-1">
-                    <button class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i></button>
+                    <a href="#NewMessageModal" @click="NewMessageTo = item.Account_number" type="button" data-toggle="modal" data-target="#NewMessageModal"><button class="btn btn-primary btn-sm" 
+                    ><i class="fas fa-envelope"></i></button></a>
                     <span class="dropdown">
                         <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
                             aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                         <ul class="dropdown-menu" aria-labelledby="menu_user">
-                            <li><a class="dropdown-item" href="#">مراسلة</a></li>
+                            <li><a class="dropdown-item" href="#NewMessageModal" @click="NewMessageTo = item.Account_number" type="button" data-toggle="modal" data-target="#NewMessageModal">مراسلة</a></li>
                             <li @click="ReportTo = item.Account_number"><a class="dropdown-item" href="#reportModal" type="button" data-toggle="modal" data-target="#reportModal">التبليغ</a></li>
                         </ul>
                     </span>
@@ -432,7 +435,9 @@
 import ListCities from "../../../../public/data/json/list-moroccan-cities.json";
 import Activites1 from "../../../../public/data/json/activite-ae-1.json";
 import Activites2 from "../../../../public/data/json/activite-ae-2.json";
+import newMessage from '../user/messages/new-message.vue';
 export default {
+  components: { newMessage },
   props:['from_url', 'myaccountnumber'],
   data() {
     return {
@@ -448,7 +453,8 @@ export default {
       city: "",
       ReportTo: null,
       typeget: "all",
-      stopLazyLoading: false
+      stopLazyLoading: false,
+      NewMessageTo: null,
     };
   },
 

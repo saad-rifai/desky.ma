@@ -85,11 +85,7 @@
 
                     </li>
 
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ asset('MyOrders') }}"> طلباتي</a>
-                        </li>
-                    @endauth
+               
 
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -99,10 +95,15 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
                                 جميع جميع طلبات العروض</a>
-                            <a class="dropdown-item" href="{{asset('MyOrders')}}"><i class="fas fa-folder"></i> طلباتي </a>
                             <a class="dropdown-item"
                                 href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i
                                     class="fas fa-folder-plus"></i> نشر طلب عروض</a>
+                                    @auth
+                                    <a class="dropdown-item" href="{{asset('MyOrders')}}"><i class="fas fa-folder"></i> طلباتي </a>
+
+                                    <a class="dropdown-item" href="{{ asset('MyOffers') }}"><i class="fas fa-ticket-alt"></i> عروضي</a>
+                                    @endauth
+
                         </div>
 
                     </li>

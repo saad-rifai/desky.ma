@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Offers;
 use App\Orders;
 use App\orders_contracts;
+use App\User;
 use App\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -807,11 +808,17 @@ class OrdersController extends Controller
     public function GetStatus(Request $request)
     {
         if (isset($request->OID)) {
-
             $infos = Orders::where('OID', $request->OID)->get(["status"]);
             if (count($infos) > 0) {
+                $OffersCheck = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2'])->count();
+                $AllowedToClose = false;
+                if($OffersCheck > 0){
+                    $AllowedToClose = false;
+                }else{
+                    $AllowedToClose = true;
+                }
                 foreach ($infos as $info);
-                return response()->json(['status' => $info->status], 200);
+                return response()->json(['status' => $info->status, 'AllowedToClose' => $AllowedToClose, 'OffersCount' => $OffersCheck], 200);
             } else {
                 return response()->json(['error' => 'Not Found'], 404);
             }
@@ -848,7 +855,7 @@ class OrdersController extends Controller
                             break;
                         case 4:
                             /* If Not Have Offers */
-                            $OffersCount = Offers::where('OID', $request->OID)->where('status', '1')->count();
+                            $OffersCount = Offers::where('OID', $request->OID)->whereIn('status', ['1','2'])->count();
                             if ($OffersCount > 0) {
                                 $response['allowed'] = false;
                                 $response['error'] = "لايمكنك اغلاق هذه الصفقة لأنه لديك مقاولون ذاتييون يعملون عليها";
@@ -1114,6 +1121,9 @@ class OrdersController extends Controller
                     default:
                         $info->time = $info->time . ' يوم';
                 }
+
+                /* Count Offer Time */
+                
                 /* Add Keywords to array */
                 if ($info->keywords != null && $info->keywords != "") {
                     $info->keywords = explode(",", $info->keywords);
@@ -1121,6 +1131,12 @@ class OrdersController extends Controller
                     $info->keywords = null;
                 }
                 /* Add Keywords to array */
+
+                /* Contract Info */
+                $ContractInfos = orders_contracts::where('OID', $request->OID)->where('self_contracter', Auth::user()->Account_number)->where('order_owner', $info->Account_number)->get()->first();
+                $info->ContractInfos = $ContractInfos;
+                /* delivery time */
+                $info->deliveryTime  = $info->ContractInfos->created_at->addDays($info->ContractInfos->time);
                 return view('offers.manage-deal', ['data' => $info]);
             }else{
                 //abort(404);
@@ -1134,6 +1150,32 @@ class OrdersController extends Controller
             } else {
               echo 'error 2';
             }
+        }
+    }
+    public function dealDelivery(Request $request){
+        if(isset($request->OID)){
+            $UpdateOffer = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->where('status', '1')->update([
+                'status' => '2'
+            ]);
+            if($UpdateOffer){
+                /* Order info */
+                $OrderInfo = Orders::where('OID' , $request->OID)->get(['Account_number'])->first();
+                /* Send Notification */
+                UserNotification::create([
+                    'to' => $OrderInfo->Account_number,
+                    'from', Auth::user()->Account_number,
+                    'message' => 'لقد قام <a href="/@'.Auth::user()->username.'">'.Auth::user()->frist_name.'</a> بتسليم الطلب رقم <a href="/myorder/'.$request->OID.'">#'.$request->OID.'</a> قم بتقييم عمله',
+                    'notifybyemail' => "0",
+                    'email_status' => "0"
+                ]);
+                return response()->json(['success' => 'تمت العملية بنجاح'], 200);
+            }else{
+            return response()->json(['error' => 'لايمكن تحديث هذا الطلب '], 400);
+
+            }
+       
+        }else{
+            return response()->json(['error' => 'Bad Request'], 400);
         }
     }
 }

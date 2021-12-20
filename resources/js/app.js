@@ -89,10 +89,16 @@ Vue.prototype.moment = moment
 
  /* Messages Section */
  Vue.component('messages-box', require('./components/user/messages/messages-box.vue').default);
+ Vue.component('new-message', require('./components/user/messages/new-message.vue').default);
  Vue.component('try-tool', require('./components/try.vue').default);
 
  /* Deals Chats */
  Vue.component('deal-messages', require('./components/user/deals/deal-messages.vue').default);
+ Vue.component('manage-deal', require('./components/user/deals/manage-deal.vue').default);
+
+ /* Tools */
+ Vue.component('time-format', require('./components/tools/time.vue').default);
+
 
 
  /**

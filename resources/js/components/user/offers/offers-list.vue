@@ -1,5 +1,7 @@
 <template>
     <div>
+        <new-message :to="NewMessageTo"></new-message>
+
         <edit-offer :oid="oid"></edit-offer>
         <button
             hidden
@@ -425,7 +427,7 @@
                                                     <i class="fas fa-edit"> </i>
                                                 </button>
 
-                                                <button
+                                             <a href="#NewMessageModal" @click="NewMessageTo = item.Account_number" type="button" data-toggle="modal" data-target="#NewMessageModal" >   <button
                                                     v-if="
                                                         item.Account_number !=
                                                             myaccountnumber
@@ -435,7 +437,7 @@
                                                     <i
                                                         class="fas fa-envelope"
                                                     ></i>
-                                                </button>
+                                                </button></a>
                                                 <span
                                                     class="dropdown"
                                                     v-if="
@@ -457,13 +459,8 @@
                                                         class="dropdown-menu"
                                                         aria-labelledby="menu_user"
                                                     >
-                                                        <li>
-                                                            <a
-                                                                class="dropdown-item"
-                                                                href="#"
-                                                                >مراسلة</a
-                                                            >
-                                                        </li>
+                                                                     <li><a class="dropdown-item" href="#NewMessageModal" @click="NewMessageTo = item.Account_number" type="button" data-toggle="modal" data-target="#NewMessageModal">مراسلة</a></li>
+
                                                         <li
                                                             @click="
                                                                 reportTo =
@@ -531,7 +528,7 @@
                                     <span
                                         v-if="item.status == 2"
                                         class="badge bg-success "
-                                        >انتهى العقد</span
+                                        >مكتمل</span
                                     >
                                     <span
                                         v-if="item.status == 3"
@@ -601,13 +598,13 @@
                                             </button>
                                         </div>
                                         <div class="col-auto">
-                                            <button
+                                          <a href="#NewMessageModal" @click="NewMessageTo = item.Account_number" type="button" data-toggle="modal" data-target="#NewMessageModal" >  <button
                                                 type="button"
                                                 class="btn btn-outline-primary btn-sm"
                                             >
                                                 <i class="fas fa-envelope"></i>
                                                 مراسلة
-                                            </button>
+                                            </button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -863,13 +860,13 @@
                                     <div class="col-auto mobile-btn-act-position">
                                         <div class="row">
                                             <div class="col-auto mobile-hidden-1 p-1">
-                                                <button
+                                              <a href="#NewMessageModal" @click="NewMessageTo = item.Account_number" type="button" data-toggle="modal" data-target="#NewMessageModal" > <button
                                                     class="btn btn-primary btn-sm"
                                                 >
                                                     <i
                                                         class="fas fa-envelope"
                                                     ></i>
-                                                </button>
+                                                </button></a>
                                             </div>
                                             <div class="col-auto p-1 ">
                                                 <span class="dropdown">
@@ -1057,7 +1054,8 @@ export default {
             nodata2: false,
             OrderStatusCheck: false,
             reportTo: null,
-            AllowdToEdit: false
+            AllowdToEdit: false,
+            NewMessageTo: null
         };
     },
     methods: {
@@ -1074,7 +1072,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    console.log(error);
+                
                 });
         },
         AcceptOffer() {

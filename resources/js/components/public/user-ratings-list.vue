@@ -1,4 +1,5 @@
 <template>
+<div>
     <div id="div-with-loading">
         <div v-if="loaddata" class="d-flex justify-content-center mt-5 mb-5">
             <div class="spinner-grow c-b-p" role="status">
@@ -16,7 +17,7 @@
             :key="index"
             class="box-article pb-3 mb-3 mt-3 position-relative"
         >
-            <a :href="'@' + item.username">
+            <a :href="'@' + item.UserInfos.username">
                 <div class="head-box-article">
                     <div class="row text-center">
                         <div class="col">
@@ -25,15 +26,15 @@
                                     <div class="avatar-large-box-article">
                                         <img
                                             v-if="
-                                                item.avatar != '' &&
-                                                    item.avatar != null
+                                                item.UserInfos.avatar != '' &&
+                                                    item.UserInfos.avatar != null
                                             "
-                                            :src="item.avatar"
-                                            :alt="item.username"
+                                            :src="item.UserInfos.avatar"
+                                            :alt="item.UserInfos.username"
                                         />
                                         <img
                                             src="/img/icons/avatar.png"
-                                            :alt="item.username"
+                                            :alt="item.UserInfos.username"
                                         />
                                     </div>
                                 </div>
@@ -41,12 +42,12 @@
                                     <div class="user-name-box-article">
                                         <h4>
                                             {{
-                                                item.frist_name[0].toUpperCase() +
-                                                    item.frist_name.substring(1)
+                                                item.UserInfos.frist_name[0].toUpperCase() +
+                                                    item.UserInfos.frist_name.substring(1)
                                             }}
                                             {{
-                                                item.last_name[0].toUpperCase() +
-                                                    item.last_name.substring(1)
+                                                item.UserInfos.last_name[0].toUpperCase() +
+                                                    item.UserInfos.last_name.substring(1)
                                             }}
                                         </h4>
                                     </div>
@@ -71,29 +72,8 @@
                             ></i>
                         </span>
                     </div>
-
-                    <div class="row mr-65 mmt-35">
-                        <div class="col-auto">
-                            <div class="user-info-box-article">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <div class="user-info-box-article">
-                                            <i class="fas fa-briefcase"></i>
-                                            {{ item.job_title }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="user-info-box-article">
-                                <i class="fas fa-map-marker-alt"></i>
-                                {{ citiesJson[item.city].ville }}, المغرب
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="body-box-article mr-65">
+                <div class="body-box-article mr-65 mt--40">
                     <p class="box-article-description"></p>
                     <p
                         class="box-article-description font-Naskh"
@@ -105,7 +85,9 @@
                 </div>
             </a>
         </div>
-                  <div class="show-more-section text-center mt-5">
+ 
+    </div>
+           <div class="show-more-section text-center mt-5">
 
         <button
             v-if="
@@ -118,8 +100,8 @@
         >
             مشاهدة المزيد
         </button>
-                  </div>
-    </div>
+        </div>
+        </div>
 </template>
 <script>
 import ListCities from "../../../../public/data/json/list-moroccan-cities.json";

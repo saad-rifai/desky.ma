@@ -260,8 +260,9 @@
               
                       <a role="button" class="collapsed" data-toggle="collapse" :href="'#TextCollapse'+index" aria-expanded="false" :aria-controls="'TextCollapse'+index"></a>
                 </div>
-                <div v-if="item.NeedRating" class="mt-3" align="left">
-                <button class="btn btn-primary btn-sm" @click="rateUserId = item.Account_number" type="button" data-toggle="modal" data-target="#Rate_modal"
+                <div v-if="item.NeedRating" class="mt-3 mb-3" align="left">
+
+                <button class="btn btn-primary btn-sm mt-3" @click="rateUserId = item.Account_number" type="button" data-toggle="modal" data-target="#Rate_modal"
                 ><i class="fas fa-star"></i> تقييم</button>
 
                 </div>
