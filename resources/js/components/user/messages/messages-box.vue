@@ -290,7 +290,10 @@
                             class="list-group-item"
                             v-for="(item, index) in ConversationsList"
                             :key="index"
-                            @click="getConversation(item.room_id)"
+                            @click="
+                                getConversation(item.room_id);
+                                RoomIdSelected = item.room_id;
+                            "
                         >
                             <div class="row">
                                 <div class="col-auto">
@@ -333,10 +336,7 @@
                                         </p>
                                         <span
                                             v-if="
-                                                (item.to == account_number &&
-                                                    item.status == 0) ||
-                                                    item.status == 1
-                                            "
+                                                item.to == account_number && (item.status == 0 || item.status == 1)"
                                             class="new-notification-badge"
                                         ></span>
                                     </div>
@@ -431,6 +431,7 @@ export default {
             ConversationSelected: [],
             ChatListCount: 10,
             paginate: 5,
+            RoomIdSelected: "",
             convertTime: function timeAgo(dateParam) {
                 if (!dateParam) {
                     return null;
@@ -482,11 +483,12 @@ export default {
             }
         },
         OldChatMessages() {
-            this.paginate +=10;
+            this.paginate += 10;
             this.getConversation(this.room_id);
         },
         sendMessage() {
             if (this.message != "" && this.room_id != null) {
+                clearInterval(this.interval2);
                 this.ChatRoomData.push({
                     date: new Date(),
                     message: this.message,
@@ -500,41 +502,56 @@ export default {
                 axios
                     .post("/ajax/user/message/send", data)
                     .then(response => {
-                        this.getConversation(this.ConversationSelected);
+                        this.getConversationMounted(this.RoomIdSelected)
+                        this.interval2 = setInterval(
+                            () =>
+                                this.getConversationMounted(
+                                    this.RoomIdSelected
+                                ),
+                            5000
+                        );
                     })
                     .catch(error => {
                         if (error.response.status == 500) {
-                        this.$vs.notify({
-                            title: "خطأ في النظام",
-                            text:
-                                "حصل خطأ في النظام أثناء محاولة معالجة طلبك يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
-                            color: "danger",
-                            fixed: true,
-                            icon: "warning"
-                        });
-                    } else if (error.response.status == 401) {
-                        this.$vs.notify({
-                            text: "يجب تسجيل الدخول لتتمكن من التبليغ",
-                            color: "danger",
-                            fixed: true,
-                            icon: "warning"
-                        });
-                        window.location.href="/login?redirect="+window.location.href+"";
-                    }  else if (error.response.status == 422) {
-                        this.$vs.notify({
-                            text: error.response.data.errors.message[0],
-                            color: "danger",
-                            fixed: true,
-                            icon: "warning"
-                        });
-                    } else {
-                        this.$vs.notify({
-                            text: error.response.data.error,
-                            color: "danger",
-                            fixed: true,
-                            icon: "warning"
-                        });
-                    }
+                            this.$vs.notify({
+                                title: "خطأ في النظام",
+                                text:
+                                    "حصل خطأ في النظام أثناء محاولة معالجة طلبك يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
+                                color: "danger",
+                                fixed: true,
+                                icon: "warning"
+                            });
+                        } else if (error.response.status == 401) {
+                            this.$vs.notify({
+                                text: "يجب تسجيل الدخول لتتمكن من التبليغ",
+                                color: "danger",
+                                fixed: true,
+                                icon: "warning"
+                            });
+                            window.location.href =
+                                "/login?redirect=" + window.location.href + "";
+                        } else if (error.response.status == 422) {
+                            this.$vs.notify({
+                                text: error.response.data.errors.message[0],
+                                color: "danger",
+                                fixed: true,
+                                icon: "warning"
+                            });
+                        } else {
+                            this.$vs.notify({
+                                text: error.response.data.error,
+                                color: "danger",
+                                fixed: true,
+                                icon: "warning"
+                            });
+                        }
+                        this.interval2 = setInterval(
+                            () =>
+                                this.getConversationMounted(
+                                    this.RoomIdSelected
+                                ),
+                            5000
+                        );
                     });
             }
         },
@@ -556,7 +573,9 @@ export default {
         },
         getConversationsList() {
             axios
-                .get("/ajax/messages/chatList/get?perPage="+this.ChatListCount)
+                .get(
+                    "/ajax/messages/chatList/get?perPage=" + this.ChatListCount
+                )
                 .then(response => {
                     this.ConversationsListData = response.data.data;
                     this.ConversationsList = this.ConversationsListData.data;
@@ -621,7 +640,7 @@ export default {
         }
     },
     created() {
-      //  this.getConversationsList();
+          this.getConversationsList();
         this.interval1 = setInterval(() => this.getConversationsList(), 5000);
     }
 };

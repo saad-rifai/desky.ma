@@ -187,13 +187,11 @@ export default {
         });
     },
   },
-  created() {
+  mounted() {
     this.getData();
-    this.interval = setInterval(() => this.getData(), 5000);
+    this.interval = setInterval(() => this.getData(), 10000);
 
   },
-  mounted(){
 
-  }
 };
 </script>

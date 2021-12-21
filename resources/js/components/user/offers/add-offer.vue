@@ -168,6 +168,17 @@ export default {
               fixed: true,
               icon: "warning",
             });
+          } else if (error.response.status == 403) {
+            this.errors = new Errors();
+
+            this.$vs.notify({
+              title: "فشلة العملية",
+              text: error.response.data.error,
+              color: "danger",
+              position: "top-right",
+              fixed: true,
+              icon: "warning",
+            });
           } else if (error.response.status == 401) {
             this.errors = new Errors();
 

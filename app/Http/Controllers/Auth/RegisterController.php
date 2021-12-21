@@ -177,7 +177,9 @@ class RegisterController extends Controller
             ]);
             if ($stmt) {
                 $Account_limits = Account_limits::create([
-                    'Account_number' => $AccountNumber
+                    'Account_number' => $AccountNumber,
+                    'Number_of_orders_per_month' => 5,
+                    'Number_of_offers_per_month' => '5'
                 ]);
                 if (Auth::attempt([
                     'email' => $request->User__email,

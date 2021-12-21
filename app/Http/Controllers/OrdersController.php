@@ -2,200 +2,212 @@
 
 namespace App\Http\Controllers;
 
+use App\Account_limits;
 use App\Offers;
 use App\Orders;
 use App\orders_contracts;
 use App\User;
 use App\UserNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\json_decode;
+use App\Http\Controllers\Controller;
 
 class OrdersController extends Controller
 {
     public function create(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required|string|max:180|min:10',
-            'description' => 'required|string|max:2000|min:80',
-            'sector' => 'required|integer|max:4|min:1',
-            'activite' => 'nullable|integer',
-            'onlineCeck' => 'required|integer|max:2|min:1',
-            'budget' => 'required|integer|max:500000|min:150',
-            'time' => 'required|integer|max:180|min:1',
-            'keywords' => 'nullable'
-        ], $messages = [
-            'required' => 'هذا الحقل مطلوب *',
-            'sector.min' => 'يرجى تحديد القطاع *',
-            'sector.max' => 'يرجى تحديد القطاع *',
-            'sector.integer' => 'يرجى تحديد القطاع *',
-            'activite.integer' => 'يرجى تحديد تصنيف صالح *',
+        /* Check Account Limit */
+        $AccountLimit = Account_limits::where('Account_number', Auth::user()->Account_number)->get()->first();
+        $CountOrdersOfThisMonth = Orders::where('Account_number', Auth::user()->Account_number)->whereMonth('created_at', Carbon::now()->month)->count();
+        if ($CountOrdersOfThisMonth < $AccountLimit->Number_of_orders_per_month) {
+
+
+            $this->validate($request, [
+                'title' => 'required|string|max:180|min:10',
+                'description' => 'required|string|max:2000|min:80',
+                'sector' => 'required|integer|max:4|min:1',
+                'activite' => 'nullable|integer',
+                'onlineCeck' => 'required|integer|max:2|min:1',
+                'budget' => 'required|integer|max:500000|min:150',
+                'time' => 'required|integer|max:180|min:1',
+                'keywords' => 'nullable'
+            ], $messages = [
+                'required' => 'هذا الحقل مطلوب *',
+                'sector.min' => 'يرجى تحديد القطاع *',
+                'sector.max' => 'يرجى تحديد القطاع *',
+                'sector.integer' => 'يرجى تحديد القطاع *',
+                'activite.integer' => 'يرجى تحديد تصنيف صالح *',
 
 
 
-            'title.min' => 'يرجى ادخال عنوان صالح العنوان الذي ادخلته أقصر من اللازم  *',
-            'title.max' => 'يرجى ادخال عنوان صالح العنوان الذي ادخلته أطول من اللازم  *',
+                'title.min' => 'يرجى ادخال عنوان صالح العنوان الذي ادخلته أقصر من اللازم  *',
+                'title.max' => 'يرجى ادخال عنوان صالح العنوان الذي ادخلته أطول من اللازم  *',
 
-            'description.min' => 'الوصف الذي ادخلته أقصر من اللازم  *',
-            'description.max' => 'الوصف الذي ادخلته أطول من اللازم الحد الأقصى 2000 حرف  *',
+                'description.min' => 'الوصف الذي ادخلته أقصر من اللازم  *',
+                'description.max' => 'الوصف الذي ادخلته أطول من اللازم الحد الأقصى 2000 حرف  *',
 
-            'onlineCeck' => 'يرجى تحديد خيار *',
+                'onlineCeck' => 'يرجى تحديد خيار *',
 
-            'budget.min' => 'أقل مبلغ مسموح به هو 150 درهم مغربي *',
-            'budget.max' => 'الحد الأقصى للميزانية المسموح بها 500 الف درهم مغربي *',
+                'budget.min' => 'أقل مبلغ مسموح به هو 150 درهم مغربي *',
+                'budget.max' => 'الحد الأقصى للميزانية المسموح بها 500 الف درهم مغربي *',
 
-            'time.min' => 'يرجى تحديد عدد الأيام المتوقعة *',
-            'time.max' => 'الحد الأقصى 180 يوم (6 أشهر) *',
-        ]);
-        /* Place Validation */
-        if ($request->onlineCeck  == 2) {
-            $datajson = file_get_contents('data/json/list-moroccan-cities.json');
-            $jsondata = json_decode($datajson, true);
-            $resultcheck = false;
-            $cityid = $request->place;
-            foreach ($jsondata as $item) {
-                if ($item['id'] == $cityid) {
-                    $resultcheck = true;
+                'time.min' => 'يرجى تحديد عدد الأيام المتوقعة *',
+                'time.max' => 'الحد الأقصى 180 يوم (6 أشهر) *',
+            ]);
+            /* Place Validation */
+            if ($request->onlineCeck  == 2) {
+                $datajson = file_get_contents('data/json/list-moroccan-cities.json');
+                $jsondata = json_decode($datajson, true);
+                $resultcheck = false;
+                $cityid = $request->place;
+                foreach ($jsondata as $item) {
+                    if ($item['id'] == $cityid) {
+                        $resultcheck = true;
+                    }
                 }
-            }
-            if ($resultcheck == false) {
-                $error = response()->json(['errors' => ['place' => [0 => 'يرجى اختيار مدينة صالحة']]], 422);
-            }
-        } else {
-            $cityid = "remotely";
-        }
-        if (!isset($error)) {
-            $Activite = $request->activite;
-            if ($request->sector != 1 && $Activite > 149 || $request->sector > 1 && $Activite > 66) {
-                return response()->json(['errors' => ['activite' => [0 => 'يرجى تحديد نشاط صالح من خلال القائمة *']]], 422);
-            } elseif ($request->file('files_u')) {
-                $files = $request->file('files_u');
-                $count = count($files);
-                $error = null;
-                if ($count <= 5) {
-                    foreach ($files as $file) {
-                        if ($file->getSize() > 1000000) {
-                            $error = response()->json(['errors' => ['files_u' => [0 => '(' . $file->getClientOriginalName() . ') هذا الملف أكبر من اللازم الحد الأقصى 1MB']]], 422);
-                        } else {
-
-                            if (
-                                $file->getMimeType() != "image/jpg" &&
-                                $file->getMimeType() != "image/jpeg" &&
-                                $file->getMimeType() != "video/x-msvideo" &&
-                                $file->getMimeType() != "application/msword" &&
-                                $file->getMimeType() !=
-                                "application/vnd.openxmlformats-officedocument.wordprocessingml.document" &&
-                                $file->getMimeType() != "image/gif" &&
-                                $file->getMimeType() != "image/vnd.microsoft.icon" &&
-                                $file->getMimeType() != "application/json" &&
-                                $file->getMimeType() != "audio/mpeg" &&
-                                $file->getMimeType() != "video/mpeg" &&
-                                $file->getMimeType() != "application/pdf" &&
-                                $file->getMimeType() != "image/svg+xml" &&
-                                $file->getMimeType() != "text/plain" &&
-                                $file->getMimeType() != "application/vnd.ms-excel" &&
-                                $file->getMimeType() != "application/zip" &&
-                                $file->getMimeType() !=
-                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" &&
-                                $file->getMimeType() != "application/vnd.rar" &&
-                                $file->getMimeType() != "application/x-rar-compressed" &&
-                                $file->getMimeType() != "application/x-zip-compressed" &&
-                                $file->getMimeType() != "application/x-7z-compressed" &&
-                                $file->getMimeType() != "application/octet-stream" &&
-                                $file->getMimeType() != "multipart/x-zip" &&
-                                $file->getMimeType() != "video/mp4" &&
-                                $file->getMimeType() != "application/psd" &&
-                                $file->getMimeType() != "image/png"
-                            ) {
-                                $error = response()->json(['errors' => ['files_u' => [0 => '(' . $file->getClientOriginalName() . ') هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, GIF, SVG, AVI, DOC, DOCX, ICO, JSON, MP3, MPEG, PDF, TXT, XLS, XSLX, ZIP, RAR, MP4) *']]], 422);
-                            }
-                        }
-                    }
-                    if ($error == null) {
-                        $uploads =  $request->files_u;
-                        $fullfilesUrl = [];
-                        $index = 0;
-                        $uploaded_count = 0;
-                        foreach ($uploads as $upload) {
-                            $image_type = $upload->extension();
-                            $file = $upload;
-                            $upload_success = $file->store('users/' . Auth::user()->Account_number . '/orders', 's3');
-                            $fullfilesUrl[$index] = ['file_url' => Storage::disk('s3')->url($upload_success), 'filename' => $upload->getClientOriginalName()];
-                            $index++;
-                            if ($upload_success) {
-                                $uploaded_count++;
-                            } else {
-                                return response()->json(['errors' => ['files_u' => [0 => 'حدث خطأ اثناء محاولة رفع الملف يرجى اعادة المحاولة ']]], 422);
-                            }
-                        }
-                        $filesjson = json_encode($fullfilesUrl);
-
-                        if ($uploaded_count == $count) {
-                            /**
-                             * Send Data To DATABASE
-                             */
-                            $filesjson = json_encode($fullfilesUrl);
-                            $OID = random_int(100000, 9999999999);
-                            $stmt = Orders::create([
-                                'OID' => $OID,
-                                'Account_number' => Auth::user()->Account_number,
-                                'title' => $request->title,
-                                'description' => $request->description,
-                                'activite' => $request->activite,
-                                'sector' => $request->sector,
-                                'files' => $filesjson,
-                                'place' => $cityid,
-                                'time' => $request->time,
-                                'budget' => $request->budget,
-                                'keywords' => $request->keywords,
-                                'status' => 0
-                            ]);
-                            if ($stmt) {
-
-
-                                return response()->json(['success' => 'تم اضافة طلبك بنجاح !', 'oid' => $OID]);
-                            } else {
-                                return response()->json(['error' => 'فشل ارسال طلبك'], 500);
-                            }
-                            return response()->json('sucs', 200);
-                        } else {
-                            return response()->json(['errors' => ['files_u' => [0 => 'حدث خطأ اثناء محاولة رفع الملفات يرجى اعادة المحاولة']]], 422);
-                        }
-                    } else {
-                        return $error;
-                    }
-                } else {
-                    return response()->json(['errors' => ['files_u' => [0 => 'مسموح فقط بـ 5 ملفات']]], 422);
+                if ($resultcheck == false) {
+                    $error = response()->json(['errors' => ['place' => [0 => 'يرجى اختيار مدينة صالحة']]], 422);
                 }
             } else {
-                $OID = random_int(100000, 9999999999);
-                $stmt = Orders::create([
-                    'OID' => $OID,
-                    'Account_number' => Auth::user()->Account_number,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'activite' => $request->activite,
-                    'sector' => $request->sector,
-                    'files' => null,
-                    'place' => $cityid,
-                    'time' => $request->time,
-                    'budget' => $request->budget,
-                    'keywords' => $request->keywords,
+                $cityid = "remotely";
+            }
+            if (!isset($error)) {
+                $Activite = $request->activite;
+                if ($request->sector != 1 && $Activite > 149 || $request->sector > 1 && $Activite > 66) {
+                    return response()->json(['errors' => ['activite' => [0 => 'يرجى تحديد نشاط صالح من خلال القائمة *']]], 422);
+                } elseif ($request->file('files_u')) {
+                    $files = $request->file('files_u');
+                    $count = count($files);
+                    $error = null;
+                    if ($count <= 5) {
+                        foreach ($files as $file) {
+                            if ($file->getSize() > 1000000) {
+                                $error = response()->json(['errors' => ['files_u' => [0 => '(' . $file->getClientOriginalName() . ') هذا الملف أكبر من اللازم الحد الأقصى 1MB']]], 422);
+                            } else {
 
-                    'status' => 0
-                ]);
-                if ($stmt) {
+                                if (
+                                    $file->getMimeType() != "image/jpg" &&
+                                    $file->getMimeType() != "image/jpeg" &&
+                                    $file->getMimeType() != "video/x-msvideo" &&
+                                    $file->getMimeType() != "application/msword" &&
+                                    $file->getMimeType() !=
+                                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document" &&
+                                    $file->getMimeType() != "image/gif" &&
+                                    $file->getMimeType() != "image/vnd.microsoft.icon" &&
+                                    $file->getMimeType() != "application/json" &&
+                                    $file->getMimeType() != "audio/mpeg" &&
+                                    $file->getMimeType() != "video/mpeg" &&
+                                    $file->getMimeType() != "application/pdf" &&
+                                    $file->getMimeType() != "image/svg+xml" &&
+                                    $file->getMimeType() != "text/plain" &&
+                                    $file->getMimeType() != "application/vnd.ms-excel" &&
+                                    $file->getMimeType() != "application/zip" &&
+                                    $file->getMimeType() !=
+                                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" &&
+                                    $file->getMimeType() != "application/vnd.rar" &&
+                                    $file->getMimeType() != "application/x-rar-compressed" &&
+                                    $file->getMimeType() != "application/x-zip-compressed" &&
+                                    $file->getMimeType() != "application/x-7z-compressed" &&
+                                    $file->getMimeType() != "application/octet-stream" &&
+                                    $file->getMimeType() != "multipart/x-zip" &&
+                                    $file->getMimeType() != "video/mp4" &&
+                                    $file->getMimeType() != "application/psd" &&
+                                    $file->getMimeType() != "image/png"
+                                ) {
+                                    $error = response()->json(['errors' => ['files_u' => [0 => '(' . $file->getClientOriginalName() . ') هذا الملف غير مدعوم مسومح فقط بي (PNG, JPG,JPEG, GIF, SVG, AVI, DOC, DOCX, ICO, JSON, MP3, MPEG, PDF, TXT, XLS, XSLX, ZIP, RAR, MP4) *']]], 422);
+                                }
+                            }
+                        }
+                        if ($error == null) {
+                            $uploads =  $request->files_u;
+                            $fullfilesUrl = [];
+                            $index = 0;
+                            $uploaded_count = 0;
+                            foreach ($uploads as $upload) {
+                                $image_type = $upload->extension();
+                                $file = $upload;
+                                $upload_success = $file->store('users/' . Auth::user()->Account_number . '/orders', 's3');
+                                $fullfilesUrl[$index] = ['file_url' => Storage::disk('s3')->url($upload_success), 'filename' => $upload->getClientOriginalName()];
+                                $index++;
+                                if ($upload_success) {
+                                    $uploaded_count++;
+                                } else {
+                                    return response()->json(['errors' => ['files_u' => [0 => 'حدث خطأ اثناء محاولة رفع الملف يرجى اعادة المحاولة ']]], 422);
+                                }
+                            }
+                            $filesjson = json_encode($fullfilesUrl);
+
+                            if ($uploaded_count == $count) {
+                                /**
+                                 * Send Data To DATABASE
+                                 */
+                                $filesjson = json_encode($fullfilesUrl);
+                                $OID = random_int(100000, 9999999999);
+                                $stmt = Orders::create([
+                                    'OID' => $OID,
+                                    'Account_number' => Auth::user()->Account_number,
+                                    'title' => $request->title,
+                                    'description' => $request->description,
+                                    'activite' => $request->activite,
+                                    'sector' => $request->sector,
+                                    'files' => $filesjson,
+                                    'place' => $cityid,
+                                    'time' => $request->time,
+                                    'budget' => $request->budget,
+                                    'keywords' => $request->keywords,
+                                    'status' => 0
+                                ]);
+                                if ($stmt) {
 
 
-                    return response()->json(['success' => 'تم اضافة طلبك بنجاح !', 'oid' => $OID]);
+                                    return response()->json(['success' => 'تم اضافة طلبك بنجاح !', 'oid' => $OID]);
+                                } else {
+                                    return response()->json(['error' => 'فشل ارسال طلبك'], 500);
+                                }
+                                return response()->json('sucs', 200);
+                            } else {
+                                return response()->json(['errors' => ['files_u' => [0 => 'حدث خطأ اثناء محاولة رفع الملفات يرجى اعادة المحاولة']]], 422);
+                            }
+                        } else {
+                            return $error;
+                        }
+                    } else {
+                        return response()->json(['errors' => ['files_u' => [0 => 'مسموح فقط بـ 5 ملفات']]], 422);
+                    }
                 } else {
-                    return response()->json(['error' => 'فشل ارسال طلبك'], 500);
+                    $OID = random_int(100000, 9999999999);
+                    $stmt = Orders::create([
+                        'OID' => $OID,
+                        'Account_number' => Auth::user()->Account_number,
+                        'title' => $request->title,
+                        'description' => $request->description,
+                        'activite' => $request->activite,
+                        'sector' => $request->sector,
+                        'files' => null,
+                        'place' => $cityid,
+                        'time' => $request->time,
+                        'budget' => $request->budget,
+                        'keywords' => $request->keywords,
+
+                        'status' => 0
+                    ]);
+                    if ($stmt) {
+
+
+                        return response()->json(['success' => 'تم اضافة طلبك بنجاح !', 'oid' => $OID]);
+                    } else {
+                        return response()->json(['error' => 'فشل ارسال طلبك'], 500);
+                    }
                 }
+            } else {
+                return $error;
             }
         } else {
-            return $error;
+            return response()->json(['error' => 'لايمكنك نشر أكثر من ' . $AccountLimit->Number_of_orders_per_month . ' طلبات في الشهر الواحد'], 403);
         }
     }
     public function editPage(Request $request)
@@ -563,14 +575,21 @@ class OrdersController extends Controller
                         $info->offers_number = "عرضان";
                         break;
                     case $OffersCount > 2 && $OffersCount < 11:
-                        $info->offers_number = $OffersCount." عروض";
+                        $info->offers_number = $OffersCount . " عروض";
                         break;
                     case $OffersCount > 10:
-                        $info->offers_number = $OffersCount." عرض";
+                        $info->offers_number = $OffersCount . " عرض";
                         break;
                     default:
-                    $info->offers_number = "لاتوجد عروض";
-                    break;
+                        $info->offers_number = "لاتوجد عروض";
+                        break;
+                }
+                /* Check If Selected At This Order */
+                $CheckOfferSelected = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['1','2'])->count();
+                if($CheckOfferSelected > 0){
+                    $info->CheckOfferSelected = true;
+                }else{
+                    $info->CheckOfferSelected = false;
                 }
 
 
@@ -726,14 +745,14 @@ class OrdersController extends Controller
                         $info->offers_number = "عرضان";
                         break;
                     case $OffersCount > 2 && $OffersCount < 11:
-                        $info->offers_number = $OffersCount." عروض";
+                        $info->offers_number = $OffersCount . " عروض";
                         break;
                     case $OffersCount > 10:
-                        $info->offers_number = $OffersCount." عرض";
+                        $info->offers_number = $OffersCount . " عرض";
                         break;
                     default:
-                    $info->offers_number = "لاتوجد عروض";
-                    break;
+                        $info->offers_number = "لاتوجد عروض";
+                        break;
                 }
 
                 if ($info->files != null) {
@@ -812,9 +831,9 @@ class OrdersController extends Controller
             if (count($infos) > 0) {
                 $OffersCheck = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2'])->count();
                 $AllowedToClose = false;
-                if($OffersCheck > 0){
+                if ($OffersCheck > 0) {
                     $AllowedToClose = false;
-                }else{
+                } else {
                     $AllowedToClose = true;
                 }
                 foreach ($infos as $info);
@@ -831,7 +850,7 @@ class OrdersController extends Controller
             $response = ["allowed" => false, "error" => null, 'code' => null];
             if (count($OrderCheck) > 0) {
                 foreach ($OrderCheck as $OrderCheck);
-                if($request->status == '1' || $request->status == '2' || $request->status == '3' || $request->status == '4'){
+                if ($request->status == '1' || $request->status == '2' || $request->status == '3' || $request->status == '4') {
                     switch ($request->status) {
                         case 0:
                             $response['allowed'] = false;
@@ -844,9 +863,18 @@ class OrdersController extends Controller
                             $response['code'] = 200;
                             break;
                         case 2:
-                            $response['allowed'] = true;
-                            $response['error'] = null;
-                            $response['code'] = 200;
+                            $OffersCount = Offers::where('OID', $request->OID)->whereIn('status', ['1'])->count();
+                            if ($OffersCount > 0) {
+                                $response['allowed'] = true;
+                                $response['error'] = null;
+                                $response['code'] = 200;
+                            } else {
+                                $response['allowed'] = false;
+                                $response['error'] = 'لايمكنك الانتقال الى مرحلة التنفيذ لأنه لايوجد أي مقاول يعمل على هذا الطلب';
+                                $response['code'] = 403;
+                            }
+
+
                             break;
                         case 3:
                             $response['allowed'] = true;
@@ -855,7 +883,7 @@ class OrdersController extends Controller
                             break;
                         case 4:
                             /* If Not Have Offers */
-                            $OffersCount = Offers::where('OID', $request->OID)->whereIn('status', ['1','2'])->count();
+                            $OffersCount = Offers::where('OID', $request->OID)->whereIn('status', ['1', '2'])->count();
                             if ($OffersCount > 0) {
                                 $response['allowed'] = false;
                                 $response['error'] = "لايمكنك اغلاق هذه الصفقة لأنه لديك مقاولون ذاتييون يعملون عليها";
@@ -865,8 +893,8 @@ class OrdersController extends Controller
                                 $response['error'] = null;
                                 $response['code'] = 200;
                             }
-    
-    
+
+
                             break;
                         case 5:
                             $response['allowed'] = false;
@@ -879,7 +907,7 @@ class OrdersController extends Controller
                             $response['code'] = 400;
                             break;
                     }
-                }else{
+                } else {
                     return response()->json(['error' => 'طلب خاطئ يرجى اعادة تحميل الصفحة'], 400);
                 }
 
@@ -888,12 +916,10 @@ class OrdersController extends Controller
                     $update = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->update([
                         'status' =>  strval($request->status),
                     ]);
-                    if($update){
+                    if ($update) {
                         return response()->json(['success' => 'تم تحديث الطلب بنجاح'], 200);
-
-                    }else{
-                return response()->json(['error' => 'حصل خطأ ما يرجى اعادى المحاولة'], 500);
-
+                    } else {
+                        return response()->json(['error' => 'حصل خطأ ما يرجى اعادى المحاولة'], 500);
                     }
                 } else {
                     return response()->json(["error" => $response['error']], $response["code"]);
@@ -987,7 +1013,10 @@ class OrdersController extends Controller
                 foreach ($infos as $info);
                 $files = json_decode($info->files, true);
                 $file_url = $files[$request->id]['file_url'];
-                $deleteFile = File::delete($file_url);
+                $ControllerFunctions = new Controller;
+                $s3FileUrl = $ControllerFunctions->GetS3FileDirection($file_url);
+
+                $deleteFile = Storage::disk('s3')->delete($s3FileUrl);
                 if ($deleteFile) {
                     unset($files[$request->id]);
                     Sort($files);
@@ -1027,163 +1056,158 @@ class OrdersController extends Controller
         }
     }
     /* Deals */
-    public function ManageDeal(Request $request){
+    public function ManageDeal(Request $request)
+    {
         if (isset($request->OID) && $request->OID != null) {
             $infos = Orders::where('OID', $request->OID)->get();
             if ($infos->count() > 0) {
 
-                $userOfferCheck = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['1','2','3'])->get();
-                if(count($userOfferCheck) > 0){
-                    foreach($userOfferCheck as $userOfferCheck);
- 
-                foreach ($infos as $info);
-                /* Get City Name */
-                $info->OfferInfos = $userOfferCheck;
-                if (isset($info->place) && $info->place != null) {
-                    $datajson = file_get_contents('data/json/list-moroccan-cities.json');
-                    $jsondata = json_decode($datajson, true);
+                $userOfferCheck = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['1', '2', '3'])->get();
+                if (count($userOfferCheck) > 0) {
+                    foreach ($userOfferCheck as $userOfferCheck);
 
-                    $resultcheck = "";
-                    foreach ($jsondata as $item) {
-                        if ($item['id'] == $info->place) {
-                            $resultcheck = $item['ville'];
+                    foreach ($infos as $info);
+                    /* Get City Name */
+                    $info->OfferInfos = $userOfferCheck;
+                    if (isset($info->place) && $info->place != null) {
+                        $datajson = file_get_contents('data/json/list-moroccan-cities.json');
+                        $jsondata = json_decode($datajson, true);
+
+                        $resultcheck = "";
+                        foreach ($jsondata as $item) {
+                            if ($item['id'] == $info->place) {
+                                $resultcheck = $item['ville'];
+                            }
                         }
+                        $info->place = $resultcheck;
+                    } else {
+                        $info->place = null;
                     }
-                    $info->place = $resultcheck;
-                } else {
-                    $info->place = null;
-                }
-                /* Get User City */
-                /* Count Offers */
-                $OffersCount = Offers::where('OID', $request->OID)->count();
-                switch ($OffersCount) {
-                    case 1:
-                        $info->offers_number = "عرض واحد";
-                        break;
-                    case 2:
-                        $info->offers_number = "عرضان";
-                        break;
-                    case $OffersCount > 2 && $OffersCount < 11:
-                        $info->offers_number = $OffersCount." عروض";
-                        break;
-                    case $OffersCount > 10:
-                        $info->offers_number = $OffersCount." عرض";
-                        break;
-                    default:
-                    $info->offers_number = "لاتوجد عروض";
-                    break;
-                }
+                    /* Get User City */
+                    /* Count Offers */
+                    $OffersCount = Offers::where('OID', $request->OID)->count();
+                    switch ($OffersCount) {
+                        case 1:
+                            $info->offers_number = "عرض واحد";
+                            break;
+                        case 2:
+                            $info->offers_number = "عرضان";
+                            break;
+                        case $OffersCount > 2 && $OffersCount < 11:
+                            $info->offers_number = $OffersCount . " عروض";
+                            break;
+                        case $OffersCount > 10:
+                            $info->offers_number = $OffersCount . " عرض";
+                            break;
+                        default:
+                            $info->offers_number = "لاتوجد عروض";
+                            break;
+                    }
 
-                if ($info->files != null) {
-                    $info->files = json_decode($info->files, true);
-                }
-                /* Get Activite And Sector NAme */
-                $Activites = $info->activite;
-                $sector = $info->sector;
-                if ($Activites != null) {
+                    if ($info->files != null) {
+                        $info->files = json_decode($info->files, true);
+                    }
+                    /* Get Activite And Sector NAme */
+                    $Activites = $info->activite;
+                    $sector = $info->sector;
+                    if ($Activites != null) {
+                        if ($sector == 1) {
+                            $listActivites = file_get_contents('data/json/activite-ae-2.json');
+                            $listActivitesdata = json_decode($listActivites, true);
+                        } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
+                            $listActivites = file_get_contents('data/json/activite-ae-1.json');
+                            $listActivitesdata = json_decode($listActivites, true);
+                        }
+                        $activite = $listActivitesdata[$Activites];
+                        $info->activite = $activite;
+                    }
+                    /* Set Sector Name */
                     if ($sector == 1) {
-                        $listActivites = file_get_contents('data/json/activite-ae-2.json');
-                        $listActivitesdata = json_decode($listActivites, true);
-                    } elseif ($sector == 2 || $sector == 3 || $sector == 4) {
-                        $listActivites = file_get_contents('data/json/activite-ae-1.json');
-                        $listActivitesdata = json_decode($listActivites, true);
+                        $sectorName = "الخدمات";
+                    } elseif ($sector == 2) {
+                        $sectorName = "التجارة";
+                    } elseif ($sector == 3) {
+                        $sectorName = "الصناعة";
+                    } elseif ($sector == 4) {
+                        $sectorName = "الحرفية";
+                    } else {
+                        $sectorName = "";
                     }
-                    $activite = $listActivitesdata[$Activites];
-                    $info->activite = $activite;
-                }
-                /* Set Sector Name */
-                if ($sector == 1) {
-                    $sectorName = "الخدمات";
-                } elseif ($sector == 2) {
-                    $sectorName = "التجارة";
-                } elseif ($sector == 3) {
-                    $sectorName = "الصناعة";
-                } elseif ($sector == 4) {
-                    $sectorName = "الحرفية";
+                    $info->sector = $sectorName;
+                    $info->budget = number_format((float)$info->budget, 2, '.', '');
+                    switch ($info->time) {
+                        case (1);
+                            $info->time = 'يوم واحد';
+                            break;
+                        case (2);
+                            $info->time = ' يومان';
+                            break;
+                        case (3);
+                            $info->time = ' 3 أيام';
+                            break;
+                        case (7);
+                            $info->time = ' اسبوع';
+                            break;
+                        case (30);
+                            $info->time = ' شهر';
+                            break;
+                        case (60);
+                            $info->time = ' 2 أشهر';
+                            break;
+                        case (90);
+                            $info->time = ' 3 أشهر';
+                            break;
+                        default:
+                            $info->time = $info->time . ' يوم';
+                    }
+
+                    /* Count Offer Time */
+
+                    /* Add Keywords to array */
+                    if ($info->keywords != null && $info->keywords != "") {
+                        $info->keywords = explode(",", $info->keywords);
+                    } else {
+                        $info->keywords = null;
+                    }
+                    /* Add Keywords to array */
+
+                    /* Contract Info */
+                    $ContractInfos = orders_contracts::where('OID', $request->OID)->where('self_contracter', Auth::user()->Account_number)->where('order_owner', $info->Account_number)->get()->first();
+                    $info->ContractInfos = $ContractInfos;
+                    /* delivery time */
+                    $info->deliveryTime  = $info->ContractInfos->created_at->addDays($info->ContractInfos->time);
+                    return view('offers.manage-deal', ['data' => $info]);
                 } else {
-                    $sectorName = "";
+                    //abort(404);
+                    echo 'error 1';
                 }
-                $info->sector = $sectorName;
-                $info->budget = number_format((float)$info->budget, 2, '.', '');
-                switch ($info->time) {
-                    case (1);
-                        $info->time = 'يوم واحد';
-                        break;
-                    case (2);
-                        $info->time = ' يومان';
-                        break;
-                    case (3);
-                        $info->time = ' 3 أيام';
-                        break;
-                    case (7);
-                        $info->time = ' اسبوع';
-                        break;
-                    case (30);
-                        $info->time = ' شهر';
-                        break;
-                    case (60);
-                        $info->time = ' 2 أشهر';
-                        break;
-                    case (90);
-                        $info->time = ' 3 أشهر';
-                        break;
-                    default:
-                        $info->time = $info->time . ' يوم';
-                }
-
-                /* Count Offer Time */
-                
-                /* Add Keywords to array */
-                if ($info->keywords != null && $info->keywords != "") {
-                    $info->keywords = explode(",", $info->keywords);
-                } else {
-                    $info->keywords = null;
-                }
-                /* Add Keywords to array */
-
-                /* Contract Info */
-                $ContractInfos = orders_contracts::where('OID', $request->OID)->where('self_contracter', Auth::user()->Account_number)->where('order_owner', $info->Account_number)->get()->first();
-                $info->ContractInfos = $ContractInfos;
-                /* delivery time */
-                $info->deliveryTime  = $info->ContractInfos->created_at->addDays($info->ContractInfos->time);
-                return view('offers.manage-deal', ['data' => $info]);
-            }else{
-                //abort(404);
-                echo 'error 1';
-
-            }
-
-
-
-
             } else {
-              echo 'error 2';
+                echo 'error 2';
             }
         }
     }
-    public function dealDelivery(Request $request){
-        if(isset($request->OID)){
+    public function dealDelivery(Request $request)
+    {
+        if (isset($request->OID)) {
             $UpdateOffer = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->where('status', '1')->update([
                 'status' => '2'
             ]);
-            if($UpdateOffer){
+            if ($UpdateOffer) {
                 /* Order info */
-                $OrderInfo = Orders::where('OID' , $request->OID)->get(['Account_number'])->first();
+                $OrderInfo = Orders::where('OID', $request->OID)->get(['Account_number'])->first();
                 /* Send Notification */
                 UserNotification::create([
                     'to' => $OrderInfo->Account_number,
                     'from', Auth::user()->Account_number,
-                    'message' => 'لقد قام <a href="/@'.Auth::user()->username.'">'.Auth::user()->frist_name.'</a> بتسليم الطلب رقم <a href="/myorder/'.$request->OID.'">#'.$request->OID.'</a> قم بتقييم عمله',
+                    'message' => 'لقد قام <a href="/@' . Auth::user()->username . '">' . Auth::user()->frist_name . '</a> بتسليم الطلب رقم <a href="/myorder/' . $request->OID . '">#' . $request->OID . '</a> قم بتقييم عمله',
                     'notifybyemail' => "0",
                     'email_status' => "0"
                 ]);
                 return response()->json(['success' => 'تمت العملية بنجاح'], 200);
-            }else{
-            return response()->json(['error' => 'لايمكن تحديث هذا الطلب '], 400);
-
+            } else {
+                return response()->json(['error' => 'لايمكن تحديث هذا الطلب '], 400);
             }
-       
-        }else{
+        } else {
             return response()->json(['error' => 'Bad Request'], 400);
         }
     }

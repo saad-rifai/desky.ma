@@ -123,6 +123,7 @@
                                     <button
                                         type="button"
                                         @click="removeUploadedFile(index)"
+                                        :id="'btn_remove'+index"
                                         class="btn-close"
                                         aria-label="Close"
                                     ></button>
@@ -457,12 +458,15 @@ export default {
     },
     methods: {
         removeUploadedFile(id) {
+            $("#btn_remove"+id).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
             let data = new FormData();
             data.append("id", id);
             data.append("OID", this.oid);
             axios
                 .post("/ajax/order/remove/file", data)
                 .then(response => {
+                 $("#btn_remove"+id).html('');
+
                     this.data.files.splice(id, 1);
 
                     this.$vs.notify({
@@ -473,6 +477,8 @@ export default {
                     });
                 })
                 .catch(error => {
+            $("#btn_remove"+id).html('');
+
                     this.$vs.notify({
                         title: "حصل خطأ ما",
                         text:

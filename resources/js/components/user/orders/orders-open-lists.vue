@@ -558,7 +558,7 @@
                             class="btn btn-primary text-center"
                             disabled
                         >
-                            نهائة النتائج
+                            نهاية النتائج
                         </button>
                     </div>
                 </div>

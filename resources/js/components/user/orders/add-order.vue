@@ -780,6 +780,14 @@ if(this.errors.errors.title){
               position: "top-right",
               icon: "warning",
             });
+          } else if (error.response.status == 403) {
+            this.$vs.notify({
+              title: "فشل العملية",
+              text: error.response.data.error,
+              color: "danger",
+              position: "top-right",
+              icon: "warning",
+            });
           } else if (error.response.status == 401) {
             this.$vs.notify({
               text: "انتهت الجلسة",

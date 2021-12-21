@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account_limits;
 use App\Offers;
 use App\Orders;
 use App\User;
@@ -13,127 +14,128 @@ use App\Jobs\NewOffersMailNot;
 use App\Jobs\SendEmail;
 use App\Mail\NewOffer;
 use App\UserRating;
+use Illuminate\Support\Carbon;
 
 class OffersController extends Controller
 {
-    public function create(Request $request){
-        if(isset($request->OID) && $request->OID != null && $request->OID != ""){
-            $infos = Orders::all()->where('OID', $request->OID);
-            if(count($infos) > 0){
-                foreach($infos as $info);
-                $this->validate($request, [
-                    'description' => 'required|min:50|max:700|string',
-                    'price' => 'required|integer|min:150|max:500000',
-                    'time' => 'required|integer|min:1|max:120'
-                ], $messages = [
-                    'required' => 'هذا الحقل مطلوب *',
+    public function create(Request $request)
+    {
+        /* Check Account Limit */
+        $AccountLimit = Account_limits::where('Account_number', Auth::user()->Account_number)->get()->first();
+        $CountOffersOfThisMonth = Offers::where('Account_number', Auth::user()->Account_number)->whereMonth('created_at', Carbon::now()->month)->count();
+        if ($CountOffersOfThisMonth < $AccountLimit->Number_of_offers_per_month) {
+            if (isset($request->OID) && $request->OID != null && $request->OID != "") {
+                $infos = Orders::all()->where('OID', $request->OID);
+                if (count($infos) > 0) {
+                    foreach ($infos as $info);
+                    $this->validate($request, [
+                        'description' => 'required|min:50|max:700|string',
+                        'price' => 'required|integer|min:150|max:500000',
+                        'time' => 'required|integer|min:1|max:120'
+                    ], $messages = [
+                        'required' => 'هذا الحقل مطلوب *',
 
-                    'description.string' => 'يرجى ادخال وصف صالح *',
-                    'description.min' => 'يرجى ادخال وصف كافي لعرضك الحد الأدنى 50 حرف *',
-                    'description.max' => 'الوصف اللذي ادخلته أطول من اللازم الحد الأقصى 700 حرف *',
-                    
-                    'price.integer' => 'يرجى تحديد التكلفة *',
-                    'price.max' => 'الحد الأقصى 500 الف درهم *',
-                    'price.min' => 'الحد الأدنى 150 درهم *',
+                        'description.string' => 'يرجى ادخال وصف صالح *',
+                        'description.min' => 'يرجى ادخال وصف كافي لعرضك الحد الأدنى 50 حرف *',
+                        'description.max' => 'الوصف اللذي ادخلته أطول من اللازم الحد الأقصى 700 حرف *',
 
-                    'time.integer' => 'يرجى تحديد مدة التنفيذ *',
-                    'time.max' => 'الحد الأقصى 120 يوم *',
-                    'time.min' => 'يرجى تحديد مدة التنفيذ *',
+                        'price.integer' => 'يرجى تحديد التكلفة *',
+                        'price.max' => 'الحد الأقصى 500 الف درهم *',
+                        'price.min' => 'الحد الأدنى 150 درهم *',
 
-                ]);
-                if(Auth::check()){
-                    if(auth::user()->verified_account == 2){
-                        if(Auth::user()->Account_number != $info->Account_number){
-                            if(count(Auth::user()->Offers->where('OID', $request->OID)) < 1 && count(Auth::user()->Orders->where('OID', $request->OID)) < 1){
-                      
-                                /** INSERT DATA */
-                                $stmt = Offers::create([
-                                    'OID' => $request->OID,
-                                    'Account_number' => Auth::user()->Account_number,
-                                    'description' => $request->description,
-                                    'price' => $request->price,
-                                    'time' => $request->time,
-                      
-                                ]);
-                                if($stmt){
-                                    $to_account_number = Orders::where('OID', $request->OID)->get(["Account_number", "title"]);
-                                    foreach($to_account_number as $to);
-                                     UserNotification::create([
-                                        'to' => $to->Account_number,
-                                        'from', null,
-                                        'message' => 'قام <a href="/@'.Auth::user()->username.'">'.auth::user()->frist_name.'</a> باضافة عرض على طلبك <a href="/order/'.$request->OID.'?offer='.$stmt->id.'#'.$stmt->id.'">'.$to->title.'</a>',
-                                        'notifybyemail' => "0",
-                                        'email_status' => "0"
+                        'time.integer' => 'يرجى تحديد مدة التنفيذ *',
+                        'time.max' => 'الحد الأقصى 120 يوم *',
+                        'time.min' => 'يرجى تحديد مدة التنفيذ *',
+
+                    ]);
+                    if (Auth::check()) {
+                        if (auth::user()->verified_account == 2) {
+                            if (Auth::user()->Account_number != $info->Account_number) {
+                                if (count(Auth::user()->Offers->where('OID', $request->OID)) < 1 && count(Auth::user()->Orders->where('OID', $request->OID)) < 1) {
+
+                                    /** INSERT DATA */
+                                    $stmt = Offers::create([
+                                        'OID' => $request->OID,
+                                        'Account_number' => Auth::user()->Account_number,
+                                        'description' => $request->description,
+                                        'price' => $request->price,
+                                        'time' => $request->time,
+
                                     ]);
-                                    $offersCount = Offers::where('OID', $request->OID)->count();
-                                    if($offersCount == 1 || $offersCount == 4 || $offersCount ==  8 || $offersCount  == 12 || $offersCount  == 16){
-                                       $toEmail = User::where('Account_number', $to->Account_number)->get(['email', 'frist_name'])->first();
-                                        $dataEmail = [
-                                            'to' => $toEmail->email,
-                                            'OID' => $request->OID,
-                                            'order_title' => $to->title,
-                                            'offer_id' => $stmt->id
-                                        ];
-                                        $datajob = [
-                                            'to' => $toEmail->email,
-                                            'emailData' => new NewOffer($dataEmail)
-                                        ];
-                                        dispatch(new SendEmail($datajob));
+                                    if ($stmt) {
+                                        $to_account_number = Orders::where('OID', $request->OID)->get(["Account_number", "title"]);
+                                        foreach ($to_account_number as $to);
+                                        UserNotification::create([
+                                            'to' => $to->Account_number,
+                                            'from', null,
+                                            'message' => 'قام <a href="/@' . Auth::user()->username . '">' . auth::user()->frist_name . '</a> باضافة عرض على طلبك <a href="/order/' . $request->OID . '?offer=' . $stmt->id . '#' . $stmt->id . '">' . $to->title . '</a>',
+                                            'notifybyemail' => "0",
+                                            'email_status' => "0"
+                                        ]);
+                                        $offersCount = Offers::where('OID', $request->OID)->count();
+                                        if ($offersCount == 1 || $offersCount == 4 || $offersCount ==  8 || $offersCount  == 12 || $offersCount  == 16) {
+                                            $toEmail = User::where('Account_number', $to->Account_number)->get(['email', 'frist_name'])->first();
+                                            $dataEmail = [
+                                                'to' => $toEmail->email,
+                                                'OID' => $request->OID,
+                                                'order_title' => $to->title,
+                                                'offer_id' => $stmt->id
+                                            ];
+                                            $datajob = [
+                                                'to' => $toEmail->email,
+                                                'emailData' => new NewOffer($dataEmail)
+                                            ];
+                                            dispatch(new SendEmail($datajob));
+                                        }
+                                        return response()->json(['success' => 'تم اضافة عرضك بنجاح !', 'offer_id' => $stmt->id], 200);
+                                    } else {
+                                        return response()->json(['error' => 'حدث خطأ ما اثناء محاولة اضافة عرضك يرجى اعادة المحاولة'], 500);
                                     }
-                                    return response()->json(['success' => 'تم اضافة عرضك بنجاح !', 'offer_id' => $stmt->id], 200);
-                                }else{
-                                    return response()->json(['error' => 'حدث خطأ ما اثناء محاولة اضافة عرضك يرجى اعادة المحاولة'], 500);
-
+                                    /** INSERT DATA */
+                                } else {
+                                    return response()->json(['error' => 'Bad Request !'], 400);
                                 }
-                               /** INSERT DATA */
-        
-                            }else{
+                            } else {
                                 return response()->json(['error' => 'Bad Request !'], 400);
-                
                             }
-        
-                        }else{
-                            return response()->json(['error' => 'Bad Request !'], 400);
-            
+                        } else {
+                            return response()->json(['error' => 'لايمكنك تقديم عرضك لأن حساب المقاول الذاتي الخاص بك غير مفعل *'], 403);
                         }
-                    }else{
-                         return response()->json(['error' => 'لايمكنك تقديم عرضك لأن حساب المقاول الذاتي الخاص بك غير مفعل *'], 403);
-                        
                     }
+                } else {
+                    return response()->json(['error' => 'Bad Request !'], 400);
                 }
-            }else{
+            } else {
                 return response()->json(['error' => 'Bad Request !'], 400);
-
             }
         }else{
-            return response()->json(['error' => 'Bad Request !'], 400);
+            return response()->json(['error' => 'لايمكنك اضافة أكثر من '.$AccountLimit->Number_of_offers_per_month.' عروض في الشهر الواحد'], 403);
         }
-
-
     }
-    public function NewOffers(Request $request){
-        if(isset($request->OID) && $request->OID != null && $request->OID != ""){
-            if(Auth::check()){
+    public function NewOffers(Request $request)
+    {
+        if (isset($request->OID) && $request->OID != null && $request->OID != "") {
+            if (Auth::check()) {
                 $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
-                if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
-                    $OrderCreator=true;
-                }else{
-                    $OrderCreator=false;
-                }   
-            }else{
-                $OrderCreator=false;
-            } 
+                if ($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0) {
+                    $OrderCreator = true;
+                } else {
+                    $OrderCreator = false;
+                }
+            } else {
+                $OrderCreator = false;
+            }
 
 
             $infos = Offers::where('OID', $request->OID)->orderBy("created_at", "DESC")->paginate(10);
-            for($i=0; $i < count($infos); $i++){
-                $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
+            for ($i = 0; $i < count($infos); $i++) {
+                $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' . $infos[$i]->Account_number);
                 foreach ($rating as $rating);
                 $infos[$i]->userRating = $rating->numRating;
                 $infos[$i]->user = $infos[$i]->user;
                 $infos[$i]->AeAccount = $infos[$i]->user->AeAccount;
                 $infos[$i]->isOnline = User::isOnline($infos[$i]->Account_number);
-                if($OrderCreator == false){
+                if ($OrderCreator == false) {
                     $infos[$i]->time = null;
                     $infos[$i]->price = null;
                     $infos[$i]->description = null;
@@ -184,36 +186,34 @@ class OffersController extends Controller
                 $infos[$i]->verified_account = $infos[$i]->user->verified_account;
             }
 
-            return response()->json(['data'=>$infos, 'OrderCreator' => $OrderCreator], 200);
-
-       
-    
-        }else{
+            return response()->json(['data' => $infos, 'OrderCreator' => $OrderCreator], 200);
+        } else {
             return response()->json(['error' => 'Bad Request !'], 400);
         }
     }
-    public function hired(Request $request){
-        if(isset($request->OID) && $request->OID != null && $request->OID != ""){
-            if(Auth::check()){
+    public function hired(Request $request)
+    {
+        if (isset($request->OID) && $request->OID != null && $request->OID != "") {
+            if (Auth::check()) {
                 $CeckIfOrderByUser = Auth::user()->Orders->where('OID', $request->OID)->count();
-                if($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0){
-                    $OrderCreator=true;
-                }else{
-                    $OrderCreator=false;
-                }   
-            }else{
-                $OrderCreator=false;
-            } 
-            $infos = Offers::where('OID', $request->OID)->whereIn("status", ["1","2","3"])->orderBy("created_at", "DESC")->paginate(6);
-            for($i=0; $i < count($infos); $i++){
-                $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' .$infos[$i]->Account_number);
+                if ($CeckIfOrderByUser != null && $CeckIfOrderByUser > 0) {
+                    $OrderCreator = true;
+                } else {
+                    $OrderCreator = false;
+                }
+            } else {
+                $OrderCreator = false;
+            }
+            $infos = Offers::where('OID', $request->OID)->whereIn("status", ["1", "2", "3"])->orderBy("created_at", "DESC")->paginate(6);
+            for ($i = 0; $i < count($infos); $i++) {
+                $rating = DB::select('SELECT ROUND(AVG(rating),1) as numRating FROM user_ratings WHERE `for` =' . $infos[$i]->Account_number);
                 foreach ($rating as $rating);
                 $infos[$i]->userRating = $rating->numRating;
 
                 $infos[$i]->user = $infos[$i]->user;
                 $infos[$i]->AeAccount = $infos[$i]->user->AeAccount;
                 $infos[$i]->isOnline = User::isOnline($infos[$i]->Account_number);
-                if($OrderCreator == false){
+                if ($OrderCreator == false) {
                     $infos[$i]->time = null;
                     $infos[$i]->price = null;
                 }
@@ -258,118 +258,111 @@ class OffersController extends Controller
                 $infos[$i]->city = $resultcheck;
                 $infos[$i]->sector = $sectorName;
                 $infos[$i]->verified_account = $infos[$i]->user->verified_account;
-                if($infos[$i]->status == "2" || $infos[$i]->status == "3"){
+                if ($infos[$i]->status == "2" || $infos[$i]->status == "3") {
                     $checkRating = UserRating::where('for', $infos[$i]->Account_number)->where('from', Auth::user()->Account_number)->where('order_id', $request->OID)->count();
-                 if($checkRating > 0){
+                    if ($checkRating > 0) {
+                        $infos[$i]->NeedRating = false;
+                    } else {
+                        $infos[$i]->NeedRating = true;
+                    }
+                } else {
                     $infos[$i]->NeedRating = false;
-
-                 }else{
-                    $infos[$i]->NeedRating = true;
-
-                 }
-                }else{
-                    $infos[$i]->NeedRating = false;
-
                 }
             }
-            if($OrderCreator == false){
-                $infos=null;
+            if ($OrderCreator == false) {
+                $infos = null;
             }
-            return response()->json(['data'=>$infos, 'OrderCreator' => $OrderCreator], 200);
-
-       
-    
-        }else{
+            return response()->json(['data' => $infos, 'OrderCreator' => $OrderCreator], 200);
+        } else {
             return response()->json(['error' => 'Bad Request !'], 400);
         }
     }
-    public function offerStatus(Request $request){
-        if(isset($request->OID)){
+    public function offerStatus(Request $request)
+    {
+        if (isset($request->OID)) {
             $status = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get(['status']);
-            if(count($status) > 0){
-                foreach($status as $statu);
+            if (count($status) > 0) {
+                foreach ($status as $statu);
                 return response()->json(['status' => $statu->status], 200);
-            }else{
-            return response()->json(['error' => 'Not Found'], 404);
-
+            } else {
+                return response()->json(['error' => 'Not Found'], 404);
             }
-
-        }else{
+        } else {
             return response()->json(['error' => 'Bad Request !'], 400);
-
         }
     }
-    public function getMyOffer(Request $request){
-        if(isset($request->OID)){
+    public function getMyOffer(Request $request)
+    {
+        if (isset($request->OID)) {
             $infos = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get();
-            foreach($infos as $info);
+            foreach ($infos as $info);
             return response()->json(['data' => $info], 200);
-        }else{
+        } else {
             return response()->json(['error' => 'bad Request'], 400);
         }
     }
-    public function allMyOffers(){
+    public function allMyOffers()
+    {
         $Offers = Offers::where('Account_number', Auth::user()->Account_number)->orderBy("created_at", "DESC")->paginate(10);
-      
-        $count = count($Offers);
-    
 
-        for($i = 0; $i < $count; $i++){
+        $count = count($Offers);
+
+
+        for ($i = 0; $i < $count; $i++) {
             $Offers[$i]->OrderInfo = Orders::where('OID', $Offers[$i]->OID)->get()->first();
         }
         return response()->json(['data' => $Offers], 200);
     }
-    public function MyOffersSearch(Request $request){
+    public function MyOffersSearch(Request $request)
+    {
         $status = $request->st;
         $Offers = Offers::where('Account_number', Auth::user()->Account_number)->where('status', 'LIKE', $status)->orderBy("created_at", "DESC")->paginate(10);
-      
-        $count = count($Offers);
-    
 
-        for($i = 0; $i < $count; $i++){
+        $count = count($Offers);
+
+
+        for ($i = 0; $i < $count; $i++) {
             $Offers[$i]->OrderInfo = Orders::where('OID', $Offers[$i]->OID)->get()->first();
         }
         return response()->json(['data' => $Offers], 200);
     }
-    public function UpdateOffer(Request $request){
-        if(isset($request->OID)){
+    public function UpdateOffer(Request $request)
+    {
+        if (isset($request->OID)) {
             $this->validate($request, [
                 'description' => 'required|min:50|max:700|string',
                 'price' => 'required|numeric|min:150|max:500000',
                 'time' => 'required|integer|min:1|max:120'
             ], $messages = [
                 'required' => 'هذا الحقل مطلوب *',
-    
+
                 'description.string' => 'يرجى ادخال وصف صالح *',
                 'description.min' => 'يرجى ادخال وصف كافي لعرضك الحد الأدنى 50 حرف *',
                 'description.max' => 'الوصف اللذي ادخلته أطول من اللازم الحد الأقصى 700 حرف *',
-                
+
                 'price.numeric' => 'يرجى تحديد التكلفة *',
                 'price.max' => 'الحد الأقصى 500 الف درهم *',
                 'price.min' => 'الحد الأدنى 150 درهم *',
-    
+
                 'time.integer' => 'يرجى تحديد مدة التنفيذ *',
                 'time.max' => 'الحد الأقصى 120 يوم *',
                 'time.min' => 'يرجى تحديد مدة التنفيذ *',
-    
+
             ]);
 
             $stmt = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->where('status', '0')
-            ->update([
-                'description' => $request->description,
-                'time' => $request->time,
-                'price' => $request->price
-            ]);
-            if($stmt){
+                ->update([
+                    'description' => $request->description,
+                    'time' => $request->time,
+                    'price' => $request->price
+                ]);
+            if ($stmt) {
                 return response()->json(['offer_id' => $request->offer_id], 200);
-
-            }else{
+            } else {
                 return response()->json(['error' => 'لايمكن تحديث هذا العرض'], 400);
-
             }
-        }else{
+        } else {
             return response()->json(['error' => 'Bad Request'], 400);
         }
-
     }
 }

@@ -48,33 +48,34 @@
                   </h3>
                   <ul class="list-social-media">
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/Youcandotshop">
+                        <a target="_blank" href="https://web.facebook.com/desky.ma">
                             <i class="fab fa-facebook-square"></i>
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://twitter.com/Youcandotshop">
+                        <a target="_blank" href="https://twitter.com/desky_ma">
                             <i class="fab fa-twitter"></i>
                         </a>
                     </li>
          
                     <li>
-                        <a target="_blank" href="https://www.instagram.com/youcandotshop/">
+                        <a target="_blank" href="https://www.instagram.com/desky.ma/">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://www.linkedin.com/company/youcandotshop/">
+                        <a target="_blank" href="https://www.linkedin.com/company/neryou">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://www.youtube.com/c/Youcandotshop">
+                        <a target="_blank" href="https://www.youtube.com/channel/UC_Sa5kh5-csU2sWquPmXxsg">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </li>
          
                 </ul>
+           
               </div>
         </div>
         <div class="bottom-footer font-Naskh">

@@ -1,5 +1,7 @@
 <?php
 
+use App\FilesToRemove;
+use App\Http\Controllers\Controller;
 use App\Jobs\SendEmail;
 use App\Mail\NewOffer;
 use App\User;
@@ -10,6 +12,9 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use App\Orders;
 use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -143,24 +148,8 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    $dataEmail = [
-        'to' => 'rifaisaad3@gmail.com',
-        'OID' => 'rifaisaad3@gmail.com',
-        'order_title' => 'rifaisaad3@gmail.com',
-        'offer_id' => 'rifaisaad3@gmail.com'
-    ];
-    $datajob = [
-        'to' => 'rifaisaad3@gmail.com',
-        'emailData' => new NewOffer($dataEmail)
-    ];
-    dispatch(new SendEmail($datajob));
-   /* try {
-        Mail::to('rifaisaad3@gmail.com')->send(new NewOffer($dataEmail));
-    } catch (\Exception $e) {
-        return 'Error - ' . $e;
-         // return response()->json(['Mail Filed !'], 500);
-
-    }*/
+    $CountOrdersOfThisMonth = Orders::where('Account_number', Auth::user()->Account_number)->whereMonth('created_at', Carbon::now()->month)->count();
+    dd($CountOrdersOfThisMonth);
 
 });
 

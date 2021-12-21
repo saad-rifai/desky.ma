@@ -132,9 +132,9 @@ export default {
                 });
         }
     },
-    created() {
+    mounted() {
         this.getConversationsList();
-        this.interval = setInterval(() => this.getConversationsList(), 5000);
+        this.interval = setInterval(() => this.getConversationsList(), 10000);
     }
 };
 </script>

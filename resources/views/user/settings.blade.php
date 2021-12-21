@@ -20,7 +20,7 @@
 
     <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered  modal-dialog-scrollable">
             <div class="modal-content" dir="rtl">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">
@@ -29,7 +29,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body position-relative">
-                    <!-- Video -->
+                    <!-- Video
                     <div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative">
                         <div class="wistia_responsive_wrapper" style="
                                           height: 100%;
@@ -46,7 +46,21 @@
                     </div>
                     <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
 
-                    <!-- Video -->
+                    Video -->
+                    <p dir="rtl" style="text-align: right;"><strong>هناك خطواة بسيطة لتفعيل حساب المقاول الذاتي:</strong></p>
+<p dir="rtl" style="text-align: right;">ملئ البيانات الخاصة بك أسفله<br />1 - رقم بطاقة التعريف الوطنية سارية المفعول<br />
+    2 - رقم تعريف المقاول الذاتي يمكنك الحصول على هذا الرقم من خلال بطاقة المقاول الذاتي 
+    <span style="text-decoration: underline;"><em>"الرقم التعريفي في السجل الوطني للمقاول الذاتي"</em></span></p>
+    <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/Carte+auto-entrepreneur.jpg" style="max-width: 450px; width: 100%" alt="بطاقة المقاول الذاتي">
+<p dir="rtl" style="text-align: right;">&nbsp;</p>
+<p dir="rtl" style="text-align: right;">&nbsp;</p>
+<p dir="rtl" style="text-align: right;">أو يمكنك الحصول عليه من خلال<em><span style="text-decoration: underline;"> شهادة التسجيل في السجل الوطني للمقاول الذاتي&nbsp;</span></em></p>
+<img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/ae-info.png" style="max-width: 450px; width: 100%" alt="هادة التسجيل في السجل الوطني للمقاول الذاتي">
+
+<p dir="rtl" style="text-align: right;">&nbsp;</p>
+<p dir="rtl" style="text-align: right;">أو من خلال الموقع الالكتروني<a href="https://rn.ae.gov.ma/" target="_blank"><em><span style="text-decoration: underline;"> للمقاول الذاتي</span></em></a></p>
+<p dir="rtl" style="text-align: right;">3 - ادخال تاريخ انتهاء صلاحية بطاقة الهوية الخاصة بك<br />4 - ادخال تاريخ الانخراط في نظام المقاول الذاتي</p>
+<p dir="rtl" style="text-align: right;">5 - تحديد القطاع الخاص بك يمكنك مشاهدة من خلال <a target="_blank" href="https://ae.gov.ma/wp-content/themes/ae-theme/activites-eligibles-AE-AR--.pdf">الرابط التالي</a> الى اي قطاع ينتمي نشاطك<br />6 - تحديد النشاط الخاص بك<br />7 - كتابة المسمى الوظيفي الخاص بك على سبيل المثال نجار, رسام, بناء, مهندس, خياط...<br />8 - رفع الوثائق في هذه المرحلة يجب رفع صورة سارية المفعول لبطاقة الهوية وصورة لبطاقة المقاول الذاتي أو شهادة التسجيل في السجل الوطني للمقاول الذاتي<br /><br />ثم أكد المعلومات وأرسل الطلب سوف يتم معالجة طلبك والرد عليك في غضون 48 ساعة عبر بريدك الالكتروني أو الاشعارات داخل المنصة&nbsp;</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">

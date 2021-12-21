@@ -22,6 +22,13 @@
                <a href="{{asset("/myorder/$data->OID")}}"> <button class="btn btn-primary btn-sm"><i class="fas fa-cog"></i> ادارة الطلب </button></a>
                <a href="{{asset("/order/$data->OID/edit")}}"> <button class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i> </button></a>
             </div>
+            
+            @endif
+    
+            @if ($data->CheckOfferSelected)
+            <div class="col-sm-auto mt-3" align="right">
+                <a href="{{asset("/deal/$data->OID/manage")}}"> <button class="btn btn-primary btn-sm"><i class="fas fa-cog"></i> ادارة الصفقة </button></a>
+             </div>
             @endif
         </div>
     </div>

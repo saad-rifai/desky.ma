@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function GetS3FileDirection($url){
-        $implode = explode(env("AWS_URL"),$url);
+        $implode = explode('.com',$url);
         foreach($implode as $implode);
         return $implode;
     }

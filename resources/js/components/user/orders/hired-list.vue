@@ -296,7 +296,7 @@
                 class=" end-data-btn text-center"
                 disabled
             >
-                نهائة النتائج
+                نهاية النتائج
             </button>
         </div>
 

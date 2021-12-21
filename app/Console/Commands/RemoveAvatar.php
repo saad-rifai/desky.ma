@@ -3,8 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 use App\FilesToRemove;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 class RemoveAvatar extends Command
 {
     /**
@@ -41,13 +42,18 @@ class RemoveAvatar extends Command
     {
         $dateNow = date("Y-m-d H:i:s");
         $data = FilesToRemove::where("date_to_remove" ,"<", $dateNow)->get();
+        $ControllerFunctions = new Controller;
+
+
         foreach($data as $data){
-            $path = public_path().'/'.$data->filepath;
-            if(file_exists($path)) {
-                unlink($path);
+            $s3FileUrl = $ControllerFunctions->GetS3FileDirection($data->filepath);
+
+            if(Storage::disk('s3')->delete($s3FileUrl)){
+                FilesToRemove::where('id', $data->id)->delete();
+
             }
 
-            FilesToRemove::where('id', $data->id)->delete();
+
         }
 
 
