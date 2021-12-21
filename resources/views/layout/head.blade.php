@@ -35,9 +35,7 @@
 
     <link rel="shortcut icon" id="favicon" href="{{ asset('img/icons/favicon-32x32.png') }}" type="image/x-icon">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/library/jquery-ui.min.css') }}" rel="stylesheet">
-    <!--link href="{{ asset('css/library/audio-player.css') }}" rel="stylesheet"-->
-    <link href="{{ asset('css/library/clicky-menu.css') }}" rel="stylesheet">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
     <title>Desky - @yield('title')</title>
@@ -47,9 +45,8 @@
     <!-- Jquery -->
 
 
-    <script src="{{ asset('js/library/nanobar.min.js') }}"></script>
+    <script src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/js/library/nanobar.min.js"></script>
     <!-- Basic Style for Tags Input -->
-    <link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
     <script>
         window.Laravel = {
             csrfToken: '{{ csrf_token() }}'
@@ -78,9 +75,9 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i
                                     class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
-                            <a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
+                            <!--a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
                                 title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i>
-                                جميع العقود</a>
+                                جميع العقود</a-->
                         </div>
 
                     </li>
@@ -182,9 +179,9 @@
                                     class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
+                                <!--a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
                                 title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i>
-                                جميع العقود</a>
+                                جميع العقود</a-->
                             </li>
 
                             </ul>

@@ -29,6 +29,6 @@ class NewOffer extends Mailable
      */
     public function build()
     {
-        return $this->from("noreply@desky.ma","desky.ma")->subject("وصلتك عروض جديدة على desky.ma ")->markdown('emails.notification.NewOffer')->with('content',$this->content);
+        return $this->subject("وصلتك عروض جديدة على desky.ma ")->markdown('emails.notification.NewOffer')->with('content',$this->content);
     }
 }

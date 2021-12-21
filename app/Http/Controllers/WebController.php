@@ -8,7 +8,7 @@ use App\UserRating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class WebController extends Controller
 {
     public function publicProfile(Request $request)
@@ -124,5 +124,86 @@ class WebController extends Controller
         } else {
             return response()->json('Bad Request !', 400);
         }
+    }
+    public function Dashboard(){
+        /* Order Infos */
+        $UserOrders = Auth::user()->Orders;
+        $OrdersNumber = count($UserOrders);
+        $OrdersPending = count($UserOrders->where('status', '0'));
+        $OrdersOpen = count($UserOrders->where('status', '1'));
+        $OrdersImplementationPhase= count($UserOrders->where('status', '2'));
+        $OrdersDone = count($UserOrders->where('status', '3'));
+        $OrdersClosed = count($UserOrders->where('status', '4'));
+        $OrdersRejected = count($UserOrders->where('status', '5'));
+        /* Order Infos */
+
+        /* Offers Infos */
+        $UserOffers = Auth::user()->Offers;
+        $OffersNumber = count($UserOffers);
+        $OffersPending = count($UserOffers->where('status', '0'));
+        $OffersOpen = count($UserOffers->where('status', '1'));
+        $OffersDone = count($UserOffers->where('status', '2'));
+        $OffersCancelled = count($UserOffers->where('status', '3'));
+        /* Offers Infos */
+        $data = [
+            /* Orders Infos */
+            'OrdersNumber' => $OrdersNumber,
+            'OrdersPending' => $OrdersPending,
+            'OrdersOpen' => $OrdersOpen,
+            'OrdersImplementationPhase' => $OrdersImplementationPhase,
+            'OrdersDone' => $OrdersDone,
+            'OrdersClosed' => $OrdersClosed,
+            'OrdersRejected' => $OrdersRejected,
+
+            /* Orders Infos */
+
+            /* Offers Infos */
+            'OffersNumber' => $OffersNumber,
+            'OffersPending' => $OffersPending,
+            'OffersOpen' => $OffersOpen,
+            'OffersDone' => $OffersDone,
+            'OrdersCancelled' => $OffersCancelled,
+
+
+
+            /* Offers Infos */
+
+        ];
+        if($OrdersNumber > 0){
+            $data += [
+                'OrdersPendingPer' => ($OrdersPending*100/$OrdersNumber),
+                'OrdersOpenPer' => ($OrdersOpen*100/$OrdersNumber),
+                'OrdersImplementationPhasePer' => ($OrdersImplementationPhase*100/$OrdersNumber),
+                'OrdersDonePer' => ($OrdersDone*100/$OrdersNumber),
+                'OrdersClosedPer' => ($OrdersClosed*100/$OrdersNumber),
+                'OrdersRejectedPer' => ($OrdersRejected*100/$OrdersNumber)
+            ];
+        }else{
+            $data += [
+                'OrdersPendingPer' => 0,
+                'OrdersOpenPer' => 0,
+                'OrdersImplementationPhasePer' => 0,
+                'OrdersDonePer' => 0,
+                'OrdersClosedPer' => 0,
+                'OrdersRejectedPer' => 0
+            ];
+        }
+        if($OffersNumber > 0){
+            $data += [
+                'OffersPendingPer' => ($OffersPending*100/$OffersNumber),
+                'OffersOpenPer' => ($OffersOpen*100/$OffersNumber),
+                'OffersDonePer' => ($OffersDone*100/$OffersNumber),
+                'OffersCancelledPer' => ($OffersCancelled*100/$OffersNumber),
+            ];
+        }else{
+            $data += [
+
+                'OffersPendingPer' => 0,
+                'OffersOpenPer' => 0,
+                'OffersDonePer' => 0,
+                'OffersCancelledPer' => 0,
+            ];
+        }
+       return view('user.dashboard')->with($data);
     }
 }

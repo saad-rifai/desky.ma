@@ -6,16 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Mail\ResetPasswordMail;
 use App\Providers\RouteServiceProvider;
 use App\User;
-//use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Mail;
-use \Swift_SmtpTransport;
-use Swift_Mailer;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use App\Jobs\SendEmail;
 
 class ResetPasswordController extends Controller
 {
@@ -158,40 +154,15 @@ class ResetPasswordController extends Controller
                 $hashToken = Crypt::encryptString($textToken);
                 $stmt = DB::table('password_resets')->insert(['email' => "$email", 'token' => "$hashToken", "created_at" => Carbon::now()]);
                 if ($stmt) {
-                    ignore_user_abort(true);
-
-                    ob_start();
-                 //   echo response()->json(['s_token' => Session::getId()], 200);
-                    $serverProtocole = filter_input(
-                        INPUT_SERVER,
-                        'SERVER_PROTOCOL',
-                        FILTER_SANITIZE_STRING
-                    );
-                    header('Content-Type: application/json; charset=utf-8');
-                    header('s_token: '.Session::getId());
-                    header($serverProtocole . ' 200 OK');
-                    header('Content-Encoding: none');
-                    header('Content-Length: ' . ob_get_length());
-                    header('Connection: close');
-
-                    ob_end_flush();
-                    ob_flush();
-                    flush();
-
-                    $valueArray2 = [
+                    $dataEmail = [
                         'token' => $hashToken,
-                
                     ];
-                
-                
-                    try {
-                        Mail::to($email)->send(new ResetPasswordMail($valueArray2));
-                    } catch (\Exception $e) {
-                        return 'Error - ' . $e;
-                     
-                
-                    }
-                      return response()->json(['Mail Sended'], 200);
+                    $datajob = [
+                        'to' => $email,
+                        'emailData' => new ResetPasswordMail($dataEmail)
+                    ];
+                    dispatch(new SendEmail($datajob));
+                   //   return response()->json(['Mail Sended'], 200);
 
                  
                 } else {

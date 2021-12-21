@@ -885,7 +885,16 @@ class OrdersController extends Controller
 
 
                 if ($response["allowed"] == true && $response["error"] == null && $response["code"] == 200) {
-                    return response()->json(['success' => 'تم تحديث الطلب بنجاح'], 200);
+                    $update = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->update([
+                        'status' =>  strval($request->status),
+                    ]);
+                    if($update){
+                        return response()->json(['success' => 'تم تحديث الطلب بنجاح'], 200);
+
+                    }else{
+                return response()->json(['error' => 'حصل خطأ ما يرجى اعادى المحاولة'], 500);
+
+                    }
                 } else {
                     return response()->json(["error" => $response['error']], $response["code"]);
                 }

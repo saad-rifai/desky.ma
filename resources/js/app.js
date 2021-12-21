@@ -69,6 +69,7 @@ Vue.prototype.moment = moment
  Vue.component('hired-list', require('./components/user/orders/hired-list.vue').default);
  Vue.component('manage-order-menu', require('./components/user/orders/manage-order-menu.vue').default);
  Vue.component('canceling-contract', require('./components/user/orders/canceling-contract.vue').default);
+ Vue.component('last-orders-box', require('./components/user/orders/last-orders-box.vue').default);
 
  /* Offers Section */
  Vue.component('add-offer', require('./components/user/offers/add-offer.vue').default);
@@ -90,6 +91,7 @@ Vue.prototype.moment = moment
  /* Messages Section */
  Vue.component('messages-box', require('./components/user/messages/messages-box.vue').default);
  Vue.component('new-message', require('./components/user/messages/new-message.vue').default);
+ Vue.component('last-messages-box', require('./components/user/messages/last-messages-box.vue').default);
  Vue.component('try-tool', require('./components/try.vue').default);
 
  /* Deals Chats */

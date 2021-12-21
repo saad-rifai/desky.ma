@@ -42,7 +42,7 @@
                 <span class="bold-text" style="
                     font-weight: 600;
                 ">
-                    مرحبا  {{$content['user_name']}}!
+                    مرحبا !
                 </span>
                 <br>
                 <br>

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\VerifiyEmail;
+use App\Mail\ResetPasswordMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

@@ -499,7 +499,9 @@ export default {
                 data.append("room_id", this.room_id);
                 axios
                     .post("/ajax/user/message/send", data)
-                    .then(response => {})
+                    .then(response => {
+                        this.getConversation(this.ConversationSelected);
+                    })
                     .catch(error => {
                         if (error.response.status == 500) {
                         this.$vs.notify({
@@ -619,7 +621,7 @@ export default {
         }
     },
     created() {
-        this.getConversationsList();
+      //  this.getConversationsList();
         this.interval1 = setInterval(() => this.getConversationsList(), 5000);
     }
 };

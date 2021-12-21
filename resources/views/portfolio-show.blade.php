@@ -3,6 +3,8 @@
 @if ($data->description != '' && $data->description != null)
     @section('description', "$data->description")
 @endif
+<link href="{{ asset('css/fotorama.css') }}" rel="stylesheet">
+
 @section('content')
     @php
     $filesArray = json_decode($data->files, true);
@@ -366,3 +368,5 @@
     </div>
 </div>
 @stop
+<script src="{{asset('js/fotorama.js')}}"></script>
+

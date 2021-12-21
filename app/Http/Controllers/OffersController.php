@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Jobs\NewOffersMailNot;
+use App\Jobs\SendEmail;
+use App\Mail\NewOffer;
 use App\UserRating;
 
 class OffersController extends Controller
@@ -65,13 +67,18 @@ class OffersController extends Controller
                                     ]);
                                     $offersCount = Offers::where('OID', $request->OID)->count();
                                     if($offersCount == 1 || $offersCount == 4 || $offersCount ==  8 || $offersCount  == 12 || $offersCount  == 16){
-                                        $datajob = [
-                                            'to' => $to,
+                                       $toEmail = User::where('Account_number', $to->Account_number)->get(['email', 'frist_name'])->first();
+                                        $dataEmail = [
+                                            'to' => $toEmail->email,
                                             'OID' => $request->OID,
                                             'order_title' => $to->title,
                                             'offer_id' => $stmt->id
                                         ];
-                                        dispatch(new NewOffersMailNot($datajob));
+                                        $datajob = [
+                                            'to' => $toEmail->email,
+                                            'emailData' => new NewOffer($dataEmail)
+                                        ];
+                                        dispatch(new SendEmail($datajob));
                                     }
                                     return response()->json(['success' => 'تم اضافة عرضك بنجاح !', 'offer_id' => $stmt->id], 200);
                                 }else{

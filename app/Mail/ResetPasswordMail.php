@@ -30,6 +30,6 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("اعادة تعيين كلمة المرور ")->markdown('emails.Reset_Password')->with('content',$this->content);
+        return $this->subject("اعادة تعيين كلمة المرور")->markdown('emails.Reset_Password')->with('content',$this->content);
     }
 }
