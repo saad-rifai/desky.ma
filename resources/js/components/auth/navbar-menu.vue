@@ -39,13 +39,13 @@
             >
           </li>
                     <li>
-            <a class="dropdown-item item-w-icn" href="/myorders"
+            <a class="dropdown-item item-w-icn" href="/MyOrders"
               ><span class="bg-icn"><i class="fas fa-folder"></i></span>
               طلباتي</a
             >
           </li>
                               <li>
-            <a class="dropdown-item item-w-icn" href="/myoffers"
+            <a class="dropdown-item item-w-icn" href="/MyOffers"
               ><span class="bg-icn"><i class="fas fa-ticket-alt"></i></span>
               عروضي</a
             >

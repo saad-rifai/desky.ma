@@ -1,5 +1,4 @@
 @extends('layout.master')
-@section('title', 'أول شبكة للمقاولين الذتيين')
 
 @section('content')
     <header>

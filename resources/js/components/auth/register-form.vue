@@ -230,8 +230,8 @@
             id="terms"
           />
           <label class="form-check-label terms-text font-Naskh" for="terms">
-            لقد قرأت <a href="#">شروط الاستخدام</a> و
-            <a href="#">سياسة الخصوصية</a> وأوافق عليها
+            لقد قرأت <a href="/conditions?from=register" target="_blank">شروط الاستخدام</a> و
+            <a href="/politique-de-confidentialite?from=register" target="_blank">سياسة الخصوصية</a> وأوافق عليها
             <br>
             عند الإشارة إلى حماية البيانات الشخصية. وفقا للقانون 09-08، لديك الحق في الوصول، والتصحيح والمعارضة على معالجة بياناتك الشخصية.
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AeAccount;
+use App\Offers;
 use App\User;
 use App\UserRating;
 use Illuminate\Http\Request;
@@ -11,6 +12,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class WebController extends Controller
 {
+    public function AllUsersSiteMapsList(){
+        $Infos = User::paginate('50', ['username']);
+       
+        return response()->view('seo.sitemap-2', $data = ['pages' =>  $Infos->lastPage()])->header('Content-Type', 'text/xml');
+
+    }
+    public function AllUsersSiteMapList(Request $request){
+        $Infos = User::paginate('50', ['username', 'created_at', 'updated_at']);
+       
+        return response()->view('seo.sitemap-users', $data = ['users' =>  $Infos])->header('Content-Type', 'text/xml');
+
+    }
     public function publicProfile(Request $request)
     {
         if ($request->username) {
@@ -54,6 +67,9 @@ class WebController extends Controller
                 /* */
                 foreach ($stmts as $stmt);
 
+                /* Get Number Of Offers Deals Done */
+                $DealsDone = Offers::where('Account_number', $stmt->Account_number)->where('status', '2')->count();
+                $stmt->DealsDone = $DealsDone;
                 /* Get City Name */
 
                 $datajson = file_get_contents('data/json/list-moroccan-cities.json');

@@ -101,6 +101,8 @@ Vue.prototype.moment = moment
  /* Tools */
  Vue.component('time-format', require('./components/tools/time.vue').default);
 
+/* Help Center */
+Vue.component('new-ticket', require('./components/HelpCenter/new-ticket.vue').default);
 
 
  /**

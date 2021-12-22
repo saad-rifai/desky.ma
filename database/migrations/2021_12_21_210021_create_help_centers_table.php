@@ -13,10 +13,12 @@ class CreateHelpCentersTable extends Migration
      */
     public function up()
     {
-        Schema::create('help_centers', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('TID', 11);
             $table->string('Account_number', 11);
             $table->string('subject');
+            $table->enum('category', ['0','1','2','3','4']);
             $table->mediumText('message');
             $table->enum('status', ['0','1','2']);  /* 0 => Open; 1 under response; 2 closed */
             $table->timestamps();

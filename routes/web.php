@@ -1,19 +1,10 @@
 <?php
 
-use App\FilesToRemove;
-use App\Http\Controllers\Controller;
-use App\Jobs\SendEmail;
-use App\Mail\NewOffer;
-use App\User;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Mail;
-use App\Orders;
-use App\Mail\ResetPasswordMail;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +29,7 @@ Route::prefix('ajax')->group(function () {
     Route::post('login/user', 'Auth\LoginController@LoginUser');
     Route::post('reset/user/password', 'Auth\ResetPasswordController@ResetPassword');
     Route::post('ResetPassword/reset', 'Auth\ResetPasswordController@UpdatePassword');
-    Route::post('user/update/avatar', 'UserAccountController@UpdateAvatar');
-    Route::post('user/update/profile', 'UserAccountController@UpdateProfile');
-    Route::post('user/update/account', 'UserAccountController@UpdateAccount');
-    Route::post('user/request/verification', 'DocumentationCenterController@RequestVerification');
-    Route::post('user/request/aeaccount', 'AeAccountController@RequestAccount');
+
 
     //Route::post('/user/request/portfolio/edit/{id}/save', 'UserPortFolioController@edit')->middleware("auth");
     Route::get('user/request/user/portfolio', 'UserPortFolioController@index');
@@ -52,12 +39,12 @@ Route::prefix('ajax')->group(function () {
     Route::post('public/request/aelist/all', 'AeAccountController@AelistAll');
     Route::post('public/request/aelist/search', 'AeAccountController@SearchInAeList');
     Route::get('public/request/ae/ratings', 'WebController@UserRatingList');
-   
+
     /* Orders Route */
 
     Route::get('orders/all', 'OrdersController@all');
     Route::post('orders/search', 'OrdersController@search');
-    Route::get('order/{OID}/json', 'OrdersController@MyOrderJson');
+    // Route::get('order/{OID}/json', 'OrdersController@MyOrderJson');
 
     /***** */
 
@@ -66,15 +53,19 @@ Route::prefix('ajax')->group(function () {
     Route::post('order/offer/status', 'OffersController@offerStatus');
     Route::post('orders/offers/hired', 'OffersController@hired');
     Route::get('order/{OID}/myoffer/', 'OffersController@getMyOffer');
-    
+
     /********/
 
     /*****************/
     Route::group(['middleware' => ['auth']], function () {
         /* USER */
-    Route::get('user/aeaccount/check', 'AeAccountController@AeCheck');
-    Route::get('user/documentation_center/check', 'DocumentationCenterController@DocumentationCenterCheck');
-
+        Route::get('user/aeaccount/check', 'AeAccountController@AeCheck');
+        Route::get('user/documentation_center/check', 'DocumentationCenterController@DocumentationCenterCheck');
+        Route::post('user/update/avatar', 'UserAccountController@UpdateAvatar');
+        Route::post('user/update/profile', 'UserAccountController@UpdateProfile');
+        Route::post('user/update/account', 'UserAccountController@UpdateAccount');
+        Route::post('user/request/verification', 'DocumentationCenterController@RequestVerification');
+        Route::post('user/request/aeaccount', 'AeAccountController@RequestAccount');
 
         /* Rating */
         Route::post('user/rate', 'UserRatingController@create');
@@ -89,9 +80,9 @@ Route::prefix('ajax')->group(function () {
         Route::post('user/portfolio/create', 'UserPortFolioController@create');
         Route::post('user/portfolio/delete/{id}', 'UserPortFolioController@delete');
         Route::get('/user/request/portfolio/infos/{id}', 'UserPortFolioController@PortfolioInfos');
-        
+
         /* Orders Route */
-    
+
         Route::post('user/order/create', 'OrdersController@create');
         Route::post('user/order/delete', 'OrdersController@deleteOrder');
         Route::post('user/order/update', 'OrdersController@update');
@@ -103,7 +94,7 @@ Route::prefix('ajax')->group(function () {
         Route::get('MyOrders/all', 'OrdersController@allMyOrders');
         Route::post('MyOrders/search', 'OrdersController@MyOrdersSearch');
 
-    
+
         /* Offers Routes */
         Route::post('user/offer/create', 'OffersController@create');
         Route::post('order/offer/update/', 'OffersController@UpdateOffer');
@@ -139,18 +130,16 @@ Route::prefix('ajax')->group(function () {
         Route::post('deal/messages', 'ChatSystemController@DealChatRoom');
         Route::post('deal/delivery', 'OrdersController@dealDelivery');
 
-    
+        /* Help Center */
+        Route::post('/help-center/new/ticket', 'HelpCenterController@NewTicket');
     });
-    
 });
 
 
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    $CountOrdersOfThisMonth = Orders::where('Account_number', Auth::user()->Account_number)->whereMonth('created_at', Carbon::now()->month)->count();
-    dd($CountOrdersOfThisMonth);
-
+    //return view('emails.HelpCenter.NewTicketCreated');
 });
 
 /** 
@@ -166,7 +155,7 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
 
     /* Messages */
 
-    Route::get('messages', function(){
+    Route::get('messages', function () {
         return view('chat/messages');
     });
 
@@ -248,10 +237,9 @@ Route::get('/login', function () {
         Session::setId($_GET['s_token']);
         Session::start();
         return  redirect('/dashboard?set_session.do&route');
-    }elseif(isset($_GET['redirect'])){
+    } elseif (isset($_GET['redirect'])) {
         Cookie::queue('redirect', $_GET['redirect'], 60);
         return view('auth.login');
-
     } else {
         return view('auth.login');
     }
@@ -263,13 +251,11 @@ Route::get('/reset', function () {
 })->name('reset');
 
 Route::get('/register', function () {
-    if(isset($_GET['redirect'])){
+    if (isset($_GET['redirect'])) {
         Cookie::queue('redirect', $_GET['redirect'], 60);
         return view('auth.login');
-
-    }else{
+    } else {
         return view('auth.register');
-
     }
 })->name('register')->middleware('guest');
 
@@ -281,6 +267,16 @@ Route::get('logout', function () {
     }
 })->name('logout');
 
+/* SiteMaps */
+Route::get('/sitemap.xml', function () {
+    return response()->view('seo.sitemap')->header('Content-Type', 'text/xml');
 
+});
+Route::get('/sitemap-1.xml', function () {
+    return response()->view('seo.sitemap-1')->header('Content-Type', 'text/xml');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+Route::get('/sitemap-2.xml', 'WebController@AllUsersSiteMapsList');
+Route::get('/sitemap-users.xml', 'WebController@AllUsersSiteMapList');
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

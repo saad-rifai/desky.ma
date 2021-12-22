@@ -7,10 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ResetPasswordMail extends Mailable
+class NewTicketCreated extends Mailable
 {
     use Queueable, SerializesModels;
     public $content;
+
     /**
      * Create a new message instance.
      *
@@ -21,15 +22,13 @@ class ResetPasswordMail extends Mailable
         $this->content = $content;
     }
 
-
     /**
-     * ->from('noreply@desky.ma', 'desky.ma')
      * Build the message.
      *
      * @return $this
      */
     public function build()
     {
-        return $this->from('account@desky.ma', 'desky.ma')->subject("اعادة تعيين كلمة المرور")->markdown('emails.Reset_Password')->with('content',$this->content);
+        return $this->from('support@desky.ma', 'desky.ma')->subject("desky.ma تذكرة رقم #".$this->content['TID']."  ")->markdown('emails.HelpCenter.NewTicketCreated')->with('content',$this->content);
     }
 }

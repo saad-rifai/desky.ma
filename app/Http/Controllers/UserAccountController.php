@@ -89,6 +89,7 @@ class UserAccountController extends Controller
             'type' => $request->type
         ]);
         if ($stmt) {
+           Cache::forget($request->username.'PP');
             return response()->json(['success' => 'تم حفظ البيانات بنجاح !'], 200);
         } else {
             return response()->json(['error' => 'فشل تحديث البيانات'], 500);

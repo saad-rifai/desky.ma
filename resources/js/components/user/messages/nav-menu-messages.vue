@@ -99,11 +99,11 @@ export default {
     methods: {
         FaviconNot() {
             const favicon = document.getElementById("favicon");
-            favicon.href = "/img/icons/favicon-not-32x32.png";
+            favicon.href = "https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/favicon-not-32x32.png";
         },
         FaviconNotHide() {
             const favicon = document.getElementById("favicon");
-            favicon.href = "/img/icons/favicon-32x32.png";
+            favicon.href = "https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/favicon-32x32.png";
         },
         playSound(sound = "https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/audio/notification.wav") {
             if (sound) {

@@ -1,6 +1,11 @@
 @extends('layout.master')
 @section('title', 'لوحة التحكم')
 @section('content')
+@if (isset($_GET['newTicket']) && $_GET['newTicket'] == true)
+<div class="info-banner bg-success">
+    <h1 class="info-banner-text">تم انشاء تذكرتك بنجاح سوف تتلقى رداََ في الساعات المقبلة</h1>
+</div>
+@endif
 
 <div class="container" id="app">
 

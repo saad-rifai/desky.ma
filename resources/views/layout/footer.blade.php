@@ -17,7 +17,6 @@
                     <ul class="footer-list list-unstyled">
                         <li class="footer-li-title"><h3>الدعم</h3></li>
                         <li class="footer-li font-Naskh"><a href="/help-center" class="footer-link">مركز المساعدة</a></li>
-                        <li class="footer-li font-Naskh"><a href="#" class="footer-link">تواصل معنا</a></li>
                         <li class="footer-li font-Naskh"><a href="https://blog.desky.ma" class="footer-link">المدونة</a></li>
                         <li class="footer-li font-Naskh"><a href="/q&a" class="footer-link">الأسئلة الشائعة</a></li>
                     </ul>                  

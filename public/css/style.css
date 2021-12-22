@@ -1081,6 +1081,20 @@ h1.title-page-cbrand {
 .font-Naskh *{
     font-family: Noto Naskh Arabic,Helvetica Neue,Helvetica,Arial,sans-serif !important;
 }
+.info-banner {
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    display: table;
+    overflow: hidden;
+}
+h1.info-banner-text {
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    display: table-cell;
+    vertical-align: middle;
+}
 .alert {
     font-family: 'Noto Naskh Arabic' !important;
 }

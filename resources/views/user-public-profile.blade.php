@@ -106,7 +106,9 @@
                 to="{{$data->Account_number}}"
 
             ></report-popup>
-                    <button class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i></button>
+            <new-message to="{{$data->Account_number}}"></new-message>
+
+                    <button class="btn btn-primary btn-sm" href="#NewMessageModal" type="button" data-toggle="modal" data-target="#NewMessageModal"><i class="fas fa-envelope"></i></button>
                     <span class="dropdown">
                         <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
                             aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
@@ -212,7 +214,7 @@
                         </div>
                         <div class="col mb-3" align="right">
                             <span class="card-info-text">
-                                11
+                                {{$data->DealsDone}}
                             </span>
                         </div>
                         @if ($data->cityName != null && $data->cityName != '')

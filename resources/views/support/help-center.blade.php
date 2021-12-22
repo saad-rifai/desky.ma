@@ -1,47 +1,10 @@
-<!doctype html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="HTML, CSS, JavaScript">
-    <meta name="description" content="Free Web tutorials">
-    <meta name="author" content="Saad Rifai">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/resetstyle.css') }}">
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Styles -->
-    <!-- Fonts -->
-    <link rel="shortcut icon" href="{{asset('img/icons/favicon-32x32.png')}}" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
+@extends('layout.master')
+@section('title', 'مركز المساعدة')
 
+@section('content')
 
-    <title>Desky -  مركز المساعدة</title>
-    <!-- Font-awsome -->
-
-    <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"
-        integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg=="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js"
-        integrity="sha512-1Al+dnfE+1gI7IBmpUZ8XnZ3l3Nv6cyA+XgdtlaptVNxJcWWRzHxOPzT+2pbp52qtXa2jkwk0MWYSmxslMsHCQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Basic Style for Tags Input -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-</head>
-
-<body>
-
-<div class="container">
-    <div class="row row-cols-1 mx-auto text-center mb-5 align-items-center position-absolute top-50 start-50 translate-middle">
+<div class="container mt-5 mb-5">
+    <div class="w-100 row row-cols-1 mx-auto text-center mb-5 align-items-center ">
         <div class="col w-100">
             <div class="icon-large-top">
                 <img style="max-width: 350px"
@@ -50,38 +13,65 @@
             </div>
         </div>
         <div class="col w-100 mt-3">
+
             <p class="text-icon" dir="rtl">
              قريبا...
                 <span class="d-block font-Naskh text-secondary">
                      لازال مركز المساعدة قيد التطوير عد لاحقاََ    
                 </span>
             </p>
-    
+
     
         </div>
-        <div class="col mt-5">
-            <a href="{{ asset('/') }}"><button  type="button" class="btn text-center btn-secondary btn-sm">
-                الصفحة الرئيسية</button></a>
-                <a href="{{ asset('/contact-us') }}"><button  type="button" class="btn text-center btn-sm btn-primary">
-                   تواصل معنا</button></a>
+        <div class="col mt-5 w-100" id="app">
+            <new-ticket></new-ticket>
+                <h5 class="card-title w-100 mb-5">هل تحتاج المساعدة ؟ لاتقلق لازال بامكاننا مساعدتك </h5>
+                <div class="row mx-auto text-center justify-content-md-center">
+                    <div class="col-sm mb-3 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/icons/683-female-customer-service-outline.png" width="40px" class="icon-card" alt="desky.ma">
+
+                              <h5 class="card-title">تواصل مع الدعم</h5>
+                              <p class="card-text font-Naskh">قم بفتح تذكرة موضحا فيها طلبك وسيتم الرد عليك في غضون 48 ساعة كحد أقصى </p>
+                            @auth
+                            <a href="#NewTicketModal" type="button" data-toggle="modal" data-target="#NewTicketModal"class="btn btn-primary">تواصل مع الدعم </a>
+                            @else
+                            <a href="/login?redirect={{url()->current()}}" type="button" class="btn btn-primary">يجب تسجيل الدخول</a>
+
+                            @endauth
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-sm mb-3 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/icons/175-envelope-mail-notification-arrow-up-outline.png" width="40px" class="icon-card" alt="desky.ma">
+
+                              <h5 class="card-title">تواصل معنا عبر البريد الالكتروني</h5>
+                              <p class="card-text font-Naskh">أرسل رسالة موضحا فيها طلبك وسيتم الرد عليك في غضون 48 ساعة كحد أقصى</p>
+                              <a href="mailto:support@desky.ma" class="btn btn-primary">support@desky.ma</a>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-sm mb-3 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/icons/112-book-morph-outline.png" width="40px" class="icon-card" alt="blog.desky.ma">
+
+                              <h5 class="card-title">اطلع على المدونة</h5>
+                              <p class="card-text font-Naskh">نقوم بنشر دروس ونصائح للمقاول الذاتي واصحاب الأعمال بشكل دوري</p>
+                              <a href="https://blog.desky.ma/?ref=help_center_desky" target="_blank" class="btn btn-primary">زيارة المدونة</a>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
         </div>
     </div>
     
 
 </div>
-    </body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Suggest Tags Js -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
-    <script src="{{ asset('js/script.js') }}"></script>
-    
-    </html>
+@stop
+
     

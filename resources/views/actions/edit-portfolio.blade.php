@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'اضافة عمل')
+@section('title', 'تعديل عمل')
 
 
 @section('content')
