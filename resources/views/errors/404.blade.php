@@ -8,15 +8,14 @@
     <meta name="description" content="Free Web tutorials">
     <meta name="author" content="Saad Rifai">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/resetstyle.css') }}">
+    <link rel="stylesheet" href="{{asset('public/css/min/resetstyle.css')}}">
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
 
     <!-- Fonts -->
-    <link rel="shortcut icon" href="{{asset('img/icons/favicon-32x32.png')}}" type="image/x-icon">
-
+    <link rel="shortcut icon" id="favicon"
+    href="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/favicon-32x32.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -25,8 +24,8 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="{{asset('public/css/min/style.css')}}">
+     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
 
 

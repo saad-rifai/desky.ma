@@ -1569,13 +1569,14 @@ span.card-info-text {
         margin-top: -25px !important;
     }
     button.btn.btn-primary.btn-sm.bid-mobile-icon:after {
-        content: url(../img/icons/map-pin-solid.svg);
+        content: "\f276";
         text-indent: 0;
         display: block;
+        font-family: 'Font Awesome 5 Pro' !important;
         line-height: 1;
         width: 10px;
-        fill: white !important;
-        filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+        color: white !important;
+        font-weight: 700 !important;
     }
 }
 @media (max-width: 767px) {

@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title', 'الرسائل')
-<link href="{{ asset('css/chat/chat-style.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('public/css/min/chat-style.css')}}">
 
 @section('content')
 

@@ -24,13 +24,13 @@
     <meta property="og:site_name" content="desky.ma">
     <meta name="twitter:image:alt" content="Desky - @yield('title', $webinfo['title'])">
     <!-- style -->
-    <link href="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/css/style.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/css/resetstyle.min.css">
+    <link rel="stylesheet" href="{{asset('public/css/min/style.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/min/resetstyle.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
 
     <!-- style -->
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/app.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="shortcut icon" href="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/favicon-32x32.png" type="image/x-icon">
 

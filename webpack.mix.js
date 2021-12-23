@@ -11,7 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
+ mix.postCss('css/style.css', 'css/min');
+ mix.postCss('css/resetstyle.css', 'css/min');
+ mix.postCss('css/chat/chat-style.css', 'css/min');
 
-mix.js('resources/js/navbar.js', 'public/js');
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/navbar.js', 'js');
+mix.js('resources/js/app.js', 'js')
+    .sass('resources/sass/app.scss', 'css');

@@ -25,11 +25,11 @@
     <meta property="og:site_name" content="desky.ma">
     <meta name="twitter:image:alt" content="Desky - @yield('title', $webinfo['title'])">
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/app.js') }}" defer></script>
     
     <!-- style -->
-    <link href="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/css/style.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/css/resetstyle.min.css">
+    <link rel="stylesheet" href="{{asset('public/css/min/style.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/min/resetstyle.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
 
     <!-- style -->
@@ -135,6 +135,6 @@ integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ
 <!-- Suggest Tags Js -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script src="{{ asset('js/script.js') }}"></script>
+<script src="{{ asset('public/js/script.js') }}"></script>
 
 </html>
