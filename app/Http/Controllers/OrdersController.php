@@ -584,6 +584,7 @@ class OrdersController extends Controller
                         $info->offers_number = "لاتوجد عروض";
                         break;
                 }
+                if(Auth::check()){
                 /* Check If Selected At This Order */
                 $CheckOfferSelected = Offers::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->whereIn('status', ['1','2'])->count();
                 if($CheckOfferSelected > 0){
@@ -591,6 +592,10 @@ class OrdersController extends Controller
                 }else{
                     $info->CheckOfferSelected = false;
                 }
+                }else{
+                    $info->CheckOfferSelected = false;
+                }
+
 
 
 
