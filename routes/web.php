@@ -44,7 +44,7 @@ Route::prefix('ajax')->group(function () {
 
     Route::get('orders/all', 'OrdersController@all');
     Route::post('orders/search', 'OrdersController@search');
-    // Route::get('order/{OID}/json', 'OrdersController@MyOrderJson');
+     Route::get('order/{OID}/json', 'OrdersController@MyOrderJson');
 
     /***** */
 

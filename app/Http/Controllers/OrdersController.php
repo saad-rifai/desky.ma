@@ -262,6 +262,7 @@ class OrdersController extends Controller
                         'time.min' => 'يرجى تحديد عدد الأيام المتوقعة *',
                         'time.max' => 'الحد الأقصى 180 يوم (6 أشهر) *',
                     ]);
+            
                     /* Place Validation */
                     if ($request->onlineCeck  == 2) {
                         $datajson = file_get_contents('data/json/list-moroccan-cities.json');
@@ -609,7 +610,7 @@ class OrdersController extends Controller
                 /* Get Activite And Sector NAme */
                 $Activites = $info->activite;
                 $sector = $info->sector;
-                if ($Activites != null) {
+                if (is_int($Activites) && $Activites >= 0) {
                     if ($sector == 1) {
                         $listActivites = file_get_contents('data/json/activite-ae-2.json');
                         $listActivitesdata = json_decode($listActivites, true);
@@ -766,7 +767,7 @@ class OrdersController extends Controller
                 /* Get Activite And Sector NAme */
                 $Activites = $info->activite;
                 $sector = $info->sector;
-                if ($Activites != null) {
+                if (is_int($Activites) && $Activites >= 0) {
                     if ($sector == 1) {
                         $listActivites = file_get_contents('data/json/activite-ae-2.json');
                         $listActivitesdata = json_decode($listActivites, true);
@@ -1115,7 +1116,7 @@ class OrdersController extends Controller
                     /* Get Activite And Sector NAme */
                     $Activites = $info->activite;
                     $sector = $info->sector;
-                    if ($Activites != null) {
+                    if (is_int($Activites) && $Activites >= 0) {
                         if ($sector == 1) {
                             $listActivites = file_get_contents('data/json/activite-ae-2.json');
                             $listActivitesdata = json_decode($listActivites, true);

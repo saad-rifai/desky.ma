@@ -40,7 +40,7 @@
                     v-bind:class="{ 'is-invalid': errors.errors.activite }"
                     v-model="activite_selected"
                 >
-                    <vs-select-item :value="null" text="بدون تحديد" />
+                    <vs-select-item value="" text="بدون تحديد" />
                     <vs-select-item
                         :key="index"
                         :value="index"
@@ -716,11 +716,10 @@ export default {
       data.append("title", this.title);
       data.append("description", this.description);
       data.append("sector", this.sector);
-      if (this.activite_selected != null && this.activite_selected != "") {
-        data.append("activite", this.activite_selected);
-      } else {
-        data.append("activite", "");
-      }
+      data.append("activite", this.activite_selected);
+
+    
+
       data.append("budget", this.budget);
       data.append("time", this.time);
       data.append("onlineCeck", this.onlineCeck);

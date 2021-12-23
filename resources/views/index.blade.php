@@ -94,10 +94,10 @@
                         <div class="card-body">
                             <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/icons/291-coin-dollar-outline.png" class="icon-card" alt="desky.ma">
                             <h2 class="title-icon">
-                                أنشر مشارعك بشكل مجاني
+                                أنشر طلباتك بشكل مجاني
                             </h2>
                             <p class="icon-text">
-                                أنشر مشارعك في المنصة وتلقى العروض
+                                أنشر طلباتك في المنصة وتلقى العروض
                                 من المقاولين بشكل مجاني
                             </p>
                         </div>
@@ -203,13 +203,14 @@
                         <h1 class="col-title" style="font-size: 20px"> مالذي تقدمه لك منصة desky ؟</h1>
                         <br>
                         
-                        <p>تتيح منصة ديسكي لك كمقاول ذاتي فرصة ايجاد عملاء جدد والتعريف بخدماتك وعرض أعمالك قصد زيادة دخلك, فيمكنك من خلال المنصة تقديم عروضك على طلبات العملاء أو يمكن للعملاء أن يتواصل معك مباشرة من خلال حسابك.
+                        <p>
+                            تتيح منصة ديسكي لك كمقاول ذاتي فرصة ايجاد عملاء جدد والتعريف بخدماتك وعرض أعمالك قصد زيادة دخلك, فيمكنك من خلال المنصة تقديم عروضك على طلبات العملاء كما يمكن للعملاء أن يتواصلوا معك مباشرة من خلال حسابك.
                         </p>
                     </div>
                 </div>
 
             </div>
-            <h3 dir="rtl" class="text-section text-center">انضم الى أكبر شبكة مقاوليين ذاتيين بالمغرب</h3>
+            <h3 dir="rtl" class="text-section text-center">انضم الى أكبر شبكة مقاولين ذاتيين بالمغرب</h3>
             <div class="users-avatars-section">
                 <div class="user-av-show">
                     <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/default/av-1.jpg" >
@@ -315,7 +316,7 @@
                         aria-labelledby="panelsStayOpen-headingThree121" data-parent="#accordionPanelsStayOpenExample">
                         <div class="accordion-body">
                             <p>
-                                يمكنك نشرط طلباتك في المنصة والحصول على العروض من أفضل المقاوليين الذاتيين قصد تنفيذ طبلك, يمكنك كذلك البحث عن مقاول ذاتي والتواصل معه مباشرة من خلال المنصة
+                                يمكنك نشر طلباتك في المنصة والحصول على العروض من أفضل المقاوليين الذاتيين قصد تنفيذ طبلك, يمكنك كذلك البحث عن مقاول ذاتي والتواصل معه مباشرة من خلال المنصة
                             </p>
                         </div>
                     </div>
@@ -331,7 +332,7 @@
   
             <div class="row row-cols-auto justify-content-md-center text-center" dir="rtl">
 
-               <div class="col"> <h4 dir="rtl" class="text-section-t text-center">مالذي تنتظره ؟</h4></div>
+               <div class="col"> <h4 dir="rtl" class="text-section-t text-center">ما الذي تنتظره ؟</h4></div>
 
                <div class="col">  <a href="/register?ref=landing-page"> <button type="button" class="btn btn-outline-primary ">سجل الأن</button></a></div>
 
