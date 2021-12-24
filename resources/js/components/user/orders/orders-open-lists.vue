@@ -584,7 +584,7 @@ export default {
             city: "",
             Activites: [],
             remotely: false,
-            budget: [150, 500000],
+            budget: [149, 500000],
             time: 180,
             typeget: "all"
         };
