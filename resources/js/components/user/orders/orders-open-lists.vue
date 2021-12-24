@@ -430,9 +430,10 @@
                                     <div class="row">
                                         <div class="col-auto">
                                             <div class="user-info-box-article">
+                                                <a :href="'/@'+item.user.username">
                                                 <div
                                                     class="row"
-                                                    onclick="redirectUserPage(event,11)"
+                                                    @click="redirectUserPage(item.Account_number)"
                                                 >
                                                     <div class="col-auto">
                                                         <div
@@ -489,6 +490,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -590,6 +592,9 @@ export default {
         };
     },
     methods: {
+        redirectUserPage(ac){
+            window.location.href = "/@"+ac
+        },
         reset() {
             this.activite = null;
             this.query = "";
