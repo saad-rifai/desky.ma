@@ -292,8 +292,8 @@
                                 ticks
                                 text-fixed=" درهم "
                                 color="#f96a0c"
-                                max="500000"
-                                :min="150"
+                                max="500001"
+                                :min="149"
                                 v-model.lazy="budget"
                                 @change="Search"
                             />
@@ -584,7 +584,7 @@ export default {
             city: "",
             Activites: [],
             remotely: false,
-            budget: [149, 500000],
+            budget: [149, 500001],
             time: 180,
             typeget: "all"
         };
@@ -596,7 +596,7 @@ export default {
             this.city = "";
             this.sector = "";
             this.remotely = false;
-            this.budget = [150, 500000];
+            this.budget = [149, 500001];
             this.time = 180;
 
             this.getData();
