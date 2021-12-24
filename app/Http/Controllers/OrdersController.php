@@ -702,8 +702,8 @@ class OrdersController extends Controller
             ->where('sector', 'LIKE', '%' . $sector . '%')
             ->where("place", "LIKE", $cityquery)
             ->where('time', '<', intval($time))
-            ->where('budget', '>', intval($budget[0]))
-            ->where('budget', '<', intval($budget[1]))
+            ->where('budget', '>=', intval($budget[0]))
+            ->where('budget', '=<', intval($budget[1]))
 
             ->where(function ($qu) use ($query) {
                 $qu->where('title', 'LIKE', '%' . $query . '%')
