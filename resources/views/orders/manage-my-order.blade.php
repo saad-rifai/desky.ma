@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title', $data->title)
 @section('description', $data->description)
-<link rel="stylesheet" href="{{asset('public/css/min/chat-style.css')}}">
+<link rel="stylesheet" href="{{asset('css/min/chat-style.css')}}">
 
 @section('content')
 

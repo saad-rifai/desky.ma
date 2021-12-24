@@ -8,8 +8,8 @@
 
  require('./bootstrap');
  
- import VuePlyr from 'vue-plyr'
- import 'vue-plyr/dist/vue-plyr.css'
+ //import VuePlyr from 'vue-plyr'
+ //import 'vue-plyr/dist/vue-plyr.css'
 
  window.Vue = require('vue');
  import Vuesax from 'vuesax';
@@ -24,7 +24,6 @@ Vue.prototype.moment = moment
  Vue.use(Vuesax, {
    // options here
  })
- Vue.use(VuePlyr )
  
  
  

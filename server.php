@@ -3,8 +3,8 @@
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
+ * @package  desky v2.0
+ * @author  Saad rifai <s.rifai@neryou.ma>
  */
 
 $uri = urldecode(

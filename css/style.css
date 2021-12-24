@@ -1170,6 +1170,9 @@ h1.card__info_money {
     margin-left: auto;
     margin-bottom: 30px;
 }
+label.form-label {
+    font-family: 'Noto Naskh Arabic' !important;
+}
 h3.pg-info-title {
     font-size: 25px;
     font-weight: 400;

@@ -29,8 +29,8 @@ foreach ($webinfos as $webinfo);
 
     <!-- Scripts -->
 
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
-    <script src="{{ asset('public/js/navbar.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/navbar.js') }}" defer></script>
 
     <!-- Styles -->
 
@@ -45,8 +45,8 @@ foreach ($webinfos as $webinfo);
 
     
     <!-- style -->
-    <link rel="stylesheet" href="{{asset('public/css/min/style.css')}}">
-    <link rel="stylesheet" href="{{asset('public/css/min/resetstyle.css')}}">
+    <link rel="stylesheet" href="{{asset('css/min/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/min/resetstyle.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
 
     <!-- style -->
