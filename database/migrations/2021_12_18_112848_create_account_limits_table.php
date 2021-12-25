@@ -16,8 +16,9 @@ class CreateAccountLimitsTable extends Migration
         Schema::create('account_limits', function (Blueprint $table) {
             $table->id();
             $table->string("Account_number",11)->unique();
-            $table->integer("Number_of_orders_per_month")->default(10);
-            $table->integer("Number_of_offers_per_month")->default(10);
+            $table->integer("Number_of_orders_per_month")->default(5);
+            $table->integer("Number_of_offers_per_month")->default(5);
+            $table->integer("Number_of_Employees_per_order")->default(5);
             $table->timestamps();
             $table->foreign('Account_number')->references('Account_number')->on('users')
             ->onDelete('cascade');

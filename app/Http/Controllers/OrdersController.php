@@ -440,6 +440,16 @@ class OrdersController extends Controller
     public function hire(Request $request)
     {
         if (isset($request->userid) && $request->userid != null && isset($request->OID) && $request->OID != null) {
+
+            /* Check Account limites */
+            $AccountLimit = Account_limits::where('Account_number', Auth::user()->Account_number)->get()->first();
+            $CountNumberOfEmployeesOfThisOrder = Offers::where('OID', $request->OID)->whereIn('status', ['1','2'])->count();
+           // dd($CountNumberOfEmployeesOfThisOrder);
+            if($AccountLimit->Number_of_Employees_per_order >  $CountNumberOfEmployeesOfThisOrder){
+
+ 
+
+
             $order = Orders::where('OID', $request->OID)->where('Account_number', Auth::user()->Account_number)->get(['title']);
 
             $orderAuthCheck = $order->count();
@@ -480,16 +490,21 @@ class OrdersController extends Controller
                             'notifybyemail' => "1",
                             'email_status' => "0"
                         ]);
-                        return response()->json(['success', 'success'], 200);
+                        return response()->json(['success'=> 'success'], 200);
                     } else {
-                        return response()->json(['error', 'server error'], 500);
+                        return response()->json(['error'=> 'server error'], 500);
                     }
                 } else {
-                    return response()->json(['error', 'تعذر انشاء العقد يرجى اعادة المحاولة'], 500);
+                    return response()->json(['error' => 'تعذر انشاء العقد يرجى اعادة المحاولة'], 500);
                 }
             } else {
-                return response()->json(['error', 'bad request'], 400);
+                return response()->json(['error' => 'bad request'], 400);
             }
+
+        }else{
+            return response()->json(['error' => 'لايمكنك توظيف أكثر من '.$AccountLimit->Number_of_Employees_per_order.' مقاولين ذاتيين على الطلب الواحد'], 403);
+        }
+
         }
     }
     public function status(Request $request)

@@ -1,12 +1,86 @@
 @extends('layout.master')
 @section('title', "$data->frist_name $data->last_name")
 @if ($data->description != '' && $data->description != null)
-@section('description', "$data->description")
+    @section('description', "$data->description")
 @endif
 
 @section('content')
     <!-- Modal preview  -->
+    <div class="modal fade" id="ShareProfile" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" dir="rtl">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                    مشاركة الملف الشخصي
+                </h5>
+                <button type="button" class="btn-close" data-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="row row-cols-1 mx-auto" style="max-width: 550px">
+                        <div class="col">
+                            <div class="mb-3">
+                                <div class="position-relative">
 
+                                    <input type="text"
+                                        onclick="this.setSelectionRange(0, this.value.length)"
+                                        style="cursor: pointer;" readonly="readonly"
+                                        class="form-control text-center" name=""
+                                        value="{{ asset('/@' . $data->username) }}">
+                                    <span class="icon-input-btn">
+                                        <i class="far fa-clone"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="footer-social-media mx-auto">
+                                <ul class="list-social-media">
+                                    <li>
+                                        <a target="_blank"
+                                            href="https://www.facebook.com/sharer/sharer.php?u={{ asset('/@' . $data->username) }}"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="مشاركة على فيسبوك">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank"
+                                            href="http://twitter.com/share?text=حسابي على منصة ديسكي&url={{ asset('/@' . $data->username) }}&hashtags=deskymaroc,auto_entrepreneur&via=desky_ma"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="مشاركةعلى تويتر">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank"
+                                            href="https://www.linkedin.com/sharing/share-offsite/?url={{ asset('/@' . $data->username) }}"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="مشاركة على لينكد ان">
+                                            <i class="fab fa-linkedin"></i>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
+                    اغلاق
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -20,7 +94,7 @@
                     @if ($data->isOnline($data->Account_number))
                         <span
                             class="position-absolute top-0 start-100 translate-middle p-2 bg-success online-status online-status-lg  border border-light rounded-circle"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="متصل">
+                            data-toggle="tooltip" data-placement="top" title="متصل">
                             <span class="visually-hidden">New alerts</span>
                         </span>
                     @endif
@@ -42,11 +116,11 @@
             <div class="col mt-2">
                 <h1 class="user-name">{{ ucfirst($data->frist_name) }} {{ ucfirst($data->last_name) }}
                     @if ($data->verified_account == 2)
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="حساب مقاول ذاتي تم التحقق منه"
+                        <span data-toggle="tooltip" data-placement="top" title="حساب مقاول ذاتي تم التحقق منه"
                             class="verified-icon verified-2" dir="rtl"></span>
                     @endif
                     @if ($data->verified_account == 1)
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="حساب تم التحقق منه"
+                        <span data-toggle="tooltip" data-placement="top" title="حساب تم التحقق منه"
                             class="verified-icon verified-1" dir="rtl"></span>
 
                     @endif
@@ -98,23 +172,32 @@
                     <a href="{{ asset('/account/settings') }}">
                         <button class="btn btn-primary btn-sm">تعديل الحساب</button>
                     </a>
-
+                    <button data-target="#ShareProfile" data-toggle="modal" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+    
                 @else
-                <report-popup
-                about="0"
-                from_url="{{url()->current()}}"
-                to="{{$data->Account_number}}"
+                    <report-popup about="0" from_url="{{ url()->current() }}" to="{{ $data->Account_number }}">
+                    </report-popup>
+                    @if ($data->verified_account == 2)
 
-            ></report-popup>
-            <new-message to="{{$data->Account_number}}"></new-message>
-
-                    <button class="btn btn-primary btn-sm" href="#NewMessageModal" type="button" data-toggle="modal" data-target="#NewMessageModal"><i class="fas fa-envelope"></i></button>
+                    <new-message to="{{ $data->Account_number }}"></new-message>
+                    <button class="btn btn-primary btn-sm" href="#NewMessageModal" type="button" data-toggle="modal"
+                        data-target="#NewMessageModal"><i class="fas fa-envelope"></i></button>
+                        @endif
                     <span class="dropdown">
+
                         <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
                             aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                           
                         <ul class="dropdown-menu" aria-labelledby="menu_user">
-                            <li><a class="dropdown-item" href="#">مراسلة</a></li>
-                            <li><a class="dropdown-item" data-toggle="modal" href="#reportModal" data-target="#reportModal" >التبليغ</a></li>
+                            @if ($data->verified_account == 2)
+                            <li><a class="dropdown-item" href="#NewMessageModal" type="button" data-toggle="modal">مراسلة</a></li>
+
+                            @endif
+                            <li><a class="dropdown-item" type="button" href="#ShareProfile" data-toggle="modal">مشاركة الملف</a></li>
+                            <li><a class="dropdown-item" data-toggle="modal" href="#reportModal"
+                                    data-target="#reportModal">التبليغ</a></li>
                         </ul>
                     </span>
                 @endif
@@ -131,7 +214,8 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#portfolio"
-                                type="button" role="tab" aria-controls="portfolio" aria-selected="false">معرض الأعمال</button>
+                                type="button" role="tab" aria-controls="portfolio" aria-selected="false">معرض
+                                الأعمال</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#rating"
@@ -143,8 +227,8 @@
                             aria-labelledby="home-tab">
 
                             <p class="font-Naskh">
-                                @php 
-                                if ($data->description != '' && $data->description != null) {
+                                @php
+                                    if ($data->description != '' && $data->description != null) {
                                         echo $data->description;
                                     } else {
                                         echo 'لم يكتب النبذة الشخصية';
@@ -152,14 +236,14 @@
                             </p>
                         </div>
                         <div class="tab-pane fade" id="portfolio" role="tabpanel" aria-labelledby="profile-tab">
-                            @if(Auth::check() && $data->Account_number == Auth::user()->Account_number)
-                            <div class="action-tab-sc mt-3 mb-3" style="text-align: left">
-                               <a href="{{asset('portfolio/create/')}}">
-                                <button class="btn btn-primary btn-sm ">اضافة عمل</button>
-                            </a>
-                            </div>
+                            @if (Auth::check() && $data->Account_number == Auth::user()->Account_number)
+                                <div class="action-tab-sc mt-3 mb-3" style="text-align: left">
+                                    <a href="{{ asset('portfolio/create/') }}">
+                                        <button class="btn btn-primary btn-sm ">اضافة عمل</button>
+                                    </a>
+                                </div>
                             @endif
-                   <portfolio-section :account_number="{{$data->Account_number}}"></portfolio-section>
+                            <portfolio-section :account_number="{{ $data->Account_number }}"></portfolio-section>
                         </div>
                         <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="contact-tab">
                             <user-ratings-list :ac="{{ $data->Account_number }}"></user-ratings-list>
@@ -181,7 +265,7 @@
                                     حساب عميل
 
                                 @else
-                                مقاول ذاتي
+                                    مقاول ذاتي
                                 @endif
                             </span>
                         </div>
@@ -214,7 +298,7 @@
                         </div>
                         <div class="col mb-3" align="right">
                             <span class="card-info-text">
-                                {{$data->DealsDone}}
+                                {{ $data->DealsDone }}
                             </span>
                         </div>
                         @if ($data->cityName != null && $data->cityName != '')
@@ -270,6 +354,6 @@
     </div>
 
 
- 
+
 
 @stop

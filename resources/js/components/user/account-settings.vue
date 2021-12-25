@@ -488,7 +488,6 @@ export default {
               text: "يرجى التحقق من المدخلات",
               color: "danger",
               position: "top-right",
-              fixed: true,
               icon: "warning",
             });
           }

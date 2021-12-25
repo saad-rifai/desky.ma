@@ -172,7 +172,6 @@ export default {
               title: "فشل تسجيل الدخول ",
               text: "البريد الالكتروني أو كلمة السر التي أدخلت غير متطابقة",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           }else{
@@ -181,13 +180,12 @@ export default {
               title: "فشل تسجيل الدخول ",
               text: "يرجى التحقق من المدخلات",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           }
 
           this.HideLoadingInDiv();
-          window.grecaptcha.reset();
+         // window.grecaptcha.reset();
         });
     },
   },

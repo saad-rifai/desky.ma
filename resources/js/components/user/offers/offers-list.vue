@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="page-load"></div>
         <new-message :to="NewMessageTo"></new-message>
 
         <edit-offer :oid="oid"></edit-offer>
@@ -28,7 +29,7 @@
             dir="rtl"
         >
             <div
-                class="modal-dialog modal-dialog-centered modal-lg vs-con-loading__container"
+                class="modal-dialog modal-dialog-centered modal-lg vs-con-loading__container" id="hire-modal-load"
             >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1059,6 +1060,18 @@ export default {
         };
     },
     methods: {
+PageLoad: function () {
+   
+      this.$vs.loading({
+        container: "#page-load",
+        scale: 0.6,
+        type: "point",
+        color: "#f96a0c",
+      });
+    },
+    HidePageload: function () {
+      this.$vs.loading.close("#page-load > .con-vs-loading");
+    },
         CheckIfAllowedToEdit() {
             let data = new FormData();
             data.append("OID", this.oid);
@@ -1076,6 +1089,7 @@ export default {
                 });
         },
         AcceptOffer() {
+            this.PageLoad();
             let data = new FormData();
             data.append("OID", this.oid);
             data.append("userid", this.userid);
@@ -1087,23 +1101,32 @@ export default {
                         title: "تمت العملية بنجاح",
                         text: "لقد قمت بتوظيف مقاول ذاتي لتنفيذ طلبك.",
                         color: "success",
-                        fixed: true,
                         icon: "check"
                     });
                     $("#close-modal-btn-4587").click();
                     if (this.status == 1) {
                         $("#openUpdateOrderStatusModal").click();
                     }
+                    this.HidePageload();
                 })
                 .catch(error => {
+                    if (error.response.status == 403) {
+                    this.$vs.notify({
+                        title: "فشلة العملية",
+                        text: error.response.data.error,
+                        color: "danger",
+                        icon: "check"
+                    });
+                    }else{
                     this.$vs.notify({
                         title: "فشلة العملية",
                         text:
                             "حدث خطأ ما أثناء محاولة تنفيذ طلبك يرجى اعادة المحاولة.",
                         color: "danger",
-                        fixed: true,
                         icon: "check"
                     });
+                    }
+                    this.HidePageload();
                 });
         },
         OrderNextStatu() {

@@ -38,26 +38,28 @@
         <div class="row" dir="rtl" align="right">
             <div class="col-lg-8">
                 @auth
-                    @switch($data->status)
-                        @case(0)
-                            <div class="alert alert-warning" role="alert">
-                                طلب قيد المراجعة حاليا, ستتوصل باشعار عند الانتهاء من معالجة طلبك.
-                            </div>
-                        @break
-                        @case(4)
-                            <div class="alert alert-warning" role="alert">
-                                طلب العروض هذا مغلق لانتهاء مدة نشره. مازال بإمكانك مراجعة العروض المقدمة والتواصل مع المقاوليين.
+                @if ($data->Account_number == Auth::user()->Account_number)
+                @switch($data->status)
+                @case(0)
+                    <div class="alert alert-warning" role="alert">
+                        طلب قيد المراجعة حاليا, ستتوصل باشعار عند الانتهاء من معالجة طلبك.
+                    </div>
+                @break
+                @case(4)
+                    <div class="alert alert-warning" role="alert">
+                        طلب العروض هذا مغلق لانتهاء مدة نشره. مازال بإمكانك مراجعة العروض المقدمة والتواصل مع المقاوليين.
 
-                            </div>
-                        @break
-                        @case(5)
-                            <div class="alert alert-warning" role="alert">
-                                {{ $data->message }}
-                            </div>
-                        @break
-                        @default
+                    </div>
+                @break
+                @case(5)
+                    <div class="alert alert-warning" role="alert">
+                        {{ $data->message }}
+                    </div>
+                @break
+                @default
 
-                    @endswitch
+            @endswitch
+                @endif
                 @endauth
 
             </div>

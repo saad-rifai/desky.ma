@@ -4,7 +4,7 @@
             <div
                 class="col p-0 position-relative vs-con-loading__container"
                 style="
-    height: 559px;
+    height: 600px;
 "
             >
                 <button

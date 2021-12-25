@@ -148,15 +148,7 @@
                 </div>
             </div>
 
-            <div class="show-more-section text-center mt-5">
-                <a href="/orders?ref=dashboard"><button
-                    style="margin-right: 0 !important"
-                    type="button"
-                    class="btn btn-primary btn-sm text-center"
-                >
-                    مشاهدة المزيد
-                </button></a>
-            </div>
+
         </div>
     </div>
 </template>

@@ -1,11 +1,7 @@
 @extends('layout.master')
 @section('title', 'لوحة التحكم')
 @section('content')
-@if (isset($_GET['newTicket']) && $_GET['newTicket'] == true)
-<div class="info-banner bg-success">
-    <h1 class="info-banner-text">تم انشاء تذكرتك بنجاح سوف تتلقى رداََ في الساعات المقبلة</h1>
-</div>
-@endif
+
 
 <div class="container" id="app">
 
@@ -15,16 +11,18 @@
                 <div class="row">
                     <div class="col-auto">
                         <div class="avatar-large-box-article">
-                            <img src="{{ asset(request()->Avatar) }}" alt="{{Auth::user()->frist_name .' '. Auth::user()->last_name}} - avatar">
+                            <a href="{{asset('/@'.Auth::user()->username)}}">   <img src="{{ asset(request()->Avatar) }}" alt="{{Auth::user()->frist_name .' '. Auth::user()->last_name}} - avatar"></a>
                         </div>
                     </div>
                     <div class="col-auto mt-2">
                         <div class="user-name-box-article">
                             <span>مرحبا بك ! </span>
                             <br>
+                          <a href="{{asset('/@'.Auth::user()->username)}}"> 
                             <h4>
                                {{ucfirst(Auth::user()->frist_name) .' '. ucfirst(Auth::user()->last_name)}}
                             </h4>
+                        </a>
                         </div>
                     </div>
                 </div>
@@ -173,8 +171,19 @@
 
 
                     <div class="box-left mb-5 card p-4">
-                       <a href="{{asset('orders?ref=dashboard')}}"> <h1 class="card-title mb-4 mt-2" style="font-size: 16px">  أحدث طلبات العروض</h1></a>
-            <last-orders-box></last-orders-box>
+                        <div class="row row-cols-1">
+                            <div class="col position-relative">
+                                <a href="{{asset('orders?ref=dashboard')}}"> <h1 class="card-title mb-4 mt-2" style="font-size: 16px">  أحدث طلبات العروض</h1></a>
+                                <a href="{{asset('orders?ref=dashboard')}}" class="card-link position-absolute top-0 end-0 mt-1 me-3">
+                                    المزيد
+                                </a>
+                            </div>
+                            <div class="col position-relative">
+                                <last-orders-box></last-orders-box>
+                            </div>
+                        </div>
+
+            
     
                 </div>
 
@@ -182,9 +191,18 @@
             </div>
             <div class="col-sm col-lg-4 mb-3">
                 <div class="card p-3">
+                    <div class="row row-cols-1">
+                        <div class="col position-relative">
+                            <a href="{{asset('/messages?ref=dashboard')}}"> <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> الرسائل</h1></a>
+                            <a href="{{asset('/messages?ref=dashboard')}}" class="card-link position-absolute top-0 end-0 mt-1 me-3">
+                                المزيد
+                            </a>
+                        </div>
+                        <div class="col">
+                            <last-messages-box :max="5" account_number="{{Auth::user()->Account_number}}"></last-messages-box>
 
-                <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> الرسائل</h1>
-                <last-messages-box :max="5" account_number="{{Auth::user()->Account_number}}"></last-messages-box>
+                        </div>
+                    </div>
       
                 </div>
             </div>

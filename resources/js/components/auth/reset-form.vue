@@ -133,7 +133,6 @@ export default {
               title: "فشل التحقق ",
               text: "البريد الالكتروني أو اسم المستخدم غير متطابق",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           }else if (error.response.status == 403) {
@@ -152,7 +151,6 @@ export default {
               title: "فشل التحقق ",
               text: "يرجى التحقق من المدخلات",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           }

@@ -202,8 +202,7 @@ foreach ($webinfos as $webinfo);
         aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl" data-toggle="tooltip"
-                    title="هذه المنصة لازالت قيد التطوير والتحسين">
+                <a class="navbar-brand beta" href="{{ asset('/') }}" dir="rtl">
 
                     <img class="logo-web " src="{{ asset('/img/brand/logo-web.png') }}" alt="logo brand desky">
                 </a>
@@ -270,6 +269,17 @@ foreach ($webinfos as $webinfo);
         </div>
     </div>
     <div class="page-wrapper-desky">
+        @if (isset($_GET['newTicket']) && $_GET['newTicket'] == true)
+        <div class="info-banner bg-success">
+            <h1 class="info-banner-text">تم انشاء تذكرتك بنجاح سوف تتلقى رداََ في الساعات المقبلة</h1>
+        </div>
+        @endif
 
+        @if (Auth::check() && Auth::user()->email_verified_at == null)
+        <div class="info-banner bg-warning">
+            <h1 class="info-banner-text">لقد ارسلنا لك رسالة تأكيد البريد الالكتروني يرجى الحقق من بريدك</h1>
+        </div>
+        @endif
+   
         @yield('content')
     </div>

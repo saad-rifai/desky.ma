@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\FilesToRemove;
 use App\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 
 class UserAccountController extends Controller
 {
@@ -65,15 +64,18 @@ class UserAccountController extends Controller
     }
     public function UpdateProfile(Request $request)
     {
+        if(isset($request->username)){
+            $request->username  = Str::lower($request->username);
+        }
         $this->validate($request, [
-            'username' => 'required|min:6|max:25|regex:/^[a-z0-9][a-z0-9_.]*[a-z0-9]$/',
+            'username' => 'required|min:6|max:25|regex:/^[a-z0-9][a-z0-9_.-]*[a-z0-9]$/',
             'description' => 'nullable|min:15|max:700|string',
             'type' => 'required|integer|max:2|min:1',
         ], $message = [
             'required' => 'هذا الحقل مطلوب *',
             'username.min' => 'يجب أن يتكون اسم المستخدم من 6 حروف على الأقل *',
             'username.max' => 'اسم المستخدم أطول من اللازم الحد الأقصى 15 حرف *',
-            'username.regex' => 'يرجى ادخال اسم مستخدم صالح يسمح فقط بالحروف والأرقام وهذه الرموز (._-) *',
+            'username.regex' => 'يرجى ادخال اسم مستخدم صالح يسمح فقط بالحروف اللاتينية والأرقام وهذه الرموز (._-) *',
             'required' => 'هذا الحقل مطلوب *',
             'description.min' => 'يرجى ادخال وصف كافي 25 حرف على الأقل *',
             'description.max' => 'الوصف اللذي ادخلته أطول من اللازم الحد الأقصى 500 حرف *',

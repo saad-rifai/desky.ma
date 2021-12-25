@@ -543,9 +543,9 @@ export default {
             axios
                 .post("/ajax/user/request/verification", data, config)
                 .then(response => {
-                    this.HideLoadingInDiv();
                     this.errors = new Errors();
-                    this.RequestStatus = true;
+                    this.CheckRequest();
+
                     this.$vs.notify({
                         title: "تم ارسال طلبك !",
                         text:
@@ -554,6 +554,8 @@ export default {
                         position: "top-right",
                         icon: "warning"
                     });
+                    this.HideLoadingInDiv();
+
                 })
                 .catch(error => {
                     this.HideLoadingInDiv();

@@ -128,7 +128,7 @@ export default {
     UpdateProfile: function () {
       this.openLoadingInDiv();
       let data = new FormData();
-      data.append("username", this.username);
+      data.append("username", this.username.toLowerCase());
       data.append("type", this.type);
       if (this.description == null) {
         data.append("description", "");
@@ -169,7 +169,6 @@ export default {
               color: "danger",
               position: "top-right",
 
-              fixed: true,
               icon: "warning",
             });
           }

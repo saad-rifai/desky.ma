@@ -86,7 +86,7 @@ h1.user-name {
 .bg-brand-h150 {
     height: 150px;
     width: 100%;
-    background-color: #f96a0c;
+    background-image: linear-gradient(to top right, #f85d12, #f9ad1c);
 }
 .progress-bar-file {
     margin-top: 15px;
@@ -207,11 +207,24 @@ span.user-rating-stars {
 .avatar-large-box-article img {
     width: 100%;
 }
+.user-name-box-article h4:hover {
+    color: #f96a0c;
+}
+.avatar-large-box-article img:hover {
+    opacity: 0.8;
+}
+.avatar-user-large {
+    background-color: white;
+}
+.avatar-user-large img:hover {
+    opacity: 0.8;
+}
 .user-name-box-article h4 {
     font-size: 17px;
     font-weight: 400;
     margin-right: -15px;
     line-height: 1.9;
+    color: #212529;
 }
 .body-box-article {
     display: -webkit-box;
@@ -858,8 +871,7 @@ button.login-opt.google {
 }
 h1.form-head-title {
     font-size: 25px;
-    color: #282828;
-    font-family: 'Noto Naskh Arabic';
+    color: #404040;
     font-weight: 700;
 }
 p.form-head-text {
@@ -1196,7 +1208,7 @@ label.form-label {
 h3.pg-info-title {
     font-size: 25px;
     font-weight: 400;
-    color: #363636;
+    color: #f96a0c;
     margin-bottom: 10px;
 }
 .mt_n_15 {
