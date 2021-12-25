@@ -1,38 +1,24 @@
 <template>
   <div>
-<div v-if="EMailSent" dir="rtl" class="alert alert-success" role="alert">
-    تم ارسالة رسالة اعادة تعيين كلمة المرور الى بريدك الالكتروني <span dir="ltr">{{email}}</span>، يرجى اتباع التعليمات لاستعادة كلمة المرور الخاصة بك.
-</div>
 
 
-    <form v-else @submit.prevent="login">
+
+    <form @submit.prevent="login">
       <div class="mb-3" id="loadform">
-        <label class="form-label">البريد الالكتروني أو الاسم المستخدم</label>
+        <label class="form-label">رمز التحقق OTP</label>
         <input
           type="text"
           class="form-control"
-          name="username"
-          v-model="username"
-          v-bind:class="{ 'is-invalid': errors.errors.username }"
+          name="otp"
+          v-model="otp"
+          v-bind:class="{ 'is-invalid': errors.errors.otp }"
         />
-        <div class="invalid-feedback" v-if="errors.errors.username">
-          {{ errors.errors.username[0] }}
+        <div class="invalid-feedback" v-if="errors.errors.otp">
+          {{ errors.errors.otp[0] }}
         </div>
       </div>
 
-      <div class="mb-3 mt-5 position-relative">
-        <vue-recaptcha
-          sitekey="6Lcs2N4cAAAAAK7Du9RE38xp5_h3Qos_sQJzwnMd"
-          :loadRecaptchaScript="true"
-        ></vue-recaptcha>
-        <div
-          class="invalid-feedback"
-          style="display: block !important"
-          v-if="errors.errors.g_recaptcha_response"
-        >
-          {{ errors.errors.g_recaptcha_response[0] }}
-        </div>
-      </div>
+
 
       <div class="mt-5">
         <button
@@ -41,7 +27,7 @@
           class="btn btn-primary w-100"
           id="btn_submit"
         >
-          اعادة تعيين
+        تحقق
         </button>
       </div>
     </form>
@@ -61,7 +47,6 @@ class Errors {
     this.errors = errors.errors;
   }
 }
-import VueRecaptcha from "vue-recaptcha";
 
 export default {
   props: ["csrf"],
@@ -69,13 +54,14 @@ export default {
   data() {
     return {
       errors: new Errors(),
-      username: "",
+      otp: "",
       csrf_token: this.csrf,
       apiresponse: "",
       error401: false,
       PasswordShow: false,
       EMailSent: false,
-      email: ""
+      email: "",
+    
     };
   },
   methods: {
@@ -97,21 +83,15 @@ export default {
     login: function () {
       this.openLoadingInDiv();
       let data = new FormData();
-      data.append("username", this.username);
+      data.append("username", this.otp);
       data.append("csrf_token", this.csrf_token);
-      data.append("g_recaptcha_response", $("#g-recaptcha-response").val());
       axios
-        .post("ajax/reset/user/password", data)
+        .post("/admin/auth/check/otp", data)
         .then((response) => {
           this.errors = new Errors();
-          this.apiresponse = response;
-          this.email = response.data.email;
-          this.EMailSent = true;
           this.$vs.notify({
-            title: "تم الارسال",
-            text: "تم ارسال رسالة اعادة تعيين كلمة المرور الى بريدك الالكتروني ",
+            text: "تم التحقق بنجاح",
             color: "success",
-            fixed: true,
             icon: "check",
           });
           // window.location.reload();
@@ -124,25 +104,22 @@ export default {
               title: "فشل التحقق",
               text: "حصل خطأ ما في النظام, يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           } else if (error.response.status == 401) {
             this.errors.record(error.response.data);
             this.$vs.notify({
               title: "فشل التحقق ",
-              text: "البريد الالكتروني أو اسم المستخدم غير متطابق",
+              text: "رمز OTP خاطئ",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           }else if (error.response.status == 403) {
             this.errors.record(error.response.data);
             this.$vs.notify({
               title: "غير مسموح ",
-              text: "لقد تجاوزت الحد المسموح به لاعادة تعيين كلمة المرور يرجى المحاولة لاحقا بعد 3 ساعات",
+              text: error.response.data.error,
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           } 
@@ -152,16 +129,14 @@ export default {
               title: "فشل التحقق ",
               text: "يرجى التحقق من المدخلات",
               color: "danger",
-              fixed: true,
               icon: "warning",
             });
           }
 
           this.HideLoadingInDiv();
-          window.grecaptcha.reset();
         });
     },
   },
-  components: { VueRecaptcha },
 };
+
 </script>

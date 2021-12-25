@@ -18,7 +18,7 @@ class CeckIfUserOnline
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            $expireat = Carbon::now()->addMinutes(3);
+            $expireat = Carbon::now()->addMinutes(1);
             Cache::put('user-online-'.auth::user()->Account_number, true, $expireat);
         }
         return $next($request);

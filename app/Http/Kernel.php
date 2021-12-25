@@ -38,7 +38,16 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\CeckIfUserOnline::class,
         ],
-
+        'admin' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\CeckIfUserOnline::class,
+        ],
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -53,6 +62,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'AdminAuth' => \App\Http\Middleware\admin\AdminAuth::class,
+        'needotp' => \App\Http\Middleware\admin\needotp::class,
         'request_ae_account' => \App\Http\Middleware\RequestAeAccount::class,
         'request_verification' => \App\Http\Middleware\RequestVerification::class,
         'verified_account' => \App\Http\Middleware\verified_account::class,

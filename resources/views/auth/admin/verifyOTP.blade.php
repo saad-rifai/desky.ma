@@ -1,5 +1,6 @@
 @extends('auth.layouts.layout')
 @section('title', 'رمز التحقق OTP')
+<script src="{{ asset('js/admin.js') }}" defer></script>
 
 @section('content')
 <div class="page-load" id="page-load"></div>
@@ -15,8 +16,8 @@
     <div class="card p-3 mt-3 mb-5 mx-auto" style="max-width: 500px" dir="rtl">
         <div class="content-form p-3 pt-1">
 
-            <div id="app">
-                <reset-form :csrf="'{{csrf_token()}}'"></reset-form>
+            <div id="admin">
+                <opt-check :csrf="'{{csrf_token()}}'"></opt-check>
 
             </div>
        

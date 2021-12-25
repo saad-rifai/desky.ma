@@ -16,9 +16,11 @@ class SendOTP extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $content;
+
+    public function __construct($content)
     {
-        //
+        $this->content = $content;
     }
 
     /**
@@ -28,6 +30,6 @@ class SendOTP extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject("رمز التحقق OTP")->markdown('emails.admin.SendOTP')->with('content',$this->content);
     }
 }

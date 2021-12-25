@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Cookie;
 |
 */
 
-Route::get('api/OAuth/register/google/call', 'Auth\RegisterController@RequesGoogle')->name('google_register');
-Route::get('/backend/google/callback', 'Auth\RegisterController@handleProviderCallback__Google');
+//Route::get('api/OAuth/register/google/call', 'Auth\RegisterController@RequesGoogle')->name('google_register');
+//Route::get('/backend/google/callback', 'Auth\RegisterController@handleProviderCallback__Google');
 
 Route::get('GeoLocationData', 'GeoLocationController@index');
-Route::get('api/OAuth/register/facebook/call', 'Auth\RegisterController@RequesFacebook')->name('facebook_register');
-Route::get('/backend/facebook/callback', 'Auth\RegisterController@handleProviderCallback__Facebook');
+//Route::get('api/OAuth/register/facebook/call', 'Auth\RegisterController@RequesFacebook')->name('facebook_register');
+//Route::get('/backend/facebook/callback', 'Auth\RegisterController@handleProviderCallback__Facebook');
 
 Route::prefix('ajax')->group(function () {
     Route::post('new/user', 'Auth\RegisterController@RegisterUser');

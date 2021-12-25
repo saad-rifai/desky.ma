@@ -11,7 +11,7 @@ class NewOffer extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
+    /** 
      * Create a new message instance.
      *
      * @return void

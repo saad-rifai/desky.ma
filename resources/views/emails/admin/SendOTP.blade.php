@@ -43,17 +43,17 @@
                 <span class="bold-text" style="
                     font-weight: 600;
                 ">
-                    مرحبا !
+                    مرحبا {{$content["fullname"]}} !
                 </span>
                 <br>
                 <br>
 
-                رمز التحقق الخاص بك هو: {{$content['OTP']}}
+                رمز التحقق الخاص بك هو: {{$content['otptoken']}}
                 <br>
                 <br>
                 معلومات الجهاز:
                 <br>
-                عنوان الجهاز: {{$content['IP']}}
+                عنوان الجهاز: {{$content['ip_adress']}}
                 <br>
                 تاريخ الطلب: {{date("Y-m-d H:i:s")}}
                 <br>
