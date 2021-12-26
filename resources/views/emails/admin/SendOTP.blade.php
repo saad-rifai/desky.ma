@@ -48,7 +48,7 @@
                 <br>
                 <br>
 
-                رمز التحقق الخاص بك هو: {{$content['otptoken']}}
+                رمز التحقق الخاص بك هو: <strong>{{$content['otptoken']}}</strong>
                 <br>
                 <br>
                 معلومات الجهاز:
@@ -60,7 +60,7 @@
                 <br>
             </p>
 
-            {{asset('/')}}
+     
             <br>
             <br>
             <p dir="rtl" style="  color: #262626; text-align: right !important;

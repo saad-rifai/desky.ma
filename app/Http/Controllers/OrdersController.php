@@ -354,13 +354,16 @@ class OrdersController extends Controller
                                         }
                                     }
                                     //dd($fileAtSystem);
-                                    if (count($fileAtSystem) > 0) {
+                                    if ($fileAtSystem != null && count($fileAtSystem) > 0) {
                                         foreach ($fileAtSystem as $fileItem) {
-                                            $fileItem = json_decode($fileItem, true);
+                                            if($fileItem != null){
+                                                $fileItem = json_decode($fileItem, true);
 
-                                            if (count($fileItem) > 0) {
-                                                array_push($fullfilesUrl, $fileItem[0]);
+                                                if (count($fileItem) > 0) {
+                                                    array_push($fullfilesUrl, $fileItem[0]);
+                                                }
                                             }
+        
                                         }
                                     }
 

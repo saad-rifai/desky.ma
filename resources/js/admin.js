@@ -7,7 +7,7 @@
 
 
 require('./bootstrap');
- 
+
 
 window.Vue = require('vue');
 import Vuesax from 'vuesax';
@@ -23,8 +23,12 @@ Vue.use(Vuesax, {
   // options here
 })
 
+
+
 //opt-check
-Vue.component('opt-check', require('./components/auth/admin/opt-check.vue').default);
+Vue.component('otp-check', require('./components/auth/admin/otp-check.vue').default);
+Vue.component('table-orders-pending-review', require('./components/auth/admin/dashboard/orders/table-orders-pending-review.vue').default);
+Vue.component('review-order-modal', require('./components/auth/admin/dashboard/orders/review-order-modal.vue').default);
 
 
 

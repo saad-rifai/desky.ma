@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\admin\AdminUsers;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,6 +42,10 @@ class User extends Authenticatable
     ];
     public static function isOnline($Account_number){
         return Cache::has('user-online-'.$Account_number);
+    }
+    public function AdminInfo(){
+        return $this->hasOne(AdminUsers::class, 'Account_number');
+
     }
     public function AeAccount(){
         return $this->hasOne(AeAccount::class, 'Account_number');

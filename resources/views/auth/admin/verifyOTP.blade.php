@@ -17,8 +17,7 @@
         <div class="content-form p-3 pt-1">
 
             <div id="admin">
-                <opt-check :csrf="'{{csrf_token()}}'"></opt-check>
-
+                <otp-check :csrf="'{{csrf_token()}}'" captchaimg="{{ captcha_img() }}"></otp-check>
             </div>
        
         </div>
@@ -27,7 +26,7 @@
     </div>
     <div class="text-center p-3 mt-3 mb-5 mx-auto" style="max-width: 750px" dir="rtl">
         <div class="content-form p-3 mx-auto" >
-            <span class="text-center font-Naskh"> تذكرت كلمة المرور ؟ <a href="{{ asset('login') }}">سجل الدخول</a></span>
+            <span class="text-center font-Naskh"> <a href="{{ asset('login') }}">اعادة الارسال</a></span>
         </div>
     </div>
 </div>

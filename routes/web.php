@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::get('GeoLocationData', 'GeoLocationController@index');
 //Route::get('/backend/facebook/callback', 'Auth\RegisterController@handleProviderCallback__Facebook');
 
 Route::prefix('ajax')->group(function () {
+    ///ajax/security/get/captcha/image
+    Route::post('security/get/captcha/image', 'WebController@refreshCaptcha');
     Route::post('new/user', 'Auth\RegisterController@RegisterUser');
     Route::post('login/user', 'Auth\LoginController@LoginUser');
     Route::post('reset/user/password', 'Auth\ResetPasswordController@ResetPassword');
@@ -139,7 +142,8 @@ Route::prefix('ajax')->group(function () {
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
 Route::get('/try', function () {
-    //return view('emails.HelpCenter.NewTicketCreated');
+    //dd(Cookie::get("admin_token"),Crypt::decryptString(Cookie::get("admin_token")));
+  
 });
 
 /** 

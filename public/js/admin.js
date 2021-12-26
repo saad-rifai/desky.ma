@@ -5070,9 +5070,309 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/opt-check.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json");
+var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json", 1);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["orderinfos"],
+  data: function data() {
+    return {
+      citiesJson: _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__
+      /*   order_title: this.orderinfos.title,
+      order_description: this.orderinfos.description*/
+
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json");
+var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json", 1);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      citiesJson: _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__,
+      serverResponse: [],
+      OrdersData: [],
+      Pages: 0,
+      current_page: 1,
+      OrdersNumber: 0,
+      OrderSelected: [],
+      modalOpen: false
+    };
+  },
+  methods: {
+    openLoadingInDiv: function openLoadingInDiv() {
+      this.$vs.loading({
+        container: "#card_load",
+        scale: 0.6,
+        color: "#f96a0c"
+      });
+    },
+    HideLoadingInDiv: function HideLoadingInDiv() {
+      this.$vs.loading.close("#card_load > .con-vs-loading");
+    },
+    NextPage: function NextPage(page) {
+      this.openLoadingInDiv();
+      this.current_page = page;
+      this.getData();
+    },
+    refresh: function refresh() {
+      this.openLoadingInDiv();
+      this.getData();
+    },
+    getData: function getData() {
+      var _this = this;
+
+      //this.openLoadingInDiv();
+      axios.get('/admin/ajax/orders/pending/get?page=' + this.current_page).then(function (response) {
+        _this.serverResponse = response.data.data;
+        _this.OrdersNumber = response.data.CountPendingOrders;
+        _this.OrdersData = response.data.data.data;
+        _this.Pages = _this.serverResponse.last_page;
+
+        _this.HideLoadingInDiv();
+
+        $("[data-toggle=tooltip]").tooltip();
+      })["catch"](function (error) {
+        _this.HideLoadingInDiv();
+
+        _this.$vs.notify({
+          title: "Failed to fetch data",
+          text: "Reload the page or contact the technical department",
+          color: "danger",
+          fixed: true,
+          icon: "warning"
+        });
+      });
+    }
+  },
+  created: function created() {
+    this.getData();
+  },
+  mounted: function mounted() {
+    this.$vs.loading({
+      container: "#card_load",
+      scale: 0.6,
+      color: "#f96a0c"
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/otp-check.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/opt-check.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/otp-check.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -5085,6 +5385,28 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5145,7 +5467,7 @@ var Errors = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["csrf"],
+  props: ["csrf", "captchaimg"],
   data: function data() {
     return {
       errors: new Errors(),
@@ -5155,7 +5477,8 @@ var Errors = /*#__PURE__*/function () {
       error401: false,
       PasswordShow: false,
       EMailSent: false,
-      email: ""
+      email: "",
+      captchacode: ""
     };
   },
   methods: {
@@ -5176,7 +5499,8 @@ var Errors = /*#__PURE__*/function () {
 
       this.openLoadingInDiv();
       var data = new FormData();
-      data.append("username", this.otp);
+      data.append("otp", this.otp);
+      data.append("captcha", this.captchacode);
       data.append("csrf_token", this.csrf_token);
       axios.post("/admin/auth/check/otp", data).then(function (response) {
         _this.errors = new Errors();
@@ -5185,11 +5509,13 @@ var Errors = /*#__PURE__*/function () {
           text: "تم التحقق بنجاح",
           color: "success",
           icon: "check"
-        }); // window.location.reload();
+        }); //window.location.replace('/admin');
 
 
         _this.HideLoadingInDiv();
       })["catch"](function (error) {
+        _this.refreshCaptcha();
+
         if (error.response.status == 500) {
           _this.errors.record(error.response.data);
 
@@ -5229,6 +5555,19 @@ var Errors = /*#__PURE__*/function () {
         }
 
         _this.HideLoadingInDiv();
+      });
+    },
+    refreshCaptcha: function refreshCaptcha() {
+      var _this2 = this;
+
+      axios.post('/ajax/security/get/captcha/image').then(function (response) {
+        _this2.captchaimg = response.data.captcha;
+      })["catch"](function (error) {
+        _this2.$vs.notify({
+          text: "فشل محاولة تحديث الكابتشا يرجى اعادة المحاولة",
+          color: "danger",
+          icon: "warning"
+        });
       });
     }
   }
@@ -63838,9 +64177,640 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/opt-check.vue?vue&type=template&id=2fd03cdc&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=template&id=3e1bbf68&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=template&id=3e1bbf68& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade ",
+        attrs: {
+          id: "review_order_modal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myLargeModalLabel",
+          "aria-hidden": "false"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalLongTitle" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Review Order #" +
+                      _vm._s(_vm.orderinfos.OID) +
+                      "\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(0)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("h5", { staticClass: "card-title" }, [_vm._v("Order Owner")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3" }, [
+                _c(
+                  "div",
+                  { staticClass: "row row-cols-2 align-orderinfoss-center" },
+                  [
+                    _c("div", { staticClass: "col-auto mr-2" }, [
+                      _c("div", { staticClass: "sm-avatar" }, [
+                        _vm.orderinfos.user.avatar &&
+                        _vm.orderinfos.user.avatar != null
+                          ? _c("img", {
+                              attrs: { src: _vm.orderinfos.user.avatar }
+                            })
+                          : _c("img", {
+                              attrs: { src: "/img/icons/avatar.png" }
+                            })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "#",
+                            "data-placement": "top",
+                            "data-toggle": "tooltip",
+                            title: "User account preview"
+                          }
+                        },
+                        [
+                          _c("p", { staticClass: "fs-5 fw-normal pb-0 mb-0" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.orderinfos.user_fullname) +
+                                "\n                                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            { staticClass: "fs-6 text-muted pb-0 mb-0" },
+                            [
+                              _vm._v(
+                                "\n                                        @" +
+                                  _vm._s(_vm.orderinfos.user.username) +
+                                  "\n                                    "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr", { staticClass: "my-4" }),
+              _vm._v(" "),
+              _c("h5", { staticClass: "card-title" }, [_vm._v("Order Infos")]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "col w-100 mb-3" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.orderinfos.title,
+                      expression: "orderinfos.title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { dir: "auto", type: "text" },
+                  domProps: { value: _vm.orderinfos.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.orderinfos, "title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col w-100 mb-3" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.orderinfos.description,
+                      expression: "orderinfos.description"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { dir: "auto", name: "text" },
+                  domProps: { value: _vm.orderinfos.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.orderinfos,
+                        "description",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row p-3" }, [
+                _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
+                  _c("strong", [_vm._v("Date created:")]),
+                  _vm._v(" " + _vm._s(_vm.orderinfos.date))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
+                  _c("strong", [_vm._v("Sector, Activity:")]),
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.orderinfos.sector_name) +
+                      ",  " +
+                      _vm._s(_vm.orderinfos.activite_name)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
+                  _c("strong", [_vm._v("Country, City:")]),
+                  _vm._v(" "),
+                  _vm.orderinfos.place && _vm.orderinfos.place != "remotely"
+                    ? _c("span", [
+                        _vm._v(
+                          "Morocco, " +
+                            _vm._s(_vm.citiesJson[_vm.orderinfos.place].ville)
+                        )
+                      ])
+                    : _c("span", [_vm._v("Remotely")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
+                  _c("strong", [_vm._v("Budget:")]),
+                  _vm._v(" " + _vm._s(_vm.orderinfos.budget) + " MAD")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
+                  _c("strong", [_vm._v("Time:")]),
+                  _vm._v(" " + _vm._s(_vm.orderinfos.time))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-6 col-xl-6 mb-3" },
+                  [
+                    _c("strong", [_vm._v("Keywords: ")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.orderinfos.keywords, function(item, index) {
+                      return _c(
+                        "span",
+                        {
+                          key: index,
+                          staticClass: " mr-2 badge badge-pill badge-secondary"
+                        },
+                        [_vm._v(_vm._s(item))]
+                      )
+                    }),
+                    _vm.orderinfos.keywords == null ||
+                    _vm.orderinfos.keywords == undefined
+                      ? _c("span", [_vm._v("undefined")])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v("Attached files")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "review-files-list" }, [
+                _c(
+                  "ul",
+                  { staticClass: "list-group list-group-flush" },
+                  [
+                    _vm._l(_vm.orderinfos.files, function(file, index) {
+                      return _c(
+                        "li",
+                        { key: index, staticClass: "list-group-item" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: file.file_url, target: "_blank" }
+                            },
+                            [_vm._v(_vm._s(file.filename))]
+                          )
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm.orderinfos.files == null ||
+                    _vm.orderinfos.files.length < 1
+                      ? _c("li", [_vm._v("No files found")])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "alert alert-warning", attrs: { role: "alert" } },
+      [
+        _vm._v(
+          "\n                      Please note: The data should not be corrected except for unintentional errors or in good faith. If the user violates the rules of the platform or its affiliates, the request must be rejected or permanently deleted.\n                      "
+        ),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(
+          "\n                      Attention : Les données ne doivent pas être corrigées, sauf erreur involontaire ou de bonne foi. Si l'utilisateur enfreint les règles de la plateforme ou de ses affiliés, la demande doit être rejetée ou supprimée définitivement.\n                      "
+        ),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("p", { attrs: { align: "right", dir: "rtl" } }, [
+          _vm._v(
+            "\n                                                    يرجى الانتباه: لا يجب تصحيح المعطيات الى في الاخطاء الغير المقصودة أو عن حسن نية في حال خالف المستخدم قواعد المنصة أو الشركات التابعة لها يجب رفض أو حذق الطلب نهائياََ\n\n                      "
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("\n                        Close\n                    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("\n                        Save changes\n                    ")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=template&id=41b4f198&":
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=template&id=41b4f198& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.modalOpen
+        ? _c("review-order-modal", { attrs: { orderinfos: _vm.OrderSelected } })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v("Orders Pending Review (" + _vm._s(_vm.OrdersNumber) + ") "),
+        _c("span", { staticClass: "icon-btn", on: { click: _vm.refresh } }, [
+          _c("i", { staticClass: "fas fa-sync" })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("table", { staticClass: "mb-0 table" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.OrdersData, function(item, index) {
+            return _c("tr", { key: index }, [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(item.OID))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "div",
+                  { staticClass: "row row-cols-2 align-items-center" },
+                  [
+                    _c("div", { staticClass: "col col-lg-3" }, [
+                      _c("div", { staticClass: "sm-avatar" }, [
+                        item.user.avatar && item.user.avatar != null
+                          ? _c("img", { attrs: { src: item.user.avatar } })
+                          : _c("img", {
+                              attrs: { src: "/img/icons/avatar.png" }
+                            })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "#",
+                            "data-placement": "top",
+                            "data-toggle": "tooltip",
+                            title: "User account preview"
+                          }
+                        },
+                        [
+                          _c("p", { staticClass: "fs-5 fw-normal pb-0 mb-0" }, [
+                            _vm._v(_vm._s(item.user_fullname))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            { staticClass: "fs-6 text-muted pb-0 mb-0" },
+                            [_vm._v("@" + _vm._s(item.user.username))]
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  staticClass: "max-w-200",
+                  attrs: { dir: "auto", align: "center" }
+                },
+                [_vm._v(_vm._s(item.title))]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  staticClass: "max-w-200",
+                  attrs: { align: "center", dir: "auto" }
+                },
+                [
+                  _c("strong", [_vm._v(_vm._s(item.sector_name))]),
+                  _vm._v(", " + _vm._s(item.activite_name) + " ")
+                ]
+              ),
+              _vm._v(" "),
+              _c("td", [
+                item.place && item.place != "remotely"
+                  ? _c("span", [
+                      _vm._v(
+                        "Morocco, " + _vm._s(_vm.citiesJson[item.place].ville)
+                      )
+                    ])
+                  : _c("span", [_vm._v("Remotely")])
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.date))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: " btn btn-primary",
+                    attrs: {
+                      type: "button",
+                      "data-target": "#review_order_modal",
+                      "data-toggle": "modal"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.OrderSelected = item
+                        _vm.modalOpen = true
+                      }
+                    }
+                  },
+                  [_vm._v("review\n                ")]
+                ),
+                _vm._v(" "),
+                _vm._m(1, true)
+              ])
+            ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "pagination_desky mx-auto mt-5" }, [
+        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+          _c(
+            "ul",
+            { staticClass: "pagination justify-content-center" },
+            [
+              _vm.current_page > 1
+                ? _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      on: {
+                        click: function($event) {
+                          return _vm.NextPage(_vm.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._m(2)]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.Pages, function(item, index) {
+                return _c(
+                  "li",
+                  {
+                    key: index,
+                    staticClass: "page-item",
+                    class: { active: _vm.current_page == index + 1 },
+                    on: {
+                      click: function($event) {
+                        return _vm.NextPage(index + 1)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "javascript:void(0);" }
+                      },
+                      [_vm._v(_vm._s(index + 1))]
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _vm.current_page < _vm.Pages
+                ? _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      on: {
+                        click: function($event) {
+                          return _vm.NextPage(_vm.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._m(3)]
+                  )
+                : _vm._e()
+            ],
+            2
+          )
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Order Owner")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("title")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("sector, activity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Country, City")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Date")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: " btn btn-outline-primary" }, [
+      _c("i", { staticClass: "fa fa-link" }),
+      _vm._v(" preview\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "page-link",
+        attrs: { href: "javascript:void(0);", "aria-label": "Previous" }
+      },
+      [
+        _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "page-link",
+        attrs: { href: "javascript:void(0);", "aria-label": "Next" }
+      },
+      [
+        _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/otp-check.vue?vue&type=template&id=9968a7ec&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/opt-check.vue?vue&type=template&id=2fd03cdc& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/admin/otp-check.vue?vue&type=template&id=9968a7ec& ***!
   \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -63897,6 +64867,69 @@ var render = function() {
             ? _c("div", { staticClass: "invalid-feedback" }, [
                 _vm._v(
                   "\n        " + _vm._s(_vm.errors.errors.otp[0]) + "\n      "
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3", attrs: { id: "loadform" } }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("الكابتشا")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row row-cols-2" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", {
+                staticClass: "mb-2",
+                domProps: { innerHTML: _vm._s(_vm.captchaimg) }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col col-lg-3" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary btn-sm ",
+                  staticStyle: { padding: "15px 10px !important" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.refreshCaptcha.apply(null, arguments)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-redo-alt" })]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.captchacode,
+                expression: "captchacode"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": _vm.errors.errors.captcha },
+            attrs: { type: "text", name: "otp" },
+            domProps: { value: _vm.captchacode },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.captchacode = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.errors.errors.captcha
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(
+                  "\n        " +
+                    _vm._s(_vm.errors.errors.captcha[0]) +
+                    "\n      "
                 )
               ])
             : _vm._e()
@@ -92908,6 +93941,17 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./public/data/json/list-moroccan-cities.json":
+/*!****************************************************!*\
+  !*** ./public/data/json/list-moroccan-cities.json ***!
+  \****************************************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[{\"id\":\"0\",\"ville\":\"Afourar\",\"region\":\"5\"},{\"id\":\"1\",\"ville\":\"Agadir\",\"region\":\"9\"},{\"id\":\"2\",\"ville\":\"Agdz\",\"region\":\"8\"},{\"id\":\"3\",\"ville\":\"Aghbala\",\"region\":\"5\"},{\"id\":\"4\",\"ville\":\"Agni Izimmer\",\"region\":\"9\"},{\"id\":\"5\",\"ville\":\"Agourai\",\"region\":\"3\"},{\"id\":\"6\",\"ville\":\"Ahfir\",\"region\":\"2\"},{\"id\":\"7\",\"ville\":\"Ain El Aouda\",\"region\":\"4\"},{\"id\":\"8\",\"ville\":\"Ain Taoujdate\",\"region\":\"3\"},{\"id\":\"9\",\"ville\":\"Ait Daoud\",\"region\":\"7\"},{\"id\":\"10\",\"ville\":\"Ajdir\",\"region\":\"1\"},{\"id\":\"11\",\"ville\":\"Akchour\",\"region\":\"1\"},{\"id\":\"12\",\"ville\":\"Akka\",\"region\":\"9\"},{\"id\":\"13\",\"ville\":\"Aklim\",\"region\":\"2\"},{\"id\":\"14\",\"ville\":\"Aknoul\",\"region\":\"3\"},{\"id\":\"15\",\"ville\":\"Al Aroui\",\"region\":\"2\"},{\"id\":\"16\",\"ville\":\"Al Hoceïma\",\"region\":\"1\"},{\"id\":\"17\",\"ville\":\"Alnif\",\"region\":\"8\"},{\"id\":\"18\",\"ville\":\"Amalou Ighriben\",\"region\":\"5\"},{\"id\":\"19\",\"ville\":\"Amizmiz\",\"region\":\"7\"},{\"id\":\"20\",\"ville\":\"Anzi\",\"region\":\"9\"},{\"id\":\"21\",\"ville\":\"Aoufous\",\"region\":\"8\"},{\"id\":\"22\",\"ville\":\"Aoulouz\",\"region\":\"9\"},{\"id\":\"23\",\"ville\":\"Aourir\",\"region\":\"9\"},{\"id\":\"24\",\"ville\":\"Arazane\",\"region\":\"9\"},{\"id\":\"25\",\"ville\":\"Arbaoua\",\"region\":\"4\"},{\"id\":\"26\",\"ville\":\"Arfoud\",\"region\":\"8\"},{\"id\":\"27\",\"ville\":\"Assa\",\"region\":\"10\"},{\"id\":\"28\",\"ville\":\"Assahrij\",\"region\":\"7\"},{\"id\":\"29\",\"ville\":\"Assilah\",\"region\":\"1\"},{\"id\":\"30\",\"ville\":\"Awsard\",\"region\":\"12\"},{\"id\":\"31\",\"ville\":\"Azemmour\",\"region\":\"6\"},{\"id\":\"32\",\"ville\":\"Azilal\",\"region\":\"5\"},{\"id\":\"33\",\"ville\":\"Azrou\",\"region\":\"3\"},{\"id\":\"34\",\"ville\":\"Aïn Bni Mathar\",\"region\":\"2\"},{\"id\":\"35\",\"ville\":\"Aïn Cheggag\",\"region\":\"3\"},{\"id\":\"36\",\"ville\":\"Aïn Dorij\",\"region\":\"1\"},{\"id\":\"37\",\"ville\":\"Aïn Erreggada\",\"region\":\"2\"},{\"id\":\"38\",\"ville\":\"Aïn Harrouda\",\"region\":\"6\"},{\"id\":\"39\",\"ville\":\"Aïn Jemaa\",\"region\":\"3\"},{\"id\":\"40\",\"ville\":\"Aïn Karma\",\"region\":\"3\"},{\"id\":\"41\",\"ville\":\"Aïn Leuh\",\"region\":\"3\"},{\"id\":\"42\",\"ville\":\"Aït Attab\",\"region\":\"5\"},{\"id\":\"43\",\"ville\":\"Aït Baha\",\"region\":\"9\"},{\"id\":\"44\",\"ville\":\"Aït Boubidmane\",\"region\":\"3\"},{\"id\":\"45\",\"ville\":\"Aït Hichem\",\"region\":\"1\"},{\"id\":\"46\",\"ville\":\"Aït Iaâza\",\"region\":\"9\"},{\"id\":\"47\",\"ville\":\"Aït Ishaq\",\"region\":\"5\"},{\"id\":\"48\",\"ville\":\"Aït Majden\",\"region\":\"5\"},{\"id\":\"49\",\"ville\":\"Aït Melloul\",\"region\":\"9\"},{\"id\":\"50\",\"ville\":\"Aït Ourir\",\"region\":\"7\"},{\"id\":\"51\",\"ville\":\"Aït Yalla\",\"region\":\"8\"},{\"id\":\"52\",\"ville\":\"Bab Berred\",\"region\":\"1\"},{\"id\":\"53\",\"ville\":\"Bab Taza\",\"region\":\"1\"},{\"id\":\"54\",\"ville\":\"Bejaâd\",\"region\":\"5\"},{\"id\":\"55\",\"ville\":\"Ben Ahmed\",\"region\":\"6\"},{\"id\":\"56\",\"ville\":\"Ben Guerir\",\"region\":\"7\"},{\"id\":\"57\",\"ville\":\"Ben Sergao\",\"region\":\"9\"},{\"id\":\"58\",\"ville\":\"Ben Taïeb\",\"region\":\"2\"},{\"id\":\"59\",\"ville\":\"Ben Yakhlef\",\"region\":\"6\"},{\"id\":\"60\",\"ville\":\"Beni Ayat\",\"region\":\"5\"},{\"id\":\"61\",\"ville\":\"Benslimane\",\"region\":\"6\"},{\"id\":\"62\",\"ville\":\"Berkane\",\"region\":\"2\"},{\"id\":\"63\",\"ville\":\"Berrechid\",\"region\":\"6\"},{\"id\":\"64\",\"ville\":\"Bhalil\",\"region\":\"3\"},{\"id\":\"65\",\"ville\":\"Bin elouidane\",\"region\":\"5\"},{\"id\":\"66\",\"ville\":\"Biougra\",\"region\":\"9\"},{\"id\":\"67\",\"ville\":\"Bir Jdid\",\"region\":\"6\"},{\"id\":\"68\",\"ville\":\"Bni Ansar\",\"region\":\"2\"},{\"id\":\"69\",\"ville\":\"Bni Bouayach\",\"region\":\"1\"},{\"id\":\"70\",\"ville\":\"Bni Chiker\",\"region\":\"2\"},{\"id\":\"71\",\"ville\":\"Bni Drar\",\"region\":\"2\"},{\"id\":\"72\",\"ville\":\"Bni Hadifa\",\"region\":\"1\"},{\"id\":\"73\",\"ville\":\"Bni Tadjite\",\"region\":\"2\"},{\"id\":\"74\",\"ville\":\"Bouanane\",\"region\":\"2\"},{\"id\":\"75\",\"ville\":\"Bouarfa\",\"region\":\"2\"},{\"id\":\"76\",\"ville\":\"Boudnib\",\"region\":\"8\"},{\"id\":\"77\",\"ville\":\"Boufakrane\",\"region\":\"3\"},{\"id\":\"78\",\"ville\":\"Bouguedra\",\"region\":\"7\"},{\"id\":\"79\",\"ville\":\"Bouhdila\",\"region\":\"2\"},{\"id\":\"80\",\"ville\":\"Bouizakarne\",\"region\":\"10\"},{\"id\":\"81\",\"ville\":\"Boujdour\",\"region\":\"11\"},{\"id\":\"82\",\"ville\":\"Boujniba\",\"region\":\"5\"},{\"id\":\"83\",\"ville\":\"Boulanouare\",\"region\":\"5\"},{\"id\":\"84\",\"ville\":\"Boulemane\",\"region\":\"3\"},{\"id\":\"85\",\"ville\":\"Boumalne-Dadès\",\"region\":\"8\"},{\"id\":\"86\",\"ville\":\"Boumia\",\"region\":\"8\"},{\"id\":\"87\",\"ville\":\"Bouskoura\",\"region\":\"6\"},{\"id\":\"88\",\"ville\":\"Bouznika\",\"region\":\"6\"},{\"id\":\"89\",\"ville\":\"Bradia\",\"region\":\"5\"},{\"id\":\"90\",\"ville\":\"Brikcha\",\"region\":\"1\"},{\"id\":\"91\",\"ville\":\"Bzou\",\"region\":\"5\"},{\"id\":\"92\",\"ville\":\"Béni Mellal\",\"region\":\"5\"},{\"id\":\"93\",\"ville\":\"Casablanca\",\"region\":\"6\"},{\"id\":\"94\",\"ville\":\"Chefchaouen\",\"region\":\"1\"},{\"id\":\"95\",\"ville\":\"Chichaoua\",\"region\":\"7\"},{\"id\":\"96\",\"ville\":\"Dar Bni Karrich\",\"region\":\"1\"},{\"id\":\"97\",\"ville\":\"Dar Chaoui\",\"region\":\"1\"},{\"id\":\"98\",\"ville\":\"Dar El Kebdani\",\"region\":\"2\"},{\"id\":\"99\",\"ville\":\"Dar Gueddari\",\"region\":\"4\"},{\"id\":\"100\",\"ville\":\"Dar Oulad Zidouh\",\"region\":\"5\"},{\"id\":\"101\",\"ville\":\"Dcheira El Jihadia\",\"region\":\"9\"},{\"id\":\"102\",\"ville\":\"Debdou\",\"region\":\"2\"},{\"id\":\"103\",\"ville\":\"Demnate\",\"region\":\"5\"},{\"id\":\"104\",\"ville\":\"Deroua\",\"region\":\"6\"},{\"id\":\"105\",\"ville\":\"Douar Kannine\",\"region\":\"2\"},{\"id\":\"106\",\"ville\":\"Dra'a\",\"region\":\"8\"},{\"id\":\"107\",\"ville\":\"Drargua\",\"region\":\"9\"},{\"id\":\"108\",\"ville\":\"Driouch\",\"region\":\"2\"},{\"id\":\"109\",\"ville\":\"Echemmaia\",\"region\":\"7\"},{\"id\":\"110\",\"ville\":\"El Aïoun Sidi Mellouk\",\"region\":\"2\"},{\"id\":\"111\",\"ville\":\"El Borouj\",\"region\":\"6\"},{\"id\":\"112\",\"ville\":\"El Gara\",\"region\":\"6\"},{\"id\":\"113\",\"ville\":\"El Guerdane\",\"region\":\"9\"},{\"id\":\"114\",\"ville\":\"El Hajeb\",\"region\":\"3\"},{\"id\":\"115\",\"ville\":\"El Hanchane\",\"region\":\"7\"},{\"id\":\"116\",\"ville\":\"El Jadida\",\"region\":\"6\"},{\"id\":\"117\",\"ville\":\"El Kelaâ des Sraghna\",\"region\":\"7\"},{\"id\":\"118\",\"ville\":\"El Ksiba\",\"region\":\"5\"},{\"id\":\"119\",\"ville\":\"El Marsa\",\"region\":\"11\"},{\"id\":\"120\",\"ville\":\"El Menzel\",\"region\":\"3\"},{\"id\":\"121\",\"ville\":\"El Ouatia\",\"region\":\"10\"},{\"id\":\"122\",\"ville\":\"Elkbab\",\"region\":\"5\"},{\"id\":\"123\",\"ville\":\"Er-Rich\",\"region\":\"5\"},{\"id\":\"124\",\"ville\":\"Errachidia\",\"region\":\"8\"},{\"id\":\"125\",\"ville\":\"Es-Semara\",\"region\":\"11\"},{\"id\":\"126\",\"ville\":\"Essaouira\",\"region\":\"7\"},{\"id\":\"127\",\"ville\":\"Fam El Hisn\",\"region\":\"9\"},{\"id\":\"128\",\"ville\":\"Farkhana\",\"region\":\"2\"},{\"id\":\"129\",\"ville\":\"Figuig\",\"region\":\"2\"},{\"id\":\"130\",\"ville\":\"Fnideq\",\"region\":\"1\"},{\"id\":\"131\",\"ville\":\"Foum Jamaa\",\"region\":\"5\"},{\"id\":\"132\",\"ville\":\"Foum Zguid\",\"region\":\"9\"},{\"id\":\"133\",\"ville\":\"Fquih Ben Salah\",\"region\":\"5\"},{\"id\":\"134\",\"ville\":\"Fraïta\",\"region\":\"7\"},{\"id\":\"135\",\"ville\":\"Fès\",\"region\":\"3\"},{\"id\":\"136\",\"ville\":\"Gardmit\",\"region\":\"8\"},{\"id\":\"137\",\"ville\":\"Ghafsai\",\"region\":\"3\"},{\"id\":\"138\",\"ville\":\"Ghmate\",\"region\":\"7\"},{\"id\":\"139\",\"ville\":\"Goulmima\",\"region\":\"8\"},{\"id\":\"140\",\"ville\":\"Gourrama\",\"region\":\"8\"},{\"id\":\"141\",\"ville\":\"Guelmim\",\"region\":\"10\"},{\"id\":\"142\",\"ville\":\"Guercif\",\"region\":\"2\"},{\"id\":\"143\",\"ville\":\"Gueznaia\",\"region\":\"1\"},{\"id\":\"144\",\"ville\":\"Guigou\",\"region\":\"3\"},{\"id\":\"145\",\"ville\":\"Guisser\",\"region\":\"6\"},{\"id\":\"146\",\"ville\":\"Had Bouhssoussen\",\"region\":\"5\"},{\"id\":\"147\",\"ville\":\"Had Kourt\",\"region\":\"4\"},{\"id\":\"148\",\"ville\":\"Haj Kaddour\",\"region\":\"3\"},{\"id\":\"149\",\"ville\":\"Harhoura\",\"region\":\"4\"},{\"id\":\"150\",\"ville\":\"Harte Lyamine\",\"region\":\"8\"},{\"id\":\"151\",\"ville\":\"Hattane\",\"region\":\"5\"},{\"id\":\"152\",\"ville\":\"Hrara\",\"region\":\"7\"},{\"id\":\"153\",\"ville\":\"Ida Ougnidif\",\"region\":\"9\"},{\"id\":\"154\",\"ville\":\"Ifrane\",\"region\":\"3\"},{\"id\":\"155\",\"ville\":\"Ifri\",\"region\":\"8\"},{\"id\":\"156\",\"ville\":\"Igdamen\",\"region\":\"9\"},{\"id\":\"157\",\"ville\":\"Ighil n'Oumgoun\",\"region\":\"8\"},{\"id\":\"158\",\"ville\":\"Ighoud\",\"region\":\"7\"},{\"id\":\"159\",\"ville\":\"Ighounane\",\"region\":\"8\"},{\"id\":\"160\",\"ville\":\"Ihddaden\",\"region\":\"2\"},{\"id\":\"161\",\"ville\":\"Imassine\",\"region\":\"8\"},{\"id\":\"162\",\"ville\":\"Imintanoute\",\"region\":\"7\"},{\"id\":\"163\",\"ville\":\"Imouzzer Kandar\",\"region\":\"3\"},{\"id\":\"164\",\"ville\":\"Imouzzer Marmoucha\",\"region\":\"3\"},{\"id\":\"165\",\"ville\":\"Imzouren\",\"region\":\"1\"},{\"id\":\"166\",\"ville\":\"Inahnahen\",\"region\":\"1\"},{\"id\":\"167\",\"ville\":\"Inezgane\",\"region\":\"9\"},{\"id\":\"168\",\"ville\":\"Irherm\",\"region\":\"9\"},{\"id\":\"169\",\"ville\":\"Issaguen (Ketama)\",\"region\":\"1\"},{\"id\":\"170\",\"ville\":\"Itzer\",\"region\":\"8\"},{\"id\":\"171\",\"ville\":\"Jamâat Shaim\",\"region\":\"7\"},{\"id\":\"172\",\"ville\":\"Jaâdar\",\"region\":\"2\"},{\"id\":\"173\",\"ville\":\"Jebha\",\"region\":\"1\"},{\"id\":\"174\",\"ville\":\"Jerada\",\"region\":\"2\"},{\"id\":\"175\",\"ville\":\"Jorf\",\"region\":\"8\"},{\"id\":\"176\",\"ville\":\"Jorf El Melha\",\"region\":\"4\"},{\"id\":\"177\",\"ville\":\"Jorf Lasfar\",\"region\":\"6\"},{\"id\":\"178\",\"ville\":\"Karia\",\"region\":\"3\"},{\"id\":\"179\",\"ville\":\"Karia (El Jadida)\",\"region\":\"6\"},{\"id\":\"180\",\"ville\":\"Karia Ba Mohamed\",\"region\":\"3\"},{\"id\":\"181\",\"ville\":\"Kariat Arekmane\",\"region\":\"2\"},{\"id\":\"182\",\"ville\":\"Kasba Tadla\",\"region\":\"5\"},{\"id\":\"183\",\"ville\":\"Kassita\",\"region\":\"2\"},{\"id\":\"184\",\"ville\":\"Kattara\",\"region\":\"7\"},{\"id\":\"185\",\"ville\":\"Kehf Nsour\",\"region\":\"5\"},{\"id\":\"186\",\"ville\":\"Kelaat-M'Gouna\",\"region\":\"8\"},{\"id\":\"187\",\"ville\":\"Kerouna\",\"region\":\"2\"},{\"id\":\"188\",\"ville\":\"Kerrouchen\",\"region\":\"5\"},{\"id\":\"189\",\"ville\":\"Khemis Zemamra\",\"region\":\"6\"},{\"id\":\"190\",\"ville\":\"Khenichet\",\"region\":\"4\"},{\"id\":\"191\",\"ville\":\"Khouribga\",\"region\":\"5\"},{\"id\":\"192\",\"ville\":\"Khémis Sahel\",\"region\":\"1\"},{\"id\":\"193\",\"ville\":\"Khémisset\",\"region\":\"4\"},{\"id\":\"194\",\"ville\":\"Khénifra\",\"region\":\"5\"},{\"id\":\"195\",\"ville\":\"Ksar El Kébir\",\"region\":\"1\"},{\"id\":\"196\",\"ville\":\"Kénitra\",\"region\":\"4\"},{\"id\":\"197\",\"ville\":\"Laaounate\",\"region\":\"6\"},{\"id\":\"198\",\"ville\":\"Laayoune\",\"region\":\"11\"},{\"id\":\"199\",\"ville\":\"Lakhsas\",\"region\":\"9\"},{\"id\":\"200\",\"ville\":\"Lakhsass\",\"region\":\"9\"},{\"id\":\"201\",\"ville\":\"Lalla Mimouna\",\"region\":\"4\"},{\"id\":\"202\",\"ville\":\"Lalla Takerkoust\",\"region\":\"7\"},{\"id\":\"203\",\"ville\":\"Larache\",\"region\":\"1\"},{\"id\":\"204\",\"ville\":\"Laâtamna\",\"region\":\"2\"},{\"id\":\"205\",\"ville\":\"Loudaya\",\"region\":\"7\"},{\"id\":\"206\",\"ville\":\"Loulad\",\"region\":\"6\"},{\"id\":\"207\",\"ville\":\"Lqliâa\",\"region\":\"9\"},{\"id\":\"208\",\"ville\":\"Lâattaouia\",\"region\":\"7\"},{\"id\":\"209\",\"ville\":\"M'diq\",\"region\":\"1\"},{\"id\":\"210\",\"ville\":\"M'haya\",\"region\":\"3\"},{\"id\":\"211\",\"ville\":\"M'rirt\",\"region\":\"5\"},{\"id\":\"212\",\"ville\":\"M'semrir\",\"region\":\"8\"},{\"id\":\"213\",\"ville\":\"Madagh\",\"region\":\"2\"},{\"id\":\"214\",\"ville\":\"Marrakech\",\"region\":\"7\"},{\"id\":\"215\",\"ville\":\"Martil\",\"region\":\"1\"},{\"id\":\"216\",\"ville\":\"Massa (Maroc)\",\"region\":\"9\"},{\"id\":\"217\",\"ville\":\"Mechra Bel Ksiri\",\"region\":\"4\"},{\"id\":\"218\",\"ville\":\"Megousse\",\"region\":\"9\"},{\"id\":\"219\",\"ville\":\"Mehdia\",\"region\":\"4\"},{\"id\":\"220\",\"ville\":\"Meknès\",\"region\":\"3\"},{\"id\":\"221\",\"ville\":\"Midar\",\"region\":\"2\"},{\"id\":\"222\",\"ville\":\"Midelt\",\"region\":\"8\"},{\"id\":\"223\",\"ville\":\"Missour\",\"region\":\"3\"},{\"id\":\"224\",\"ville\":\"Mohammadia\",\"region\":\"6\"},{\"id\":\"225\",\"ville\":\"Moqrisset\",\"region\":\"1\"},{\"id\":\"226\",\"ville\":\"Moulay Abdallah\",\"region\":\"6\"},{\"id\":\"227\",\"ville\":\"Moulay Ali Cherif\",\"region\":\"8\"},{\"id\":\"228\",\"ville\":\"Moulay Bouazza\",\"region\":\"5\"},{\"id\":\"229\",\"ville\":\"Moulay Bousselham\",\"region\":\"4\"},{\"id\":\"230\",\"ville\":\"Moulay Brahim\",\"region\":\"7\"},{\"id\":\"231\",\"ville\":\"Moulay Idriss Zerhoun\",\"region\":\"3\"},{\"id\":\"232\",\"ville\":\"Moulay Yaâcoub\",\"region\":\"3\"},{\"id\":\"233\",\"ville\":\"Moussaoua\",\"region\":\"3\"},{\"id\":\"234\",\"ville\":\"MyAliCherif\",\"region\":\"8\"},{\"id\":\"235\",\"ville\":\"Mzouda\",\"region\":\"7\"},{\"id\":\"236\",\"ville\":\"Médiouna\",\"region\":\"6\"},{\"id\":\"237\",\"ville\":\"N'Zalat Bni Amar\",\"region\":\"3\"},{\"id\":\"238\",\"ville\":\"Nador\",\"region\":\"2\"},{\"id\":\"239\",\"ville\":\"Naima\",\"region\":\"2\"},{\"id\":\"240\",\"ville\":\"Oualidia\",\"region\":\"6\"},{\"id\":\"241\",\"ville\":\"Ouaouizeght\",\"region\":\"5\"},{\"id\":\"242\",\"ville\":\"Ouaoumana\",\"region\":\"5\"},{\"id\":\"243\",\"ville\":\"Ouarzazate\",\"region\":\"8\"},{\"id\":\"244\",\"ville\":\"Ouazzane\",\"region\":\"1\"},{\"id\":\"245\",\"ville\":\"Oued Amlil\",\"region\":\"3\"},{\"id\":\"246\",\"ville\":\"Oued Heimer\",\"region\":\"2\"},{\"id\":\"247\",\"ville\":\"Oued Ifrane\",\"region\":\"3\"},{\"id\":\"248\",\"ville\":\"Oued Laou\",\"region\":\"1\"},{\"id\":\"249\",\"ville\":\"Oued Rmel\",\"region\":\"1\"},{\"id\":\"250\",\"ville\":\"Oued Zem\",\"region\":\"5\"},{\"id\":\"251\",\"ville\":\"Oued-Eddahab\",\"region\":\"12\"},{\"id\":\"252\",\"ville\":\"Oujda\",\"region\":\"2\"},{\"id\":\"253\",\"ville\":\"Oulad Abbou\",\"region\":\"6\"},{\"id\":\"254\",\"ville\":\"Oulad Amrane\",\"region\":\"6\"},{\"id\":\"255\",\"ville\":\"Oulad Ayad\",\"region\":\"5\"},{\"id\":\"256\",\"ville\":\"Oulad Berhil\",\"region\":\"9\"},{\"id\":\"257\",\"ville\":\"Oulad Frej\",\"region\":\"6\"},{\"id\":\"258\",\"ville\":\"Oulad Ghadbane\",\"region\":\"6\"},{\"id\":\"259\",\"ville\":\"Oulad H'Riz Sahel\",\"region\":\"6\"},{\"id\":\"260\",\"ville\":\"Oulad M'Barek\",\"region\":\"5\"},{\"id\":\"261\",\"ville\":\"Oulad M'rah\",\"region\":\"6\"},{\"id\":\"262\",\"ville\":\"Oulad Saïd\",\"region\":\"6\"},{\"id\":\"263\",\"ville\":\"Oulad Sidi Ben Daoud\",\"region\":\"6\"},{\"id\":\"264\",\"ville\":\"Oulad Teïma\",\"region\":\"9\"},{\"id\":\"265\",\"ville\":\"Oulad Yaich\",\"region\":\"5\"},{\"id\":\"266\",\"ville\":\"Oulad Zbair\",\"region\":\"3\"},{\"id\":\"267\",\"ville\":\"Ouled Tayeb\",\"region\":\"3\"},{\"id\":\"268\",\"ville\":\"Oulmès\",\"region\":\"4\"},{\"id\":\"269\",\"ville\":\"Ounagha\",\"region\":\"7\"},{\"id\":\"270\",\"ville\":\"Outat El Haj\",\"region\":\"3\"},{\"id\":\"271\",\"ville\":\"Point Cires\",\"region\":\"1\"},{\"id\":\"272\",\"ville\":\"Rabat\",\"region\":\"4\"},{\"id\":\"273\",\"ville\":\"Ras El Aïn\",\"region\":\"6\"},{\"id\":\"274\",\"ville\":\"Ras El Ma\",\"region\":\"2\"},{\"id\":\"275\",\"ville\":\"Ribate El Kheir\",\"region\":\"3\"},{\"id\":\"276\",\"ville\":\"Rissani\",\"region\":\"8\"},{\"id\":\"277\",\"ville\":\"Rommani\",\"region\":\"4\"},{\"id\":\"278\",\"ville\":\"Sabaa Aiyoun\",\"region\":\"3\"},{\"id\":\"279\",\"ville\":\"Safi\",\"region\":\"7\"},{\"id\":\"280\",\"ville\":\"Salé\",\"region\":\"4\"},{\"id\":\"281\",\"ville\":\"Sarghine\",\"region\":\"8\"},{\"id\":\"282\",\"ville\":\"Saïdia\",\"region\":\"2\"},{\"id\":\"283\",\"ville\":\"Sebt El Maârif\",\"region\":\"6\"},{\"id\":\"284\",\"ville\":\"Sebt Gzoula\",\"region\":\"7\"},{\"id\":\"285\",\"ville\":\"Sebt Jahjouh\",\"region\":\"3\"},{\"id\":\"286\",\"ville\":\"Selouane\",\"region\":\"2\"},{\"id\":\"287\",\"ville\":\"Settat\",\"region\":\"6\"},{\"id\":\"288\",\"ville\":\"Sid L'Mokhtar\",\"region\":\"7\"},{\"id\":\"289\",\"ville\":\"Sid Zouin\",\"region\":\"7\"},{\"id\":\"290\",\"ville\":\"Sidi Abdallah Ghiat\",\"region\":\"7\"},{\"id\":\"291\",\"ville\":\"Sidi Addi\",\"region\":\"3\"},{\"id\":\"292\",\"ville\":\"Sidi Ahmed\",\"region\":\"7\"},{\"id\":\"293\",\"ville\":\"Sidi Ali Ban Hamdouche\",\"region\":\"6\"},{\"id\":\"294\",\"ville\":\"Sidi Allal El Bahraoui\",\"region\":\"4\"},{\"id\":\"295\",\"ville\":\"Sidi Allal Tazi\",\"region\":\"4\"},{\"id\":\"296\",\"ville\":\"Sidi Bennour\",\"region\":\"6\"},{\"id\":\"297\",\"ville\":\"Sidi Bou Othmane\",\"region\":\"7\"},{\"id\":\"298\",\"ville\":\"Sidi Boubker\",\"region\":\"2\"},{\"id\":\"299\",\"ville\":\"Sidi Bouknadel\",\"region\":\"4\"},{\"id\":\"300\",\"ville\":\"Sidi Bouzid\",\"region\":\"6\"},{\"id\":\"301\",\"ville\":\"Sidi Ifni\",\"region\":\"10\"},{\"id\":\"302\",\"ville\":\"Sidi Jaber\",\"region\":\"5\"},{\"id\":\"303\",\"ville\":\"Sidi Kacem\",\"region\":\"4\"},{\"id\":\"304\",\"ville\":\"Sidi Lyamani\",\"region\":\"1\"},{\"id\":\"305\",\"ville\":\"Sidi Mohamed ben Abdallah el-Raisuni\",\"region\":\"1\"},{\"id\":\"306\",\"ville\":\"Sidi Rahhal\",\"region\":\"7\"},{\"id\":\"307\",\"ville\":\"Sidi Rahhal Chataï\",\"region\":\"6\"},{\"id\":\"308\",\"ville\":\"Sidi Slimane\",\"region\":\"4\"},{\"id\":\"309\",\"ville\":\"Sidi Slimane Echcharaa\",\"region\":\"2\"},{\"id\":\"310\",\"ville\":\"Sidi Smaïl\",\"region\":\"6\"},{\"id\":\"311\",\"ville\":\"Sidi Taibi\",\"region\":\"4\"},{\"id\":\"312\",\"ville\":\"Sidi Yahya El Gharb\",\"region\":\"4\"},{\"id\":\"313\",\"ville\":\"Skhinate\",\"region\":\"3\"},{\"id\":\"314\",\"ville\":\"Skhirate\",\"region\":\"4\"},{\"id\":\"315\",\"ville\":\"Skhour Rehamna\",\"region\":\"7\"},{\"id\":\"316\",\"ville\":\"Skoura\",\"region\":\"8\"},{\"id\":\"317\",\"ville\":\"Smimou\",\"region\":\"7\"},{\"id\":\"318\",\"ville\":\"Soualem\",\"region\":\"6\"},{\"id\":\"319\",\"ville\":\"Souk El Arbaa\",\"region\":\"4\"},{\"id\":\"320\",\"ville\":\"Souk Sebt Oulad Nemma\",\"region\":\"5\"},{\"id\":\"321\",\"ville\":\"Stehat\",\"region\":\"1\"},{\"id\":\"322\",\"ville\":\"Séfrou\",\"region\":\"3\"},{\"id\":\"323\",\"ville\":\"Tabounte\",\"region\":\"8\"},{\"id\":\"324\",\"ville\":\"Tafajight\",\"region\":\"3\"},{\"id\":\"325\",\"ville\":\"Tafetachte\",\"region\":\"7\"},{\"id\":\"326\",\"ville\":\"Tafraout\",\"region\":\"9\"},{\"id\":\"327\",\"ville\":\"Taghjijt\",\"region\":\"10\"},{\"id\":\"328\",\"ville\":\"Taghzout\",\"region\":\"1\"},{\"id\":\"329\",\"ville\":\"Tagzen\",\"region\":\"9\"},{\"id\":\"330\",\"ville\":\"Tahannaout\",\"region\":\"7\"},{\"id\":\"331\",\"ville\":\"Tahla\",\"region\":\"3\"},{\"id\":\"332\",\"ville\":\"Tala Tazegwaght\",\"region\":\"1\"},{\"id\":\"333\",\"ville\":\"Taliouine\",\"region\":\"9\"},{\"id\":\"334\",\"ville\":\"Talmest\",\"region\":\"7\"},{\"id\":\"335\",\"ville\":\"Talsint\",\"region\":\"2\"},{\"id\":\"336\",\"ville\":\"Tamallalt\",\"region\":\"7\"},{\"id\":\"337\",\"ville\":\"Tamanar\",\"region\":\"7\"},{\"id\":\"338\",\"ville\":\"Tamansourt\",\"region\":\"7\"},{\"id\":\"339\",\"ville\":\"Tamassint\",\"region\":\"1\"},{\"id\":\"340\",\"ville\":\"Tamegroute\",\"region\":\"8\"},{\"id\":\"341\",\"ville\":\"Tameslouht\",\"region\":\"7\"},{\"id\":\"342\",\"ville\":\"Tamesna\",\"region\":\"4\"},{\"id\":\"343\",\"ville\":\"Tamraght\",\"region\":\"9\"},{\"id\":\"344\",\"ville\":\"Tan-Tan\",\"region\":\"10\"},{\"id\":\"345\",\"ville\":\"Tanalt\",\"region\":\"9\"},{\"id\":\"346\",\"ville\":\"Tanger\",\"region\":\"1\"},{\"id\":\"347\",\"ville\":\"Tanoumrite Nkob Zagora\",\"region\":\"8\"},{\"id\":\"348\",\"ville\":\"Taounate\",\"region\":\"3\"},{\"id\":\"349\",\"ville\":\"Taourirt\",\"region\":\"2\"},{\"id\":\"350\",\"ville\":\"Taourirt ait zaghar\",\"region\":\"8\"},{\"id\":\"351\",\"ville\":\"Tarfaya\",\"region\":\"11\"},{\"id\":\"352\",\"ville\":\"Targuist\",\"region\":\"1\"},{\"id\":\"353\",\"ville\":\"Taroudannt\",\"region\":\"9\"},{\"id\":\"354\",\"ville\":\"Tata\",\"region\":\"9\"},{\"id\":\"355\",\"ville\":\"Taza\",\"region\":\"3\"},{\"id\":\"356\",\"ville\":\"Taïnaste\",\"region\":\"3\"},{\"id\":\"357\",\"ville\":\"Temsia\",\"region\":\"9\"},{\"id\":\"358\",\"ville\":\"Tendrara\",\"region\":\"2\"},{\"id\":\"359\",\"ville\":\"Thar Es-Souk\",\"region\":\"3\"},{\"id\":\"360\",\"ville\":\"Tichoute\",\"region\":\"8\"},{\"id\":\"361\",\"ville\":\"Tiddas\",\"region\":\"4\"},{\"id\":\"362\",\"ville\":\"Tiflet\",\"region\":\"4\"},{\"id\":\"363\",\"ville\":\"Tifnit\",\"region\":\"9\"},{\"id\":\"364\",\"ville\":\"Tighassaline\",\"region\":\"5\"},{\"id\":\"365\",\"ville\":\"Tighza\",\"region\":\"5\"},{\"id\":\"366\",\"ville\":\"Timahdite\",\"region\":\"3\"},{\"id\":\"367\",\"ville\":\"Tinejdad\",\"region\":\"8\"},{\"id\":\"368\",\"ville\":\"Tisgdal\",\"region\":\"9\"},{\"id\":\"369\",\"ville\":\"Tissa\",\"region\":\"3\"},{\"id\":\"370\",\"ville\":\"Tit Mellil\",\"region\":\"6\"},{\"id\":\"371\",\"ville\":\"Tizguite\",\"region\":\"3\"},{\"id\":\"372\",\"ville\":\"Tizi Ouasli\",\"region\":\"3\"},{\"id\":\"373\",\"ville\":\"Tiznit\",\"region\":\"9\"},{\"id\":\"374\",\"ville\":\"Tiztoutine\",\"region\":\"2\"},{\"id\":\"375\",\"ville\":\"Touarga\",\"region\":\"4\"},{\"id\":\"376\",\"ville\":\"Touima\",\"region\":\"2\"},{\"id\":\"377\",\"ville\":\"Touissit\",\"region\":\"2\"},{\"id\":\"378\",\"ville\":\"Toulal\",\"region\":\"3\"},{\"id\":\"379\",\"ville\":\"Toundoute\",\"region\":\"8\"},{\"id\":\"380\",\"ville\":\"Tounfite\",\"region\":\"8\"},{\"id\":\"381\",\"ville\":\"Témara\",\"region\":\"4\"},{\"id\":\"382\",\"ville\":\"Tétouan\",\"region\":\"1\"},{\"id\":\"383\",\"ville\":\"Youssoufia\",\"region\":\"7\"},{\"id\":\"384\",\"ville\":\"Zag\",\"region\":\"10\"},{\"id\":\"385\",\"ville\":\"Zagora\",\"region\":\"8\"},{\"id\":\"386\",\"ville\":\"Zaouia d'Ifrane\",\"region\":\"3\"},{\"id\":\"387\",\"ville\":\"Zaouïat Cheikh\",\"region\":\"5\"},{\"id\":\"388\",\"ville\":\"Zaïda\",\"region\":\"8\"},{\"id\":\"389\",\"ville\":\"Zaïo\",\"region\":\"2\"},{\"id\":\"390\",\"ville\":\"Zeghanghane\",\"region\":\"2\"},{\"id\":\"391\",\"ville\":\"Zeubelemok\",\"region\":\"7\"},{\"id\":\"392\",\"ville\":\"Zinat\",\"region\":\"1\"}]");
+
+/***/ }),
+
 /***/ "./resources/js/admin.js":
 /*!*******************************!*\
   !*** ./resources/js/admin.js ***!
@@ -92945,7 +93989,9 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.prototype.moment = moment__WEBPACK_IM
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vuesax__WEBPACK_IMPORTED_MODULE_0___default.a, {// options here
 }); //opt-check
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('opt-check', __webpack_require__(/*! ./components/auth/admin/opt-check.vue */ "./resources/js/components/auth/admin/opt-check.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('otp-check', __webpack_require__(/*! ./components/auth/admin/otp-check.vue */ "./resources/js/components/auth/admin/otp-check.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('table-orders-pending-review', __webpack_require__(/*! ./components/auth/admin/dashboard/orders/table-orders-pending-review.vue */ "./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('review-order-modal', __webpack_require__(/*! ./components/auth/admin/dashboard/orders/review-order-modal.vue */ "./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
   el: '#admin'
 });
@@ -92997,18 +94043,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/auth/admin/opt-check.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/auth/admin/opt-check.vue ***!
-  \**********************************************************/
+/***/ "./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue ***!
+  \************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _opt_check_vue_vue_type_template_id_2fd03cdc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./opt-check.vue?vue&type=template&id=2fd03cdc& */ "./resources/js/components/auth/admin/opt-check.vue?vue&type=template&id=2fd03cdc&");
-/* harmony import */ var _opt_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./opt-check.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/admin/opt-check.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _review_order_modal_vue_vue_type_template_id_3e1bbf68___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./review-order-modal.vue?vue&type=template&id=3e1bbf68& */ "./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=template&id=3e1bbf68&");
+/* harmony import */ var _review_order_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./review-order-modal.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -93017,9 +94063,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _opt_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _opt_check_vue_vue_type_template_id_2fd03cdc___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _opt_check_vue_vue_type_template_id_2fd03cdc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _review_order_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _review_order_modal_vue_vue_type_template_id_3e1bbf68___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _review_order_modal_vue_vue_type_template_id_3e1bbf68___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -93029,38 +94075,176 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/auth/admin/opt-check.vue"
+component.options.__file = "resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/auth/admin/opt-check.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_review_order_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./review-order-modal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_review_order_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=template&id=3e1bbf68&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=template&id=3e1bbf68& ***!
+  \*******************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_review_order_modal_vue_vue_type_template_id_3e1bbf68___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./review-order-modal.vue?vue&type=template&id=3e1bbf68& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/review-order-modal.vue?vue&type=template&id=3e1bbf68&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_review_order_modal_vue_vue_type_template_id_3e1bbf68___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_review_order_modal_vue_vue_type_template_id_3e1bbf68___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _table_orders_pending_review_vue_vue_type_template_id_41b4f198___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./table-orders-pending-review.vue?vue&type=template&id=41b4f198& */ "./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=template&id=41b4f198&");
+/* harmony import */ var _table_orders_pending_review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table-orders-pending-review.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _table_orders_pending_review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _table_orders_pending_review_vue_vue_type_template_id_41b4f198___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _table_orders_pending_review_vue_vue_type_template_id_41b4f198___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_table_orders_pending_review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./table-orders-pending-review.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_table_orders_pending_review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=template&id=41b4f198&":
+/*!****************************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=template&id=41b4f198& ***!
+  \****************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_table_orders_pending_review_vue_vue_type_template_id_41b4f198___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./table-orders-pending-review.vue?vue&type=template&id=41b4f198& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/dashboard/orders/table-orders-pending-review.vue?vue&type=template&id=41b4f198&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_table_orders_pending_review_vue_vue_type_template_id_41b4f198___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_table_orders_pending_review_vue_vue_type_template_id_41b4f198___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/admin/otp-check.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/auth/admin/otp-check.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _otp_check_vue_vue_type_template_id_9968a7ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./otp-check.vue?vue&type=template&id=9968a7ec& */ "./resources/js/components/auth/admin/otp-check.vue?vue&type=template&id=9968a7ec&");
+/* harmony import */ var _otp_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./otp-check.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/admin/otp-check.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _otp_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _otp_check_vue_vue_type_template_id_9968a7ec___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _otp_check_vue_vue_type_template_id_9968a7ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/admin/otp-check.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/admin/otp-check.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************!*\
-  !*** ./resources/js/components/auth/admin/opt-check.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/auth/admin/otp-check.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_opt_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./opt-check.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/opt-check.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_opt_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_otp_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./otp-check.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/otp-check.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_otp_check_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/auth/admin/opt-check.vue?vue&type=template&id=2fd03cdc&":
+/***/ "./resources/js/components/auth/admin/otp-check.vue?vue&type=template&id=9968a7ec&":
 /*!*****************************************************************************************!*\
-  !*** ./resources/js/components/auth/admin/opt-check.vue?vue&type=template&id=2fd03cdc& ***!
+  !*** ./resources/js/components/auth/admin/otp-check.vue?vue&type=template&id=9968a7ec& ***!
   \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_opt_check_vue_vue_type_template_id_2fd03cdc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./opt-check.vue?vue&type=template&id=2fd03cdc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/opt-check.vue?vue&type=template&id=2fd03cdc&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_opt_check_vue_vue_type_template_id_2fd03cdc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_otp_check_vue_vue_type_template_id_9968a7ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./otp-check.vue?vue&type=template&id=9968a7ec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/admin/otp-check.vue?vue&type=template&id=9968a7ec&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_otp_check_vue_vue_type_template_id_9968a7ec___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_opt_check_vue_vue_type_template_id_2fd03cdc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_otp_check_vue_vue_type_template_id_9968a7ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

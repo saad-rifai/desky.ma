@@ -146,7 +146,6 @@
                             role="alert"
                         ></div>
                         <div
-                            id="upload-files-form"
                             class="upload-files-form"
                             data-target="files-include"
                             @drop="dropfiles"
@@ -525,10 +524,7 @@ export default {
                         position: "top-right",
                         icon: "error"
                     });
-                } else if (
-                    this.filesSelected.length + this.data.files.length >=
-                    5
-                ) {
+                } else if (this.filesSelected != null && this.data.files != null && this.filesSelected.length + this.data.files.length >= 5) {
                     this.$vs.notify({
                         title: "مسموح فقط بي 5 صور كحد أقصى *",
                         text:
@@ -590,10 +586,7 @@ export default {
                         position: "top-right",
                         icon: "error"
                     });
-                } else if (
-                    this.filesSelected.length + this.data.files.length >=
-                    5
-                ) {
+                } else if (this.filesSelected != null && this.data.files != null && this.filesSelected.length + this.data.files.length >= 5) {
                     this.$vs.notify({
                         title: "مسموح فقط بي 5 صور كحد أقصى *",
                         text:

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Captcha;
+
 class WebController extends Controller
 {
     public function AllUsersSiteMapsList(){
@@ -221,5 +223,11 @@ class WebController extends Controller
             ];
         }
        return view('user.dashboard')->with($data);
+    }
+    public function refreshCaptcha()
+    {
+        return response()->json([
+            'captcha' => Captcha::img()
+        ]);
     }
 }

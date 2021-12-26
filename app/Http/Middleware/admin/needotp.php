@@ -26,7 +26,7 @@ class needotp
                 if(Cookie::get('admin_token')){
                     $admin_token = Cookie::get('admin_token');
                     $decrypted = Crypt::decryptString($admin_token);
-                    $stmt = AdminAuthToken::where("Account_number", Auth::user()->account_number)->where('token', $decrypted)->count();
+                    $stmt = AdminAuthToken::where("Account_number", Auth::user()->Account_number)->where('token', $decrypted)->count();
                     if($stmt < 1){
                         return $next($request);
         

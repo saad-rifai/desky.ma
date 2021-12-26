@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.4",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "mews/captcha": "^3.2",
         "stevebauman/location": "^6.2"
     },
     "require-dev": {
