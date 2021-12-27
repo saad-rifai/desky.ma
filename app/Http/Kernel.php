@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'maintenance' => \App\Http\Middleware\maintenance::class,
         'AdminAuth' => \App\Http\Middleware\admin\AdminAuth::class,
         'needotp' => \App\Http\Middleware\admin\needotp::class,
         'request_ae_account' => \App\Http\Middleware\RequestAeAccount::class,

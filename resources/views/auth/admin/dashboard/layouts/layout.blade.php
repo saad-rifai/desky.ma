@@ -183,12 +183,15 @@
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul id="Orders_Pending_Review_ul">
+                                    @if (auth::user()->permissions->view_orders_pending_review)
                                     <li>
                                         <a id="Orders_Pending_Review" href="{{asset('/admin/orders/pending')}}">
                                             <i class="pe-7s-hourglass"></i>
                                             Orders Pending Review
                                         </a>
                                     </li>
+                                    @endif
+
                                     <li>
                                         <a href="elements-dropdowns.html">
                                             <i class="metismenu-icon">

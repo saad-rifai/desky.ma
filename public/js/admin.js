@@ -5553,6 +5553,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
 
 
 
@@ -5606,6 +5607,9 @@ var Errors = /*#__PURE__*/function () {
       $("#apply_btn_28292710011").html("apply");
       this.$vs.loading.close();
     },
+    refreshTabel: function refreshTabel() {
+      this.$root.$emit('refresh_tabel'); //like this
+    },
     Apply: function Apply() {
       var _this = this;
 
@@ -5619,6 +5623,10 @@ var Errors = /*#__PURE__*/function () {
       data.append("decision", this.decision);
       data.append("reason", this.reason);
       axios.post("/admin/ajax/order/pending/new/decision", data).then(function (response) {
+        $("#cancel_btn_28292710011").click();
+
+        _this.refreshTabel();
+
         _this.errors = new Errors();
 
         _this.HideLoadingInDiv();
@@ -5857,6 +5865,11 @@ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___nam
     this.getData();
   },
   mounted: function mounted() {
+    var _this2 = this;
+
+    this.$root.$on('refresh_tabel', function () {
+      _this2.refresh();
+    });
     this.$vs.loading({
       container: "#card_load",
       scale: 0.6,
@@ -65437,7 +65450,11 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-secondary",
-                  attrs: { type: "button", "data-dismiss": "modal" },
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    id: "cancel_btn_28292710011"
+                  },
                   on: { click: _vm.ResetDecision }
                 },
                 [

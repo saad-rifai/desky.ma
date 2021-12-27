@@ -192,6 +192,7 @@ Route::group(['middleware' => ['auth', 'avatar', 'verified_account']], function 
 });
 
 Route::group(['middleware' => 'avatar'], function () {
+
     Route::get('/order/{OID}', 'OrdersController@show');
 
     Route::get('/portfolio/{id}/{title}', 'UserPortFolioController@show');

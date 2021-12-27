@@ -32,6 +32,8 @@ class AdminAuth
                         return redirect("admin/check/otp");
         
                     }else{
+                        $json_permissions = json_decode(Auth::user()->AdminInfo->permissions->permissions);
+                        Auth::user()->permissions = $json_permissions;
                         return $next($request);
                     }
                 }else{

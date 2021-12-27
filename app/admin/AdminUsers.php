@@ -11,4 +11,8 @@ class AdminUsers extends Model
     {
         return $this->belongsTo(User::class, 'Account_number');
     }
+    public function permissions()
+    {
+        return $this->belongsTo(permissions::class, 'type');
+    }
 }

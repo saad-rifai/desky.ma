@@ -404,6 +404,7 @@
                             type="button"
                             class="btn btn-secondary"
                             data-dismiss="modal"
+                            id="cancel_btn_28292710011"
                             @click="ResetDecision"
                         >
                             cancel
@@ -471,6 +472,9 @@ export default {
       $("#apply_btn_28292710011").html("apply");
       this.$vs.loading.close();
     },
+    refreshTabel: function(){
+     this.$root.$emit('refresh_tabel') //like this
+    },
         Apply(){
             this.openLoadingInDiv();
             let data = new FormData();
@@ -482,6 +486,9 @@ export default {
             data.append("decision", this.decision);
             data.append("reason", this.reason);
             axios.post("/admin/ajax/order/pending/new/decision", data).then((response) => {
+
+            $("#cancel_btn_28292710011").click();
+            this.refreshTabel();
             this.errors = new Errors();
             this.HideLoadingInDiv();
             this.$vs.notify({

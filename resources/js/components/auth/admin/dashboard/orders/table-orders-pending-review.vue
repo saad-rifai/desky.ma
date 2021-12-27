@@ -134,6 +134,9 @@ export default {
 
     },
     mounted() {
+        this.$root.$on('refresh_tabel', () => {
+            this.refresh()
+        })
         this.$vs.loading({
         container: "#card_load",
         scale: 0.6,
