@@ -6001,7 +6001,7 @@ var Errors = /*#__PURE__*/function () {
       });
     },
     HideLoadingInDiv: function HideLoadingInDiv() {
-      $("#btn_submit").html("اعادة التعيين");
+      $("#btn_submit").html("تحقق");
       this.$vs.loading.close("#loadform > .con-vs-loading");
     },
     login: function login() {
@@ -6019,8 +6019,9 @@ var Errors = /*#__PURE__*/function () {
           text: "تم التحقق بنجاح",
           color: "success",
           icon: "check"
-        }); //window.location.replace('/admin');
+        });
 
+        window.location.replace('/admin');
 
         _this.HideLoadingInDiv();
       })["catch"](function (error) {

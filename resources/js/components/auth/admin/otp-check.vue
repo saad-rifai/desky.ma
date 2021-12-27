@@ -99,7 +99,7 @@ export default {
       });
     },
     HideLoadingInDiv: function () {
-      $("#btn_submit").html("اعادة التعيين");
+      $("#btn_submit").html("تحقق");
       this.$vs.loading.close("#loadform > .con-vs-loading");
     },
 
@@ -118,7 +118,7 @@ export default {
             color: "success",
             icon: "check",
           });
-           //window.location.replace('/admin');
+           window.location.replace('/admin');
           this.HideLoadingInDiv();
         })
         .catch((error) => {
