@@ -132,7 +132,7 @@ foreach ($webinfos as $webinfo);
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
-                                جميع جميع طلبات العروض</a>
+                                جميع طلبات العروض المفتوحة</a>
                             <a class="dropdown-item"
                                 href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i
                                     class="fas fa-folder-plus"></i> نشر طلب عروض</a>
