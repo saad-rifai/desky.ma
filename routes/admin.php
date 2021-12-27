@@ -22,6 +22,7 @@ Route::group(['middleware' => ['AdminAuth']], function () {
     });
     Route::prefix("ajax")->group(function (){
         Route::get('/orders/pending/get', "Orders@PendingOrdersJson");
+        Route::post('/order/pending/new/decision', "Orders@ReviewDecision");
     });
 });
 ?>

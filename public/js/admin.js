@@ -86,6 +86,39 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./data/json/activite-ae-1.json":
+/*!**************************************!*\
+  !*** ./data/json/activite-ae-1.json ***!
+  \**************************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[\"البيع عن طريق الأنترنت\",\"البيع عن طريق المراسلة\",\"النسيج وتحضير الألياف النسيجية والغزل بطريقة تقليدية\",\"أنشطة تحويل وحفظ الأسماك والقشريات والرخويات\",\"تجارة أجهزة الاتصالات بالتقسيط\",\"تجارة أخرى بالتقسيط خارج المتاجر والأكشاك والأسواق\",\"تجارة أخرى بالتقسيط في الأكشاك والأسواق\",\"تجارة الأثاث ومعدات الإضاءة وتجهيزات منزلية أخرى بالتقسيط\",\"تجارة الأجهزة السمعية البصرية بالتقسيط\",\"تجارة الأجهزة الكهربائية المنزلية بالتقسيط\",\"تجارة الأحذية ومنتجات من الجلد بالتقسيط\",\"تجارة الأسماك والقشريات والرخويات بالتقسيط\",\"تجارة الألعاب واللعب بالتقسيط\",\"تجارة البصريات وآلات التصوير بالتقسيط\",\"تجارة الحواسيب والوحدات الملحقة والبرمجيات بالتقسيط\",\"تجارة الخبز والحلويات والسكريات بالتقسيط\",\"تجارة الخردوات والصباغة والزجاج بالتقسيط\",\"تجارة الزرابي والموكيت وأغطية الجدران والأرض بالتقسيط\",\"تجارة السلع المستعملة بالتقسيط\",\"تجارة الصحف ومنتجات من الورق بالتقسيط\",\"تجارة العطور ومواد التجميل بالتقسيط\",\"تجارة الفواكه والخضر بالتقسيط\",\"تجارة الكتب بالتقسيط\",\"تجارة اللحوم ومشتقات اللحوم بالتقسيط\",\"تجارة المشروبات بالتقسيط\",\"تجارة الملابس بالتقسيط\",\"تجارة المنتجات الغذائية بالتقسيط في الأكشاك والأسواق\",\"تجارة المنسوجات بالتقسيط\",\"تجارة المنسوجات والملابس والأحذية في الأكشاك والأسواق\",\"تجارة المواد الغذائية\",\"تجارة تسجيلات الموسيقى والفيديو بالتقسيط\",\"تجارة معدات رياضية بالتقسيط\",\"تحضير وصنع منتجات من الجلد\",\"تحويل الحبوب\",\"تحويل اللحوم والدواجن وحفظها بطريقة تقليدية\",\"تحويل وحفظ الفواكه والخضر\",\"تفكيك الحطام واسترداد النفايات المفروزة\",\"صناعات تحويلية أخرى\",\"صناعة الخبز والحلويات\",\"صناعة الفراشي والمكانس والمنافض\",\"صناعة يدوية للأحذية\",\"صناعة يدوية للزرابي\",\"صنع الأثاث\",\"صنع الأطعمة والأطباق المعدة\",\"صنع الآلات الموسيقية\",\"صنع التوابل والبهارات\",\"صنع الزيوت والدهون\",\"صنع الشكولاتة والحلويات السكرية\",\"صنع الصباغة والبرنيق والحبر والصمغ\",\"صنع العجائن الغذائية والكسكس\",\"صنع الغراء\",\"صنع المثلجات والصوربي\",\"صنع المجوهرات المقلدة ومواد مشابهة\",\"صنع الملابس\",\"صنع الملونات والصباغ\",\"صنع حرفي لمنتجات النسيج والملابس التقليدية\",\"صنع حرفي لمنتجات تقليدية من المعادن والصفائح لحوافر الدواب\",\"صنع حرفي لمنتجات متنوعة من الخشب والقصب والحلفاء\",\"صنع منتجات الألبان بما في ذلك الجبن\",\"صنع منتجات تقليدية من الطين المعد\",\"صنع منتجات خزفية ومن الطين المعد\",\"صنع منتجات متنوعة من الخشب والفلين\",\"صنع منتجات معدنية\",\"صنع مواد التنظيف\",\"صنع وتحويل عناصر للبناء\",\"صياغة وتحويل الزجاج\",\"نشر ونجر الخشب\"]");
+
+/***/ }),
+
+/***/ "./data/json/activite-ae-2.json":
+/*!**************************************!*\
+  !*** ./data/json/activite-ae-2.json ***!
+  \**************************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[\"إزالة التلوث وخدمات أخرى لتدبير النفايات\",\"أستاذ الفن المسرحي (خارج المؤسسة المدرسية)\",\"أستاذ الفنون البصرية (خارج المؤسسة المدرسية)\",\"أستاذ الفنون السمعية البصرية (خارج المؤسسة المدرسية)\",\"أستاذ الموسيقى والغناء (خارج المؤسسة المدرسية)\",\"أستاذ فن السيرك (خارج المؤسسة المدرسية)\",\"أستاذ في تصميم الرقصات (خارج المؤسسة المدرسية)\",\"أشغال إعداد المواقع\",\"أشغال التركيب\",\"أشغال الصباغة\",\"أشغال النجارة\",\"أشغال الهدم\",\"أشغال تغليف الأرضية والجدران\",\"أشغال جبسية\",\"إصلاح الأثاث والتجهيزات المنزلية\",\"إصلاح الأحذية والمصنوعات الجلدية\",\"إصلاح الأدوات الشخصية والأدوات المنزلية\",\"إصلاح الدراجات النارية\",\"إصلاح الساعات والمجوهرات\",\"إصلاح مركبات معدنية\",\"إصلاح وصيانة التجهيزات والمعدات\",\"أصناف أخرى من النقل البري للمسافرين\",\"الاستشارة في الأعمال واستشارات أخرى في التدبير\",\"الاستشارة في العلاقات العامة والاتصال\",\"الإيواء السياحي وأصناف أخرى للإيواء\",\"البحث العلمي في ميدان التكنولوجيا الحيوية\",\"البحث العلمي في ميدان العلوم الإنسانية والاجتماعية\",\"البحث العلمي في ميداني علوم الفيزياء والعلوم الطبيعية الأخرى\",\"التخزين المبرد\",\"التخزين غير المبرد\",\"الحلاقة والتجميل والعناية بالجسم\",\"الخبرة الاستشارية وإيواء المواقع الالكترونية وتطوير الأنظمة المعلوماتية\",\"المغاسل والمصابغ\",\"المقاهي والمطاعم وخدمات المطاعم الأخرى\",\"النقل عبر الأنهار\",\"النقل على متن سيارات الأجرة\",\"النقل في الحواضر والضواحي\",\"الوكالات العقارية وإدارة الأملاك العقارية\",\"أنشطة أخرى لتوفير الموارد البشرية\",\"أنشطة أخرى متصلة بصحة الإنسان\",\"أنشطة الأمن الخاص\",\"أنشطة التحقيق\",\"أنشطة التصوير الفوتوغرافي\",\"أنشطة الدعم في مجال التعليم\",\"أنشطة الدعم للعروض الحية\",\"أنشطة العمل الاجتماعي بدون إيواء الخاصة بالأطفال الصغار والمسنين وذوي الاحتياجات الخاصة\",\"أنشطة الفحص و/أو العلاج المنظمة\",\"أنشطة المراقبة والتحاليل التقنية\",\"أنشطة تأجير حقوق الملكية الفكرية وحقوق مماثلة باستثناء الأعمال الخاضعة لحقوق النشر\",\"أنشطة تتعلق بتنظيم الأسفار والسياحة\",\"أنشطة تنظيف المباني بما في ذلك المباني الصناعية\",\"أنشطة توضيب السلع\",\"أنشطة لدعم الفلاحة واستغلال الغابات وصيد الأسماك\",\"أنشطة متخصصة أخرى علمية وتقنية\",\"أنشطة متخصصة في التصميم\",\"أنشطة مرتبطة بالرياضة\",\"بهلوان،\",\"تأجير واستئجار اللوازم والآلات والمعدات\",\"تأجير واستئجار وسائل النقل\",\"تجليد الكتب وأنشطة مكملة\",\"تحرير الأنباء وخدمات المعلومات\",\"تركيب المرايا والزجاج\",\"تقني الاضاءة\",\"تقني الصوت\",\"تقني المؤثرات الخاصة\",\"جمع النفايات غير الخطرة\",\"حفر الآبار والاستبار\",\"حكواتي في الفضاءات العامة والخاصة\",\"خدمات الترحيل\",\"خدمات دعم أخرى مقدمة للمقاولات\",\"خدمات ملحقة بالنقل\",\"دراسات السوق واستطلاعات الرأي\",\"راقص\",\"رسام الكاريكاتور\",\"رواقي\",\"رئيس فرقة موسيقية\",\"سينوغراف\",\"صانع في الطبع الفني (سيريغرافيست)\",\"صيانة وإصلاح السيارات\",\"عازف موسيقي\",\"عرائسي\",\"فضاءات للمخيمات وفضاءات للقوافل أو عربات الترفيه\",\"فنان الشارع\",\"فنان الميم\",\"فنان رسام\",\"فنان في الخدع البصرية\",\"كاتب المشاهد\",\"كاتب سيناريو\",\"لاعب الارجوحة بالسيرك\",\"لاعب التوازن بالسيرك\",\"لاعب خفة بالسيرك\",\"مازج الصوت\",\"مبرمج العروض الفنية\",\"مجازف سينمائي\",\"محافظ الأستوديو\",\"محافظ الخشبة\",\"محافظ السيرك\",\"محافظ سينما\",\"مخرج تلفزي أو سينمائي\",\"مخرج عرض الهواء في السيرك\",\"مخرج مساعد (الفنون السمعية البصرية)\",\"مخرج مساعد (الفنون المسرحية)\",\"مخرج مسرحي\",\"مدون الحروف الموسيقية (النوتة)\",\"مدير الفنانين\",\"مدير التصوير\",\"مدير فني\",\"مردد\",\"مرشد سياحي\",\"مزين فني (مكياج)\",\"مساعد تقني فني\",\"مساعد منفذ الديكور\",\"مصدر الأصوات\",\"مصمم الأعمال الفنية التفاعلية\",\"مصمم الرسوم ( غرافيك)\",\"مصمم الرسوم المتحركة\",\"مصمم المناظر (الديكور )\",\"مصمم الأزياء\",\"مصمم الصورة والحركة\",\"مصمم الملابس الفنية\",\"مصمم رقصات\",\"مصمم صور متعددة الأبعاد\",\"مصمم معلوماتي للرسوم (أنفوغرافيست )\",\"مصور بالكاميرا\",\"مصور فني\",\"مغني/مؤدي\",\"مقلد\",\"مكلف بالاتصال والعلاقات العامة في المجال الفني\",\"مكلف بالأكسسوار\",\"ملبس الفنانين\",\"ملحن\",\"ممثل\",\"مناولة البضائع\",\"منتج\",\"مندوب المعارض الفنية\",\"منشط فني\",\"منشط موسيقي( ديجي)\",\"منظم الجوالات الفنية\",\"مهندس الاضاءة\",\"مهندس الصوت\",\"موزع موسيقي\",\"موضب الصوت والصورة ( مونطاج)\",\"مؤلف\",\"مؤلف درامي\",\"نحات\",\"نسخ التسجيلات\",\"نسخ وإعداد الوثائق وأنشطة أخرى مختصة في دعم المكاتب\",\"نقل البضائع عبر الطرق\",\"وسيط فني\",\"وكيل الفنان\"]");
+
+/***/ }),
+
+/***/ "./data/json/list-moroccan-cities.json":
+/*!*********************************************!*\
+  !*** ./data/json/list-moroccan-cities.json ***!
+  \*********************************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[{\"id\":\"0\",\"ville\":\"Afourar\",\"region\":\"5\"},{\"id\":\"1\",\"ville\":\"Agadir\",\"region\":\"9\"},{\"id\":\"2\",\"ville\":\"Agdz\",\"region\":\"8\"},{\"id\":\"3\",\"ville\":\"Aghbala\",\"region\":\"5\"},{\"id\":\"4\",\"ville\":\"Agni Izimmer\",\"region\":\"9\"},{\"id\":\"5\",\"ville\":\"Agourai\",\"region\":\"3\"},{\"id\":\"6\",\"ville\":\"Ahfir\",\"region\":\"2\"},{\"id\":\"7\",\"ville\":\"Ain El Aouda\",\"region\":\"4\"},{\"id\":\"8\",\"ville\":\"Ain Taoujdate\",\"region\":\"3\"},{\"id\":\"9\",\"ville\":\"Ait Daoud\",\"region\":\"7\"},{\"id\":\"10\",\"ville\":\"Ajdir\",\"region\":\"1\"},{\"id\":\"11\",\"ville\":\"Akchour\",\"region\":\"1\"},{\"id\":\"12\",\"ville\":\"Akka\",\"region\":\"9\"},{\"id\":\"13\",\"ville\":\"Aklim\",\"region\":\"2\"},{\"id\":\"14\",\"ville\":\"Aknoul\",\"region\":\"3\"},{\"id\":\"15\",\"ville\":\"Al Aroui\",\"region\":\"2\"},{\"id\":\"16\",\"ville\":\"Al Hoceïma\",\"region\":\"1\"},{\"id\":\"17\",\"ville\":\"Alnif\",\"region\":\"8\"},{\"id\":\"18\",\"ville\":\"Amalou Ighriben\",\"region\":\"5\"},{\"id\":\"19\",\"ville\":\"Amizmiz\",\"region\":\"7\"},{\"id\":\"20\",\"ville\":\"Anzi\",\"region\":\"9\"},{\"id\":\"21\",\"ville\":\"Aoufous\",\"region\":\"8\"},{\"id\":\"22\",\"ville\":\"Aoulouz\",\"region\":\"9\"},{\"id\":\"23\",\"ville\":\"Aourir\",\"region\":\"9\"},{\"id\":\"24\",\"ville\":\"Arazane\",\"region\":\"9\"},{\"id\":\"25\",\"ville\":\"Arbaoua\",\"region\":\"4\"},{\"id\":\"26\",\"ville\":\"Arfoud\",\"region\":\"8\"},{\"id\":\"27\",\"ville\":\"Assa\",\"region\":\"10\"},{\"id\":\"28\",\"ville\":\"Assahrij\",\"region\":\"7\"},{\"id\":\"29\",\"ville\":\"Assilah\",\"region\":\"1\"},{\"id\":\"30\",\"ville\":\"Awsard\",\"region\":\"12\"},{\"id\":\"31\",\"ville\":\"Azemmour\",\"region\":\"6\"},{\"id\":\"32\",\"ville\":\"Azilal\",\"region\":\"5\"},{\"id\":\"33\",\"ville\":\"Azrou\",\"region\":\"3\"},{\"id\":\"34\",\"ville\":\"Aïn Bni Mathar\",\"region\":\"2\"},{\"id\":\"35\",\"ville\":\"Aïn Cheggag\",\"region\":\"3\"},{\"id\":\"36\",\"ville\":\"Aïn Dorij\",\"region\":\"1\"},{\"id\":\"37\",\"ville\":\"Aïn Erreggada\",\"region\":\"2\"},{\"id\":\"38\",\"ville\":\"Aïn Harrouda\",\"region\":\"6\"},{\"id\":\"39\",\"ville\":\"Aïn Jemaa\",\"region\":\"3\"},{\"id\":\"40\",\"ville\":\"Aïn Karma\",\"region\":\"3\"},{\"id\":\"41\",\"ville\":\"Aïn Leuh\",\"region\":\"3\"},{\"id\":\"42\",\"ville\":\"Aït Attab\",\"region\":\"5\"},{\"id\":\"43\",\"ville\":\"Aït Baha\",\"region\":\"9\"},{\"id\":\"44\",\"ville\":\"Aït Boubidmane\",\"region\":\"3\"},{\"id\":\"45\",\"ville\":\"Aït Hichem\",\"region\":\"1\"},{\"id\":\"46\",\"ville\":\"Aït Iaâza\",\"region\":\"9\"},{\"id\":\"47\",\"ville\":\"Aït Ishaq\",\"region\":\"5\"},{\"id\":\"48\",\"ville\":\"Aït Majden\",\"region\":\"5\"},{\"id\":\"49\",\"ville\":\"Aït Melloul\",\"region\":\"9\"},{\"id\":\"50\",\"ville\":\"Aït Ourir\",\"region\":\"7\"},{\"id\":\"51\",\"ville\":\"Aït Yalla\",\"region\":\"8\"},{\"id\":\"52\",\"ville\":\"Bab Berred\",\"region\":\"1\"},{\"id\":\"53\",\"ville\":\"Bab Taza\",\"region\":\"1\"},{\"id\":\"54\",\"ville\":\"Bejaâd\",\"region\":\"5\"},{\"id\":\"55\",\"ville\":\"Ben Ahmed\",\"region\":\"6\"},{\"id\":\"56\",\"ville\":\"Ben Guerir\",\"region\":\"7\"},{\"id\":\"57\",\"ville\":\"Ben Sergao\",\"region\":\"9\"},{\"id\":\"58\",\"ville\":\"Ben Taïeb\",\"region\":\"2\"},{\"id\":\"59\",\"ville\":\"Ben Yakhlef\",\"region\":\"6\"},{\"id\":\"60\",\"ville\":\"Beni Ayat\",\"region\":\"5\"},{\"id\":\"61\",\"ville\":\"Benslimane\",\"region\":\"6\"},{\"id\":\"62\",\"ville\":\"Berkane\",\"region\":\"2\"},{\"id\":\"63\",\"ville\":\"Berrechid\",\"region\":\"6\"},{\"id\":\"64\",\"ville\":\"Bhalil\",\"region\":\"3\"},{\"id\":\"65\",\"ville\":\"Bin elouidane\",\"region\":\"5\"},{\"id\":\"66\",\"ville\":\"Biougra\",\"region\":\"9\"},{\"id\":\"67\",\"ville\":\"Bir Jdid\",\"region\":\"6\"},{\"id\":\"68\",\"ville\":\"Bni Ansar\",\"region\":\"2\"},{\"id\":\"69\",\"ville\":\"Bni Bouayach\",\"region\":\"1\"},{\"id\":\"70\",\"ville\":\"Bni Chiker\",\"region\":\"2\"},{\"id\":\"71\",\"ville\":\"Bni Drar\",\"region\":\"2\"},{\"id\":\"72\",\"ville\":\"Bni Hadifa\",\"region\":\"1\"},{\"id\":\"73\",\"ville\":\"Bni Tadjite\",\"region\":\"2\"},{\"id\":\"74\",\"ville\":\"Bouanane\",\"region\":\"2\"},{\"id\":\"75\",\"ville\":\"Bouarfa\",\"region\":\"2\"},{\"id\":\"76\",\"ville\":\"Boudnib\",\"region\":\"8\"},{\"id\":\"77\",\"ville\":\"Boufakrane\",\"region\":\"3\"},{\"id\":\"78\",\"ville\":\"Bouguedra\",\"region\":\"7\"},{\"id\":\"79\",\"ville\":\"Bouhdila\",\"region\":\"2\"},{\"id\":\"80\",\"ville\":\"Bouizakarne\",\"region\":\"10\"},{\"id\":\"81\",\"ville\":\"Boujdour\",\"region\":\"11\"},{\"id\":\"82\",\"ville\":\"Boujniba\",\"region\":\"5\"},{\"id\":\"83\",\"ville\":\"Boulanouare\",\"region\":\"5\"},{\"id\":\"84\",\"ville\":\"Boulemane\",\"region\":\"3\"},{\"id\":\"85\",\"ville\":\"Boumalne-Dadès\",\"region\":\"8\"},{\"id\":\"86\",\"ville\":\"Boumia\",\"region\":\"8\"},{\"id\":\"87\",\"ville\":\"Bouskoura\",\"region\":\"6\"},{\"id\":\"88\",\"ville\":\"Bouznika\",\"region\":\"6\"},{\"id\":\"89\",\"ville\":\"Bradia\",\"region\":\"5\"},{\"id\":\"90\",\"ville\":\"Brikcha\",\"region\":\"1\"},{\"id\":\"91\",\"ville\":\"Bzou\",\"region\":\"5\"},{\"id\":\"92\",\"ville\":\"Béni Mellal\",\"region\":\"5\"},{\"id\":\"93\",\"ville\":\"Casablanca\",\"region\":\"6\"},{\"id\":\"94\",\"ville\":\"Chefchaouen\",\"region\":\"1\"},{\"id\":\"95\",\"ville\":\"Chichaoua\",\"region\":\"7\"},{\"id\":\"96\",\"ville\":\"Dar Bni Karrich\",\"region\":\"1\"},{\"id\":\"97\",\"ville\":\"Dar Chaoui\",\"region\":\"1\"},{\"id\":\"98\",\"ville\":\"Dar El Kebdani\",\"region\":\"2\"},{\"id\":\"99\",\"ville\":\"Dar Gueddari\",\"region\":\"4\"},{\"id\":\"100\",\"ville\":\"Dar Oulad Zidouh\",\"region\":\"5\"},{\"id\":\"101\",\"ville\":\"Dcheira El Jihadia\",\"region\":\"9\"},{\"id\":\"102\",\"ville\":\"Debdou\",\"region\":\"2\"},{\"id\":\"103\",\"ville\":\"Demnate\",\"region\":\"5\"},{\"id\":\"104\",\"ville\":\"Deroua\",\"region\":\"6\"},{\"id\":\"105\",\"ville\":\"Douar Kannine\",\"region\":\"2\"},{\"id\":\"106\",\"ville\":\"Dra'a\",\"region\":\"8\"},{\"id\":\"107\",\"ville\":\"Drargua\",\"region\":\"9\"},{\"id\":\"108\",\"ville\":\"Driouch\",\"region\":\"2\"},{\"id\":\"109\",\"ville\":\"Echemmaia\",\"region\":\"7\"},{\"id\":\"110\",\"ville\":\"El Aïoun Sidi Mellouk\",\"region\":\"2\"},{\"id\":\"111\",\"ville\":\"El Borouj\",\"region\":\"6\"},{\"id\":\"112\",\"ville\":\"El Gara\",\"region\":\"6\"},{\"id\":\"113\",\"ville\":\"El Guerdane\",\"region\":\"9\"},{\"id\":\"114\",\"ville\":\"El Hajeb\",\"region\":\"3\"},{\"id\":\"115\",\"ville\":\"El Hanchane\",\"region\":\"7\"},{\"id\":\"116\",\"ville\":\"El Jadida\",\"region\":\"6\"},{\"id\":\"117\",\"ville\":\"El Kelaâ des Sraghna\",\"region\":\"7\"},{\"id\":\"118\",\"ville\":\"El Ksiba\",\"region\":\"5\"},{\"id\":\"119\",\"ville\":\"El Marsa\",\"region\":\"11\"},{\"id\":\"120\",\"ville\":\"El Menzel\",\"region\":\"3\"},{\"id\":\"121\",\"ville\":\"El Ouatia\",\"region\":\"10\"},{\"id\":\"122\",\"ville\":\"Elkbab\",\"region\":\"5\"},{\"id\":\"123\",\"ville\":\"Er-Rich\",\"region\":\"5\"},{\"id\":\"124\",\"ville\":\"Errachidia\",\"region\":\"8\"},{\"id\":\"125\",\"ville\":\"Es-Semara\",\"region\":\"11\"},{\"id\":\"126\",\"ville\":\"Essaouira\",\"region\":\"7\"},{\"id\":\"127\",\"ville\":\"Fam El Hisn\",\"region\":\"9\"},{\"id\":\"128\",\"ville\":\"Farkhana\",\"region\":\"2\"},{\"id\":\"129\",\"ville\":\"Figuig\",\"region\":\"2\"},{\"id\":\"130\",\"ville\":\"Fnideq\",\"region\":\"1\"},{\"id\":\"131\",\"ville\":\"Foum Jamaa\",\"region\":\"5\"},{\"id\":\"132\",\"ville\":\"Foum Zguid\",\"region\":\"9\"},{\"id\":\"133\",\"ville\":\"Fquih Ben Salah\",\"region\":\"5\"},{\"id\":\"134\",\"ville\":\"Fraïta\",\"region\":\"7\"},{\"id\":\"135\",\"ville\":\"Fès\",\"region\":\"3\"},{\"id\":\"136\",\"ville\":\"Gardmit\",\"region\":\"8\"},{\"id\":\"137\",\"ville\":\"Ghafsai\",\"region\":\"3\"},{\"id\":\"138\",\"ville\":\"Ghmate\",\"region\":\"7\"},{\"id\":\"139\",\"ville\":\"Goulmima\",\"region\":\"8\"},{\"id\":\"140\",\"ville\":\"Gourrama\",\"region\":\"8\"},{\"id\":\"141\",\"ville\":\"Guelmim\",\"region\":\"10\"},{\"id\":\"142\",\"ville\":\"Guercif\",\"region\":\"2\"},{\"id\":\"143\",\"ville\":\"Gueznaia\",\"region\":\"1\"},{\"id\":\"144\",\"ville\":\"Guigou\",\"region\":\"3\"},{\"id\":\"145\",\"ville\":\"Guisser\",\"region\":\"6\"},{\"id\":\"146\",\"ville\":\"Had Bouhssoussen\",\"region\":\"5\"},{\"id\":\"147\",\"ville\":\"Had Kourt\",\"region\":\"4\"},{\"id\":\"148\",\"ville\":\"Haj Kaddour\",\"region\":\"3\"},{\"id\":\"149\",\"ville\":\"Harhoura\",\"region\":\"4\"},{\"id\":\"150\",\"ville\":\"Harte Lyamine\",\"region\":\"8\"},{\"id\":\"151\",\"ville\":\"Hattane\",\"region\":\"5\"},{\"id\":\"152\",\"ville\":\"Hrara\",\"region\":\"7\"},{\"id\":\"153\",\"ville\":\"Ida Ougnidif\",\"region\":\"9\"},{\"id\":\"154\",\"ville\":\"Ifrane\",\"region\":\"3\"},{\"id\":\"155\",\"ville\":\"Ifri\",\"region\":\"8\"},{\"id\":\"156\",\"ville\":\"Igdamen\",\"region\":\"9\"},{\"id\":\"157\",\"ville\":\"Ighil n'Oumgoun\",\"region\":\"8\"},{\"id\":\"158\",\"ville\":\"Ighoud\",\"region\":\"7\"},{\"id\":\"159\",\"ville\":\"Ighounane\",\"region\":\"8\"},{\"id\":\"160\",\"ville\":\"Ihddaden\",\"region\":\"2\"},{\"id\":\"161\",\"ville\":\"Imassine\",\"region\":\"8\"},{\"id\":\"162\",\"ville\":\"Imintanoute\",\"region\":\"7\"},{\"id\":\"163\",\"ville\":\"Imouzzer Kandar\",\"region\":\"3\"},{\"id\":\"164\",\"ville\":\"Imouzzer Marmoucha\",\"region\":\"3\"},{\"id\":\"165\",\"ville\":\"Imzouren\",\"region\":\"1\"},{\"id\":\"166\",\"ville\":\"Inahnahen\",\"region\":\"1\"},{\"id\":\"167\",\"ville\":\"Inezgane\",\"region\":\"9\"},{\"id\":\"168\",\"ville\":\"Irherm\",\"region\":\"9\"},{\"id\":\"169\",\"ville\":\"Issaguen (Ketama)\",\"region\":\"1\"},{\"id\":\"170\",\"ville\":\"Itzer\",\"region\":\"8\"},{\"id\":\"171\",\"ville\":\"Jamâat Shaim\",\"region\":\"7\"},{\"id\":\"172\",\"ville\":\"Jaâdar\",\"region\":\"2\"},{\"id\":\"173\",\"ville\":\"Jebha\",\"region\":\"1\"},{\"id\":\"174\",\"ville\":\"Jerada\",\"region\":\"2\"},{\"id\":\"175\",\"ville\":\"Jorf\",\"region\":\"8\"},{\"id\":\"176\",\"ville\":\"Jorf El Melha\",\"region\":\"4\"},{\"id\":\"177\",\"ville\":\"Jorf Lasfar\",\"region\":\"6\"},{\"id\":\"178\",\"ville\":\"Karia\",\"region\":\"3\"},{\"id\":\"179\",\"ville\":\"Karia (El Jadida)\",\"region\":\"6\"},{\"id\":\"180\",\"ville\":\"Karia Ba Mohamed\",\"region\":\"3\"},{\"id\":\"181\",\"ville\":\"Kariat Arekmane\",\"region\":\"2\"},{\"id\":\"182\",\"ville\":\"Kasba Tadla\",\"region\":\"5\"},{\"id\":\"183\",\"ville\":\"Kassita\",\"region\":\"2\"},{\"id\":\"184\",\"ville\":\"Kattara\",\"region\":\"7\"},{\"id\":\"185\",\"ville\":\"Kehf Nsour\",\"region\":\"5\"},{\"id\":\"186\",\"ville\":\"Kelaat-M'Gouna\",\"region\":\"8\"},{\"id\":\"187\",\"ville\":\"Kerouna\",\"region\":\"2\"},{\"id\":\"188\",\"ville\":\"Kerrouchen\",\"region\":\"5\"},{\"id\":\"189\",\"ville\":\"Khemis Zemamra\",\"region\":\"6\"},{\"id\":\"190\",\"ville\":\"Khenichet\",\"region\":\"4\"},{\"id\":\"191\",\"ville\":\"Khouribga\",\"region\":\"5\"},{\"id\":\"192\",\"ville\":\"Khémis Sahel\",\"region\":\"1\"},{\"id\":\"193\",\"ville\":\"Khémisset\",\"region\":\"4\"},{\"id\":\"194\",\"ville\":\"Khénifra\",\"region\":\"5\"},{\"id\":\"195\",\"ville\":\"Ksar El Kébir\",\"region\":\"1\"},{\"id\":\"196\",\"ville\":\"Kénitra\",\"region\":\"4\"},{\"id\":\"197\",\"ville\":\"Laaounate\",\"region\":\"6\"},{\"id\":\"198\",\"ville\":\"Laayoune\",\"region\":\"11\"},{\"id\":\"199\",\"ville\":\"Lakhsas\",\"region\":\"9\"},{\"id\":\"200\",\"ville\":\"Lakhsass\",\"region\":\"9\"},{\"id\":\"201\",\"ville\":\"Lalla Mimouna\",\"region\":\"4\"},{\"id\":\"202\",\"ville\":\"Lalla Takerkoust\",\"region\":\"7\"},{\"id\":\"203\",\"ville\":\"Larache\",\"region\":\"1\"},{\"id\":\"204\",\"ville\":\"Laâtamna\",\"region\":\"2\"},{\"id\":\"205\",\"ville\":\"Loudaya\",\"region\":\"7\"},{\"id\":\"206\",\"ville\":\"Loulad\",\"region\":\"6\"},{\"id\":\"207\",\"ville\":\"Lqliâa\",\"region\":\"9\"},{\"id\":\"208\",\"ville\":\"Lâattaouia\",\"region\":\"7\"},{\"id\":\"209\",\"ville\":\"M'diq\",\"region\":\"1\"},{\"id\":\"210\",\"ville\":\"M'haya\",\"region\":\"3\"},{\"id\":\"211\",\"ville\":\"M'rirt\",\"region\":\"5\"},{\"id\":\"212\",\"ville\":\"M'semrir\",\"region\":\"8\"},{\"id\":\"213\",\"ville\":\"Madagh\",\"region\":\"2\"},{\"id\":\"214\",\"ville\":\"Marrakech\",\"region\":\"7\"},{\"id\":\"215\",\"ville\":\"Martil\",\"region\":\"1\"},{\"id\":\"216\",\"ville\":\"Massa (Maroc)\",\"region\":\"9\"},{\"id\":\"217\",\"ville\":\"Mechra Bel Ksiri\",\"region\":\"4\"},{\"id\":\"218\",\"ville\":\"Megousse\",\"region\":\"9\"},{\"id\":\"219\",\"ville\":\"Mehdia\",\"region\":\"4\"},{\"id\":\"220\",\"ville\":\"Meknès\",\"region\":\"3\"},{\"id\":\"221\",\"ville\":\"Midar\",\"region\":\"2\"},{\"id\":\"222\",\"ville\":\"Midelt\",\"region\":\"8\"},{\"id\":\"223\",\"ville\":\"Missour\",\"region\":\"3\"},{\"id\":\"224\",\"ville\":\"Mohammadia\",\"region\":\"6\"},{\"id\":\"225\",\"ville\":\"Moqrisset\",\"region\":\"1\"},{\"id\":\"226\",\"ville\":\"Moulay Abdallah\",\"region\":\"6\"},{\"id\":\"227\",\"ville\":\"Moulay Ali Cherif\",\"region\":\"8\"},{\"id\":\"228\",\"ville\":\"Moulay Bouazza\",\"region\":\"5\"},{\"id\":\"229\",\"ville\":\"Moulay Bousselham\",\"region\":\"4\"},{\"id\":\"230\",\"ville\":\"Moulay Brahim\",\"region\":\"7\"},{\"id\":\"231\",\"ville\":\"Moulay Idriss Zerhoun\",\"region\":\"3\"},{\"id\":\"232\",\"ville\":\"Moulay Yaâcoub\",\"region\":\"3\"},{\"id\":\"233\",\"ville\":\"Moussaoua\",\"region\":\"3\"},{\"id\":\"234\",\"ville\":\"MyAliCherif\",\"region\":\"8\"},{\"id\":\"235\",\"ville\":\"Mzouda\",\"region\":\"7\"},{\"id\":\"236\",\"ville\":\"Médiouna\",\"region\":\"6\"},{\"id\":\"237\",\"ville\":\"N'Zalat Bni Amar\",\"region\":\"3\"},{\"id\":\"238\",\"ville\":\"Nador\",\"region\":\"2\"},{\"id\":\"239\",\"ville\":\"Naima\",\"region\":\"2\"},{\"id\":\"240\",\"ville\":\"Oualidia\",\"region\":\"6\"},{\"id\":\"241\",\"ville\":\"Ouaouizeght\",\"region\":\"5\"},{\"id\":\"242\",\"ville\":\"Ouaoumana\",\"region\":\"5\"},{\"id\":\"243\",\"ville\":\"Ouarzazate\",\"region\":\"8\"},{\"id\":\"244\",\"ville\":\"Ouazzane\",\"region\":\"1\"},{\"id\":\"245\",\"ville\":\"Oued Amlil\",\"region\":\"3\"},{\"id\":\"246\",\"ville\":\"Oued Heimer\",\"region\":\"2\"},{\"id\":\"247\",\"ville\":\"Oued Ifrane\",\"region\":\"3\"},{\"id\":\"248\",\"ville\":\"Oued Laou\",\"region\":\"1\"},{\"id\":\"249\",\"ville\":\"Oued Rmel\",\"region\":\"1\"},{\"id\":\"250\",\"ville\":\"Oued Zem\",\"region\":\"5\"},{\"id\":\"251\",\"ville\":\"Oued-Eddahab\",\"region\":\"12\"},{\"id\":\"252\",\"ville\":\"Oujda\",\"region\":\"2\"},{\"id\":\"253\",\"ville\":\"Oulad Abbou\",\"region\":\"6\"},{\"id\":\"254\",\"ville\":\"Oulad Amrane\",\"region\":\"6\"},{\"id\":\"255\",\"ville\":\"Oulad Ayad\",\"region\":\"5\"},{\"id\":\"256\",\"ville\":\"Oulad Berhil\",\"region\":\"9\"},{\"id\":\"257\",\"ville\":\"Oulad Frej\",\"region\":\"6\"},{\"id\":\"258\",\"ville\":\"Oulad Ghadbane\",\"region\":\"6\"},{\"id\":\"259\",\"ville\":\"Oulad H'Riz Sahel\",\"region\":\"6\"},{\"id\":\"260\",\"ville\":\"Oulad M'Barek\",\"region\":\"5\"},{\"id\":\"261\",\"ville\":\"Oulad M'rah\",\"region\":\"6\"},{\"id\":\"262\",\"ville\":\"Oulad Saïd\",\"region\":\"6\"},{\"id\":\"263\",\"ville\":\"Oulad Sidi Ben Daoud\",\"region\":\"6\"},{\"id\":\"264\",\"ville\":\"Oulad Teïma\",\"region\":\"9\"},{\"id\":\"265\",\"ville\":\"Oulad Yaich\",\"region\":\"5\"},{\"id\":\"266\",\"ville\":\"Oulad Zbair\",\"region\":\"3\"},{\"id\":\"267\",\"ville\":\"Ouled Tayeb\",\"region\":\"3\"},{\"id\":\"268\",\"ville\":\"Oulmès\",\"region\":\"4\"},{\"id\":\"269\",\"ville\":\"Ounagha\",\"region\":\"7\"},{\"id\":\"270\",\"ville\":\"Outat El Haj\",\"region\":\"3\"},{\"id\":\"271\",\"ville\":\"Point Cires\",\"region\":\"1\"},{\"id\":\"272\",\"ville\":\"Rabat\",\"region\":\"4\"},{\"id\":\"273\",\"ville\":\"Ras El Aïn\",\"region\":\"6\"},{\"id\":\"274\",\"ville\":\"Ras El Ma\",\"region\":\"2\"},{\"id\":\"275\",\"ville\":\"Ribate El Kheir\",\"region\":\"3\"},{\"id\":\"276\",\"ville\":\"Rissani\",\"region\":\"8\"},{\"id\":\"277\",\"ville\":\"Rommani\",\"region\":\"4\"},{\"id\":\"278\",\"ville\":\"Sabaa Aiyoun\",\"region\":\"3\"},{\"id\":\"279\",\"ville\":\"Safi\",\"region\":\"7\"},{\"id\":\"280\",\"ville\":\"Salé\",\"region\":\"4\"},{\"id\":\"281\",\"ville\":\"Sarghine\",\"region\":\"8\"},{\"id\":\"282\",\"ville\":\"Saïdia\",\"region\":\"2\"},{\"id\":\"283\",\"ville\":\"Sebt El Maârif\",\"region\":\"6\"},{\"id\":\"284\",\"ville\":\"Sebt Gzoula\",\"region\":\"7\"},{\"id\":\"285\",\"ville\":\"Sebt Jahjouh\",\"region\":\"3\"},{\"id\":\"286\",\"ville\":\"Selouane\",\"region\":\"2\"},{\"id\":\"287\",\"ville\":\"Settat\",\"region\":\"6\"},{\"id\":\"288\",\"ville\":\"Sid L'Mokhtar\",\"region\":\"7\"},{\"id\":\"289\",\"ville\":\"Sid Zouin\",\"region\":\"7\"},{\"id\":\"290\",\"ville\":\"Sidi Abdallah Ghiat\",\"region\":\"7\"},{\"id\":\"291\",\"ville\":\"Sidi Addi\",\"region\":\"3\"},{\"id\":\"292\",\"ville\":\"Sidi Ahmed\",\"region\":\"7\"},{\"id\":\"293\",\"ville\":\"Sidi Ali Ban Hamdouche\",\"region\":\"6\"},{\"id\":\"294\",\"ville\":\"Sidi Allal El Bahraoui\",\"region\":\"4\"},{\"id\":\"295\",\"ville\":\"Sidi Allal Tazi\",\"region\":\"4\"},{\"id\":\"296\",\"ville\":\"Sidi Bennour\",\"region\":\"6\"},{\"id\":\"297\",\"ville\":\"Sidi Bou Othmane\",\"region\":\"7\"},{\"id\":\"298\",\"ville\":\"Sidi Boubker\",\"region\":\"2\"},{\"id\":\"299\",\"ville\":\"Sidi Bouknadel\",\"region\":\"4\"},{\"id\":\"300\",\"ville\":\"Sidi Bouzid\",\"region\":\"6\"},{\"id\":\"301\",\"ville\":\"Sidi Ifni\",\"region\":\"10\"},{\"id\":\"302\",\"ville\":\"Sidi Jaber\",\"region\":\"5\"},{\"id\":\"303\",\"ville\":\"Sidi Kacem\",\"region\":\"4\"},{\"id\":\"304\",\"ville\":\"Sidi Lyamani\",\"region\":\"1\"},{\"id\":\"305\",\"ville\":\"Sidi Mohamed ben Abdallah el-Raisuni\",\"region\":\"1\"},{\"id\":\"306\",\"ville\":\"Sidi Rahhal\",\"region\":\"7\"},{\"id\":\"307\",\"ville\":\"Sidi Rahhal Chataï\",\"region\":\"6\"},{\"id\":\"308\",\"ville\":\"Sidi Slimane\",\"region\":\"4\"},{\"id\":\"309\",\"ville\":\"Sidi Slimane Echcharaa\",\"region\":\"2\"},{\"id\":\"310\",\"ville\":\"Sidi Smaïl\",\"region\":\"6\"},{\"id\":\"311\",\"ville\":\"Sidi Taibi\",\"region\":\"4\"},{\"id\":\"312\",\"ville\":\"Sidi Yahya El Gharb\",\"region\":\"4\"},{\"id\":\"313\",\"ville\":\"Skhinate\",\"region\":\"3\"},{\"id\":\"314\",\"ville\":\"Skhirate\",\"region\":\"4\"},{\"id\":\"315\",\"ville\":\"Skhour Rehamna\",\"region\":\"7\"},{\"id\":\"316\",\"ville\":\"Skoura\",\"region\":\"8\"},{\"id\":\"317\",\"ville\":\"Smimou\",\"region\":\"7\"},{\"id\":\"318\",\"ville\":\"Soualem\",\"region\":\"6\"},{\"id\":\"319\",\"ville\":\"Souk El Arbaa\",\"region\":\"4\"},{\"id\":\"320\",\"ville\":\"Souk Sebt Oulad Nemma\",\"region\":\"5\"},{\"id\":\"321\",\"ville\":\"Stehat\",\"region\":\"1\"},{\"id\":\"322\",\"ville\":\"Séfrou\",\"region\":\"3\"},{\"id\":\"323\",\"ville\":\"Tabounte\",\"region\":\"8\"},{\"id\":\"324\",\"ville\":\"Tafajight\",\"region\":\"3\"},{\"id\":\"325\",\"ville\":\"Tafetachte\",\"region\":\"7\"},{\"id\":\"326\",\"ville\":\"Tafraout\",\"region\":\"9\"},{\"id\":\"327\",\"ville\":\"Taghjijt\",\"region\":\"10\"},{\"id\":\"328\",\"ville\":\"Taghzout\",\"region\":\"1\"},{\"id\":\"329\",\"ville\":\"Tagzen\",\"region\":\"9\"},{\"id\":\"330\",\"ville\":\"Tahannaout\",\"region\":\"7\"},{\"id\":\"331\",\"ville\":\"Tahla\",\"region\":\"3\"},{\"id\":\"332\",\"ville\":\"Tala Tazegwaght\",\"region\":\"1\"},{\"id\":\"333\",\"ville\":\"Taliouine\",\"region\":\"9\"},{\"id\":\"334\",\"ville\":\"Talmest\",\"region\":\"7\"},{\"id\":\"335\",\"ville\":\"Talsint\",\"region\":\"2\"},{\"id\":\"336\",\"ville\":\"Tamallalt\",\"region\":\"7\"},{\"id\":\"337\",\"ville\":\"Tamanar\",\"region\":\"7\"},{\"id\":\"338\",\"ville\":\"Tamansourt\",\"region\":\"7\"},{\"id\":\"339\",\"ville\":\"Tamassint\",\"region\":\"1\"},{\"id\":\"340\",\"ville\":\"Tamegroute\",\"region\":\"8\"},{\"id\":\"341\",\"ville\":\"Tameslouht\",\"region\":\"7\"},{\"id\":\"342\",\"ville\":\"Tamesna\",\"region\":\"4\"},{\"id\":\"343\",\"ville\":\"Tamraght\",\"region\":\"9\"},{\"id\":\"344\",\"ville\":\"Tan-Tan\",\"region\":\"10\"},{\"id\":\"345\",\"ville\":\"Tanalt\",\"region\":\"9\"},{\"id\":\"346\",\"ville\":\"Tanger\",\"region\":\"1\"},{\"id\":\"347\",\"ville\":\"Tanoumrite Nkob Zagora\",\"region\":\"8\"},{\"id\":\"348\",\"ville\":\"Taounate\",\"region\":\"3\"},{\"id\":\"349\",\"ville\":\"Taourirt\",\"region\":\"2\"},{\"id\":\"350\",\"ville\":\"Taourirt ait zaghar\",\"region\":\"8\"},{\"id\":\"351\",\"ville\":\"Tarfaya\",\"region\":\"11\"},{\"id\":\"352\",\"ville\":\"Targuist\",\"region\":\"1\"},{\"id\":\"353\",\"ville\":\"Taroudannt\",\"region\":\"9\"},{\"id\":\"354\",\"ville\":\"Tata\",\"region\":\"9\"},{\"id\":\"355\",\"ville\":\"Taza\",\"region\":\"3\"},{\"id\":\"356\",\"ville\":\"Taïnaste\",\"region\":\"3\"},{\"id\":\"357\",\"ville\":\"Temsia\",\"region\":\"9\"},{\"id\":\"358\",\"ville\":\"Tendrara\",\"region\":\"2\"},{\"id\":\"359\",\"ville\":\"Thar Es-Souk\",\"region\":\"3\"},{\"id\":\"360\",\"ville\":\"Tichoute\",\"region\":\"8\"},{\"id\":\"361\",\"ville\":\"Tiddas\",\"region\":\"4\"},{\"id\":\"362\",\"ville\":\"Tiflet\",\"region\":\"4\"},{\"id\":\"363\",\"ville\":\"Tifnit\",\"region\":\"9\"},{\"id\":\"364\",\"ville\":\"Tighassaline\",\"region\":\"5\"},{\"id\":\"365\",\"ville\":\"Tighza\",\"region\":\"5\"},{\"id\":\"366\",\"ville\":\"Timahdite\",\"region\":\"3\"},{\"id\":\"367\",\"ville\":\"Tinejdad\",\"region\":\"8\"},{\"id\":\"368\",\"ville\":\"Tisgdal\",\"region\":\"9\"},{\"id\":\"369\",\"ville\":\"Tissa\",\"region\":\"3\"},{\"id\":\"370\",\"ville\":\"Tit Mellil\",\"region\":\"6\"},{\"id\":\"371\",\"ville\":\"Tizguite\",\"region\":\"3\"},{\"id\":\"372\",\"ville\":\"Tizi Ouasli\",\"region\":\"3\"},{\"id\":\"373\",\"ville\":\"Tiznit\",\"region\":\"9\"},{\"id\":\"374\",\"ville\":\"Tiztoutine\",\"region\":\"2\"},{\"id\":\"375\",\"ville\":\"Touarga\",\"region\":\"4\"},{\"id\":\"376\",\"ville\":\"Touima\",\"region\":\"2\"},{\"id\":\"377\",\"ville\":\"Touissit\",\"region\":\"2\"},{\"id\":\"378\",\"ville\":\"Toulal\",\"region\":\"3\"},{\"id\":\"379\",\"ville\":\"Toundoute\",\"region\":\"8\"},{\"id\":\"380\",\"ville\":\"Tounfite\",\"region\":\"8\"},{\"id\":\"381\",\"ville\":\"Témara\",\"region\":\"4\"},{\"id\":\"382\",\"ville\":\"Tétouan\",\"region\":\"1\"},{\"id\":\"383\",\"ville\":\"Youssoufia\",\"region\":\"7\"},{\"id\":\"384\",\"ville\":\"Zag\",\"region\":\"10\"},{\"id\":\"385\",\"ville\":\"Zagora\",\"region\":\"8\"},{\"id\":\"386\",\"ville\":\"Zaouia d'Ifrane\",\"region\":\"3\"},{\"id\":\"387\",\"ville\":\"Zaouïat Cheikh\",\"region\":\"5\"},{\"id\":\"388\",\"ville\":\"Zaïda\",\"region\":\"8\"},{\"id\":\"389\",\"ville\":\"Zaïo\",\"region\":\"2\"},{\"id\":\"390\",\"ville\":\"Zeghanghane\",\"region\":\"2\"},{\"id\":\"391\",\"ville\":\"Zeubelemok\",\"region\":\"7\"},{\"id\":\"392\",\"ville\":\"Zinat\",\"region\":\"1\"}]");
+
+/***/ }),
+
 /***/ "./node_modules/@popperjs/core/lib/createPopper.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@popperjs/core/lib/createPopper.js ***!
@@ -5079,8 +5112,18 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json");
-var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json", 1);
+/* harmony import */ var _data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! /data/json/list-moroccan-cities.json */ "./data/json/list-moroccan-cities.json");
+var _data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! /data/json/list-moroccan-cities.json */ "./data/json/list-moroccan-cities.json", 1);
+/* harmony import */ var _data_json_activite_ae_1_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! /data/json/activite-ae-1.json */ "./data/json/activite-ae-1.json");
+var _data_json_activite_ae_1_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! /data/json/activite-ae-1.json */ "./data/json/activite-ae-1.json", 1);
+/* harmony import */ var _data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! /data/json/activite-ae-2.json */ "./data/json/activite-ae-2.json");
+var _data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! /data/json/activite-ae-2.json */ "./data/json/activite-ae-2.json", 1);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 //
 //
 //
@@ -5201,16 +5244,468 @@ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___nam
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+var Errors = /*#__PURE__*/function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "get",
+    value: function get(filed) {
+      if (this.errors[filed]) {
+        return this.errors[filed][0];
+      }
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors.errors;
+    }
+  }]);
+
+  return Errors;
+}();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["orderinfos"],
   data: function data() {
     return {
-      citiesJson: _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__
-      /*   order_title: this.orderinfos.title,
-      order_description: this.orderinfos.description*/
-
+      errors: new Errors(),
+      citiesJson: _data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__,
+      Activites: [],
+      Activites2: _data_json_activite_ae_2_json__WEBPACK_IMPORTED_MODULE_2__,
+      Activites1: _data_json_activite_ae_1_json__WEBPACK_IMPORTED_MODULE_1__,
+      decision: null,
+      reason: ""
     };
+  },
+  methods: {
+    openLoadingInDiv: function openLoadingInDiv() {
+      $("#apply_btn_28292710011").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...');
+      this.$vs.loading({
+        scale: 0.6,
+        color: "#f96a0c"
+      });
+    },
+    HideLoadingInDiv: function HideLoadingInDiv() {
+      $("#apply_btn_28292710011").html("apply");
+      this.$vs.loading.close();
+    },
+    Apply: function Apply() {
+      var _this = this;
+
+      this.openLoadingInDiv();
+      var data = new FormData();
+      data.append("OID", this.orderinfos.OID);
+      data.append("title", this.orderinfos.title);
+      data.append("description", this.orderinfos.description);
+      data.append("sector", this.orderinfos.sector);
+      data.append("activite", this.orderinfos.activite);
+      data.append("decision", this.decision);
+      data.append("reason", this.reason);
+      axios.post("/admin/ajax/order/pending/new/decision", data).then(function (response) {
+        _this.errors = new Errors();
+
+        _this.HideLoadingInDiv();
+
+        _this.$vs.notify({
+          title: "operation accomplished successfully",
+          text: "The user will be notified of this action",
+          color: "success",
+          icon: "check"
+        });
+      })["catch"](function (error) {
+        _this.HideLoadingInDiv();
+
+        if (error.response.status == 500) {
+          _this.errors = new Errors();
+
+          _this.$vs.notify({
+            title: "Operation failed",
+            text: "An error occurred in the system, please try again. If the error persists, please contact the technical department",
+            color: "danger",
+            icon: "warning"
+          });
+        } else if (error.response.status == 401) {
+          _this.$vs.notify({
+            title: "Session over",
+            text: "You must be logged in",
+            color: "danger",
+            position: "top-right",
+            icon: "warning"
+          });
+
+          window.location.reload();
+        } else if (error.response.status == 403) {
+          _this.errors = new Errors();
+
+          _this.$vs.notify({
+            title: "غير مسموح ",
+            text: error.response.data.error,
+            color: "danger",
+            icon: "warning"
+          });
+        } else if (error.response.status == 422) {
+          _this.errors.record(error.response.data);
+
+          _this.$vs.notify({
+            title: "Operation failed ",
+            text: "Please check the input",
+            color: "danger",
+            icon: "warning"
+          });
+        } else {
+          _this.errors = new Errors();
+
+          _this.$vs.notify({
+            title: "Operation failed ",
+            text: "Try again",
+            color: "danger",
+            icon: "warning"
+          });
+        }
+      });
+    },
+    ResetDecision: function ResetDecision() {
+      this.decision = null;
+      this.reason = "";
+    },
+    SectorChange: function SectorChange() {
+      //  this.orderinfos.activite = null;
+      if (this.orderinfos.sector == 1) {
+        this.Activites = this.Activites2;
+      } else if (this.orderinfos.sector == 2 || this.orderinfos.sector == 3 || this.orderinfos.sector == 4) {
+        this.Activites = this.Activites1;
+      } else {
+        this.Activites = [];
+        this.orderinfos.activite = [];
+      }
+    }
+  },
+  mounted: function mounted() {
+    if (this.orderinfos.sector == 1) {
+      this.Activites = this.Activites2;
+    } else if (this.orderinfos.sector == 2 || this.orderinfos.sector == 3 || this.orderinfos.sector == 4) {
+      this.Activites = this.Activites1;
+    } else {
+      this.Activites = [];
+      this.orderinfos.activite = [];
+    }
   }
 });
 
@@ -5227,6 +5722,8 @@ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___nam
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json");
 var _public_data_json_list_moroccan_cities_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! /public/data/json/list-moroccan-cities.json */ "./public/data/json/list-moroccan-cities.json", 1);
+//
+//
 //
 //
 //
@@ -64193,6 +64690,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("div", { attrs: { id: "load_modal_28292710011" } }),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -64203,6 +64702,14 @@ var render = function() {
           role: "dialog",
           "aria-labelledby": "myLargeModalLabel",
           "aria-hidden": "false"
+        },
+        on: {
+          click: function($event) {
+            if ($event.target !== $event.currentTarget) {
+              return null
+            }
+            return _vm.ResetDecision.apply(null, arguments)
+          }
         }
       },
       [
@@ -64224,7 +64731,23 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(0)
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close"
+                  },
+                  on: { click: _vm.ResetDecision }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
@@ -64290,9 +64813,15 @@ var render = function() {
               _vm._v(" "),
               _c("h5", { staticClass: "card-title" }, [_vm._v("Order Infos")]),
               _vm._v(" "),
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "col w-100 mb-3" }, [
+                _c(
+                  "label",
+                  { staticClass: "form-label", attrs: { for: "title" } },
+                  [_vm._v("Title")]
+                ),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -64303,7 +64832,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { dir: "auto", type: "text" },
+                  class: {
+                    "is-invalid": _vm.errors.errors.title
+                  },
+                  attrs: { id: "title", dir: "auto", type: "text" },
                   domProps: { value: _vm.orderinfos.title },
                   on: {
                     input: function($event) {
@@ -64313,10 +64845,33 @@ var render = function() {
                       _vm.$set(_vm.orderinfos, "title", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors.errors.title
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "invalid-feedback",
+                        staticStyle: { display: "block !important" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.errors.errors.title[0]) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col w-100 mb-3" }, [
+                _c(
+                  "label",
+                  { staticClass: "form-label", attrs: { for: "Description" } },
+                  [_vm._v("Description")]
+                ),
+                _vm._v(" "),
                 _c("textarea", {
                   directives: [
                     {
@@ -64327,7 +64882,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { dir: "auto", name: "text" },
+                  class: {
+                    "is-invalid": _vm.errors.errors.description
+                  },
+                  attrs: { dir: "auto", id: "Description", name: "text" },
                   domProps: { value: _vm.orderinfos.description },
                   on: {
                     input: function($event) {
@@ -64341,22 +64899,167 @@ var render = function() {
                       )
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors.errors.description
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "invalid-feedback",
+                        staticStyle: { display: "block !important" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.errors.errors.description[0]) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row row-cols-lg-2" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-sm mb-3" },
+                  [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Sector")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "vs-select",
+                      {
+                        staticClass: "w-100",
+                        class: {
+                          "is-invalid": _vm.errors.errors.sector
+                        },
+                        attrs: { dir: "auto" },
+                        on: { change: _vm.SectorChange },
+                        model: {
+                          value: _vm.orderinfos.sector,
+                          callback: function($$v) {
+                            _vm.$set(_vm.orderinfos, "sector", $$v)
+                          },
+                          expression: "orderinfos.sector"
+                        }
+                      },
+                      [
+                        _c("vs-select-item", {
+                          attrs: {
+                            dir: "auto",
+                            value: "0",
+                            text: "no selection"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { dir: "auto", value: "1", text: "الخدمات" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { dir: "auto", value: "2", text: "التجارة" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { dir: "auto", value: "3", text: "الصناعة" }
+                        }),
+                        _vm._v(" "),
+                        _c("vs-select-item", {
+                          attrs: { dir: "auto", value: "4", text: "الحرفية" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.errors.sector
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "invalid-feedback",
+                            staticStyle: { display: "block !important" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.errors.errors.sector[0]) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-sm mb-3" },
+                  [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Activity")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "vs-select",
+                      {
+                        staticClass: "selectExample",
+                        class: {
+                          "is-invalid": _vm.errors.errors.activite
+                        },
+                        attrs: { width: "100%", autocomplete: "" },
+                        model: {
+                          value: _vm.orderinfos.activite,
+                          callback: function($$v) {
+                            _vm.$set(_vm.orderinfos, "activite", $$v)
+                          },
+                          expression: "orderinfos.activite"
+                        }
+                      },
+                      [
+                        _c("vs-select-item", {
+                          attrs: { value: undefined, text: "بدون تحديد" }
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.Activites, function(item, index) {
+                          return _c("vs-select-item", {
+                            key: index,
+                            attrs: { value: index, text: item }
+                          })
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.errors.activite
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "invalid-feedback",
+                            staticStyle: { display: "block !important" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.errors.errors.activite[0]) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row p-3" }, [
                 _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
                   _c("strong", [_vm._v("Date created:")]),
-                  _vm._v(" " + _vm._s(_vm.orderinfos.date))
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
-                  _c("strong", [_vm._v("Sector, Activity:")]),
                   _vm._v(
-                    " " +
-                      _vm._s(_vm.orderinfos.sector_name) +
-                      ",  " +
-                      _vm._s(_vm.orderinfos.activite_name)
+                    "\n                            " +
+                      _vm._s(_vm.orderinfos.date) +
+                      "\n                        "
                   )
                 ]),
                 _vm._v(" "),
@@ -64366,7 +65069,7 @@ var render = function() {
                   _vm.orderinfos.place && _vm.orderinfos.place != "remotely"
                     ? _c("span", [
                         _vm._v(
-                          "Morocco, " +
+                          "Morocco,\n                                " +
                             _vm._s(_vm.citiesJson[_vm.orderinfos.place].ville)
                         )
                       ])
@@ -64375,12 +65078,20 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
                   _c("strong", [_vm._v("Budget:")]),
-                  _vm._v(" " + _vm._s(_vm.orderinfos.budget) + " MAD")
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.orderinfos.budget) +
+                      " MAD\n                        "
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6 col-xl-6 mb-3" }, [
                   _c("strong", [_vm._v("Time:")]),
-                  _vm._v(" " + _vm._s(_vm.orderinfos.time))
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.orderinfos.time) +
+                      " Day\n                        "
+                  )
                 ]),
                 _vm._v(" "),
                 _c(
@@ -64435,15 +65146,328 @@ var render = function() {
                     _vm._v(" "),
                     _vm.orderinfos.files == null ||
                     _vm.orderinfos.files.length < 1
-                      ? _c("li", [_vm._v("No files found")])
+                      ? _c("li", [
+                          _vm._v(
+                            "\n                                No files found\n                            "
+                          )
+                        ])
                       : _vm._e()
                   ],
                   2
                 )
+              ]),
+              _vm._v(" "),
+              _c("hr", { staticClass: "my-4" }),
+              _vm._v(" "),
+              _c("h5", { staticClass: "card-title" }, [_vm._v("Actions")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3" }, [
+                _c(
+                  "label",
+                  { staticClass: "form-label", attrs: { for: "decision" } },
+                  [_vm._v("decision")]
+                ),
+                _vm._v(" "),
+                _c("div", { attrs: { id: "decision" } }, [
+                  _c(
+                    "ul",
+                    {
+                      staticClass: "list-group list-group-flush",
+                      attrs: { align: "left" }
+                    },
+                    [
+                      _c(
+                        "li",
+                        { staticClass: "list-group-item" },
+                        [
+                          _c(
+                            "vs-radio",
+                            {
+                              class: {
+                                "is-invalid": _vm.errors.errors.decision
+                              },
+                              attrs: { color: "success", "vs-value": "1" },
+                              model: {
+                                value: _vm.decision,
+                                callback: function($$v) {
+                                  _vm.decision = $$v
+                                },
+                                expression: "decision"
+                              }
+                            },
+                            [_vm._v("Accept the request")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "list-group-item" },
+                        [
+                          _c(
+                            "vs-radio",
+                            {
+                              class: {
+                                "is-invalid": _vm.errors.errors.decision
+                              },
+                              attrs: { color: "warning", "vs-value": "2" },
+                              model: {
+                                value: _vm.decision,
+                                callback: function($$v) {
+                                  _vm.decision = $$v
+                                },
+                                expression: "decision"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "Rejection of the request with the\n                                        possibility of\n                                        modification"
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "list-group-item" },
+                        [
+                          _c(
+                            "vs-radio",
+                            {
+                              class: {
+                                "is-invalid": _vm.errors.errors.decision
+                              },
+                              attrs: { color: "danger", "vs-value": "3" },
+                              model: {
+                                value: _vm.decision,
+                                callback: function($$v) {
+                                  _vm.decision = $$v
+                                },
+                                expression: "decision"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "Delete the request\n                                        permanently"
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.errors.errors.decision
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "invalid-feedback",
+                          staticStyle: { display: "block !important" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.errors.decision[0]) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _vm.decision == 2 || _vm.decision == 3
+                  ? _c("div", [
+                      _c(
+                        "div",
+                        { staticClass: "mb-3" },
+                        [
+                          _c(
+                            "vs-tooltip",
+                            {
+                              attrs: {
+                                text:
+                                  "The user must be informed of the reason for which this decision was taken",
+                                position: "right"
+                              }
+                            },
+                            [
+                              _c("label", { attrs: { for: "reason" } }, [
+                                _vm._v(
+                                  "Reason for decision\n                                        "
+                                ),
+                                _c("i", { staticClass: "fa fa-info-circle" })
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.reason,
+                                expression: "reason"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.errors.errors.reason
+                            },
+                            attrs: {
+                              dir: "rtl",
+                              id: "reason",
+                              cols: "30",
+                              rows: "10"
+                            },
+                            domProps: { value: _vm.reason },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.reason = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.errors.reason
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "invalid-feedback",
+                                  staticStyle: { display: "block !important" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.errors.errors.reason[0]) +
+                                      "\n                                "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "mb-3" },
+                        [
+                          _c(
+                            "vs-tooltip",
+                            {
+                              attrs: {
+                                text:
+                                  "This is how the message will look to the user",
+                                position: "right"
+                              }
+                            },
+                            [
+                              _c("label", { attrs: { for: "reason" } }, [
+                                _vm._v(
+                                  "Notification preview\n                                        "
+                                ),
+                                _c("i", { staticClass: "fa fa-info-circle" })
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "text-wrapper alert alert-info" },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass: "text-right",
+                                  attrs: { dir: "rtl" }
+                                },
+                                [
+                                  _c("strong", [_vm._v("مراحباََ")]),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                                        يؤسفنا أن نعلمك أنه قد تم\n                                        "
+                                  ),
+                                  _vm.decision == 2
+                                    ? _c("span", [_vm._v("رفض طلبك")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.decision == 3
+                                    ? _c("span", [_vm._v("حذف طلبك")])
+                                    : _vm._e(),
+                                  _vm._v(
+                                    "\n                                        رقم #" +
+                                      _vm._s(_vm.orderinfos.OID) +
+                                      " ("
+                                  ),
+                                  _c("a", { attrs: { href: "#" } }, [
+                                    _vm._v(_vm._s(_vm.orderinfos.title))
+                                  ]),
+                                  _vm._v(
+                                    "),\n                                        "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(_vm.reason) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" },
+                  on: { click: _vm.ResetDecision }
+                },
+                [
+                  _vm._v(
+                    "\n                        cancel\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    disabled:
+                      _vm.decision == null ||
+                      (_vm.decision == 2 && _vm.reason == "") ||
+                      (_vm.decision == 3 && _vm.reason == ""),
+                    type: "button",
+                    id: "apply_btn_28292710011"
+                  },
+                  on: { click: _vm.Apply }
+                },
+                [
+                  _vm._v(
+                    "\n                        apply\n                    "
+                  )
+                ]
+              )
+            ])
           ])
         ])
       ]
@@ -64456,34 +65480,17 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
       "div",
       { staticClass: "alert alert-warning", attrs: { role: "alert" } },
       [
         _vm._v(
-          "\n                      Please note: The data should not be corrected except for unintentional errors or in good faith. If the user violates the rules of the platform or its affiliates, the request must be rejected or permanently deleted.\n                      "
+          "\n                        Please note: The data should not be corrected except\n                        for unintentional errors or in good faith. If the\n                        user violates the rules of the platform or its\n                        affiliates, the request must be rejected or\n                        permanently deleted.\n                        "
         ),
         _c("br"),
         _vm._v(" "),
         _c("br"),
         _vm._v(
-          "\n                      Attention : Les données ne doivent pas être corrigées, sauf erreur involontaire ou de bonne foi. Si l'utilisateur enfreint les règles de la plateforme ou de ses affiliés, la demande doit être rejetée ou supprimée définitivement.\n                      "
+          "\n                        Attention : Les données ne doivent pas être\n                        corrigées, sauf erreur involontaire ou de bonne foi.\n                        Si l'utilisateur enfreint les règles de la\n                        plateforme ou de ses affiliés, la demande doit être\n                        rejetée ou supprimée définitivement.\n                        "
         ),
         _c("br"),
         _vm._v(" "),
@@ -64491,32 +65498,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", { attrs: { align: "right", dir: "rtl" } }, [
           _vm._v(
-            "\n                                                    يرجى الانتباه: لا يجب تصحيح المعطيات الى في الاخطاء الغير المقصودة أو عن حسن نية في حال خالف المستخدم قواعد المنصة أو الشركات التابعة لها يجب رفض أو حذق الطلب نهائياََ\n\n                      "
+            "\n                            يرجى الانتباه: لا يجب تصحيح المعطيات الى في\n                            الاخطاء الغير المقصودة أو عن حسن نية في حال خالف\n                            المستخدم قواعد المنصة أو الشركات التابعة لها يجب\n                            رفض أو حذق الطلب نهائياََ\n                        "
           )
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("\n                        Close\n                    ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("\n                        Save changes\n                    ")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -64646,6 +65632,7 @@ var render = function() {
                     staticClass: " btn btn-primary",
                     attrs: {
                       type: "button",
+                      id: "btn_review",
                       "data-target": "#review_order_modal",
                       "data-toggle": "modal"
                     },
@@ -64659,7 +65646,11 @@ var render = function() {
                   [_vm._v("review\n                ")]
                 ),
                 _vm._v(" "),
-                _vm._m(1, true)
+                _c(
+                  "a",
+                  { attrs: { href: "/order/" + item.OID, target: "_blank" } },
+                  [_vm._m(1, true)]
+                )
               ])
             ])
           }),

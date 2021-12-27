@@ -184,7 +184,7 @@
                                 </a>
                                 <ul id="Orders_Pending_Review_ul">
                                     <li>
-                                        <a id="Orders_Pending_Review" href="elements-buttons-standard.html">
+                                        <a id="Orders_Pending_Review" href="{{asset('/admin/orders/pending')}}">
                                             <i class="pe-7s-hourglass"></i>
                                             Orders Pending Review
                                         </a>

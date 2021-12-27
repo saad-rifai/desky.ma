@@ -63,4 +63,34 @@ class Orders extends Controller
 
         return response()->json(['data' => $data, 'CountPendingOrders' => $CountPendingOrders], 200);
     }
+    public function ReviewDecision(Request $request){
+        $this->validate($request, [
+            'OID' => 'required|integer',
+            'title' => 'required|string|max:180|min:10',
+            'description' => 'required|string|max:2000|min:80',
+            'sector' => 'required|integer|max:4|min:1',
+            'activite' => 'required|integer',
+            'decision' => 'required|integer|max:3|min:1',
+        ], [
+            'integer' => 'Please check entries',
+            
+            'title.max' => 'title Too Long Max 180 Characters',
+            'title.min' => 'title Too Short Min 10 Characters',
+
+            'description.max' => 'Description Too Long Max 2000 Characters',
+            'description.min' => 'Description Too Short Min 80 Characters',
+
+            'max' => 'Please check entries',
+            'min' => 'Please check entries',
+        ]);
+        if ($request->sector != 1 && $request->activite > 149 || $request->sector > 1 && $request->activite > 66) {
+            return response()->json(['errors' => ['activite' => [0 => 'Please select a valid activity from the menu *']]], 422);
+        } 
+        if($request->decision == 2 || $request->decision == 3){
+            $this->validate($request, [
+                'reason' => 'required|string|max:700|min:15'
+            ]);
+        }
+
+    }
 }

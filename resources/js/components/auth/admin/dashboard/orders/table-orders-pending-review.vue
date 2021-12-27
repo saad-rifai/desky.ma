@@ -44,10 +44,12 @@
 
                 <td>{{item.date}}</td>
                 <td>
-                    <button @click="OrderSelected = item; modalOpen = true" class=" btn btn-primary" type="button" data-target="#review_order_modal" data-toggle="modal">review
+                    <button @click="OrderSelected = item; modalOpen = true" class=" btn btn-primary" type="button" id="btn_review" data-target="#review_order_modal" data-toggle="modal">review
                     </button>
+                    <a :href="'/order/'+item.OID" target="_blank">
                     <button class=" btn btn-outline-primary"><i class="fa fa-link"></i> preview
                     </button>
+                    </a>
                 </td>
             </tr>
        
