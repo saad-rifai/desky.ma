@@ -15,7 +15,7 @@ class maintenance
      */
     public function handle($request, Closure $next)
     {
-        if($request->ip() != '192.168.1.102'){
+        if($request->ip() != '192.168.1.100'){
            // return view("errors.maintenance");
             return response()->view('errors.maintenance')->setStatusCode(503); 
 
