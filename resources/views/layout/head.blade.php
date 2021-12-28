@@ -232,13 +232,13 @@ foreach ($webinfos as $webinfo);
 
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ asset('orders') }}">
                         طلبات العروض
                     </a>
                     <ul class="list-group list-group-flush list-unstyled">
                         <li>
                             <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
-                                جميع جميع طلبات العروض</a>
+                                جميع طلبات العروض المفتوحة</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ asset('MyOrders') }}"><i class="fas fa-folder"></i>
@@ -274,12 +274,21 @@ foreach ($webinfos as $webinfo);
             <h1 class="info-banner-text">تم انشاء تذكرتك بنجاح سوف تتلقى رداََ في الساعات المقبلة</h1>
         </div>
         @endif
+        <div class="info-banner bg-brand font-Naskh" dir="rtl">
+            <div class="container">
+                <div class="row justify-content-center align-items-center text-center mb-3">
+                    <div class="col-auto"><h1 class="fs-6 pt-3 text-white" data-toggle="tooltip" data-placement="bottom" title="عند تفعيل حساب المقاول الذاتي الخاص بك ستتمكن من تقديم عروضك على الطلبات وسيتمكن العملاء من التواصل معك والبحث عنك في محركات البحث ديسكي.">حساب المقاول الذاتي الخاص بك غير مفعل بعد قدم طلب لتفعيله الأن </h1></div> 
+                    <div class="col-auto mt-2"><button class="btn btn-outline-light btn-sm">تفعيل حساب المقاول الذاتي</button></div>
+    
+                </div>
+            </div>
 
+        </div>
         @if (Auth::check() && Auth::user()->email_verified_at == null)
         <div class="info-banner bg-warning">
             <h1 class="info-banner-text">لقد ارسلنا لك رسالة تأكيد البريد الالكتروني يرجى الحقق من بريدك</h1>
         </div>
         @endif
-   
+
         @yield('content')
     </div>

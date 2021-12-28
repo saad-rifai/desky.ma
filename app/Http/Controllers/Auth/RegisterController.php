@@ -95,7 +95,7 @@ class RegisterController extends Controller
                 'User__password' => 'required|string|min:8|max:25',
                 'terms' => 'required|in:true',
                 //'typeaccount' => 'required|integer|max:1|min:0',
-                'g_recaptcha_response' => 'required',
+                'g_recaptcha_response' => 'required|captcha',
             ],
             $message = [
                 'required' => 'هذا الحقل مطلوب *',

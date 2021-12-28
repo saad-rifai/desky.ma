@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'AdminCaptcha' => [
+        'UserInputID' => 'CaptchaCode',
+        'ImageWidth' => 250,
+        'ImageHeight' => 50,
+    ],
     'secret' => env('NOCAPTCHA_SECRET'),
     'sitekey' => env('NOCAPTCHA_SITEKEY'),
     'options' => [
@@ -11,6 +16,7 @@ return [
         'width'     => 200,
         'height'    => 45,
         'quality'   => 100,
-        'math'      => false, //Enable Math Captcha
+        'math'      => false,
     ],
+
 ];

@@ -5949,9 +5949,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
-//
-//
-//
 var Errors = /*#__PURE__*/function () {
   function Errors() {
     _classCallCheck(this, Errors);
@@ -6021,12 +6018,11 @@ var Errors = /*#__PURE__*/function () {
           icon: "check"
         });
 
-        window.location.replace('/admin');
+        window.location.replace("/admin");
 
         _this.HideLoadingInDiv();
       })["catch"](function (error) {
-        _this.refreshCaptcha();
-
+        // this.refreshCaptcha();
         if (error.response.status == 500) {
           _this.errors.record(error.response.data);
 
@@ -6071,7 +6067,7 @@ var Errors = /*#__PURE__*/function () {
     refreshCaptcha: function refreshCaptcha() {
       var _this2 = this;
 
-      axios.post('/ajax/security/get/captcha/image').then(function (response) {
+      axios.post("/ajax/security/get/captcha/image").then(function (response) {
         _this2.captchaimg = response.data.captcha;
       })["catch"](function (error) {
         _this2.$vs.notify({
@@ -65875,7 +65871,9 @@ var render = function() {
           _vm.errors.errors.otp
             ? _c("div", { staticClass: "invalid-feedback" }, [
                 _vm._v(
-                  "\n        " + _vm._s(_vm.errors.errors.otp[0]) + "\n      "
+                  "\n                " +
+                    _vm._s(_vm.errors.errors.otp[0]) +
+                    "\n            "
                 )
               ])
             : _vm._e()
@@ -65890,25 +65888,11 @@ var render = function() {
                 staticClass: "mb-2",
                 domProps: { innerHTML: _vm._s(_vm.captchaimg) }
               })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-lg-3" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-primary btn-sm ",
-                  staticStyle: { padding: "15px 10px !important" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.refreshCaptcha.apply(null, arguments)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-redo-alt" })]
-              )
             ])
           ]),
+          _vm._v(" "),
+          _c("br"),
+          _c("br"),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -65936,9 +65920,9 @@ var render = function() {
           _vm.errors.errors.captcha
             ? _c("div", { staticClass: "invalid-feedback" }, [
                 _vm._v(
-                  "\n        " +
+                  "\n                " +
                     _vm._s(_vm.errors.errors.captcha[0]) +
-                    "\n      "
+                    "\n            "
                 )
               ])
             : _vm._e()
@@ -65962,7 +65946,7 @@ var staticRenderFns = [
           staticStyle: { "margin-right": "0 !important" },
           attrs: { type: "submit", id: "btn_submit" }
         },
-        [_vm._v("\n      تحقق\n      ")]
+        [_vm._v("\n                تحقق\n            ")]
       )
     ])
   }

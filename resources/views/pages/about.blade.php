@@ -26,7 +26,89 @@
                         NERYOU SARL شركة برماجيات تقوم بتطوير حلول برمجية للشركات الصغيرة والمتوسطة والكبيرة والافراد.
 
                     </p>
+                    <br>
+                    <br>
+                  <!--  <h6> الادارة</h6>
+                    <div class="row row-cols-lg-2 row-cols-sm-1 mt-5 mx-auto">
+                        <div class="col-auto mb-5">
+                            <div class="row row-cols-2 align-items-center mx-auto">
+                                <div class="col-auto">
+                                    <div class="larg-avatar">
+                                <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/adil-miftah.jpg" alt="Adil Miftah">
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-auto">
+                                    <h1 class="user-name">Adil Miftah</h1>
+                                    <p class="text-muted mb-0 " style="font-size: 12px !important;">شريك مؤسس, الرئيس التنفيذي</p>
+                                    <div class="footer-social-media ms-0 mb-0">
+                           
+                                        <ul class="list-social-media m-0">
+    
+                                          <li class="m-1 me-3">
+                                              <a target="_blank" href="https://twitter.com/desky_ma">
+                                                  <i class="fab fa-twitter"></i>
+                                              </a>
+                                          </li>
+                               
+                                          <li class="m-1 me-3">
+                                              <a target="_blank" href="https://www.instagram.com/desky.ma/">
+                                                  <i class="fab fa-instagram"></i>
+                                              </a>
+                                          </li>
+                                          <li class="m-1 me-3">
+                                              <a target="_blank" href="https://www.linkedin.com/company/neryou">
+                                                  <i class="fab fa-linkedin"></i>
+                                              </a>
+                                          </li>
 
+                               
+                                      </ul>
+                                 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto mb-5">
+                            <div class="row row-cols-2 align-items-center mx-auto">
+                                <div class="col-auto">
+                                    <div class="larg-avatar">
+                                <img src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/asset/saad-rifai.jpeg" alt="Saad Rifai">
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-auto">
+                                    <h1 class="user-name">Saad Rifai</h1>
+                                    <p class="text-muted mb-0 " style="font-size: 12px !important;">شريك مؤسس, رئيس العمليات</p>
+                                    <div class="footer-social-media ms-0 mb-0">
+                           
+                                        <ul class="list-social-media m-0">
+    
+                                          <li class="m-1 me-3">
+                                              <a target="_blank" href="https://twitter.com/desky_ma">
+                                                  <i class="fab fa-twitter"></i>
+                                              </a>
+                                          </li>
+                               
+                                          <li class="m-1 me-3">
+                                              <a target="_blank" href="https://www.instagram.com/desky.ma/">
+                                                  <i class="fab fa-instagram"></i>
+                                              </a>
+                                          </li>
+                                          <li class="m-1 me-3">
+                                              <a target="_blank" href="https://www.linkedin.com/company/neryou">
+                                                  <i class="fab fa-linkedin"></i>
+                                              </a>
+                                          </li>
+
+                               
+                                      </ul>
+                                 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div -->
                 </div>
             </div>
         </div>

@@ -147,6 +147,7 @@ nav.form-nav-br {
     border-top: none !important;
 
 }
+
 nav.form-nav-br .logo {
     width: 100%;
     max-width: 120px;
@@ -759,7 +760,7 @@ span.nb-step {
 
 .bg-brand {
     background-color: #f96a0c !important;
-    border-radius: 0 20px 20px 0;
+    /*border-radius: 0 20px 20px 0;*/
 }
 h3.ul-title {
     font-size: 16px;
@@ -1089,6 +1090,19 @@ h1.title-page-cbrand {
     hyphens: auto;
     white-space: pre-line !important;
     margin-top: -1em;
+}
+.larg-avatar {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 100%;
+}
+del {
+    text-decoration: line-through !important;
+}
+.larg-avatar img {
+    width: 100%;
 }
 .font-Naskh *{
     font-family: Noto Naskh Arabic,Helvetica Neue,Helvetica,Arial,sans-serif !important;

@@ -11,6 +11,7 @@
         "php": "^7.2.5",
         "anhskohbo/no-captcha": "^3.3",
         "aws/aws-sdk-php": "~3.0",
+        "captcha-com/laravel-captcha": "4.*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -19,7 +20,6 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.4",
         "league/flysystem-aws-s3-v3": "~1.0",
-        "mews/captcha": "^3.2",
         "stevebauman/location": "^6.2"
     },
     "require-dev": {

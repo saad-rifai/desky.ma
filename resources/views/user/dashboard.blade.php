@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-auto mt-4">
-                <p class="text-muted fs-6">
+                <p class="text-muted fs-6" data-toggle="tooltip" data-placement="bottom" title="رقم تعريف حسابك ">
               N°  <strong>{{Auth::user()->Account_number}}</strong>
                   </p>
             </div>
@@ -37,6 +37,54 @@
 
     <div class="body-dashboard">
         <div class="row" dir="rtl">
+            <div class="col-sm col-lg-4 mb-3">
+                <div class="card p-3 mb-3 position-relative bg-brand">
+                    <div class="row row-cols-1 mx-auto">
+                        <div class="col position-relative text-center text-white mt-5 mb-5">
+                   
+                                <p class="card-title fs-6 mb-3 font-Naskh">حساب المقاول الذاتي الخاص بك غير مفعل بعد قدم طلب لتفعيله الأن</p>
+                                <a href="{{asset('account/settings?ref=dashboard_card#ae_account')}}"><button class="btn btn-outline-primary btn-sm">تفعيل حساب المقاول الذاتي</button></a>
+
+                      
+                        </div>
+                    </div>
+      
+                </div>
+                <div class="card p-3 mb-3">
+                    <div class="row row-cols-1">
+                        <div class="col position-relative">
+                         <h1 class="card-title mb-1 mt-2 mx-auto"  style="font-size: 16px"> تلميحات <i data-toggle="tooltip" data-placement="left" title="نصائح لمساعدتك على زيادة فرصة حصولك على عملاء في منصة ديسكي" class="fas fa-info-circle"></i></h1>
+                    
+                        </div>
+                        <div class="col">
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <a href="#"><i class="far fa-circle"></i> قم باضافة النبذة التعريفية</a></li>                        
+                                <!--li class="list-group-item"> <del> <a href="#"><i class="fas fa-check-circle "></i> قم باضافة النبذة التعريفية</a></del></li-->                        
+                                <li class="list-group-item"> <a  href="#"><i class="far fa-circle"></i> قم باضافة الصورة الشخصية</a></li>                        
+                                <li class="list-group-item "> <a  href="#"><i class="far fa-circle"></i> قم باضافة أعمال الى معرض أعمالك</a></li>                        
+                              </ul>
+                        </div>
+                    </div>
+      
+                </div>
+                <div class="card p-3 mb-3">
+                    <div class="row row-cols-1">
+                        <div class="col position-relative">
+                            <a href="{{asset('/messages?ref=dashboard')}}"> <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> الرسائل</h1></a>
+                            <a href="{{asset('/messages?ref=dashboard')}}" class="card-link position-absolute top-0 end-0 mt-1 me-3">
+                                المزيد
+                            </a>
+                        </div>
+                        <div class="col">
+                            <last-messages-box :max="5" account_number="{{Auth::user()->Account_number}}"></last-messages-box>
+
+                        </div>
+                    </div>
+      
+                </div>
+
+            </div>
             <div class="col-sm">
                 <div class="card p-3 mb-4">
                     <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> نظرة عامة</h1>
@@ -189,23 +237,7 @@
 
           
             </div>
-            <div class="col-sm col-lg-4 mb-3">
-                <div class="card p-3">
-                    <div class="row row-cols-1">
-                        <div class="col position-relative">
-                            <a href="{{asset('/messages?ref=dashboard')}}"> <h1 class="card-title mb-4 mt-2" style="font-size: 16px"> الرسائل</h1></a>
-                            <a href="{{asset('/messages?ref=dashboard')}}" class="card-link position-absolute top-0 end-0 mt-1 me-3">
-                                المزيد
-                            </a>
-                        </div>
-                        <div class="col">
-                            <last-messages-box :max="5" account_number="{{Auth::user()->Account_number}}"></last-messages-box>
 
-                        </div>
-                    </div>
-      
-                </div>
-            </div>
         </div>
     </div>
 

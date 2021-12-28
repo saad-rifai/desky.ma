@@ -167,6 +167,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+		LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -182,8 +183,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-
-
     ],
 
     /*
@@ -198,7 +197,7 @@ return [
     */
 
     'aliases' => [
-       // 'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        //'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -235,8 +234,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ],
 

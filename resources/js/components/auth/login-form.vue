@@ -185,7 +185,7 @@ export default {
           }
 
           this.HideLoadingInDiv();
-         // window.grecaptcha.reset();
+        // window.grecaptcha.reset();
         });
     },
   },

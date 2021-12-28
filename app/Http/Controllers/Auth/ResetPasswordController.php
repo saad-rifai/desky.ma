@@ -123,12 +123,12 @@ class ResetPasswordController extends Controller
         $this->validate($request,
             [
                 'username' => 'required|string|max:100|min:6',
-                'g_recaptcha_response' => 'required',
+                'g_recaptcha_response' => 'required|captcha',
             ],
             $message = [
                 'required' => 'هذا الحقل مطلوب *',
                 'g_recaptcha_response.required' => 'يرجى التحقق من الكابشا *',
-                'g_recaptcha_response.captcha' => 'يرجى التحقق من الكابشا NoCaptcha *',
+                'g_recaptcha_response.captcha' => 'يرجى التحقق من الكابشا  *',
 
                 'username.max' => '   البريد الاكتروني أو أسم المستخدم أطول من اللازم *',
                 'username.min' => '   البريد الاكتروني أو أسم المستخدم أقصر من اللازم *',

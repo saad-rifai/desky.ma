@@ -17,7 +17,7 @@
         <div class="content-form p-3 pt-1">
 
             <div id="admin">
-                <otp-check :csrf="'{{csrf_token()}}'" captchaimg="{{ captcha_img() }}"></otp-check>
+                <otp-check :csrf="'{{csrf_token()}}'" captchaimg="{{ captcha_image_html('AdminCaptcha') }}"></otp-check>
             </div>
        
         </div>

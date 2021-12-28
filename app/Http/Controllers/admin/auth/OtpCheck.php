@@ -65,7 +65,7 @@ class OtpCheck extends Controller
     public function OtpVerifiy(Request $request){
         $this->validate($request,  [
             'otp' => 'required|integer|max:999999|min:111111',
-            'captcha' => 'required|captcha',
+            'captcha' => 'required',
         ], $messages = [
             'required' => 'يرجى ادخال الرمز',
             'integer' => 'يرجى ادخال رمز تحقق صالح',
