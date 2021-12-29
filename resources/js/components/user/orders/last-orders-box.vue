@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="">
-            <div id="div-with-loading_853791254" class="vs-con-loading__container">
+            <div
+                id="div-with-loading_853791254"
+                class="vs-con-loading__container"
+            >
                 <div
                     v-if="nodata == true"
                     class="no-data-message text-center mt-4 mb-4"
@@ -147,8 +150,6 @@
                     </a>
                 </div>
             </div>
-
-
         </div>
     </div>
 </template>
@@ -164,12 +165,11 @@ export default {
             listData: [],
             stopLazyLoading: false,
             nodata: false,
-            typeget: "all",
+            typeget: "all"
         };
     },
     methods: {
-
-                getData() {
+        getData() {
             this.stopLazyLoading = false;
             this.typeget = "all";
             axios
@@ -193,9 +193,9 @@ export default {
 
                     console.error(error);
                 });
-        },
+        }
     },
-    created(){
+    created() {
         this.getData();
     }
 };
