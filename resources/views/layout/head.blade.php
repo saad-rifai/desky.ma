@@ -274,16 +274,19 @@ foreach ($webinfos as $webinfo);
             <h1 class="info-banner-text">تم انشاء تذكرتك بنجاح سوف تتلقى رداََ في الساعات المقبلة</h1>
         </div>
         @endif
+        @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->verified_account == null && Auth::user()->AeAccount == null)
         <div class="info-banner bg-brand font-Naskh" dir="rtl">
             <div class="container">
                 <div class="row justify-content-center align-items-center text-center mb-3">
                     <div class="col-auto"><h1 class="fs-6 pt-3 text-white" data-toggle="tooltip" data-placement="bottom" title="عند تفعيل حساب المقاول الذاتي الخاص بك ستتمكن من تقديم عروضك على الطلبات وسيتمكن العملاء من التواصل معك والبحث عنك في محركات البحث ديسكي.">حساب المقاول الذاتي الخاص بك غير مفعل بعد قدم طلب لتفعيله الأن </h1></div> 
-                    <div class="col-auto mt-2"><button class="btn btn-outline-light btn-sm">تفعيل حساب المقاول الذاتي</button></div>
+                    <div class="col-auto mt-2"><a href="{{asset('/account/settings?ref=dashboard_card#ae_account')}}"><button class="btn btn-outline-light btn-sm">تفعيل حساب المقاول الذاتي</button></a></div>
     
                 </div>
             </div>
 
-        </div>
+        </div>  
+        @endif
+
         @if (Auth::check() && Auth::user()->email_verified_at == null)
         <div class="info-banner bg-warning">
             <h1 class="info-banner-text">لقد ارسلنا لك رسالة تأكيد البريد الالكتروني يرجى الحقق من بريدك</h1>

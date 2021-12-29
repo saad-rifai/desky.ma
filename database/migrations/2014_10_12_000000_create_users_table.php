@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string("country", 5);
             $table->string("city", 6);
             $table->integer("gender");
-            $table->integer("type");
+            $table->integer("type"); /* 1 => AE; 2 => Client */
             $table->string("avatar")->nullable();
             $table->mediumText("description")->nullable();
             $table->integer("sector")->nullable();

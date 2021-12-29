@@ -29,7 +29,10 @@ Vue.use(Vuesax, {
 Vue.component('otp-check', require('./components/auth/admin/otp-check.vue').default);
 Vue.component('table-orders-pending-review', require('./components/auth/admin/dashboard/orders/table-orders-pending-review.vue').default);
 Vue.component('review-order-modal', require('./components/auth/admin/dashboard/orders/review-order-modal.vue').default);
-
+Vue.component('review-order-modal', require('./components/auth/admin/dashboard/orders/review-order-modal.vue').default);
+// Ae Account
+Vue.component('table-aeaccount-pending-review', require('./components/auth/admin/dashboard/users/aeaccount/table-aeaccount-pending-review.vue').default);
+Vue.component('review-request-aeaccount-modal', require('./components/auth/admin/dashboard/users/aeaccount/review-request-aeaccount.vue').default);
 
 
 
