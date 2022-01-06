@@ -49,7 +49,7 @@
                                     class="invalid-feedback"
                                     v-if="errors.errors.message"
                                 >
-                                    {{ errors.errors.message[0] }}
+                                    <i class="fas fa-exclamation-triangle"></i> {{ errors.errors.message[0] }}
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,6 @@ export default {
                             title:"تم ارسال رسالتك",
                             text: "<a href='/messages?id="+this.to+"'><button type='button' class='btn btn-outline-light btn-sm'>مشاهدة الرسالة</button></a>",
                             color: "success",
-                            fixed: true,
                             icon: "check"
                         });
                 }).catch((error) => {
@@ -144,7 +143,6 @@ export default {
                             text:
                                 "حصل خطأ في النظام أثناء محاولة معالجة طلبك يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
                             color: "danger",
-                            fixed: true,
                             icon: "warning"
                         });
                     } else if (error.response.status == 401) {
@@ -152,7 +150,6 @@ export default {
                         this.$vs.notify({
                             text: "يجب تسجيل الدخول لتتمكن من التبليغ",
                             color: "danger",
-                            fixed: true,
                             icon: "warning"
                         });
                         window.location.href="/login?redirect="+window.location.href+"";
@@ -161,7 +158,6 @@ export default {
                         this.$vs.notify({
                             text: "تحقق من المدخلات",
                             color: "danger",
-                            fixed: true,
                             icon: "warning"
                         });
                     } else {
@@ -169,7 +165,6 @@ export default {
                         this.$vs.notify({
                             text: error.response.data.error,
                             color: "danger",
-                            fixed: true,
                             icon: "warning"
                         });
                     }

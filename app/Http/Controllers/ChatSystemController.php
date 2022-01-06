@@ -265,6 +265,14 @@ class ChatSystemController extends Controller
         }
     }
     public function SendMessage(Request $request){
+        if (preg_match('/\+?[0-9][0-9()\-\s+]{8,20}[0-9]/', $request->message)) {
+            return response()->json(['errors' => ['message' => [0 => ' للحفاظ على أمان مجتمعنا يمنع مشاركة رقم الهاتف أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+        }
+
+        if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->message))
+        {
+            return response()->json(['errors' => ['message' => [0 => 'للحفاظ على أمان مجتمعنا يمنع مشاركة البريد الالكتروني أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+        } 
         $this->validate($request, [
             'room_id' => 'required',
             'message' => 'required|max:1500|min:1',
@@ -316,6 +324,14 @@ class ChatSystemController extends Controller
     }
     public function NewMessage(Request $request){
         if(isset($request->to) && isset($request->message)){
+            if (preg_match('/\+?[0-9][0-9()\-\s+]{8,20}[0-9]/', $request->message)) {
+                return response()->json(['errors' => ['message' => [0 => ' للحفاظ على أمان مجتمعنا يمنع مشاركة رقم الهاتف أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+            }
+
+            if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->message))
+            {
+                return response()->json(['errors' => ['message' => [0 => 'للحفاظ على أمان مجتمعنا يمنع مشاركة البريد الالكتروني أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+            } 
             $this->validate($request, [
                 'message' => 'required|max:1500|min:1',
             ], $messages = [

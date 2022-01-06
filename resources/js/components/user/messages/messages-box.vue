@@ -518,14 +518,12 @@ export default {
                                 text:
                                     "حصل خطأ في النظام أثناء محاولة معالجة طلبك يرجى اعادة المحاولة واذا استمر معك الخطأ يرجى التواصل معنا",
                                 color: "danger",
-                                fixed: true,
                                 icon: "warning"
                             });
                         } else if (error.response.status == 401) {
                             this.$vs.notify({
                                 text: "يجب تسجيل الدخول لتتمكن من التبليغ",
                                 color: "danger",
-                                fixed: true,
                                 icon: "warning"
                             });
                             window.location.href =
@@ -534,14 +532,12 @@ export default {
                             this.$vs.notify({
                                 text: error.response.data.errors.message[0],
                                 color: "danger",
-                                fixed: true,
                                 icon: "warning"
                             });
                         } else {
                             this.$vs.notify({
                                 text: error.response.data.error,
                                 color: "danger",
-                                fixed: true,
                                 icon: "warning"
                             });
                         }

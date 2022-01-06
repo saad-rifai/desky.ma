@@ -44,6 +44,7 @@ class WebController extends Controller
                         'users.email_verified_at',
                         'users.created_at',
                         'users.verified_account',
+                        'users.type',
                     ]
                 );
                 $count = $stmts->count();
@@ -105,7 +106,7 @@ class WebController extends Controller
                     
                     $Activites = $aeInfos->activite;
                     $sector = $aeInfos->sector;
-                    $Activites = explode(',', $Activites);
+                 
                     if ($sector == 1) {
                         $listActivites = file_get_contents('data/json/activite-ae-2.json');
                         $listActivitesdata = json_decode($listActivites, true);
@@ -113,9 +114,9 @@ class WebController extends Controller
                         $listActivites = file_get_contents('data/json/activite-ae-1.json');
                         $listActivitesdata = json_decode($listActivites, true);
                     }
-                    for ($i = 0; count($Activites) > $i; $i++) {
-                        $activite .= " " . $listActivitesdata[$i] . '،';
-                    }
+                   
+                        $activite = $listActivitesdata[$Activites];
+                    
                     $Activites = $activite;
                 } else {
                     $Activites = null;

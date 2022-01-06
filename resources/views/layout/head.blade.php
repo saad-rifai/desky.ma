@@ -40,7 +40,7 @@ foreach ($webinfos as $webinfo);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <!-- Fonts -->
 
     
@@ -109,43 +109,20 @@ foreach ($webinfos as $webinfo);
             <div class="collapse navbar-collapse" id="PhoneNavbar">
                 <ul class="navbar-nav mx-auto  mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle dropdown-hover" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-expanded="false">
-                            المقاولين الذاتيين <i class="fas fa-chevron-down"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i
-                                    class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
-                            <!--a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
-                                title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i>
-                                جميع العقود</a-->
-                        </div>
-
+                        <a class="nav-link"
+                        href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i class="bi bi-plus-square"></i> نشر طلب عروض</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i class="bi bi-people-fill"></i> المقاولين الذاتيين</a>
+                    </li>
+         
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-folder"></i> طلبات العروض</a>
                     </li>
 
-
-
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-expanded="false">
-                            طلبات العروض <i class="fas fa-chevron-down"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
-                                جميع طلبات العروض المفتوحة</a>
-                            <a class="dropdown-item"
-                                href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i
-                                    class="fas fa-folder-plus"></i> نشر طلب عروض</a>
-                            @auth
-                                <a class="dropdown-item" href="{{ asset('MyOrders') }}"><i class="fas fa-folder"></i>
-                                    طلباتي </a>
-
-                                <a class="dropdown-item" href="{{ asset('MyOffers') }}"><i
-                                        class="fas fa-ticket-alt"></i> عروضي</a>
-                            @endauth
-
-                        </div>
-
+                        <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-images"></i> معرض الأعمال </a>
                     </li>
                 </ul>
                 @guest
@@ -168,6 +145,7 @@ foreach ($webinfos as $webinfo);
 
                     <div class="auth-user">
                         <div class="row">
+          
                             <div class="col-auto pm-0">
 
                                 <notification-menu></notification-menu>
@@ -212,46 +190,23 @@ foreach ($webinfos as $webinfo);
         </div>
         <div class="offcanvas-body">
             <ul class="list-group list-unstyled">
-
-                <li class="nav-item ">
-                    <a class="nav-link" href="#">
-                        المقاولين الذاتيين
-                    </a>
-                    <ul class="list-group list-group-flush list-unstyled">
-                        <li>
-                            <a class="dropdown-item" href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i
-                                    class="fas fa-users"></i> تصفح المقاولين الذاتيين</a>
-                        </li>
-                        <li>
-                            <!--a href="#" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
-                                title="جميع المقاولين الذاتيين اللذين تعاقدت معهم"><i class="fas fa-file-contract"></i>
-                                جميع العقود</a-->
-                        </li>
-
-                    </ul>
-
+                <li class="nav-item">
+                    <a class="nav-link"
+                    href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i class="bi bi-plus-square"></i> نشر طلب عروض</a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ asset('orders') }}">
-                        طلبات العروض
-                    </a>
-                    <ul class="list-group list-group-flush list-unstyled">
-                        <li>
-                            <a class="dropdown-item" href="{{ asset('orders') }}"><i class="fas fa-folders"></i>
-                                جميع طلبات العروض المفتوحة</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ asset('MyOrders') }}"><i class="fas fa-folder"></i>
-                                طلباتي </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                                href="{{ asset('new/order?from=navbar&token=' . csrf_token()) }}"><i
-                                    class="fas fa-folder-plus"></i> نشر طلب عروض</a>
-                        </li>
-                    </ul>
-
+                <li class="nav-item">
+                    <a class="nav-link"
+                    href="{{ asset('auto-entrepreneurs?href=navbar') }}"><i class="bi bi-people-fill"></i> المقاولين الذاتيين</a>
                 </li>
+     
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-folder"></i> طلبات العروض</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-images"></i> معرض الأعمال </a>
+                </li>
+           
                 @guest
                     <div class="btn-act-section mt-3" dir="rtl">
 
@@ -274,19 +229,7 @@ foreach ($webinfos as $webinfo);
             <h1 class="info-banner-text">تم انشاء تذكرتك بنجاح سوف تتلقى رداََ في الساعات المقبلة</h1>
         </div>
         @endif
-        @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->verified_account == null && Auth::user()->AeAccount == null)
-        <div class="info-banner bg-brand font-Naskh" dir="rtl">
-            <div class="container">
-                <div class="row justify-content-center align-items-center text-center mb-3">
-                    <div class="col-auto"><h1 class="fs-6 pt-3 text-white" data-toggle="tooltip" data-placement="bottom" title="عند تفعيل حساب المقاول الذاتي الخاص بك ستتمكن من تقديم عروضك على الطلبات وسيتمكن العملاء من التواصل معك والبحث عنك في محركات البحث ديسكي.">حساب المقاول الذاتي الخاص بك غير مفعل بعد قدم طلب لتفعيله الأن </h1></div> 
-                    <div class="col-auto mt-2"><a href="{{asset('/account/settings?ref=dashboard_card#ae_account')}}"><button class="btn btn-outline-light btn-sm">تفعيل حساب المقاول الذاتي</button></a></div>
-    
-                </div>
-            </div>
-
-        </div>  
-        @endif
-
+       
         @if (Auth::check() && Auth::user()->email_verified_at == null)
         <div class="info-banner bg-warning">
             <h1 class="info-banner-text">لقد ارسلنا لك رسالة تأكيد البريد الالكتروني يرجى الحقق من بريدك</h1>

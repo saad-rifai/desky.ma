@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AeAccount;
 use App\FilesToRemove;
 use App\User;
 use Illuminate\Http\Request;
@@ -64,6 +65,14 @@ class UserAccountController extends Controller
     }
     public function UpdateProfile(Request $request)
     {
+        if (preg_match('/\+?[0-9][0-9()\-\s+]{8,20}[0-9]/', $request->description)) {
+            return response()->json(['errors' => ['description' => [0 => ' للحفاظ على أمان مجتمعنا يمنع مشاركة رقم الهاتف أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+        }
+
+        if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->description))
+        {
+            return response()->json(['errors' => ['description' => [0 => 'للحفاظ على أمان مجتمعنا يمنع مشاركة البريد الالكتروني أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+        } 
         if(isset($request->username)){
             $request->username  = Str::lower($request->username);
         }
@@ -71,6 +80,7 @@ class UserAccountController extends Controller
             'username' => 'required|min:6|max:25|regex:/^[a-z0-9][a-z0-9_.-]*[a-z0-9]$/',
             'description' => 'nullable|min:15|max:700|string',
             'type' => 'required|integer|max:2|min:1',
+            
         ], $message = [
             'required' => 'هذا الحقل مطلوب *',
             'username.min' => 'يجب أن يتكون اسم المستخدم من 6 حروف على الأقل *',
@@ -146,6 +156,7 @@ class UserAccountController extends Controller
             'verified_account' => null
         ]);
         if ($stmt) {
+            $stmt2 = AeAccount::where('Account_number',Auth::user()->Account_number)->delete();
             return response()->json(['success' => 'تم حفظ البيانات بنجاح !'], 200);
         } else {
             return response()->json(['error' => 'فشل تحديث البيانات'], 500);

@@ -6,81 +6,75 @@
 
 @section('content')
     <!-- Modal preview  -->
-    <div class="modal fade" id="ShareProfile" data-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true" dir="rtl">
-    <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">
-                    مشاركة الملف الشخصي
-                </h5>
-                <button type="button" class="btn-close" data-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <div class="row row-cols-1 mx-auto" style="max-width: 550px">
-                        <div class="col">
-                            <div class="mb-3">
-                                <div class="position-relative">
+    <div class="modal fade" id="ShareProfile" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+        aria-hidden="true" dir="rtl">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                        مشاركة الملف الشخصي
+                    </h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="row row-cols-1 mx-auto" style="max-width: 550px">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <div class="position-relative">
 
-                                    <input type="text"
-                                        onclick="this.setSelectionRange(0, this.value.length)"
-                                        style="cursor: pointer;" readonly="readonly"
-                                        class="form-control text-center" name=""
-                                        value="{{ asset('/@' . $data->username) }}">
-                                    <span class="icon-input-btn">
-                                        <i class="far fa-clone"></i>
-                                    </span>
+                                        <input type="text" onclick="this.setSelectionRange(0, this.value.length)"
+                                            style="cursor: pointer;" readonly="readonly" class="form-control text-center"
+                                            name="" value="{{ asset('/@' . $data->username) }}">
+                                        <span class="icon-input-btn">
+                                            <i class="far fa-clone"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="footer-social-media mx-auto">
+                                    <ul class="list-social-media">
+                                        <li>
+                                            <a target="_blank"
+                                                href="https://www.facebook.com/sharer/sharer.php?u={{ asset('/@' . $data->username) }}"
+                                                data-toggle="tooltip" data-placement="top" title="مشاركة على فيسبوك">
+                                                <i class="fab fa-facebook-square"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank"
+                                                href="http://twitter.com/share?text=حسابي على منصة ديسكي&url={{ asset('/@' . $data->username) }}&hashtags=deskymaroc,auto_entrepreneur&via=desky_ma"
+                                                data-toggle="tooltip" data-placement="top" title="مشاركةعلى تويتر">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank"
+                                                href="https://www.linkedin.com/sharing/share-offsite/?url={{ asset('/@' . $data->username) }}"
+                                                data-toggle="tooltip" data-placement="top" title="مشاركة على لينكد ان">
+                                                <i class="fab fa-linkedin"></i>
+                                            </a>
+                                        </li>
+
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="footer-social-media mx-auto">
-                                <ul class="list-social-media">
-                                    <li>
-                                        <a target="_blank"
-                                            href="https://www.facebook.com/sharer/sharer.php?u={{ asset('/@' . $data->username) }}"
-                                            data-toggle="tooltip" data-placement="top"
-                                            title="مشاركة على فيسبوك">
-                                            <i class="fab fa-facebook-square"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a target="_blank"
-                                            href="http://twitter.com/share?text=حسابي على منصة ديسكي&url={{ asset('/@' . $data->username) }}&hashtags=deskymaroc,auto_entrepreneur&via=desky_ma"
-                                            data-toggle="tooltip" data-placement="top"
-                                            title="مشاركةعلى تويتر">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a target="_blank"
-                                            href="https://www.linkedin.com/sharing/share-offsite/?url={{ asset('/@' . $data->username) }}"
-                                            data-toggle="tooltip" data-placement="top"
-                                            title="مشاركة على لينكد ان">
-                                            <i class="fab fa-linkedin"></i>
-                                        </a>
-                                    </li>
 
-                                </ul>
-                            </div>
-                        </div>
+
+
                     </div>
-
-
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
+                        اغلاق
+                    </button>
 
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
-                    اغلاق
-                </button>
-
-            </div>
         </div>
     </div>
-</div>
 
 
 
@@ -175,27 +169,29 @@
                     <button data-target="#ShareProfile" data-toggle="modal" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-share-alt"></i>
                     </button>
-    
+
                 @else
                     <report-popup about="0" from_url="{{ url()->current() }}" to="{{ $data->Account_number }}">
                     </report-popup>
                     @if ($data->verified_account == 2)
 
-                    <new-message to="{{ $data->Account_number }}"></new-message>
-                    <button class="btn btn-primary btn-sm" href="#NewMessageModal" type="button" data-toggle="modal"
-                        data-target="#NewMessageModal"><i class="fas fa-envelope"></i></button>
-                        @endif
+                        <new-message to="{{ $data->Account_number }}"></new-message>
+                        <button class="btn btn-primary btn-sm" href="#NewMessageModal" type="button" data-toggle="modal"
+                            data-target="#NewMessageModal"><i class="fas fa-envelope"></i></button>
+                    @endif
                     <span class="dropdown">
 
                         <button class="btn btn-outline-primary btn-sm" id="menu_user" data-toggle="dropdown"
                             aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
-                           
+
                         <ul class="dropdown-menu" aria-labelledby="menu_user">
                             @if ($data->verified_account == 2)
-                            <li><a class="dropdown-item" href="#NewMessageModal" type="button" data-toggle="modal">مراسلة</a></li>
+                                <li><a class="dropdown-item" href="#NewMessageModal" type="button"
+                                        data-toggle="modal">مراسلة</a></li>
 
                             @endif
-                            <li><a class="dropdown-item" type="button" href="#ShareProfile" data-toggle="modal">مشاركة الملف</a></li>
+                            <li><a class="dropdown-item" type="button" href="#ShareProfile" data-toggle="modal">مشاركة
+                                    الملف</a></li>
                             <li><a class="dropdown-item" data-toggle="modal" href="#reportModal"
                                     data-target="#reportModal">التبليغ</a></li>
                         </ul>
@@ -261,12 +257,18 @@
                         </div>
                         <div class="col mb-3" align="right">
                             <span class="card-info-text">
-                                @if ($data->type != 1 && $data->verified_account != 2)
-                                    حساب عميل
 
-                                @else
-                                    مقاول ذاتي
-                                @endif
+                                @switch($data->type)
+                                    @case(1)
+                                        حساب مقاول ذاتي
+                                    @break
+                                    @case(2)
+                                        حساب عميل
+
+                                    @break
+                                    @default
+                                        غير محدد
+                                @endswitch
                             </span>
                         </div>
 

@@ -27,7 +27,16 @@ class OffersController extends Controller
             if (isset($request->OID) && $request->OID != null && $request->OID != "") {
                 $infos = Orders::all()->where('OID', $request->OID);
                 if (count($infos) > 0) {
+
                     foreach ($infos as $info);
+                    if (preg_match('/\+?[0-9][0-9()\-\s+]{8,20}[0-9]/', $request->description)) {
+                        return response()->json(['errors' => ['description' => [0 => 'للحفاظ على أمان مجتمعنا يمنع مشاركة رقم الهاتف أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+                    }
+
+                    if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->description))
+                    {
+                        return response()->json(['errors' => ['description' => [0 => 'للحفاظ على أمان مجتمعنا يمنع مشاركة البريد الالكتروني أو أي معلومات تواصل خارجية, رجاءا لاتقم بمشاركة أي معلومات تواصل خارجية لتجنب حضر حسابك']]], 422);
+                    }                    
                     $this->validate($request, [
                         'description' => 'required|min:50|max:700|string',
                         'price' => 'required|integer|min:150|max:500000',
@@ -48,6 +57,7 @@ class OffersController extends Controller
                         'time.min' => 'يرجى تحديد مدة التنفيذ *',
 
                     ]);
+
                     if (Auth::check()) {
                         if (auth::user()->verified_account == 2) {
                             if (Auth::user()->Account_number != $info->Account_number) {

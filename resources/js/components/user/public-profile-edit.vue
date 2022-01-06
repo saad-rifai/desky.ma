@@ -145,7 +145,6 @@ export default {
             text: "تم الحفظ بنجاح !",
             color: "success",
             position: "top-right",
-            fixed: true,
             icon: "check",
           });
           this.HideLoadingInDiv();
@@ -158,7 +157,6 @@ export default {
               text: "حصل خطأ ما اثناء محاولة حفظ البيانات يرجى اعادة المحاولة",
               color: "danger",
               position: "top-right",
-              fixed: true,
               icon: "warning",
             });
             this.HideLoadingInDiv();

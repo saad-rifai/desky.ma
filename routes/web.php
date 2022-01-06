@@ -141,9 +141,13 @@ Route::prefix('ajax')->group(function () {
 
 Route::get('ResetPassword/reset/{hashToken}', 'Auth\ResetPasswordController@VerifyToken');
 Route::get('account/verifiyEmail/{AccountNumber}/{token}', 'Auth\VerificationController@verifiyEmail');
-Route::get('/try', function () {
+Route::get('/try/{string}', function ($string) {
     //dd(Cookie::get("admin_token"),Crypt::decryptString(Cookie::get("admin_token")));
-  
+    if (preg_match('/\+?[0-9][0-9()\-\s+]{8,20}[0-9]/', $string)) {
+        echo 'string with numbers';
+    }else{
+        echo 'Not Have A Number';
+    }
 });
 
 /** 

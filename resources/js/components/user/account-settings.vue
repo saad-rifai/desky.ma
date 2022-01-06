@@ -21,19 +21,24 @@
             ></button>
           </div>
           <div class="modal-body">
+          <div class="alert alert-danger d-flex align-items-center" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </svg>
     <p style="font-size:14px">        هل أنت متأكد من أنك تود اجراء تعديل على معلومات حسابك ؟ نظرا لان
             حسابك موثق وفي حال قمت يتعديل معلوماتك سيتعين عليك القيام بطلب جديد
             لتوثيق حسابك</p>
+            </div>
           </div>
           <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
-              data-bs-dismiss="modal"
+              data-dismiss="modal"
             >
               الغاء
             </button>
-            <button type="button" class="btn btn-primary" @click="UpdateAccount" data-bs-dismiss="modal">حفظ التغييرات</button>
+            <button type="button" class="btn btn-primary" @click="UpdateAccount" data-dismiss="modal">حفظ التغييرات</button>
           </div>
         </div>
       </div>
@@ -467,7 +472,6 @@ export default {
             text: "تم الحفظ بنجاح !",
             color: "success",
             position: "top-right",
-            fixed: true,
             icon: "check",
           });
           this.HideLoadingInDiv();
@@ -479,7 +483,6 @@ export default {
               text: "حصل خطأ ما اثناء محاولة حفظ البيانات يرجى اعادة المحاولة",
               color: "danger",
               position: "top-right",
-              fixed: true,
               icon: "warning",
             });
           } else {

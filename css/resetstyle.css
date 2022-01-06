@@ -126,9 +126,20 @@ span.col-text {
 .btn-primary:focus {
     box-shadow: 0 0 0 0.25rem rgb(249 106 12 / 46%) !important;
 }
+.form-check-label {
+    font-family: 'Noto Naskh Arabic' !important;
+    cursor: pointer !important;
+}
+.form-check-input {
+    cursor: pointer !important;
+}
+
+.nav-link i {
+    font-size: 15px !important;
+}
 .navbar-light .navbar-nav .nav-link {
     color: rgb(60 60 60) !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
 }
 .dropdown-menu {
     padding: 5px !important;
@@ -471,6 +482,12 @@ button.btn.btn-secondary {
     border-top-left-radius: calc(0.3rem - 1px) !important;
     border-top-right-radius: calc(0.3rem - 1px) !important;
     border-color: #d8dbe0 !important;
+}
+@media (max-width: 380px){
+.dropdown .user-info-box-article-avatar {
+    width: 35px !important;
+    height: 35px !important;
+}
 }
 .select2-container--default
     .select2-selection--multiple
