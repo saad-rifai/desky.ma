@@ -121,9 +121,9 @@ foreach ($webinfos as $webinfo);
                         <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-folder"></i> طلبات العروض</a>
                     </li>
 
-                    <li class="nav-item">
+                    <!--li class="nav-item">
                         <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-images"></i> معرض الأعمال </a>
-                    </li>
+                    </li-->
                 </ul>
                 @guest
                     <div class="btn-act-section" dir="rtl">
@@ -203,9 +203,9 @@ foreach ($webinfos as $webinfo);
                     <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-folder"></i> طلبات العروض</a>
                 </li>
 
-                <li class="nav-item">
+                <!--li class="nav-item">
                     <a class="nav-link" href="{{ asset('orders') }}"><i class="bi bi-images"></i> معرض الأعمال </a>
-                </li>
+                </li-->
            
                 @guest
                     <div class="btn-act-section mt-3" dir="rtl">
