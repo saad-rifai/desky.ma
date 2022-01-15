@@ -93,7 +93,6 @@ foreach ($webinfos as $webinfo);
 </head>
 
 <body>
-
     <!-- Nav Bar  -->
     <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light web-navbar" id="navbar">
         <div class="container-fluid container">

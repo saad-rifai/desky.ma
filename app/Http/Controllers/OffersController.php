@@ -151,7 +151,7 @@ class OffersController extends Controller
                     $infos[$i]->description = null;
                 }
 
-                /* Get Activite Name */
+                /* Get Activite Name 
                 $Activites = $infos[$i]->AeAccount->activite;
                 $sector = $infos[$i]->AeAccount->sector;
                 if ($sector == 1) {
@@ -163,7 +163,7 @@ class OffersController extends Controller
                 }
                 $activite = $listActivitesdata[$Activites];
 
-                /* Set Sector Name */
+                /* Set Sector Name 
 
                 if ($sector == 1) {
                     $sectorName = "الخدمات";
@@ -176,7 +176,7 @@ class OffersController extends Controller
                 } else {
                     $sectorName = "";
                 }
-
+                */
 
 
                 /* Get City Name */
@@ -190,9 +190,9 @@ class OffersController extends Controller
                         $resultcheck = $item['ville'];
                     }
                 }
-                $infos[$i]->activite = $activite;
+                $infos[$i]->activite = null;
                 $infos[$i]->city = $resultcheck;
-                $infos[$i]->sector = $sectorName;
+                $infos[$i]->sector = null;
                 $infos[$i]->verified_account = $infos[$i]->user->verified_account;
             }
 
