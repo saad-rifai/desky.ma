@@ -156,8 +156,13 @@ class UserAccountController extends Controller
             'verified_account' => null
         ]);
         if ($stmt) {
-            $stmt2 = AeAccount::where('Account_number',Auth::user()->Account_number)->delete();
+
+            $stmt2 = AeAccount::where('Account_number',Auth::user()->Account_number)->update([
+                'status' => '1'
+            ]);
+
             return response()->json(['success' => 'تم حفظ البيانات بنجاح !'], 200);
+
         } else {
             return response()->json(['error' => 'فشل تحديث البيانات'], 500);
         }
