@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('user:removeavatar')->everyMinute();
-        $schedule->command('queue:work')->everyMinute();
-        $schedule->command('queue:restart')->everyFiveMinutes();
+      //  $schedule->command('queue:work')->everyMinute();
+    //    $schedule->command('queue:restart')->everyFiveMinutes();
 
     }
 
