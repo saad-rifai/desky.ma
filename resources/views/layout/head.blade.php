@@ -82,14 +82,14 @@ foreach ($webinfos as $webinfo);
 
         gtag('config', 'G-S1XT2DT4WF');
     </script>
-    <script type='text/javascript'>
+    <!-- script type='text/javascript'>
         window.smartlook||(function(d) {
           var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
           var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
           c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
           })(document);
           smartlook('init', '2116c3d407e509ec35e5e7310e0ccd81e60825ad');
-      </script>
+      </script-->
 </head>
 
 <body>
