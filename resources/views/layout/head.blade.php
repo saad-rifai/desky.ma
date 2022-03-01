@@ -59,7 +59,11 @@ foreach ($webinfos as $webinfo);
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
     <!-- Jquery -->
-
+    
+    <!-- Adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1059577133653304"
+     crossorigin="anonymous"></script>
+    <!-- Adsense -->
     <script src="https://desky-ma-disk.s3.eu-west-3.amazonaws.com/assets/js/library/nanobar.min.js"></script>
 
     <!-- Basic Style for Tags Input -->
